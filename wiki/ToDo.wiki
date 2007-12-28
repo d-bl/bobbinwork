@@ -1,0 +1,14 @@
+#summary To Do
+#labels Featured
+
+before uploading the code
+  * enforce some Contributor License Agreement ?
+  * adjust the about boxes and copyright statements in the sources to the GNU-GPL
+after uploading
+  * see [Launching] - desired deployment
+  * complete the Java doc (should include the Visio diagrams)
+  * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
+  * code reviews
+  * project management
+  * ultimately: support drawing with drag-and-drop and all types of grids on a canvas
+  * see also the to do's in the code and see the wish lists in the [http://bw-en.wikispaces.com/ user guide]
