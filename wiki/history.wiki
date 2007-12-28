@@ -1,0 +1,8 @@
+#summary Initial Status / Short History.
+#labels Featured
+
+_by the initiator of the project_
+
+The polar grid generator was my first ever Java project, 1.4 compliant. The grid model is rather clumsy, to put it mildly. The GUI is developed with NetBeans though nowadays I'm using Eclipse. The GUI is not very user friendly: too mathematical for lace makers. Another GUI approach is sketched in the wish list
+
+The core model for working diagrams has more quality. It doesn't yet support knots and unfortunately I couldn't figure out a way to support the open (twist-cross) and closed (cross-twist) working method in a single definition. Thread diagrams would be identical, but pair diagrams and written instructions would be different. The initial revision of the code is 5.0 compliant. The GUI is in its infancy and evolved step by step by applying bits and pieces of examples and the swing tutorial. May be some generic XML editor could be used instead as a basis. 
