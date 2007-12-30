@@ -7,7 +7,7 @@ Once the Java sources are imported in an IDE, a default build should allow to la
   * nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
 
 =Current Distributions=
-  * working diagrams: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwViewer.jar application] or as an [file:///D:/Mijn%20Documenten/Joke/WWW/BobbinWork/viewer-EN.html applet]
+  * working diagrams: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwViewer.jar application] or as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/viewer-EN.html applet]
   * polar grids: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwpGrid.jar application]
 
 =Desired Deployment=
