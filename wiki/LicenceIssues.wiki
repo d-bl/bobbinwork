@@ -9,7 +9,7 @@ Therefore, as long as the XML files are embedded within the program, lacemakers 
 
 The [http://opensource.org/licenses/artistic-license-2.0.php artistic license 2.0] states:
  You are always permitted to make arrangements wholly outside of this license directly with the Copyright Holder of a given Package. If the terms of this license do not permit the full use that you propose to make of the Package, you should contact the Copyright Holder and seek a different licensing arrangement.
-This is supposed to apply to any license or resource with copyrights, legally maybe not always ethically. But over time the project may get more contributors/authors what might make arrangements problematic.
+This is supposed to apply to any license or resource with copyrights, legally, maybe not always ethically. But over time the project may get more contributors/authors what might make arrangements problematic.
 
 
 = Arrangements =
