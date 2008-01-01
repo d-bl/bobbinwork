@@ -1,4 +1,4 @@
-#summary output from embedded input requires another licence than the code.
+#summary sublicenses should be allowed for output from input embedded in the code.
 #labels Featured,Phase-Requirements
 
 = Introduction =
