@@ -1,11 +1,6 @@
 #summary Execute the applications
 #labels Featured
 
-==By Developers==
-Once the Java sources are imported in an IDE, a default build should allow to launch the applications
-  * nl.!BobbinWork.viewer.gui.BWVApplet (executable as an applet and as an application)
-  * nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
-
 ==By Users==
 ===Last Distribution with a restrictive license===
   * working diagrams: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwViewer.jar application] or as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/viewer-EN.html applet]
@@ -14,6 +9,11 @@ Once the Java sources are imported in an IDE, a default build should allow to la
 ===Initial GNU-GPLv3 distribution===
   * working diagrams: as an [http://bobbinwork.googlecode.com/files/bwViewer.jar application] (no diagrams provided yet)
   * polar grids: as an [http://bobbinwork.googlecode.com/files/bwpGrid.jar application]
+
+==By Developers==
+Once the Java sources are imported in an IDE, a default build should allow to launch the applications
+  * nl.!BobbinWork.viewer.gui.BWVApplet (executable as an applet and as an application)
+  * nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
 
 ==Desired Deployment==
 Java !WebStart and !FatJar or !JarJar or whatever to make it also easily accessible for the many less computer literate lace makers who's system doesn't meet the prerequisites to execute the jar files. It should significantly simplify the main [http://bw-nl.wikispaces.com/ wiki] page.
