@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram
+  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+  xsi:noNamespaceSchemaLocation='http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd'
+>
+  <group pairs="1-130">
+    <title>
+      <value lang="en">Diagram</value>
+      <value lang="nl">Werktekening</value>
+      <value lang="de">Arbeitszeichnung</value>
+    </title>
+    <!-- put your instructions here -->
+  </group>  
+</diagram>
