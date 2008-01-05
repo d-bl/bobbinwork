@@ -10,5 +10,5 @@ after uploading
   * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
   * code reviews
   * project management
-  * ultimately: support drawing with drag-and-drop and all types of grids on a canvas
   * see also the to do's in the code and see the wish lists in the [http://bw-en.wikispaces.com/ user guide]
+  * Redesign the GUI from scratch. Perhaps something like the outline view in Eclipse that synchronises with the source. Ultimately: support drawing with drag-and-drop and all types of grids on a canvas.
