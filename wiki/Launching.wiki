@@ -7,13 +7,12 @@ Once the Java sources are imported in an IDE, a default build should allow to la
   * nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
 
 ==By Users==
-===Original Distribution===
-This distribution has a restrictive license
+===Last Distribution with a restrictive license===
   * working diagrams: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwViewer.jar application] or as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/viewer-EN.html applet]
   * polar grids: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwpGrid.jar application]
 
-===Initial GPL distribution===
-  * working diagrams: as an [http://bobbinwork.googlecode.com/files/bwViewer.jar application]
+===Initial GNU-GPLv3 distribution===
+  * working diagrams: as an [http://bobbinwork.googlecode.com/files/bwViewer.jar application] (no diagrams provided yet)
   * polar grids: as an [http://bobbinwork.googlecode.com/files/bwpGrid.jar application]
 
 ==Desired Deployment==
