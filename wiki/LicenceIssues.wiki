@@ -1,5 +1,5 @@
 #summary sublicenses should be allowed for output from input embedded in the code.
-#labels Featured,Phase-Requirements
+#labels Phase-Requirements
 
 = Introduction =
 
