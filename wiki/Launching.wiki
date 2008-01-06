@@ -11,7 +11,7 @@ See the downloads.
 
 ==By Developers==
 Once the Java sources are imported in an IDE, a default build should allow to launch the applications
-  * nl.!BobbinWork.viewer.gui.BWVApplet (executable as an applet and as an application)
+  * nl.!BobbinWork.viewer.gui.BWVApplet (executable as an applet and as an application, takes a while to launch ar load a diagram)
   * nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
 
 ==Desired Deployment==
