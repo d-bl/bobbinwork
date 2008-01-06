@@ -1,12 +1,10 @@
 #summary To Do
 #labels Featured
 
-before uploading the code
-  * prepare for [http://code.google.com/p/bobbinwork/wiki/LicenceIssues XML licensing]
+  * resolve [http://groups.google.com/group/google-code-hosting/browse_thread/thread/c29b04d10111ab26 this issue] for sample diagrams/templates
   * enforce some Contributor License Agreement ?
-after uploading
   * see [Launching] - desired deployment
-  * complete the Java doc (should include the !Visio diagrams)
+  * complete the Java doc (include the Visio diagrams?)
   * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
   * code reviews
   * project management
