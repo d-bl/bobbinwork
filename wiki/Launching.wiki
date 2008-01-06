@@ -2,15 +2,15 @@
 #labels Featured
 
 ==By Users==
-See the [http://bw-en.wikispaces.com/#tochome2 user guide wiki] for details.
 ===Open Source distribution===
-See the downloads.
+See the downloads or the [http://bw-en.wikispaces.com/ user guide wiki]
+
 ===Last Distribution with a restrictive license===
   * working diagrams: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwViewer.jar application] or as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/viewer-EN.html applet]
   * polar grids: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwpGrid.jar application]
 
 ==By Developers==
-Once the Java sources are imported in an IDE, a default build should allow to launch the applications
+Once the Java sources are imported in an IDE, a default build should allow to launch the applications. See the the [http://bw-en.wikispaces.com/ user guide wiki] for command line arguments.
   * nl.!BobbinWork.viewer.gui.BWVApplet (executable as an applet and as an application, takes a while to launch ar load a diagram)
   * nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
 
