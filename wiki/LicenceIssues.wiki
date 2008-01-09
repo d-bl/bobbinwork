@@ -1,7 +1,12 @@
-#summary sublicenses should be allowed for output from input embedded in the code.
+#summary diagrams and GNU-GPLv3 compatible licences in the repository
 #labels Phase-Requirements
 
-= Introduction =
+=GNU-GPLv3 compatible licences=
+
+???
+
+=Diagrams=
+== Introduction ==
 
 The [http://www.gnu.org/licenses/gpl-faq.html#GPLOutput GNU/GPL-FAQ] states:
  when a program translates its input into some other form, the copyright status of the output inherits that of the input it was generated from.
@@ -12,6 +17,6 @@ The [http://opensource.org/licenses/artistic-license-2.0.php artistic license 2.
 It seems logical that this applies to any license or resource with copyrights; legally, maybe not always ethically. But over time the project may get more contributors/authors what might make arrangements problematic.
 
 
-= Arrangements =
+== Arrangements ==
 
-To avoid problems, the XML sources are [http://groups.google.com/group/bobbinwork/files published separately] allowing sublicenses. However, the definitions of the basic stitches are kept together with the rest the code and implicitly included.
+The XML sources are [http://groups.google.com/group/bobbinwork/files published separately] allowing any license/copyright. However, the definitions of the basic stitches are kept together with the rest the code and are implicitly included.
