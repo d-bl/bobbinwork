@@ -1,9 +1,15 @@
 #summary diagrams and GNU-GPLv3 compatible licences in the repository
 #labels Phase-Requirements
 
+Discussions about these issues:
+[http://groups.google.com/group/google-code-hosting/browse_thread/thread/c29b04d10111ab26/ 1]
+[http://groups.google.com/group/google-code-hosting/browse_thread/thread/8fd3954ae2456e53/ 2]
+[http://groups.google.com/group/bobbinwork/browse_thread/thread/1e538ff005c6db48/ 3]
+[http://groups.google.com/group/bobbinwork/browse_thread/thread/d84ecad9e8f65e71/ 4]
+
 =GNU-GPLv3 compatible licences=
 
-???
+How does Google want us to (not) import code/sources with GNU-GPLv3?
 
 =Diagrams=
 == Introduction ==
