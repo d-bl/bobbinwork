@@ -1,12 +1,10 @@
-#summary To Do
 #labels Featured
-
-  * resolve [http://groups.google.com/group/google-code-hosting/browse_thread/thread/c29b04d10111ab26 this issue] for sample diagrams/templates
   * enforce some Contributor License Agreement ?
   * see [Launching] - desired deployment
   * complete the Java doc (include the Visio diagrams?)
   * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
   * code reviews
   * project management
+  * bring the xsd up to date
   * see also the to do's in the code and see the wish lists in the [http://bw-en.wikispaces.com/ user guide]
   * Redesign the GUI from scratch. Perhaps something like the outline view in Eclipse that synchronises with the source. Ultimately: support drawing with drag-and-drop and all types of grids on a canvas.
