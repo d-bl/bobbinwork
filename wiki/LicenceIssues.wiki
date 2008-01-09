@@ -6,6 +6,7 @@ Discussions about these issues:
 [http://groups.google.com/group/google-code-hosting/browse_thread/thread/8fd3954ae2456e53/ 2]
 [http://groups.google.com/group/bobbinwork/browse_thread/thread/1e538ff005c6db48/ 3]
 [http://groups.google.com/group/bobbinwork/browse_thread/thread/d84ecad9e8f65e71/ 4]
+[http://groups.google.com/group/google-code-hosting/browse_thread/thread/24cf5157ebbb5613/70dbbca5ff488fdd?lnk=gst&q=branches#70dbbca5ff488fdd 5]
 
 =GNU-GPLv3 compatible licences=
 
