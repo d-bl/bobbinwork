@@ -1,0 +1,21 @@
+#summary GUI requirements
+#labels Phase-Design
+
+=palet=
+  * Currently all elements with an id are presented as a sequential list of thumbnail-diagrams. The list should become tool bar button showing the selected item with a fly-out menu with thumbnails and reflecting the XML tree structure.
+  * The content of BasicStitches.xml should only be shown in the palet, not in the tree view.
+
+=Bidirectional synchronisation between the remaining three panels=
+
+Just a tree to select a diagram section could be too intimidating. When clicking the diagram it is usually not clear which level is meant. So first click the diagram, a corresponding tree element gets hightlighted, then click a higher or lower level in the tree if you want to manipulate a larger or smaller section. Clicks between threads but within the convex hull of (groups of) stitches could be the trigger. Thus click on threads can still be used for painting.
+
+  * Currently a section in the diagram gets highlighted if a tree element is selected. The other way around is not yet implemented.
+  * The tree view should show the "exploded" sections. See the [http://groups.google.com/group/bobbinwork/web/TechnicalOverview.vsd
+technical overview] about exploded.
+  * "Exploded" sections should not be reflected in the XML source, unless the user changes it interactively.
+  * Something like the synchronised outline views when editing an XML file in Eclipse could be attractive, but customise the outline like the currently implemented tree view.
+
+=Manipulations=
+  * Highlighting a diagram section should also pop up handlers to move and rotate.
+  * Drag points of bezier curves.
+  * Squeeze or otherwise distort the selected group of elements.
