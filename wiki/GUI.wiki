@@ -1,6 +1,8 @@
 #summary GUI requirements
 #labels Phase-Design
 
+Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids.
+
 =palet=
   * Currently all elements with an id are presented as a sequential list of thumbnail-diagrams. The list should become tool bar button showing the selected item with a fly-out menu with thumbnails and reflecting the XML tree structure.
   * The content of !BasicStitches.xml should only be shown in the palet, not in the tree view.
