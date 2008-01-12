@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding="ISO-8859-1"?>
+<xsd:schema xmlns="http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd"
+            elementFormDefault="qualified"
+            attributeFormDefault="qualified" 
+>
+<!-- Copyright 2004, J. Falkink-Pol
+
+This file is part of BobbinWork.
+
+BobbinWork is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+BobbinWork is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+
+ <xsd:annotation>
+  <xsd:documentation>
+   The storage format reflects the working order for a lace maker.
+   Lace makers keywords: thread, gimp, pair, pin, bobbin, stitch, cross, twist, pattern, repeat.
+  </xsd:documentation>
+ </xsd:annotation>
+
+ <!--
+   Basics
+ -->
+
+ <xsd:simpleType name="xy">
+  <!--
+    Co-ordinates, starting from the left upper corner.
+    Signs are only allowed within copy elements,
+    turning absolute coordinates into relative movements.
+    -->
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="[+-]?[0-9]+,[+-]?[0-9]+"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <xsd:simpleType name="nm">
+  <!--
+    Select pairs or bobbins of the ancestor
+    counting them from left to right, starting at 1.
+    After each movement bobbins and pairs are recounted.
+    For bobbins within a stitch the usual values are:
+    2-3 for cross, either 1-2 or 3-4 for twist.
+    Pairs treated as threads create exeptions.
+    -->
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="[0-9]+\-[0-9]+"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <xsd:simpleType name="nrs">
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="[0-9]+(-[0-9]+)?(,[0-9]+(-[0-9]+))*"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <xsd:simpleType name="color">
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="([0-9A-F]{6}|red|green|blue|black|white|yellow|purple|orange|brown)"/>
+   <!--
+     000000=black  FFFFFF=white
+     FF0000=red    00FF00=green  0000FF=blue
+     FFFF00=yellow FF00FF=purple FF8000=orange 804000=brown
+     -->
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <xsd:simpleType name="deco">
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="(solid|dashes|dots|dashDot|dashDotDot|dashDashDot|Ztwist|Stwist)"/>
+   <!-- Ztwist and Stwist may be too ambitious -->
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <xsd:complexType name="text">
+   <xsd:simpleContent>
+     <xsd:extension base="xsd:string">
+       <xsd:attribute name="lang" type="xsd:string"/>
+     </xsd:extension>
+   </xsd:simpleContent>
+ </xsd:complexType>
+
+ <xsd:complexType name="style">
+  <xsd:attribute  name="color"  type="color"               default="black"/>
+  <xsd:attribute  name="width"  type="xsd:positiveInteger" default="1"/>
+  <xsd:attribute  name="deco"   type="deco"                default="solid"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="curve">
+  <xsd:attribute  name="start"  type="xy"/>
+  <xsd:attribute  name="c1"     type="xy"/>
+  <xsd:attribute  name="c2"     type="xy"/>
+  <xsd:attribute  name="end"    type="xy"/>
+ </xsd:complexType>
+
+ <!--
+   Transformations
+ -->
+
+ <xsd:complexType name="meet">
+  <!-- Overrides default adjustments connecting ends with starts. -->
+  <xsd:choice>
+   <xsd:element   name="pair"   type="curve"/>
+   <xsd:element   name="back"   type="curve"/>
+   <xsd:element   name="gimp"   type="curve"/>
+   <xsd:element   name="front"  type="curve"/>
+  </xsd:choice>
+  <xsd:attribute  name="nr"     type="xsd:positiveInteger"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="rotate">
+  <!--
+    With a and b instead of angle a rotation includes resizing.
+    All 3 points on a strait line is a resize without rotation.
+    -->
+  <xsd:attribute  name="centre" type="xy" use="required"/>
+  <xsd:attribute  name="angle"  type="xsd:integer"/>
+  <xsd:attribute  name="a"      type="xy"/>
+  <xsd:attribute  name="b"      type="xy"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="mirror">
+  <!--
+    Mirror in the line through a and b.
+    Note that back curves become front curves and vice versa,
+    but starts don't become ends.
+    -->
+  <xsd:attribute  name="a"      type="xy" use="required"/>
+  <xsd:attribute  name="b"      type="xy" use="required"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="move">
+  <xsd:attribute  name="x"      type="xsd:integer" default="0"/>
+  <xsd:attribute  name="y"      type="xsd:integer" default="0"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="copy">
+  <xsd:sequence                                 minOccurs="0" maxOccurs="unbounded" >
+   <xsd:element   name="move"     type="move"   minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="rotate"   type="rotate" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="meet"     type="meet"   minOccurs="0" maxOccurs="unbounded" />
+   <!-- more to be developped, e.g. copy a rectangle into a fan -->
+  </xsd:sequence>
+  <xsd:attribute  name="pairs" type="nm"        use="required"/>
+  <xsd:attribute  name="of"    type="xsd:IDREF" use="required"/>
+ </xsd:complexType>
+
+ <!--
+   The essentials
+ -->
+
+ <xsd:complexType name="pin">
+  <xsd:attribute  name="position" type="xy" use="required"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="bobbins">
+  <!--
+    Defaults:
+    front.color = black;
+    back.color  = grey;
+    back.width  = largestOf (3 * front.width, 5 + front.width).
+    back.deco   = front.deco = solid.
+    -->
+  <xsd:sequence>
+   <xsd:element   name="thread" type="text"  minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="front"  type="style" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="back"   type="style" minOccurs="0" maxOccurs="1" />
+  </xsd:sequence>
+  <xsd:attribute  name="nrs"    type="nrs" use="required"/>
+  <xsd:attribute  name="id"     type="xsd:ID" use="required"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="switch">
+  <xsd:sequence>
+   <xsd:element   name="back"   type="curve" minOccurs="1" maxOccurs="1" />
+   <xsd:element   name="gimp"   type="curve" minOccurs="0" maxOccurs="2"/>
+   <xsd:element   name="front"  type="curve" minOccurs="1" maxOccurs="1" />
+  </xsd:sequence>
+  <xsd:attribute  name="bobbins" type="nm" use="required"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="stitch">
+  <xsd:sequence>
+   <xsd:element   name="title"  type="text"  minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="pin"    type="pin"   minOccurs="0" maxOccurs="unbounded" />
+   <!--
+     The style basically concerns colors,
+     for black-and-white prints 'deco' and 'width' can replaces colors.
+
+     Use 'style' in an open or closed drawing.
+     In case of an open+closed drawing:
+     use 'style' if the stitch either starts and ends with twists,
+     or starts and ends with cross-movements;
+     otherwise use both 'open' and 'closed'.
+     -->
+   <xsd:element   name="style"  type="style" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="pair"   type="curve" minOccurs="1" maxOccurs="unbounded" />
+   <xsd:sequence                             minOccurs="1" maxOccurs="unbounded" >
+    <xsd:element  name="twist"  type="switch" minOccurs="0" maxOccurs="unbounded" />
+    <xsd:element  name="cross"  type="switch" minOccurs="0" maxOccurs="unbounded" />
+    <!-- Twist: Even thread over preceding thread.
+         Cross: Odd thread over next thread
+         Pairs used as threads and gimps cause exceptions.
+         Gimps are drawn between back and front.
+
+         In an open diagram stitches should end with a cross,
+         trailing twists are drawn as cross marks in a pair diagram.
+         In a closed diagram stitches should start with a cross,
+         leading twists are drawn as cross marks in a pair diagram.
+      -->
+   </xsd:sequence>
+  </xsd:sequence>
+  <xsd:attribute  name="pairs"  type="nm" use="required"/>
+  <xsd:attribute  name="id"     type="xsd:ID"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="group">
+  <!-- Twists at group level are allways drawn as cross marks on pair curves. -->
+  <xsd:sequence>
+   <xsd:element   name="title"  type="text"   minOccurs="0" maxOccurs="unbounded" />
+   <xsd:sequence                              minOccurs="1" maxOccurs="unbounded" >
+     <xsd:element name="twist"  type="switch" minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="group"  type="group"  minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="stitch" type="stitch" minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="copy"   type="copy"   minOccurs="0" maxOccurs="unbounded" />
+   </xsd:sequence>
+  </xsd:sequence>
+  <xsd:attribute  name="pairs"  type="nm" use="required"/>
+  <xsd:attribute  name="id"     type="xsd:ID"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="diagram">
+  <xsd:sequence>
+   <xsd:element   name="title"  type="text"   minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="group"  type="group"  minOccurs="0" maxOccurs="unbounded" />
+  </xsd:sequence>
+ </xsd:complexType>
+
+ <xsd:element     name="diagram"/>
+
+</xsd:schema>

@@ -1,0 +1,25 @@
+/* style.css Copyright 2005-2007 by J. Falkink-Pol
+ *
+ * This file is part of BobbinWork.
+ *
+ * BobbinWork is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BobbinWork is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+body, td              {color:#000000; /*font:Arial, Helvetica, sans-serif; font-size:14pt; margin:10px; margin-top:0px*/}
+code, pre             {color:#0055CC}
+pre  strong, .strong,                 /* working around some bug? */
+code strong           {color:#000088}
+pre  em,     .em,                     /* working around some bug? */
+code em               {color:#0000BB}
+.img                  {text-align:center}
