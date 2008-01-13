@@ -125,7 +125,7 @@ public class BWVApplet extends JApplet {
      * JButton's triggering modification of the dom tree that was generated from
      * the xml file.
      */
-    private JButton delete, replace, select;
+    private JButton delete, replace;
 
     public BWVApplet() {
         try {
@@ -157,8 +157,6 @@ public class BWVApplet extends JApplet {
         fragments = new Fragments();
         delete = new Button(false, "TreeToolBar_delete");//$NON-NLS-1$
         replace = new Button(false, "TreeToolBar_replace"); //$NON-NLS-1$
-        select = new Button(false, "TreeToolBar_select"); //$NON-NLS-1$
-        select.setEnabled(true);
 
         /* ---- connect non-menu components with listeners ---- */
 
@@ -186,7 +184,7 @@ public class BWVApplet extends JApplet {
                 TOTAL_LEFT_WIDTH - SplitPane.DIVIDER_WIDTH - (int) fragments.getMinimumSize().getWidth(), // dividerPosition
                 HORIZONTAL_SPLIT, // 
                 new Panel( // component of spiltPane
-                        new AbstractButton[] { delete, replace, select }, // toolbar
+                        new AbstractButton[] { delete, replace }, // toolbar
                         new JScrollPane(tree)),
                 new Panel( // component of spiltPane
                         new FragmentsViewMenu(), // toolbar
@@ -224,28 +222,6 @@ public class BWVApplet extends JApplet {
 
             public void actionPerformed(ActionEvent e) {
                 tree.deleteSelected();
-            }
-        });
-
-        select.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent e) {
-                Object[] possibilities = {"ham", "spam", "yam"};
-                String s = (String)JOptionPane.showInputDialog(
-                                    (Component)null,
-                                    "Complete the sentence:\n"
-                                    + "\"Green eggs and...\"",
-                                    "Customized Dialog",
-                                    JOptionPane.PLAIN_MESSAGE,
-                                    (Icon)null,
-                                    possibilities,
-                                    "ham");
-
-                //If a string was returned, say so.
-                if ((s != null) && (s.length() > 0)) {
-                 //   setLabel("Green eggs and... " + s + "!");
-                    return;
-                }
             }
         });
 
@@ -916,7 +892,7 @@ public class BWVApplet extends JApplet {
     private class SourceArea extends JTextArea {
 
         /**
-         * Shows a JColorChooser dialog and pastes the result as a hexidecimal
+         * Shows a JColorChooser dialog and pastes the result as a hexadecimal
          * code into the associated text model.
          */
         private void insertColor() {
