@@ -51,7 +51,7 @@ import org.xml.sax.SAXParseException;
 /**
  * Visual presentation of the dom tree of the xml code for a diagram.
  * 
- * @author Eigenaar
+ * @author J. Falkink-Pol
  * 
  */
 public class BWTree extends JTree {
