@@ -101,7 +101,9 @@ abstract class MultiplePairsPartition extends MultipleThreadsPartition {
                     new Point2D.Double(x, y), //
                     frontCurve, //
                     front.getStyle().getBackGround().getWidth(), //
-                    back.getCurve());
+                    back.getCurve(), //
+                    back.getStyle().getBackGround().getWidth() //
+                    );
             if (frontCurve==nearest){
                 return front;
             }

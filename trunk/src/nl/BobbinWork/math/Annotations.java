@@ -28,13 +28,13 @@ public class Annotations {
     }
 
     /**
-     * Creates a twistmark
+     * Creates a twist mark
      * 
      * @param curve
      *            the curve that should get the twist mark
      * @param length
      *            of the twist mark
-     * @return a perpendicular line approximately through the centre of the
+     * @return a perpendicular line approximately through the center of the
      *         curve
      * 
      * @author J. Falkink-Pol

@@ -20,10 +20,6 @@ package nl.BobbinWork.math;
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Point2D;
 
-/**
- * @author R. van Hassel
- *
- */
 public class Nearest {
     
     private Nearest(){
@@ -33,11 +29,12 @@ public class Nearest {
     /**
      * @param mouse coordinates for the mouse position
      * @param front thread segment that lies in front of the other
-     * @param frontWidth wdth of the line drawn as front thread
+     * @param frontWidth width of the line drawn as front thread
      * @param back thread segment that lies in behind the other
      * @return the thread segment with the shortest distance to the mouse
      */
-    public static CubicCurve2D nearest(Point2D mouse, CubicCurve2D front, int frontWidth, CubicCurve2D back){
+    public static CubicCurve2D nearest(Point2D mouse, CubicCurve2D front, int frontWidth, CubicCurve2D back, int backWidth){
+    	//TODO compute which line is really nearest
         return front;
     }
 
