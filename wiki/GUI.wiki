@@ -9,12 +9,13 @@ Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trai
 
 =Bidirectional synchronisation between the remaining three panels=
 
-Just a tree to select a diagram section could be too intimidating. When clicking the diagram it is usually not clear which level is meant. So first click the diagram, a corresponding tree element gets hightlighted, then click a higher or lower level in the tree if you want to manipulate a larger or smaller section. Clicks between threads but within the convex hull of (groups of) stitches could be the trigger. Thus click on threads can still be used for painting.
+Just a tree to select a diagram section could be too intimidating. On the other hand, when clicking the diagram it is usually not clear which level is meant. To solve the dilemma and keep the user interface simple: first click the diagram, a corresponding tree element gets highlighted, then click a higher or lower level in the tree if you want to manipulate a larger or smaller section. Mouse clicks are already used to select or apply thread styles. Selecting should not be easily confused with applying thread styles, so probably use the default mouse key to select both a style as a stitch.
 
   * Currently a section in the diagram gets highlighted if a tree element is selected. The other way around is not yet implemented.
   * The tree view should show the "exploded" sections. See the [http://groups.google.com/group/bobbinwork/web/TechnicalOverview.vsd technical overview] about exploded.
   * "Exploded" sections should not be reflected in the XML source, unless the user changes it interactively.
-  * Something like the synchronised outline views when editing an XML file in Eclipse could be attractive, but customise the outline like the currently implemented tree view.
+  * Something like the synchronised outline view when editing an XML file in Eclipse could be attractive, but customise the outline like the currently implemented tree view.
+  * A design conflict: the multilingual titles seem too complex to define as attributes and are currently indeed implemented as elements. In the treeview however, the title should be shown in one language as an attribute.
 
 =Manipulations=
   * Highlighting a diagram section should also pop up handlers to move and rotate.
