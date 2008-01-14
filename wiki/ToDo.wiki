@@ -1,6 +1,6 @@
 #labels Featured
   * enforce some Contributor License Agreement ?
-  * see [Launching] - desired deployment
+  * create environment independent ANT build file, see also [Launching] for desired deployment
   * complete the Java doc (include the Visio diagrams?)
   * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
   * code reviews
