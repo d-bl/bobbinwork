@@ -18,13 +18,11 @@
 
 
 package nl.BobbinWork.diagram.model;
+import static nl.BobbinWork.math.NearestPoint.onCurve;
 
 import java.awt.Shape;
-import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Point2D;
 import java.util.Vector;
-
-import static nl.BobbinWork.math.Nearest.nearest;
 
 import org.w3c.dom.Element;
 
@@ -96,19 +94,11 @@ abstract class MultiplePairsPartition extends MultipleThreadsPartition {
         if (s != null) {
             ThreadSegment front = s.getFront();
             ThreadSegment back = s.getBack();
-            CubicCurve2D frontCurve = front.getCurve();
-            CubicCurve2D nearest = nearest( //
-                    new Point2D.Double(x, y), //
-                    frontCurve, //
-                    front.getStyle().getBackGround().getWidth(), //
-                    back.getCurve(), //
-                    back.getStyle().getBackGround().getWidth() //
-                    );
-            if (frontCurve==nearest){
-                return front;
-            }
-            return back;
-
+            Point2D mouse = new Point2D.Double(x, y); 
+            Point2D dummy = new Point2D.Double(0,0);
+        	Double frontDistance = onCurve(front.getCurve(), mouse, dummy);
+        	Double backDistance = onCurve(back.getCurve(), mouse, dummy);
+            return frontDistance < backDistance ? front : back;
         } else {
             return null;
         }
