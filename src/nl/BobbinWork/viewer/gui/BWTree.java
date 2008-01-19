@@ -148,7 +148,7 @@ public class BWTree extends JTree {
         /* TODO workaround because
          *     buildTree(viewModelRoot, basicStitches);
          * didn't work out right in setDoc(Element)
-         * probably because the <copy> instruction doesn't work over different douments
+         * probably because the <copy> instruction doesn't work over different documents
          *  
          * rather only load once into the list of fragments
         */
@@ -188,7 +188,7 @@ public class BWTree extends JTree {
     }
 
     /**
-     * gets the partition of the diagram reffered to by the selected element of
+     * gets the partition of the diagram referred to by the selected element of
      * the tree model
      */
     Partition getSelectedPartition() {
@@ -308,7 +308,7 @@ public class BWTree extends JTree {
     }
 
     /**
-     * deletes the currenty selected node from the tree model, adjusts the dom
+     * deletes the currently selected node from the tree model, adjusts the dom
      * tree accordingly
      */
     void deleteSelected() {

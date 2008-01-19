@@ -48,7 +48,7 @@ public class Annotations {
 
         // approximation to divide the curve in more or less equal lengths
         // see divide.gif
-        // TODO perhaps quadratic/squareroot or whatever
+        // TODO perhaps quadratic/square root or whatever
         double s = start.distance(c1) + start.distance(c2);
         double e = end.distance(c1) + end.distance(c2);
         double t = e / (e + s);
