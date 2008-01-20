@@ -129,7 +129,7 @@ public enum ElementType {
     new_bobbins(), //
 
     /**
-     * Ssequence of thread segments not following the ordinary over-under rules.
+     * Sequence of thread segments not following the ordinary over-under rules.
      */
     bobbin(), //
 
@@ -173,7 +173,7 @@ public enum ElementType {
      * 
      * @param segment
      *            true if Element has at least the attributes <code>start</code>
-     *            and <code>end</code>, and optionaly <code>c1</code> and
+     *            and <code>end</code>, and optionally <code>c1</code> and
      *            <code>c1</code>
      * 
      */
@@ -191,7 +191,7 @@ public enum ElementType {
      * designating points involved in transformations like move.
      * 
      * @param attributes
-     *            attribte tags of point involved in transformations like move.
+     *            attribute tags of point involved in transformations like move.
      */
     private ElementType(AttributeType attributes[]) {
         pointAttributes = new String[attributes.length];
@@ -245,7 +245,7 @@ public enum ElementType {
      * Checks if an XML element defines a segment.
      * 
      * <code>Segment</code> elements have the mandatory attributes
-     * <code><ul><li>start</li><li>end</li></ul></code> and the optinal attributes
+     * <code><ul><li>start</li><li>end</li></ul></code> and the optional attributes
      * <code><ul><li>c2</li><li>c2</li></ul></code>
      * 
      * @param s

@@ -41,7 +41,6 @@ import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 
 import javax.swing.AbstractButton;
 import javax.swing.Box;
-import javax.swing.Icon;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
