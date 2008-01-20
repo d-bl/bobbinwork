@@ -3,8 +3,10 @@
   * create environment independent ANT build file, see also [Launching] for desired deployment
   * complete the Java doc (include the Visio diagrams?)
   * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
-  * code reviews
+  * code reviews. For example nl.BobbinWork.diagram.xml.ElementType as I have my doubts about this enum.
   * project management
   * bring the xsd up to date
-  * see also the to do's in the code and see the wish lists in the [http://bw-en.wikispaces.com/ user guide]
-  * See [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
+  * see also 
+    * to do's in the code
+    * the wish lists in the [http://bw-en.wikispaces.com/ user guide]
+    * See [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
