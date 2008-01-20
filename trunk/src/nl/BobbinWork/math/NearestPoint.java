@@ -386,7 +386,7 @@ public class NearestPoint {
         Point2D pn = new Point2D.Double();
         CubicCurve2D c = new CubicCurve2D.Double(0, 0, 1, 2, 3, 3, 4, 2);
         Point2D pa = new Point2D.Double(3.5, 2.0);
-        double distSq = onCurve(c, pa, pn);
+        assert ( onCurve(c, pa, pn)>0 );
         System.out.println("Point On Curve is "+pn);
     }
 }
