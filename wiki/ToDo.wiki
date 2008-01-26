@@ -1,12 +1,12 @@
 #labels Featured
-  * enforce some Contributor License Agreement ?
   * create environment independent ANT build file, see also [Launching] for desired deployment
   * complete the Java doc (include the Visio diagrams?)
-  * unit tests, currently only high level tests are available by visually checking and manipulating the sample diagrams
-  * code reviews. For example nl.BobbinWork.diagram.xml.ElementType as I have my doubts about this enum.
+  * unit tests, starting with the math and diagram.model packages. Currently only high level tests are available by visually checking and manipulating the sample diagrams
+  * replace the W3C-dom by jdom? Could be a good moment to start with unit tests.
+  * code reviews. For example on what is squeezed into the enum nl.BobbinWork.diagram.xml.ElementType.
   * project management
   * bring the xsd up to date
   * see also 
     * to do's in the code
     * the wish lists in the [http://bw-en.wikispaces.com/ user guide]
-    * See [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
+    * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
