@@ -25,7 +25,7 @@ import java.awt.Shape;
 import java.awt.geom.CubicCurve2D;
 
 import org.w3c.dom.Element;
-import static nl.BobbinWork.math.Annotations.createTwistMark;
+import static nl.BobbinWork.diagram.math.Annotations.createTwistMark;
 
 /**
  * A segment of a continuous line. From straight to S-shape.
