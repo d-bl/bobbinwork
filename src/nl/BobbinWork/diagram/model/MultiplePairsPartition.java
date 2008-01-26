@@ -18,7 +18,7 @@
 
 
 package nl.BobbinWork.diagram.model;
-import static nl.BobbinWork.math.NearestPoint.onCurve;
+import static nl.BobbinWork.diagram.math.NearestPoint.onCurve;
 
 import java.awt.Shape;
 import java.awt.geom.Point2D;

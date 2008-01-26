@@ -1,4 +1,4 @@
-package nl.BobbinWork.math;
+package nl.BobbinWork.diagram.math;
 
 //Copyright 2004, FreeHEP.
 
