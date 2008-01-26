@@ -1,9 +1,9 @@
 #labels Featured
   * create environment independent ANT build file, see also [Launching] for desired deployment
   * complete the Java doc (include the Visio diagrams?)
-  * unit tests, starting with the math and diagram.model packages. Currently only high level tests are available by visually checking and manipulating the sample diagrams
+  * unit tests, starting with the `math` and `diagram.model` packages. Currently only high level tests are available by visually checking and manipulating the sample diagrams
   * replace the W3C-dom by jdom? Could be a good moment to start with unit tests.
-  * code reviews. For example on what is squeezed into the enum nl.BobbinWork.diagram.xml.ElementType.
+  * code reviews. For example on what is squeezed into the enum `nl.BobbinWork.diagram.xml.ElementType`.
   * project management
   * bring the xsd up to date
   * see also 
