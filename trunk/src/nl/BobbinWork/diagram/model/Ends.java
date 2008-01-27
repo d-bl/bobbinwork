@@ -83,9 +83,6 @@ class Ends {
         // |x x|
         // |_x_|
         int end = Math.min(child.getIns().length, ins.length - offset);
-        if (end == 0 ) {
-            System.out.println("nr of threads exceed nr of pairs");
-        }
         for (int i = 0; i < end; i++) {
             if (ins[offset + i] == null) {
                 ins[offset + i] = child.getIns()[i];

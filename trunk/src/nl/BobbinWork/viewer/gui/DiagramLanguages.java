@@ -25,16 +25,16 @@ import nl.BobbinWork.diagram.xml.ElementType;
 
 /**
  * Manages the languages encountered in diagrams and their order as preferred by
- * the user. Language support for the diagrams is something different than
- * Language support for the application.
+ * the user. A diagram may support another set of languages than the application.
  * 
  * @author J. Falkink-Pol
  * 
  */
 public class DiagramLanguages {
     /*
-     * TODO: turn into some user sortable como box of languages found in
-     * diagrams and/or cookies
+     * TODO: turn into some user sortable combo box of languages found in
+     * diagrams and/or cookies. Language extraction should be part of the 
+     * diagram.model package.
      */
 
     /**
