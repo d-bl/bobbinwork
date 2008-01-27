@@ -79,7 +79,7 @@ public class BWVApplet extends JApplet {
 
     private static final AboutInfo aboutInfo = new AboutInfo(//
             " BobbinWork - Viewer" // caption //$NON-NLS-1$
-            , "2.0.56" // version //$NON-NLS-1$
+            , "2.0.58" // version //$NON-NLS-1$
             , "2006-2007" // years //$NON-NLS-1$
             , "J. Falkink-Pol" // author //$NON-NLS-1$
     );

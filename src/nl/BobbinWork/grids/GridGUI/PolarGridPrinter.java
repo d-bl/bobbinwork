@@ -34,7 +34,7 @@ public class PolarGridPrinter
     
     static private final AboutInfo aboutInfo = new AboutInfo
             ( " BobbinWork - Polar Grid" // caption
-            , "1.7"                      // version
+            , "2.0.58"                      // version
             , "2005-2006"                // years
             , "J. Falkink-Pol"           // author
             );
