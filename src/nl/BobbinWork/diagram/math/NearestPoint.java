@@ -107,8 +107,9 @@ public class NearestPoint {
 
 
         //  Return the point on the curve at parameter value t
-        System.out.println("t: "+t);
-        pn.setLocation(bezier(v, DEGREE, t, null, null));
+        if (pn != null ) {
+         pn.setLocation(bezier(v, DEGREE, t, null, null));
+        }
 
         return pn.distanceSq(pa);
     }

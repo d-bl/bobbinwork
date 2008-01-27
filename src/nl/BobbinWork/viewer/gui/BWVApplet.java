@@ -69,7 +69,6 @@ import javax.swing.event.TreeSelectionListener;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
 import nl.BobbinWork.bwlib.gui.AboutInfo;
-import nl.BobbinWork.bwlib.gui.JFrameBrowser;
 import nl.BobbinWork.bwlib.gui.NativeBrowser;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.BWFileHandler;
@@ -80,16 +79,14 @@ public class BWVApplet extends JApplet {
 
     private static final AboutInfo aboutInfo = new AboutInfo(//
             " BobbinWork - Viewer" // caption //$NON-NLS-1$
-            , "2.0" // version //$NON-NLS-1$
+            , "2.0.56" // version //$NON-NLS-1$
             , "2006-2007" // years //$NON-NLS-1$
             , "J. Falkink-Pol" // author //$NON-NLS-1$
     );
 
     private static final String //
-            LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels", //$NON-NLS-1$
-            REL_NOTES = "nl/BobbinWork/viewer/help/releasenotes.html", //$NON-NLS-1$
-            USER_GUIDE = "http://bobbinwork.wikispaces.com/"; //$NON-NLS-1$
-
+            LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
+            
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml";
 
     /** icon for dialogs and application frame */
@@ -633,19 +630,11 @@ public class BWVApplet extends JApplet {
          */
         private HelpMenu() {
 
-            ActionListener localHelpActionListener = new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    new JFrameBrowser(aboutInfo.getCaption(), icon, e.getActionCommand());
-                }
-            };
             applyStrings(this, "MenuHelp_help"); //$NON-NLS-1$
+            add(new javax.swing.JSeparator());
+            add(new javax.swing.JSeparator());
 
             JMenuItem//
-
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHelp_releaseNotes"); //$NON-NLS-1$
-            jMenuItem.setActionCommand(REL_NOTES); //$NON-NLS-1$ 
-            jMenuItem.addActionListener(localHelpActionListener);
-            add(jMenuItem);
 
             jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHelp_About"); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
@@ -657,67 +646,97 @@ public class BWVApplet extends JApplet {
             add(jMenuItem);
         }
 
-        /** Adding items showing external information in an external browser. */
+        private class BrowsingActionListener implements ActionListener {
+        	
+        	private String url;
+        	
+        	BrowsingActionListener (String url) {
+        		this.url = url;
+        	}
+
+            public void actionPerformed(ActionEvent e) {
+                if (!NativeBrowser.show(url)) {
+                    javax.swing.JOptionPane.showMessageDialog(//
+                            self,//
+                            "browser not found" + "\n\n" + url, //$NON-NLS-2$
+                            getString("MenuHelp_userGuide"), //$NON-NLS-1$
+                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        }
+
+        /** Convenience method: extends the menu with a browser item. */
+        private void extend(String text, String code) {
+
+            extend(1,text, "http://bw-"+code+".wikispaces.com/");  //$NON-NLS-1$ $NON-NLS-2$
+        }        
+
+        /** Convenience method: extends the menu with a browser item. */
+        private void extend(int index, String text, String url) {
+
+            JMenuItem //
+            jMenuItem = new JMenuItem();
+            jMenuItem.setText(text);  //$NON-NLS-1$
+			jMenuItem.addActionListener(new BrowsingActionListener(url));
+            insert(jMenuItem, index);
+        }
+        
+        /** Extends the applet version of the menu with items that launch a browser. */
         public void extend() {
 
-            JMenuItem jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHelp_userGuide"); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    if (!NativeBrowser.show(USER_GUIDE)) {
-                        javax.swing.JOptionPane.showMessageDialog(//
-                                self,//
-                                "browser not found" + "\n\n" + USER_GUIDE, //$NON-NLS-1$
-                                getString("MenuHelp_userGuide"), //
-                                javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                    }
-                }
-            });
-            insert(jMenuItem, 0);
-        }
-    }
-
-    /**
-     * A fully dressed JMenu, controlling the appearance of the high lights on
-     * the diagram
-     */
-    private class DiagramHighlightsMenu extends JMenu {
-
-        private DiagramHighlightsMenu() {
-            JMenuItem//
-
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHighlight_AreaColor"); //$NON-NLS-1$
-            jMenuItem.setBackground(new Color(diagramPanel.getAreaHighlight().getRGB()));
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Color color = JColorChooser.showDialog(//
-                            self, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
-                    if (color != null) {
-                        ((JMenuItem) e.getSource()).setBackground(color);
-                        diagramPanel.setAreaHighlight(color);
-                    }
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHighlight_ThreadColor"); //$NON-NLS-1$
-            jMenuItem.setBackground(new Color(diagramPanel.getThreadHighlight().getRGB()));
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Color color = JColorChooser.showDialog(//
-                            self, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
-                    if (color != null) {
-                        ((JMenuItem) e.getSource()).setBackground(color);
-                        diagramPanel.setThreadHighlight(color);
-                    }
-                }
-            });
-            add(jMenuItem);
+            extend("Nederlands","nl");  //$NON-NLS-1$ $NON-NLS-2$
+            extend("Français","fr");  //$NON-NLS-1$ $NON-NLS-2$
+            extend("Español","es");  //$NON-NLS-1$ $NON-NLS-2$
+            extend("English","en");  //$NON-NLS-1$ $NON-NLS-2$
+            extend("Deutsch","de");  //$NON-NLS-1$ $NON-NLS-2$
+            //myBundle().getString(keyBase)
+            extend(0,"download updates", "http://code.google.com/p/bobbinwork/downloads/list/");  //$NON-NLS-2$
+            extend(0,"download examples", "http://groups.google.com/group/bobbinwork/files/");  //$NON-NLS-2$
         }
     }
 
     /** A fully dressed JMenu, controlling the view of the diagram */
     private class DiagramViewMenu extends JMenu {
+
+
+        /**
+         * A fully dressed JMenu, controlling the appearance of the high lights on
+         * the diagram
+         */
+        private class DiagramHighlightsMenu extends JMenu {
+
+            private DiagramHighlightsMenu() {
+                JMenuItem//
+
+                jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHighlight_AreaColor"); //$NON-NLS-1$
+                jMenuItem.setBackground(new Color(diagramPanel.getAreaHighlight().getRGB()));
+                jMenuItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Color color = JColorChooser.showDialog(//
+                                self, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
+                        if (color != null) {
+                            ((JMenuItem) e.getSource()).setBackground(color);
+                            diagramPanel.setAreaHighlight(color);
+                        }
+                    }
+                });
+                add(jMenuItem);
+
+                jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHighlight_ThreadColor"); //$NON-NLS-1$
+                jMenuItem.setBackground(new Color(diagramPanel.getThreadHighlight().getRGB()));
+                jMenuItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        Color color = JColorChooser.showDialog(//
+                                self, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
+                        if (color != null) {
+                            ((JMenuItem) e.getSource()).setBackground(color);
+                            diagramPanel.setThreadHighlight(color);
+                        }
+                    }
+                });
+                add(jMenuItem);
+            }
+        }
 
         /** Creates a fully dressed JMenu, controlling the view of the diagram */
         private DiagramViewMenu() {
