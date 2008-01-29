@@ -35,34 +35,6 @@ public class NearestPoint {
     }
 
     /***
-     * Returns the nearest point (pn) on line p1 - p2 nearest to point pa.
-     *
-     * @param p1 start point of line
-     * @param p2 end point of line
-     * @param pa arbitrary point
-     * @param pn nearest point (return param)
-     * @return distance squared between pa and nearest point (pn)
-     */ 
-    public static double onLine(Point2D p1, Point2D p2, Point2D pa, Point2D pn) {
-        double dx = p2.getX() - p1.getX();
-        double dy = p2.getY() - p1.getY();
-        double dsq = dx*dx + dy*dy;
-        if (dsq == 0) {
-            pn.setLocation(p1);
-        } else {
-            double u = ((pa.getX()-p1.getX())*dx + (pa.getY()-p1.getY())*dy)/dsq;
-            if (u <= 0) {
-                pn.setLocation(p1);
-            } else if (u >= 1) {
-                pn.setLocation(p2);
-            } else {
-                pn.setLocation(p1.getX() + u*dx, p1.getY() + u*dy);
-            }
-        }
-        return pn.distanceSq(pa);
-    }
-
-    /***
      * Return the nearest point (pn) on cubic bezier curve c nearest to point pa.
      *
      * @param c cubice curve
@@ -105,12 +77,13 @@ public class NearestPoint {
             t = 1.0;
         }
 
-
-        //  Return the point on the curve at parameter value t
-        if (pn != null ) {
-         pn.setLocation(bezier(v, DEGREE, t, null, null));
+        //  Even if the caller is just interested in the distance
+        //  Compute the point on the curve at parameter value t
+        if (pn == null ) {
+        	pn = new Point2D.Double();
         }
 
+        pn.setLocation(bezier(v, DEGREE, t, null, null));
         return pn.distanceSq(pa);
     }
 
@@ -378,16 +351,5 @@ public class NearestPoint {
         }
         
         return p[degree][0];
-    }
-    
-    /***
-     * Test for onCurve
-     */
-    public static void main(String[] args) {
-        Point2D pn = new Point2D.Double();
-        CubicCurve2D c = new CubicCurve2D.Double(0, 0, 1, 2, 3, 3, 4, 2);
-        Point2D pa = new Point2D.Double(3.5, 2.0);
-        assert ( onCurve(c, pa, pn)>0 );
-        System.out.println("Point On Curve is "+pn);
     }
 }
