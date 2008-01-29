@@ -95,9 +95,8 @@ abstract class MultiplePairsPartition extends MultipleThreadsPartition {
             ThreadSegment front = s.getFront();
             ThreadSegment back = s.getBack();
             Point2D mouse = new Point2D.Double(x, y); 
-            Point2D dummy = new Point2D.Double(0,0);
-        	Double frontDistance = onCurve(front.getCurve(), mouse, dummy);
-        	Double backDistance = onCurve(back.getCurve(), mouse, dummy);
+        	Double frontDistance = onCurve(front.getCurve(), mouse, null);
+        	Double backDistance = onCurve(back.getCurve(), mouse, null);
             return frontDistance < backDistance ? front : back;
         } else {
             return null;
