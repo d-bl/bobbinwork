@@ -9,31 +9,69 @@ import static nl.BobbinWork.diagram.math.Annotations.*;
 
 public class testAnnotations extends TestCase {
 	
-	private class Line extends Line2D.Float {
-		public Line (float x1,float y1,float x2,float y2) {
-			super(x1,y1,x2,y2);
-		}
-		public boolean equals(Line2D.Float l){
-			//FIXME: not used by assertEquals
-			return this.getX1() == l.x1 //
-			    && this.getY1() == l.y1 //
-			    && this.getX2() == l.x2 //
-			    && this.getY2() == l.y2 ;
-		}
+	private String pointToString(Point2D p) {
+		return "(" + p.getX() +","+p.getY()+ ")";
 	}
+	
+	private String lineToString(Line2D line) {
+		return pointToString(line.getP1()) + "-" + //
+		       pointToString(line.getP2());
+	}
+	
+	/**
+	 * @param tolerance maximum distance between both points
+	 * @return true if the points are close enough
+	 */
+	private boolean equalPoints (Point2D expected, Point2D actual, double tolerance){
+		return expected.distance(actual) <= tolerance;
+	}
+	
+	private void assertEqualLines (Line2D expected, Line2D actual, double tolerance){
+		
+		String message = "expected line " + lineToString(expected) //
+                            + " but got " + lineToString(actual);
+		
+		assertTrue ("bad test: line shorter than tolerance*2:", //
+				 2 * tolerance <= expected.getP1().distance( expected.getP2() ) );
+		
+		assertTrue ( message, ( equalPoints(expected.getP1(), actual.getP1(), tolerance) &&
+		                        equalPoints(expected.getP2(), actual.getP2(), tolerance)
+		                      ) || 
+		                      ( equalPoints(expected.getP1(), actual.getP2(), tolerance) &&
+		                        equalPoints(expected.getP2(), actual.getP1(), tolerance)
+		                      ) 
+                   );
+ 	}
 
+	/**
+	 * Test method for {@link nl.BobbinWork.diagram.math.Annotations#CreateTwistMark(java.awt.geom.CubicCurve2D, int)}.
+	 */
 	public void testCreateTwistMark() {
 
-		Point2D p1 = new Point2D.Double(0, 0);
-        Point2D cp1 = new Point2D.Double(8, 0);
-        Point2D cp2 = new Point2D.Double(7, 0);
-        Point2D p2 = new Point2D.Double(9, 0);
-        CubicCurve2D c = new CubicCurve2D.Double();
-        c.setCurve(p1, cp1, cp2, p2);
-        
-        assertEquals(new Line(4.5f,-1.0f,4.5f,1.0f), createTwistMark(c,2));
+		CubicCurve2D curve = new CubicCurve2D.Double();
+		Line2D expectedTwistMark = new Line2D.Double (4.5,-1, 4.5,1);
 
-		fail("Not yet implemented");
+		// straight lines
+		
+		curve.setCurve(0,0, 0,0, 9,0, 9,0);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.5);
+	    
+		curve.setCurve(0,0, 4,0, 5,0, 9,0);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.5);
+
+		// a visually straight line doubling itself (at 3 scales)
+
+	    curve.setCurve(0,0, 8,0, 1,0, 9,0);
+        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.5);
+
+		curve.setCurve(0,0, 0.8,0, 0.1,0, 0.9,0);
+		expectedTwistMark.setLine(0.45,-1, 0.45,1);
+        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.45);
+
+		curve.setCurve(0,0, 80,0, 10,0, 90,0);
+		expectedTwistMark.setLine(45,-1, 45,1);
+        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0);
+
+        fail("Required tolerance looks like a rounding problem");
 	}
-
 }
