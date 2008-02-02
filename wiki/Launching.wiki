@@ -1,9 +1,9 @@
-#summary Execute the applications
+#summary Execute and build the applications
 #labels Featured
 
-==By Users==
+==Execution of the applications by users==
 ===Open Source distribution===
-See the downloads or the [http://bw-en.wikispaces.com/ user guide wiki]
+See the downloads page or the [http://bw-en.wikispaces.com/ user guide wiki]
 
 ===Last Distribution with a restrictive license===
   * working diagrams: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwViewer.jar application] or as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/viewer-EN.html applet]
@@ -12,6 +12,6 @@ See the downloads or the [http://bw-en.wikispaces.com/ user guide wiki]
 ==Desired Deployment==
 The [http://code.google.com/p/bobbinwork/source/browse/trunk/ jardesc] files are build files for Eclipse, bound by the local project name. An ANT build file might have advantages, but for now the jardecs are at least human readable and unambigious.
 
-To display another language than set by the operating system, both programs accept a language code as optional command line argument, see also the [http://bw-en.wikispaces.com/ user guide wiki]. The bwViewer takes quite some time to launch or load a diagram.
+To display another language than set by the operating system, both programs accept a language code as optional command line argument. The bwViewer takes quite some time to launch or load a diagram.
 
-Use Java !WebStart to make it also easily accessible for the many less computer literate lace makers who's system doesn't meet the prerequisites to execute the jar files. It should simplify the section "launching problems" on the main page of the [http://bw-en.wikispaces.com/ user guide wiki].
+Java !WebStart might make the programs easier accessible for the many less computer literate lace makers who's system doesn't meet the prerequisites to execute the jar files. It should simplify the section "launching problems" on the main page of the [http://bw-en.wikispaces.com/ user guide wiki].
