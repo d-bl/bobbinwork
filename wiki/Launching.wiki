@@ -10,15 +10,8 @@ See the downloads or the [http://bw-en.wikispaces.com/ user guide wiki]
   * polar grids: as an [http://www.xs4all.nl/%7Efalkink/BobbinWork/bwpGrid.jar application]
 
 ==Desired Deployment==
-An environment independent build file is not yet created.
+The [http://code.google.com/p/bobbinwork/source/browse/trunk/ jardesc] files are build files for Eclipse, bound by the local project name. An ANT build file might have advantages, but for now the jardecs are at least human readable and unambigious.
 
-Both programs can have a language code as optional command line argument, see also the [http://bw-en.wikispaces.com/ user guide wiki].
-
-bwpGrid.jar
-  * can exclude diagram, viewer, math packages
-  * main class: nl.!BobbinWork.grids.GridGUI.!PolarGridPrinter
-bwViewer.jar
-  * can exclude grids packages
-  * main class: nl.!BobbinWork.viewer.gui.BWVApplet (executable as an applet and as an application, takes a while to launch or load a diagram)
+To display another language than set by the operating system, both programs accept a language code as optional command line argument, see also the [http://bw-en.wikispaces.com/ user guide wiki]. The bwViewer takes quite some time to launch or load a diagram.
 
 Use Java !WebStart to make it also easily accessible for the many less computer literate lace makers who's system doesn't meet the prerequisites to execute the jar files. It should simplify the section "launching problems" on the main page of the [http://bw-en.wikispaces.com/ user guide wiki].
