@@ -47,13 +47,13 @@ public class Annotations {
         Point2D end = curve.getP2();
 
         // approximation to divide the curve in more or less equal lengths
-        // see divide.gif
+        // http://bw-en.wikispaces.com/bezier+math#TwistMark
         // TODO perhaps quadratic/square root or whatever
         double s = start.distance(c1) + start.distance(c2);
         double e = end.distance(c1) + end.distance(c2);
         double t = e / (e + s);
 
-        // applying casteljau.gif
+        // applying Casteljau
         Point2D a = pointBetween(start, c1, t);
         Point2D b = pointBetween(c1, c2, t);
         Point2D c = pointBetween(c2, end, t);
@@ -63,15 +63,15 @@ public class Annotations {
 
         double dx = z.getX() - p.getX();
         double dy = z.getY() - p.getY();
-        double scale = length / (Math.hypot(dx, dy) * 2);
+        double scale = ((double)length) / (Math.hypot(dx, dy) * 2.0);
         dx *= scale;
         dy *= scale;
 
-        return new Line2D.Float(//
-                (int) (z.getX() + dy), //
-                (int) (z.getY() - dx), //
-                (int) (z.getX() - dy), //
-                (int) (z.getY() + dx));
+        return new Line2D.Double(//
+                  z.getX() + dy, //
+                  z.getY() - dx, //
+                  z.getX() - dy, //
+                  z.getY() + dx);
 
     }
 
@@ -79,7 +79,7 @@ public class Annotations {
      * @author J. Falkink-Pol
      */
     static private Point2D pointBetween(Point2D a, Point2D b, double t) {
-        return new Point2D.Double((a.getX() * (1 - t)) + (b.getX() * t), (a.getY() * (1 - t))
+        return new Point2D.Double((a.getX() * (1.0 - t)) + (b.getX() * t), (a.getY() * (1.0 - t))
                 + (b.getY() * t));
     }
 }

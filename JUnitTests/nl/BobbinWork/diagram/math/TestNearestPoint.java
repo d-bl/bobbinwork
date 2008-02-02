@@ -19,7 +19,6 @@ package nl.BobbinWork.diagram.math;
 
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Point2D;
-import static java.lang.Math.sqrt;
 
 import junit.framework.TestCase;
 import static nl.BobbinWork.diagram.math.NearestPoint.*;

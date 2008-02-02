@@ -21,7 +21,7 @@ import java.awt.geom.*;
  * by Philip J. Schneider from "Graphics Gems", Academic Press, 1990.
  *
  * @author Mark Donszelmann
- * @version $Id: NearestPoint.java 258 2004-06-08 06:27:49Z duns $
+ * original version Id: NearestPoint.java 258 2004-06-08 06:27:49Z duns 
  */ 
 public class NearestPoint {
     

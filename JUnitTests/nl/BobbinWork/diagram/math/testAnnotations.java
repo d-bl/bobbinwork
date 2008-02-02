@@ -51,27 +51,43 @@ public class testAnnotations extends TestCase {
 		CubicCurve2D curve = new CubicCurve2D.Double();
 		Line2D expectedTwistMark = new Line2D.Double (4.5,-1, 4.5,1);
 
-		// straight lines
+		// symmetric straight lines
 		
 		curve.setCurve(0,0, 0,0, 9,0, 9,0);
-	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.5);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0);
 	    
 		curve.setCurve(0,0, 4,0, 5,0, 9,0);
-	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.5);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0);
 
-		// a visually straight line doubling itself (at 3 scales)
+		// a visually straight symmetrical line doubling itself (at 3 scales)
 
 	    curve.setCurve(0,0, 8,0, 1,0, 9,0);
-        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.5);
+        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0);
 
 		curve.setCurve(0,0, 0.8,0, 0.1,0, 0.9,0);
 		expectedTwistMark.setLine(0.45,-1, 0.45,1);
-        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0.45);
+        assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0);
 
 		curve.setCurve(0,0, 80,0, 10,0, 90,0);
 		expectedTwistMark.setLine(45,-1, 45,1);
         assertEqualLines(expectedTwistMark, createTwistMark(curve,2), 0);
 
-        fail("Required tolerance looks like a rounding problem");
+		// asymmetrical straight lines
+		
+		expectedTwistMark.setLine(4.5,-5, 4.5,5);
+
+		curve.setCurve(0,0, 8,0, 6,0, 9,0);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10), 0.5);
+	    
+		curve.setCurve(0,0, 6,0, 8,0, 9,0);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10), 1.1);
+	    
+		curve.setCurve(0,0, 0,0, 0,0, 9,0);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10), 4.5);
+	    
+		curve.setCurve(0,0, 9,0, 9,0, 9,0);
+	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10), 1.1);
+	    
+        fail("Too much tolerance required");
 	}
 }
