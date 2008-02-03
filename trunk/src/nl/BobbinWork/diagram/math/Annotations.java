@@ -27,6 +27,10 @@ public class Annotations {
         // only static methods so hide constructor
     }
 
+    public static Line2D createTwistMark(CubicCurve2D curve, int length) {
+    	return createTwistMark(curve, length, 0.15);
+    }
+    
     /**
      * Creates a twist mark
      * 
@@ -39,7 +43,7 @@ public class Annotations {
      * 
      * @author J. Falkink-Pol
      */
-    public static Line2D createTwistMark(CubicCurve2D curve, int length) {
+    public static Line2D createTwistMark(CubicCurve2D curve, int length, double correction) {
 
         Point2D start = curve.getP1();
         Point2D c1 = curve.getCtrlP1();
@@ -48,11 +52,11 @@ public class Annotations {
 
         // approximation to divide the curve in more or less equal lengths
         // http://bw-en.wikispaces.com/bezier+math#TwistMark
-        // TODO perhaps quadratic/square root or whatever
+        // TODO optimize somehow
         double s = start.distance(c1) + start.distance(c2);
         double e = end.distance(c1) + end.distance(c2);
-        double t = e / (e + s);
-
+        double t = (e / (e+s)) * (1-2*correction) + correction;
+        
         // applying Casteljau
         Point2D a = pointBetween(start, c1, t);
         Point2D b = pointBetween(c1, c2, t);
@@ -63,6 +67,12 @@ public class Annotations {
 
         double dx = z.getX() - p.getX();
         double dy = z.getY() - p.getY();
+        if ( dx==0 && dy == 0 ) {
+        	// TODO t was 0 or 1 (what should not happen)
+        	// or c1=c2 and start=end (in which case nothing gets solved)
+            dx = z.getX() - q.getX();
+            dy = z.getY() - q.getY();
+        }
         double scale = ((double)length) / (Math.hypot(dx, dy) * 2.0);
         dx *= scale;
         dy *= scale;
