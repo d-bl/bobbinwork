@@ -1,0 +1,81 @@
+table of content
+<div style="margin-left: 1em;"><a href="#tocBezier%20math0">Foundation</a></div>
+<div style="margin-left: 1em;"><a href="#tocBezier%20math1">Ends</a></div>
+<div style="margin-left: 1em;"><a href="#tocBezier%20math2">Gaps</a></div>
+<div style="margin-left: 1em;"><a href="#tocBezier%20math3">Tension</a></div>
+<div style="margin-left: 1em;"><a href="#tocBezier%20math4">Highlights</a></div>
+<div style="margin-left: 2em;"><a href="#tocBezier%20math5">Threads</a></div>
+<div style="margin-left: 2em;"><a href="#tocBezier%20math6">Groups of stitches</a></div>
+<div style="margin-left: 1em;"><a href="#tocBezier%20math7">Twist marks</a></div>
+<h1 id="tocBezier math0">Foundation</h1>
+ <br>
+Small connected sections of Bezier curves are the foundation of the working diagrams.<br>
+
+<br>
+Each cross or twist consist of one section in the background and one section in the foreground. A "shadow" for these sections creates the under/over effect. A white "shadow" creates the traditional drawings.<br>
+<img src="bezier-images/bezier-basics.PNG" alt="bezier-basics.PNG" title="bezier-basics.PNG"> <img src="http://bw-en.wikispaces.com/space/showimage/bezier-shadow.PNG" alt="bezier-shadow.PNG" title="bezier-shadow.PNG"><br>
+The following code snippet shows how to define the Bezier curves of a half stitch. Note that the "<tt>.</tt>" is for the decimals and the "<tt>,</tt>" separates X from Y. X being the horizontal distance from the left side of the canvas, and Y the vertical distance from the top side of the canvas, so <tt>0,0</tt> is the top left corner.<br>
+
+<pre class="xml"><span class="sc3"><span class="re1">&lt;stitch</span> <span class="re0">id</span>=<span class="st0">"tc"</span> <span class="re0">pairs</span>=<span class="st0">"15-16"</span><span class="re2">&gt;</span></span>
+
+    <span class="sc3"><span class="re1">&lt;pair</span> <span class="re0">start</span>=<span class="st0">"3,13.3"</span> <span class="re0">end</span>=<span class="st0">"13.5,3"</span> <span class="re2">/&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;pair</span> <span class="re0">start</span>=<span class="st0">"3,3"</span> <span class="re0">end</span>=<span class="st0">"13.5,13.5"</span> <span class="re2">/&gt;</span></span>
+
+    <span class="sc3"><span class="re1">&lt;twist</span> <span class="re0">bobbins</span>=<span class="st0">"1-2"</span><span class="re2">&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;back</span> <span class="re0">start</span>=<span class="st0">"0,6.6"</span> <span class="re0">end</span>=<span class="st0">"5,11.6"</span> <span class="re2">/&gt;</span></span>
+
+        <span class="sc3"><span class="re1">&lt;front</span> <span class="re0">start</span>=<span class="st0">"5,2"</span> c1=<span class="st0">"5,5"</span> c2=<span class="st0">"5,5"</span> <span class="re0">end</span>=<span class="st0">"0,10"</span> <span class="re2">/&gt;</span></span>
+
+    <span class="sc3"><span class="re1">&lt;/twist<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;twist</span> <span class="re0">bobbins</span>=<span class="st0">"3-4"</span><span class="re2">&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;back</span> <span class="re0">start</span>=<span class="st0">"11.6,2"</span> c1=<span class="st0">"11.6,5"</span> c2=<span class="st0">"11.6,5"</span> <span class="re0">end</span>=<span class="st0">"16.6,10"</span> <span class="re2">/&gt;</span></span>
+
+        <span class="sc3"><span class="re1">&lt;front</span> <span class="re0">start</span>=<span class="st0">"16.6,6.6"</span> <span class="re0">end</span>=<span class="st0">"11.6,11.6"</span> <span class="re2">/&gt;</span></span>
+    <span class="sc3"><span class="re1">&lt;/twist<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;cross</span> <span class="re0">bobbins</span>=<span class="st0">"2-3"</span><span class="re2">&gt;</span></span>
+
+        <span class="sc3"><span class="re1">&lt;back</span> <span class="re0">start</span>=<span class="st0">"11.6,11.6"</span> <span class="re0">end</span>=<span class="st0">"6.6,16.6"</span> <span class="re2">/&gt;</span></span>
+        <span class="sc3"><span class="re1">&lt;front</span> <span class="re0">start</span>=<span class="st0">"5,11.6"</span> <span class="re0">end</span>=<span class="st0">"10,16.3"</span> <span class="re2">/&gt;</span></span>
+
+    <span class="sc3"><span class="re1">&lt;/cross<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/stitch<span class="re2">&gt;</span></span></span></pre>
+
+<br>
+<h1 id="tocBezier math1">Ends</h1>
+ This is how the half stitch looks like:<br>
+<img src="bezier-images/bezier-tc.PNG" alt="bezier-tc.PNG" title="bezier-tc.PNG"><br>
+Unlike traditional diagrams, no ends come out of the stitch going to the bobbins. That is a technical work-around for better chaining the stitches together. Saying that, an idea is coming up how to improve it: the program should extend the loose ends for a while. This is rather a programming challenge than a mathematical challenge, though it might be tricky in what direction to extend.<br>
+<br>
+<h1 id="tocBezier math2">Gaps</h1>
+
+ Let us combine a predefined half stitch with predefined twists:<br>
+<img src="http://bw-en.wikispaces.com/space/showimage/bezier-ttc.PNG" alt="bezier-ttc.PNG" title="bezier-ttc.PNG"><br>
+On the left the result without any intelligence in the program. On the right the program knows how to make the ends meet. But just making the ends meet is not sufficient. The "shadow" still shows a gap. As shown in the picture at the very top of this page, c2, end, start and c1 should be on a straight line. That is a smaller challenge than extending the ends discussed above. But it adds to the tension challenge discussed below.<br>
+<br>
+<h1 id="tocBezier math3">Tension</h1>
+ In this example of a striped Vierge ground, the drunken coloured lines show that the program doesn't know how to tension the threads.<br>
+<img src="bezier-images/bezier-drunken.PNG" alt="bezier-drunken.PNG" title="bezier-drunken.PNG"><br>
+So the program has to do more than just make the ends meet. But simply stretching a drunken line into a more straight line is not enough. We have some obvious restrictions by the pins, but also the connection points and intersections should not move too close. <em>This is a real challenge for which I could use assistance of specialists in Bezier mathematics</em>.<br>
+
+<br>
+<h1 id="tocBezier math4">Highlights</h1>
+<h2 id="tocBezier math5">Threads</h2>
+ Selecting threads has an obvious bug. The current strategy is drizzling into the details of the tree until the cross or twist is found that contains the mouse pointer. Then nearest thread is highlighted. The following issue show why some sections at the edge sometimes can't be selected.<br>
+<h2 id="tocBezier math6">Groups of stitches</h2>
+ <img src="bezier-images/bezier-high-lights.PNG" alt="bezier-high-lights.PNG" title="bezier-high-lights.PNG"><br>
+In the Image above, the green dots show the end points of the selected group of stitches. These points define the shape for the highlights. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. This is not even the worst example. So here has to change something too.<br>
+
+<a name="TwistMark"></a><br>
+<h1 id="tocBezier math7">Twist marks</h1>
+ Additional twists in a pair diagram are marked with short perpendicular lines approximately through the centre of a pair segment. <tt>t=0.5</tt> only divides a curve in two halves of equal length if the curve is symmetrical. The following 2 figures inspired the approximation of <tt>t</tt> as calculated in <a class="wiki_link_ext" href="http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/math/Annotations.java" rel="nofollow">createTwistMark</a>.<br>
+<br>
+Inspiration for the basic calculation: the ratio of the distances of the end points to both control points. Just R1/(R1+R4) is too simple as thus the direction would play no role.<br>
+
+<img src="bezier-images/Divide.gif" alt="Divide.gif" title="Divide.gif"><br>
+<br>
+Inspiration for the correction<br>
+<img src="bezier-images/divide2.png" alt="divide2.png" title="divide2.png"><br>
+both from <a href="http://www.ablestable.com/play/bezier/" rel="nofollow">ablestable</a> follow the link to <em>Understanding Bezier Curves</em><br>
+<br>
+The following diagram illustrates the variables used in further calculations.<br>
+<img src="bezier-images/Casteljau.png" alt="Casteljau.png" title="Casteljau.png"><br>
