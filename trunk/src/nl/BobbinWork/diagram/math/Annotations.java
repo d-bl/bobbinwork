@@ -37,21 +37,23 @@ public class Annotations {
      * @param curve
      *            the curve that should get the twist mark
      * @param length
-     *            of the twist mark
+     *            the length of the twist mark
      * @return a perpendicular line approximately through the center of the
      *         curve
      * 
      * @author J. Falkink-Pol
      */
     public static Line2D createTwistMark(CubicCurve2D curve, int length, double correction) {
+    	// TODO: public methods should not call one another but a common private one?
 
-        Point2D start = curve.getP1();
+        // http://bobbinwork.googlecode.com/svn/trunk/doc/bezier.html#TwistMarks
+
+    	Point2D start = curve.getP1();
         Point2D c1 = curve.getCtrlP1();
         Point2D c2 = curve.getCtrlP2();
         Point2D end = curve.getP2();
 
         // approximation to divide the curve in more or less equal lengths
-        // http://bw-en.wikispaces.com/bezier+math#TwistMark
         // TODO optimize somehow
         double s = start.distance(c1) + start.distance(c2);
         double e = end.distance(c1) + end.distance(c2);

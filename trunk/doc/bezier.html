@@ -1,19 +1,23 @@
 table of content
 <div style="margin-left: 1em;"><a href="#tocBezier%20math0">Foundation</a></div>
+<div style="margin-left: 2em;"><a href="#tocBezier%20math0a">Half Stitch</a></div>
 <div style="margin-left: 1em;"><a href="#tocBezier%20math1">Ends</a></div>
 <div style="margin-left: 1em;"><a href="#tocBezier%20math2">Gaps</a></div>
 <div style="margin-left: 1em;"><a href="#tocBezier%20math3">Tension</a></div>
 <div style="margin-left: 1em;"><a href="#tocBezier%20math4">Highlights</a></div>
 <div style="margin-left: 2em;"><a href="#tocBezier%20math5">Threads</a></div>
 <div style="margin-left: 2em;"><a href="#tocBezier%20math6">Groups of stitches</a></div>
-<div style="margin-left: 1em;"><a href="#tocBezier%20math7">Twist marks</a></div>
+<div style="margin-left: 1em;"><a href="#TwistMarks">Twist marks</a></div>
 <h1 id="tocBezier math0">Foundation</h1>
  <br>
 Small connected sections of Bezier curves are the foundation of the working diagrams.<br>
 
 <br>
-Each cross or twist consist of one section in the background and one section in the foreground. A "shadow" for these sections creates the under/over effect. A white "shadow" creates the traditional drawings.<br>
+Each cross or twist (called switch in the code but that's an unfamiliar term for lace makers) consist of one section in the background and one section in the foreground. A "shadow" for these sections creates the under/over effect. A white "shadow" creates the traditional drawings.<br>
 <img src="bezier-images/bezier-basics.PNG" alt="bezier-basics.PNG" title="bezier-basics.PNG"> <img src="http://bw-en.wikispaces.com/space/showimage/bezier-shadow.PNG" alt="bezier-shadow.PNG" title="bezier-shadow.PNG"><br>
+
+<h2 id="tocBezier math0a">Half Stitch</h2>
+<img src="bezier-images/bezier-tc.PNG" alt="bezier-tc.PNG" title="bezier-tc.PNG"><br>
 The following code snippet shows how to define the Bezier curves of a half stitch. Note that the "<tt>.</tt>" is for the decimals and the "<tt>,</tt>" separates X from Y. X being the horizontal distance from the left side of the canvas, and Y the vertical distance from the top side of the canvas, so <tt>0,0</tt> is the top left corner.<br>
 
 <pre class="xml"><span class="sc3"><span class="re1">&lt;stitch</span> <span class="re0">id</span>=<span class="st0">"tc"</span> <span class="re0">pairs</span>=<span class="st0">"15-16"</span><span class="re2">&gt;</span></span>
@@ -42,8 +46,6 @@ The following code snippet shows how to define the Bezier curves of a half stitc
 
 <br>
 <h1 id="tocBezier math1">Ends</h1>
- This is how the half stitch looks like:<br>
-<img src="bezier-images/bezier-tc.PNG" alt="bezier-tc.PNG" title="bezier-tc.PNG"><br>
 Unlike traditional diagrams, no ends come out of the stitch going to the bobbins. That is a technical work-around for better chaining the stitches together. Saying that, an idea is coming up how to improve it: the program should extend the loose ends for a while. This is rather a programming challenge than a mathematical challenge, though it might be tricky in what direction to extend.<br>
 <br>
 <h1 id="tocBezier math2">Gaps</h1>
@@ -55,7 +57,12 @@ On the left the result without any intelligence in the program. On the right the
 <h1 id="tocBezier math3">Tension</h1>
  In this example of a striped Vierge ground, the drunken coloured lines show that the program doesn't know how to tension the threads.<br>
 <img src="bezier-images/bezier-drunken.PNG" alt="bezier-drunken.PNG" title="bezier-drunken.PNG"><br>
-So the program has to do more than just make the ends meet. But simply stretching a drunken line into a more straight line is not enough. We have some obvious restrictions by the pins, but also the connection points and intersections should not move too close. <em>This is a real challenge for which I could use assistance of specialists in Bezier mathematics</em>.<br>
+After making the segment ends meet and put the control points in a straight line as described above. Subsequently the line/thread should be flattened/tensioned. This flattening process has some restrictions: 
+<ul>
+ <li>threads cannot move through pins</li>
+ <li>segments within a &quot;switch&quot; should stay together: an X should not turn into a T or worse, where the width of the shadow and angle determines when an X turns into a T.</li> 
+</ul>
+On a pair level flattening lines is less an issue but when an X turns into a T is not so well defined.<br>
 
 <br>
 <h1 id="tocBezier math4">Highlights</h1>
@@ -65,8 +72,8 @@ So the program has to do more than just make the ends meet. But simply stretchin
  <img src="bezier-images/bezier-high-lights.PNG" alt="bezier-high-lights.PNG" title="bezier-high-lights.PNG"><br>
 In the Image above, the green dots show the end points of the selected group of stitches. These points define the shape for the highlights. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. This is not even the worst example. So here has to change something too.<br>
 
-<a name="TwistMark"></a><br>
-<h1 id="tocBezier math7">Twist marks</h1>
+<a name="TwistMarks"></a><br>
+<h1>Twist marks</h1>
  Additional twists in a pair diagram are marked with short perpendicular lines approximately through the centre of a pair segment. <tt>t=0.5</tt> only divides a curve in two halves of equal length if the curve is symmetrical. The following 2 figures inspired the approximation of <tt>t</tt> as calculated in <a class="wiki_link_ext" href="http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/math/Annotations.java" rel="nofollow">createTwistMark</a>.<br>
 <br>
 Inspiration for the basic calculation: the ratio of the distances of the end points to both control points. Just R1/(R1+R4) is too simple as thus the direction would play no role.<br>
