@@ -21,7 +21,9 @@ import java.awt.geom.*;
  * by Philip J. Schneider from "Graphics Gems", Academic Press, 1990.
  *
  * @author Mark Donszelmann
- * original version Id: NearestPoint.java 258 2004-06-08 06:27:49Z duns 
+ * 
+ * original version from xref -- Id: NearestPoint.java 258 2004-06-08 06:27:49Z duns 
+ * official version http://java.freehep.org/svn/showfile.svn?path=%2fwired%2ftrunk%2fwired-plugin%2fsrc%2fmain%2fjava%2fhep%2fwired%2fheprep%2futil%2fNearestPoint.java&revision=HEAD&name=freehep
  */ 
 public class NearestPoint {
     
@@ -35,9 +37,9 @@ public class NearestPoint {
     }
 
     /***
-     * Return the nearest point (pn) on cubic bezier curve c nearest to point pa.
+     * Return the nearest point (pn) on cubic Bezier curve c nearest to point pa.
      *
-     * @param c cubice curve
+     * @param c cubic curve
      * @param pa arbitrary point
      * @param pn nearest point found (return param)
      * @return distance squared between pa and nearest point (pn)
