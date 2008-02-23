@@ -1,0 +1,7 @@
+#summary Before the project went open source
+
+=Before the project went open source=
+
+The polar grid generator is developed without prior Java experience. The grid model is rather clumsy, to put it mildly. The GUI is not very user friendly: too mathematical for lace makers. Another GUI approach is sketched in the wish list. The GUI is developed with NetBeans.
+
+The core model for working diagrams has more quality. However, it doesn't yet support knots and unfortunately it is still a complete mystery how to support the open (twist-cross) and closed (cross-twist) working method in a single definition. Thread diagrams would be identical, but pair diagrams and written instructions would be different. The GUI is in its infancy and evolved step by step by applying bits and pieces of examples and the swing tutorial. 
