@@ -67,7 +67,7 @@ public class SampleListener implements ActionListener {
     		if ( SAMPLE_URLS[i].matches(".*"+s+".*")) {//$NON-NLS-1$ //$NON-NLS-2$
     			s = SAMPLE_URLS[i];
     			try {
-    				parent.loadFromStream(s,(new URL(s)).openStream());
+   					parent.loadFromStream(s,(new URL(s)).openStream());
     			} catch (MalformedURLException e1) {
     				showError(s, e1, getString("MenuFile_LoadSample_invalid_URL"));
     			} catch (IOException e1) {

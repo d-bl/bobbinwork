@@ -4,7 +4,7 @@
     <options buildIfNeeded="true" compress="true" descriptionLocation="/BobbinWork/bwViewer.jardesc" exportErrors="false" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
     <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
     <selectedProjects/>
-    <manifest generateManifest="true" mainClassHandleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.viewer.gui{BWVApplet.java[BWVApplet" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+    <manifest generateManifest="false" mainClassHandleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.viewer.gui{BWVApplet.java[BWVApplet" manifestLocation="/BobbinWork/bvVierwer.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
         <sealing sealJar="false">
             <packagesToSeal/>
             <packagesToUnSeal/>
@@ -16,7 +16,6 @@
         <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.bwlib.io"/>
         <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.diagram.model"/>
         <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.diagram.xml.expand"/>
-        <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.viewer.help"/>
         <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.diagram.xml"/>
         <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.viewer.gui"/>
         <javaElement handleIdentifier="=BobbinWork/src&lt;nl.BobbinWork.diagram.math"/>

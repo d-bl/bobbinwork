@@ -19,6 +19,7 @@ package nl.BobbinWork.viewer.gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -26,11 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import static java.awt.event.KeyEvent.*;
@@ -40,7 +38,6 @@ import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 
 import javax.swing.AbstractButton;
-import javax.swing.ImageIcon;
 import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
@@ -55,7 +52,6 @@ import javax.swing.JSplitPane;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 import javax.swing.JTextArea;
-import static javax.swing.KeyStroke.getKeyStroke;
 import static javax.swing.SwingUtilities.isRightMouseButton;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import javax.swing.Timer;
@@ -67,6 +63,8 @@ import javax.swing.event.TreeSelectionListener;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
 import nl.BobbinWork.bwlib.gui.AboutInfo;
+import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.bwlib.gui.CursorController;
 import nl.BobbinWork.bwlib.gui.LocaleButton;
 import nl.BobbinWork.bwlib.gui.CButtonBar;
 import nl.BobbinWork.bwlib.gui.NativeBrowser;
@@ -81,7 +79,7 @@ public class BWVApplet extends JApplet {
 
     private static final AboutInfo aboutInfo = new AboutInfo(//
             " BobbinWork - Viewer" // caption //$NON-NLS-1$
-            , "2.0.72" // version //$NON-NLS-1$
+            , "2.0.74" // version //$NON-NLS-1$
             , "2006-2007" // years //$NON-NLS-1$
             , "J. Falkink-Pol" // author //$NON-NLS-1$
     );
@@ -91,12 +89,6 @@ public class BWVApplet extends JApplet {
 	private static final String DOWNLOADS_URL = "http://code.google.com/p/bobbinwork/downloads/list"; //$NON-NLS-1$
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
-    private static final Object[] SAMPLE_URLS= new Object[] {//
-			"http://bobbinwork.googlegroups.com/web/flanders.xml?gda=4z7qcT0AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURDSmCdrehNs8EVCWMltc8R2k",//$NON-NLS-1$
-			"http://bobbinwork.googlegroups.com/web/torchon.xml?gda=M4C-rDwAAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURDSHAoqq6MVKgGExQWFmpupE",//$NON-NLS-1$
-			"http://bobbinwork.googlegroups.com/web/spiders.xml?gda=4zTd7TwAAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURDScIXlog2Wd3wWxjd0fqC3o",//$NON-NLS-1$
-			"http://bobbinwork.googlegroups.com/web/braid2.xml?gda=UQQDQzsAAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURDRVk4fsgKMsk2Mbh43_kAi9",//$NON-NLS-1$
-			"http://bobbinwork.googlegroups.com/web/braid1.xml?gda=2VRhyDsAAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURDRD4DT6Fua1gH-xvy-DVSKm"};
 
     /** icon for dialogs and application frame */
     private final Image icon = getToolkit().getImage(getClass().getClassLoader()//
@@ -170,8 +162,8 @@ public class BWVApplet extends JApplet {
         /* ---- create global menus with listeners ---- */
 
         JMenuItem
-        jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuFile_LoadSample"); //$NON-NLS-1$ 
-        jMenuItem.addActionListener(new SampleListener(self));
+        jMenuItem = new LocaleMenuItem("MenuFile_LoadSample"); //$NON-NLS-1$ 
+        jMenuItem.addActionListener(CursorController.createListener(this,new SampleListener(self)));
 
         JMenuBar //
         jMenuBar = new JMenuBar();
@@ -226,19 +218,19 @@ public class BWVApplet extends JApplet {
         diagramPanel.setDiagramType(true, false);
         diagramPanel.addMouseMotionListener(mouseMotionListener);
 
-        delete.addActionListener(new ActionListener() {
+        delete.addActionListener(CursorController.createListener(this,new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                tree.deleteSelected();
+   	                tree.deleteSelected();
             }
-        });
+        }));
 
-        replace.addActionListener(new ActionListener() {
+        replace.addActionListener(CursorController.createListener(this,new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                tree.replaceSelected(fragments.getSelectedElement());
+   	                tree.replaceSelected(fragments.getSelectedElement());
             }
-        });
+        }));
 
         fragments.addSelectionListener(fragments.new SelectionListener() {
 
@@ -334,13 +326,13 @@ public class BWVApplet extends JApplet {
 
             JMenuItem//
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuFile_New"); //$NON-NLS-1$ 
-            jMenuItem.setAccelerator(getKeyStroke(VK_N, CTRL_MASK));
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    loadNewFile();
-                }
-            });
+            jMenuItem = new LocaleMenuItem("MenuFile_New", VK_N, CTRL_MASK); //$NON-NLS-1$
+            jMenuItem.addActionListener(CursorController.createListener(this,new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+                	//FIXME cursor doesn't become hour glass
+            		loadNewFile();
+            	}
+            }));
             add(jMenuItem);
         }
 
@@ -353,8 +345,7 @@ public class BWVApplet extends JApplet {
             add(new JSeparator());
 
             JMenuItem//
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuFile_exit"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_F4, ALT_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem( "MenuFile_exit",VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     System.exit(0);
@@ -364,7 +355,7 @@ public class BWVApplet extends JApplet {
 
             insertSeparator(0);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuFile_SaveAs"); //$NON-NLS-1$
+            jMenuItem = new JMenuItem("MenuFile_SaveAs"); //$NON-NLS-1$
             jMenuItem.setActionCommand("saveAs"); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -373,8 +364,7 @@ public class BWVApplet extends JApplet {
             });
             insert(jMenuItem, 0);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuFile_save"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_S, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem ("MenuFile_save",VK_S, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     fileHandler.save(source.getText());
@@ -382,13 +372,13 @@ public class BWVApplet extends JApplet {
             });
             insert(jMenuItem, 0);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuFile_open"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_O, CTRL_DOWN_MASK));
-            jMenuItem.addActionListener(new ActionListener() {
+            jMenuItem = new LocaleMenuItem( "MenuFile_open",VK_O, CTRL_DOWN_MASK); //$NON-NLS-1$
+            jMenuItem.addActionListener(CursorController.createListener(this,new ActionListener() {
+            	//FIXME cursor doesn't become hour glass
                 public void actionPerformed(ActionEvent e) {
                     loadFile();
                 }
-            });
+            }));
             insert(jMenuItem, 0);
         }
     }
@@ -403,7 +393,7 @@ public class BWVApplet extends JApplet {
 
             add(new javax.swing.JSeparator());
             JMenuItem//
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuPrint_PageSetup"); //$NON-NLS-1$
+            jMenuItem = new LocaleMenuItem("MenuPrint_PageSetup"); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.updatePageFormat();
@@ -411,8 +401,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuPrint_print"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_P, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem( "MenuPrint_print", VK_P, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.adjustablePrint();
@@ -431,8 +420,7 @@ public class BWVApplet extends JApplet {
             applyStrings(this, "MenuEdit_edit"); //$NON-NLS-1$
 
             JMenuItem//
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuEdit_show"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_F5, 0));
+            jMenuItem = new LocaleMenuItem( "MenuEdit_show",VK_F5, 0); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     // String fileName = tree.getDocName();
@@ -444,7 +432,7 @@ public class BWVApplet extends JApplet {
 
             add(new javax.swing.JSeparator());
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuEdit_InsertColor"); //$NON-NLS-1$
+            jMenuItem = new LocaleMenuItem( "MenuEdit_InsertColor"); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     source.insertColor();
@@ -454,8 +442,7 @@ public class BWVApplet extends JApplet {
 
             add(new javax.swing.JSeparator());
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuEdit_cut"); //$NON-NLS-1$ 
-            jMenuItem.setAccelerator(getKeyStroke(VK_X, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem( "MenuEdit_cut",VK_X, CTRL_DOWN_MASK); //$NON-NLS-1$ 
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     source.cut();
@@ -463,8 +450,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuEdit_copy"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_C, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem( "MenuEdit_copy",VK_C, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     source.copy();
@@ -472,22 +458,13 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuEdit_paste"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_V, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem( "MenuEdit_paste",VK_V, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     source.paste();
                 }
             });
             add(jMenuItem);
-
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuEdit_paste"); //$NON-NLS-1$ 
-            jMenuItem.setAccelerator(getKeyStroke(VK_V, CTRL_DOWN_MASK));
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    source.paste();
-                }
-            });
         }
     }
 
@@ -505,7 +482,7 @@ public class BWVApplet extends JApplet {
             applyStrings(this, "MenuFragments_fragments"); //$NON-NLS-1$
 
             JMenuItem//
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_thread"); //$NON-NLS-1$ 
+            jMenuItem = new LocaleMenuItem("MenuView_thread"); //$NON-NLS-1$ 
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     fragments.setDiagramType(false, true);
@@ -513,7 +490,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_pair"); //$NON-NLS-1$ 
+            jMenuItem = new LocaleMenuItem("MenuView_pair"); //$NON-NLS-1$ 
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     fragments.setDiagramType(true, false);
@@ -521,7 +498,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_hybrid"); //$NON-NLS-1$ 
+            jMenuItem = new LocaleMenuItem("MenuView_hybrid"); //$NON-NLS-1$ 
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     fragments.setDiagramType(true, true);
@@ -546,7 +523,7 @@ public class BWVApplet extends JApplet {
 
             JMenuItem//
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHelp_About"); //$NON-NLS-1$
+            jMenuItem = new LocaleMenuItem("MenuHelp_About"); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     JOptionPane.showMessageDialog(self, aboutInfo.getMessage(), aboutInfo.getCaption(),
@@ -617,7 +594,7 @@ public class BWVApplet extends JApplet {
             private DiagramHighlightsMenu() {
                 JMenuItem//
 
-                jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHighlight_AreaColor"); //$NON-NLS-1$
+                jMenuItem = new LocaleMenuItem("MenuHighlight_AreaColor"); //$NON-NLS-1$
                 jMenuItem.setBackground(new Color(diagramPanel.getAreaHighlight().getRGB()));
                 jMenuItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -631,7 +608,7 @@ public class BWVApplet extends JApplet {
                 });
                 add(jMenuItem);
 
-                jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuHighlight_ThreadColor"); //$NON-NLS-1$
+                jMenuItem = new LocaleMenuItem("MenuHighlight_ThreadColor"); //$NON-NLS-1$
                 jMenuItem.setBackground(new Color(diagramPanel.getThreadHighlight().getRGB()));
                 jMenuItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -653,8 +630,7 @@ public class BWVApplet extends JApplet {
 
             JMenuItem//
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_zoomIn"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_I, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem("MenuView_zoomIn",VK_I, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.setScreenScale(diagramPanel.getScreenScale() * 1.25);
@@ -662,8 +638,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_zoomOut"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_J, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem("MenuView_zoomOut",VK_J, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.setScreenScale(diagramPanel.getScreenScale() * 0.8);
@@ -671,8 +646,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_zoomReset"); //$NON-NLS-1$ 
-            jMenuItem.setAccelerator(getKeyStroke(VK_K, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem("MenuView_zoomReset",VK_K, CTRL_DOWN_MASK); //$NON-NLS-1$ 
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.setScreenScale(1d);
@@ -686,8 +660,7 @@ public class BWVApplet extends JApplet {
 
             add(new javax.swing.JSeparator());
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_thread"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_F7, SHIFT_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem("MenuView_thread",VK_F7, SHIFT_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.setDiagramType(true, false);
@@ -699,8 +672,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_pair"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_F7, 0));
+            jMenuItem = new LocaleMenuItem("MenuView_pair",VK_F7, 0); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.setDiagramType(false, true);
@@ -712,8 +684,7 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
-            jMenuItem = (JMenuItem) applyStrings(new JMenuItem(), "MenuView_hybrid"); //$NON-NLS-1$
-            jMenuItem.setAccelerator(getKeyStroke(VK_F7, CTRL_DOWN_MASK));
+            jMenuItem = new LocaleMenuItem("MenuView_hybrid", VK_F7, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     diagramPanel.setDiagramType(true, true);
