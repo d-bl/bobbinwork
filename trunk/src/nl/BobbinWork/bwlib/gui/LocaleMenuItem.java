@@ -1,4 +1,4 @@
-/* BWVApplet.java Copyright 2006-2008 by J. Falkink-Pol
+/* BWTree.java Copyright 2006-2008 by J. Falkink-Pol
  *
  * This file is part of BobbinWork.
  *
@@ -17,24 +17,25 @@
  */
 package nl.BobbinWork.bwlib.gui;
 
+import static javax.swing.KeyStroke.getKeyStroke;
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 
-import javax.swing.JButton;
+import javax.swing.JMenuItem;
 
-/** A Button with caption, hint etc. (as far as present) loaded from the Localizer's properties file. */
-public class LocaleButton extends JButton {
-    /**
-     * Convenience JButton constructor
-     * 
-     * @param enabled
-     *            initial enablement of the button
-     * @param bundleKeyBase
-     *            for the Localizer bundle for caption, hint etc.
-     */
-    public LocaleButton(boolean enabled, String bundleKeyBase) {
-        super();
-        applyStrings(this, bundleKeyBase); //$NON-NLS-1$
-        setEnabled(enabled);
-    }
+
+public class LocaleMenuItem extends JMenuItem {
+	
+    /** Convenience JMenu constructor */
+	public LocaleMenuItem (String bundleKeyBase, int keyEvent, int mask){
+		super();
+        applyStrings(this, bundleKeyBase);
+        setAccelerator(getKeyStroke(keyEvent, mask));
+		
+	}
+    /** Convenience JMenu constructor */
+	public LocaleMenuItem (String bundleKeyBase){
+		super();
+        applyStrings(this, bundleKeyBase);
+		
+	}
 }
-
