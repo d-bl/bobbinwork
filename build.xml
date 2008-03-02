@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BobbinWork" default="sign" basedir=".">
+
+	<!-- Copyright 2008, J. Falkink-Pol
+		
+		This file is part of BobbinWork.
+		
+		BobbinWork is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+		
+		BobbinWork is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		
+		You should have received a copy of the GNU General Public License
+		along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+		
+	-->
+
+	<property name="version" value="2.0.xxx" />
+
+	<property environment="env" />
+
+	<property name="doc.dir" location="doc" />
+	<property name="src.dir" location="src" />
+	<property name="test.dir" location="test" />
+	<property name="build.dir" location="build" />
+	<property name="rel.jar" value="-rel-${version}.jar" />
+	<property name="grid.jar.path"
+		location="${build.dir}/test/bwpGrid${rel.jar}" />
+	<property name="bwViewer.jar.path"
+		location="${build.dir}/test/bwViewer${rel.jar}" />
+
+	<path id="project.classpath">
+		<pathelement location="${build.dir}/test" />
+		<pathelement location="${build.dir}/dist" />
+		<fileset dir="${env.JAVA_HOME}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean" description="Remove all generated files.">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="prepare"
+		description="Create the output directories.">
+		<mkdir dir="${build.dir}/test" />
+		<mkdir dir="${build.dir}/dist" />
+	</target>
+
+	<target name="compile" description="create class files from java sources" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.dir}/test">
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+
+	<target name="bwViewer.jar"
+		description="create viewer of bobbin lace working diagrams"
+		depends="compile">
+		<jar destfile="${bwViewer.jar.path}">
+			<fileset dir="${build.dir}/test" includes="**/diagram/**" />
+			<fileset dir="${build.dir}/test" includes="**/viewer/**" />
+			<fileset dir="${build.dir}/test" includes="**/bwlib/**" />
+			<fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
+			<fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
+			<fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
+			<fileset dir="${src.dir}" includes="**/viewer/**/*.gif" />
+			<fileset dir="${src.dir}"
+				includes="**/viewer/**/*.properties" />
+			<manifest>
+				<attribute name="Implementation-Version" value="${version}" /> 
+				<attribute name="Main-Class"
+					value="nl.BobbinWork.viewer.gui.BWVApplet" />
+				<attribute name="SplashScreen-Image"
+					value="nl/BobbinWork/viewer/gui/splash.gif" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="grid.jar"
+		description="create polar grid generator"
+		depends="compile">
+		<jar destfile="${grid.jar.path}">
+			<fileset dir="${build.dir}/test" includes="**/grids/**" />
+			<fileset dir="${build.dir}/test" includes="**/bwlib/**" />
+			<fileset dir="${src.dir}" includes="**/grids/**/*.html" />
+			<fileset dir="${src.dir}" includes="**/grids/**/*.gif" />
+			<fileset dir="${src.dir}"
+				includes="**/grids/**/*.properties" />
+			<manifest>
+				<attribute name="Implementation-Version" value="${version}" /> 
+				<attribute name="Main-Class"
+					value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="sign"
+		description="sign the jar files (see also genkey.bat)"
+		depends="grid.jar, bwViewer.jar">
+		<signjar destDir="${build.dir}/dist" keystore="bw"
+			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
+			alias="signjar">
+			<path>
+				<fileset dir="${build.dir}/test" includes="**/*.jar" />
+			</path>
+		</signjar>
+	</target>
+
+</project>

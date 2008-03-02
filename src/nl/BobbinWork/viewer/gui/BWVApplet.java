@@ -19,7 +19,6 @@ package nl.BobbinWork.viewer.gui;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -67,26 +66,22 @@ import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.CursorController;
 import nl.BobbinWork.bwlib.gui.LocaleButton;
 import nl.BobbinWork.bwlib.gui.CButtonBar;
-import nl.BobbinWork.bwlib.gui.NativeBrowser;
 import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.SplitPane;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.BWFileHandler;
 
+@SuppressWarnings("serial")
 public class BWVApplet extends JApplet {
 
     private static final int TOTAL_LEFT_WIDTH = 300;
 
     private static final AboutInfo aboutInfo = new AboutInfo(//
             " BobbinWork - Viewer" // caption //$NON-NLS-1$
-            , "2.0.74" // version //$NON-NLS-1$
             , "2006-2007" // years //$NON-NLS-1$
             , "J. Falkink-Pol" // author //$NON-NLS-1$
     );
 
-    private static final String WIKI_URL = "http://bw-XX.wikispaces.com/"; //$NON-NLS-1$
-	private static final String SAMPLES_URL = "http://groups.google.com/group/bobbinwork/files"; //$NON-NLS-1$
-	private static final String DOWNLOADS_URL = "http://code.google.com/p/bobbinwork/downloads/list"; //$NON-NLS-1$
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
 
@@ -317,7 +312,7 @@ public class BWVApplet extends JApplet {
     }
 
     /** A fully dressed JMenu, extendable for the applet */
-    private class FileMenu extends JMenu implements AppletApplicationMenu {
+	private class FileMenu extends JMenu implements AppletApplicationMenu {
 
         /** Creates a JMenu with items that load a predefined file. */
         private FileMenu() {
@@ -353,13 +348,16 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
 
+            if ( getFileHandler() == null ) return;
             insertSeparator(0);
 
-            jMenuItem = new JMenuItem("MenuFile_SaveAs"); //$NON-NLS-1$
+            jMenuItem = new LocaleMenuItem("MenuFile_SaveAs"); //$NON-NLS-1$
             jMenuItem.setActionCommand("saveAs"); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    saveFileAs();
+                    if ( getFileHandler() == null ) return;
+                	fileHandler.saveAs(source.getText());
+                    tree.setDocName(fileHandler.getFileName());
                 }
             });
             insert(jMenuItem, 0);
@@ -367,7 +365,8 @@ public class BWVApplet extends JApplet {
             jMenuItem = new LocaleMenuItem ("MenuFile_save",VK_S, CTRL_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    fileHandler.save(source.getText());
+                    if ( getFileHandler() == null ) return;
+                	fileHandler.save(source.getText());
                 }
             });
             insert(jMenuItem, 0);
@@ -376,6 +375,7 @@ public class BWVApplet extends JApplet {
             jMenuItem.addActionListener(CursorController.createListener(this,new ActionListener() {
             	//FIXME cursor doesn't become hour glass
                 public void actionPerformed(ActionEvent e) {
+                    if ( getFileHandler() == null ) return;
                     loadFile();
                 }
             }));
@@ -384,7 +384,7 @@ public class BWVApplet extends JApplet {
     }
 
     /** A fully dressed JMenu, controlling the view of the diagram */
-    private class DiagramPrintMenu extends JMenu {
+	private class DiagramPrintMenu extends JMenu {
 
         /** Creates a fully dressed JMenu, controlling the view of the diagram */
         private DiagramPrintMenu() {
@@ -412,7 +412,7 @@ public class BWVApplet extends JApplet {
     }
 
     /** A fully dressed JMenu, to edit the XML source */
-    private class EditMenu extends JMenu {
+	private class EditMenu extends JMenu {
 
         /** Creates a fully dressed JMenu, to edit the XML source */
         private EditMenu() {
@@ -475,7 +475,7 @@ public class BWVApplet extends JApplet {
     }
 
     /** A fully dressed JMenu, controlling the view of the fragments */
-    private class FragmentsViewMenu extends JMenu {
+	private class FragmentsViewMenu extends JMenu {
 
         /** Creates a fully dressed JMenu, controlling the view of the fragments */
         private FragmentsViewMenu() {
@@ -509,7 +509,7 @@ public class BWVApplet extends JApplet {
     }
 
     /** A fully dressed JMenu, extendable for the application */
-    private class HelpMenu extends JMenu implements AppletApplicationMenu {
+	private class HelpMenu extends JMenu {
 
 		/**
          * Creates a fully dressed JMenu, with items showing internal
@@ -518,9 +518,7 @@ public class BWVApplet extends JApplet {
         private HelpMenu() {
 
             applyStrings(this, "MenuHelp_help"); //$NON-NLS-1$
-            add(new javax.swing.JSeparator());
-            add(new javax.swing.JSeparator());
-
+   
             JMenuItem//
 
             jMenuItem = new LocaleMenuItem("MenuHelp_About"); //$NON-NLS-1$
@@ -532,64 +530,16 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
         }
-
-        private class BrowsingActionListener implements ActionListener {
-        	
-        	private String url;
-        	
-        	BrowsingActionListener (String url) {
-        		this.url = url;
-        	}
-
-            public void actionPerformed(ActionEvent e) {
-                if (!NativeBrowser.show(url)) {
-                    javax.swing.JOptionPane.showMessageDialog(//
-                            self,//TODO: myBundle().getString(keyBase)
-                            "browser not found" + "\n\n" + url, //$NON-NLS-2$
-                            getString("MenuHelp_userGuide"), //$NON-NLS-1$
-                            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-        }
-
-        /** Convenience method: extends the menu with a browser item. */
-        private void extend(String text, String code) {
-
-            extend(1,text, WIKI_URL.replace("XX", code));  //$NON-NLS-1$
-        }        
-
-        /** Convenience method: extends the menu with a browser item. */
-        private void extend(int index, String text, String url) {
-
-            JMenuItem //
-            jMenuItem = new JMenuItem();
-            jMenuItem.setText(text);  //$NON-NLS-1$
-			jMenuItem.addActionListener(new BrowsingActionListener(url));
-            insert(jMenuItem, index);
-        }
-        
-        /** Extends the applet version of the menu with items that launch a browser. */
-        public void extend() {
-
-            extend("Nederlands","nl");  //$NON-NLS-1$ $NON-NLS-2$
-            extend("Français","fr");  //$NON-NLS-1$ $NON-NLS-2$
-            extend("Español","es");  //$NON-NLS-1$ $NON-NLS-2$
-            extend("English","en");  //$NON-NLS-1$ $NON-NLS-2$
-            extend("Deutsch","de");  //$NON-NLS-1$ $NON-NLS-2$
-            //TODO: myBundle().getString(keyBase)
-            extend(0,"download updates", DOWNLOADS_URL);
-            extend(0,"download examples", SAMPLES_URL);
-        }
     }
 
     /** A fully dressed JMenu, controlling the view of the diagram */
-    private class DiagramViewMenu extends JMenu {
+	private class DiagramViewMenu extends JMenu {
 
         /**
          * A fully dressed JMenu, controlling the appearance of the high lights on
          * the diagram
          */
-        private class DiagramHighlightsMenu extends JMenu {
+		private class DiagramHighlightsMenu extends JMenu {
 
             private DiagramHighlightsMenu() {
                 JMenuItem//
@@ -712,10 +662,18 @@ public class BWVApplet extends JApplet {
 
     /** manages the last opened/saved file */
     private BWFileHandler fileHandler;
+    
+    private BWFileHandler getFileHandler() {
+        if (fileHandler == null ) try { 
+        	fileHandler = new BWFileHandler(this, //
+                new BWFileFilter( getString("FileType"), "xml,bwml".split(",") ));
+        } 
+        catch (Exception e) { }
+        return fileHandler;
+    }
 
     /** Loads a new file into the source and tree. */
     private void loadNewFile() {
-
         InputStream stream = getClass().getClassLoader().getResourceAsStream(NEW_DIAGRAM);
         loadFromStream(NEW_DIAGRAM, stream);
     }
@@ -745,36 +703,36 @@ public class BWVApplet extends JApplet {
         }
 
         if (fileHandler != null) {
-            fileHandler.clearFileName();
+        	fileHandler.clearFileName();
         }
 	}
 
     /** Lets the user select a file and loads it into source and tree */
-    private void loadFile() {
-        InputStream stream = fileHandler.open();
-        if (stream != null) {
-            String fileName = fileHandler.getFileName();
-            try {
-                source.read(new InputStreamReader(stream), fileName);
-                tree.setDoc(source.getText());
-                tree.setDocName(fileName);
-            } catch (Exception exception) {
-                showError(fileName, exception, "open file");
-                source.setText(null);
-                tree.setDoc("");
-                fileHandler.clearFileName();
-            }
+	private void loadFile() {
+		InputStream stream = fileHandler.open();
+		if (stream != null) {
+			String fileName = fileHandler.getFileName();
+			try {
+				source.read(new InputStreamReader(stream), fileName);
+				tree.setDoc(source.getText());
+				tree.setDocName(fileName);
+			} catch (Exception exception) {
+				showError(fileName, exception, "open file");
+				source.setText(null);
+				tree.setDoc("");
+				fileHandler.clearFileName();
+			}
 
-            try {
-                stream.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+			try {
+				stream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
     /**
-     * Convinience API for JOptionPane.showMessageDialog to show the exception
+     * Convenience API for JOptionPane.showMessageDialog to show the exception
      * message to the user
      */
     private void showError(String fileName, Exception exception, String action) {
@@ -784,14 +742,8 @@ public class BWVApplet extends JApplet {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    /** Save the content of source in a file with a name selected by the user */
-    private void saveFileAs() {
-        fileHandler.saveAs(source.getText());
-        tree.setDocName(fileHandler.getFileName());
-    }
-
     /** A JTextArea with an additional method to insert color codes. */
-    private class SourceArea extends JTextArea {
+	private class SourceArea extends JTextArea {
 
         /**
          * Shows a JColorChooser dialog and pastes the result as a hexadecimal
@@ -818,19 +770,17 @@ public class BWVApplet extends JApplet {
             setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
         }
 
-        applet.fileHandler = new BWFileHandler(applet, //
-            new BWFileFilter( getString("FileType"), "xml,bwml".split(",") )); //$NON-NLS-1$ //$NON-NLS-2$  //$NON-NLS-3$
-                        
         // Initialize the applet
         applet.init();
 
         // extend the menu with I/O items (not allowed for applets)
         for (Component menu : applet.getJMenuBar().getComponents()) {
-        	try {
+        	if ( menu instanceof AppletApplicationMenu ) {
         		((AppletApplicationMenu) menu).extend();
-        	} catch (ClassCastException e) {} // FIXME skip menu items
+        	}
         }
-
+        //*/
+        
         // create a frame with the applet on it
         JFrame frame = new JFrame();
         frame.setSize(700, 500);

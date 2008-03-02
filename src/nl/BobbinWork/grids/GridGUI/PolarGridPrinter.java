@@ -28,13 +28,13 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  * @author J. Falkink-Pol
  */
 
+@SuppressWarnings("serial")
 public class PolarGridPrinter
         extends javax.swing.JFrame
         implements java.awt.event.ActionListener {
     
     static private final AboutInfo aboutInfo = new AboutInfo
             ( " BobbinWork - Polar Grid" // caption
-            , "2.0.58"                      // version
             , "2005-2006"                // years
             , "J. Falkink-Pol"           // author
             );

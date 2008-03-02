@@ -43,21 +43,24 @@ public class AboutInfo {
     }
     
     public String getMessage() {
-        return "<html><p> "
+        return "<html> "
             + Localizer.getString("MenuHelp_release") + " "
             + getVersion() + "<br>Copyright © " 
             + getYears() + " " 
             + getAuthor()  
-            + "<p><br>" 
+            + "<hr>" 
             + Localizer.getString("MenuHelp_About_License").replaceAll("\\n", "<br>")
-            + "<p></html>" 
+            + "<hr>" 
+            + Localizer.getString("MenuHelp_About_URLs").replaceAll("\\n", "<br>")
+            + "</html>" 
             ;
     }
     
-    public AboutInfo(String caption, String version, String years, String author) {
+    public AboutInfo(String caption, String years, String author) {
         this.caption = caption;
-        this.version = version;
         this.years = years;
         this.author = author;
+        this.version = this.getClass().getPackage().getImplementationVersion();
+        if ( this.version == null ) this.version = "?.?.???";
     }
 }
