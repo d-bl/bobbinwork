@@ -33,6 +33,7 @@ import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.security.AccessControlException;
 
 import javax.swing.JPanel;
 
@@ -49,6 +50,7 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
  * 
  * @author J. Falkink-Pol
  */
+@SuppressWarnings("serial")
 public class DiagramPanel extends JPanel implements Printable {
 
     private Color //
@@ -64,15 +66,16 @@ public class DiagramPanel extends JPanel implements Printable {
     /** the model for the diagram drawn on the panel */
     private Diagram diagram = null;
 
-    private PrinterJob printJob = PrinterJob.getPrinterJob();
-
-    private PageFormat pageFormat = printJob.defaultPage();
+    private PrinterJob printJob;
+    private PageFormat pageFormat;
 
     /** Creates a new instance of DiagramPanel. */
     public DiagramPanel() {
-
-        setBackground(Color.white);
-
+    	try {
+    		printJob = PrinterJob.getPrinterJob();
+    		pageFormat = printJob.defaultPage();
+    	} catch (AccessControlException e) {}
+    	setBackground(Color.white);
     }
 
     /** registers whether threads and/or pairs ar drawn. */
@@ -84,6 +87,7 @@ public class DiagramPanel extends JPanel implements Printable {
 
     /** Changes the pageformat with a dialog. */
     void updatePageFormat() {
+    	if (printJob == null) return;
         pageFormat = printJob.pageDialog(pageFormat);
     }
 
@@ -121,6 +125,7 @@ public class DiagramPanel extends JPanel implements Printable {
 
     /** Print the diagram with a chance to adjust options or cancel. */
     void adjustablePrint() {
+    	if (printJob == null) return;
         printJob.setPrintable(this, pageFormat);
         if (printJob.printDialog()) {
             try {
