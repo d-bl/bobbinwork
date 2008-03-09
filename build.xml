@@ -20,22 +20,33 @@
 		
 	-->
 
+	<property file="ant.properties" />
+	
 	<property name="version" value="2.0.xxx" />
+	<property name="keystore" value="bw" />
+	<property name="keyalias" value="signjar" />
+	
+    <property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/deploy" />
+    <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
+    <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
 
-	<property environment="env" />
-
+	<property name="generated1" value="do not change this file, it is generated"/> 
+	<property name="generated2" value="move to @DEPLOY@ and commit AFTER uploading and testing" />
+	<property name="generated3" value="the jar to @CODE_BASE@" />
 	<property name="doc.dir" location="doc" />
 	<property name="src.dir" location="src" />
-	<property name="test.dir" location="test" />
+	<property name="tmp.dir" location="tmp" />
 	<property name="build.dir" location="build" />
 	<property name="rel.jar" value="-rel-${version}.jar" />
 	<property name="grid.jar.path"
-		location="${build.dir}/test/bwpGrid${rel.jar}" />
+		location="${build.dir}/tmp/bwpGrid${rel.jar}" />
 	<property name="bwViewer.jar.path"
-		location="${build.dir}/test/bwViewer${rel.jar}" />
+		location="${build.dir}/tmp/bwViewer${rel.jar}" />
+
+	<property environment="env" />
 
 	<path id="project.classpath">
-		<pathelement location="${build.dir}/test" />
+		<pathelement location="${build.dir}/tmp" />
 		<pathelement location="${build.dir}/dist" />
 		<fileset dir="${env.JAVA_HOME}/lib">
 			<include name="*.jar" />
@@ -48,12 +59,13 @@
 
 	<target name="prepare"
 		description="Create the output directories.">
-		<mkdir dir="${build.dir}/test" />
+		<mkdir dir="${build.dir}/tmp" />
 		<mkdir dir="${build.dir}/dist" />
+		<!-- svn propset svn:ignore "${build.dir} . -->
 	</target>
 
 	<target name="compile" description="create class files from java sources" depends="prepare">
-		<javac srcdir="${src.dir}" destdir="${build.dir}/test">
+		<javac srcdir="${src.dir}" destdir="${build.dir}/tmp" target="1.5">
 			<classpath refid="project.classpath" />
 		</javac>
 	</target>
@@ -62,9 +74,9 @@
 		description="create viewer of bobbin lace working diagrams"
 		depends="compile">
 		<jar destfile="${bwViewer.jar.path}">
-			<fileset dir="${build.dir}/test" includes="**/diagram/**" />
-			<fileset dir="${build.dir}/test" includes="**/viewer/**" />
-			<fileset dir="${build.dir}/test" includes="**/bwlib/**" />
+			<fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
+			<fileset dir="${build.dir}/tmp" includes="**/viewer/**" />
+			<fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
 			<fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
 			<fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
 			<fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
@@ -85,8 +97,8 @@
 		description="create polar grid generator"
 		depends="compile">
 		<jar destfile="${grid.jar.path}">
-			<fileset dir="${build.dir}/test" includes="**/grids/**" />
-			<fileset dir="${build.dir}/test" includes="**/bwlib/**" />
+			<fileset dir="${build.dir}/tmp" includes="**/grids/**" />
+			<fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
 			<fileset dir="${src.dir}" includes="**/grids/**/*.html" />
 			<fileset dir="${src.dir}" includes="**/grids/**/*.gif" />
 			<fileset dir="${src.dir}"
@@ -100,15 +112,29 @@
 	</target>
 
 	<target name="sign"
-		description="sign the jar files (see also genkey.bat)"
+		description="sign the jar files (see also genkey.bat) and generate jnlp files"
 		depends="grid.jar, bwViewer.jar">
-		<signjar destDir="${build.dir}/dist" keystore="bw"
+		<!-- svn propset svn:ignore "${keystore} . -->
+		<signjar destDir="${build.dir}/dist" keystore="${keystore}"
 			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
-			alias="signjar">
+			alias="${keyalias}">
 			<path>
-				<fileset dir="${build.dir}/test" includes="**/*.jar" />
+				<fileset dir="${build.dir}/tmp" includes="**/*.jar" />
 			</path>
 		</signjar>
+		<copy todir="${build.dir}/dist" verbose="true">
+			<fileset dir="${src.dir}" includes="**/*.jnlp" />
+			<filterset>
+			    <filter token="NOTE1" value="${generated1}" />
+			    <filter token="NOTE2" value="${generated2}" />
+			    <filter token="REL_JAR" value="${rel.jar}" />
+			    <filter token="REL" value="${version}" />
+			    <filter token="DEPLOY" value="${jnlp.deploy}" />
+			    <filter token="CODE_BASE" value="${jnlp.code.base}" />
+			    <filter token="HOME_PAGE" value="${jnlp.home.page}" />
+            </filterset>
+			<flattenmapper/>
+		</copy>
 	</target>
 
 </project>
