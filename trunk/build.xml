@@ -20,34 +20,36 @@
 		
 	-->
 
-	<property file="ant.properties" />
-	
-	<property name="version" value="2.0.xxx" />
-	<property name="keystore" value="bw" />
-	<property name="keyalias" value="signjar" />
-	
-    <property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/deploy" />
+	<property name="build.dir" location="build" /><!-- 
+		svn propset svn:ignore "${build.dir}" . -->
+	<property file="ant.properties" /><!-- at least: 
+		keystore (e.g. in ${build.dir} ) 
+	    keyalias 
+	    -->
+	<property environment="env" /><!-- at least: 
+		KEYSTOREPASS 
+	    JAVA_HOME (jdk, not jre)
+	    -->
+			
+	<property name="version" value="2.0.xx" />
+	<property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webStart" />
     <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
 
+	<property name="doc.dir" location="doc" />
+	<property name="src.dir" location="src" />
+	<property name="rel.jar" value="-rel-${version}.jar" />
+	
 	<property name="generated1" value="do not change this file, it is generated"/> 
 	<property name="generated2" value="move to @DEPLOY@ and commit AFTER uploading and testing" />
 	<property name="generated3" value="the jar to @CODE_BASE@" />
-	<property name="doc.dir" location="doc" />
-	<property name="src.dir" location="src" />
-	<property name="tmp.dir" location="tmp" />
-	<property name="build.dir" location="build" />
-	<property name="rel.jar" value="-rel-${version}.jar" />
+
 	<property name="grid.jar.path"
 		location="${build.dir}/tmp/bwpGrid${rel.jar}" />
 	<property name="bwViewer.jar.path"
 		location="${build.dir}/tmp/bwViewer${rel.jar}" />
 
-	<property environment="env" />
-
 	<path id="project.classpath">
-		<pathelement location="${build.dir}/tmp" />
-		<pathelement location="${build.dir}/dist" />
 		<fileset dir="${env.JAVA_HOME}/lib">
 			<include name="*.jar" />
 		</fileset>
@@ -61,7 +63,7 @@
 		description="Create the output directories.">
 		<mkdir dir="${build.dir}/tmp" />
 		<mkdir dir="${build.dir}/dist" />
-		<!-- svn propset svn:ignore "${build.dir} . -->
+		<!-- svn propset svn:ignore "${build.dir}" . -->
 	</target>
 
 	<target name="compile" description="create class files from java sources" depends="prepare">
@@ -111,10 +113,15 @@
 		</jar>
 	</target>
 
+	<target name="genkey" description="generate key to sign the jar files">
+		<genkey keystore="${keystore}" alias="${keyalias}" 
+			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
+			dname="OU=Development, O=BobbinWork, C=NL"/>
+	</target>
+
 	<target name="sign"
 		description="sign the jar files (see also genkey.bat) and generate jnlp files"
-		depends="grid.jar, bwViewer.jar">
-		<!-- svn propset svn:ignore "${keystore} . -->
+		depends="grid.jar, bwViewer.jar, genkey">
 		<signjar destDir="${build.dir}/dist" keystore="${keystore}"
 			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
 			alias="${keyalias}">
@@ -136,5 +143,6 @@
 			<flattenmapper/>
 		</copy>
 	</target>
+	
 
 </project>
