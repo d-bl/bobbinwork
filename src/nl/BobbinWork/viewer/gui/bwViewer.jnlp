@@ -36,7 +36,7 @@
   </information>
   <update check="timeout" policy="always"/>
   <resources>
-    <java version="1.6+"/>
+    <java version="@TARGET@+"/>
     <jar href="bwViewer@REL_JAR@" download="eager" main="true"/>
   </resources>
   <applet-desc main-class="nl.BobbinWork.viewer.gui.BWVApplet" name="bwBiewer" width="800" height="600"/>
