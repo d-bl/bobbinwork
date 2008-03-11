@@ -20,7 +20,7 @@
 		
 	-->
 
-	<property name="build.dir" location="build" /><!-- 
+	<property name="build.dir" location="build" /><!-- please set:
 		svn propset svn:ignore "${build.dir}" . -->
 	<property file="ant.properties" /><!-- at least: 
 		keystore (e.g. in ${build.dir} ) 
@@ -35,6 +35,7 @@
 	<property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webStart" />
     <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
+	<property name="target" value="1.5" />
 
 	<property name="doc.dir" location="doc" />
 	<property name="src.dir" location="src" />
@@ -59,6 +60,12 @@
 		<delete dir="${build.dir}" />
 	</target>
 
+	<target name="genkey" description="generate key to sign the jar files">
+		<genkey keystore="${keystore}" alias="${keyalias}" 
+			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
+			dname="OU=Development, O=BobbinWork, C=NL"/>
+	</target>
+
 	<target name="prepare"
 		description="Create the output directories.">
 		<mkdir dir="${build.dir}/tmp" />
@@ -67,7 +74,7 @@
 	</target>
 
 	<target name="compile" description="create class files from java sources" depends="prepare">
-		<javac srcdir="${src.dir}" destdir="${build.dir}/tmp" target="1.5">
+		<javac srcdir="${src.dir}" destdir="${build.dir}/tmp" target="${target}">
 			<classpath refid="project.classpath" />
 		</javac>
 	</target>
@@ -86,6 +93,7 @@
 			<fileset dir="${src.dir}"
 				includes="**/viewer/**/*.properties" />
 			<manifest>
+				<attribute name="Java-Version" value="${target}" /> 
 				<attribute name="Implementation-Version" value="${version}" /> 
 				<attribute name="Main-Class"
 					value="nl.BobbinWork.viewer.gui.BWVApplet" />
@@ -113,15 +121,9 @@
 		</jar>
 	</target>
 
-	<target name="genkey" description="generate key to sign the jar files">
-		<genkey keystore="${keystore}" alias="${keyalias}" 
-			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
-			dname="OU=Development, O=BobbinWork, C=NL"/>
-	</target>
-
 	<target name="sign"
 		description="sign the jar files (see also genkey.bat) and generate jnlp files"
-		depends="grid.jar, bwViewer.jar, genkey">
+		depends="grid.jar, bwViewer.jar">
 		<signjar destDir="${build.dir}/dist" keystore="${keystore}"
 			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
 			alias="${keyalias}">
@@ -132,6 +134,7 @@
 		<copy todir="${build.dir}/dist" verbose="true">
 			<fileset dir="${src.dir}" includes="**/*.jnlp" />
 			<filterset>
+			    <filter token="TARGET" value="${target}" />
 			    <filter token="NOTE1" value="${generated1}" />
 			    <filter token="NOTE2" value="${generated2}" />
 			    <filter token="REL_JAR" value="${rel.jar}" />

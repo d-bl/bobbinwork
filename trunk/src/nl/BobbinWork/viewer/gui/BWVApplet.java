@@ -18,7 +18,6 @@
 package nl.BobbinWork.viewer.gui;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -71,10 +70,14 @@ import nl.BobbinWork.bwlib.gui.SplitPane;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.BWFileHandler;
 
+/**
+ * @author User
+ *
+ */
 @SuppressWarnings("serial")
 public class BWVApplet extends JApplet {
 
-    private static final int TOTAL_LEFT_WIDTH = 300;
+	private static final int TOTAL_LEFT_WIDTH = 300;
 
     private static final AboutInfo aboutInfo = new AboutInfo(//
             " BobbinWork - Viewer" // caption //$NON-NLS-1$
@@ -156,14 +159,10 @@ public class BWVApplet extends JApplet {
 
         /* ---- create global menus with listeners ---- */
 
-        JMenuItem
-        jMenuItem = new LocaleMenuItem("MenuFile_LoadSample"); //$NON-NLS-1$ 
-        jMenuItem.addActionListener(CursorController.createListener(this,new SampleListener(self)));
-
         JMenuBar //
         jMenuBar = new JMenuBar();
         jMenuBar.add(new FileMenu());
-        jMenuBar.add(jMenuItem);
+        jMenuBar.add(new SampleMenu(this));
         jMenuBar.add(new HelpMenu());
         setJMenuBar(jMenuBar);
 
@@ -173,10 +172,14 @@ public class BWVApplet extends JApplet {
 
         /* ---- put components and their local menu's/toolbars together ---- */
 
-        JSplitPane//
+        int dividerPosition = TOTAL_LEFT_WIDTH 
+        					- SplitPane.DIVIDER_WIDTH 
+        					- (int) fragments.getMinimumSize().getWidth();
+        
+		JSplitPane//
 
         splitPane = new SplitPane(//
-                TOTAL_LEFT_WIDTH - SplitPane.DIVIDER_WIDTH - (int) fragments.getMinimumSize().getWidth(), // dividerPosition
+                dividerPosition, 
                 HORIZONTAL_SPLIT, // 
                 new CPanel( // component of spiltPane
                         new AbstractButton[] { delete, replace }, // toolbar
@@ -310,9 +313,9 @@ public class BWVApplet extends JApplet {
         });
 
     }
-
+    
     /** A fully dressed JMenu, extendable for the applet */
-	private class FileMenu extends JMenu implements AppletApplicationMenu {
+	private class FileMenu extends JMenu {
 
         /** Creates a JMenu with items that load a predefined file. */
         private FileMenu() {
@@ -329,17 +332,12 @@ public class BWVApplet extends JApplet {
             	}
             }));
             add(jMenuItem);
-        }
 
-        /**
-         * Extends the JMenu with an exit at the bottom, and open/save/save-as
-         * at the top.
-         */
-        public void extend() {
+            if (! wrappedInApplicationFrame() ) return;
+            // the remaining IO items only if executed as a Java application
 
             add(new JSeparator());
 
-            JMenuItem//
             jMenuItem = new LocaleMenuItem( "MenuFile_exit",VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -466,12 +464,6 @@ public class BWVApplet extends JApplet {
             });
             add(jMenuItem);
         }
-    }
-
-    /** A JMenu with more items for an application than for an applet */
-    private interface AppletApplicationMenu {
-        /** Adds items to the menu that are not allowed in applets */
-        void extend();
     }
 
     /** A fully dressed JMenu, controlling the view of the fragments */
@@ -759,35 +751,36 @@ public class BWVApplet extends JApplet {
     }
 
     /**
-     * @param args
+     * @return true if the applet is framed in an application
      */
-    public static void main(String[] args) {
+    private boolean wrappedInApplicationFrame() {
+    	
+    	try { 
+    		getDocumentBase(); 
+    		return false; 
+    	} catch (NullPointerException e) {}
+    	return true;
+    }
 
-        BWVApplet applet = new BWVApplet();
-
-        // override the default of the applet
-        if (args.length > 0) {
-            setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
-        }
-
-        // Initialize the applet
-        applet.init();
-
-        // extend the menu with I/O items (not allowed for applets)
-        for (Component menu : applet.getJMenuBar().getComponents()) {
-        	if ( menu instanceof AppletApplicationMenu ) {
-        		((AppletApplicationMenu) menu).extend();
-        	}
-        }
-        //*/
-        
-        // create a frame with the applet on it
-        JFrame frame = new JFrame();
+    private static void wrapInApplicationFrame(BWVApplet applet) {
+    	
+		JFrame frame = new JFrame();
         frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle(aboutInfo.getCaption() + " " + aboutInfo.getVersion()); //$NON-NLS-1$
         frame.setIconImage(applet.icon);
         frame.add(applet);
         frame.setVisible(true);
+	}
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+
+        BWVApplet applet = new BWVApplet();
+        if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
+        applet.init();
+        wrapInApplicationFrame(applet);
     }
 }

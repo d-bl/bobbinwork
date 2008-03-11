@@ -43,7 +43,7 @@
   </information>
   <update check="timeout" policy="always"/>
   <resources>
-    <java version="1.6+"/> 
+    <java version="@TARGET@+"/> 
     <jar href="bwpGrid@REL_JAR@" download="eager" main="true"/>
   </resources>
   <application-desc main-class="nl.BobbinWork.grids.GridGUI.PolarGridPrinter"/>
