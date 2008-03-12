@@ -137,6 +137,8 @@ public class BWVApplet extends JApplet {
          */
     }
 
+    private SampleMenu sampleMenu;
+    
     /**
      * Completes creation of the applet now that the look-and-feel and Localizer
      * are initialized.
@@ -159,10 +161,20 @@ public class BWVApplet extends JApplet {
 
         /* ---- create global menus with listeners ---- */
 
+        sampleMenu = new SampleMenu(this);
+        sampleMenu.setInputActionListener( new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				/* TODO could be generalised if e.getSource() would lead back to sampleMenu
+				 * but it leads back to one of the JMenuItem's.
+				 * In the generalised form the listener could be passed on to the constructor. 
+				 */ 
+				loadFromStream( sampleMenu.getInputStreamName(), sampleMenu.getInputStream() );
+		}});
+        
         JMenuBar //
         jMenuBar = new JMenuBar();
         jMenuBar.add(new FileMenu());
-        jMenuBar.add(new SampleMenu(this));
+        jMenuBar.add(sampleMenu);
         jMenuBar.add(new HelpMenu());
         setJMenuBar(jMenuBar);
 
