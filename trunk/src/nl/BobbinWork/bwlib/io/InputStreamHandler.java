@@ -17,18 +17,10 @@
  */
 package nl.BobbinWork.bwlib.io;
 
-import java.awt.event.ActionListener;
 import java.io.InputStream;
 
 public interface InputStreamHandler {
-
-	/**
-	 * Registers the listener that is triggered when a new stream is created.
-	 * 
-	 * @param actionListener
-	 */
-	public void setInputActionListener (ActionListener actionListener);
-	
+	// TODO rename into NamedInputStream
 	public InputStream getInputStream();
 	public String getInputStreamName();
 }

@@ -44,6 +44,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -69,6 +70,7 @@ import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.SplitPane;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.BWFileHandler;
+import nl.BobbinWork.bwlib.io.InputStreamHandler;
 
 /**
  * @author User
@@ -137,8 +139,6 @@ public class BWVApplet extends JApplet {
          */
     }
 
-    private SampleMenu sampleMenu;
-    
     /**
      * Completes creation of the applet now that the look-and-feel and Localizer
      * are initialized.
@@ -161,20 +161,16 @@ public class BWVApplet extends JApplet {
 
         /* ---- create global menus with listeners ---- */
 
-        sampleMenu = new SampleMenu(this);
-        sampleMenu.setInputActionListener( new ActionListener(){
+        ActionListener inputStreamListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				/* TODO could be generalised if e.getSource() would lead back to sampleMenu
-				 * but it leads back to one of the JMenuItem's.
-				 * In the generalised form the listener could be passed on to the constructor. 
-				 */ 
-				loadFromStream( sampleMenu.getInputStreamName(), sampleMenu.getInputStream() );
-		}});
+				InputStreamHandler ish = ((InputStreamHandler)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).getInvoker());
+				loadFromStream( ish.getInputStreamName(), ish.getInputStream() );
+		}};
         
         JMenuBar //
         jMenuBar = new JMenuBar();
         jMenuBar.add(new FileMenu());
-        jMenuBar.add(sampleMenu);
+        jMenuBar.add(new SampleMenu(this,inputStreamListener));
         jMenuBar.add(new HelpMenu());
         setJMenuBar(jMenuBar);
 
