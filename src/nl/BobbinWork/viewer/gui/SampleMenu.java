@@ -46,6 +46,8 @@ import nl.BobbinWork.bwlib.io.InputStreamHandler;
 @SuppressWarnings("serial")
 public class SampleMenu extends JMenu implements InputStreamHandler {
 
+	// TODO rename into SampleDiagramChooser
+	
 	private static final String BASE_URL = "http://bobbinwork.googlegroups.com/web/";
 	private static final String S = "AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURD";
     private static final String[] SAMPLE_URLS = new String[] {//
@@ -59,6 +61,17 @@ public class SampleMenu extends JMenu implements InputStreamHandler {
      * Handed down to dialogs.
      */
     private Component parent;
+    
+    private ActionListener actionListener;
+    private InputStream inputStream = null;
+    private String inputStreamName = null;
+	public String getInputStreamName() {
+		return inputStreamName;
+	}
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	
     
     /**
      * Gives anonymous ActionListener's access to fields.
@@ -117,25 +130,13 @@ public class SampleMenu extends JMenu implements InputStreamHandler {
     	}
     };
     
-    private ActionListener actionListener;
-    private InputStream inputStream = null;
-    private String inputStreamName = null;
-	public String getInputStreamName() {
-		return inputStreamName;
-	}
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-	public void setInputActionListener (ActionListener actionListener) {
-		this.actionListener = actionListener;
-	}
-	
 	/**
 	 * @param parent handed down to dialogs
 	 * @param actionListener triggered when an InputStream is created from a user selected URL 
 	 */
-	public SampleMenu (Component parent){
+	public SampleMenu (Component parent, ActionListener actionListener){
     	super();
+    	this.actionListener = actionListener;
     	this.parent = parent;
         applyStrings(this, "MenuFile_LoadSample"); //$NON-NLS-1$
 
