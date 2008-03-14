@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0+" codebase="@CODE_BASE@" href="@DEPLOY@/bwViewer.jnlp">
+	<!-- Copyright 2008, J. Falkink-Pol
+		
+		This file is part of BobbinWork.
+		
+		BobbinWork is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+		
+		BobbinWork is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+		
+		You should have received a copy of the GNU General Public License
+		along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+		
+	-->
+
+  <information>
+    <!-- 
+    	@NOTE1@ 
+    	@NOTE2@ 
+    -->
+    <title>BobbinWork Viewer @REL@</title>
+    <vendor>J. Falkink-Pol</vendor>
+    <homepage href="@HOME_PAGE@"/>
+    <description>Working diagrams for bobbin lace</description>
+    <description kind="short">Play with grounds</description>
+    <offline-allowed/>
+    <security>
+      <all-permissions/>
+    </security> 
+  </information>
+  <update check="timeout" policy="always"/>
+  <resources>
+    <java version="@TARGET@+"/>
+    <jar href="bwViewer@REL_JAR@" download="eager" main="true"/>
+  </resources>
+  <applet-desc main-class="nl.BobbinWork.viewer.gui.BWVApplet" name="bwBiewer" width="800" height="600"/>
+</jnlp>
