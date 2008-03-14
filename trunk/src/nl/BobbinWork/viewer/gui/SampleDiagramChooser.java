@@ -33,7 +33,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
-import nl.BobbinWork.bwlib.io.InputStreamHandler;
+import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.bwlib.io.InputStreamCreator;
 
 /**
  * A menu that lets a user open a web page as a stream.
@@ -44,7 +45,7 @@ import nl.BobbinWork.bwlib.io.InputStreamHandler;
  *
  */
 @SuppressWarnings("serial")
-public class SampleMenu extends JMenu implements InputStreamHandler {
+public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 
 	// TODO rename into SampleDiagramChooser
 	
@@ -76,7 +77,7 @@ public class SampleMenu extends JMenu implements InputStreamHandler {
     /**
      * Gives anonymous ActionListener's access to fields.
      */
-    private SampleMenu self = this;
+    private SampleDiagramChooser self = this;
     
 	/**
 	 * Creates an inputStream from the specified URL.
@@ -97,7 +98,6 @@ public class SampleMenu extends JMenu implements InputStreamHandler {
 		} catch (IOException e1) {
 			JOptionPane.showInputDialog(
 					parent,
-	                getString("ExcuseUs") + "\n\n" + //$NON-NLS-1$
 	                getString("MenuFile_PasteSample_Prompt"), //$NON-NLS-1$
 	                url+"\n");
 			return;
@@ -134,18 +134,13 @@ public class SampleMenu extends JMenu implements InputStreamHandler {
 	 * @param parent handed down to dialogs
 	 * @param actionListener triggered when an InputStream is created from a user selected URL 
 	 */
-	public SampleMenu (Component parent, ActionListener actionListener){
+	public SampleDiagramChooser (Component parent, ActionListener actionListener){
     	super();
     	this.actionListener = actionListener;
     	this.parent = parent;
         applyStrings(this, "MenuFile_LoadSample"); //$NON-NLS-1$
 
-    	JMenuItem //
-        jMenuItem = new JMenuItem(getString("MenuFile_ChooseSample"));
-    	jMenuItem.addActionListener(freeListener);
-        add(jMenuItem);
-        
-        add(new JSeparator());
+    	JMenuItem jMenuItem;
 
         for (int i=0 ; i < SAMPLE_URLS.length ; i++){
             jMenuItem = new JMenuItem(SAMPLE_URLS[i].replaceAll("\\?.*", "")); //$NON-NLS-1$ //$NON-NLS-2$
@@ -153,6 +148,13 @@ public class SampleMenu extends JMenu implements InputStreamHandler {
             jMenuItem.addActionListener( predefinedListener );
             add(jMenuItem);
     	}
+        
+        add(new JSeparator());
+
+        jMenuItem = new LocaleMenuItem("MenuFile_ChooseSample");
+    	jMenuItem.addActionListener(freeListener);
+        add(jMenuItem);
+        
     	// TODO enhancements to prepare in the background
     	// replace with actual links from http://groups.google.com/group/bobbinwork/files
     	// cache files 

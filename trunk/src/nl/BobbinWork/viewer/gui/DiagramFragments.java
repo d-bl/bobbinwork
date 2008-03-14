@@ -50,7 +50,7 @@ import static nl.BobbinWork.viewer.gui.DiagramLanguages.getPrimaryTitle;
  * @author J. Falkink-Pol
  * 
  */
-public class Fragments extends JToolBar {
+public class DiagramFragments extends JToolBar {
 
     /** Appearance (threads and/or pairs) of the rendered cells. */
     private boolean showThreads = true, showPairs = false;
@@ -71,7 +71,7 @@ public class Fragments extends JToolBar {
      * Creates a toolbar that allows the user to select a fragment of the
      * diagram that can be used again
      */
-    Fragments() {
+    DiagramFragments() {
         super(JToolBar.VERTICAL);
 
         setFloatable(false);
@@ -99,7 +99,7 @@ public class Fragments extends JToolBar {
      * @param listener
      *            the listener to add
      */
-    void addSelectionListener(Fragments.SelectionListener listener) {
+    void addSelectionListener(DiagramFragments.SelectionListener listener) {
         list.addListSelectionListener(listener.listener);
     }
 
