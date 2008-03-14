@@ -19,7 +19,7 @@ package nl.BobbinWork.bwlib.io;
 
 import java.io.InputStream;
 
-public interface InputStreamHandler {
+public interface InputStreamCreator {
 	// TODO rename into NamedInputStream
 	public InputStream getInputStream();
 	public String getInputStreamName();
