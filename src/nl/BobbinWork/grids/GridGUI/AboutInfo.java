@@ -16,7 +16,9 @@
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package nl.BobbinWork.bwlib.gui;
+package nl.BobbinWork.grids.GridGUI;
+
+import nl.BobbinWork.bwlib.gui.Localizer;
 
 /**
  *

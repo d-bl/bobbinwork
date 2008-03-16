@@ -22,15 +22,18 @@
 
 	<property name="build.dir" location="build" />
 	<property file="../ant.properties" /><!-- at least: 
-		keystore (e.g. in ${build.dir} ) 
+		keystore (e.g. in ${build.dir} don't share with other projects or rewrite genkey task) 
 	    keyalias 
+	    version.tail (preferably the revision number)
 	    -->
 	<property environment="env" /><!-- at least: 
 		KEYSTOREPASS 
 	    JAVA_HOME (jdk, not jre)
 	    -->
 			
-	<property name="version" value="2.0.xx" />
+	<property name="version" value="2.0.${version.tail}" /><!-- base number 
+		signal compatibillity issues with basicStitches.xml? -->
+	
 	<property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webStart" />
     <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
@@ -66,7 +69,7 @@
 	</target>
 
 	<target name="genkey" description="generate key to sign the jar files" depends="prepare">
-		<delete file="${keystore}"/>
+		<delete file="${keystore}"/><!-- to make the next task repatable -->
 		<genkey keystore="${keystore}" alias="${keyalias}" 
 			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
 			dname="OU=Development, O=BobbinWork, C=NL"/>
