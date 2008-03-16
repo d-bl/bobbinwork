@@ -20,9 +20,8 @@
 		
 	-->
 
-	<property name="build.dir" location="build" /><!-- please set:
-		svn propset svn:ignore "${build.dir}" . -->
-	<property file="ant.properties" /><!-- at least: 
+	<property name="build.dir" location="build" />
+	<property file="../ant.properties" /><!-- at least: 
 		keystore (e.g. in ${build.dir} ) 
 	    keyalias 
 	    -->
@@ -60,17 +59,17 @@
 		<delete dir="${build.dir}" />
 	</target>
 
-	<target name="genkey" description="generate key to sign the jar files">
-		<genkey keystore="${keystore}" alias="${keyalias}" 
-			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
-			dname="OU=Development, O=BobbinWork, C=NL"/>
-	</target>
-
 	<target name="prepare"
 		description="Create the output directories.">
 		<mkdir dir="${build.dir}/tmp" />
 		<mkdir dir="${build.dir}/dist" />
-		<!-- svn propset svn:ignore "${build.dir}" . -->
+	</target>
+
+	<target name="genkey" description="generate key to sign the jar files" depends="prepare">
+		<delete file="${keystore}"/>
+		<genkey keystore="${keystore}" alias="${keyalias}" 
+			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
+			dname="OU=Development, O=BobbinWork, C=NL"/>
 	</target>
 
 	<target name="compile" description="create class files from java sources" depends="prepare">
@@ -122,8 +121,8 @@
 	</target>
 
 	<target name="sign"
-		description="sign the jar files (see also genkey.bat) and generate jnlp files"
-		depends="grid.jar, bwViewer.jar">
+		description="sign the jar files and generate jnlp files (depends on genkey, but that runs just once)"
+		depends="grid.jar, bwViewer.jar, genkey">
 		<signjar destDir="${build.dir}/dist" keystore="${keystore}"
 			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
 			alias="${keyalias}">
