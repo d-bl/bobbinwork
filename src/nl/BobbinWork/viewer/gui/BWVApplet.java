@@ -44,6 +44,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
@@ -69,6 +70,7 @@ import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.SplitPane;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.BWFileHandler;
+import nl.BobbinWork.bwlib.io.InputStreamCreator;
 
 /**
  * @author User
@@ -105,7 +107,7 @@ public class BWVApplet extends JApplet {
      * Fragments of the diagram that can be used again (referred to with &lt;copy
      * of=".."&gt;)
      */
-    private Fragments fragments;
+    private DiagramFragments fragments;
 
     /**
      * A vector drawing drawn by the model created from the DOM tree that was
@@ -149,7 +151,7 @@ public class BWVApplet extends JApplet {
         source = new SourceArea();
         diagramPanel = new DiagramPanel();
         threadStyleToolBar = new ThreadStyleToolBar(getBundle());
-        fragments = new Fragments();
+        fragments = new DiagramFragments();
         delete = new LocaleButton(false, "TreeToolBar_delete");//$NON-NLS-1$
         replace = new LocaleButton(false, "TreeToolBar_replace"); //$NON-NLS-1$
 
@@ -159,10 +161,16 @@ public class BWVApplet extends JApplet {
 
         /* ---- create global menus with listeners ---- */
 
+        ActionListener inputStreamListener = new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				InputStreamCreator ish = ((InputStreamCreator)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).getInvoker());
+				loadFromStream( ish.getInputStreamName(), ish.getInputStream() );
+		}};
+        
         JMenuBar //
         jMenuBar = new JMenuBar();
         jMenuBar.add(new FileMenu());
-        jMenuBar.add(new SampleMenu(this));
+        jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
         jMenuBar.add(new HelpMenu());
         setJMenuBar(jMenuBar);
 
