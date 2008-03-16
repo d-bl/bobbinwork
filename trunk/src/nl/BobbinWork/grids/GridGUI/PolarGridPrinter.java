@@ -20,7 +20,6 @@ package nl.BobbinWork.grids.GridGUI;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
-import nl.BobbinWork.bwlib.gui.AboutInfo;
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 
 /**

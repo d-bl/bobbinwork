@@ -18,7 +18,6 @@
 
 package nl.BobbinWork.grids.GridGUI;
 
-import nl.BobbinWork.bwlib.gui.AboutInfo;
 
 
 

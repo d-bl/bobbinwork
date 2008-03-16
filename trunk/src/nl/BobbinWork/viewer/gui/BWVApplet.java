@@ -61,7 +61,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
-import nl.BobbinWork.bwlib.gui.AboutInfo;
+import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.CursorController;
 import nl.BobbinWork.bwlib.gui.LocaleButton;
@@ -79,18 +79,14 @@ import nl.BobbinWork.bwlib.io.InputStreamCreator;
 @SuppressWarnings("serial")
 public class BWVApplet extends JApplet {
 
+	private static final String years = "2006-2008";  
+	private static final String caption = "Viewer";  
+
 	private static final int TOTAL_LEFT_WIDTH = 300;
-
-    private static final AboutInfo aboutInfo = new AboutInfo(//
-            " BobbinWork - Viewer" // caption //$NON-NLS-1$
-            , "2006-2008" // years //$NON-NLS-1$
-            , "J. Falkink-Pol" // author //$NON-NLS-1$
-    );
-
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
 
-    /** icon for dialogs and application frame */
+    /** icon for the left upper corner of dialogs and application frame */
     private final Image icon = getToolkit().getImage(getClass().getClassLoader()//
             .getResource("nl/BobbinWork/viewer/gui/bobbin.gif")); //$NON-NLS-1$
 
@@ -108,6 +104,7 @@ public class BWVApplet extends JApplet {
      * of=".."&gt;)
      */
     private DiagramFragments fragments;
+    private HelpMenu helpMenu;
 
     /**
      * A vector drawing drawn by the model created from the DOM tree that was
@@ -171,7 +168,7 @@ public class BWVApplet extends JApplet {
         jMenuBar = new JMenuBar();
         jMenuBar.add(new FileMenu());
         jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
-        jMenuBar.add(new HelpMenu());
+        jMenuBar.add(helpMenu = new HelpMenu(this, years,caption)); 
         setJMenuBar(jMenuBar);
 
         /* ---- load content ---- */
@@ -508,30 +505,6 @@ public class BWVApplet extends JApplet {
         }
     }
 
-    /** A fully dressed JMenu, extendable for the application */
-	private class HelpMenu extends JMenu {
-
-		/**
-         * Creates a fully dressed JMenu, with items showing internal
-         * information in dialogs
-         */
-        private HelpMenu() {
-
-            applyStrings(this, "MenuHelp_help"); //$NON-NLS-1$
-   
-            JMenuItem//
-
-            jMenuItem = new LocaleMenuItem("MenuHelp_About"); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    JOptionPane.showMessageDialog(self, aboutInfo.getMessage(), aboutInfo.getCaption(),
-                            JOptionPane.INFORMATION_MESSAGE);
-                }
-            });
-            add(jMenuItem);
-        }
-    }
-
     /** A fully dressed JMenu, controlling the view of the diagram */
 	private class DiagramViewMenu extends JMenu {
 
@@ -758,9 +731,7 @@ public class BWVApplet extends JApplet {
         }
     }
 
-    /**
-     * @return true if the applet is framed in an application
-     */
+    /** @return true if the applet is framed in an application */
     private boolean wrappedInApplicationFrame() {
     	
     	try { 
@@ -775,15 +746,12 @@ public class BWVApplet extends JApplet {
 		JFrame frame = new JFrame();
         frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle(aboutInfo.getCaption() + " " + aboutInfo.getVersion()); //$NON-NLS-1$
+        frame.setTitle(applet.helpMenu.getCaption()); //$NON-NLS-1$
         frame.setIconImage(applet.icon);
         frame.add(applet);
         frame.setVisible(true);
 	}
 
-    /**
-     * @param args
-     */
     public static void main(String[] args) {
 
         BWVApplet applet = new BWVApplet();

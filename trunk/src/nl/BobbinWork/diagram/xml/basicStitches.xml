@@ -23,6 +23,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  -->
 
     <group pairs="1-1" display="no">
+        <!-- signal compatibility issues with the version number in build.xml? 
+         either when old diagrams might not work with the the new revision
+         or when new diagrams might not work with the the old revision
+        -->
         <title>
             <value lang="en">stitches (building blocks for the diagram)</value>
             <value lang="nl">slagen (bouwstenen voor de werktekening)</value>
