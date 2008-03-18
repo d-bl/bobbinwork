@@ -41,11 +41,12 @@ import nl.BobbinWork.diagram.model.Twist;
 import nl.BobbinWork.diagram.xml.TreeBuilder;
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 
-public class ThreadStyleToolBar extends JToolBar {
+@SuppressWarnings("serial")
+class ThreadStyleToolBar extends JToolBar {
 
     private Twist twist;
 
-    public ThreadStyle getStyleOfFrontThread() {
+    ThreadStyle getStyleOfFrontThread() {
         return twist.getFront().getStyle();
     }
 
@@ -157,7 +158,7 @@ public class ThreadStyleToolBar extends JToolBar {
         }
     };
 
-    public void setStyleOfFrontThread(ThreadStyle p) {
+    void setStyleOfFrontThread(ThreadStyle p) {
         if (p != null) {
             getStyleOfFrontThread().set(p);
             coreButton.setBackground(p.getColor());
@@ -170,7 +171,7 @@ public class ThreadStyleToolBar extends JToolBar {
         
     }
     
-    public ThreadStyleToolBar(ResourceBundle bundle) {
+    ThreadStyleToolBar(ResourceBundle bundle) {
 
         setFloatable(false);
         setRollover(true);

@@ -22,9 +22,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.GregorianCalendar;
@@ -50,14 +47,14 @@ import javax.swing.JSplitPane;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 import javax.swing.JTextArea;
-import static javax.swing.SwingUtilities.isRightMouseButton;
-import static javax.swing.SwingUtilities.isLeftMouseButton;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+
+import org.w3c.dom.Element;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
@@ -71,7 +68,8 @@ import nl.BobbinWork.bwlib.io.BWFileHandler;
 import nl.BobbinWork.bwlib.io.InputStreamCreator;
 import nl.BobbinWork.diagram.gui.InteractiveDiagramPanel;
 import nl.BobbinWork.diagram.gui.DiagramPanel;
-import nl.BobbinWork.diagram.gui.ThreadStyleToolBar;
+import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 /**
  * @author User
@@ -81,7 +79,7 @@ import nl.BobbinWork.diagram.gui.ThreadStyleToolBar;
 public class BWVApplet extends JApplet {
 
 	private static final String years = "2006-2008";  
-	private static final String caption = "Viewer";  
+	private static String caption = "Viewer"; // get extended by the help menu  
 
 	private static final int TOTAL_LEFT_WIDTH = 300;
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
@@ -90,9 +88,6 @@ public class BWVApplet extends JApplet {
     /** icon for the left upper corner of dialogs and application frame */
     private final Image icon = getToolkit().getImage(getClass().getClassLoader()//
             .getResource("nl/BobbinWork/viewer/gui/bobbin.gif")); //$NON-NLS-1$
-
-    /** outer this */
-    private BWVApplet self = this;
 
     /** JTextArea with the XML source */
     private SourceArea source;
@@ -105,16 +100,12 @@ public class BWVApplet extends JApplet {
      * of=".."&gt;)
      */
     private DiagramFragments fragments;
-    private HelpMenu helpMenu;
 
     /**
      * A vector drawing drawn by the model created from the DOM tree that was
      * generated from the XML file.
      */
     private DiagramPanel diagramPanel;
-
-    /** Tool bar defining styles for threads. */
-    private ThreadStyleToolBar threadStyleToolBar;
 
     /**
      * JButton's triggering modification of the DOM tree that was generated from
@@ -148,7 +139,6 @@ public class BWVApplet extends JApplet {
         tree = new BWTree();
         source = new SourceArea();
         diagramPanel = new DiagramPanel();
-        threadStyleToolBar = new ThreadStyleToolBar(getBundle());
         fragments = new DiagramFragments();
         delete = new LocaleButton(false, "TreeToolBar_delete");//$NON-NLS-1$
         replace = new LocaleButton(false, "TreeToolBar_replace"); //$NON-NLS-1$
@@ -164,12 +154,14 @@ public class BWVApplet extends JApplet {
 				InputStreamCreator ish = ((InputStreamCreator)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).getInvoker());
 				loadFromStream( ish.getInputStreamName(), ish.getInputStream() );
 		}};
-        
+		final HelpMenu helpMenu = new HelpMenu(this, years,caption);
+		caption = helpMenu.getCaption();
+		
         JMenuBar //
         jMenuBar = new JMenuBar();
         jMenuBar.add(new FileMenu());
         jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
-        jMenuBar.add(helpMenu = new HelpMenu(this, years,caption)); 
+        jMenuBar.add(helpMenu); 
         setJMenuBar(jMenuBar);
 
         /* ---- load content ---- */
@@ -206,16 +198,13 @@ public class BWVApplet extends JApplet {
                 TOTAL_LEFT_WIDTH, // dividerPosition
                 HORIZONTAL_SPLIT, // orientation
                 splitPane, // left component of spiltPane
-                new InteractiveDiagramPanel(diagramPanel, self, threadStyleToolBar, mouseMotionListener));
+                new InteractiveDiagramPanel(diagramPanel, this));
 
         getContentPane().add(splitPane);
     }
 
     /** Connects the non-menu components with listeners */
     private void createNonMenuListeners() {
-
-        diagramPanel.setDiagramType(true, false);
-        diagramPanel.addMouseMotionListener(mouseMotionListener);
 
         delete.addActionListener(CursorController.createListener(this,new ActionListener() {
 
@@ -242,44 +231,17 @@ public class BWVApplet extends JApplet {
 
         tree.getModel().addTreeModelListener(new TreeModelListener() {
 
-            public void treeNodesChanged(TreeModelEvent e) {
-                BWTree.restoreOrphans(e);
-                diagramPanel.setPattern(tree.getRootElement());
+			private void treeChanged(TreeModelEvent e) {
+				BWTree.restoreOrphans(e);
+		        TreeExpander.parse((Element) tree.getRootElement());
+                diagramPanel.setPattern(new Diagram(tree.getRootElement()));
                 fragments.populate(tree.getRoot());
-            }
+			}
 
-            public void treeNodesInserted(TreeModelEvent e) {
-                BWTree.restoreOrphans(e);
-                diagramPanel.setPattern(tree.getRootElement());
-                fragments.populate(tree.getRoot());
-            }
-
-            public void treeNodesRemoved(TreeModelEvent e) {
-                BWTree.restoreOrphans(e);
-                diagramPanel.setPattern(tree.getRootElement());
-                fragments.populate(tree.getRoot());
-            }
-
-            public void treeStructureChanged(TreeModelEvent e) {
-                BWTree.restoreOrphans(e);
-                diagramPanel.setPattern(tree.getRootElement());
-                fragments.populate(tree.getRoot());
-            }
-        });
-
-        diagramPanel.addMouseListener(new MouseAdapter() {
-
-            public void mouseClicked(MouseEvent e) {
-                if (isLeftMouseButton(e)) {
-                    diagramPanel.setThreadStyleAt(//
-                            threadStyleToolBar.getStyleOfFrontThread(), //
-                            e.getX(), //
-                            e.getY());
-                } else if (isRightMouseButton(e)) {
-                    threadStyleToolBar.setStyleOfFrontThread//
-                            (diagramPanel.getThreadStyleAt(e.getX(), e.getY()));
-                }
-            }
+            public void treeNodesChanged(TreeModelEvent e) { treeChanged(e); }
+            public void treeNodesInserted(TreeModelEvent e) { treeChanged(e); }
+            public void treeNodesRemoved(TreeModelEvent e) { treeChanged(e); }
+            public void treeStructureChanged(TreeModelEvent e) { treeChanged(e);}
         });
 
         tree.addTreeSelectionListener(new TreeSelectionListener() {
@@ -473,18 +435,6 @@ public class BWVApplet extends JApplet {
         }
     }
 
-    private final MouseMotionListener mouseMotionListener = new MouseMotionListener() {
-
-        public void mouseDragged(MouseEvent arg0) {
-            // no dragging
-        }
-
-        public void mouseMoved(MouseEvent e) {
-            diagramPanel.highlightThreadAt(e.getX(), e.getY(), tree.getSelectedPartition());
-        }
-
-    };
-
     /** manages the last opened/saved file */
     private BWFileHandler fileHandler;
     
@@ -598,7 +548,7 @@ public class BWVApplet extends JApplet {
 		JFrame frame = new JFrame();
         frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle(applet.helpMenu.getCaption()); //$NON-NLS-1$
+        frame.setTitle(caption); //$NON-NLS-1$
         frame.setIconImage(applet.icon);
         frame.add(applet);
         frame.setVisible(true);

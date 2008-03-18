@@ -19,7 +19,7 @@ import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 @SuppressWarnings("serial")
 class PrintMenu extends JMenu {
 	
-    /** Creates a fully dressed JMenu, to print of the diagram */
+    /** Creates a fully dressed JMenu, to print the diagram */
     public PrintMenu(final DiagramPanel diagramPanel) {
 
         applyStrings(this, "MenuPrint"); //$NON-NLS-1$

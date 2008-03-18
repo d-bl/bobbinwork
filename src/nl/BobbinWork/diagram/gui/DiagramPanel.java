@@ -37,13 +37,10 @@ import java.security.AccessControlException;
 
 import javax.swing.JPanel;
 
-import org.w3c.dom.Element;
-
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.model.ThreadSegment;
 import nl.BobbinWork.diagram.model.ThreadStyle;
-import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 /**
  * Bobbin lace Working diagram, a thread and/or pair diagram.
@@ -137,9 +134,8 @@ public class DiagramPanel extends JPanel implements Printable {
     }
 
     /** Sets the XML definition and redraws the diagram. */
-    public void setPattern(Element root) {
-        TreeExpander.parse((Element) root);
-        diagram = new Diagram(root);
+    public void setPattern(Diagram diagram) {
+        this.diagram = diagram;
         repaint();
     }
 
@@ -173,8 +169,12 @@ public class DiagramPanel extends JPanel implements Printable {
         }
     }
 
+    private Partition lastHigLight;
     /** Highlight a section of the diagram corresponding with a node of the tree. */
     public void highLight(Partition partition) {
+    	
+    	lastHigLight = partition; // remember for higlightThreadAt()
+    	
         // clear previous highlights
         paintImmediately(getBounds());
         if (partition != null) {
@@ -195,12 +195,9 @@ public class DiagramPanel extends JPanel implements Printable {
      * @param x
      *            horizontal offset from the left margin
      * @param y
-     *            vertical offset fromthe top margin
-     * @param partition
-     *            unless null: the partition selected in the tree that should
-     *            remain highlighted
+     *            vertical offset from the top margin
      */
-    public void highlightThreadAt(int x, int y, Partition partition) {
+    void highlightThreadAt(int x, int y) {
 
         x /= getScreenScale();
         y /= getScreenScale();
@@ -210,9 +207,9 @@ public class DiagramPanel extends JPanel implements Printable {
         Graphics2D g2 = (Graphics2D) getGraphics();
         g2.scale(getScreenScale(), getScreenScale());
 
-        if (partition != null) {
+        if (lastHigLight != null) {
             g2.setPaint(areaHighlight);
-            g2.fill(partition.getHull());
+            g2.fill(lastHigLight.getHull());
         }
         if (threadSegment != null) {
             g2.setPaint(threadHighlight);
