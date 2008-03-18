@@ -33,7 +33,6 @@ import static java.awt.event.KeyEvent.*;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import static java.awt.event.InputEvent.CTRL_MASK;
 import static java.awt.event.InputEvent.ALT_DOWN_MASK;
-import static java.awt.event.InputEvent.SHIFT_DOWN_MASK;
 
 import javax.swing.AbstractButton;
 import javax.swing.JApplet;
@@ -65,12 +64,14 @@ import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.CursorController;
 import nl.BobbinWork.bwlib.gui.LocaleButton;
-import nl.BobbinWork.bwlib.gui.CButtonBar;
 import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.SplitPane;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.BWFileHandler;
 import nl.BobbinWork.bwlib.io.InputStreamCreator;
+import nl.BobbinWork.diagram.gui.InteractiveDiagramPanel;
+import nl.BobbinWork.diagram.gui.DiagramPanel;
+import nl.BobbinWork.diagram.gui.ThreadStyleToolBar;
 
 /**
  * @author User
@@ -205,12 +206,7 @@ public class BWVApplet extends JApplet {
                 TOTAL_LEFT_WIDTH, // dividerPosition
                 HORIZONTAL_SPLIT, // orientation
                 splitPane, // left component of spiltPane
-                new CPanel(
-                        // 
-                        new CButtonBar(//
-                                threadStyleToolBar,//
-                                new JMenu[] { new DiagramPrintMenu(), new DiagramViewMenu() }),
-                        new JScrollPane(diagramPanel)));
+                new InteractiveDiagramPanel(diagramPanel, self, threadStyleToolBar, mouseMotionListener));
 
         getContentPane().add(splitPane);
     }
@@ -386,34 +382,6 @@ public class BWVApplet extends JApplet {
         }
     }
 
-    /** A fully dressed JMenu, controlling the view of the diagram */
-	private class DiagramPrintMenu extends JMenu {
-
-        /** Creates a fully dressed JMenu, controlling the view of the diagram */
-        private DiagramPrintMenu() {
-
-            applyStrings(this, "MenuPrint"); //$NON-NLS-1$
-
-            add(new javax.swing.JSeparator());
-            JMenuItem//
-            jMenuItem = new LocaleMenuItem("MenuPrint_PageSetup"); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.updatePageFormat();
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem( "MenuPrint_print", VK_P, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.adjustablePrint();
-                }
-            });
-            add(jMenuItem);
-        }
-    }
-
     /** A fully dressed JMenu, to edit the XML source */
 	private class EditMenu extends JMenu {
 
@@ -499,122 +467,6 @@ public class BWVApplet extends JApplet {
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent arg0) {
                     fragments.setDiagramType(true, true);
-                }
-            });
-            add(jMenuItem);
-        }
-    }
-
-    /** A fully dressed JMenu, controlling the view of the diagram */
-	private class DiagramViewMenu extends JMenu {
-
-        /**
-         * A fully dressed JMenu, controlling the appearance of the high lights on
-         * the diagram
-         */
-		private class DiagramHighlightsMenu extends JMenu {
-
-            private DiagramHighlightsMenu() {
-                JMenuItem//
-
-                jMenuItem = new LocaleMenuItem("MenuHighlight_AreaColor"); //$NON-NLS-1$
-                jMenuItem.setBackground(new Color(diagramPanel.getAreaHighlight().getRGB()));
-                jMenuItem.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Color color = JColorChooser.showDialog(//
-                                self, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
-                        if (color != null) {
-                            ((JMenuItem) e.getSource()).setBackground(color);
-                            diagramPanel.setAreaHighlight(color);
-                        }
-                    }
-                });
-                add(jMenuItem);
-
-                jMenuItem = new LocaleMenuItem("MenuHighlight_ThreadColor"); //$NON-NLS-1$
-                jMenuItem.setBackground(new Color(diagramPanel.getThreadHighlight().getRGB()));
-                jMenuItem.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        Color color = JColorChooser.showDialog(//
-                                self, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
-                        if (color != null) {
-                            ((JMenuItem) e.getSource()).setBackground(color);
-                            diagramPanel.setThreadHighlight(color);
-                        }
-                    }
-                });
-                add(jMenuItem);
-            }
-        }
-
-        /** Creates a fully dressed JMenu, controlling the view of the diagram */
-        private DiagramViewMenu() {
-            applyStrings(this, "MenuView_view"); //$NON-NLS-1$
-
-            JMenuItem//
-
-            jMenuItem = new LocaleMenuItem("MenuView_zoomIn",VK_I, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.setScreenScale(diagramPanel.getScreenScale() * 1.25);
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem("MenuView_zoomOut",VK_J, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.setScreenScale(diagramPanel.getScreenScale() * 0.8);
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem("MenuView_zoomReset",VK_K, CTRL_DOWN_MASK); //$NON-NLS-1$ 
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.setScreenScale(1d);
-                }
-            });
-            add(jMenuItem);
-
-            add(new javax.swing.JSeparator());
-
-            add((DiagramHighlightsMenu) applyStrings(new DiagramHighlightsMenu(), "MenuView_highlight"));
-
-            add(new javax.swing.JSeparator());
-
-            jMenuItem = new LocaleMenuItem("MenuView_thread",VK_F7, SHIFT_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.setDiagramType(true, false);
-                    if (diagramPanel.getMouseMotionListeners().length <= 0) {
-                        diagramPanel.addMouseMotionListener(mouseMotionListener);
-                    }
-                    threadStyleToolBar.setVisible(true);
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem("MenuView_pair",VK_F7, 0); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.setDiagramType(false, true);
-                    if (diagramPanel.getMouseMotionListeners().length > 0) {
-                        diagramPanel.removeMouseMotionListener(mouseMotionListener);
-                    }
-                    threadStyleToolBar.setVisible(false);
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem("MenuView_hybrid", VK_F7, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent arg0) {
-                    diagramPanel.setDiagramType(true, true);
-                    if (diagramPanel.getMouseMotionListeners().length <= 0) {
-                        diagramPanel.addMouseMotionListener(mouseMotionListener);
-                    }
-                    threadStyleToolBar.setVisible(true);
                 }
             });
             add(jMenuItem);
