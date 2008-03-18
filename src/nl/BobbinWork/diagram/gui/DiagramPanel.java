@@ -16,7 +16,7 @@
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -78,14 +78,14 @@ public class DiagramPanel extends JPanel implements Printable {
     	setBackground(Color.white);
     }
 
-    /** registers whether threads and/or pairs ar drawn. */
-    void setDiagramType(boolean showThreads, boolean showPairs) {
+    /** Registers whether threads and/or pairs are drawn. */
+    public void setDiagramType(boolean showThreads, boolean showPairs) {
         this.showThreads = showThreads;
         this.showPairs = showPairs;
         repaint(getBounds());
     }
 
-    /** Changes the pageformat with a dialog. */
+    /** Changes the page format with a dialog. */
     void updatePageFormat() {
     	if (printJob == null) return;
         pageFormat = printJob.pageDialog(pageFormat);
@@ -137,7 +137,7 @@ public class DiagramPanel extends JPanel implements Printable {
     }
 
     /** Sets the XML definition and redraws the diagram. */
-    void setPattern(Element root) {
+    public void setPattern(Element root) {
         TreeExpander.parse((Element) root);
         diagram = new Diagram(root);
         repaint();
@@ -174,7 +174,7 @@ public class DiagramPanel extends JPanel implements Printable {
     }
 
     /** Highlight a section of the diagram corresponding with a node of the tree. */
-    void highLight(Partition partition) {
+    public void highLight(Partition partition) {
         // clear previous highlights
         paintImmediately(getBounds());
         if (partition != null) {
@@ -200,7 +200,7 @@ public class DiagramPanel extends JPanel implements Printable {
      *            unless null: the partition selected in the tree that should
      *            remain highlighted
      */
-    void highlightThreadAt(int x, int y, Partition partition) {
+    public void highlightThreadAt(int x, int y, Partition partition) {
 
         x /= getScreenScale();
         y /= getScreenScale();
@@ -240,7 +240,7 @@ public class DiagramPanel extends JPanel implements Printable {
      * @param y
      *            vertical offset fromthe top margin
      */
-    void setThreadStyleAt(ThreadStyle threadStyle, int x, int y) {
+    public void setThreadStyleAt(ThreadStyle threadStyle, int x, int y) {
 
         if (showThreads) {
             x /= getScreenScale();
@@ -262,7 +262,7 @@ public class DiagramPanel extends JPanel implements Printable {
      *            vertical offset fromthe top margin
      * @return null if the position is not at a thread in the diagram
      */
-    ThreadStyle getThreadStyleAt(int x, int y) {
+    public ThreadStyle getThreadStyleAt(int x, int y) {
 
         if (showThreads) {
             x /= getScreenScale();

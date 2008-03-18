@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,7 +45,7 @@ public class ThreadStyleToolBar extends JToolBar {
 
     private Twist twist;
 
-    ThreadStyle getStyleOfFrontThread() {
+    public ThreadStyle getStyleOfFrontThread() {
         return twist.getFront().getStyle();
     }
 
@@ -157,7 +157,7 @@ public class ThreadStyleToolBar extends JToolBar {
         }
     };
 
-    void setStyleOfFrontThread(ThreadStyle p) {
+    public void setStyleOfFrontThread(ThreadStyle p) {
         if (p != null) {
             getStyleOfFrontThread().set(p);
             coreButton.setBackground(p.getColor());
