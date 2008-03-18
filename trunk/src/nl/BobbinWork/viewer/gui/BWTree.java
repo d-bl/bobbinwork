@@ -54,6 +54,7 @@ import org.xml.sax.SAXParseException;
  * @author J. Falkink-Pol
  * 
  */
+@SuppressWarnings("serial")
 public class BWTree extends JTree {
 
     /** outer this */
@@ -191,7 +192,7 @@ public class BWTree extends JTree {
      * gets the partition of the diagram referred to by the selected element of
      * the tree model
      */
-    Partition getSelectedPartition() {
+    public Partition getSelectedPartition() {
         try {
             DefaultMutableTreeNode viewNode = (DefaultMutableTreeNode) getSelectionPath()
                     .getLastPathComponent();

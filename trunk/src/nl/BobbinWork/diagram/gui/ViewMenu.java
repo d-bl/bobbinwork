@@ -6,8 +6,6 @@ import static java.awt.event.KeyEvent.VK_F7;
 import static java.awt.event.KeyEvent.VK_I;
 import static java.awt.event.KeyEvent.VK_J;
 import static java.awt.event.KeyEvent.VK_K;
-import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
-import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -19,6 +17,8 @@ import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
+import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
+import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 
 /**
