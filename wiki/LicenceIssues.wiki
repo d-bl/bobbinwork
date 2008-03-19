@@ -1,4 +1,4 @@
-#summary diagrams and GNU-GPLv3 compatible licences in the repository
+#summary xml sources defining diagrams and GNU-GPLv3 compatible licences in the repository
 #labels Phase-Requirements
 
 Discussions about these issues:
