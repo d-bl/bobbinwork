@@ -6,5 +6,5 @@
   * bring the xsd up to date
   * see also 
     * to do's in the code
-    * the wish lists in the [http://bw-en.wikispaces.com/ user guide]
+    * the [http://bw-en.wikispaces.com/viewer+wish+list wish list]s in the [http://bw-en.wikispaces.com/ user guide]
     * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
