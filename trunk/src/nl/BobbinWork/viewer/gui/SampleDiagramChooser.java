@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.io.InputStreamCreator;
 
 /**
@@ -44,19 +45,19 @@ import nl.BobbinWork.bwlib.io.InputStreamCreator;
  * @author J. Falkink-Pol
  *
  */
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 
 	// TODO rename into SampleDiagramChooser
 	
-	private static final String BASE_URL = "http://bobbinwork.googlegroups.com/web/";
-	private static final String S = "AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURD";
+	private static final String BASE_URL = "http://bobbinwork.googlegroups.com/web/"; //$NON-NLS-1$
+	private static final String S = "AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURD"; //$NON-NLS-1$
     private static final String[] SAMPLE_URLS = new String[] {//
-         "torchon.xml?gda=M4C-rDw" + S + "SHAoqq6MVKgGExQWFmpupE",//$NON-NLS-1$
-    	 "spiders.xml?gda=4zTd7Tw" + S + "ScIXlog2Wd3wWxjd0fqC3o",//$NON-NLS-1$
-    	"flanders.xml?gda=4z7qcT0" + S + "SmCdrehNs8EVCWMltc8R2k",//$NON-NLS-1$
-    	  "braid2.xml?gda=UQQDQzs" + S + "RVk4fsgKMsk2Mbh43_kAi9",//$NON-NLS-1$
-    	  "braid1.xml?gda=2VRhyDs" + S + "RD4DT6Fua1gH-xvy-DVSKm"};//$NON-NLS-1$
+         "torchon.xml?gda=M4C-rDw" + S + "SHAoqq6MVKgGExQWFmpupE",//$NON-NLS-1$ //$NON-NLS-2$
+    	 "spiders.xml?gda=4zTd7Tw" + S + "ScIXlog2Wd3wWxjd0fqC3o",//$NON-NLS-1$ //$NON-NLS-2$
+    	"flanders.xml?gda=4z7qcT0" + S + "SmCdrehNs8EVCWMltc8R2k",//$NON-NLS-1$ //$NON-NLS-2$
+    	  "braid2.xml?gda=UQQDQzs" + S + "RVk4fsgKMsk2Mbh43_kAi9",//$NON-NLS-1$ //$NON-NLS-2$
+    	  "braid1.xml?gda=2VRhyDs" + S + "RD4DT6Fua1gH-xvy-DVSKm"};//$NON-NLS-1$ //$NON-NLS-2$
     
     /**
      * Handed down to dialogs.
@@ -86,20 +87,20 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 	 */
 	private void setInputStream(String url) {
 		try {
-			inputStreamName = "";
+			inputStreamName = ""; //$NON-NLS-1$
 			inputStream = (new URL(url)).openStream();
 			inputStreamName = url;
 		} catch (MalformedURLException e1) {
 		    JOptionPane.showMessageDialog(parent, //
-		            url + "\n" + e1.getLocalizedMessage(),//
-		            getString("MenuFile_LoadSample_invalid_URL"), //
+		            url + "\n" + e1.getLocalizedMessage(),// //$NON-NLS-1$
+		            getString("MenuFile_LoadSample_invalid_URL"), // //$NON-NLS-1$
 		            JOptionPane.ERROR_MESSAGE);
 		    return;
 		} catch (IOException e1) {
 			JOptionPane.showInputDialog(
 					parent,
-	                getString("MenuFile_PasteSample_Prompt"), //$NON-NLS-1$
-	                url+"\n");
+	                "", //$NON-NLS-1$
+	                url+"\n"); //$NON-NLS-1$
 			return;
 		}
 	}
@@ -113,7 +114,7 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 		public void actionPerformed(ActionEvent e) {
 			setInputStream((String)JOptionPane.showInputDialog(
 	                self.parent,
-	                getString("MenuFile_ChooseSample_Prompt"), //$NON-NLS-1$
+	                "", //$NON-NLS-1$
 	                "http://"));  //$NON-NLS-1$
     		actionListener.actionPerformed(e);
 		}
@@ -151,7 +152,7 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
         
         add(new JSeparator());
 
-        jMenuItem = new LocaleMenuItem("MenuFile_ChooseSample");
+        jMenuItem = new LocaleMenuItem("MenuFile_ChooseSample"); //$NON-NLS-1$
     	jMenuItem.addActionListener(freeListener);
         add(jMenuItem);
         

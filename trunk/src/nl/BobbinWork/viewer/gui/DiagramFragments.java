@@ -178,11 +178,11 @@ public class DiagramFragments extends JToolBar {
             }
             Element element = (Element) value;
             partition = (Partition) element.getUserData(Partition.MODEL_TO_DOM);
-            setToolTipText("<html><body><p><strong>" + //
-                    element.getAttribute("id") + //
-                    "</strong></p><p>" + //
+            setToolTipText("<html><body><p><strong>" + // //$NON-NLS-1$
+                    element.getAttribute("id") + // //$NON-NLS-1$
+                    "</strong></p><p>" + // //$NON-NLS-1$
                     getPrimaryTitle(element) + //
-                    "</p></body></html>");
+                    "</p></body></html>"); //$NON-NLS-1$
             return this;
         }
     }
@@ -200,8 +200,8 @@ public class DiagramFragments extends JToolBar {
         for (Enumeration n = root.depthFirstEnumeration(); n.hasMoreElements();) {
             Object object = ((DefaultMutableTreeNode) n.nextElement()).getUserObject();
             if (object instanceof Element //
-                    && !((Element) object).getAttribute("id").equals("")//
-                    && !((Element) object).getAttribute("display").equals("none")//
+                    && !((Element) object).getAttribute("id").equals("")// //$NON-NLS-1$ //$NON-NLS-2$
+                    && !((Element) object).getAttribute("display").equals("none")// //$NON-NLS-1$ //$NON-NLS-2$
                     ) {
                 listModel.addElement((Element) object);
             }

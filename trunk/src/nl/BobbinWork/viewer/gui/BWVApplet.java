@@ -75,11 +75,11 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
  * @author User
  *
  */
-@SuppressWarnings("serial")
+@SuppressWarnings("serial")  //$NON-NLS-1$
 public class BWVApplet extends JApplet {
 
-	private static final String years = "2006-2008";  
-	private static String caption = "Viewer"; // get extended by the help menu  
+	private static final String years = "2006-2008";  //$NON-NLS-1$  
+	private static String caption = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
 
 	private static final int TOTAL_LEFT_WIDTH = 300;
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
@@ -441,7 +441,9 @@ public class BWVApplet extends JApplet {
     private BWFileHandler getFileHandler() {
         if (fileHandler == null ) try { 
         	fileHandler = new BWFileHandler(this, //
-                new BWFileFilter( getString("FileType"), "xml,bwml".split(",") ));
+                new BWFileFilter( 
+                		getString("FileType"), //$NON-NLS-1$
+                		"xml,bwml".split(",") ));  //$NON-NLS-1$  //$NON-NLS-2$
         } 
         catch (Exception e) { }
         return fileHandler;
@@ -457,8 +459,8 @@ public class BWVApplet extends JApplet {
 		if (stream == null) {
             JOptionPane.showMessageDialog(this, //
                     fileName + "\nnot found", "load sample", JOptionPane.ERROR_MESSAGE);
-            tree.setDoc("");
-            tree.setDocName("");
+            tree.setDoc(""); //$NON-NLS-1$
+            tree.setDocName(""); //$NON-NLS-1$
         } else {
             try {
                 source.read(new InputStreamReader(stream), fileName);
@@ -467,7 +469,7 @@ public class BWVApplet extends JApplet {
             } catch (Exception exception) {
                 showError(fileName, exception, "load sample, read failed");
                 source.setText(null);
-                tree.setDoc("");
+                tree.setDoc(""); //$NON-NLS-1$
             }
 
             try {
@@ -494,7 +496,7 @@ public class BWVApplet extends JApplet {
 			} catch (Exception exception) {
 				showError(fileName, exception, "open file");
 				source.setText(null);
-				tree.setDoc("");
+				tree.setDoc("");  //$NON-NLS-1$
 				fileHandler.clearFileName();
 			}
 
@@ -512,7 +514,7 @@ public class BWVApplet extends JApplet {
      */
     private void showError(String fileName, Exception exception, String action) {
         JOptionPane.showMessageDialog(this, //
-                fileName + "\n" + exception.getLocalizedMessage(),//
+                fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
                 action, //
                 JOptionPane.ERROR_MESSAGE);
     }
@@ -527,7 +529,7 @@ public class BWVApplet extends JApplet {
         private void insertColor() {
             Color color = JColorChooser.showDialog(this, source.getText(), Color.BLACK);
             if (color != null) {
-                String s = "#" + Integer.toHexString(color.getRGB() & 0xFFFFFF);
+                String s = "#" + Integer.toHexString(color.getRGB() & 0xFFFFFF);  //$NON-NLS-1$
                 replaceSelection(s);
             }
         }
@@ -548,7 +550,7 @@ public class BWVApplet extends JApplet {
 		JFrame frame = new JFrame();
         frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle(caption); //$NON-NLS-1$
+        frame.setTitle(caption);
         frame.setIconImage(applet.icon);
         frame.add(applet);
         frame.setVisible(true);
