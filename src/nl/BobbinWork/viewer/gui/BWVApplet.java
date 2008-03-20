@@ -456,18 +456,13 @@ public class BWVApplet extends JApplet {
     }
 
 	void loadFromStream(String fileName, InputStream stream) {
-		if (stream == null) {
-            JOptionPane.showMessageDialog(this, //
-                    fileName + "\nnot found", "load sample", JOptionPane.ERROR_MESSAGE);
-            tree.setDoc(""); //$NON-NLS-1$
-            tree.setDocName(""); //$NON-NLS-1$
-        } else {
+		if (stream != null) {
             try {
                 source.read(new InputStreamReader(stream), fileName);
                 tree.setDoc(source.getText());
                 tree.setDocName(fileName);
             } catch (Exception exception) {
-                showError(fileName, exception, "load sample, read failed");
+                showError(fileName, exception, getString("LOAD_ERROR_caption"));
                 source.setText(null);
                 tree.setDoc(""); //$NON-NLS-1$
             }
