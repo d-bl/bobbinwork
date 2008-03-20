@@ -36,7 +36,6 @@ import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
-import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.ElementType;
 import nl.BobbinWork.diagram.xml.TreeBuilder;
@@ -54,7 +53,7 @@ import org.xml.sax.SAXParseException;
  * @author J. Falkink-Pol
  * 
  */
-@SuppressWarnings("serial")
+@SuppressWarnings("serial") //$NON-NLS-1$
 public class BWTree extends JTree {
 
     /** outer this */
@@ -89,9 +88,9 @@ public class BWTree extends JTree {
         }
 
         buildTree(viewModelRoot, domRoot);
-        String s = (String) domRoot.getUserData("source");
+        String s = (String) domRoot.getUserData("source"); //$NON-NLS-1$
         if (s == null) {
-            s = "";
+            s = ""; //$NON-NLS-1$
         }
         viewModelRoot.setUserObject(s);
         treeModel.nodeStructureChanged(viewModelRoot);
@@ -125,7 +124,7 @@ public class BWTree extends JTree {
      * every xml file of a diagram.
      */
     private void loadBasicStitches() {
-       InputStream is = getClass().getClassLoader().getResourceAsStream("nl/BobbinWork/diagram/xml/basicStitches.xml");
+       InputStream is = getClass().getClassLoader().getResourceAsStream("nl/BobbinWork/diagram/xml/basicStitches.xml"); //$NON-NLS-1$
        BufferedReader in = new BufferedReader(new InputStreamReader(is));
        StringBuffer buffer = new StringBuffer();
        String line;
@@ -135,9 +134,9 @@ public class BWTree extends JTree {
            }
            is.close();
            basicStitches = buffer.toString();
-           int start = basicStitches.indexOf("<group");
-           int end = basicStitches.lastIndexOf("</group");
-           basicStitches = basicStitches.substring(start, end) + "</group>";
+           int start = basicStitches.indexOf("<group"); //$NON-NLS-1$
+           int end = basicStitches.lastIndexOf("</group"); //$NON-NLS-1$
+           basicStitches = basicStitches.substring(start, end) + "</group>"; //$NON-NLS-1$
        } catch (IOException e) {
            // TODO Auto-generated catch block
            e.printStackTrace();
@@ -156,21 +155,23 @@ public class BWTree extends JTree {
         if (basicStitches==null) {
             loadBasicStitches();
         }
-        int i = content1.indexOf("<group");
+        int i = content1.indexOf("<group"); //$NON-NLS-1$
         String content = content1.substring(0, i) + basicStitches + content1.substring(i);
         ////// end workaround
         
         if (content == null || content.equals("")) { //$NON-NLS-1$
             setDoc((Element) null);
         } else {
-            String caption = "xml -> tree";
+            String caption = "XML_ERROR_caption"; //$NON-NLS-1$
             try {
                 String fileName = getDocName();
                 setDoc(validatingTreeBuilder.build(content));
                 setDocName(fileName);
             } catch (SAXParseException e) {
-                String s = "Line: " + e.getLineNumber() // 
-                         + "\nColumn: " + e.getColumnNumber() + "\n";
+                String s = "XML_ERROR_position" //$NON-NLS-1$
+                	.replaceFirst("<LLL>", e.getLineNumber()+"" )  //$NON-NLS-1$ //$NON-NLS-2$
+                	.replaceFirst("<CCC>", e.getColumnNumber()+"" ) //$NON-NLS-1$ //$NON-NLS-2$
+                	+ "\n"; //$NON-NLS-1$
                 JOptionPane.showMessageDialog( //
                         self, // 
                         s + e.getLocalizedMessage(), //
@@ -197,7 +198,7 @@ public class BWTree extends JTree {
             DefaultMutableTreeNode viewNode = (DefaultMutableTreeNode) getSelectionPath()
                     .getLastPathComponent();
             Node domNode = (Node) viewNode.getUserObject();
-            if ((viewNode != null) && (viewNode.toString().matches(".*copy:.*"))) {
+            if ((viewNode != null) && (viewNode.toString().matches(".*copy:.*"))) { //$NON-NLS-1$
                 // from the orphaned dom node to the original node
                 domNode = (Node) domNode.getUserData(TreeExpander.ORPHANE_TO_CLONE);
             }
@@ -215,7 +216,7 @@ public class BWTree extends JTree {
     /** gets the root element of the dom tree */
     Element getRootElement() {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
-        if (root.getUserObject().getClass().getName().matches(".*String.*")) {
+        if (root.getUserObject().getClass().getName().matches(".*String.*")) { //$NON-NLS-1$
             // the root of the tree view is just a filename
             root = (DefaultMutableTreeNode) root.getFirstChild();
         }
@@ -233,7 +234,7 @@ public class BWTree extends JTree {
     static void restoreOrphans(TreeModelEvent e) {
 
         DefaultMutableTreeNode mtn = (DefaultMutableTreeNode) e.getTreePath().getLastPathComponent();
-        if (mtn.getUserObject().getClass().getName().matches(".*String.*")) {
+        if (mtn.getUserObject().getClass().getName().matches(".*String.*")) { //$NON-NLS-1$
             // the root of the tree view is just a filename
             /*
              * TODO redesign/eliminate TreeBuilder so ownerDocument stores the
@@ -357,7 +358,7 @@ public class BWTree extends JTree {
 
             // TODO? setSelectedElement(null);
 
-            se.setAttribute("of", alternativeElement.getAttribute("id"));
+            se.setAttribute("of", alternativeElement.getAttribute("id")); //$NON-NLS-1$ //$NON-NLS-2$
 
             MutableTreeNode tn = (MutableTreeNode) se.getUserData(TreeExpander.DOM_TO_VIEW); //$NON-NLS-1$
             MutableTreeNode tnp = (MutableTreeNode) tn.getParent();
@@ -400,11 +401,11 @@ public class BWTree extends JTree {
         BWTreeCellRenderer() {
 
             // load the icons for the element tags
-            String dir = getClass().getPackage().getName().replaceAll("\\.", "/") + "/";
+            String dir = getClass().getPackage().getName().replaceAll("\\.", "/") + "/"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             icons = new ImageIcon[ElementType.values().length];
             int i = 0;
             for (ElementType et : ElementType.values()) {
-                String iconFileName = dir + et.toString() + ".gif";
+                String iconFileName = dir + et.toString() + ".gif"; //$NON-NLS-1$
                 URL iconURL = getClass().getClassLoader().getResource(iconFileName);
                 if (iconURL != null) {
                     icons[i++] = new ImageIcon(iconURL);
@@ -426,47 +427,47 @@ public class BWTree extends JTree {
                 String fileName = (String) userObject;
 
                 setToolTipText(fileName);
-                setText(fileName.replaceAll(".*[/\\\\]", ""));
+                setText(fileName.replaceAll(".*[/\\\\]", "")); //$NON-NLS-1$ //$NON-NLS-2$
 
             } else if (userObject instanceof Element) {
 
                 Element element = (Element) userObject;
                 ElementType elementType = ElementType.valueOf(element.getNodeName());
 
-                String s = "";
-                if ((element.getAttribute("color") != null) && (element.getAttribute("color").length() > 0)) {
+                String s = ""; //$NON-NLS-1$
+                if ((element.getAttribute("color") != null) && (element.getAttribute("color").length() > 0)) { //$NON-NLS-1$ //$NON-NLS-2$
 
-                    s = "<html><head><body><p><span style='background:"//
-                            + element.getAttribute("color")//
-                            + "'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> " //
-                            + element.getAttribute("width") //
-                            + "</p></body></html>";
+                    s = "<html><head><body><p><span style='background:"// //$NON-NLS-1$
+                            + element.getAttribute("color")// //$NON-NLS-1$
+                            + "'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> " // //$NON-NLS-1$
+                            + element.getAttribute("width") // //$NON-NLS-1$
+                            + "</p></body></html>"; //$NON-NLS-1$
 
                 } else {
-                    s = " (" + element.getAttribute("x") + "," + element.getAttribute("y") + ") ";
-                    s = s.replaceAll(" \\(,\\)", "");
-                    s += (" (" + element.getAttribute("start") + ")").replace(" ()", "");
-                    s += (" (" + element.getAttribute("c1") + ")").replace(" ()", "");
-                    s += (" (" + element.getAttribute("c2") + ")").replace(" ()", "");
-                    s += (" (" + element.getAttribute("end") + ")").replace(" ()", "");
-                    s += (" (" + element.getAttribute("centre") + ")").replace(" ()", "");
-                    s += (" (" + element.getAttribute("position") + ")").replace(" ()", "");
-                    s += " " + element.getAttribute("angle");
-                    if (element.getAttribute("pairs").length() > 0) {
-                        s += getString("tree_pairs") + " " + element.getAttribute("pairs") + " : ";
-                    } else if (element.getAttribute("bobbins").length() > 0) {
-                        s += getString("tree_bobbins") + " " + element.getAttribute("bobbins") + " : ";
+                    s = " (" + element.getAttribute("x") + "," + element.getAttribute("y") + ") "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s = s.replaceAll(" \\(,\\)", ""); //$NON-NLS-1$ //$NON-NLS-2$
+                    s += (" (" + element.getAttribute("start") + ")").replace(" ()", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s += (" (" + element.getAttribute("c1") + ")").replace(" ()", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s += (" (" + element.getAttribute("c2") + ")").replace(" ()", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s += (" (" + element.getAttribute("end") + ")").replace(" ()", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s += (" (" + element.getAttribute("centre") + ")").replace(" ()", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s += (" (" + element.getAttribute("position") + ")").replace(" ()", ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+                    s += " " + element.getAttribute("angle"); //$NON-NLS-1$ //$NON-NLS-2$
+                    if (element.getAttribute("pairs").length() > 0) { //$NON-NLS-1$
+                        s += "" + " " + element.getAttribute("pairs") + " : "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+                    } else if (element.getAttribute("bobbins").length() > 0) { //$NON-NLS-1$
+                        s += "" + " " + element.getAttribute("bobbins") + " : "; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
                     }
-                    s += element.getAttribute("nrs");
-                    if (element.getAttribute("lang").length() > 0) {
-                        s += (element.getAttribute("lang") + ": ")//
+                    s += element.getAttribute("nrs"); //$NON-NLS-1$
+                    if (element.getAttribute("lang").length() > 0) { //$NON-NLS-1$
+                        s += (element.getAttribute("lang") + ": ")// //$NON-NLS-1$ //$NON-NLS-2$
                         + element.getFirstChild().getNodeValue();
                     }
-                    s += " " + getPrimaryTitle(element);
-                    s += " " + getPrimaryTitle((Element) element.getUserData(TreeExpander.ORPHANE_TO_CLONE));
+                    s += " " + getPrimaryTitle(element); //$NON-NLS-1$
+                    s += " " + getPrimaryTitle((Element) element.getUserData(TreeExpander.ORPHANE_TO_CLONE)); //$NON-NLS-1$
 
-                    s = s.replaceAll("\\s+", " ");
-                    s = s.replaceAll("^\\s*", "");
+                    s = s.replaceAll("\\s+", " "); //$NON-NLS-1$ //$NON-NLS-2$
+                    s = s.replaceAll("^\\s*", ""); //$NON-NLS-1$ //$NON-NLS-2$
                 }
 
                 setIcon(elementType.getIcon());
@@ -475,17 +476,17 @@ public class BWTree extends JTree {
                 // same label (bold)
                 // + XML element with attributes for the tooltip
 
-                if (s.indexOf("</body>") > 0) {
-                    s = ""; // clear color
+                if (s.indexOf("</body>") > 0) { //$NON-NLS-1$
+                    s = ""; // clear color //$NON-NLS-1$
                 }
-                s = s.replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-                s = "<html><head><body><p><strong>" + s + "</strong></p><p>&lt;" + element.getNodeName();
+                s = s.replaceAll("<", "&lt;").replaceAll(">", "&gt;"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
+                s = "<html><head><body><p><strong>" + s + "</strong></p><p>&lt;" + element.getNodeName(); //$NON-NLS-1$ //$NON-NLS-2$
                 NamedNodeMap n = element.getAttributes();
                 int count = n.getLength();
                 for (int i = 0; i < count; i++) {
-                    s += " " + n.item(i).getNodeName() + "='" + n.item(i).getNodeValue() + "'";
+                    s += " " + n.item(i).getNodeName() + "='" + n.item(i).getNodeValue() + "'"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                 }
-                setToolTipText(s + "&gt;</p></body></html>");
+                setToolTipText(s + "&gt;</p></body></html>"); //$NON-NLS-1$
             }
             return this;
         }

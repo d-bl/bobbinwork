@@ -48,29 +48,29 @@ public class DiagramLanguages {
     static String getPrimaryTitle(Element element) {
 
         if (element == null) {
-            return "";
+            return ""; //$NON-NLS-1$
         } else {
             Element title = element;
             try {
                 if (ElementType.valueOf(element.getNodeName()) != ElementType.title) {
-                    title = (Element) element.getElementsByTagName("title").item(0);
+                    title = (Element) element.getElementsByTagName("title").item(0); //$NON-NLS-1$
                     if (title == null || !title.getParentNode().isSameNode(element)) {
-                        return "";
+                        return ""; //$NON-NLS-1$
                     }
                 }
-                NodeList values = element.getElementsByTagName("value");
+                NodeList values = element.getElementsByTagName("value"); //$NON-NLS-1$
                 String lang = Localizer.getBundle().getLocale().getLanguage();
                 int i, len = values.getLength();
                 for (i=0 ; i<len ; i++) {
-                    if ( values.item(i).getAttributes().getNamedItem("lang").getTextContent().matches(lang)) {
+                    if ( values.item(i).getAttributes().getNamedItem("lang").getTextContent().matches(lang)) { //$NON-NLS-1$
                         return values.item(i).getTextContent();
                     }
                 }
                 return values.item(0).getTextContent().//
-                        replaceFirst("\\A\\s*", "").//
-                        replaceFirst("\\r|\\n.*", "");
+                        replaceFirst("\\A\\s*", "").// //$NON-NLS-1$ //$NON-NLS-2$
+                        replaceFirst("\\r|\\n.*", ""); //$NON-NLS-1$ //$NON-NLS-2$
             } catch (NullPointerException e) {
-                return "";
+                return ""; //$NON-NLS-1$
             }
         }
     }

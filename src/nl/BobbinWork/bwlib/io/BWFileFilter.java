@@ -26,7 +26,7 @@ public class BWFileFilter extends FileFilter {
 
     private String [] patterns = null;
 
-    private String description = "";
+    private String description = ""; //$NON-NLS-1$
 
     /**
      * Creates a file filter that accepts all directories and files.
@@ -44,10 +44,10 @@ public class BWFileFilter extends FileFilter {
     public BWFileFilter(String description, String [] extensions) {
         this.patterns = new String[extensions.length];
         for (int i = 0; i < extensions.length; i++) {
-            this.description += ", *." + extensions[i]; 
-            this.patterns[i] = ".*\\." + extensions[i];
+            this.description += ", *." + extensions[i]; //$NON-NLS-1$
+            this.patterns[i] = ".*\\." + extensions[i]; //$NON-NLS-1$
         }
-        this.description = description + " (" + this.description.substring(2) + ")";
+        this.description = description + " (" + this.description.substring(2) + ")"; //$NON-NLS-1$ //$NON-NLS-2$
     }
 
     public String getDescription() {
