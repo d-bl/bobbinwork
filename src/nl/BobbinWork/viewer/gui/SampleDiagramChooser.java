@@ -34,7 +34,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
-import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.io.InputStreamCreator;
 
 /**
@@ -48,8 +47,6 @@ import nl.BobbinWork.bwlib.io.InputStreamCreator;
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 
-	// TODO rename into SampleDiagramChooser
-	
 	private static final String BASE_URL = "http://bobbinwork.googlegroups.com/web/"; //$NON-NLS-1$
 	private static final String S = "AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURD"; //$NON-NLS-1$
     private static final String[] SAMPLE_URLS = new String[] {//
@@ -64,7 +61,9 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
      */
     private Component parent;
     
-    private ActionListener actionListener;
+    private SampleDiagramChooser externalActionSource = this;
+    
+    private ActionListener externalActionListener;
     private InputStream inputStream = null;
     private String inputStreamName = null;
 	public String getInputStreamName() {
@@ -116,7 +115,8 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 	                self.parent,
 	                "", //$NON-NLS-1$
 	                "http://"));  //$NON-NLS-1$
-    		actionListener.actionPerformed(e);
+    		e.setSource(externalActionSource);
+    		externalActionListener.actionPerformed(e);
 		}
 	};
 	
@@ -127,17 +127,18 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 
     	public void actionPerformed(ActionEvent e) {
     		setInputStream(e.getActionCommand());
-    		actionListener.actionPerformed(e);
+    		e.setSource(externalActionSource);
+    		externalActionListener.actionPerformed(e);
     	}
     };
     
 	/**
 	 * @param parent handed down to dialogs
-	 * @param actionListener triggered when an InputStream is created from a user selected URL 
+	 * @param externalActionListener triggered when an InputStream is created from a user selected URL 
 	 */
-	public SampleDiagramChooser (Component parent, ActionListener actionListener){
+	public SampleDiagramChooser (Component parent, ActionListener externalActionListener){
     	super();
-    	this.actionListener = actionListener;
+    	this.externalActionListener = externalActionListener;
     	this.parent = parent;
         applyStrings(this, "MenuFile_LoadSample"); //$NON-NLS-1$
 
