@@ -23,6 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -64,7 +65,7 @@ public class BWTree extends JTree {
             TreeBuilder = new TreeBuilder(false);
     
     public BWTree() {
-        super();
+        super(new Vector<String>());
         ToolTipManager.sharedInstance().registerComponent(this);
         setShowsRootHandles(false);
         setRootVisible(true);
@@ -73,7 +74,7 @@ public class BWTree extends JTree {
     }
     private void setDoc(Element domRoot) {
         
-        if (domRoot == null) {
+		if (domRoot == null) {
             try {
                 domRoot = TreeBuilder.build("<diagram><title> </title></diagram>"); //$NON-NLS-1$
             } catch (Exception e) {
@@ -83,16 +84,16 @@ public class BWTree extends JTree {
         DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
         DefaultMutableTreeNode viewModelRoot = (DefaultMutableTreeNode) treeModel.getRoot();
 
-        // destoy old tree
+		// destoy old tree
         for (int i = viewModelRoot.getChildCount(); i > 0; viewModelRoot.remove(--i)) {
         }
 
-        buildTree(viewModelRoot, domRoot);
+		buildTree(viewModelRoot, domRoot);
         String s = (String) domRoot.getUserData("source"); //$NON-NLS-1$
         if (s == null) {
             s = ""; //$NON-NLS-1$
         }
-        viewModelRoot.setUserObject(s);
+		viewModelRoot.setUserObject(s);
         treeModel.nodeStructureChanged(viewModelRoot);
     }
 
