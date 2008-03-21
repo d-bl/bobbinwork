@@ -154,7 +154,7 @@ public class BWVApplet extends JApplet {
 
         ActionListener inputStreamListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				InputStreamCreator isc = ((InputStreamCreator)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).getInvoker());
+				InputStreamCreator isc = (InputStreamCreator)e.getSource();
 				loadFromStream( isc.getInputStreamName(), isc.getInputStream() );
 		}};
 		
