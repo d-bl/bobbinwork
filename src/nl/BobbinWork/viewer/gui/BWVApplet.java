@@ -17,7 +17,6 @@
  */
 package nl.BobbinWork.viewer.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -34,7 +33,6 @@ import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 import javax.swing.AbstractButton;
 import javax.swing.JApplet;
 import javax.swing.JButton;
-import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -46,7 +44,6 @@ import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
-import javax.swing.JTextArea;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.TreeModelEvent;
@@ -90,7 +87,7 @@ public class BWVApplet extends JApplet {
             .getResource("nl/BobbinWork/viewer/gui/bobbin.gif")); //$NON-NLS-1$
 
     /** JTextArea with the XML source */
-    private SourceArea source;
+    private SourcePanel source;
 
     /** tree view of the XML elements */
     private BWTree tree;
@@ -136,8 +133,14 @@ public class BWVApplet extends JApplet {
 
         /* ---- create components ---- */
 
+        source = new SourcePanel(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // String fileName = tree.getDocName();
+                tree.setDoc(source.getText());
+                // tree.setDocName(fileName);
+            }
+        });
         tree = new BWTree();
-        source = new SourceArea();
         diagramPanel = new DiagramPanel();
         fragments = new DiagramFragments();
         delete = new LocaleButton(false, "TreeToolBar_delete");//$NON-NLS-1$
@@ -151,9 +154,10 @@ public class BWVApplet extends JApplet {
 
         ActionListener inputStreamListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				InputStreamCreator ish = ((InputStreamCreator)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).getInvoker());
-				loadFromStream( ish.getInputStreamName(), ish.getInputStream() );
+				InputStreamCreator isc = ((InputStreamCreator)((JPopupMenu)((JMenuItem)e.getSource()).getParent()).getInvoker());
+				loadFromStream( isc.getInputStreamName(), isc.getInputStream() );
 		}};
+		
 		final HelpMenu helpMenu = new HelpMenu(this, years,caption);
 		caption = helpMenu.getCaption();
 		
@@ -190,9 +194,7 @@ public class BWVApplet extends JApplet {
                 1000, // dividerPosition
                 VERTICAL_SPLIT, // orientation
                 splitPane, // 
-                new CPanel( //
-                        new EditMenu(), // toolbar
-                        new JScrollPane(source))); // 
+                source); // 
 
         splitPane = new SplitPane(//
                 TOTAL_LEFT_WIDTH, // dividerPosition
@@ -288,16 +290,15 @@ public class BWVApplet extends JApplet {
             JMenuItem//
 
             jMenuItem = new LocaleMenuItem("MenuFile_New", VK_N, CTRL_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(CursorController.createListener(this,new ActionListener() {
+            jMenuItem.addActionListener(new ActionListener() {
             	public void actionPerformed(ActionEvent e) {
-                	//FIXME cursor doesn't become hour glass
-            		loadNewFile();
+                	loadNewFile();
             	}
-            }));
+            });
             add(jMenuItem);
 
             if (! wrappedInApplicationFrame() ) return;
-            // the remaining IO items only if executed as a Java application
+            // the remaining IO items only if executed as an application
 
             add(new JSeparator());
 
@@ -333,71 +334,13 @@ public class BWVApplet extends JApplet {
             insert(jMenuItem, 0);
 
             jMenuItem = new LocaleMenuItem( "MenuFile_open",VK_O, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(CursorController.createListener(this,new ActionListener() {
-            	//FIXME cursor doesn't become hour glass
-                public void actionPerformed(ActionEvent e) {
+            jMenuItem.addActionListener(new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
                     if ( getFileHandler() == null ) return;
                     loadFile();
                 }
-            }));
+            });
             insert(jMenuItem, 0);
-        }
-    }
-
-    /** A fully dressed JMenu, to edit the XML source */
-	private class EditMenu extends JMenu {
-
-        /** Creates a fully dressed JMenu, to edit the XML source */
-        private EditMenu() {
-
-            applyStrings(this, "MenuEdit_edit"); //$NON-NLS-1$
-
-            JMenuItem//
-            jMenuItem = new LocaleMenuItem( "MenuEdit_show",VK_F5, 0); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    // String fileName = tree.getDocName();
-                    tree.setDoc(source.getText());
-                    // tree.setDocName(fileName);
-                }
-            });
-            add(jMenuItem);
-
-            add(new javax.swing.JSeparator());
-
-            jMenuItem = new LocaleMenuItem( "MenuEdit_InsertColor"); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    source.insertColor();
-                }
-            });
-            add(jMenuItem);
-
-            add(new javax.swing.JSeparator());
-
-            jMenuItem = new LocaleMenuItem( "MenuEdit_cut",VK_X, CTRL_DOWN_MASK); //$NON-NLS-1$ 
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    source.cut();
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem( "MenuEdit_copy",VK_C, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    source.copy();
-                }
-            });
-            add(jMenuItem);
-
-            jMenuItem = new LocaleMenuItem( "MenuEdit_paste",VK_V, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    source.paste();
-                }
-            });
-            add(jMenuItem);
         }
     }
 
@@ -481,6 +424,9 @@ public class BWVApplet extends JApplet {
 
     /** Lets the user select a file and loads it into source and tree */
 	private void loadFile() {
+		// reducing this method to:
+		// loadFromStream( fileHandler.getFileName(), fileHandler.open() )
+		// makes the file name in the tree root lag behind
 		InputStream stream = fileHandler.open();
 		if (stream != null) {
 			String fileName = fileHandler.getFileName();
@@ -489,7 +435,7 @@ public class BWVApplet extends JApplet {
 				tree.setDoc(source.getText());
 				tree.setDocName(fileName);
 			} catch (Exception exception) {
-				showError(fileName, exception, "open file");
+				showError(fileName, exception, getString("LOAD_ERROR_caption"));
 				source.setText(null);
 				tree.setDoc("");  //$NON-NLS-1$
 				fileHandler.clearFileName();
@@ -512,22 +458,6 @@ public class BWVApplet extends JApplet {
                 fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
                 action, //
                 JOptionPane.ERROR_MESSAGE);
-    }
-
-    /** A JTextArea with an additional method to insert color codes. */
-	private class SourceArea extends JTextArea {
-
-        /**
-         * Shows a JColorChooser dialog and pastes the result as a hexadecimal
-         * code into the associated text model.
-         */
-        private void insertColor() {
-            Color color = JColorChooser.showDialog(this, source.getText(), Color.BLACK);
-            if (color != null) {
-                String s = "#" + Integer.toHexString(color.getRGB() & 0xFFFFFF);  //$NON-NLS-1$
-                replaceSelection(s);
-            }
-        }
     }
 
     /** @return true if the applet is framed in an application */
