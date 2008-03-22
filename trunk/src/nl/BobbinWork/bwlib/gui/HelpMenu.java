@@ -19,16 +19,16 @@ public class HelpMenu extends JMenu {
     /**
      * @param parent
      * @param details
-     * @param caption
+     * @param simpleCaption
      */
-    public HelpMenu(final Component parent, final String years, final String caption) {
+    public HelpMenu(final Component parent, final String years, final String simpleCaption) {
 
-    	this.caption = "BobbinWork - " + caption + " " //$NON-NLS-1$ //$NON-NLS-2$
+    	this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
     		+ this.getClass().getPackage().getImplementationVersion();
 
     	final String description = "<html> "
     		+ Localizer.getString("MenuHelp_release") + " "
-    		+ caption + "<br>Copyright © " 
+    		+ simpleCaption + "<br>Copyright © " 
     		+ years + " " 
     		+ "J. Falkink-Pol"  
     		+ "<hr>" 
@@ -46,16 +46,16 @@ public class HelpMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-                JOptionPane.showMessageDialog(parent, description, caption,
+                JOptionPane.showMessageDialog(parent, description, simpleCaption,
                         JOptionPane.INFORMATION_MESSAGE);
             }
         });
         add(jMenuItem);
     }
 
-	private String caption;
-	public String getCaption() {
-		return caption;
+	private String versionedCaption;
+	public String getVersionedCaption() {
+		return versionedCaption;
 	}
 
 }
