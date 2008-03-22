@@ -110,7 +110,7 @@
 		depends="compile">
 		<jar destfile="${grid.jar.path}">
 			<fileset dir="${build.dir}/tmp" includes="**/grids/**" />
-			<fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
+			<fileset dir="${build.dir}/tmp" includes="**/bwlib/gui/**" />
 			<fileset dir="${src.dir}" includes="**/grids/**/*.html" />
 			<fileset dir="${src.dir}" includes="**/grids/**/*.gif" />
 			<fileset dir="${src.dir}"

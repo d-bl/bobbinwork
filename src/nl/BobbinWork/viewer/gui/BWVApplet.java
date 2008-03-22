@@ -18,17 +18,17 @@
 package nl.BobbinWork.viewer.gui;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.URL;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import static java.awt.event.KeyEvent.*;
-import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 
 import javax.swing.AbstractButton;
 import javax.swing.JApplet;
@@ -38,9 +38,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
@@ -60,9 +58,9 @@ import nl.BobbinWork.bwlib.gui.CursorController;
 import nl.BobbinWork.bwlib.gui.LocaleButton;
 import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.SplitPane;
-import nl.BobbinWork.bwlib.io.BWFileFilter;
-import nl.BobbinWork.bwlib.io.BWFileHandler;
+import nl.BobbinWork.bwlib.io.FileMenu;
 import nl.BobbinWork.bwlib.io.InputStreamCreator;
+import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.InteractiveDiagramPanel;
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.model.Diagram;
@@ -75,16 +73,13 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 @SuppressWarnings("serial")  //$NON-NLS-1$
 public class BWVApplet extends JApplet {
 
-	private static final String years = "2006-2008";  //$NON-NLS-1$  
+	private static final String YEARS = "2006-2008";  //$NON-NLS-1$  
 	private static String caption = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
 
 	private static final int TOTAL_LEFT_WIDTH = 300;
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
-
-    /** icon for the left upper corner of dialogs and application frame */
-    private final Image icon = getToolkit().getImage(getClass().getClassLoader()//
-            .getResource("nl/BobbinWork/viewer/gui/bobbin.gif")); //$NON-NLS-1$
+    private static final String ICON = "nl/BobbinWork/viewer/gui/bobbin.gif"; //$NON-NLS-1$
 
     /** JTextArea with the XML source */
     private SourcePanel source;
@@ -103,12 +98,6 @@ public class BWVApplet extends JApplet {
      * generated from the XML file.
      */
     private DiagramPanel diagramPanel;
-
-    /**
-     * JButton's triggering modification of the DOM tree that was generated from
-     * the XML file.
-     */
-    private JButton delete, replace;
 
     public BWVApplet() {
         try {
@@ -131,7 +120,7 @@ public class BWVApplet extends JApplet {
      */
     public void init() {
 
-        /* ---- create components ---- */
+        /* ---- create components and listeners ---- */
 
         source = new SourcePanel(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -143,33 +132,11 @@ public class BWVApplet extends JApplet {
         tree = new BWTree();
         diagramPanel = new DiagramPanel();
         fragments = new DiagramFragments();
-        delete = new LocaleButton(false, "TreeToolBar_delete");//$NON-NLS-1$
-        replace = new LocaleButton(false, "TreeToolBar_replace"); //$NON-NLS-1$
+        JButton delete = new LocaleButton(false, "TreeToolBar_delete");//$NON-NLS-1$
+        JButton replace = new LocaleButton(false, "TreeToolBar_replace"); //$NON-NLS-1$
 
-        /* ---- connect non-menu components with listeners ---- */
-
-        createNonMenuListeners();
-
-        /* ---- create global menus with listeners ---- */
-
-        ActionListener inputStreamListener = new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				InputStreamCreator isc = (InputStreamCreator)e.getSource();
-				loadFromStream( isc.getInputStreamName(), isc.getInputStream() );
-		}};
-		
-		final HelpMenu helpMenu = new HelpMenu(this, years,caption);
-		caption = helpMenu.getVersionedCaption();
-		
-        JMenuBar //
-        jMenuBar = new JMenuBar();
-        jMenuBar.add(new FileMenu());
-        jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
-        jMenuBar.add(helpMenu); 
-        setJMenuBar(jMenuBar);
-
-        /* ---- load content ---- */
-
+        createNonMenuListeners(delete,replace);
+        createGlobalMenus();
         loadNewFile();
 
         /* ---- put components and their local menu's/toolbars together ---- */
@@ -204,9 +171,51 @@ public class BWVApplet extends JApplet {
 
         getContentPane().add(splitPane);
     }
+    
+	private void createGlobalMenus() {
+
+        final FileMenu fileMenu = new FileMenu( //
+        		! wrappedInApplicationFrame(), //
+        		new ActionListener() { 
+					public void actionPerformed(ActionEvent e) {
+						loadNewFile();
+				}}, new ActionListener(){
+					public void actionPerformed(ActionEvent e) {
+						NamedInputStream is = (NamedInputStream)e.getSource();
+						loadFromStream( is.getName(), is.getStream() );
+				}}, new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						File file = (File)e.getSource();
+				        try {
+				            PrintStream p = (new PrintStream(new FileOutputStream(file)));
+				            p.print(source.getText());
+				            p.flush();
+				            p.close();
+				        } catch (IOException ioe) {
+				            showError(file.toString(), ioe, "");
+				        }
+				        tree.setDocName(file.toString());
+					}
+				});
+
+        final HelpMenu helpMenu = new HelpMenu(this, YEARS,caption);
+		caption = helpMenu.getVersionedCaption();
+
+		JMenuBar //
+        jMenuBar = new JMenuBar();
+		jMenuBar.add(fileMenu);
+        jMenuBar.add(new SampleDiagramChooser(this,new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				fileMenu.clearSelectedFile();
+				InputStreamCreator isc = (InputStreamCreator)e.getSource();
+				loadFromStream( isc.getInputStreamName(), isc.getInputStream() );
+		}}));
+        jMenuBar.add(helpMenu); 
+        setJMenuBar(jMenuBar);
+	}
 
     /** Connects the non-menu components with listeners */
-    private void createNonMenuListeners() {
+    private void createNonMenuListeners(final JButton delete, final JButton replace) {
 
         delete.addActionListener(CursorController.createListener(this,new ActionListener() {
 
@@ -279,71 +288,6 @@ public class BWVApplet extends JApplet {
 
     }
     
-    /** A fully dressed JMenu, extendable for the applet */
-	private class FileMenu extends JMenu {
-
-        /** Creates a JMenu with items that load a predefined file. */
-        private FileMenu() {
-
-            applyStrings(this, "MenuFile_file"); //$NON-NLS-1$
-
-            JMenuItem//
-
-            jMenuItem = new LocaleMenuItem("MenuFile_New", VK_N, CTRL_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-            	public void actionPerformed(ActionEvent e) {
-                	loadNewFile();
-            	}
-            });
-            add(jMenuItem);
-
-            if (! wrappedInApplicationFrame() ) return;
-            // the remaining IO items only if executed as an application
-
-            add(new JSeparator());
-
-            jMenuItem = new LocaleMenuItem( "MenuFile_exit",VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
-            add(jMenuItem);
-
-            if ( getFileHandler() == null ) return;
-            insertSeparator(0);
-
-            jMenuItem = new LocaleMenuItem("MenuFile_SaveAs"); //$NON-NLS-1$
-            jMenuItem.setActionCommand("saveAs"); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if ( getFileHandler() == null ) return;
-                	fileHandler.saveAs(source.getText());
-                    tree.setDocName(fileHandler.getFileName());
-                }
-            });
-            insert(jMenuItem, 0);
-
-            jMenuItem = new LocaleMenuItem ("MenuFile_save",VK_S, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if ( getFileHandler() == null ) return;
-                	fileHandler.save(source.getText());
-                }
-            });
-            insert(jMenuItem, 0);
-
-            jMenuItem = new LocaleMenuItem( "MenuFile_open",VK_O, CTRL_DOWN_MASK); //$NON-NLS-1$
-            jMenuItem.addActionListener(new ActionListener() {
-            	public void actionPerformed(ActionEvent e) {
-                    if ( getFileHandler() == null ) return;
-                    loadFile();
-                }
-            });
-            insert(jMenuItem, 0);
-        }
-    }
-
     /** A fully dressed JMenu, controlling the view of the fragments */
 	private class FragmentsViewMenu extends JMenu {
 
@@ -378,20 +322,6 @@ public class BWVApplet extends JApplet {
         }
     }
 
-    /** manages the last opened/saved file */
-    private BWFileHandler fileHandler;
-    
-    private BWFileHandler getFileHandler() {
-        if (fileHandler == null ) try { 
-        	fileHandler = new BWFileHandler(this, //
-                new BWFileFilter( 
-                		getString("FileType"), //$NON-NLS-1$
-                		"xml,bwml".split(",") ));  //$NON-NLS-1$  //$NON-NLS-2$
-        } 
-        catch (Exception e) { }
-        return fileHandler;
-    }
-
     /** Loads a new file into the source and tree. */
     private void loadNewFile() {
         InputStream stream = getClass().getClassLoader().getResourceAsStream(NEW_DIAGRAM);
@@ -416,37 +346,6 @@ public class BWVApplet extends JApplet {
                 e.printStackTrace();
             }
         }
-
-        if (fileHandler != null) {
-        	fileHandler.clearFileName();
-        }
-	}
-
-    /** Lets the user select a file and loads it into source and tree */
-	private void loadFile() {
-		// reducing this method to:
-		// loadFromStream( fileHandler.getFileName(), fileHandler.open() )
-		// makes the file name in the tree root lag behind
-		InputStream stream = fileHandler.open();
-		if (stream != null) {
-			String fileName = fileHandler.getFileName();
-			try {
-				source.read(new InputStreamReader(stream), fileName);
-				tree.setDoc(source.getText());
-				tree.setDocName(fileName);
-			} catch (Exception exception) {
-				showError(fileName, exception, getString("LOAD_ERROR_caption"));
-				source.setText(null);
-				tree.setDoc("");  //$NON-NLS-1$
-				fileHandler.clearFileName();
-			}
-
-			try {
-				stream.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
     /**
@@ -472,11 +371,12 @@ public class BWVApplet extends JApplet {
 
     private static void wrapInApplicationFrame(BWVApplet applet) {
     	
+        URL iocnURL = applet.getClass().getClassLoader().getResource(ICON);
 		JFrame frame = new JFrame();
         frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle(caption);
-        frame.setIconImage(applet.icon);
+		frame.setIconImage(applet.getToolkit().getImage(iocnURL));
         frame.add(applet);
         frame.setVisible(true);
 	}
