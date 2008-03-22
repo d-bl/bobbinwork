@@ -159,7 +159,7 @@ public class BWVApplet extends JApplet {
 		}};
 		
 		final HelpMenu helpMenu = new HelpMenu(this, years,caption);
-		caption = helpMenu.getCaption();
+		caption = helpMenu.getVersionedCaption();
 		
         JMenuBar //
         jMenuBar = new JMenuBar();
