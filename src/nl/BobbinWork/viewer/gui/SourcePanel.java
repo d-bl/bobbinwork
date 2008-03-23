@@ -37,6 +37,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import nl.BobbinWork.bwlib.gui.CMenuBar;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
 
@@ -47,7 +48,7 @@ class SourcePanel extends JPanel {
 	
 	SourcePanel(ActionListener sourceListener) {
         super(new BorderLayout());
-        add(new EditMenu(sourceListener), PAGE_START);
+        add(new CMenuBar(new EditMenu(sourceListener)), PAGE_START);
         add(new JScrollPane(source), CENTER);
         
 	}
