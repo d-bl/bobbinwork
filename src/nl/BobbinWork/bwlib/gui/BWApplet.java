@@ -12,6 +12,8 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class BWApplet extends JApplet {
 
+	private static final String ICON = "nl/BobbinWork/bwlib/gui/bobbin.gif";
+
 	public BWApplet (String bundle) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -32,9 +34,11 @@ public class BWApplet extends JApplet {
     	return true;
     }
 
-	public static void wrapInApplicationFrame(BWApplet applet, String caption, String icon) {
+	public static void wrapInApplicationFrame(BWApplet applet, String caption) {
     	
-        URL iocnURL = applet.getClass().getClassLoader().getResource(icon);
+        applet.init();
+
+        URL iocnURL = applet.getClass().getClassLoader().getResource(ICON);
 		JFrame frame = new JFrame();
         frame.setSize(700, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

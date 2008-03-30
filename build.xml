@@ -90,6 +90,7 @@
 			<fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
 			<fileset dir="${build.dir}/tmp" includes="**/viewer/**" />
 			<fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
+            <fileset dir="${src.dir}" includes="**/bwlib/**/*.gif" />
 			<fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
 			<fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
 			<fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
@@ -101,8 +102,6 @@
 				<attribute name="Implementation-Version" value="${version}" /> 
 				<attribute name="Main-Class"
 					value="nl.BobbinWork.viewer.gui.BWVApplet" />
-				<attribute name="SplashScreen-Image"
-					value="nl/BobbinWork/viewer/gui/splash.gif" />
 			</manifest>
 		</jar>
 	</target>
@@ -114,10 +113,10 @@
             <fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
             <fileset dir="${build.dir}/tmp" includes="**/grounds/**" />
             <fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
+            <fileset dir="${src.dir}" includes="**/bwlib/**/*.gif" />
             <fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
             <fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
             <fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
-            <fileset dir="${src.dir}" includes="**/grounds/**/*.*ml" />
             <fileset dir="${src.dir}"
                 includes="**/viewer/**/*.properties" />
             <manifest>

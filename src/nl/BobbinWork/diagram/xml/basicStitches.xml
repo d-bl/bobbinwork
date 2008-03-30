@@ -1293,4 +1293,104 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <copy of="hor"  pairs="351-360"><move y="1100"/></copy>
 
     </group>
+  <group pairs="1-1" display="no">
+    <title>
+      <value lang="en">composed stitches (building blocks for grounds)</value>
+      <value lang="nl">samengestelde slagen (bouwstenen voor gronden)</value>
+    </title>
+    <group id="flanders"  pairs="1-4">
+      <title>
+        <value lang="en">flanders</value>
+        <value lang="nl">vlaanders</value>
+      </title>
+      <group pairs="1-4">
+        <!-- NE --><copy of="tc"   pairs="1-2"><rotate centre="10,10" angle="-45"/></copy>
+        <!-- NW --><copy of="tc"   pairs="3-4"><rotate centre="10,10" angle="45"/><move x="60"/></copy>
+        <!-- N  --><copy of="tctc" pairs="2-3"><move y="10" x="30"/></copy>
+        <pin position="38,40"/>
+        <!-- E  --><copy of="tc"   pairs="1-2"><move y="30" x="10"/></copy>
+        <!-- W  --><copy of="tc"   pairs="3-4"><move y="30" x="50"/></copy>
+        <!-- S  --><copy of="tctc" pairs="2-3"><move y="50" x="30"/></copy>
+      </group>
+    </group>
+    <group id="spider" pairs="1-6">
+      <title>
+        <value lang="en">spider</value>
+        <value lang="nl">spin</value>
+      </title>
+      <group pairs="1-6">
+      <!-- 1 --><copy of="ttctc"  pairs="3-4"><move x="50" y="10"/></copy>
+      <!-- 2 --><copy of="llctc"  pairs="2-3"><move x="28" y="33"/></copy>
+      <!-- 3 --><copy of="llctc"  pairs="1-2"><move x="10" y="55"/></copy>
+      
+      <!-- 4 --><copy of="rctc"  pairs="4-5"><move x="73" y="33"/></copy>
+      <!-- 5 --><copy of="ctc"  pairs="3-4"><move x="50" y="43"/></copy>
+      <!-- 6 --><copy of="ctc"  pairs="2-3"><move x="30" y="63"/></copy>
+      
+      <!-- 7 --><copy of="rctc"  pairs="5-6"><move x="90" y="55"/></copy>
+      <!-- 8 --><copy of="ctc"  pairs="4-5"><move x="70" y="63"/></copy>
+      <!-- 9 --><copy of="ctc"  pairs="3-4"><move x="50" y="70"/></copy>
+      
+      <!-- 10 --><copy of="ctc"  pairs="3-4"><move x="50" y="100"/></copy>
+      <pin position="58,93"/>
+      <!-- 11 --><copy of="ctc"  pairs="2-3"><move x="30" y="108"/></copy>
+      <!-- 12 --><copy of="ctc"  pairs="1-2"><move x="10" y="115"/></copy>
+      
+      <!-- 13 --><copy of="ctc"  pairs="4-5"><move x="70" y="108"/></copy>
+      <!-- 14 --><copy of="ctc"  pairs="3-4"><move x="50" y="125"/></copy>
+      <!-- 15 --><copy of="ctc"  pairs="2-3"><move x="28" y="138"/></copy>
+      
+      <!-- 16 --><copy of="ctc"  pairs="5-6"><move x="90" y="115"/></copy>
+      <!-- 17 --><copy of="ctc"  pairs="4-5"><move x="73" y="138"/></copy>
+      <!-- 18 --><copy of="ctc"  pairs="3-4"><move x="50" y="160"/></copy>
+      </group>
+    </group>
+    <group id="vierge" pairs="1-4">
+      <title>
+        <value lang="en">vierge</value>
+        <value lang="nl">maagdengrond</value>
+      </title>
+      <copy of="ctc" pairs="1-2"><rotate centre="8.2,8.4" angle="-55"/><move x="10" y="15"/></copy>
+      <copy of="ctc" pairs="3-4"><rotate centre="8.2,8.4" angle="55"/><move x="90" y="15"/></copy>
+      <copy of="ctc"  pairs="2-3"><move x="50" y="0"/></copy>
+      <copy of="ctc"  pairs="2-3"><move x="50" y="32"/></copy>
+      <pin position="58,25" />
+      <copy of="ctc"  pairs="3-4"><move x="90" y="40"/></copy>
+      <copy of="ctc"  pairs="3-4"><move x="90" y="72"/></copy>
+      <pin position="98,65" />
+      <copy of="ctc" pairs="2-3"><rotate centre="8.2,8.4" angle="55"/><move x="50" y="57"/></copy>
+      <copy of="ctc"  pairs="1-2"><move x="10" y="40"/></copy>
+      <copy of="ctc"  pairs="1-2"><move x="10" y="72"/></copy>
+      <pin position="18,65" />
+      <copy of="ctc"  pairs="2-3"><move x="50" y="80"/></copy>
+      <copy of="ctc"  pairs="2-3"><move x="50" y="112"/></copy>
+      <pin position="58,105" />
+    </group>
+    <group id="sGravenmoers" pairs="1-4">
+      <title>
+        <value lang="en">sGravenmoers</value>
+        <value lang="nl">sGravenmoers</value>
+      </title>
+      <copy of="ctc" pairs="1-2"><rotate centre="8.2,8.4" angle="-55"/><move x="10" y="15"/></copy>
+      <copy of="ctc" pairs="3-4"><rotate centre="8.2,8.4" angle="55"/><move x="90" y="15"/></copy>
+      <group id="top" pairs="2-3">
+        <copy of="ctc"  pairs="1-2"><move x="50" y="0"/></copy>
+        <copy of="ctc"  pairs="1-2"><move x="50" y="32"/></copy>
+        <pin position="58,25" />
+      </group>
+      <copy of="ctc"  pairs="3-4"><move x="90" y="40"/></copy>
+      <copy of="ctc"  pairs="1-2"><move x="10" y="40"/></copy>
+      <copy of="ctc" pairs="2-3"><rotate centre="8.2,8.4" angle="55"/><move x="50" y="57"/></copy>
+
+      <copy of="ctc"  pairs="3-4"><move x="90" y="72"/></copy>
+      <pin position="98,65" />
+      <copy of="ctc"  pairs="1-2"><move x="10" y="72"/></copy>
+      <pin position="18,65" />
+      <group id="top" pairs="2-3">
+        <copy of="ctc"  pairs="1-2"><move x="50" y="80"/></copy>
+        <copy of="ctc"  pairs="1-2"><move x="50" y="112"/></copy>
+        <pin position="58,105" />
+      </group>
+    </group>
+  </group>
 </diagram>

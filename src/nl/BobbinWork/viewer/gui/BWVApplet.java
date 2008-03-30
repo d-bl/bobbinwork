@@ -75,9 +75,8 @@ public class BWVApplet extends BWApplet {
 	private static final int TOTAL_LEFT_WIDTH = 300;
     private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
-    private static final String ICON = "nl/BobbinWork/viewer/gui/bobbin.gif"; //$NON-NLS-1$
 
-    /** JTextArea with the XML source */
+	/** JTextArea with the XML source */
     private SourcePanel source;
 
     /** tree view of the XML elements */
@@ -346,9 +345,7 @@ public class BWVApplet extends BWApplet {
 
     public static void main(String[] args) {
 
-        BWVApplet applet = new BWVApplet();
         if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
-        applet.init();
-        wrapInApplicationFrame(applet, caption, ICON);
+        wrapInApplicationFrame(new BWVApplet(), caption);
     }
 }
