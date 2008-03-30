@@ -340,13 +340,13 @@ public class BWVApplet extends BWApplet {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-	public BWVApplet(String bundle) {
-		super(bundle);
+	public BWVApplet() {
+		super(LOCALIZER_BUNDLE_NAME);
 	}
 
     public static void main(String[] args) {
 
-        BWVApplet applet = new BWVApplet(LOCALIZER_BUNDLE_NAME);
+        BWVApplet applet = new BWVApplet();
         if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
         applet.init();
         wrapInApplicationFrame(applet, caption, ICON);
