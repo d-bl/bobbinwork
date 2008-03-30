@@ -17,7 +17,6 @@
  */
 package nl.BobbinWork.viewer.gui;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -26,14 +25,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.net.URL;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import javax.swing.AbstractButton;
-import javax.swing.JApplet;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -43,7 +39,6 @@ import javax.swing.JSplitPane;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static javax.swing.JSplitPane.VERTICAL_SPLIT;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -52,6 +47,7 @@ import javax.swing.event.TreeSelectionListener;
 import org.w3c.dom.Element;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
+import nl.BobbinWork.bwlib.gui.BWApplet;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.CursorController;
@@ -71,7 +67,7 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
  *
  */
 @SuppressWarnings("serial")  //$NON-NLS-1$
-public class BWVApplet extends JApplet {
+public class BWVApplet extends BWApplet {
 
 	private static final String YEARS = "2006-2008";  //$NON-NLS-1$  
 	private static String caption = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
@@ -98,21 +94,6 @@ public class BWVApplet extends JApplet {
      * generated from the XML file.
      */
     private DiagramPanel diagramPanel;
-
-    public BWVApplet() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        setPreferredSize(new Dimension(790, 500));
-        setBundle(LOCALIZER_BUNDLE_NAME);
-        /*
-         * After completing the constructor of the applet, the main of the
-         * application gets a chance to overrule the defaults of the applet
-         * before init() gets called.
-         */
-    }
 
     /**
      * Completes creation of the applet now that the look-and-feel and Localizer
@@ -359,33 +340,15 @@ public class BWVApplet extends JApplet {
                 JOptionPane.ERROR_MESSAGE);
     }
 
-    /** @return true if the applet is framed in an application */
-    private boolean wrappedInApplicationFrame() {
-    	
-    	try { 
-    		getDocumentBase(); 
-    		return false; 
-    	} catch (NullPointerException e) {}
-    	return true;
-    }
-
-    private static void wrapInApplicationFrame(BWVApplet applet) {
-    	
-        URL iocnURL = applet.getClass().getClassLoader().getResource(ICON);
-		JFrame frame = new JFrame();
-        frame.setSize(700, 500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle(caption);
-		frame.setIconImage(applet.getToolkit().getImage(iocnURL));
-        frame.add(applet);
-        frame.setVisible(true);
+	public BWVApplet(String bundle) {
+		super(bundle);
 	}
 
     public static void main(String[] args) {
 
-        BWVApplet applet = new BWVApplet();
+        BWVApplet applet = new BWVApplet(LOCALIZER_BUNDLE_NAME);
         if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
         applet.init();
-        wrapInApplicationFrame(applet);
+        wrapInApplicationFrame(applet, caption, ICON);
     }
 }
