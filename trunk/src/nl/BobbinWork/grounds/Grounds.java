@@ -62,7 +62,7 @@ public class Grounds extends BWApplet {
 			super(new BorderLayout());
 			
 			final JPanel stitchChooser = new JPanel();
-			stitchChooser.setToolTipText("changing individual stitches is not yet implemented");//$NON-NLS-1$
+			stitchChooser.add(new javax.swing.JLabel("<html><br>select a ground<br>from the menu<br><br>this space is <br>reserved to change<br> individual stitches<br> but that is not yet<br> implemented</html>"));//$NON-NLS-1$
 
 			JMenuBar jMenuBar = new JMenuBar();
 			jMenuBar.add( createChooser(mainDiagramPanel, stitchChooser));
