@@ -51,6 +51,8 @@
 		location="${build.dir}/tmp/bwpGrid${rel.jar}" />
 	<property name="bwViewer.jar.path"
 		location="${build.dir}/tmp/bwViewer${rel.jar}" />
+    <property name="bwGrounds.jar.path"
+        location="${build.dir}/tmp/bwGrounds${rel.jar}" />
 
 	<path id="project.classpath">
 		<fileset dir="${env.JAVA_HOME}/lib">
@@ -105,6 +107,28 @@
 		</jar>
 	</target>
 
+    <target name="bwGrounds.jar"
+        description="create bobbin lace ground generator"
+        depends="compile">
+        <jar destfile="${bwGrounds.jar.path}">
+            <fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
+            <fileset dir="${build.dir}/tmp" includes="**/grounds/**" />
+            <fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
+            <fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
+            <fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
+            <fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
+            <fileset dir="${src.dir}" includes="**/grounds/**/*.*ml" />
+            <fileset dir="${src.dir}"
+                includes="**/viewer/**/*.properties" />
+            <manifest>
+                <attribute name="Java-Version" value="${target}" /> 
+                <attribute name="Implementation-Version" value="${version}" /> 
+                <attribute name="Main-Class"
+                    value="nl.BobbinWork.grounds.Grounds" />
+            </manifest>
+        </jar>
+    </target>
+
 	<target name="grid.jar"
 		description="create polar grid generator"
 		depends="compile">
@@ -116,6 +140,7 @@
 			<fileset dir="${src.dir}"
 				includes="**/grids/**/*.properties" />
 			<manifest>
+                <attribute name="Java-Version" value="${target}" /> 
 				<attribute name="Implementation-Version" value="${version}" /> 
 				<attribute name="Main-Class"
 					value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
@@ -124,8 +149,8 @@
 	</target>
 
 	<target name="sign"
-		description="sign the jar files and generate jnlp files (depends on genkey, but that runs just once)"
-		depends="grid.jar, bwViewer.jar, genkey">
+		description="sign the jar files and generate jnlp files"
+		depends="grid.jar, bwViewer.jar, bwGrounds.jar, genkey">
 		<signjar destDir="${build.dir}/dist" keystore="${keystore}"
 			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
 			alias="${keyalias}">
