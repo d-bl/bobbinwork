@@ -50,9 +50,9 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 	private static final String BASE_URL = "http://bobbinwork.googlegroups.com/web/"; //$NON-NLS-1$
 	private static final String S = "AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURD"; //$NON-NLS-1$
     private static final String[] SAMPLE_URLS = new String[] {//
-         "torchon.xml?gda=M4C-rDw" + S + "SHAoqq6MVKgGExQWFmpupE",//$NON-NLS-1$ //$NON-NLS-2$
-    	 "spiders.xml?gda=4zTd7Tw" + S + "ScIXlog2Wd3wWxjd0fqC3o",//$NON-NLS-1$ //$NON-NLS-2$
-    	"flanders.xml?gda=4z7qcT0" + S + "SmCdrehNs8EVCWMltc8R2k",//$NON-NLS-1$ //$NON-NLS-2$
+      // "torchon.xml?gda=M4C-rDw" + S + "SHAoqq6MVKgGExQWFmpupE",//$NON-NLS-1$ //$NON-NLS-2$
+      // "spiders.xml?gda=4zTd7Tw" + S + "ScIXlog2Wd3wWxjd0fqC3o",//$NON-NLS-1$ //$NON-NLS-2$
+      //"flanders.xml?gda=4z7qcT0" + S + "SmCdrehNs8EVCWMltc8R2k",//$NON-NLS-1$ //$NON-NLS-2$
     	  "braid2.xml?gda=UQQDQzs" + S + "RVk4fsgKMsk2Mbh43_kAi9",//$NON-NLS-1$ //$NON-NLS-2$
     	  "braid1.xml?gda=2VRhyDs" + S + "RD4DT6Fua1gH-xvy-DVSKm"};//$NON-NLS-1$ //$NON-NLS-2$
     
@@ -145,7 +145,7 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
     	JMenuItem jMenuItem;
 
         for (int i=0 ; i < SAMPLE_URLS.length ; i++){
-            jMenuItem = new JMenuItem(SAMPLE_URLS[i].replaceAll("\\?.*", "")); //$NON-NLS-1$ //$NON-NLS-2$
+            jMenuItem = new JMenuItem(BASE_URL+SAMPLE_URLS[i].replaceAll("\\?.*", "")); //$NON-NLS-1$ //$NON-NLS-2$
             jMenuItem.setActionCommand(BASE_URL + SAMPLE_URLS[i]);
             jMenuItem.addActionListener( predefinedListener );
             add(jMenuItem);
