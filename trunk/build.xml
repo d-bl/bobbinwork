@@ -1,177 +1,153 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="BobbinWork" default="sign" basedir=".">
 
-	<!-- Copyright 2008, J. Falkink-Pol
-		
-		This file is part of BobbinWork.
-		
-		BobbinWork is free software: you can redistribute it and/or modify
-		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation, either version 3 of the License, or
-		(at your option) any later version.
-		
-		BobbinWork is distributed in the hope that it will be useful,
-		but WITHOUT ANY WARRANTY; without even the implied warranty of
-		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-		GNU General Public License for more details.
-		
-		You should have received a copy of the GNU General Public License
-		along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
-		
-	-->
+    <!-- Copyright 2008, J. Falkink-Pol
+        
+        This file is part of BobbinWork.
+        
+        BobbinWork is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+        
+        BobbinWork is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+        
+        You should have received a copy of the GNU General Public License
+        along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+        
+    -->
 
-	<property name="build.dir" location="build" />
-	<property file="../ant.properties" /><!-- at least: 
-		keystore (e.g. in ${build.dir} don't share with other projects or rewrite genkey task) 
-	    keyalias 
-	    version.tail (preferably the revision number)
-	    -->
-	<property environment="env" /><!-- at least: 
-		KEYSTOREPASS 
-	    JAVA_HOME (jdk, not jre)
-	    -->
-			
-	<property name="version" value="2.0.${version.tail}" /><!-- base number 
-		signal compatibillity issues with basicStitches.xml? -->
-	
-	<property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webStart" />
+    <property name="build.dir" location="build" />
+    <property file="../ant.properties" /><!-- at least: 
+        keystore (e.g. in ${build.dir} don't share with other projects or rewrite genkey task) 
+        keyalias 
+        version.tail (preferably the revision number)
+        -->
+    <property environment="env" /><!-- at least: 
+        KEYSTOREPASS 
+        JAVA_HOME (jdk, not jre)
+        -->
+            
+    <property name="version" value="2.0.${version.tail}" /><!-- base number 
+        signal compatibillity issues with basicStitches.xml? -->
+    
+    <property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webStart" />
     <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
-	<property name="target" value="1.5" />
+    <property name="target" value="1.5" />
 
-	<property name="doc.dir" location="doc" />
-	<property name="src.dir" location="src" />
-	<property name="rel.jar" value="-rel-${version}.jar" />
-	
-	<property name="generated1" value="do not change this file, it is generated"/> 
-	<property name="generated2" value="move to @DEPLOY@ and commit AFTER uploading and testing" />
-	<property name="generated3" value="the jar to @CODE_BASE@" />
+    <property name="doc.dir" location="doc" />
+    <property name="src.dir" location="src" />
+    <property name="rel.jar" value="-rel-${version}.jar" />
+    
+    <property name="generated1" value="do not change this file, it is generated"/> 
+    <property name="generated2" value="move to @DEPLOY@ and commit AFTER uploading and testing" />
+    <property name="generated3" value="the jar to @CODE_BASE@" />
 
-	<property name="grid.jar.path"
-		location="${build.dir}/tmp/bwpGrid${rel.jar}" />
-	<property name="bwViewer.jar.path"
-		location="${build.dir}/tmp/bwViewer${rel.jar}" />
-    <property name="bwGrounds.jar.path"
-        location="${build.dir}/tmp/bwGrounds${rel.jar}" />
+    <property name="grid.jar.path"
+        location="${build.dir}/tmp/bwpGrid${rel.jar}" />
+    <property name="bwViewer.jar.path"
+        location="${build.dir}/tmp/bwViewer${rel.jar}" />
 
-	<path id="project.classpath">
-		<fileset dir="${env.JAVA_HOME}/lib">
-			<include name="*.jar" />
-		</fileset>
-	</path>
+    <path id="project.classpath">
+        <fileset dir="${env.JAVA_HOME}/lib">
+            <include name="*.jar" />
+        </fileset>
+    </path>
 
-	<target name="clean" description="Remove all generated files.">
-		<delete dir="${build.dir}" />
-	</target>
+    <target name="clean" description="Remove all generated files.">
+        <delete dir="${build.dir}" />
+    </target>
 
-	<target name="prepare"
-		description="Create the output directories.">
-		<mkdir dir="${build.dir}/tmp" />
-		<mkdir dir="${build.dir}/dist" />
-	</target>
+    <target name="prepare"
+        description="Create the output directories.">
+        <mkdir dir="${build.dir}/tmp" />
+        <mkdir dir="${build.dir}/dist" />
+    </target>
 
-	<target name="genkey" description="generate key to sign the jar files" depends="prepare">
-		<delete file="${keystore}"/><!-- to make the next task repatable -->
-		<genkey keystore="${keystore}" alias="${keyalias}" 
-			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
-			dname="OU=Development, O=BobbinWork, C=NL"/>
-	</target>
+    <target name="genkey" description="generate key to sign the jar files" depends="prepare">
+        <delete file="${keystore}"/><!-- to make the next task repatable -->
+        <genkey keystore="${keystore}" alias="${keyalias}" 
+            storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
+            dname="OU=Development, O=BobbinWork, C=NL"/>
+    </target>
 
-	<target name="compile" description="create class files from java sources" depends="prepare">
-		<javac srcdir="${src.dir}" destdir="${build.dir}/tmp" target="${target}">
-			<classpath refid="project.classpath" />
-		</javac>
-	</target>
+    <target name="compile" description="create class files from java sources" depends="prepare">
+        <javac srcdir="${src.dir}" destdir="${build.dir}/tmp" target="${target}">
+            <classpath refid="project.classpath" />
+        </javac>
+    </target>
 
-	<target name="bwViewer.jar"
-		description="create viewer of bobbin lace working diagrams"
-		depends="compile">
-		<jar destfile="${bwViewer.jar.path}">
-			<fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
-			<fileset dir="${build.dir}/tmp" includes="**/viewer/**" />
-			<fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
-            <fileset dir="${src.dir}" includes="**/bwlib/**/*.gif" />
-			<fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
-			<fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
-			<fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
-			<fileset dir="${src.dir}" includes="**/viewer/**/*.gif" />
-			<fileset dir="${src.dir}"
-				includes="**/viewer/**/*.properties" />
-			<manifest>
-				<attribute name="Java-Version" value="${target}" /> 
-				<attribute name="Implementation-Version" value="${version}" /> 
-				<attribute name="Main-Class"
-					value="nl.BobbinWork.viewer.gui.BWVApplet" />
-			</manifest>
-		</jar>
-	</target>
-
-    <target name="bwGrounds.jar"
-        description="create bobbin lace ground generator"
+    <target name="bwViewer.jar"
+        description="create viewer of bobbin lace working diagrams"
         depends="compile">
-        <jar destfile="${bwGrounds.jar.path}">
+        <jar destfile="${bwViewer.jar.path}">
             <fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
-            <fileset dir="${build.dir}/tmp" includes="**/grounds/**" />
+            <fileset dir="${build.dir}/tmp" includes="**/viewer/**" />
             <fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
-            <fileset dir="${src.dir}" includes="**/bwlib/**/*.gif" />
             <fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
             <fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
             <fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
+            <fileset dir="${src.dir}" includes="**/viewer/**/*.gif" />
             <fileset dir="${src.dir}"
                 includes="**/viewer/**/*.properties" />
             <manifest>
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
-                    value="nl.BobbinWork.grounds.Grounds" />
+                    value="nl.BobbinWork.viewer.gui.BWVApplet" />
+                <attribute name="SplashScreen-Image"
+                    value="nl/BobbinWork/viewer/gui/splash.gif" />
             </manifest>
         </jar>
     </target>
 
-	<target name="grid.jar"
-		description="create polar grid generator"
-		depends="compile">
-		<jar destfile="${grid.jar.path}">
-			<fileset dir="${build.dir}/tmp" includes="**/grids/**" />
-			<fileset dir="${build.dir}/tmp" includes="**/bwlib/gui/**" />
-			<fileset dir="${src.dir}" includes="**/grids/**/*.html" />
-			<fileset dir="${src.dir}" includes="**/grids/**/*.gif" />
-			<fileset dir="${src.dir}"
-				includes="**/grids/**/*.properties" />
-			<manifest>
-                <attribute name="Java-Version" value="${target}" /> 
-				<attribute name="Implementation-Version" value="${version}" /> 
-				<attribute name="Main-Class"
-					value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
-			</manifest>
-		</jar>
-	</target>
+    <target name="grid.jar"
+        description="create polar grid generator"
+        depends="compile">
+        <jar destfile="${grid.jar.path}">
+            <fileset dir="${build.dir}/tmp" includes="**/grids/**" />
+            <fileset dir="${build.dir}/tmp" includes="**/bwlib/gui/**" />
+            <fileset dir="${src.dir}" includes="**/grids/**/*.html" />
+            <fileset dir="${src.dir}" includes="**/grids/**/*.gif" />
+            <fileset dir="${src.dir}"
+                includes="**/grids/**/*.properties" />
+            <manifest>
+                <attribute name="Implementation-Version" value="${version}" /> 
+                <attribute name="Main-Class"
+                    value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
+            </manifest>
+        </jar>
+    </target>
 
-	<target name="sign"
-		description="sign the jar files and generate jnlp files"
-		depends="grid.jar, bwViewer.jar, bwGrounds.jar, genkey">
-		<signjar destDir="${build.dir}/dist" keystore="${keystore}"
-			storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
-			alias="${keyalias}">
-			<path>
-				<fileset dir="${build.dir}/tmp" includes="**/*.jar" />
-			</path>
-		</signjar>
-		<copy todir="${build.dir}/dist" verbose="true">
-			<fileset dir="${src.dir}" includes="**/*.jnlp" />
-			<filterset>
-			    <filter token="TARGET" value="${target}" />
-			    <filter token="NOTE1" value="${generated1}" />
-			    <filter token="NOTE2" value="${generated2}" />
-			    <filter token="REL_JAR" value="${rel.jar}" />
-			    <filter token="REL" value="${version}" />
-			    <filter token="DEPLOY" value="${jnlp.deploy}" />
-			    <filter token="CODE_BASE" value="${jnlp.code.base}" />
-			    <filter token="HOME_PAGE" value="${jnlp.home.page}" />
+    <target name="sign"
+        description="sign the jar files and generate jnlp files (depends on genkey, but that runs just once)"
+        depends="grid.jar, bwViewer.jar, genkey">
+        <signjar destDir="${build.dir}/dist" keystore="${keystore}"
+            storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
+            alias="${keyalias}">
+            <path>
+                <fileset dir="${build.dir}/tmp" includes="**/*.jar" />
+            </path>
+        </signjar>
+        <copy todir="${build.dir}/dist" verbose="true">
+            <fileset dir="${src.dir}" includes="**/*.jnlp" />
+            <filterset>
+                <filter token="TARGET" value="${target}" />
+                <filter token="NOTE1" value="${generated1}" />
+                <filter token="NOTE2" value="${generated2}" />
+                <filter token="REL_JAR" value="${rel.jar}" />
+                <filter token="REL" value="${version}" />
+                <filter token="DEPLOY" value="${jnlp.deploy}" />
+                <filter token="CODE_BASE" value="${jnlp.code.base}" />
+                <filter token="HOME_PAGE" value="${jnlp.home.page}" />
             </filterset>
-			<flattenmapper/>
-		</copy>
-	</target>
-	
+            <flattenmapper/>
+        </copy>
+    </target>
+    
 
 </project>
