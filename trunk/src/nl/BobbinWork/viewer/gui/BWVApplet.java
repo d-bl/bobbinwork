@@ -25,7 +25,6 @@ import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -57,7 +56,6 @@ import nl.BobbinWork.bwlib.gui.LocaleButton;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.SplitPane;
 import nl.BobbinWork.bwlib.io.FileMenu;
-import nl.BobbinWork.bwlib.io.InputStreamCreator;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.gui.InteractiveDiagramPanel;
@@ -169,45 +167,33 @@ public class BWVApplet extends BWApplet {
 		}};
 		ActionListener saveListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				File file = (File)e.getSource();
-				try {
-					PrintStream p = (new PrintStream(new FileOutputStream(file)));
-					p.print(source.getText());
-					p.flush();
-					p.close();
-				} catch (IOException ioe) {
-					showError(file.toString(), ioe, "");
-				}
-				tree.setDocName(file.toString());
+				saveFile((File)e.getSource());
 			}
-		};
-		final FileMenu fileMenu = new FileMenu( ! wrappedInApplicationFrame(), 
-				newListener, inputStreamListener, saveListener);
 
+		};
 		final HelpMenu helpMenu = new HelpMenu(this, YEARS,caption);
 		caption = helpMenu.getVersionedCaption();
 
-		JMenuBar //
+		JMenuBar jMenuBar;
 		jMenuBar = new JMenuBar();
-		jMenuBar.add(fileMenu);
-		jMenuBar.add(new SampleDiagramChooser(this,new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				fileMenu.clearSelectedFile();
-				InputStreamCreator isc = (InputStreamCreator)e.getSource();
-				loadFromStream( isc.getInputStreamName(), isc.getInputStream() );
-			}}));
-		jMenuBar.add(new GroundChooser(new GroundListener()));//TODO use NamedInputStream 
+		jMenuBar.add(new FileMenu( ! wrappedInApplicationFrame(), 
+				newListener, inputStreamListener, saveListener));
+		jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
+		jMenuBar.add(new GroundChooser(inputStreamListener)); 
 		jMenuBar.add(helpMenu); 
 		setJMenuBar(jMenuBar);
 	}
 	
-	private class GroundListener implements ActionListener{ 
-
-		public void actionPerformed(ActionEvent e) {
-			String s = e.getActionCommand();
-			ByteArrayInputStream is = new ByteArrayInputStream(s.getBytes());
-			loadFromStream("generatedGround.xml",is);
+	private void saveFile(File file) {
+		try {
+			PrintStream p = (new PrintStream(new FileOutputStream(file)));
+			p.print(source.getText());
+			p.flush();
+			p.close();
+		} catch (IOException ioe) {
+			showError(file.toString(), ioe, "");
 		}
+		tree.setDocName(file.toString());
 	}
 
 	/** Connects the non-menu components with listeners */
