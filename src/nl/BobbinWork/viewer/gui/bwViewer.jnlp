@@ -34,6 +34,13 @@
       <all-permissions/>
     </security> 
   </information>
+  <shortcut>
+    <!-- put a shortcut on the desktop -->
+    <desktop/>
+    <!-- put shortcut in start menu too -->
+    <menu submenu="BobbinWork"/>
+  </shortcut>
+  
   <update check="timeout" policy="always"/>
   <resources>
     <java version="@TARGET@+"/>
