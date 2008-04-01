@@ -27,15 +27,14 @@ public class HelpMenu extends JMenu {
     		+ this.getClass().getPackage().getImplementationVersion();
 
     	final String description = "<html> "
-    		+ Localizer.getString("MenuHelp_release") + " "
-    		+ simpleCaption + "<br>Copyright © " 
-    		+ years + " " 
-    		+ "J. Falkink-Pol"  
-    		+ "<hr>" 
-    		+ Localizer.getString("MenuHelp_About_License").replaceAll("\\n", "<br>")
-    		+ "<hr>" 
-    		+ Localizer.getString("MenuHelp_About_URLs").replaceAll("\\n", "<br>")
-    		+ "</html>" 
+    		+ versionedCaption + "<br>Copyright © "  //$NON-NLS-1$ 
+    		+ years + " "  //$NON-NLS-1$
+    		+ "J. Falkink-Pol" //$NON-NLS-1$   
+    		+ "<hr>"  //$NON-NLS-1$ 
+    		+ Localizer.getString("MenuHelp_About_License").replaceAll("\\n", "<br>") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+    		+ "<hr>"  //$NON-NLS-1$ 
+    		+ Localizer.getString("MenuHelp_About_URLs").replaceAll("\\n", "<br>") //$NON-NLS-1$ //$NON-NLS-2$
+    		+ "</html>"  //$NON-NLS-1$ 
     		;
 
     	applyStrings(this, "MenuHelp_help"); //$NON-NLS-1$

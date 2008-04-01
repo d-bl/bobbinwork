@@ -69,7 +69,7 @@
     </target>
 
     <target name="genkey" description="generate key to sign the jar files" depends="prepare">
-        <delete file="${keystore}"/><!-- to make the next task repatable -->
+        <delete file="${keystore}"/><!-- to make the task repatable -->
         <genkey keystore="${keystore}" alias="${keyalias}" 
             storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
             dname="OU=Development, O=BobbinWork, C=NL"/>
@@ -88,12 +88,9 @@
             <fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
             <fileset dir="${build.dir}/tmp" includes="**/viewer/**" />
             <fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
-            <fileset dir="${src.dir}" includes="**/diagram/**/*.*ml" />
-            <fileset dir="${src.dir}" includes="**/diagram/**/*.xsd" />
-            <fileset dir="${src.dir}" includes="**/diagram/**/*.gif" />
-            <fileset dir="${src.dir}" includes="**/viewer/**/*.gif" />
-            <fileset dir="${src.dir}"
-                includes="**/viewer/**/*.properties" />
+            <fileset dir="${src.dir}" includes="**/diagram/**/*.*" excludes="**/*.j*" />
+            <fileset dir="${src.dir}" includes="**/bwlib/**/*.*" excludes="**/*.j*"/>
+            <fileset dir="${src.dir}" includes="**/viewer/**/*.properties" />
             <manifest>
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
@@ -109,10 +106,7 @@
         <jar destfile="${grid.jar.path}">
             <fileset dir="${build.dir}/tmp" includes="**/grids/**" />
             <fileset dir="${build.dir}/tmp" includes="**/bwlib/gui/**" />
-            <fileset dir="${src.dir}" includes="**/grids/**/*.html" />
-            <fileset dir="${src.dir}" includes="**/grids/**/*.gif" />
-            <fileset dir="${src.dir}"
-                includes="**/grids/**/*.properties" />
+            <fileset dir="${src.dir}" includes="**/grids/**/*.*"  excludes="**/*.j*"/>
             <manifest>
                 <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
