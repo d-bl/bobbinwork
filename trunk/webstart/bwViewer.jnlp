@@ -33,6 +33,12 @@
     <security>
       <all-permissions/>
     </security> 
+    <shortcut>
+      <!-- put a shortcut on the desktop -->
+      <desktop/>
+      <!-- put shortcut in start menu too -->
+      <menu submenu="BobbinWork"/>
+    </shortcut>
   </information>
   <update check="timeout" policy="always"/>
   <resources>
