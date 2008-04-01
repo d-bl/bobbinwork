@@ -348,6 +348,8 @@ public class BWVApplet extends BWApplet {
 	public static void main(String[] args) {
 
 		if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
-		wrapInApplicationFrame(new BWVApplet(), caption);
+		BWVApplet applet = new BWVApplet();
+        applet.init(); // side effect: adds the version to the caption
+		wrapInApplicationFrame(applet, caption);
 	}
 }

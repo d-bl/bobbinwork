@@ -36,8 +36,6 @@ public class BWApplet extends JApplet {
 
 	public static void wrapInApplicationFrame(BWApplet applet, String caption) {
     	
-        applet.init();
-
         URL iocnURL = applet.getClass().getClassLoader().getResource(ICON);
 		JFrame frame = new JFrame();
         frame.setSize(700, 500);
