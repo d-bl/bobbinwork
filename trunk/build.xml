@@ -34,7 +34,7 @@
     <property name="version" value="2.0.${version.tail}" /><!-- base number 
         signal compatibillity issues with basicStitches.xml? -->
     
-    <property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webStart" />
+    <property name="jnlp.deploy" value="http://code.google.com/p/bobbinwork/source/browse/trunk/webstart" />
     <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
     <property name="target" value="1.5" />
