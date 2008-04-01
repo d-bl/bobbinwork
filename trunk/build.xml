@@ -35,7 +35,7 @@
         signal compatibillity issues with basicStitches.xml? -->
     
     <property name="jnlp.deploy" value="http://bobbinwork.googlecode.com/svn/trunk/webstart" />
-    <property name="jnlp.code.base" value="http://code.google.com/p/bobbinwork/downloads/list" />
+    <property name="jnlp.code.base" value="http://bobbinwork.googlecode.com/files" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
     <property name="target" value="1.5" />
 

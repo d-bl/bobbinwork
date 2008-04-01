@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0+" codebase="http://code.google.com/p/bobbinwork/downloads/list" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/bwViewer.jnlp">
+<jnlp spec="1.0+" codebase="http://bobbinwork.googlecode.com/files" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/bwViewer.jnlp">
 	<!-- Copyright 2008, J. Falkink-Pol
 		
 		This file is part of BobbinWork.
