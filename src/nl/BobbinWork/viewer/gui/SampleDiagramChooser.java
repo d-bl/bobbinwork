@@ -34,7 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
-import nl.BobbinWork.bwlib.io.InputStreamCreator;
+import nl.BobbinWork.bwlib.io.NamedInputStream;
 
 /**
  * A menu that lets a user open a web page as a stream.
@@ -45,7 +45,7 @@ import nl.BobbinWork.bwlib.io.InputStreamCreator;
  *
  */
 @SuppressWarnings("serial") //$NON-NLS-1$
-public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
+public class SampleDiagramChooser extends JMenu {
 
 	private static final String BASE_URL = "http://bobbinwork.googlegroups.com/web/"; //$NON-NLS-1$
 	private static final String S = "AAAAYixsiBs_Jr-a7N6OS_3XDppDSmRoLLcG9UYL7B9ILBWG1qiJ7UbTIup-M2XPURD"; //$NON-NLS-1$
@@ -61,18 +61,9 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
      */
     private Component parent;
     
-    private SampleDiagramChooser externalActionSource = this;
-    
     private ActionListener externalActionListener;
     private InputStream inputStream = null;
     private String inputStreamName = null;
-	public String getInputStreamName() {
-		return inputStreamName;
-	}
-	public InputStream getInputStream() {
-		return inputStream;
-	}
-	
     
     /**
      * Gives anonymous ActionListener's access to fields.
@@ -81,14 +72,19 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
     
 	/**
 	 * Creates an inputStream from the specified URL.
+	 * @param e 
 	 * 
 	 * @param url selected or entered by the user 
+	 * @return 
 	 */
-	private void setInputStream(String url) {
+	private void createInputStream(ActionEvent e, String url) {
 		try {
 			inputStreamName = ""; //$NON-NLS-1$
 			inputStream = (new URL(url)).openStream();
 			inputStreamName = url;
+			e.setSource(new NamedInputStream(inputStreamName, inputStream));
+			externalActionListener.actionPerformed(e);
+
 		} catch (MalformedURLException e1) {
 		    JOptionPane.showMessageDialog(parent, //
 		            url + "\n" + e1.getLocalizedMessage(),// //$NON-NLS-1$
@@ -104,34 +100,6 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
 		}
 	}
 	
-	
-    /**
-     * Listens to the menu item that lets the user enter a URL with a dialog.
-     */
-    private ActionListener freeListener = new ActionListener() {
-
-		public void actionPerformed(ActionEvent e) {
-			setInputStream((String)JOptionPane.showInputDialog(
-	                self.parent,
-	                "", //$NON-NLS-1$
-	                "http://"));  //$NON-NLS-1$
-    		e.setSource(externalActionSource);
-    		externalActionListener.actionPerformed(e);
-		}
-	};
-	
-    /**
-     * Listens to the menu items with a predefined URL.
-     */
-    private ActionListener predefinedListener = new ActionListener() {
-
-    	public void actionPerformed(ActionEvent e) {
-    		setInputStream(e.getActionCommand());
-    		e.setSource(externalActionSource);
-    		externalActionListener.actionPerformed(e);
-    	}
-    };
-    
 	/**
 	 * @param parent handed down to dialogs
 	 * @param externalActionListener triggered when an InputStream is created from a user selected URL 
@@ -147,14 +115,27 @@ public class SampleDiagramChooser extends JMenu implements InputStreamCreator {
         for (int i=0 ; i < SAMPLE_URLS.length ; i++){
             jMenuItem = new JMenuItem(BASE_URL+SAMPLE_URLS[i].replaceAll("\\?.*", "")); //$NON-NLS-1$ //$NON-NLS-2$
             jMenuItem.setActionCommand(BASE_URL + SAMPLE_URLS[i]);
-            jMenuItem.addActionListener( predefinedListener );
+            jMenuItem.addActionListener( new ActionListener() {
+
+            	public void actionPerformed(ActionEvent e) {
+            		createInputStream(e,e.getActionCommand());
+            	}
+            } );
             add(jMenuItem);
     	}
         
         add(new JSeparator());
 
         jMenuItem = new LocaleMenuItem("MenuFile_ChooseSample"); //$NON-NLS-1$
-    	jMenuItem.addActionListener(freeListener);
+    	jMenuItem.addActionListener(new ActionListener() {
+
+    		public void actionPerformed(ActionEvent e) {
+    			createInputStream(e,(String)JOptionPane.showInputDialog(
+    	                self.parent,
+    	                "", //$NON-NLS-1$
+    	                "http://"));  //$NON-NLS-1$
+    			}
+    	});
         add(jMenuItem);
         
     	// TODO enhancements to prepare in the background

@@ -99,8 +99,6 @@
                 <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
                     value="nl.BobbinWork.viewer.gui.BWVApplet" />
-                <attribute name="SplashScreen-Image"
-                    value="nl/BobbinWork/viewer/gui/splash.gif" />
             </manifest>
         </jar>
     </target>

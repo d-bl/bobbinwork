@@ -5,12 +5,11 @@ import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import nl.BobbinWork.bwlib.io.InputStreamCreator;
+import nl.BobbinWork.bwlib.io.NamedInputStream;
 
 
 @SuppressWarnings("serial")
@@ -32,32 +31,14 @@ public class GroundChooser extends JMenu {
 			item.addActionListener(new ActionListener () {
 
 				public void actionPerformed(ActionEvent e) {
-					e.setSource(new StreamCreator("ground.xml",item.getActionCommand()));
+					//e.setSource(new StreamCreator("ground.xml",item.getActionCommand()));
+					ByteArrayInputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
+					e.setSource(new NamedInputStream("",is));
 					externalActionListener.actionPerformed(e);					
 				}
 				});
 			add(item);
 		}
-	}
-	
-	private class StreamCreator implements InputStreamCreator {
-		
-		String name;
-		String content;
-		
-		StreamCreator (String name, String stream) {
-			this.name = name;
-			this.content = stream;
-		}
-		
-		public InputStream getInputStream() {
-			return new ByteArrayInputStream(content.getBytes());
-		}
-
-		public String getInputStreamName() {
-			return name;
-		}
-		
 	}
 	
 	private class GroundMenuItem extends JMenuItem {
@@ -79,11 +60,10 @@ public class GroundChooser extends JMenu {
 			}
 			//System.out.println(s);
 			s = "<group pairs='1-" + (pairs*4) + "'>\n" + s + "</group>"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			s = "<?xml version='1.0' encoding='UTF-8'?>\n" //$NON-NLS-1$
-				+"<diagram\n  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'" //$NON-NLS-1$
+			s = "<diagram\n  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'" //$NON-NLS-1$
 				+"\n  xsi:noNamespaceSchemaLocation='http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd'\n>\n" //$NON-NLS-1$
 				+ s + "</diagram>"; //$NON-NLS-1$
-			setActionCommand( s ); 
+			setActionCommand( "<?xml version='1.0' encoding='UTF-8'?>\n" + s ); //$NON-NLS-1$
 	        applyStrings(this, "MenuGround_"+groundID); //$NON-NLS-1$
 		}
 	}
