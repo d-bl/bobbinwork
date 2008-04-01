@@ -23,7 +23,7 @@ public class GroundChooser extends JMenu {
 		JMenuItem[] data = {
 				new GroundMenuItem("flanders",55,55, 4, 2),//$NON-NLS-1$
 				new GroundMenuItem("spider",80,140, 6, 3),//$NON-NLS-1$
-				//new GroundMenuItem("spider",136,160, 6, 2),//$NON-NLS-1$
+				new GroundMenuItem("snowflake",136,100, 6, 4),//$NON-NLS-1$
 				new GroundMenuItem("vierge",80,80, 4, 2),//$NON-NLS-1$
 				new GroundMenuItem("sGravenmoers",80,80,4, 2)};//$NON-NLS-1$
 		
@@ -31,12 +31,11 @@ public class GroundChooser extends JMenu {
 			item.addActionListener(new ActionListener () {
 
 				public void actionPerformed(ActionEvent e) {
-					//e.setSource(new StreamCreator("ground.xml",item.getActionCommand()));
 					ByteArrayInputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
-					e.setSource(new NamedInputStream("",is));
+					e.setSource(new NamedInputStream("ground.xml",is));
 					externalActionListener.actionPerformed(e);					
 				}
-				});
+			});
 			add(item);
 		}
 	}
@@ -45,12 +44,14 @@ public class GroundChooser extends JMenu {
 		
 		GroundMenuItem (String groundID, int x, int y, int pairs, int pairShift) {
 			
-			String s = "";
-			for (int i=0 ; i<4 ; i++){
-				int xx = i*2*x;
-				int yy = 0;
-				int p = pairs*i+1; 
-				for (int j=0 ; j<=i*2 ; j+=2){
+			final int diagonalRows = 4;
+			int p = (diagonalRows+1) * pairs;
+			String s = "<copy of='"+groundID+"' pairs='"+p+"-"+(p+pairs-1)+"'/>";
+			for (int i=0 ; i<diagonalRows ; i++){
+				int xx = (diagonalRows-1)*x+i*x;
+				int yy = i*y;
+				p = pairShift*(diagonalRows+i)+1; 
+				for (int j=0 ; j<diagonalRows && p>0; j++){
 					s = s + "<copy of='"+groundID+"' pairs='"+p+"-"+(p+pairs-1)+"'>"
 					+"<move x='"+(xx)+"' y='"+(yy)+"'/></copy>\n";
 					xx -= x;
@@ -58,12 +59,12 @@ public class GroundChooser extends JMenu {
 					p -= pairShift;
 				}			
 			}
-			//System.out.println(s);
-			s = "<group pairs='1-" + (pairs*4) + "'>\n" + s + "</group>"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-			s = "<diagram\n  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'" //$NON-NLS-1$
-				+"\n  xsi:noNamespaceSchemaLocation='http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd'\n>\n" //$NON-NLS-1$
-				+ s + "</diagram>"; //$NON-NLS-1$
-			setActionCommand( "<?xml version='1.0' encoding='UTF-8'?>\n" + s ); //$NON-NLS-1$
+			System.out.println(s);
+			s = "<?xml version='1.0' encoding='UTF-8'?>\n" //$NON-NLS-1$ 
+				+ "<diagram>\n<group pairs='1-" //$NON-NLS-1$
+				+ (pairShift*2*diagonalRows+pairs-pairShift) + "'>\n" + s //$NON-NLS-1$ 
+				+ "</group>\n</diagram>"; //$NON-NLS-1$ 
+			setActionCommand( s );
 	        applyStrings(this, "MenuGround_"+groundID); //$NON-NLS-1$
 		}
 	}
