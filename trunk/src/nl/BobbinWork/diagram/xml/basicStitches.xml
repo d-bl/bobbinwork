@@ -1345,6 +1345,16 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <!-- 18 --><copy of="ctc"  pairs="3-4"><move x="50" y="160"/></copy>
       </group>
     </group>
+    <group id="snowflake" pairs="1-6">
+      <title>
+        <value lang="en">snowflake</value>
+        <value lang="nl">sneeuwvlok</value>
+      </title>
+      <pin position="58,0"/>
+      <pin position="0,43"/>
+      <pin position="116,43"/>
+      <copy of="spider" pairs="1-6"/>
+    </group>
     <group id="vierge" pairs="1-4">
       <title>
         <value lang="en">vierge</value>
