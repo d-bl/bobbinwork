@@ -1,10 +1,11 @@
 #labels Featured
   * complete the Java doc (include the Visio diagrams?)
-  * add unit tests, starting with the `diagram` packages `math` and `model`. Currently only high level tests are available by visually checking and manipulating the sample diagrams
-  * replace the W3C-dom by jdom/xpath/castor? Could be a good moment to start with unit tests and gain performance.
+  * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level tests are available by visually checking and manipulating the sample diagrams
+  * replace the W3C-dom by jdom/xpath? A good moment to start with unit tests and gain performance on [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/xml/expand/TreeExpander.java#104 
+expand(...)] which takes several seconds on [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/xml/basicStitches.xml basicStitches.xml].
   * code review
   * bring the xsd up to date
   * see also 
+    * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
     * to do's in the code
     * the [http://bw-en.wikispaces.com/viewer+wish+list wish list]s in the [http://bw-en.wikispaces.com/ user guide]
-    * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
