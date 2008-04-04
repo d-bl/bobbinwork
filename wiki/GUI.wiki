@@ -1,5 +1,5 @@
 #summary GUI requirements
-#labels Phase-Design
+#labels Phase-Design,Featured
 
 Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids.
 
