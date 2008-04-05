@@ -39,17 +39,16 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 import nl.BobbinWork.diagram.model.Partition;
-import static nl.BobbinWork.viewer.gui.DiagramLanguages.getPrimaryTitle;
+import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;;
 
 /**
  * A palette that allows the user to select a fragment of the diagram that can
  * be used again.
- * 
- * @author J. Falkink-Pol
- * 
  */
+@SuppressWarnings("serial")
 public class DiagramFragments extends JToolBar {
 
     /** Appearance (threads and/or pairs) of the rendered cells. */
