@@ -1,18 +1,17 @@
-#summary GUI requirements
+#summary some thoughts on what the GUI should become
 #labels Phase-Design,Featured
 
 Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids.
 
 =palet=
   * Currently all elements with an id are presented as a sequential list of thumbnail-diagrams. The list should become tool bar button showing the selected item, clicking it should activate a menu reflecting the XML tree structure with thumbnails.
-  * The content of !BasicStitches.xml should only be shown in the palet, not in the tree view.
 
-=Bidirectional synchronisation between the remaining three panels=
+=Bidirectional synchronisation between the other three panels=
 
 Just a tree to select a diagram section could be too intimidating. On the other hand, when clicking the diagram it is usually not clear which level is meant. To solve the dilemma and keep the user interface simple: first click the diagram, a corresponding tree element gets highlighted, then click a higher or lower level in the tree if you want to manipulate a larger or smaller section. Mouse clicks are already used to select or apply thread styles. Selecting should not be easily confused with applying thread styles, so probably use the default mouse key to select both a style as a stitch.
 
   * Currently a section in the diagram gets highlighted if a tree element is selected. The other way around should also be implemented.
-  * The tree view is intended for lace makers and should be generated from the diagram model (objects of class Partition only) not from the XML-DOM
+  * The tree view is intended for lace makers and should be generated from the diagram model (objects of class Partition only) or at least from the expanded DOM tree. Titles should not show up as nodes.
   * The tree/diagram should also be mutually synchronised with the source, like the synchronised outline when editing an XML file in Eclipse. Diagram objects generated from a cloned DOM sub tree should be linked to the <copy> element in the XML source. Even if the XML format is only used as bootstrap, this functionality is required for translators of <title>s (stitch names).
 
 =Manipulations=
