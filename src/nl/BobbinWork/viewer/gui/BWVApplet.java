@@ -64,10 +64,6 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 import org.w3c.dom.Element;
 
-/**
- * @author User
- *
- */
 @SuppressWarnings("serial")  //$NON-NLS-1$
 public class BWVApplet extends BWApplet {
 

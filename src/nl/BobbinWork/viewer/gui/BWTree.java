@@ -41,7 +41,7 @@ import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.ElementType;
 import nl.BobbinWork.diagram.xml.TreeBuilder;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
-import static nl.BobbinWork.viewer.gui.DiagramLanguages.getPrimaryTitle;
+import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;

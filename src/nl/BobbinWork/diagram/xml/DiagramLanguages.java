@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.xml;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -45,7 +45,7 @@ public class DiagramLanguages {
      *            children.
      * @return for the time being: the first line of text found
      */
-    static String getPrimaryTitle(Element element) {
+    public static String getPrimaryTitle(Element element) {
 
         if (element == null) {
             return ""; //$NON-NLS-1$
