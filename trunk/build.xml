@@ -24,15 +24,15 @@
     <property file="../ant.properties" /><!-- at least: 
         keystore (e.g. in ${build.dir} don't share with other projects or rewrite genkey task) 
         keyalias 
-        version.tail (preferably the revision number)
+        svn.revision (of the jar on http://code.google.com/p/bobbinwork/downloads/list)
         -->
     <property environment="env" /><!-- at least: 
         KEYSTOREPASS 
         JAVA_HOME (jdk, not jre)
         -->
             
-    <property name="version" value="2.0.${version.tail}" /><!-- base number 
-        signal compatibillity issues with basicStitches.xml? -->
+    <property name="version" value="2.0.${svn.revision}" /><!--  
+        base number signals compatibillity issues with basicStitches.xml? -->
     
     <property name="jnlp.deploy" value="http://bobbinwork.googlecode.com/svn/trunk/webstart" />
     <property name="jnlp.code.base" value="http://bobbinwork.googlecode.com/files" />
@@ -106,9 +106,11 @@
         <jar destfile="${grid.jar.path}">
             <fileset dir="${build.dir}/tmp" includes="**/grids/**" />
             <fileset dir="${build.dir}/tmp" includes="**/bwlib/gui/**" />
+            <fileset dir="${src.dir}" includes="**/bwlib/**/*.*" excludes="**/*.j*"/>
             <fileset dir="${src.dir}" includes="**/grids/**/*.*"  excludes="**/*.j*"/>
             <manifest>
-                <attribute name="Implementation-Version" value="${version}" /> 
+            	<attribute name="Java-Version" value="${target}" /> 
+            	<attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
                     value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
             </manifest>
@@ -116,7 +118,7 @@
     </target>
 
     <target name="sign"
-        description="sign the jar files and generate jnlp files (depends on genkey, but that runs just once)"
+        description="sign the jar files and generate jnlp files"
         depends="grid.jar, bwViewer.jar, genkey">
         <signjar destDir="${build.dir}/dist" keystore="${keystore}"
             storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
