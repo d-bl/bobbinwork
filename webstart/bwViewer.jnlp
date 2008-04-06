@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0+" codebase="http://www.xs4all.nl/~falkink/BobbinWork/" href="http://www.xs4all.nl/~falkink/BobbinWork//bwViewer.jnlp">
+<jnlp spec="1.0+" codebase="http://bobbinwork.googlecode.com/files" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/bwViewer.jnlp">
 	<!-- Copyright 2008, J. Falkink-Pol
 		
 		This file is part of BobbinWork.
@@ -22,7 +22,7 @@
   <information>
     <!-- 
     	do not change this file, it is generated 
-    	move to http://www.xs4all.nl/~falkink/BobbinWork/ and commit AFTER uploading and testing 
+    	move to http://bobbinwork.googlecode.com/svn/trunk/webstart and commit AFTER uploading and testing 
     -->
     <title>BobbinWork Viewer 2.0.115</title>
     <vendor>J. Falkink-Pol</vendor>
