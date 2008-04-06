@@ -29,8 +29,7 @@
     <homepage href="http://bobbinwork.googlecode.com/"/>
     <description>Working diagrams for bobbin lace</description>
     <description kind="short">Play with grounds</description>
-    <icon href="bobbin.gif"/>
-    <!--icon href="bwViewer-rel-2.0.115xx.jar!/nl/BobbinWork/bwlib/gui/bobbin.gif"/-->
+    <icon href="http://bobbinwork.googlecode.com/svn/trunk/src/nl/BobbinWork/bwlib/gui/bobbin.gif"/>
     <offline-allowed/>
     <security>
       <all-permissions/>
