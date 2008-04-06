@@ -24,7 +24,7 @@
     	do not change this file, it is generated 
     	move to http://www.xs4all.nl/~falkink/BobbinWork/ and commit AFTER uploading and testing 
     -->
-    <title>BobbinWork Viewer 2.0.xxx</title>
+    <title>BobbinWork Viewer 2.0.115</title>
     <vendor>J. Falkink-Pol</vendor>
     <homepage href="http://bobbinwork.googlecode.com/"/>
     <description>Working diagrams for bobbin lace</description>
@@ -46,7 +46,7 @@
   <update check="timeout" policy="always"/>
   <resources>
     <java version="1.5+"/>
-    <jar href="bwViewer-rel-2.0.xxx.jar" download="eager" main="true"/>
+    <jar href="bwViewer-rel-2.0.115.jar" download="eager" main="true"/>
   </resources>
   <applet-desc main-class="nl.BobbinWork.viewer.gui.BWVApplet" name="bwViewer" width="800" height="600"/>
 </jnlp>
