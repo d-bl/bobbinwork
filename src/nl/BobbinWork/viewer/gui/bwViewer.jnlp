@@ -29,17 +29,19 @@
     <homepage href="@HOME_PAGE@"/>
     <description>Working diagrams for bobbin lace</description>
     <description kind="short">Play with grounds</description>
+    <icon href="bobbin.gif"/>
+    <!--icon href="bwViewer-rel-2.0.115xx.jar!/nl/BobbinWork/bwlib/gui/bobbin.gif"/-->
     <offline-allowed/>
     <security>
       <all-permissions/>
     </security> 
+    <shortcut>
+      <!-- put a shortcut on the desktop -->
+      <desktop/>
+      <!-- put shortcut in start menu too -->
+      <menu submenu="BobbinWork"/>
+    </shortcut>
   </information>
-  <shortcut>
-    <!-- put a shortcut on the desktop -->
-    <desktop/>
-    <!-- put shortcut in start menu too -->
-    <menu submenu="BobbinWork"/>
-  </shortcut>
   
   <update check="timeout" policy="always"/>
   <resources>

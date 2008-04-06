@@ -29,6 +29,7 @@
     <homepage href="@HOME_PAGE@"/>
     <description>Polar grids for bobbin lace</description>
     <description kind="short">Polar grids that don't distort</description>
+    <icon href="bwViewer-rel-2.0.115xx.jar!/nl/BobbinWork/bwlib/gui/bobbin.gif"/>
     <offline-allowed/>
     <security>
       <all-permissions/>
