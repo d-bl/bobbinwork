@@ -20,6 +20,10 @@ package nl.BobbinWork.grids.GridGUI;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 
 /**
@@ -28,9 +32,7 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  */
 
 @SuppressWarnings("serial")
-public class PolarGridPrinter
-        extends javax.swing.JFrame
-        implements java.awt.event.ActionListener {
+public class PolarGridPrinter extends JFrame implements ActionListener {
     
     static private final AboutInfo aboutInfo = new AboutInfo
             ( " BobbinWork - Polar Grid" // caption

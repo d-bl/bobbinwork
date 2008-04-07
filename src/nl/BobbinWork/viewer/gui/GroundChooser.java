@@ -59,7 +59,7 @@ public class GroundChooser extends JMenu {
 					p -= pairShift;
 				}			
 			}
-			System.out.println(s);
+			//System.out.println(s);
 			s = "<?xml version='1.0' encoding='UTF-8'?>\n" //$NON-NLS-1$ 
 				+ "<diagram>\n<group pairs='1-" //$NON-NLS-1$
 				+ (pairShift*2*diagonalRows+pairs-pairShift) + "'>\n" //$NON-NLS-1$

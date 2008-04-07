@@ -95,7 +95,7 @@
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
-                    value="nl.BobbinWork.viewer.gui.BWVApplet" />
+                    value="nl.BobbinWork.viewer.gui.BWViewer" />
             </manifest>
         </jar>
     </target>

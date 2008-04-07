@@ -1,4 +1,4 @@
-/* BWVApplet.java Copyright 2006-2008 by J. Falkink-Pol
+/* BWViewer.java Copyright 2006-2008 by J. Falkink-Pol
  *
  * This file is part of BobbinWork.
  *
@@ -48,7 +48,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
-import nl.BobbinWork.bwlib.gui.BWApplet;
+import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.CursorController;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
@@ -65,10 +65,10 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 import org.w3c.dom.Element;
 
 @SuppressWarnings("serial")  //$NON-NLS-1$
-public class BWVApplet extends BWApplet {
+public class BWViewer extends BWFrame {
 
 	private static final String YEARS = "2006-2008";  //$NON-NLS-1$  
-	private static String caption = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
+	private static final String CAPTION = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
 
 	private static final int TOTAL_LEFT_WIDTH = 300;
 	private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
@@ -92,11 +92,8 @@ public class BWVApplet extends BWApplet {
 	 */
 	private DiagramPanel diagramPanel;
 
-	/**
-	 * Completes creation of the applet now that the look-and-feel and Localizer
-	 * are initialized.
-	 */
-	public void init() {
+	public BWViewer() {
+		super(LOCALIZER_BUNDLE_NAME);
 
 		/* ---- create components and listeners ---- */
 
@@ -129,10 +126,10 @@ public class BWVApplet extends BWApplet {
 				dividerPosition, 
 				HORIZONTAL_SPLIT, // 
 				new CPanel( // component of spiltPane
-						new AbstractButton[] { delete, replace }, // toolbar
+						new AbstractButton[] { delete, replace }, // tool bar
 						new JScrollPane(tree)),
 						new CPanel( // component of spiltPane
-								new FragmentsViewMenu(), // toolbar
+								new FragmentsViewMenu(), // tool bar
 								fragments)); 
 
 		splitPane = new SplitPane(//
@@ -167,13 +164,12 @@ public class BWVApplet extends BWApplet {
 			}
 
 		};
-		final HelpMenu helpMenu = new HelpMenu(this, YEARS,caption);
-		caption = helpMenu.getVersionedCaption();
+		final HelpMenu helpMenu = new HelpMenu(this, YEARS,CAPTION);
+		setTitle(helpMenu.getVersionedCaption());
 
 		JMenuBar jMenuBar;
 		jMenuBar = new JMenuBar();
-		jMenuBar.add(new FileMenu( ! wrappedInApplicationFrame(), 
-				newListener, inputStreamListener, saveListener));
+		jMenuBar.add(new FileMenu( newListener, inputStreamListener, saveListener));
 		jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
 		jMenuBar.add(new GroundChooser(inputStreamListener)); 
 		jMenuBar.add(helpMenu); 
@@ -337,15 +333,9 @@ public class BWVApplet extends BWApplet {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	public BWVApplet() {
-		super(LOCALIZER_BUNDLE_NAME);
-	}
-
 	public static void main(String[] args) {
 
 		if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
-		BWVApplet applet = new BWVApplet();
-        applet.init(); // side effect: adds the version to the caption
-		wrapInApplicationFrame(applet, caption);
+		new BWViewer().setVisible(true);
 	}
 }
