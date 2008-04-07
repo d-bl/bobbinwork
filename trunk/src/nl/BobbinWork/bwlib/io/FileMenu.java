@@ -35,12 +35,6 @@ public class FileMenu extends JMenu {
      * a new file with default content. If the environments allows access
      * to the file system, also the standard items 
      * save, save as, open and exit are created.
-     * 
-     * @param restrictedEnvironment 
-     *        true if the caller has no access to the file system 
-     * @param newFile 
-     * 	      the resource to be opened by the classLoader
-     * 	 	  when the "new" item is selected from the menu.
      * @param inputStreamListener 
      * 		  listens for newly opened input streams. 
      * 		  The event source type will be a NamedInputStream. 
@@ -48,10 +42,12 @@ public class FileMenu extends JMenu {
      * 		  listens for save requests from the user. 
      * 		  The event source will be a String with a file name
      * 		  in case of SaveAs or null otherwise.
+     * @param newFile 
+     * 	      the resource to be opened by the classLoader
+     * 	 	  when the "new" item is selected from the menu.
      */
     public FileMenu(
-    		boolean restrictedEnvironment, 
-    		final ActionListener newListener,
+    		final ActionListener newListener, 
     		final ActionListener inputStreamListener,
     		final ActionListener saveListener) {
 
@@ -68,9 +64,6 @@ public class FileMenu extends JMenu {
         });
         add(jMenuItem);
 
-        if ( restrictedEnvironment ) return;
-        // the remaining IO items only with access rights for the file system
-
         add(new JSeparator());
 
         jMenuItem = new LocaleMenuItem( "MenuFile_exit",VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
@@ -81,7 +74,12 @@ public class FileMenu extends JMenu {
         });
         add(jMenuItem);
         
-        fileChooser = new JFileChooser();
+        try {
+        	fileChooser = new JFileChooser();
+        } catch (java.security.AccessControlException e) {
+        	return;
+        }
+        
         fileChooser.setFileFilter(new BWFileFilter( 
         		getString("FileType"), //$NON-NLS-1$
         		"xml,bwml".split(",") )); //$NON-NLS-1$ //$NON-NLS-2$

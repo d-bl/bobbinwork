@@ -6,20 +6,20 @@ import static java.awt.event.KeyEvent.VK_F7;
 import static java.awt.event.KeyEvent.VK_I;
 import static java.awt.event.KeyEvent.VK_J;
 import static java.awt.event.KeyEvent.VK_K;
+import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
+import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseMotionListener;
 
-import javax.swing.JApplet;
 import javax.swing.JColorChooser;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
-import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.viewer.gui.BWViewer;
 
 /**
  * A menu controlling the appearance of the diagram.
@@ -33,7 +33,7 @@ class ViewMenu extends JMenu {
      */
 	private class DiagramHighlightsMenu extends JMenu {
 
-        private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final JApplet self) {
+        private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final BWViewer viewer) {
         	applyStrings(this, "MenuView_highlight");
         	
         	JMenuItem//
@@ -43,7 +43,7 @@ class ViewMenu extends JMenu {
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Color color = JColorChooser.showDialog(//
-                            self, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
+                            viewer, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
                     if (color != null) {
                         ((JMenuItem) e.getSource()).setBackground(color);
                         diagramPanel.setAreaHighlight(color);
@@ -57,7 +57,7 @@ class ViewMenu extends JMenu {
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Color color = JColorChooser.showDialog(//
-                            self, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
+                            viewer, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
                     if (color != null) {
                         ((JMenuItem) e.getSource()).setBackground(color);
                         diagramPanel.setThreadHighlight(color);
@@ -71,7 +71,7 @@ class ViewMenu extends JMenu {
     /** Creates a fully dressed JMenu, controlling the view of the diagram */
     ViewMenu(
     		final DiagramPanel diagramPanel, 
-    		final JApplet parent,
+    		final BWViewer viewer,
     		final ThreadStyleToolBar threadStyleToolBar,
     		final MouseMotionListener mouseMotionListener) {
     	
@@ -105,7 +105,7 @@ class ViewMenu extends JMenu {
 
         add(new javax.swing.JSeparator());
 
-        add(new DiagramHighlightsMenu(diagramPanel,parent));
+        add(new DiagramHighlightsMenu(diagramPanel,viewer));
 
         add(new javax.swing.JSeparator());
 

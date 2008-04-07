@@ -29,12 +29,12 @@ class GridBoundary extends ConcentricCircle {
         // TODO: throw an error, not just don't refuse
     }
     
-    /** @deprecated </code>PolarGridDef</code> creates the first circle of a polair grid definition. */
+    /** </code>PolarGridDef</code> creates the first circle of a polair grid definition. */
     public GridBoundary(double diameter) {
         super(diameter);
     }
     
-    /** @deprecated </code>PolarGridDef</code> creates the last circle of a polair grid definition. */
+    /** </code>PolarGridDef</code> creates the last circle of a polair grid definition. */
     public GridBoundary(ConcentricCircle x) {
         super(false,x);
     }

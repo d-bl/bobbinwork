@@ -1,4 +1,4 @@
-/* BWVApplet.java Copyright 2006-2008 by J. Falkink-Pol
+/* LocaleButton.java Copyright 2006-2008 by J. Falkink-Pol
  *
  * This file is part of BobbinWork.
  *
@@ -22,6 +22,7 @@ import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import javax.swing.JButton;
 
 /** A Button with caption, hint etc. (as far as present) loaded from the Localizer's properties file. */
+@SuppressWarnings("serial")
 public class LocaleButton extends JButton {
     /**
      * Convenience JButton constructor

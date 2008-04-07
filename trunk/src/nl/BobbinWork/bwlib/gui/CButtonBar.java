@@ -1,4 +1,4 @@
-/* BWVApplet.java Copyright 2006-2008 by J. Falkink-Pol
+/* CButtonBar.java Copyright 2006-2008 by J. Falkink-Pol
  *
  * This file is part of BobbinWork.
  *

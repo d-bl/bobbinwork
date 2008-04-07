@@ -17,6 +17,8 @@
  */
 package nl.BobbinWork.viewer.gui;
 
+import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -32,17 +34,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.Border;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 import nl.BobbinWork.diagram.model.Partition;
-import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;;
+
+import org.w3c.dom.Element;
 
 /**
  * A palette that allows the user to select a fragment of the diagram that can

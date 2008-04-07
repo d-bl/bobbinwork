@@ -2,6 +2,9 @@ package nl.BobbinWork.diagram.gui;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.PAGE_START;
+import static javax.swing.SwingUtilities.isLeftMouseButton;
+import static javax.swing.SwingUtilities.isRightMouseButton;
+import static nl.BobbinWork.bwlib.gui.Localizer.getBundle;
 
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
@@ -9,17 +12,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.Box;
-import javax.swing.JApplet;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
-import static javax.swing.SwingUtilities.isRightMouseButton;
-import static javax.swing.SwingUtilities.isLeftMouseButton;
-import static nl.BobbinWork.bwlib.gui.Localizer.getBundle;
 
 import nl.BobbinWork.bwlib.gui.CMenuBar;
-import nl.BobbinWork.diagram.gui.ViewMenu;
+import nl.BobbinWork.viewer.gui.BWViewer;
 
 /**
  * A diagram panel together with a tool bar to interact with the diagram.
@@ -32,7 +31,7 @@ public class InteractiveDiagramPanel extends JPanel {
 	
     public InteractiveDiagramPanel(
     		final DiagramPanel diagramPanel, 
-    		final JApplet parent) {
+    		final BWViewer viewer) {
 		
 		super(new BorderLayout());
 		
@@ -60,7 +59,7 @@ public class InteractiveDiagramPanel extends JPanel {
 
         JMenu menuList[] = new JMenu[] { 
         		new PrintMenu(diagramPanel), 
-        		new ViewMenu(diagramPanel, parent, threadStyleToolBar, mouseMotionListener) };
+        		new ViewMenu(diagramPanel, viewer, threadStyleToolBar, mouseMotionListener) };
         
         add (new CToolBar( threadStyleToolBar, menuList ), PAGE_START);
         add(new JScrollPane(diagramPanel), CENTER);
