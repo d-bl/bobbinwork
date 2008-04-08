@@ -40,6 +40,7 @@ import java.awt.print.PrinterJob;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class PolarGridDrawPanel
         
         extends

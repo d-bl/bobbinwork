@@ -194,7 +194,8 @@ public class DiagramFragments extends JToolBar {
      *            preferable, or better the corresponding property objects of
      *            the diagram model, but the list also should become a tree
      */
-    void populate(DefaultMutableTreeNode root) {
+    @SuppressWarnings("unchecked") // because depthFirstEnumeration() has a raw type signature 
+	void populate(DefaultMutableTreeNode root) {
         listModel.clear();
         for (Enumeration n = root.depthFirstEnumeration(); n.hasMoreElements();) {
             Object object = ((DefaultMutableTreeNode) n.nextElement()).getUserObject();
@@ -208,7 +209,7 @@ public class DiagramFragments extends JToolBar {
     }
 
     /**
-     * Sets wether pairs and or threads are shown in the diagrams of the
+     * Sets whether pairs and or threads are shown in the diagrams of the
      * fragments.
      */
     void setDiagramType(boolean showPairs, boolean showThreads) {

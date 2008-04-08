@@ -18,6 +18,8 @@
 
 package nl.BobbinWork.grids.PolarGridModel;
 
+import java.util.TreeSet;
+
 /** Constraint for a change in the density of dots on a polair grid.
  *<p>
  * An asymetrical figure like a Torchon spider can be used to increase the density.
@@ -37,7 +39,7 @@ package nl.BobbinWork.grids.PolarGridModel;
  *
  * @author J. Falkink-Pol
  */
-public class LegRatio implements Comparable {
+public class LegRatio implements Comparable<LegRatio> {
     
     private int left;
     private int right;
@@ -80,10 +82,10 @@ public class LegRatio implements Comparable {
     /** Compares the <code>getValue</code> results of the object
      * with <code>getValue</code> results of another object.
      */
-    public int compareTo(Object a) {
-        if ( this.getValue() == ((LegRatio) a).getValue() ) {
+    public int compareTo(LegRatio a) {
+        if ( this.getValue() == a.getValue() ) {
             return 0;
-        } else if ( this.getValue() < ((LegRatio) a).getValue() ) {
+        } else if ( this.getValue() < a.getValue() ) {
             return -1;
         } else {
             return 1;
@@ -123,12 +125,12 @@ public class LegRatio implements Comparable {
      */
     public static LegRatio[] getList(int dotsPerRepeat) {
         
-        java.util.TreeSet ratios = new java.util.TreeSet();
+        TreeSet<LegRatio> ratios = new TreeSet<LegRatio>();
         
         for ( int left=1 ; left<dotsPerRepeat ; left++ ) {
             if ( (dotsPerRepeat % left) == 0) { // fit on the repeat
                 for ( int right=left+1 ; right<=(2*left) ; right++ ) {
-                    ratios.add( (Object) new LegRatio(left, right) );
+                    ratios.add( new LegRatio(left, right) );
                 }
             }
         }

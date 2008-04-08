@@ -167,7 +167,7 @@ public class PolarGridModel {
     /** Gets the co-ordinates for all dots of the grid. */
     public Point2D[] getAllDots() {
         
-        Vector v = new Vector();
+        Vector<Point2D.Double> v = new Vector<Point2D.Double>();
         
         double aRadians = Math.toRadians( 360 / this.getNumberOfRepeats() );
         

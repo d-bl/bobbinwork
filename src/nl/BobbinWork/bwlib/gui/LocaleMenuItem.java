@@ -23,6 +23,7 @@ import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import javax.swing.JMenuItem;
 
 
+@SuppressWarnings("serial")
 public class LocaleMenuItem extends JMenuItem {
 	
     /** Convenience JMenu constructor */

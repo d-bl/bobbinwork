@@ -24,6 +24,7 @@ import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
 /** A JToolbar with a additional convenience constructors. */
+@SuppressWarnings("serial")
 public class CButtonBar extends JToolBar {
 
     /** Convenience JToolBar constructor */

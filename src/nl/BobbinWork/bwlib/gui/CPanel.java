@@ -28,6 +28,7 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 
 /** A JPanel with a additional convenience constructors. */
+@SuppressWarnings("serial")
 public class CPanel extends JPanel {
 
     /** Convenience JPanel constructor */
