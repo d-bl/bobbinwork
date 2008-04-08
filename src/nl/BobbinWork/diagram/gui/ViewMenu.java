@@ -15,11 +15,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JColorChooser;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
-import nl.BobbinWork.viewer.gui.BWViewer;
 
 /**
  * A menu controlling the appearance of the diagram.
@@ -33,7 +33,7 @@ class ViewMenu extends JMenu {
      */
 	private class DiagramHighlightsMenu extends JMenu {
 
-        private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final BWViewer viewer) {
+        private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final JFrame viewer) {
         	applyStrings(this, "MenuView_highlight");
         	
         	JMenuItem//
@@ -71,7 +71,7 @@ class ViewMenu extends JMenu {
     /** Creates a fully dressed JMenu, controlling the view of the diagram */
     ViewMenu(
     		final DiagramPanel diagramPanel, 
-    		final BWViewer viewer,
+    		final JFrame viewer,
     		final ThreadStyleToolBar threadStyleToolBar,
     		final MouseMotionListener mouseMotionListener) {
     	

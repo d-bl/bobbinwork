@@ -21,11 +21,11 @@ public class GroundChooser extends JMenu {
 		applyStrings(this, "MenuGround_Choose"); //$NON-NLS-1$
 
 		JMenuItem[] data = {
-				new GroundMenuItem("vierge",80,80, 4, 2),//$NON-NLS-1$
-				new GroundMenuItem("sGravenmoers",80,80,4, 2),//$NON-NLS-1$
-				new GroundMenuItem("spider",80,140, 6, 3),//$NON-NLS-1$
-				new GroundMenuItem("flanders",55,55, 4, 2),//$NON-NLS-1$
-				new GroundMenuItem("snowflake",136,100, 6, 4)};//$NON-NLS-1$
+				createGroundMenuItem("vierge", 80, 80, 4, 2),//$NON-NLS-1$
+				createGroundMenuItem("sGravenmoers", 80, 80, 4, 2),//$NON-NLS-1$
+				createGroundMenuItem("spider", 80, 140, 6, 3),//$NON-NLS-1$
+				createGroundMenuItem("flanders", 55, 55, 4, 2),//$NON-NLS-1$
+				createGroundMenuItem("snowflake", 136, 100, 6, 4)};//$NON-NLS-1$
 
 		for (final JMenuItem item : data) {
 			item.addActionListener(new ActionListener () {
@@ -40,9 +40,7 @@ public class GroundChooser extends JMenu {
 		}
 	}
 	
-	private class GroundMenuItem extends JMenuItem {
-		
-		GroundMenuItem (String groundID, int x, int y, int pairs, int pairShift) {
+	private JMenuItem createGroundMenuItem (String groundID, int x, int y, int pairs, int pairShift) {
 			
 			final int diagonalRows = 4;
 			int p = (diagonalRows - 1) * pairShift * 2 + pairs + 1;
@@ -65,9 +63,11 @@ public class GroundChooser extends JMenu {
 				+ (pairShift*2*diagonalRows+pairs-pairShift) + "'>\n" //$NON-NLS-1$
 				+ "<title/>\n" // magically it makes the name of the stitch appear in the treeView $NON-NLS-1$
 				+ s
-				+ "</group>\n</diagram>"; //$NON-NLS-1$ 
-			setActionCommand( s );
-	        applyStrings(this, "MenuGround_"+groundID); //$NON-NLS-1$
-		}
+				+ "</group>\n</diagram>"; //$NON-NLS-1$
+			
+			JMenuItem item = new JMenuItem();
+			item.setActionCommand( s );
+			applyStrings(item, "MenuGround_"+groundID); //$NON-NLS-1$
+			return item;
 	}
 }
