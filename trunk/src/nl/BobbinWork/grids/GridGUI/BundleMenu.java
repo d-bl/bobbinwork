@@ -25,6 +25,7 @@ import javax.swing.JMenu;
  * @author J. Falkink-Pol
  *
  */
+@SuppressWarnings("serial")
 public class BundleMenu extends JMenu {
 
     /**

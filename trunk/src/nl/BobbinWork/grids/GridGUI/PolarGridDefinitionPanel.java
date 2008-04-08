@@ -32,6 +32,7 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  *
  * @author  J. Falkink-Pol
  */
+@SuppressWarnings("serial")
 public class PolarGridDefinitionPanel
         
         extends

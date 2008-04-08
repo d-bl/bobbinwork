@@ -22,6 +22,7 @@ package nl.BobbinWork.grids.GridGUI;
  *
  * @author J. Falkink-Pol
  */
+@SuppressWarnings("serial")
 public class JMenuItemExit
         
         extends

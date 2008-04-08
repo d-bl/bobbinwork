@@ -19,6 +19,8 @@ package nl.BobbinWork.diagram.xml;
 
 import javax.swing.ImageIcon;
 
+import nl.BobbinWork.diagram.model.Partition;
+
 import org.w3c.dom.Element;
 
 /*
@@ -148,9 +150,9 @@ public enum ElementType {
     private boolean segment = false;
 
     /** the class for the object to be constructed from the element */
-    private Class myClass;
+    private Class<Partition> myClass;
 
-    Class getMyClass(Element element) {
+    Class<Partition> getMyClass(Element element) {
         return myClass;
     }
 

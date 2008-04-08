@@ -22,6 +22,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 /** A JMenubar with a additional convenience constructors. */
+@SuppressWarnings("serial")
 public class CMenuBar extends JMenuBar {
 
     /** Convenience JMenuBar constructor */

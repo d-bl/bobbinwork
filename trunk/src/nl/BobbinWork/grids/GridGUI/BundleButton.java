@@ -25,6 +25,7 @@ import javax.swing.JButton;
  * @author J. Falkink-Pol
  * 
  */
+@SuppressWarnings("serial")
 public class BundleButton extends JButton {
 
     /**

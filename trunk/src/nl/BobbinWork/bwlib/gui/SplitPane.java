@@ -5,6 +5,7 @@ import java.awt.Component;
 import javax.swing.JSplitPane;
 
 /** A JToolbar with an additional convenience constructor. */
+@SuppressWarnings("serial")
 public class SplitPane extends JSplitPane {
 
     public static final int DIVIDER_WIDTH = 8;

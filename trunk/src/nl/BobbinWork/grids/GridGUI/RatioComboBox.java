@@ -24,6 +24,7 @@ import nl.BobbinWork.grids.PolarGridModel.LegRatio;
  *
  * @author J. Falkink-Pol
  */
+@SuppressWarnings("serial")
 public class RatioComboBox extends javax.swing.JComboBox {
     
     /** Creates a new instance of RatioComboBox */

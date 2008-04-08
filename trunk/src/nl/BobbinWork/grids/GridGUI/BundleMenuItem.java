@@ -25,6 +25,7 @@ import javax.swing.JMenuItem;
  * @author J. Falkink-Pol
  *
  */
+@SuppressWarnings("serial")
 public class BundleMenuItem extends JMenuItem {
 
     /**
