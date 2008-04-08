@@ -12,13 +12,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.Box;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
 import nl.BobbinWork.bwlib.gui.CMenuBar;
-import nl.BobbinWork.viewer.gui.BWViewer;
 
 /**
  * A diagram panel together with a tool bar to interact with the diagram.
@@ -31,7 +31,7 @@ public class InteractiveDiagramPanel extends JPanel {
 	
     public InteractiveDiagramPanel(
     		final DiagramPanel diagramPanel, 
-    		final BWViewer viewer) {
+    		final JFrame viewer) {
 		
 		super(new BorderLayout());
 		

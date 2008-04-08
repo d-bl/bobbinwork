@@ -64,8 +64,7 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 import org.w3c.dom.Element;
 
-@SuppressWarnings("serial")  //$NON-NLS-1$
-public class BWViewer extends BWFrame {
+public class BWViewer {
 
 	private static final String YEARS = "2006-2008";  //$NON-NLS-1$  
 	private static final String CAPTION = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
@@ -92,8 +91,9 @@ public class BWViewer extends BWFrame {
 	 */
 	private DiagramPanel diagramPanel;
 
+	private BWFrame frame = new BWFrame(LOCALIZER_BUNDLE_NAME); 
+
 	public BWViewer() {
-		super(LOCALIZER_BUNDLE_NAME);
 
 		/* ---- create components and listeners ---- */
 
@@ -129,7 +129,7 @@ public class BWViewer extends BWFrame {
 						new AbstractButton[] { delete, replace }, // tool bar
 						new JScrollPane(tree)),
 						new CPanel( // component of spiltPane
-								new FragmentsViewMenu(), // tool bar
+								createFragmentsViewMenu(), // tool bar
 								fragments)); 
 
 		splitPane = new SplitPane(//
@@ -142,9 +142,9 @@ public class BWViewer extends BWFrame {
 				TOTAL_LEFT_WIDTH, // dividerPosition
 				HORIZONTAL_SPLIT, // orientation
 				splitPane, // left component of spiltPane
-				new InteractiveDiagramPanel(diagramPanel, this));
+				new InteractiveDiagramPanel(diagramPanel, frame));
 
-		getContentPane().add(splitPane);
+		frame.getContentPane().add(splitPane);
 	}
 
 	private void createGlobalMenus() {
@@ -164,16 +164,16 @@ public class BWViewer extends BWFrame {
 			}
 
 		};
-		final HelpMenu helpMenu = new HelpMenu(this, YEARS,CAPTION);
-		setTitle(helpMenu.getVersionedCaption());
+		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,CAPTION);
+		frame.setTitle(helpMenu.getVersionedCaption());
 
 		JMenuBar jMenuBar;
 		jMenuBar = new JMenuBar();
 		jMenuBar.add(new FileMenu( newListener, inputStreamListener, saveListener));
-		jMenuBar.add(new SampleDiagramChooser(this,inputStreamListener));
+		jMenuBar.add(new SampleDiagramChooser(frame,inputStreamListener));
 		jMenuBar.add(new GroundChooser(inputStreamListener)); 
 		jMenuBar.add(helpMenu); 
-		setJMenuBar(jMenuBar);
+		frame.setJMenuBar(jMenuBar);
 	}
 	
 	private void saveFile(File file) {
@@ -191,14 +191,14 @@ public class BWViewer extends BWFrame {
 	/** Connects the non-menu components with listeners */
 	private void createNonMenuListeners(final JButton delete, final JButton replace) {
 
-		delete.addActionListener(CursorController.createListener(this,new ActionListener() {
+		delete.addActionListener(CursorController.createListener(frame,new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				tree.deleteSelected();
 			}
 		}));
 
-		replace.addActionListener(CursorController.createListener(this,new ActionListener() {
+		replace.addActionListener(CursorController.createListener(frame,new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				tree.replaceSelected(fragments.getSelectedElement());
@@ -263,11 +263,11 @@ public class BWViewer extends BWFrame {
 	}
 
 	/** A fully dressed JMenu, controlling the view of the fragments */
-	private class FragmentsViewMenu extends JMenu {
+	/** Creates a fully dressed JMenu, controlling the view of the fragments */
+	private JMenu createFragmentsViewMenu() {
+		JMenu menu = new JMenu();
 
-		/** Creates a fully dressed JMenu, controlling the view of the fragments */
-		private FragmentsViewMenu() {
-			applyStrings(this, "MenuFragments_fragments"); //$NON-NLS-1$
+			applyStrings(menu, "MenuFragments_fragments"); //$NON-NLS-1$
 
 			JMenuItem//
 			jMenuItem = new LocaleMenuItem("MenuView_thread"); //$NON-NLS-1$ 
@@ -276,7 +276,7 @@ public class BWViewer extends BWFrame {
 					fragments.setDiagramType(false, true);
 				}
 			});
-			add(jMenuItem);
+			menu.add(jMenuItem);
 
 			jMenuItem = new LocaleMenuItem("MenuView_pair"); //$NON-NLS-1$ 
 			jMenuItem.addActionListener(new ActionListener() {
@@ -284,7 +284,7 @@ public class BWViewer extends BWFrame {
 					fragments.setDiagramType(true, false);
 				}
 			});
-			add(jMenuItem);
+			menu.add(jMenuItem);
 
 			jMenuItem = new LocaleMenuItem("MenuView_hybrid"); //$NON-NLS-1$ 
 			jMenuItem.addActionListener(new ActionListener() {
@@ -292,8 +292,8 @@ public class BWViewer extends BWFrame {
 					fragments.setDiagramType(true, true);
 				}
 			});
-			add(jMenuItem);
-		}
+			menu.add(jMenuItem);
+			return menu;
 	}
 
 	/** Loads a new file into the source and tree. */
@@ -327,7 +327,7 @@ public class BWViewer extends BWFrame {
 	 * message to the user
 	 */
 	private void showError(String fileName, Exception exception, String action) {
-		JOptionPane.showMessageDialog(this, //
+		JOptionPane.showMessageDialog(frame, //
 				fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
 				action, //
 				JOptionPane.ERROR_MESSAGE);
@@ -336,6 +336,6 @@ public class BWViewer extends BWFrame {
 	public static void main(String[] args) {
 
 		if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
-		new BWViewer().setVisible(true);
+		new BWViewer().frame.setVisible(true);
 	}
 }
