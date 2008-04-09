@@ -71,7 +71,7 @@ public class BWViewer {
 
 	private static final int TOTAL_LEFT_WIDTH = 300;
 	private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
-	private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
+    private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
 
 	/** JTextArea with the XML source */
 	private SourcePanel source;
@@ -99,9 +99,7 @@ public class BWViewer {
 
 		source = new SourcePanel(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// String fileName = tree.getDocName();
 				tree.setDoc(source.getText());
-				// tree.setDocName(fileName);
 			}
 		});
 		tree = new BWTree();
@@ -112,7 +110,7 @@ public class BWViewer {
 
 		createNonMenuListeners(delete,replace);
 		createGlobalMenus();
-		loadNewFile();
+		loadFromStream(NEW_DIAGRAM, getClass().getClassLoader().getResourceAsStream(NEW_DIAGRAM));
 
 		/* ---- put components and their local menu's/toolbars together ---- */
 
@@ -120,7 +118,7 @@ public class BWViewer {
 		- SplitPane.DIVIDER_WIDTH 
 		- (int) fragments.getMinimumSize().getWidth();
 
-		JSplitPane//
+		JSplitPane splitPane;
 
 		splitPane = new SplitPane(//
 				dividerPosition, 
@@ -149,10 +147,6 @@ public class BWViewer {
 
 	private void createGlobalMenus() {
 
-		ActionListener newListener = new ActionListener() { 
-			public void actionPerformed(ActionEvent e) {
-				loadNewFile();
-		}};
 		ActionListener inputStreamListener = new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				NamedInputStream is = (NamedInputStream)e.getSource();
@@ -166,10 +160,11 @@ public class BWViewer {
 		};
 		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,CAPTION);
 		frame.setTitle(helpMenu.getVersionedCaption());
+		FileMenu fileMenu = new FileMenu( inputStreamListener, saveListener, NEW_DIAGRAM);
 
 		JMenuBar jMenuBar;
 		jMenuBar = new JMenuBar();
-		jMenuBar.add(new FileMenu( newListener, inputStreamListener, saveListener));
+		jMenuBar.add(fileMenu);
 		jMenuBar.add(new SampleDiagramChooser(frame,inputStreamListener));
 		jMenuBar.add(new GroundChooser(inputStreamListener)); 
 		jMenuBar.add(helpMenu); 
@@ -296,12 +291,6 @@ public class BWViewer {
 			return menu;
 	}
 
-	/** Loads a new file into the source and tree. */
-	private void loadNewFile() {
-		InputStream stream = getClass().getClassLoader().getResourceAsStream(NEW_DIAGRAM);
-		loadFromStream(NEW_DIAGRAM, stream);
-	}
-
 	void loadFromStream(String fileName, InputStream stream) {
 		if (stream != null) {
 			try {
@@ -322,11 +311,8 @@ public class BWViewer {
 		}
 	}
 
-	/**
-	 * Convenience API for JOptionPane.showMessageDialog to show the exception
-	 * message to the user
-	 */
 	private void showError(String fileName, Exception exception, String action) {
+		
 		JOptionPane.showMessageDialog(frame, //
 				fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
 				action, //
