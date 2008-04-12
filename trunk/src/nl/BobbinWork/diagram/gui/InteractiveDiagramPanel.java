@@ -19,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 
 import nl.BobbinWork.bwlib.gui.CMenuBar;
+import nl.BobbinWork.bwlib.gui.PrintMenu;
 
 /**
  * A diagram panel together with a tool bar to interact with the diagram.

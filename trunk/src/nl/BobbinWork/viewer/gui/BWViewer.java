@@ -126,9 +126,9 @@ public class BWViewer {
 				new CPanel( // component of spiltPane
 						new AbstractButton[] { delete, replace }, // tool bar
 						new JScrollPane(tree)),
-						new CPanel( // component of spiltPane
-								createFragmentsViewMenu(), // tool bar
-								fragments)); 
+				new CPanel( // component of spiltPane
+						createFragmentsViewMenu(), // tool bar
+						fragments)); 
 
 		splitPane = new SplitPane(//
 				1000, // dividerPosition
