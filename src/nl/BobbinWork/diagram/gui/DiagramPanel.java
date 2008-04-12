@@ -18,27 +18,26 @@
 
 package nl.BobbinWork.diagram.gui;
 
+import static java.awt.RenderingHints.KEY_ANTIALIASING;
+import static java.awt.RenderingHints.KEY_INTERPOLATION;
+import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
+import static java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import static java.awt.RenderingHints.KEY_INTERPOLATION;
-import static java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR;
-import static java.awt.RenderingHints.KEY_ANTIALIASING;
-import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
-
 import java.awt.Shape;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import java.security.AccessControlException;
 
 import javax.swing.JPanel;
 
-import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.ThreadSegment;
 import nl.BobbinWork.diagram.model.ThreadStyle;
 
@@ -63,17 +62,27 @@ public class DiagramPanel extends JPanel implements Printable {
     /** the model for the diagram drawn on the panel */
     private Diagram diagram = null;
 
-    private PrinterJob printJob;
-    private PageFormat pageFormat;
+    private PrinterJob printJob = null;
+    private PageFormat pageFormat = null;
 
     /** Creates a new instance of DiagramPanel. */
     public DiagramPanel() {
-    	try {
-    		printJob = PrinterJob.getPrinterJob();
-    		pageFormat = printJob.defaultPage();
-    	} catch (AccessControlException e) {}
     	setBackground(Color.white);
     }
+
+	private boolean initPrint() {
+		
+		if (printJob != null && pageFormat != null) return true;
+		try {
+    		printJob = PrinterJob.getPrinterJob();
+    		pageFormat = printJob.defaultPage();
+    		return true;
+    	} catch (Exception e) {
+    		printJob = null;
+    		pageFormat = null;
+    		return false;
+    	}
+	}
 
     /** Registers whether threads and/or pairs are drawn. */
     public void setDiagramType(boolean showThreads, boolean showPairs) {
@@ -84,8 +93,8 @@ public class DiagramPanel extends JPanel implements Printable {
 
     /** Changes the page format with a dialog. */
     void updatePageFormat() {
-    	if (printJob == null) return;
-        pageFormat = printJob.pageDialog(pageFormat);
+    	
+    	if ( initPrint() ) pageFormat = printJob.pageDialog(pageFormat);
     }
 
     /*
@@ -122,7 +131,7 @@ public class DiagramPanel extends JPanel implements Printable {
 
     /** Print the diagram with a chance to adjust options or cancel. */
     void adjustablePrint() {
-    	if (printJob == null) return;
+    	if ( ! initPrint() )  return;
         printJob.setPrintable(this, pageFormat);
         if (printJob.printDialog()) {
             try {
@@ -146,9 +155,13 @@ public class DiagramPanel extends JPanel implements Printable {
 
         Graphics2D g2 = (Graphics2D) g;
         if (diagram != null) {
-            // determine space available on paper
-            int pw = (int) (pageFormat.getImageableWidth() / PRINT_SCALE);
-            int ph = (int) (pageFormat.getImageableHeight() / PRINT_SCALE);
+            // determine space available on paper (default A4 minus 25.4 mm margin)
+            int pw = 626;
+            int ph = 969;
+            if ( pageFormat != null ) {
+            	pw = (int) (pageFormat.getImageableWidth() / PRINT_SCALE);
+            	ph = (int) (pageFormat.getImageableHeight() / PRINT_SCALE);
+            }
             setPreferredSize(new Dimension((int) (pw * getScreenScale()), (int) (ph * getScreenScale())));
 
             // make the off-page area grey
