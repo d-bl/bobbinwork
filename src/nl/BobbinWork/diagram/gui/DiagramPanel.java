@@ -32,10 +32,10 @@ import java.awt.Shape;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 
 import javax.swing.JPanel;
 
+import nl.BobbinWork.bwlib.gui.PrintMenu.PrintablePreviewer;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.ThreadSegment;
@@ -47,7 +47,7 @@ import nl.BobbinWork.diagram.model.ThreadStyle;
  * @author J. Falkink-Pol
  */
 @SuppressWarnings("serial")
-public class DiagramPanel extends JPanel implements Printable {
+public class DiagramPanel extends JPanel implements PrintablePreviewer {
 
     private Color //
             areaHighlight = new Color(0xFF, 0xFF, 0x33, 0x77),//
@@ -62,39 +62,16 @@ public class DiagramPanel extends JPanel implements Printable {
     /** the model for the diagram drawn on the panel */
     private Diagram diagram = null;
 
-    private PrinterJob printJob = null;
-    private PageFormat pageFormat = null;
-
     /** Creates a new instance of DiagramPanel. */
     public DiagramPanel() {
     	setBackground(Color.white);
     }
-
-	private boolean initPrint() {
-		
-		if (printJob != null && pageFormat != null) return true;
-		try {
-    		printJob = PrinterJob.getPrinterJob();
-    		pageFormat = printJob.defaultPage();
-    		return true;
-    	} catch (Exception e) {
-    		printJob = null;
-    		pageFormat = null;
-    		return false;
-    	}
-	}
 
     /** Registers whether threads and/or pairs are drawn. */
     public void setDiagramType(boolean showThreads, boolean showPairs) {
         this.showThreads = showThreads;
         this.showPairs = showPairs;
         repaint(getBounds());
-    }
-
-    /** Changes the page format with a dialog. */
-    void updatePageFormat() {
-    	
-    	if ( initPrint() ) pageFormat = printJob.pageDialog(pageFormat);
     }
 
     /*
@@ -129,19 +106,6 @@ public class DiagramPanel extends JPanel implements Printable {
         return Printable.PAGE_EXISTS;
     }
 
-    /** Print the diagram with a chance to adjust options or cancel. */
-    void adjustablePrint() {
-    	if ( ! initPrint() )  return;
-        printJob.setPrintable(this, pageFormat);
-        if (printJob.printDialog()) {
-            try {
-                printJob.print();
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
     /** Sets the XML definition and redraws the diagram. */
     public void setPattern(Diagram diagram) {
         this.diagram = diagram;
@@ -156,12 +120,8 @@ public class DiagramPanel extends JPanel implements Printable {
         Graphics2D g2 = (Graphics2D) g;
         if (diagram != null) {
             // determine space available on paper (default A4 minus 25.4 mm margin)
-            int pw = 626;
-            int ph = 969;
-            if ( pageFormat != null ) {
-            	pw = (int) (pageFormat.getImageableWidth() / PRINT_SCALE);
-            	ph = (int) (pageFormat.getImageableHeight() / PRINT_SCALE);
-            }
+        	int pw = (int) (pageFormat.getImageableWidth() / PRINT_SCALE);
+        	int ph = (int) (pageFormat.getImageableHeight() / PRINT_SCALE);
             setPreferredSize(new Dimension((int) (pw * getScreenScale()), (int) (ph * getScreenScale())));
 
             // make the off-page area grey
@@ -183,6 +143,7 @@ public class DiagramPanel extends JPanel implements Printable {
     }
 
     private Partition lastHigLight;
+
     /** Highlight a section of the diagram corresponding with a node of the tree. */
     public void highLight(Partition partition) {
     	
@@ -324,5 +285,11 @@ public class DiagramPanel extends JPanel implements Printable {
                 color.getBlue(), //
                 threadHighlight.getAlpha());
     }
+
+	private PageFormat pageFormat = new PageFormat();
+	
+	public void setPageFormat(PageFormat pageFormat) {
+		this.pageFormat = pageFormat;
+	}
 
 }
