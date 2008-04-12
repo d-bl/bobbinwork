@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="BobbinWork" default="sign" basedir=".">
+<project name="BobbinWork" default="all" basedir=".">
 
     <!-- Copyright 2008, J. Falkink-Pol
         
@@ -48,15 +48,55 @@
     <property name="generated3" value="the jar to @CODE_BASE@" />
 
     <property name="grid.jar.path"
-        location="${build.dir}/tmp/bwpGrid${rel.jar}" />
+        location="${build.dir}/bwpGrid${rel.jar}" />
     <property name="bwViewer.jar.path"
-        location="${build.dir}/tmp/bwViewer${rel.jar}" />
+        location="${build.dir}/bwViewer${rel.jar}" />
 
     <path id="project.classpath">
         <fileset dir="${env.JAVA_HOME}/lib">
             <include name="*.jar" />
         </fileset>
     </path>
+
+    <macrodef name="jnlp">
+        <attribute name="jnlp.base.name" default="NOT-SET"/>
+        <attribute name="jnlp.main.class" default="NOT-SET"/>
+        <attribute name="jnlp.application.name" default="NOT-SET"/>
+        <attribute name="jnlp.application.description" default="NOT-SET"/>
+        <attribute name="jnlp.application.kind" default="NOT-SET"/>
+        <sequential>
+        	<echo> @{jnlp.base.name}.jnlp : @{jnlp.main.class} </echo>
+            <echoxml file="${build.dir}/@{jnlp.base.name}.jnlp">
+                <jnlp spec="1.0+" codebase="${jnlp.code.base}" href="${jnlp.deploy}@{jnlp.base.name}.jnlp">
+                  <information>
+                    <title>BobbinWork @{jnlp.application.name} ${version}</title>
+                    <vendor>J. Falkink-Pol</vendor>
+                    <homepage href="http://bobbinwork.googlecode.com"/>
+                    <description>@{jnlp.application.description}</description>
+                    <description kind="short">@{jnlp.application.kind}</description>
+                    <icon href="http://bobbinwork.googlecode.com/svn/trunk/src/nl/BobbinWork/bwlib/gui/bobbin.gif"/>
+                    <offline-allowed/>
+                    <security>
+                      <all-permissions/>
+                    </security> 
+                    <shortcut>
+                      <!-- put a shortcut on the desktop -->
+                      <desktop/>
+                      <!-- put shortcut in start menu too -->
+                      <menu submenu="BobbinWork"/>
+                    </shortcut>
+                  </information>
+                  
+                  <update check="timeout" policy="always"/>
+                  <resources>
+                    <java version="${target}+"/>
+                    <jar href="@{jnlp.base.name}${rel.jar}" download="eager" main="true"/>
+                  </resources>
+                  <application-desc main-class="@{jnlp.main.class}"/>
+                </jnlp>
+            </echoxml>
+        </sequential>
+    </macrodef>
 
     <target name="clean" description="Remove all generated files.">
         <delete dir="${build.dir}" />
@@ -65,14 +105,7 @@
     <target name="prepare"
         description="Create the output directories.">
         <mkdir dir="${build.dir}/tmp" />
-        <mkdir dir="${build.dir}/dist" />
-    </target>
-
-    <target name="genkey" description="generate key to sign the jar files" depends="prepare">
-        <delete file="${keystore}"/><!-- to make the task repatable -->
-        <genkey keystore="${keystore}" alias="${keyalias}" 
-            storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}" 
-            dname="OU=Development, O=BobbinWork, C=NL"/>
+        <mkdir dir="${build.dir}" />
     </target>
 
     <target name="compile" description="create class files from java sources" depends="prepare">
@@ -81,16 +114,12 @@
         </javac>
     </target>
 
-    <target name="bwViewer.jar"
+	<target name="diagrams"
         description="create viewer of bobbin lace working diagrams"
         depends="compile">
         <jar destfile="${bwViewer.jar.path}">
-            <fileset dir="${build.dir}/tmp" includes="**/diagram/**" />
-            <fileset dir="${build.dir}/tmp" includes="**/viewer/**" />
-            <fileset dir="${build.dir}/tmp" includes="**/bwlib/**" />
-            <fileset dir="${src.dir}" includes="**/diagram/**/*.*" excludes="**/*.j*" />
-            <fileset dir="${src.dir}" includes="**/bwlib/**/*.*" excludes="**/*.j*"/>
-            <fileset dir="${src.dir}" includes="**/viewer/**/*.properties" />
+            <fileset dir="${build.dir}/tmp" includes="**" excludes="**/grids/**" />
+            <fileset dir="${src.dir}" includes="**" excludes="**/grids/**, **/*.java"/>
             <manifest>
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
@@ -100,14 +129,12 @@
         </jar>
     </target>
 
-    <target name="grid.jar"
+    <target name="grids"
         description="create polar grid generator"
         depends="compile">
         <jar destfile="${grid.jar.path}">
-            <fileset dir="${build.dir}/tmp" includes="**/grids/**" />
-            <fileset dir="${build.dir}/tmp" includes="**/bwlib/gui/**" />
-            <fileset dir="${src.dir}" includes="**/bwlib/**/*.*" excludes="**/*.j*"/>
-            <fileset dir="${src.dir}" includes="**/grids/**/*.*"  excludes="**/*.j*"/>
+            <fileset dir="${build.dir}/tmp" includes="**/grids/**, **/bwlib/**/Localizer.java, **/bwlib/**/*Browse.java" />
+            <fileset dir="${src.dir}" includes="**/bwlib/**, **/grids/**" excludes="**/*.java"/>
             <manifest>
             	<attribute name="Java-Version" value="${target}" /> 
             	<attribute name="Implementation-Version" value="${version}" /> 
@@ -116,32 +143,22 @@
             </manifest>
         </jar>
     </target>
-
-    <target name="sign"
-        description="sign the jar files and generate jnlp files"
-        depends="grid.jar, bwViewer.jar, genkey">
-        <signjar destDir="${build.dir}/dist" keystore="${keystore}"
-            storepass="${env.KEYSTOREPASS}" keypass="${env.KEYSTOREPASS}"
-            alias="${keyalias}">
-            <path>
-                <fileset dir="${build.dir}/tmp" includes="**/*.jar" />
-            </path>
-        </signjar>
-        <copy todir="${build.dir}/dist" verbose="true">
-            <fileset dir="${src.dir}" includes="**/*.jnlp" />
-            <filterset>
-                <filter token="TARGET" value="${target}" />
-                <filter token="NOTE1" value="${generated1}" />
-                <filter token="NOTE2" value="${generated2}" />
-                <filter token="REL_JAR" value="${rel.jar}" />
-                <filter token="REL" value="${version}" />
-                <filter token="DEPLOY" value="${jnlp.deploy}" />
-                <filter token="CODE_BASE" value="${jnlp.code.base}" />
-                <filter token="HOME_PAGE" value="${jnlp.home.page}" />
-            </filterset>
-            <flattenmapper/>
-        </copy>
+	
+    <target name="jnlp" depends="prepare" description="generate jnlp files">
+        <jnlp jnlp.base.name="bwViewer" 
+              jnlp.main.class="nl.BobbinWork.viewer.gui.BWViewer" 
+              jnlp.application.name="Diagram Viewer"
+              jnlp.application.description="Working diagrams for bobbin lace"
+        	  jnlp.application.kind="Play with grounds"
+        />
+        <jnlp jnlp.base.name="bwpGrid" 
+              jnlp.main.class="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" 
+              jnlp.application.name="Polar Grid Generator"
+              jnlp.application.description="Polar grids for bobbin lace"
+        	  jnlp.application.kind= "Polar grids that don't distort"
+        />
     </target>
     
+    <target name="all" depends="jnlp, diagrams, grids"/>
 
 </project>
