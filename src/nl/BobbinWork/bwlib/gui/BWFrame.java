@@ -23,7 +23,7 @@ public class BWFrame extends JFrame {
         setBundle(bundle);
         URL iocnURL = getClass().getClassLoader().getResource(ICON);
 		setSize(700, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setIconImage(getToolkit().getImage(iocnURL));
 	}
 }

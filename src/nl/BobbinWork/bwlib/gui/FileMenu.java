@@ -1,4 +1,4 @@
-package nl.BobbinWork.bwlib.io;
+package nl.BobbinWork.bwlib.gui;
 
 import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
@@ -24,7 +24,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.getString;
-import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.bwlib.io.BWFileFilter;
+import nl.BobbinWork.bwlib.io.NamedInputStream;
 
 @SuppressWarnings("serial")
 public class FileMenu extends JMenu {
@@ -93,7 +94,8 @@ public class FileMenu extends JMenu {
         jMenuItem = new LocaleMenuItem("MenuFile_New", VK_N, CTRL_MASK); //$NON-NLS-1$
         jMenuItem.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-            	InputStream stream = getClass().getClassLoader().getResourceAsStream(newFileName);
+        		clearSelectedFile();
+        		InputStream stream = getClass().getClassLoader().getResourceAsStream(newFileName);
             	e.setSource(new NamedInputStream(newFileName, stream));
             	inputStreamListener.actionPerformed(e);
         	}
@@ -122,7 +124,7 @@ public class FileMenu extends JMenu {
     }
     
     
-	public void clearSelectedFile() {
+	public final void clearSelectedFile() {
 		if (fileChooser != null) fileChooser.setSelectedFile(null);
 	}
 

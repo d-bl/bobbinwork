@@ -51,11 +51,11 @@ import javax.swing.event.TreeSelectionListener;
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.CPanel;
 import nl.BobbinWork.bwlib.gui.CursorController;
+import nl.BobbinWork.bwlib.gui.FileMenu;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleButton;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.SplitPane;
-import nl.BobbinWork.bwlib.io.FileMenu;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.gui.InteractiveDiagramPanel;
@@ -160,13 +160,20 @@ public class BWViewer {
 		};
 		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,CAPTION);
 		frame.setTitle(helpMenu.getVersionedCaption());
-		FileMenu fileMenu = new FileMenu( inputStreamListener, saveListener, NEW_DIAGRAM);
+		final FileMenu fileMenu = new FileMenu( inputStreamListener, saveListener, NEW_DIAGRAM);
+		
+		ActionListener inputStreamListener2 = new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				fileMenu.clearSelectedFile();
+				NamedInputStream is = (NamedInputStream)e.getSource();
+				loadFromStream( is.getName(), is.getStream() );
+		}};
 
 		JMenuBar jMenuBar;
 		jMenuBar = new JMenuBar();
 		jMenuBar.add(fileMenu);
-		jMenuBar.add(new SampleDiagramChooser(frame,inputStreamListener));
-		jMenuBar.add(new GroundChooser(inputStreamListener)); 
+		jMenuBar.add(new SampleDiagramChooser(frame,inputStreamListener2));
+		jMenuBar.add(new GroundChooser(inputStreamListener2)); 
 		jMenuBar.add(helpMenu); 
 		frame.setJMenuBar(jMenuBar);
 	}
