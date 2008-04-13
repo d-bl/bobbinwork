@@ -21,17 +21,11 @@
     -->
 
     <property name="build.dir" location="build" />
-    <property file="../ant.properties" /><!-- at least: 
-        keystore (e.g. in ${build.dir} don't share with other projects or rewrite genkey task) 
-        keyalias 
-        svn.revision (of the jar on http://code.google.com/p/bobbinwork/downloads/list)
-        -->
-    <property environment="env" /><!-- at least: 
-        KEYSTOREPASS 
-        JAVA_HOME (jdk, not jre)
-        -->
+	<property name="svn.revision.of.published.jar" value="xxx" />
+	<property file="../ant.properties" />
+    <property environment="env" /><!-- at least: JAVA_HOME (jdk, not jre) -->
             
-    <property name="version" value="2.0.${svn.revision}" /><!--  
+    <property name="version" value="2.0.${svn.revision.of.published.jar}" /><!--  
         base number signals compatibillity issues with basicStitches.xml? -->
     
     <property name="jnlp.deploy" value="http://bobbinwork.googlecode.com/svn/trunk/webstart" />
@@ -43,14 +37,8 @@
     <property name="src.dir" location="src" />
     <property name="rel.jar" value="-rel-${version}.jar" />
     
-    <property name="generated1" value="do not change this file, it is generated"/> 
-    <property name="generated2" value="move to @DEPLOY@ and commit AFTER uploading and testing" />
-    <property name="generated3" value="the jar to @CODE_BASE@" />
-
-    <property name="grid.jar.path"
-        location="${build.dir}/bwpGrid${rel.jar}" />
-    <property name="bwViewer.jar.path"
-        location="${build.dir}/bwViewer${rel.jar}" />
+    <property name="grid.jar.path" location="${build.dir}/bwpGrid${rel.jar}" />
+    <property name="bwViewer.jar.path" location="${build.dir}/bwViewer${rel.jar}" />
 
     <path id="project.classpath">
         <fileset dir="${env.JAVA_HOME}/lib">
