@@ -32,19 +32,7 @@
     <property name="jnlp.code.base" value="http://bobbinwork.googlecode.com/files" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
     <property name="target" value="1.5" />
-
-    <property name="doc.dir" location="doc" />
-    <property name="src.dir" location="src" />
-    <property name="rel.jar" value="-rel-${version}.jar" />
-    
-    <property name="grid.jar.path" location="${build.dir}/bwpGrid${rel.jar}" />
-    <property name="bwViewer.jar.path" location="${build.dir}/bwViewer${rel.jar}" />
-
-    <path id="project.classpath">
-        <fileset dir="${env.JAVA_HOME}/lib">
-            <include name="*.jar" />
-        </fileset>
-    </path>
+    <property name="jar.suffix" value="-rel-${version}.jar" />
 
     <macrodef name="jnlp">
         <attribute name="jnlp.base.name" default="NOT-SET"/>
@@ -78,13 +66,26 @@
                   <update check="timeout" policy="always"/>
                   <resources>
                     <java version="${target}+"/>
-                    <jar href="@{jnlp.base.name}${rel.jar}" download="eager" main="true"/>
+                    <jar href="@{jnlp.base.name}${jar.suffix}" download="eager" main="true"/>
                   </resources>
                   <application-desc main-class="@{jnlp.main.class}"/>
                 </jnlp>
             </echoxml>
         </sequential>
     </macrodef>
+
+    <path id="project.classpath">
+        <fileset dir="${env.JAVA_HOME}/lib">
+            <include name="*.jar" />
+        </fileset>
+        <fileset dir="C:\Program Files\eclipse\plugins\org.junit_3.8.2.v200706111738"><!-- 
+                    C:\Program Files\eclipse\plugins\org.junit4_4.3.1  ../3rdParty/junit4.4 -->
+            <include name="junit.jar" />
+        </fileset>
+        <fileset dir="${build.dir}">
+            <include name="*.jar" />
+        </fileset>
+    </path>
 
     <target name="clean" description="Remove all generated files.">
         <delete dir="${build.dir}" />
@@ -93,21 +94,20 @@
     <target name="prepare"
         description="Create the output directories.">
         <mkdir dir="${build.dir}/tmp" />
+        <mkdir dir="${build.dir}/tmptest" />
         <mkdir dir="${build.dir}" />
     </target>
 
-    <target name="compile" description="create class files from java sources" depends="prepare">
-        <javac srcdir="${src.dir}" destdir="${build.dir}/tmp" target="${target}">
+    <target name="compile" depends="prepare" description="create class files from java sources">
+        <javac srcdir="src" destdir="${build.dir}/tmp" target="${target}">
             <classpath refid="project.classpath" />
         </javac>
     </target>
 
-	<target name="diagrams"
-        description="create viewer of bobbin lace working diagrams"
-        depends="compile">
-        <jar destfile="${bwViewer.jar.path}">
+	<target name="diagrams" depends="compile" description="create viewer of bobbin lace working diagrams">
+        <jar destfile="${build.dir}/bwViewer${jar.suffix}">
             <fileset dir="${build.dir}/tmp" includes="**" excludes="**/grids/**" />
-            <fileset dir="${src.dir}" includes="**" excludes="**/grids/**, **/*.java"/>
+            <fileset dir="src" includes="**" excludes="**/grids/**, **/*.java"/>
             <manifest>
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
@@ -117,12 +117,10 @@
         </jar>
     </target>
 
-    <target name="grids"
-        description="create polar grid generator"
-        depends="compile">
-        <jar destfile="${grid.jar.path}">
+    <target name="grids" depends="compile" description="create polar grid generator">
+        <jar destfile="${build.dir}/bwpGrid${jar.suffix}">
             <fileset dir="${build.dir}/tmp" includes="**/grids/**, **/bwlib/**/Localizer.java, **/bwlib/**/*Browse.java" />
-            <fileset dir="${src.dir}" includes="**/bwlib/**, **/grids/**" excludes="**/*.java"/>
+            <fileset dir="src" includes="**/bwlib/**, **/grids/**" excludes="**/*.java"/>
             <manifest>
             	<attribute name="Java-Version" value="${target}" /> 
             	<attribute name="Implementation-Version" value="${version}" /> 
@@ -132,6 +130,26 @@
         </jar>
     </target>
 	
+    <target name="testCompile" depends="compile, grids, diagrams" description="create class files from test sources">
+    	<javac srcdir="JUnitTests" destdir="${build.dir}/tmptest">
+            <classpath refid="project.classpath" />
+        </javac>
+    </target>
+        
+    <target name="testJar" depends="testCompile" description="create jar from compiled test classes">
+    	<jar destfile="${build.dir}/test.jar">
+            <fileset dir="${build.dir}/tmptest" includes="**/*.*"/>
+        </jar>
+    </target>
+            
+    <target name="testRun" depends="testJar" description="run test classes">
+    	<junit printsummary="yes" haltonfailure="yes">
+		  <test name="nl.BobbinWork.diagram.math.TestNearestPoint" haltonfailure="no" outfile="NP.txt">
+		    <formatter type="xml"/>
+		  </test>
+    	</junit>
+    </target>
+
     <target name="jnlp" depends="prepare" description="generate jnlp files">
         <jnlp jnlp.base.name="bwViewer" 
               jnlp.main.class="nl.BobbinWork.viewer.gui.BWViewer" 
@@ -147,6 +165,6 @@
         />
     </target>
     
-    <target name="all" depends="jnlp, diagrams, grids"/>
+    <target name="all" depends="jnlp, testRun"/>
 
 </project>
