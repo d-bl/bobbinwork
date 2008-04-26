@@ -18,10 +18,7 @@
 
 
 package nl.BobbinWork.diagram.model;
-import static nl.BobbinWork.diagram.math.NearestPoint.onCurve;
-
 import java.awt.Shape;
-import java.awt.geom.Point2D;
 import java.util.Vector;
 
 import org.w3c.dom.Element;
@@ -92,12 +89,7 @@ abstract class MultiplePairsPartition extends MultipleThreadsPartition {
     public ThreadSegment getThreadAt(int x, int y) {
         Switch s = (Switch) getSwitchAt(x, y);
         if (s != null) {
-            ThreadSegment front = s.getFront();
-            ThreadSegment back = s.getBack();
-            Point2D mouse = new Point2D.Double(x, y); 
-        	Double frontDistance = onCurve(front.getCurve(), mouse, null);
-        	Double backDistance = onCurve(back.getCurve(), mouse, null);
-            return frontDistance < backDistance ? front : back;
+        	return s.getFront(); 
         } else {
             return null;
         }
