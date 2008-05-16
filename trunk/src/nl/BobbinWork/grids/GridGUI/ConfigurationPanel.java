@@ -18,12 +18,14 @@
 
 package nl.BobbinWork.grids.GridGUI;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.EventHandler;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
+import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import nl.BobbinWork.grids.PolarGridModel.DensityChange;
@@ -33,37 +35,38 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  * @author  J. Falkink-Pol
  */
 @SuppressWarnings("serial")
-public class PolarGridDefinitionPanel
-        
-        extends
-        javax.swing.JPanel
-        
-        implements
-        java.awt.event.ActionListener,
-        PropertyChangeListener,
-        ChangeListener {
+public class ConfigurationPanel extends JPanel {
     
     private static double MAX_DIAMETER=500d;
     private static double MIN_DIAMETER=1d;
     private static double DIAMETER_STEP=0.1d;
     
     private static String dir = "nl/BobbinWork/grids/help/";
-    private String[] distanceComboStrings =
-    { comboRow  (dir+"DistOptNull.gif")
-      , comboRow(dir+"DistOptNew.gif")
-      , comboRow(dir+"DistOptAvg.gif")
-      , comboRow(dir+"DistOptOld.gif")
-    }; // ascending order
-    
+    private String[] distanceComboStrings ={ 
+    		comboRow(dir+"DistOptNull.gif"), 
+    		comboRow(dir+"DistOptNew.gif"), 
+    		comboRow(dir+"DistOptAvg.gif"), 
+    		comboRow(dir+"DistOptOld.gif")}; // ascending order
+
     private java.util.ResourceBundle bundle = null;
     private PolarGridModel pgm = null;
     
     /** Creates new form PolarGridDefinitionPanel */
-    public PolarGridDefinitionPanel(PolarGridModel pgm, java.util.ResourceBundle bundle) {
+    public ConfigurationPanel(PolarGridModel pgm, java.util.ResourceBundle bundle) {
         
-        this.bundle = bundle;
+    	this.bundle = bundle;
         initComponents();
         setModel(pgm);
+    }
+    
+    private JSpinner[] spinners() {
+    	return new JSpinner[] {
+    			spiNumberOfRepeats, 
+    			spiDotsPerRepeat, 
+    			spiAngleOnFootside, 
+    			spiInnerDiameter,
+    			spiOuterDiameter,
+    			spiDiameterDensityChange};
     }
     
     private String comboRow(String imageFile) {
@@ -73,31 +76,6 @@ public class PolarGridDefinitionPanel
     public void setModel(PolarGridModel pgm) {
         this.pgm = pgm;
         this.connectComponents();
-    }
-    
-    public void propertyChange(PropertyChangeEvent e) {
-        this.fromModelToLabels();
-    }
-    
-    public void stateChanged(javax.swing.event.ChangeEvent e) {
-        this.fromModelToLabels();
-    }
-    
-    public void actionPerformed(ActionEvent e) {
-        this.fromModelToLabels();
-    }
-    
-    /** Adds a listener to any semantic event of the objects on the panel. */
-    public void addListener(Object listener) {
-        spiNumberOfRepeats      .getModel().addChangeListener( (ChangeListener) listener);
-        spiDotsPerRepeat        .getModel().addChangeListener( (ChangeListener) listener);
-        spiAngleOnFootside      .getModel().addChangeListener( (ChangeListener) listener);
-        spiInnerDiameter        .getModel().addChangeListener( (ChangeListener) listener);
-        spiOuterDiameter        .getModel().addChangeListener( (ChangeListener) listener);
-        spiDiameterDensityChange.getModel().addChangeListener( (ChangeListener) listener);
-        cbxAlternate            .addActionListener        ( (ActionListener        ) listener);
-        cmbDistanceOption       .addActionListener        ( (ActionListener        ) listener);
-        cmbLegRatio             .addActionListener        ( (ActionListener        ) listener);
     }
     
     private void connectComponents( ) {
@@ -116,14 +94,7 @@ public class PolarGridDefinitionPanel
         cbxAlternate            .setSelected      ( dc.getAlternate() );
         cmbDistanceOption       .setSelectedIndex ( dc.getDistanceOption() );
         
-        // keep the computed labels up to date (triggering this.fromModelToLabels)
-        spiNumberOfRepeats      .addChangeListener(this);
-        spiDotsPerRepeat        .addChangeListener(this);
-        spiInnerDiameter        .addChangeListener(this);
-        spiOuterDiameter        .addChangeListener(this);
-        spiDiameterDensityChange.addChangeListener(this);
-        cmbLegRatio             .addActionListener(this);
-        cmbDistanceOption       .addActionListener(this);
+        addModelToLabelListeners();
         
         // from panel fields to pgm
         spiNumberOfRepeats.getModel().addChangeListener( (ChangeListener) EventHandler.create(ChangeListener.class,
@@ -147,41 +118,90 @@ public class PolarGridDefinitionPanel
         
         setDependencies();
     }
-    
-    private String roundString(double value) {
-        int v = (int) (value * 100D);
-        return String.valueOf( ((double)v) / 100 );
+
+    /** Adds listeners for semantic events to the objects on this panel. 
+     * @param toBeRepainted the component to be repainted by the listeners 
+     * */
+    public void addRepaintingListeners( final Component toBeRepainted ) {
+
+        final class RepaintingListener implements ActionListener, ChangeListener {
+
+        	public void stateChanged(ChangeEvent e) {
+    			toBeRepainted.repaint();
+    	    }
+    	    
+        	public void actionPerformed(ActionEvent e) {
+    			toBeRepainted.repaint();
+    	    }
+        }
+        
+        RepaintingListener repaintingListener = new RepaintingListener();
+        
+    	cbxAlternate      .addActionListener( repaintingListener );
+    	cmbLegRatio       .addActionListener( repaintingListener );
+    	cmbDistanceOption .addActionListener( repaintingListener );
+
+    	for (JSpinner spinner : spinners() ) {
+    		spinner.getModel().addChangeListener(repaintingListener);
+    	}
     }
     
-    /** Keeps the computed labels up to date. */
-    // TODO: called 10 times when the visible button is pushed, 5 times when focus changes to another field
-    private void fromModelToLabels() {
+    /** Adds listeners for semantic events to the objects on this panel. */
+	private void addModelToLabelListeners() {
+		// keep the computed labels up to date (triggering this.fromModelToLabels)
+        ModelToLabelListener listener = new ModelToLabelListener();
+    	for (JSpinner spinner : spinners() ) {
+    		spinner.addChangeListener(listener);
+    	}
+    	cmbLegRatio      .addActionListener(listener);
+        cmbDistanceOption.addActionListener(listener);
+	}
     
-        DensityChange dc = ((DensityChange) pgm.getInnerCircle().getNext());
-        
-        int numberOfRpeats = pgm.getNumberOfRepeats();
-        double densityCircumference = dc.getCircumference();
-        double innerCircumeference = pgm.getInnerCircle().getCircumference();
-        double outerCircumference = pgm.getOuterCircle().getCircumference();
-        double averageCircumference = (innerCircumeference + outerCircumference ) / 2;
-    
-        lblCircumInside.setText( roundString( innerCircumeference ));
-        lblCircumOutside.setText( roundString( outerCircumference ));
-        lblCircumDensityChange.setText( roundString( densityCircumference ));
-        
-        int numberOfDots = pgm.getDotsPerRepeat() * numberOfRpeats;
-        lblDistanceInside.setText( roundString( innerCircumeference / numberOfDots) );
-        lblDistanceInsideStraight.setText( roundString( averageCircumference / numberOfDots) );
-        lblDistanceOldDensityStraight.setText( roundString( averageCircumference / numberOfDots) );
-        lblDistanceOldDensity.setText( roundString( densityCircumference / numberOfDots));
-        
-        numberOfDots = dc.getDotsPerRepeat() * numberOfRpeats;
-        lblDistanceOutside.setText( roundString( outerCircumference / numberOfDots));
-        lblDistanceOutsideStraight.setText( roundString( averageCircumference / numberOfDots) );
-        lblDistanceNewDensityStraight.setText( roundString( averageCircumference / numberOfDots) );
-        lblDistanceNewDensity.setText( roundString( densityCircumference / numberOfDots));
-        
-        setDependencies();
+    private class ModelToLabelListener implements ActionListener, ChangeListener {
+
+    	private String roundString(double value) {
+    		int v = (int) (value * 100D);
+    		return String.valueOf( ((double)v) / 100 );
+    	}
+    	
+    	public void stateChanged(ChangeEvent e) {
+	        fromModelToLabels();
+	    }
+	    
+    	public void actionPerformed(ActionEvent e) {
+	        fromModelToLabels();
+	    }
+	    
+	    /** Keeps the computed labels up to date. */
+	    // TODO: called 10 times when the visible button is pushed, 5 times when focus changes to another field
+	    private void fromModelToLabels() {
+	    	
+	    	DensityChange dc = ((DensityChange) pgm.getInnerCircle().getNext());
+	    	
+	    	int numberOfRpeats = pgm.getNumberOfRepeats();
+	    	double densityCircumference = dc.getCircumference();
+	    	double innerCircumeference = pgm.getInnerCircle().getCircumference();
+	    	double outerCircumference = pgm.getOuterCircle().getCircumference();
+	    	double averageCircumference = (innerCircumeference + outerCircumference ) / 2;
+	    	
+	    	lblCircumInside.setText( roundString( innerCircumeference ));
+	    	lblCircumOutside.setText( roundString( outerCircumference ));
+	    	lblCircumDensityChange.setText( roundString( densityCircumference ));
+	    	
+	    	int numberOfDots = pgm.getDotsPerRepeat() * numberOfRpeats;
+	    	lblDistanceInside.setText( roundString( innerCircumeference / numberOfDots) );
+	    	lblDistanceInsideStraight.setText( roundString( averageCircumference / numberOfDots) );
+	    	lblDistanceOldDensityStraight.setText( roundString( averageCircumference / numberOfDots) );
+	    	lblDistanceOldDensity.setText( roundString( densityCircumference / numberOfDots));
+	    	
+	    	numberOfDots = dc.getDotsPerRepeat() * numberOfRpeats;
+	    	lblDistanceOutside.setText( roundString( outerCircumference / numberOfDots));
+	    	lblDistanceOutsideStraight.setText( roundString( averageCircumference / numberOfDots) );
+	    	lblDistanceNewDensityStraight.setText( roundString( averageCircumference / numberOfDots) );
+	    	lblDistanceNewDensity.setText( roundString( densityCircumference / numberOfDots));
+	    	
+	    	setDependencies();
+	    }
     }
     
     private void setDependencies() {
@@ -748,5 +768,5 @@ public class PolarGridDefinitionPanel
     private javax.swing.JSpinner spiOuterDiameter;
     // End of variables declaration//GEN-END:variables
     // </editor-fold>
-    
+
 }
