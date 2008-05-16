@@ -27,8 +27,6 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
@@ -36,57 +34,22 @@ import java.awt.geom.Point2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
 
 import javax.swing.JPanel;
 
+import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
+
 @SuppressWarnings("serial")
-public class PolarGridDrawPanel
-        
-        extends
-        JPanel
-        
-        implements
-        Printable,
-        ActionListener,
-        java.beans.PropertyChangeListener, 
-        javax.swing.event.ChangeListener {
+public class PreviewPanel extends JPanel implements Printable {
     
-    private nl.BobbinWork.grids.PolarGridModel.PolarGridModel pgm = null;
+    private PolarGridModel pgm = null;
     
-    public PolarGridDrawPanel() {
+    public PreviewPanel() {
         setBackground(Color.white);
     }
     
-    public void setPolarGridModel(nl.BobbinWork.grids.PolarGridModel.PolarGridModel pgm ) {
+    public void setPolarGridModel(PolarGridModel pgm ) {
         this.pgm = pgm;
-    }
-    
-    public void propertyChange(java.beans.PropertyChangeEvent e) {
-        // listens to the text fields on the defPanel
-        this.repaint();
-    }
-    public void stateChanged(javax.swing.event.ChangeEvent e) {
-        // listens to the spinners on the defPanel
-        this.repaint();
-    }
-    public void actionPerformed(ActionEvent e) {
-        
-        if ( e.getActionCommand().equalsIgnoreCase("print" ) ) {
-            
-            PrinterJob printJob = PrinterJob.getPrinterJob();
-            printJob.setPrintable(this);
-            if (printJob.printDialog()) {
-                try {
-                    printJob.print();
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
-            }
-        } else {
-            // listens to the refresh menu item and the non text fields on the defPanel
-            this.repaint();
-        }
     }
     
     public void paintComponent(Graphics g) {
@@ -108,7 +71,7 @@ public class PolarGridDrawPanel
         
         // don't only show the south east part of the circle
         double radius = pgm.getOuterCircle().getDiameter() / 2D;
-        radius *= nl.BobbinWork.grids.PolarGridModel.PolarGridModel.SCALE_MM;
+        radius *= PolarGridModel.SCALE_MM;
         // respect the margin
         radius += margin;
         g2.translate(radius, Math.min(radius, 324D) ); // verticaly on the center of the paper

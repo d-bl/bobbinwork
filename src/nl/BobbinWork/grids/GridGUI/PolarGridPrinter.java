@@ -18,13 +18,31 @@
 
 package nl.BobbinWork.grids.GridGUI;
 
+import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
+import static java.util.Locale.getDefault;
+import static java.util.ResourceBundle.getBundle;
+
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.print.PrinterJob;
+import java.util.Locale;
+
+import static java.awt.BorderLayout.WEST;
+import static java.awt.BorderLayout.CENTER;
 
 import javax.swing.JFrame;
-
-import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
+import static javax.swing.SwingUtilities.invokeLater;
+import static javax.swing.UIManager.setLookAndFeel;
+import static javax.swing.UIManager.getSystemLookAndFeelClassName;
+import static javax.swing.KeyStroke.getKeyStroke;
 
 /**
  *
@@ -32,7 +50,7 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  */
 
 @SuppressWarnings("serial")
-public class PolarGridPrinter extends JFrame implements ActionListener {
+public class PolarGridPrinter extends JFrame  {
     
     static private final AboutInfo aboutInfo = new AboutInfo
             ( " BobbinWork - Polar Grid" // caption
@@ -45,15 +63,15 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
     static private final String bundleName = "nl/BobbinWork/grids/GridGUI/labels";
     static private java.util.ResourceBundle bundle = null; // set in main
     
-    private PolarGridDefinitionPanel defPanel = null; // set in constructor
-    private PolarGridDrawPanel gridPanel = null; // set in constructor
+    private ConfigurationPanel configurationPanel = null; // set in constructor
+    private PreviewPanel previewPanel = null; // set in constructor
     
     public PolarGridPrinter() {
         
         PolarGridModel pgm = new PolarGridModel();
-        defPanel = new PolarGridDefinitionPanel(pgm,bundle);
-        gridPanel = new PolarGridDrawPanel();
-        gridPanel.setPolarGridModel(pgm);
+        configurationPanel = new ConfigurationPanel(pgm,bundle);
+        previewPanel = new PreviewPanel();
+        previewPanel.setPolarGridModel(pgm);
         
         java.awt.Image icon = null;
         
@@ -65,18 +83,24 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         }
         JMenuItemAbout jMenuItemAbout = new JMenuItemAbout(aboutInfo, bundle);
         
-        javax.swing.JScrollPane diagramScrollPane = new javax.swing.JScrollPane(gridPanel);
-        getContentPane().add(java.awt.BorderLayout.WEST, defPanel);
-        getContentPane().add(java.awt.BorderLayout.CENTER, diagramScrollPane);
-        defPanel.addListener(gridPanel);
-        diagramScrollPane.setPreferredSize(new java.awt.Dimension(250, 250));
+        JScrollPane gridScrollPane = new JScrollPane(previewPanel);
+        JScrollPane defScrollPane = new JScrollPane(configurationPanel);
+        
+        gridScrollPane.setPreferredSize(new Dimension(250, 250));
+        Dimension dimension = defScrollPane.getPreferredSize();
+        dimension.width += 40;
+        defScrollPane.setPreferredSize(dimension);
+        
+        getContentPane().add(WEST, defScrollPane);
+        getContentPane().add(CENTER, gridScrollPane);
+        configurationPanel.addRepaintingListeners(previewPanel);
         
         /* ---- menu ---- */
         
-        javax.swing.JMenu menu;
-        javax.swing.JMenuItem jMenuItem;
+        JMenu menu;
+        JMenuItem jMenuItem;
         
-        javax.swing.JMenuBar jMenuBar = new javax.swing.JMenuBar();
+        JMenuBar jMenuBar = new javax.swing.JMenuBar();
         setJMenuBar(jMenuBar);
         
         menu = new javax.swing.JMenu(bundle.getString("MenuFile_File"));
@@ -85,19 +109,19 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         
         jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_New"));
         jMenuItem.setMnemonic(bundle.getString("MenuFile_New_Underline").charAt(0));
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem.setEnabled(false);
         menu.add(jMenuItem);
         
         jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Open"));
         jMenuItem.setMnemonic(bundle.getString("MenuFile_Open_Underline").charAt(0));
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem.setEnabled(false);
         menu.add(jMenuItem);
         
         jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Save"));
         jMenuItem.setMnemonic(bundle.getString("MenuFile_Save_Underline").charAt(0));
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem.setEnabled(false);
         menu.add(jMenuItem);
         
@@ -111,9 +135,21 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Print"));
         jMenuItem.setMnemonic(bundle.getString("MenuFile_Print_Underline").charAt(0));
         jMenuItem.setActionCommand("print");
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem.setToolTipText(bundle.getString("MenuFile_print_ToolTip"));
-        jMenuItem.addActionListener(gridPanel);
+        jMenuItem.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent actionEvent) {
+	            PrinterJob printJob = PrinterJob.getPrinterJob();
+	            printJob.setPrintable(previewPanel);
+	            if (printJob.printDialog()) {
+	                try {
+	                    printJob.print();
+	                } catch (Exception ex) {
+	                    ex.printStackTrace();
+	                }
+	            }
+			}});
         menu.add(jMenuItem);
         
         menu.add(new javax.swing.JSeparator());
@@ -121,7 +157,7 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         jMenuItem = new JMenuItemExit(bundle);
         jMenuItem.setMnemonic(bundle.getString("MenuFile_Exit_Underline").charAt(0));
         jMenuItem.setText(bundle.getString("MenuFile_Exit"));
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
         menu.add(jMenuItem);
         
         /**/
@@ -132,9 +168,20 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         
         jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuView_Refresh"));
         jMenuItem.setMnemonic(bundle.getString("MenuView_Refresh_Underline").charAt(0));
-        jMenuItem.setActionCommand("refresh");
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
-        jMenuItem.addActionListener(this);
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_F5, 0));
+        jMenuItem.addActionListener(new ActionListener(){
+
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                for ( int i=0 ; i<configurationPanel.getComponentCount() ; i++ ) {
+                    if ( configurationPanel.getComponent(i).isFocusOwner() ) {
+                        configurationPanel.requestFocusInWindow();
+                        configurationPanel.getComponent(i).requestFocus();
+                        break;
+                    }
+                }
+            }
+            
+        });
         menu.add(jMenuItem);
         
         menu.add(new javax.swing.JSeparator());
@@ -167,7 +214,7 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         jMenuBar.add( menu );
         
         jMenuItem = new JMenuItemBrowse(unknownBrowser, icon, aboutInfo.getCaption());
-        jMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_F1, 0));
         jMenuItem.setText(bundle.getString("MenuHelp_Overview"));
         jMenuItem.setMnemonic(bundle.getString("MenuHelp_Overview_Underline").charAt(0));
         jMenuItem.setActionCommand(dir+"help.html");
@@ -195,18 +242,6 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
         
     }
     
-    public void actionPerformed(java.awt.event.ActionEvent e) {
-        if ( e.getActionCommand().equals("refresh") ) {
-            for ( int i=0 ; i<defPanel.getComponentCount() ; i++ ) {
-                if ( defPanel.getComponent(i).isFocusOwner() ) {
-                    defPanel.requestFocusInWindow();
-                    defPanel.getComponent(i).requestFocus();
-                    break;
-                }
-            }
-        }
-    }
-    
     /**
      * Create the GUI and show it.  For thread safety,
      * this method should be invoked from the
@@ -215,7 +250,7 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
     private static void createAndShowGUI() {
         
         //Create and set up the window.
-        javax.swing.JFrame frame = new PolarGridPrinter();
+        JFrame frame = new PolarGridPrinter();
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         
         //Display the window.
@@ -226,25 +261,25 @@ public class PolarGridPrinter extends JFrame implements ActionListener {
     public static void main(String args[]){
         
         try {
-            javax.swing.UIManager.setLookAndFeel( javax.swing.UIManager.getSystemLookAndFeelClassName() );
+            setLookAndFeel( getSystemLookAndFeelClassName() );
             //com.sun.java.swing.plaf.windows.WindowsLookAndFeel() );
         } catch (Exception e) {
             e.printStackTrace();
         }
         
-        java.util.Locale locale;
+        Locale locale;
         if ( args.length > 0 ) {
-            locale = new java.util.Locale(args[0]);
+            locale = new Locale(args[0]);
         } else {
-            locale = new java.util.Locale
-            ( java.util.Locale.getDefault().getLanguage()
-            , java.util.Locale.getDefault().getCountry()
+            locale = new Locale
+            ( getDefault().getLanguage()
+            , getDefault().getCountry()
             );
         }
         setBundle(bundleName, locale);
-        bundle = java.util.ResourceBundle.getBundle( bundleName, locale); // TODO: deprecated
+        bundle = getBundle( bundleName, locale); // TODO: deprecated
         
         //Schedule a job for the event-dispatching thread:
-        javax.swing.SwingUtilities.invokeLater(new Runnable() { public void run() { createAndShowGUI();} });
+        invokeLater(new Runnable() { public void run() { createAndShowGUI();} });
     }
 }
