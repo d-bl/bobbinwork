@@ -28,6 +28,8 @@ import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.Locale;
@@ -54,47 +56,49 @@ public class PolarGridPrinter extends JFrame  {
 	private static final String YEARS = "2005-2008";  //$NON-NLS-1$  
 	private static final String CAPTION = "Polar Grids"; // gets extended by the help menu  //$NON-NLS-1$  
 
-    static private final String dir = "nl/BobbinWork/grids/help/";
-    static private final String iconUrl = dir + "bobbin.gif";
-    static private final String bundleName = "nl/BobbinWork/grids/GridGUI/labels";
-    
-    private ConfigurationPanel configurationPanel;
-    private PreviewPanel previewPanel;
+    static private final String ICON_URL = "nl/BobbinWork/grids/help/bobbin.gif";
+    static private final String BUNDLE_NAME = "nl/BobbinWork/grids/GridGUI/labels";
     
     public PolarGridPrinter() {
         
-        PolarGridModel pgm = new PolarGridModel();
-        configurationPanel = new ConfigurationPanel(pgm);
-        previewPanel = new PreviewPanel();
+    	java.net.URL url = getClass().getClassLoader().getResource(ICON_URL);
+    	if ( url != null ) {
+    		Image icon = this.getToolkit().getImage(url);
+    		setIconImage(icon);
+    	}
+    	
+        final PolarGridModel pgm = new PolarGridModel();
+        final PreviewPanel previewPanel = new PreviewPanel();
+        final ConfigurationPanel configurationPanel = new ConfigurationPanel(pgm);
+        final JScrollPane previewScrollPane = new JScrollPane(previewPanel);
+        final JScrollPane configurationScrollPane = new JScrollPane(configurationPanel);
+        
         previewPanel.setPolarGridModel(pgm);
-        
-        java.awt.Image icon = null;
-        
-        java.net.URL url = getClass().getClassLoader().getResource(iconUrl);
-        if ( url != null ) {
-            icon = this.getToolkit().getImage(url);
-            setIconImage(icon);
-        }
-        
-        JScrollPane gridScrollPane = new JScrollPane(previewPanel);
-        JScrollPane defScrollPane = new JScrollPane(configurationPanel);
-        
-        gridScrollPane.setPreferredSize(new Dimension(250, 250));
-        Dimension dimension = defScrollPane.getPreferredSize();
-        dimension.width += 40;
-        defScrollPane.setPreferredSize(dimension);
-        
-        getContentPane().add(WEST, defScrollPane);
-        getContentPane().add(CENTER, gridScrollPane);
         configurationPanel.addRepaintingListeners(previewPanel);
+        previewScrollPane.setPreferredSize(new Dimension(250, 250));
+        addSpaceForScrollBar(configurationScrollPane);
         
-        /* ---- menu ---- */
-        
-        JMenu menu;
+        getContentPane().add(WEST, configurationScrollPane);
+        getContentPane().add(CENTER, previewScrollPane);
+        setJMenuBar( createMenuBar (previewPanel) );
+    }
+
+	private void addSpaceForScrollBar(JScrollPane scrollPane) {
+		
+		// don't let the need for one scroll bar introduce the need for another
+		
+		Dimension dimension = scrollPane.getPreferredSize();
+        dimension.width += 40;
+        dimension.height += 40;
+        scrollPane.setPreferredSize(dimension);
+	}
+
+	private JMenuBar createMenuBar(final PreviewPanel previewPanel) {
+		
+		JMenu menu;
         JMenuItem jMenuItem;
         
-        JMenuBar jMenuBar = new javax.swing.JMenuBar();
-        setJMenuBar(jMenuBar);
+        JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add( new PrintMenu(previewPanel) );
         
         menu = new javax.swing.JMenu(getString("MenuView_View"));
@@ -104,16 +108,9 @@ public class PolarGridPrinter extends JFrame  {
         jMenuItem = new LocaleMenuItem("MenuView_Refresh", KeyEvent.VK_F5, 0); 
         jMenuItem.addActionListener(new ActionListener(){
 
-            public void actionPerformed(java.awt.event.ActionEvent e) {
-                for ( int i=0 ; i<configurationPanel.getComponentCount() ; i++ ) {
-                    if ( configurationPanel.getComponent(i).isFocusOwner() ) {
-                        configurationPanel.requestFocusInWindow();
-                        configurationPanel.getComponent(i).requestFocus();
-                        break;
-                    }
-                }
-            }
-            
+        	public void actionPerformed(ActionEvent e) {
+        		previewPanel.repaint();
+    	    }
         });
         menu.add(jMenuItem);
         
@@ -124,12 +121,16 @@ public class PolarGridPrinter extends JFrame  {
         addScaleMenuItem(menu, "MenuView_inch", false);
         
 		final HelpMenu helpMenu = new HelpMenu(this, YEARS,CAPTION);
-		this.setTitle(helpMenu.getVersionedCaption());
+		setTitle(helpMenu.getVersionedCaption());
 		jMenuBar.add( helpMenu );
-    }
+		return jMenuBar;
+	}
 
-	private void addScaleMenuItem(JMenu menu, String bundleKeyBase,
+	private void addScaleMenuItem(
+			JMenu menu, 
+			String bundleKeyBase,
 			boolean enabled) {
+		
 		JMenuItem jMenuItem;
 		jMenuItem = new LocaleMenuItem(bundleKeyBase); 
 		jMenuItem.setEnabled(enabled);
@@ -170,7 +171,7 @@ public class PolarGridPrinter extends JFrame  {
             , getDefault().getCountry()
             );
         }
-        setBundle(bundleName, locale);
+        setBundle(BUNDLE_NAME, locale);
         
         //Schedule a job for the event-dispatching thread:
         invokeLater(new Runnable() { public void run() { createAndShowGUI();} });

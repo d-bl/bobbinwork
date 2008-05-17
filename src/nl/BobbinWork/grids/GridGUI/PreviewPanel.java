@@ -44,6 +44,7 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 public class PreviewPanel extends JPanel implements Printable, PrintablePreviewer {
     
     private PolarGridModel pgm = null;
+	private PageFormat pageFormat = new PageFormat();
     
     public PreviewPanel() {
         setBackground(Color.white);
@@ -55,31 +56,31 @@ public class PreviewPanel extends JPanel implements Printable, PrintablePreviewe
     
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        drawShapes( (Graphics2D) g, 5D, 180D);
+        drawShapes( (Graphics2D) g);
     }
     
     public int print(Graphics g, PageFormat pf, int pi) throws PrinterException {
         if (pi >= 1) {
             return Printable.NO_SUCH_PAGE;
         }
-        drawShapes( (Graphics2D) g, 75D, 0D);
+        drawShapes( (Graphics2D) g);
         return Printable.PAGE_EXISTS;
     }
     
-    private void drawShapes(Graphics2D g2, double margin, double rotation){
+    private void drawShapes(Graphics2D g2){
         
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         // don't only show the south east part of the circle
         double radius = pgm.getOuterCircle().getDiameter() / 2D;
         radius *= PolarGridModel.SCALE_MM;
-        // respect the margin
-        radius += margin;
+        radius += pageFormat.getImageableX(); // the margin
         g2.translate(radius, Math.min(radius, 324D) ); // verticaly on the center of the paper
         
-        // the repeat markings not starting from 3 o'clock but with 9 o'clock between the first two
+        // the repeat markings not starting from 3 o'clock 
+        // but with 9 o'clock between the first two
         g2.rotate(Math.toRadians( -360D/2D / (double) pgm.getNumberOfRepeats() ));
-        g2.rotate(Math.toRadians( rotation ));
+        g2.rotate(Math.toRadians( 180D ));
         
         //g2.rotate(Math.toRadians(-45D));
         //g2.shear(0.2D, 0.2D);
@@ -98,5 +99,8 @@ public class PreviewPanel extends JPanel implements Printable, PrintablePreviewe
     }
 
 	public void setPageFormat(PageFormat pageFormat) {
+		
+		this.pageFormat = pageFormat;
+		repaint();
 	}
 }
