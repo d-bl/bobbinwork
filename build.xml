@@ -165,6 +165,6 @@
         />
     </target>
     
-	<target name="all" depends="grids, diagrams, jnlp, testCompile"/><!--testRun-->
+	<target name="all" depends="grids, diagrams, jnlp, testJar"/><!--testRun-->
 
 </project>

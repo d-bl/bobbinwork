@@ -1,4 +1,4 @@
-package nl.BobbinWork.bwlib.gui;
+package nl.BobbinWork.viewer.guiUtils;
 
 import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.getString;
+import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.io.BWFileFilter;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
 

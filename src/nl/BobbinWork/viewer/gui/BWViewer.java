@@ -49,7 +49,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
-import nl.BobbinWork.bwlib.gui.FileMenu;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
@@ -59,6 +58,7 @@ import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 import nl.BobbinWork.viewer.guiUtils.CPanel;
 import nl.BobbinWork.viewer.guiUtils.CursorController;
+import nl.BobbinWork.viewer.guiUtils.FileMenu;
 import nl.BobbinWork.viewer.guiUtils.LocaleButton;
 import nl.BobbinWork.viewer.guiUtils.SplitPane;
 
