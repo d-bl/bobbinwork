@@ -16,7 +16,7 @@
     <Component class="javax.swing.JLabel" name="lblNumberOfRepeats">
       <Properties>
         <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="number_of_repeats_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="number_of_repeats_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Sans Serif" size="12" style="1"/>
@@ -26,13 +26,13 @@
           <ComponentRef name="spiNumberOfRepeats"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="number_of_repeats" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="number_of_repeats" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="number_of_repeats" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="number_of_repeats" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -59,7 +59,7 @@
     <Component class="javax.swing.JLabel" name="lblDotsPerRepeat">
       <Properties>
         <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="dots_per_repeat_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="dots_per_repeat_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Sans Serif" size="12" style="1"/>
@@ -69,16 +69,16 @@
           <ComponentRef name="spiDotsPerRepeat"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="dots_per_repeat" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="dots_per_repeat" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="dots_per_repeat_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="dots_per_repeat_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="dots_per_repeat" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="dots_per_repeat" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
@@ -106,7 +106,7 @@
     <Component class="javax.swing.JLabel" name="lblAngleOnFootside">
       <Properties>
         <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="angle_on_footside_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="angle_on_footside_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Sans Serif" size="12" style="1"/>
@@ -116,13 +116,13 @@
           <ComponentRef name="spiAngleOnFootside"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="angle_on_footside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="angle_on_footside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="angle_on_footside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="angle_on_footside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -149,19 +149,19 @@
           <Font name="MS Sans Serif" size="12" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_diameters" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_diameters" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_diameters_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_diameters_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_diameters" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_diameters" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_diameters_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_diameters_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -177,19 +177,19 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_circumference" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_circumference" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_circumference_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_circumference_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_circumference" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_circumference" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_circumference_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_circumference_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -205,19 +205,19 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_distance" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_distance" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_distance_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_distance_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_distance" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_distance" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_distances_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_distances_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -233,7 +233,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_straight" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_straight" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -250,7 +250,7 @@
         </Property>
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Col_Head_curved" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Col_Head_curved" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
@@ -263,7 +263,7 @@
     <Component class="javax.swing.JLabel" name="lblInSide">
       <Properties>
         <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_inside_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_inside_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Sans Serif" size="12" style="1"/>
@@ -272,17 +272,17 @@
           <ComponentRef name="spiInnerDiameter"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_inside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_inside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_inside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_inside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_inside_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_inside_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -294,7 +294,7 @@
     <Component class="javax.swing.JLabel" name="lblOutSide">
       <Properties>
         <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_outside_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_outside_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Sans Serif" size="12" style="1"/>
@@ -304,17 +304,17 @@
           <ComponentRef name="spiOuterDiameter"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_outside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_outside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_outside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_outside" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_outside_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_outside_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -513,7 +513,7 @@
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_ratio" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_ratio" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -569,7 +569,7 @@
         <Property name="horizontalAlignment" type="int" value="11"/>
         <Property name="text" type="java.lang.String" value=" . . "/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_old_density_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_old_density_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -584,7 +584,7 @@
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_old_density" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_old_density" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
@@ -625,7 +625,7 @@
         <Property name="horizontalAlignment" type="int" value="11"/>
         <Property name="text" type="java.lang.String" value=" . . "/>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_new_density_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_new_density_ToolTip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="focusable" type="boolean" value="false"/>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -640,7 +640,7 @@
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_new_density" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_new_density" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" value=""/>
       </AccessibilityProperties>
@@ -683,7 +683,7 @@
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_alternate" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_alternate" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -701,7 +701,7 @@
           <Connection code="new javax.swing.DefaultComboBoxModel(distanceComboStrings)" type="code"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Density_Option_Tooltip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Density_Option_Tooltip" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[90, 32]"/>
@@ -719,7 +719,7 @@
     <Component class="javax.swing.JLabel" name="lblDensityChange">
       <Properties>
         <Property name="displayedMnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_density_change_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_density_change_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="MS Sans Serif" size="12" style="1"/>
@@ -728,16 +728,16 @@
           <ComponentRef name="spiDiameterDensityChange"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_density_change" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_density_change" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="horizontalTextPosition" type="int" value="10"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_density_change" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_density_change" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="AccessibleContext.accessibleDescription" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Matrix_Row_Head_density_changes_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Matrix_Row_Head_density_changes_AccDesc" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
@@ -749,17 +749,17 @@
     <Component class="javax.swing.JButton" name="btnDraw">
       <Properties>
         <Property name="mnemonic" type="int" editor="org.netbeans.modules.i18n.form.FormI18nMnemonicEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Draw_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Draw_Underline" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Draw" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Draw" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="F5"/>
         <Property name="actionCommand" type="java.lang.String" value="refresh"/>
       </Properties>
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="nl/BobbinWork/GridGUI/labels.properties" key="Draw" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="nl/BobbinWork/grids/GridGUI/labels.properties" key="Draw" replaceFormat="bundle.getString(&quot;{key}&quot;)"/>
         </Property>
       </AccessibilityProperties>
       <Constraints>
