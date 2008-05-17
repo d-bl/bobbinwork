@@ -20,15 +20,10 @@ package nl.BobbinWork.grids.GridGUI;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.WEST;
-import static java.util.Locale.getDefault;
-import static javax.swing.SwingUtilities.invokeLater;
-import static javax.swing.UIManager.getSystemLookAndFeelClassName;
-import static javax.swing.UIManager.setLookAndFeel;
 import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -40,6 +35,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 
+import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
@@ -51,22 +47,17 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  */
 
 @SuppressWarnings("serial")
-public class PolarGridPrinter extends JFrame  {
+public class PolarGridPrinter {
     
 	private static final String YEARS = "2005-2008";  //$NON-NLS-1$  
-	private static final String CAPTION = "Polar Grids"; // gets extended by the help menu  //$NON-NLS-1$  
+	private static final String BASE_CAPTION = "Polar Grids"; //$NON-NLS-1$  
 
-    static private final String ICON_URL = "nl/BobbinWork/grids/help/bobbin.gif";
-    static private final String BUNDLE_NAME = "nl/BobbinWork/grids/GridGUI/labels";
+    static private final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/grids/GridGUI/labels"; //$NON-NLS-1$
     
+	private JFrame frame = new BWFrame(LOCALIZER_BUNDLE_NAME); 
+
     public PolarGridPrinter() {
         
-    	java.net.URL url = getClass().getClassLoader().getResource(ICON_URL);
-    	if ( url != null ) {
-    		Image icon = this.getToolkit().getImage(url);
-    		setIconImage(icon);
-    	}
-    	
         final PolarGridModel pgm = new PolarGridModel();
         final PreviewPanel previewPanel = new PreviewPanel();
         final ConfigurationPanel configurationPanel = new ConfigurationPanel(pgm);
@@ -78,9 +69,9 @@ public class PolarGridPrinter extends JFrame  {
         previewScrollPane.setPreferredSize(new Dimension(250, 250));
         addSpaceForScrollBar(configurationScrollPane);
         
-        getContentPane().add(WEST, configurationScrollPane);
-        getContentPane().add(CENTER, previewScrollPane);
-        setJMenuBar( createMenuBar (previewPanel) );
+        frame.getContentPane().add(WEST, configurationScrollPane);
+        frame.getContentPane().add(CENTER, previewScrollPane);
+        frame.setJMenuBar( createMenuBar (previewPanel) );
     }
 
 	private void addSpaceForScrollBar(JScrollPane scrollPane) {
@@ -120,8 +111,8 @@ public class PolarGridPrinter extends JFrame  {
         addScaleMenuItem(menu, "MenuView_mm", false);
         addScaleMenuItem(menu, "MenuView_inch", false);
         
-		final HelpMenu helpMenu = new HelpMenu(this, YEARS,CAPTION);
-		setTitle(helpMenu.getVersionedCaption());
+		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,BASE_CAPTION);
+		frame.setTitle(helpMenu.getVersionedCaption());
 		jMenuBar.add( helpMenu );
 		return jMenuBar;
 	}
@@ -138,42 +129,9 @@ public class PolarGridPrinter extends JFrame  {
         menu.add(jMenuItem);
 	}
     
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    private static void createAndShowGUI() {
-        
-        //Create and set up the window.
-        JFrame frame = new PolarGridPrinter();
-        frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }
-    
-    public static void main(String args[]){
-        
-        try {
-            setLookAndFeel( getSystemLookAndFeelClassName() );
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        Locale locale;
-        if ( args.length > 0 ) {
-            locale = new Locale(args[0]);
-        } else {
-            locale = new Locale
-            ( getDefault().getLanguage()
-            , getDefault().getCountry()
-            );
-        }
-        setBundle(BUNDLE_NAME, locale);
-        
-        //Schedule a job for the event-dispatching thread:
-        invokeLater(new Runnable() { public void run() { createAndShowGUI();} });
-    }
+	public static void main(String[] args) {
+
+		if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
+		new PolarGridPrinter().frame.setVisible(true);
+	}
 }

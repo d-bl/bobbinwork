@@ -19,8 +19,6 @@ package nl.BobbinWork.bwlib.gui;
 
 import java.awt.Component;
 
-import javax.swing.Box;
-import javax.swing.JMenu;
 import javax.swing.JToolBar;
 
 /** A JToolbar with a additional convenience constructors. */
@@ -36,16 +34,5 @@ public class CButtonBar extends JToolBar {
         for (Component component : components) {
             add(component);
         }
-    }
-
-    /** Convenience JToolBar constructor */
-	public CButtonBar(JToolBar toolBar, JMenu[] menu) {
-        setFloatable(false);
-        setRollover(true);
-        setBorder(null);
-
-        add(new CMenuBar(menu));
-        add(Box.createHorizontalGlue());
-        add(toolBar);
     }
 }

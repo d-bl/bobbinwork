@@ -67,31 +67,27 @@ import org.w3c.dom.Element;
 public class BWViewer {
 
 	private static final String YEARS = "2006-2008";  //$NON-NLS-1$  
-	private static final String CAPTION = "Viewer"; // gets extended by the help menu  //$NON-NLS-1$  
+	private static final String BASE_CAPTION = "Viewer"; //$NON-NLS-1$  
+
+	private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
 
 	private static final int TOTAL_LEFT_WIDTH = 300;
-	private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels"; //$NON-NLS-1$
     private static final String NEW_DIAGRAM = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
 
+    private BWFrame frame = new BWFrame(LOCALIZER_BUNDLE_NAME); 
+    
 	/** JTextArea with the XML source */
 	private SourcePanel source;
 
 	/** tree view of the XML elements */
 	private BWTree tree;
 
-	/**
-	 * Fragments of the diagram that can be used again (referred to with &lt;copy
-	 * of=".."&gt;)
-	 */
+	/** Fragments of the diagram that can be used again (referred to with &lt;copy of=".."&gt;) */
 	private DiagramFragments fragments;
 
-	/**
-	 * A vector drawing drawn by the model created from the DOM tree that was
-	 * generated from the XML file.
-	 */
+	/** Drawn by the model created from the DOM tree generated from the XML file. */
 	private DiagramPanel diagramPanel;
 
-	private BWFrame frame = new BWFrame(LOCALIZER_BUNDLE_NAME); 
 
 	public BWViewer() {
 
@@ -158,7 +154,7 @@ public class BWViewer {
 			}
 
 		};
-		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,CAPTION);
+		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,BASE_CAPTION);
 		frame.setTitle(helpMenu.getVersionedCaption());
 		final FileMenu fileMenu = new FileMenu( inputStreamListener, saveListener, NEW_DIAGRAM);
 		
