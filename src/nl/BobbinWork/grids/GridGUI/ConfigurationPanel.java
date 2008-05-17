@@ -28,6 +28,7 @@ import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.grids.PolarGridModel.DensityChange;
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 /**
@@ -48,13 +49,14 @@ public class ConfigurationPanel extends JPanel {
     		comboRow(dir+"DistOptAvg.gif"), 
     		comboRow(dir+"DistOptOld.gif")}; // ascending order
 
+    @Deprecated
     private java.util.ResourceBundle bundle = null;
     private PolarGridModel pgm = null;
     
     /** Creates new form PolarGridDefinitionPanel */
-    public ConfigurationPanel(PolarGridModel pgm, java.util.ResourceBundle bundle) {
+    public ConfigurationPanel(PolarGridModel pgm) {
         
-    	this.bundle = bundle;
+    	bundle = Localizer.getBundle(); 
         initComponents();
         setModel(pgm);
     }

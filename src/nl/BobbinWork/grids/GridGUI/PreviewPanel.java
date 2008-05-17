@@ -37,10 +37,11 @@ import java.awt.print.PrinterException;
 
 import javax.swing.JPanel;
 
+import nl.BobbinWork.bwlib.gui.PrintMenu.PrintablePreviewer;
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 
 @SuppressWarnings("serial")
-public class PreviewPanel extends JPanel implements Printable {
+public class PreviewPanel extends JPanel implements Printable, PrintablePreviewer {
     
     private PolarGridModel pgm = null;
     
@@ -95,4 +96,7 @@ public class PreviewPanel extends JPanel implements Printable {
         this.setPreferredSize(new Dimension( (int)radius*2, (int)radius*2 ));
         this.revalidate();
     }
+
+	public void setPageFormat(PageFormat pageFormat) {
+	}
 }

@@ -18,31 +18,30 @@
 
 package nl.BobbinWork.grids.GridGUI;
 
-import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.WEST;
+import static java.util.Locale.getDefault;
+import static javax.swing.SwingUtilities.invokeLater;
+import static javax.swing.UIManager.getSystemLookAndFeelClassName;
+import static javax.swing.UIManager.setLookAndFeel;
+import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
-import static java.util.Locale.getDefault;
-import static java.util.ResourceBundle.getBundle;
-
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.print.PrinterJob;
 import java.util.Locale;
-
-import static java.awt.BorderLayout.WEST;
-import static java.awt.BorderLayout.CENTER;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
-import static javax.swing.SwingUtilities.invokeLater;
-import static javax.swing.UIManager.setLookAndFeel;
-import static javax.swing.UIManager.getSystemLookAndFeelClassName;
-import static javax.swing.KeyStroke.getKeyStroke;
+
+import nl.BobbinWork.bwlib.gui.HelpMenu;
+import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.bwlib.gui.PrintMenu;
+import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 
 /**
  *
@@ -52,36 +51,30 @@ import static javax.swing.KeyStroke.getKeyStroke;
 @SuppressWarnings("serial")
 public class PolarGridPrinter extends JFrame  {
     
-    static private final AboutInfo aboutInfo = new AboutInfo
-            ( " BobbinWork - Polar Grid" // caption
-            , "2005-2006"                // years
-            , "J. Falkink-Pol"           // author
-            );
+	private static final String YEARS = "2005-2008";  //$NON-NLS-1$  
+	private static final String CAPTION = "Polar Grids"; // gets extended by the help menu  //$NON-NLS-1$  
+
     static private final String dir = "nl/BobbinWork/grids/help/";
-    static private final String site = "http://www.xs4all.nl/~falkink/lace/";
     static private final String iconUrl = dir + "bobbin.gif";
     static private final String bundleName = "nl/BobbinWork/grids/GridGUI/labels";
-    static private java.util.ResourceBundle bundle = null; // set in main
     
-    private ConfigurationPanel configurationPanel = null; // set in constructor
-    private PreviewPanel previewPanel = null; // set in constructor
+    private ConfigurationPanel configurationPanel;
+    private PreviewPanel previewPanel;
     
     public PolarGridPrinter() {
         
         PolarGridModel pgm = new PolarGridModel();
-        configurationPanel = new ConfigurationPanel(pgm,bundle);
+        configurationPanel = new ConfigurationPanel(pgm);
         previewPanel = new PreviewPanel();
         previewPanel.setPolarGridModel(pgm);
         
         java.awt.Image icon = null;
         
-        setTitle(aboutInfo.getCaption());
         java.net.URL url = getClass().getClassLoader().getResource(iconUrl);
         if ( url != null ) {
             icon = this.getToolkit().getImage(url);
             setIconImage(icon);
         }
-        JMenuItemAbout jMenuItemAbout = new JMenuItemAbout(aboutInfo, bundle);
         
         JScrollPane gridScrollPane = new JScrollPane(previewPanel);
         JScrollPane defScrollPane = new JScrollPane(configurationPanel);
@@ -102,73 +95,13 @@ public class PolarGridPrinter extends JFrame  {
         
         JMenuBar jMenuBar = new javax.swing.JMenuBar();
         setJMenuBar(jMenuBar);
+        jMenuBar.add( new PrintMenu(previewPanel) );
         
-        menu = new javax.swing.JMenu(bundle.getString("MenuFile_File"));
-        menu.setMnemonic(bundle.getString("MenuFile_File_Underline").charAt(0));
+        menu = new javax.swing.JMenu(getString("MenuView_View"));
+        menu.setMnemonic(getString("MenuView_View_Underline").charAt(0));
         jMenuBar.add( menu );
         
-        jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_New"));
-        jMenuItem.setMnemonic(bundle.getString("MenuFile_New_Underline").charAt(0));
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem.setEnabled(false);
-        menu.add(jMenuItem);
-        
-        jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Open"));
-        jMenuItem.setMnemonic(bundle.getString("MenuFile_Open_Underline").charAt(0));
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem.setEnabled(false);
-        menu.add(jMenuItem);
-        
-        jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Save"));
-        jMenuItem.setMnemonic(bundle.getString("MenuFile_Save_Underline").charAt(0));
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem.setEnabled(false);
-        menu.add(jMenuItem);
-        
-        jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Save_as"));
-        jMenuItem.setMnemonic(bundle.getString("MenuFile_Save_as_Underline").charAt(0));
-        jMenuItem.setEnabled(false);
-        menu.add(jMenuItem);
-        
-        menu.add(new javax.swing.JSeparator());
-        
-        jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuFile_Print"));
-        jMenuItem.setMnemonic(bundle.getString("MenuFile_Print_Underline").charAt(0));
-        jMenuItem.setActionCommand("print");
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem.setToolTipText(bundle.getString("MenuFile_print_ToolTip"));
-        jMenuItem.addActionListener(new ActionListener(){
-
-			public void actionPerformed(ActionEvent actionEvent) {
-	            PrinterJob printJob = PrinterJob.getPrinterJob();
-	            printJob.setPrintable(previewPanel);
-	            if (printJob.printDialog()) {
-	                try {
-	                    printJob.print();
-	                } catch (Exception ex) {
-	                    ex.printStackTrace();
-	                }
-	            }
-			}});
-        menu.add(jMenuItem);
-        
-        menu.add(new javax.swing.JSeparator());
-        
-        jMenuItem = new JMenuItemExit(bundle);
-        jMenuItem.setMnemonic(bundle.getString("MenuFile_Exit_Underline").charAt(0));
-        jMenuItem.setText(bundle.getString("MenuFile_Exit"));
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
-        menu.add(jMenuItem);
-        
-        /**/
-        
-        menu = new javax.swing.JMenu(bundle.getString("MenuView_View"));
-        menu.setMnemonic(bundle.getString("MenuView_View_Underline").charAt(0));
-        jMenuBar.add( menu );
-        
-        jMenuItem = new javax.swing.JMenuItem(bundle.getString("MenuView_Refresh"));
-        jMenuItem.setMnemonic(bundle.getString("MenuView_Refresh_Underline").charAt(0));
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_F5, 0));
+        jMenuItem = new LocaleMenuItem("MenuView_Refresh", KeyEvent.VK_F5, 0); 
         jMenuItem.addActionListener(new ActionListener(){
 
             public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -186,61 +119,23 @@ public class PolarGridPrinter extends JFrame  {
         
         menu.add(new javax.swing.JSeparator());
         
-        String scaleToolTip = bundle.getString("MenuView_scale_ToolTip");
+        addScaleMenuItem(menu, "MenuView_cm", true);
+        addScaleMenuItem(menu, "MenuView_mm", false);
+        addScaleMenuItem(menu, "MenuView_inch", false);
         
-        jMenuItem = new javax.swing.JRadioButtonMenuItem(bundle.getString("MenuView_mm"),true);
-        jMenuItem.setMnemonic(bundle.getString("MenuView_mm_Underline").charAt(0));
-        jMenuItem.setToolTipText(scaleToolTip);
-        menu.add(jMenuItem);
-        
-        jMenuItem = new javax.swing.JRadioButtonMenuItem(bundle.getString("MenuView_cm"),false);
-        jMenuItem.setMnemonic(bundle.getString("MenuView_cm_Underline").charAt(0));
-        jMenuItem.setEnabled(false);
-        jMenuItem.setToolTipText(scaleToolTip);
-        menu.add(jMenuItem);
-        
-        jMenuItem = new javax.swing.JRadioButtonMenuItem(bundle.getString("MenuView_inch"),false);
-        jMenuItem.setMnemonic(bundle.getString("MenuView_inch_Underline").charAt(0));
-        jMenuItem.setEnabled(false);
-        jMenuItem.setToolTipText(scaleToolTip);
-        menu.add(jMenuItem);
-        
-        /**/
-        
-        String unknownBrowser = "can't find your Browser";
-        
-        menu = new javax.swing.JMenu(bundle.getString("MenuHelp_Help"));
-        menu.setMnemonic(bundle.getString("MenuHelp_Help_Underline").charAt(0));
-        jMenuBar.add( menu );
-        
-        jMenuItem = new JMenuItemBrowse(unknownBrowser, icon, aboutInfo.getCaption());
-        jMenuItem.setAccelerator(getKeyStroke(KeyEvent.VK_F1, 0));
-        jMenuItem.setText(bundle.getString("MenuHelp_Overview"));
-        jMenuItem.setMnemonic(bundle.getString("MenuHelp_Overview_Underline").charAt(0));
-        jMenuItem.setActionCommand(dir+"help.html");
-        menu.add(jMenuItem);
-        
-        jMenuItem = new JMenuItemBrowse(unknownBrowser, icon, aboutInfo.getCaption());
-        jMenuItem.setText(bundle.getString("MenuHelp_Spiders"));
-        jMenuItem.setMnemonic(bundle.getString("MenuHelp_Spiders_Underline").charAt(0));
-        jMenuItem.setActionCommand(dir+"spiders.html");
-        menu.add(jMenuItem);
-        
-        jMenuItem = new JMenuItemBrowse(unknownBrowser, icon, aboutInfo.getCaption());
-        jMenuItem.setText(bundle.getString("MenuHelp_Website"));
-        jMenuItem.setMnemonic(bundle.getString("MenuHelp_Website_Underline").charAt(0));
-        jMenuItem.setActionCommand(site+"grid-round-EN.html");
-        menu.add( jMenuItem );
-        
-        jMenuItem = new JMenuItemBrowse(unknownBrowser, icon, aboutInfo.getCaption());
-        jMenuItem.setText(bundle.getString("MenuHelp_Release_notes"));
-        jMenuItem.setMnemonic(bundle.getString("MenuHelp_Release_notes_Underline").charAt(0));
-        jMenuItem.setActionCommand(dir+"ReleaseNotes.html");
-        menu.add(jMenuItem);
-        
-        menu.add( jMenuItemAbout );
-        
+		final HelpMenu helpMenu = new HelpMenu(this, YEARS,CAPTION);
+		this.setTitle(helpMenu.getVersionedCaption());
+		jMenuBar.add( helpMenu );
     }
+
+	private void addScaleMenuItem(JMenu menu, String bundleKeyBase,
+			boolean enabled) {
+		JMenuItem jMenuItem;
+		jMenuItem = new LocaleMenuItem(bundleKeyBase); 
+		jMenuItem.setEnabled(enabled);
+        jMenuItem.setToolTipText(getString("MenuView_scale_ToolTip"));
+        menu.add(jMenuItem);
+	}
     
     /**
      * Create the GUI and show it.  For thread safety,
@@ -262,7 +157,6 @@ public class PolarGridPrinter extends JFrame  {
         
         try {
             setLookAndFeel( getSystemLookAndFeelClassName() );
-            //com.sun.java.swing.plaf.windows.WindowsLookAndFeel() );
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -277,7 +171,6 @@ public class PolarGridPrinter extends JFrame  {
             );
         }
         setBundle(bundleName, locale);
-        bundle = getBundle( bundleName, locale); // TODO: deprecated
         
         //Schedule a job for the event-dispatching thread:
         invokeLater(new Runnable() { public void run() { createAndShowGUI();} });

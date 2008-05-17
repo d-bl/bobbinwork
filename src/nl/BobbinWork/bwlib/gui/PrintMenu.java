@@ -73,8 +73,8 @@ class PrintMenu extends JMenu {
     	
         applyStrings(this, "MenuPrint"); //$NON-NLS-1$
 
-        add(new javax.swing.JSeparator());
-        JMenuItem//
+        JMenuItem jMenuItem ;
+        
         jMenuItem = new LocaleMenuItem("MenuPrint_PageSetup"); //$NON-NLS-1$
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
