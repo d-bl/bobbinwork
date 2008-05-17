@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.bwlib.gui;
+package nl.BobbinWork.viewer.guiUtils;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.PAGE_START;
@@ -26,6 +26,8 @@ import java.awt.Component;
 import javax.swing.AbstractButton;
 import javax.swing.JMenu;
 import javax.swing.JPanel;
+
+import nl.BobbinWork.bwlib.gui.CMenuBar;
 
 /** A JPanel with a additional convenience constructors. */
 @SuppressWarnings("serial")
