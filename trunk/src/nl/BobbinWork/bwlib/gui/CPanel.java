@@ -44,11 +44,4 @@ public class CPanel extends JPanel {
         add(new CMenuBar(menu), PAGE_START);
         add(content, CENTER);
     }
-
-    /** Convenience JPanel constructor */
-	public CPanel(Component toolBar, Component content) {
-        super(new BorderLayout());
-        add(toolBar, PAGE_START);
-        add(content, CENTER);
-    }
 }
