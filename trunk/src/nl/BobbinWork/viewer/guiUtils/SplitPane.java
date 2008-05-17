@@ -1,4 +1,4 @@
-package nl.BobbinWork.bwlib.gui;
+package nl.BobbinWork.viewer.guiUtils;
 
 import java.awt.Component;
 
