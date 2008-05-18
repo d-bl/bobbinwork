@@ -28,7 +28,7 @@ import javax.swing.JSpinner;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import nl.BobbinWork.bwlib.gui.Localizer;
+import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import nl.BobbinWork.grids.PolarGridModel.DensityChange;
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 /**
@@ -42,26 +42,24 @@ public class ConfigurationPanel extends JPanel {
     private static double MIN_DIAMETER=1d;
     private static double DIAMETER_STEP=0.1d;
     
-    private static String dir = "nl/BobbinWork/grids/help/";
+    private static String DIR = "nl/BobbinWork/grids/GridGUI/tooltipImages/";
     private String[] distanceComboStrings ={ 
-    		comboRow(dir+"DistOptNull.gif"), 
-    		comboRow(dir+"DistOptNew.gif"), 
-    		comboRow(dir+"DistOptAvg.gif"), 
-    		comboRow(dir+"DistOptOld.gif")}; // ascending order
+    		comboRow(DIR+"DistOptNull.gif"), 
+    		comboRow(DIR+"DistOptNew.gif"), 
+    		comboRow(DIR+"DistOptAvg.gif"), 
+    		comboRow(DIR+"DistOptOld.gif")}; // ascending order
 
-    @Deprecated
-    private java.util.ResourceBundle bundle = null;
     private PolarGridModel pgm = null;
     
     /** Creates new form PolarGridDefinitionPanel */
     public ConfigurationPanel(PolarGridModel pgm) {
         
-    	bundle = Localizer.getBundle(); 
         initComponents();
         setModel(pgm);
     }
     
     private JSpinner[] spinners() {
+    	// as a field it was initialised too late
     	return new JSpinner[] {
     			spiNumberOfRepeats, 
     			spiDotsPerRepeat, 
@@ -270,11 +268,11 @@ public class ConfigurationPanel extends JPanel {
         setLayout(new java.awt.GridBagLayout());
 
         setToolTipText("");
-        lblNumberOfRepeats.setDisplayedMnemonic(bundle.getString("number_of_repeats_Underline").charAt(0));
+        lblNumberOfRepeats.setDisplayedMnemonic(getString("number_of_repeats_Underline").charAt(0));
         lblNumberOfRepeats.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblNumberOfRepeats.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNumberOfRepeats.setLabelFor(spiNumberOfRepeats);
-        lblNumberOfRepeats.setText(bundle.getString("number_of_repeats"));
+        lblNumberOfRepeats.setText(getString("number_of_repeats"));
         lblNumberOfRepeats.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -283,7 +281,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(2, 4, 2, 4);
         add(lblNumberOfRepeats, gridBagConstraints);
-        lblNumberOfRepeats.getAccessibleContext().setAccessibleName(bundle.getString("number_of_repeats"));
+        lblNumberOfRepeats.getAccessibleContext().setAccessibleName(getString("number_of_repeats"));
 
         spiNumberOfRepeats.setModel(new javax.swing.SpinnerNumberModel(5, PolarGridModel.MIN_REPEATS, PolarGridModel.MAX_REPEATS, 1));
         spiNumberOfRepeats.setMaximumSize(new java.awt.Dimension(27, 20));
@@ -294,12 +292,12 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         add(spiNumberOfRepeats, gridBagConstraints);
 
-        lblDotsPerRepeat.setDisplayedMnemonic(bundle.getString("dots_per_repeat_Underline").charAt(0));
+        lblDotsPerRepeat.setDisplayedMnemonic(getString("dots_per_repeat_Underline").charAt(0));
         lblDotsPerRepeat.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblDotsPerRepeat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblDotsPerRepeat.setLabelFor(spiDotsPerRepeat);
-        lblDotsPerRepeat.setText(bundle.getString("dots_per_repeat"));
-        lblDotsPerRepeat.setToolTipText(bundle.getString("dots_per_repeat_ToolTip"));
+        lblDotsPerRepeat.setText(getString("dots_per_repeat"));
+        lblDotsPerRepeat.setToolTipText(getString("dots_per_repeat_ToolTip"));
         lblDotsPerRepeat.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -308,7 +306,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 4);
         add(lblDotsPerRepeat, gridBagConstraints);
-        lblDotsPerRepeat.getAccessibleContext().setAccessibleName(bundle.getString("dots_per_repeat"));
+        lblDotsPerRepeat.getAccessibleContext().setAccessibleName(getString("dots_per_repeat"));
         lblDotsPerRepeat.getAccessibleContext().setAccessibleDescription("");
 
         spiDotsPerRepeat.setModel(new javax.swing.SpinnerNumberModel(12, PolarGridModel.MIN_DOTS_PER_REPEAT, PolarGridModel.MAX_DOTS_PER_REPEAT, 1));
@@ -320,11 +318,11 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 0);
         add(spiDotsPerRepeat, gridBagConstraints);
 
-        lblAngleOnFootside.setDisplayedMnemonic(bundle.getString("angle_on_footside_Underline").charAt(0));
+        lblAngleOnFootside.setDisplayedMnemonic(getString("angle_on_footside_Underline").charAt(0));
         lblAngleOnFootside.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblAngleOnFootside.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblAngleOnFootside.setLabelFor(spiAngleOnFootside);
-        lblAngleOnFootside.setText(bundle.getString("angle_on_footside"));
+        lblAngleOnFootside.setText(getString("angle_on_footside"));
         lblAngleOnFootside.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -333,7 +331,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.insets = new java.awt.Insets(0, 4, 0, 4);
         add(lblAngleOnFootside, gridBagConstraints);
-        lblAngleOnFootside.getAccessibleContext().setAccessibleName(bundle.getString("angle_on_footside"));
+        lblAngleOnFootside.getAccessibleContext().setAccessibleName(getString("angle_on_footside"));
 
         spiAngleOnFootside.setModel(new javax.swing.SpinnerNumberModel(45, PolarGridModel.MIN_ANGLE, PolarGridModel.MAX_ANGLE, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -344,8 +342,8 @@ public class ConfigurationPanel extends JPanel {
         add(spiAngleOnFootside, gridBagConstraints);
 
         lblDiameters.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
-        lblDiameters.setText(bundle.getString("Matrix_Col_Head_diameters"));
-        lblDiameters.setToolTipText(bundle.getString("Matrix_Col_Head_diameters_ToolTip"));
+        lblDiameters.setText(getString("Matrix_Col_Head_diameters"));
+        lblDiameters.setToolTipText(getString("Matrix_Col_Head_diameters_ToolTip"));
         lblDiameters.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -354,13 +352,13 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblDiameters, gridBagConstraints);
-        lblDiameters.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_Col_Head_diameters"));
-        lblDiameters.getAccessibleContext().setAccessibleDescription(bundle.getString("Matrix_Col_Head_diameters_AccDesc"));
+        lblDiameters.getAccessibleContext().setAccessibleName(getString("Matrix_Col_Head_diameters"));
+        lblDiameters.getAccessibleContext().setAccessibleDescription(getString("Matrix_Col_Head_diameters_AccDesc"));
 
         lblCircumference.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblCircumference.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblCircumference.setText(bundle.getString("Matrix_Col_Head_circumference"));
-        lblCircumference.setToolTipText(bundle.getString("Matrix_Col_Head_circumference_ToolTip"));
+        lblCircumference.setText(getString("Matrix_Col_Head_circumference"));
+        lblCircumference.setToolTipText(getString("Matrix_Col_Head_circumference_ToolTip"));
         lblCircumference.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -370,13 +368,13 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblCircumference, gridBagConstraints);
-        lblCircumference.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_Col_Head_circumference"));
-        lblCircumference.getAccessibleContext().setAccessibleDescription(bundle.getString("Matrix_Col_Head_circumference_AccDesc"));
+        lblCircumference.getAccessibleContext().setAccessibleName(getString("Matrix_Col_Head_circumference"));
+        lblCircumference.getAccessibleContext().setAccessibleDescription(getString("Matrix_Col_Head_circumference_AccDesc"));
 
         lblDotDistances.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblDotDistances.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDotDistances.setText(bundle.getString("Matrix_Col_Head_distance"));
-        lblDotDistances.setToolTipText(bundle.getString("Matrix_Col_Head_distance_ToolTip"));
+        lblDotDistances.setText(getString("Matrix_Col_Head_distance"));
+        lblDotDistances.setToolTipText(getString("Matrix_Col_Head_distance_ToolTip"));
         lblDotDistances.setFocusable(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -385,12 +383,12 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblDotDistances, gridBagConstraints);
-        lblDotDistances.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_Col_Head_distance"));
-        lblDotDistances.getAccessibleContext().setAccessibleDescription(bundle.getString("Matrix_Col_Head_distances_AccDesc"));
+        lblDotDistances.getAccessibleContext().setAccessibleName(getString("Matrix_Col_Head_distance"));
+        lblDotDistances.getAccessibleContext().setAccessibleDescription(getString("Matrix_Col_Head_distances_AccDesc"));
 
         lblDotDistanceStraight.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblDotDistanceStraight.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDotDistanceStraight.setText(bundle.getString("Matrix_Col_Head_straight"));
+        lblDotDistanceStraight.setText(getString("Matrix_Col_Head_straight"));
         lblDotDistanceStraight.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
@@ -401,7 +399,7 @@ public class ConfigurationPanel extends JPanel {
 
         lblDotDistanceCurved.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblDotDistanceCurved.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblDotDistanceCurved.setText(bundle.getString("Matrix_Col_Head_curved"));
+        lblDotDistanceCurved.setText(getString("Matrix_Col_Head_curved"));
         lblDotDistanceCurved.setToolTipText("");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -410,10 +408,10 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblDotDistanceCurved, gridBagConstraints);
 
-        lblInSide.setDisplayedMnemonic(bundle.getString("Matrix_Row_Head_inside_Underline").charAt(0));
+        lblInSide.setDisplayedMnemonic(getString("Matrix_Row_Head_inside_Underline").charAt(0));
         lblInSide.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblInSide.setLabelFor(spiInnerDiameter);
-        lblInSide.setText(bundle.getString("Matrix_Row_Head_inside"));
+        lblInSide.setText(getString("Matrix_Row_Head_inside"));
         lblInSide.setFocusable(false);
         lblInSide.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -423,14 +421,14 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblInSide, gridBagConstraints);
-        lblInSide.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_Row_Head_inside"));
-        lblInSide.getAccessibleContext().setAccessibleDescription(bundle.getString("Matrix_Row_Head_inside_AccDesc"));
+        lblInSide.getAccessibleContext().setAccessibleName(getString("Matrix_Row_Head_inside"));
+        lblInSide.getAccessibleContext().setAccessibleDescription(getString("Matrix_Row_Head_inside_AccDesc"));
 
-        lblOutSide.setDisplayedMnemonic(bundle.getString("Matrix_Row_Head_outside_Underline").charAt(0));
+        lblOutSide.setDisplayedMnemonic(getString("Matrix_Row_Head_outside_Underline").charAt(0));
         lblOutSide.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblOutSide.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblOutSide.setLabelFor(spiOuterDiameter);
-        lblOutSide.setText(bundle.getString("Matrix_Row_Head_outside"));
+        lblOutSide.setText(getString("Matrix_Row_Head_outside"));
         lblOutSide.setFocusable(false);
         lblOutSide.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -440,8 +438,8 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblOutSide, gridBagConstraints);
-        lblOutSide.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_Row_Head_outside"));
-        lblOutSide.getAccessibleContext().setAccessibleDescription(bundle.getString("Matrix_Row_Head_outside_AccDesc"));
+        lblOutSide.getAccessibleContext().setAccessibleName(getString("Matrix_Row_Head_outside"));
+        lblOutSide.getAccessibleContext().setAccessibleDescription(getString("Matrix_Row_Head_outside_AccDesc"));
 
         spiInnerDiameter.setModel(new javax.swing.SpinnerNumberModel(5d, MIN_DIAMETER, MAX_DIAMETER, DIAMETER_STEP));
         spiInnerDiameter.setMaximumSize(new java.awt.Dimension(27, 20));
@@ -556,7 +554,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         add(cmbLegRatio, gridBagConstraints);
-        cmbLegRatio.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_ratio"));
+        cmbLegRatio.getAccessibleContext().setAccessibleName(getString("Matrix_ratio"));
 
         spiDiameterDensityChange.setModel(new javax.swing.SpinnerNumberModel(5d, MIN_DIAMETER, MAX_DIAMETER, DIAMETER_STEP));
         spiDiameterDensityChange.setMaximumSize(new java.awt.Dimension(27, 20));
@@ -585,7 +583,7 @@ public class ConfigurationPanel extends JPanel {
         lblDistanceOldDensity.setFont(new java.awt.Font("SansSerif", 0, 11));
         lblDistanceOldDensity.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblDistanceOldDensity.setText(" . . ");
-        lblDistanceOldDensity.setToolTipText(bundle.getString("Matrix_old_density_ToolTip"));
+        lblDistanceOldDensity.setToolTipText(getString("Matrix_old_density_ToolTip"));
         lblDistanceOldDensity.setFocusable(false);
         lblDistanceOldDensity.setMaximumSize(new java.awt.Dimension(40, 22));
         lblDistanceOldDensity.setMinimumSize(new java.awt.Dimension(40, 22));
@@ -597,7 +595,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblDistanceOldDensity, gridBagConstraints);
-        lblDistanceOldDensity.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_old_density"));
+        lblDistanceOldDensity.getAccessibleContext().setAccessibleName(getString("Matrix_old_density"));
         lblDistanceOldDensity.getAccessibleContext().setAccessibleDescription("");
 
         lblDistanceOldDensityStraight.setFont(new java.awt.Font("SansSerif", 0, 11));
@@ -617,7 +615,7 @@ public class ConfigurationPanel extends JPanel {
         lblDistanceNewDensity.setFont(new java.awt.Font("SansSerif", 0, 11));
         lblDistanceNewDensity.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         lblDistanceNewDensity.setText(" . . ");
-        lblDistanceNewDensity.setToolTipText(bundle.getString("Matrix_new_density_ToolTip"));
+        lblDistanceNewDensity.setToolTipText(getString("Matrix_new_density_ToolTip"));
         lblDistanceNewDensity.setFocusable(false);
         lblDistanceNewDensity.setMaximumSize(new java.awt.Dimension(40, 22));
         lblDistanceNewDensity.setMinimumSize(new java.awt.Dimension(40, 22));
@@ -629,7 +627,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblDistanceNewDensity, gridBagConstraints);
-        lblDistanceNewDensity.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_new_density"));
+        lblDistanceNewDensity.getAccessibleContext().setAccessibleName(getString("Matrix_new_density"));
         lblDistanceNewDensity.getAccessibleContext().setAccessibleDescription("");
 
         lblDistanceNewDensityStraight.setFont(new java.awt.Font("SansSerif", 0, 11));
@@ -650,7 +648,7 @@ public class ConfigurationPanel extends JPanel {
             +"<img src='"
             +getClass()
             .getClassLoader()
-            .getResource("nl/BobbinWork/grids/help/alternate.gif")
+            .getResource(DIR + "alternate.gif")
             +"'></html>");
         cbxAlternate.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         cbxAlternate.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
@@ -659,11 +657,11 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.gridy = 7;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         add(cbxAlternate, gridBagConstraints);
-        cbxAlternate.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_alternate"));
+        cbxAlternate.getAccessibleContext().setAccessibleName(getString("Matrix_alternate"));
 
         cmbDistanceOption.setFont(new java.awt.Font("SansSerif", 0, 11));
         cmbDistanceOption.setModel(new javax.swing.DefaultComboBoxModel(distanceComboStrings));
-        cmbDistanceOption.setToolTipText(bundle.getString("Matrix_Density_Option_Tooltip"));
+        cmbDistanceOption.setToolTipText(getString("Matrix_Density_Option_Tooltip"));
         cmbDistanceOption.setMinimumSize(new java.awt.Dimension(90, 32));
         cmbDistanceOption.setPreferredSize(new java.awt.Dimension(90, 32));
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -674,10 +672,10 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 2);
         add(cmbDistanceOption, gridBagConstraints);
 
-        lblDensityChange.setDisplayedMnemonic(bundle.getString("Matrix_Row_Head_density_change_Underline").charAt(0));
+        lblDensityChange.setDisplayedMnemonic(getString("Matrix_Row_Head_density_change_Underline").charAt(0));
         lblDensityChange.setFont(new java.awt.Font("MS Sans Serif", 1, 12));
         lblDensityChange.setLabelFor(spiDiameterDensityChange);
-        lblDensityChange.setText(bundle.getString("Matrix_Row_Head_density_change"));
+        lblDensityChange.setText(getString("Matrix_Row_Head_density_change"));
         lblDensityChange.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -687,11 +685,11 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 5);
         add(lblDensityChange, gridBagConstraints);
-        lblDensityChange.getAccessibleContext().setAccessibleName(bundle.getString("Matrix_Row_Head_density_change"));
-        lblDensityChange.getAccessibleContext().setAccessibleDescription(bundle.getString("Matrix_Row_Head_density_changes_AccDesc"));
+        lblDensityChange.getAccessibleContext().setAccessibleName(getString("Matrix_Row_Head_density_change"));
+        lblDensityChange.getAccessibleContext().setAccessibleDescription(getString("Matrix_Row_Head_density_changes_AccDesc"));
 
-        btnDraw.setMnemonic(bundle.getString("Draw_Underline").charAt(0));
-        btnDraw.setText(bundle.getString("Draw"));
+        btnDraw.setMnemonic(getString("Draw_Underline").charAt(0));
+        btnDraw.setText(getString("Draw"));
         btnDraw.setToolTipText("F5");
         btnDraw.setActionCommand("refresh");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -702,7 +700,7 @@ public class ConfigurationPanel extends JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 2);
         add(btnDraw, gridBagConstraints);
-        btnDraw.getAccessibleContext().setAccessibleName(bundle.getString("Draw"));
+        btnDraw.getAccessibleContext().setAccessibleName(getString("Draw"));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(new javax.swing.border.BevelBorder(javax.swing.border.BevelBorder.LOWERED));
