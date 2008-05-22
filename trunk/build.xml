@@ -21,8 +21,8 @@
     -->
 
     <property name="build.dir" location="build" />
-	<property name="svn.revision.of.published.jar" value="xxx" />
-	<property file="../ant.properties" />
+    <property name="svn.revision.of.published.jar" value="xxx" />
+    <property file="../ant.properties" />
     <property environment="env" /><!-- at least: JAVA_HOME (jdk, not jre) -->
             
     <property name="version" value="2.0.${svn.revision.of.published.jar}" /><!--  
@@ -41,7 +41,7 @@
         <attribute name="jnlp.application.description" default="NOT-SET"/>
         <attribute name="jnlp.application.kind" default="NOT-SET"/>
         <sequential>
-        	<echo> @{jnlp.base.name}.jnlp : @{jnlp.main.class} </echo>
+            <echo> @{jnlp.base.name}.jnlp : @{jnlp.main.class} </echo>
             <echoxml file="${build.dir}/@{jnlp.base.name}.jnlp">
                 <jnlp spec="1.0+" codebase="${jnlp.code.base}" href="${jnlp.deploy}@{jnlp.base.name}.jnlp">
                   <information>
@@ -75,16 +75,9 @@
     </macrodef>
 
     <path id="project.classpath">
-        <fileset dir="${env.JAVA_HOME}/lib">
-            <include name="*.jar" />
-        </fileset>
-        <fileset dir="C:\Program Files\eclipse\plugins\org.junit_3.8.2.v200706111738"><!-- 
-                    C:\Program Files\eclipse\plugins\org.junit4_4.3.1  ../3rdParty/junit4.4 -->
-            <include name="junit.jar" />
-        </fileset>
-        <fileset dir="${build.dir}">
-            <include name="*.jar" />
-        </fileset>
+        <fileset dir="${env.JAVA_HOME}/lib" includes="*.jar" />
+        <fileset dir="${build.dir}" includes="*.jar" />
+        <fileset dir="../3rdParty/junit4.4" includes="*.jar" />
     </path>
 
     <target name="clean" description="Remove all generated files.">
@@ -104,7 +97,7 @@
         </javac>
     </target>
 
-	<target name="diagrams" depends="compile" description="create viewer of bobbin lace working diagrams">
+    <target name="diagrams" depends="compile" description="create viewer of bobbin lace working diagrams">
         <jar destfile="${build.dir}/bwViewer${jar.suffix}">
             <fileset dir="${build.dir}/tmp" includes="**" excludes="**/grids/**" />
             <fileset dir="src" includes="**" excludes="**/grids/**, **/*.java"/>
@@ -122,32 +115,35 @@
             <fileset dir="${build.dir}/tmp" includes="**/grids/**, **/bwlib/gui/**" />
             <fileset dir="src" includes="**/bwlib/**, **/grids/**" excludes="**/*.java"/>
             <manifest>
-            	<attribute name="Java-Version" value="${target}" /> 
-            	<attribute name="Implementation-Version" value="${version}" /> 
+                <attribute name="Java-Version" value="${target}" /> 
+                <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
                     value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
             </manifest>
         </jar>
     </target>
-	
+    
     <target name="testCompile" depends="compile" description="create class files from test sources">
+    	<property name="myclasspath" refid="project.classpath"/>
+    	<echo message="Classpath = ${myclasspath}"/>
+    	
     	<javac srcdir="JUnitTests" destdir="${build.dir}/tmptest">
             <classpath refid="project.classpath" />
         </javac>
     </target>
         
     <target name="testJar" depends="testCompile" description="create jar from compiled test classes">
-    	<jar destfile="${build.dir}/test.jar">
+        <jar destfile="${build.dir}/test.jar">
             <fileset dir="${build.dir}/tmptest" includes="**/*.*"/>
         </jar>
     </target>
             
     <target name="testRun" depends="testJar" description="run test classes">
-    	<junit printsummary="yes" haltonfailure="yes">
-		  <test name="nl.BobbinWork.diagram.math.TestNearestPoint" haltonfailure="no" outfile="NP.txt">
-		    <formatter type="xml"/>
-		  </test>
-    	</junit>
+        <junit printsummary="yes" haltonfailure="yes">
+          <test name="nl.BobbinWork.diagram.math.TestAnnotation" haltonfailure="no" outfile="NP.txt">
+            <formatter type="xml"/>
+          </test>
+        </junit>
     </target>
 
     <target name="jnlp" depends="prepare" description="generate jnlp files">
@@ -155,16 +151,16 @@
               jnlp.main.class="nl.BobbinWork.viewer.gui.BWViewer" 
               jnlp.application.name="Diagram Viewer"
               jnlp.application.description="Working diagrams for bobbin lace"
-        	  jnlp.application.kind="Play with grounds"
+              jnlp.application.kind="Play with grounds"
         />
         <jnlp jnlp.base.name="bwpGrid" 
               jnlp.main.class="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" 
               jnlp.application.name="Polar Grid Generator"
               jnlp.application.description="Polar grids for bobbin lace"
-        	  jnlp.application.kind= "Polar grids that don't distort"
+              jnlp.application.kind= "Polar grids that don't distort"
         />
     </target>
     
-	<target name="all" depends="grids, diagrams, jnlp, testJar"/><!--testRun-->
+    <target name="all" depends="grids, diagrams, jnlp, testJar"/>
 
 </project>
