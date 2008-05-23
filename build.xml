@@ -138,11 +138,13 @@
         </jar>
     </target>
             
-    <target name="testRun" depends="testJar" description="run test classes">
-        <junit printsummary="yes" haltonfailure="yes">
-          <test name="nl.BobbinWork.diagram.math.TestAnnotation" haltonfailure="no" outfile="NP.txt">
-            <formatter type="xml"/>
-          </test>
+    <target name="testRun" depends="testCompile" description="run test classes">
+        <junit printsummary="yes" haltonfailure="true">
+          <classpath refid="project.classpath"/>	
+          <formatter type="brief"/>
+          <batchtest todir="${build.dir}/tmptest">
+          	<fileset dir="${build.dir}/tmptest" includes="**/Test*.class, "/>
+          </batchtest>
         </junit>
     </target>
 
@@ -161,6 +163,6 @@
         />
     </target>
     
-    <target name="all" depends="grids, diagrams, jnlp, testJar"/>
+    <target name="all" depends="grids, diagrams, jnlp, testJar, testRun"/>
 
 </project>
