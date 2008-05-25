@@ -17,62 +17,77 @@
  */
 package nl.BobbinWork.diagram.math;
 
+import static nl.BobbinWork.diagram.math.NearestPoint.onCurve;
+
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Point2D;
 
 import junit.framework.TestCase;
-import static nl.BobbinWork.diagram.math.NearestPoint.*;
 
-/**
- * @author J. Falkink-Pol
- *
- */
+import org.junit.Before;
+import org.junit.Test;
+
 public class TestNearestPoint extends TestCase {
 
-	/**
-	 * Test method for {@link nl.BobbinWork.diagram.math.NearestPoint#onCurve(java.awt.geom.CubicCurve2D, java.awt.geom.Point2D, java.awt.geom.Point2D)}.
-	 */
+	private Point2D pn;
+	private Point2D p1;
+	private CubicCurve2D c;
+	private Point2D p2;
+	private Point2D cp1;
+	private Point2D cp2;
+
+	@Before
 	public void testOnCurve() {
 		
-		Point2D p;
-        Point2D pn = new Point2D.Double();
-        Point2D p1 = new Point2D.Double(0, 0);
-        Point2D cp1 = new Point2D.Double(1, 2);
-        Point2D cp2 = new Point2D.Double(3, 3);
-        Point2D p2 = new Point2D.Double(4, 2);
-        CubicCurve2D c = new CubicCurve2D.Double();
+        pn = new Point2D.Double();
+        p1 = new Point2D.Double(0, 0);
+        cp1 = new Point2D.Double(1, 2);
+        cp2 = new Point2D.Double(3, 3);
+        p2 = new Point2D.Double(4, 2);
+        c = new CubicCurve2D.Double();
         c.setCurve(p1, cp1, cp2, p2);
-        
+	}
+	
+	@Test
+    public void startPoint() {
+		assertEquals (0.0, onCurve(c, p1, null) );
         assertEquals (0.0, onCurve(c, p1, pn) );
         assertEquals (p1, pn );
-        assertEquals (0.0, onCurve(c, p1, null) );
-
+	}
+	
+	@Test
+    public void endPoint() {
+		assertEquals (0.0, onCurve(c, p2, null) );
         assertEquals (0.0, onCurve(c, p2, pn) );
         assertEquals (p2, pn );
-        assertEquals (0.0, onCurve(c, p2, null) );
-
-        p = new Point2D.Double(-2, -1);
+	}
+	
+	@Test
+    public void controlPoints() {
+		assertTrue (1.0 > onCurve(c, cp1, null) );
+		assertTrue (1.0 > onCurve(c, cp1, pn) );
+		
+		assertTrue (1.0 > onCurve(c, cp2, null) );
+		assertTrue (1.0 > onCurve(c, cp2, pn) );
+	}
+	
+	@Test
+    public void otherPoints() {
+		Point2D p;
+        
+		p = new Point2D.Double(-2, -1);
         assertEquals (5.0, onCurve(c, p, pn) );
         assertEquals (p1, pn );
-        assertEquals (5.0, onCurve(c, p, null) );
 
         p = new Point2D.Double(5, 1);
         assertEquals (2.0, onCurve(c, p, pn) );
         assertEquals (p2, pn );
-        assertEquals (2.0, onCurve(c, p, null) );
 
-        assertTrue (1.0 > onCurve(c, cp1, pn) );
-        assertTrue (1.0 > onCurve(c, cp1, null) );
-
-        assertTrue (1.0 > onCurve(c, cp2, pn) );
-        assertTrue (1.0 > onCurve(c, cp2, null) );
 
         p = new Point2D.Double(0, 3);
         assertTrue (4.0 > onCurve(c, cp1, pn) );
-        assertTrue (4.0 > onCurve(c, cp1, null) );
 
         p = new Point2D.Double(3, 4);
         assertTrue (4.0 > onCurve(c, cp2, pn) );
-        assertTrue (4.0 > onCurve(c, cp2, null) );
 	}
 }
