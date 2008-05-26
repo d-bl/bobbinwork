@@ -22,11 +22,19 @@ import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import static nl.BobbinWork.diagram.math.Annotations.*;
 
-public class TestAnnotations extends TestCase {
+public class TestAnnotations {
 	
+	private static final double DOUBLE = 0/0.0;
+	private CubicCurve2D curve;
+	private Line2D expectedTwistMark;
+
 	private String pointToString(Point2D p) {
 		return "(" + p.getX() +","+p.getY()+ ")";
 	}
@@ -55,12 +63,12 @@ public class TestAnnotations extends TestCase {
 	}
 	
 	private void assertEqualLines (Line2D expected, Line2D actual, double tolerance){
-		
-		assertTrue ("bad test: line shorter than tolerance*2:", //
-				 ( 2 * tolerance <= expected.getP1().distance( expected.getP2() ) ) //
-				 || equalPoints(expected.getP1(), expected.getP2(), 0)
-				 );
-		
+
+		assertTrue (
+				"bad test: line shorter than tolerance*2:", //
+				( 2 * tolerance <= expected.getP1().distance( expected.getP2() ) ) //
+		);
+
 		String message = "expected line " + lineToString(expected) //
         + " but got " + lineToString(actual);
 		assertTrue ( message, equalLines(expected, actual, tolerance) 
@@ -81,10 +89,8 @@ public class TestAnnotations extends TestCase {
 		                      );
 	}
 
-	/**
-	 * Test method for {@link nl.BobbinWork.diagram.math.Annotations#CreateTwistMark(java.awt.geom.CubicCurve2D, int)}.
-	 */
-	public void testCreateTwistMark() {
+	@Test
+	public void asserts() {
 
 		// test the test methods
 
@@ -92,28 +98,33 @@ public class TestAnnotations extends TestCase {
 	    assertFalse (equalPoints(new Point2D.Double(0,0), new Point2D.Double(1,1), 0));
 	    assertFalse (equalPoints(new Point2D.Double(0,0), new Point2D.Double(1,1), 1));
 	    assertTrue  (equalPoints(new Point2D.Double(0,0), new Point2D.Double(1,1), 2));
-	    assertTrue  (equalPoints(new Point2D.Double(0/0.0,0/0.0), new Point2D.Double(0/0.0,0/0.0), 0));
-	    assertFalse (equalPoints(new Point2D.Double(0/0.0,0/0.0), new Point2D.Double(0/0.0,0), 0));
-	    assertFalse (equalPoints(new Point2D.Double(0/0.0,0/0.0), new Point2D.Double(0,0/0.0), 0));
+	    assertTrue  (equalPoints(new Point2D.Double(DOUBLE,DOUBLE), new Point2D.Double(DOUBLE,DOUBLE), 0));
+	    assertFalse (equalPoints(new Point2D.Double(DOUBLE,DOUBLE), new Point2D.Double(DOUBLE,0), 0));
+	    assertFalse (equalPoints(new Point2D.Double(DOUBLE,DOUBLE), new Point2D.Double(0,DOUBLE), 0));
 	    
 	    assertTrue  (equalLines (new Line2D.Double(4.5,-1, 4.5,1),new Line2D.Double(4.5,-1, 4.5,1),0));
 	    assertTrue  (equalLines (new Line2D.Double(4.5,-1, 4.5,1),new Line2D.Double(4.5,1, 4.5,-1),0));
 	    assertFalse (equalLines (new Line2D.Double(4.5,-1, 4.5,1),new Line2D.Double(4.5,1, 4.5,1),0));
 	    
-	    // the real test
-	    
-	    CubicCurve2D curve = new CubicCurve2D.Double();
-		Line2D expectedTwistMark = new Line2D.Double (4.5,-1, 4.5,1);
+	}
 
-		// symmetric straight lines
-		
+	@Before
+	public void setUp() {
+	    curve = new CubicCurve2D.Double();
+		expectedTwistMark = new Line2D.Double (4.5,-1, 4.5,1);
+	}
+
+	@Test
+	public void symmetricStraightLines() {
 		curve.setCurve(0,0, 0,0, 9,0, 9,0);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2,0), 0);
 	    
 		curve.setCurve(0,0, 4,0, 5,0, 9,0);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2,0), 0);
+	}
 
-		// a visually straight symmetrical line doubling itself (at 3 scales)
+	@Test
+	public void flatLoops() {
 
 	    curve.setCurve(0,0, 8,0, 1,0, 9,0);
         assertEqualLines(expectedTwistMark, createTwistMark(curve,2,0), 0);
@@ -125,7 +136,10 @@ public class TestAnnotations extends TestCase {
 		curve.setCurve(0,0, 80,0, 10,0, 90,0);
 		expectedTwistMark.setLine(45,-1, 45,1);
         assertEqualLines(expectedTwistMark, createTwistMark(curve,2,0), 0);
+	}
 
+	@Test
+	public void asymmetricalStraightLines() {
 		// asymmetrical straight lines
 		
 		expectedTwistMark.setLine(4.5,-5, 4.5,5);
@@ -154,8 +168,33 @@ public class TestAnnotations extends TestCase {
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0   ), 4.5);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.2 ), 0.11);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.15), 1.1);
-	    
-		// closed curves
+
+	    assertEqualLines(
+	    		createTwistMark(curve,10, Annotations.DEFAULT_CORRECTION), 
+	    		createTwistMark(curve,10), 0.0
+	    );
+	}
+	
+	@Test
+	public void impossibleTwistMark1() {
+		
+		expectedTwistMark.setLine(DOUBLE,DOUBLE, DOUBLE,DOUBLE); // 4*NaN
+		
+		curve.setCurve(0,0, 9,0, 9,0, 0,0);
+		assertEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
+		
+	}
+	
+	@Test
+	public void impossibleTwistMark2() {
+		
+		expectedTwistMark.setLine(DOUBLE,DOUBLE, DOUBLE,DOUBLE); // 4*NaN
+		curve.setCurve(0,0, 0,0, 0,0, 0,0);
+		assertEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
+	}
+
+	@Test
+	public void closedCurves() {
 		
 		expectedTwistMark.setLine(0,-5, 0,5);
 		curve.setCurve(0,0, -9,0, 9,0, 0,0);
@@ -166,15 +205,5 @@ public class TestAnnotations extends TestCase {
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0   ), 0.7);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.2 ), 0.7);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.15), 0.7);
-	    
-		// impossible twist mark
-		
-		expectedTwistMark.setLine(0/0.0,0/0.0, 0/0.0,0/0.0); // 4*NaN
-
-		curve.setCurve(0,0, 9,0, 9,0, 0,0);
-	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
-	    
-	    curve.setCurve(0,0, 0,0, 0,0, 0,0);
-	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
 	}
 }
