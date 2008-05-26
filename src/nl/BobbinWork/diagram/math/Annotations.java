@@ -23,14 +23,12 @@ import java.awt.geom.Point2D;
 
 public class Annotations {
 
-    private Annotations() {
+    protected static final double DEFAULT_CORRECTION = 0.15;
+
+	private Annotations() {
         // only static methods so hide constructor
     }
 
-    public static Line2D createTwistMark(CubicCurve2D curve, int length) {
-    	return createTwistMark(curve, length, 0.15);
-    }
-    
     /**
      * Creates a twist mark
      * 
@@ -43,7 +41,11 @@ public class Annotations {
      * 
      * @author J. Falkink-Pol
      */
-    public static Line2D createTwistMark(CubicCurve2D curve, int length, double correction) {
+    public static Line2D createTwistMark(CubicCurve2D curve, int length) {
+    	return createTwistMark(curve, length, DEFAULT_CORRECTION);
+    }
+    
+    protected static Line2D createTwistMark(CubicCurve2D curve, int length, double correction) {
     	// TODO: public methods should not call one another but a common private one?
 
         // http://bobbinwork.googlecode.com/svn/trunk/doc/bezier.html#TwistMarks
