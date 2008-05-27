@@ -25,8 +25,9 @@ public class Annotations {
 
     protected static final double DEFAULT_CORRECTION = 0.15;
 
-	private Annotations() {
+	protected Annotations() {
         // only static methods so hide constructor
+		// but keep it available for 100% test coverage
     }
 
     /**

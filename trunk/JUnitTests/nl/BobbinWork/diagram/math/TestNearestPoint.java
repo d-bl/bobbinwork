@@ -21,6 +21,7 @@ import static nl.BobbinWork.diagram.math.NearestPoint.onCurve;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -90,5 +91,15 @@ public class TestNearestPoint {
 		Point2D p = new Point2D.Double(5, 1);
         assertEquals (2.0, onCurve(c, p, pn) );
         assertEquals (p2, pn );
+	}
+
+	private class subNearestPoint extends NearestPoint {
+		subNearestPoint () {
+		}
+	}
+
+	@Test
+	public void constructor() {
+		new subNearestPoint();
 	}
 }
