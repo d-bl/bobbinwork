@@ -25,6 +25,7 @@ import java.awt.geom.Point2D;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static nl.BobbinWork.diagram.math.Annotations.*;
@@ -210,13 +211,14 @@ public class TestAnnotations {
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.15), 0.7);
 	}
 
-	private class subAnnotations extends Annotations {
-		subAnnotations () {
+	@Ignore // not a test class
+	private class AnnotationsUtil extends Annotations {
+		AnnotationsUtil () {
 		}
 	}
 
 	@Test
 	public void constructor() {
-		new subAnnotations();
+		new AnnotationsUtil();
 	}
 }
