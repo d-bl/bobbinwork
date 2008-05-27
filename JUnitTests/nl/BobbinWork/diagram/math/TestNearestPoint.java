@@ -65,11 +65,15 @@ public class TestNearestPoint {
 	
 	@Test
     public void controlPoints() {
-		assertTrue (1.0 > onCurve(c, cp1, null) );
-		assertTrue (1.0 > onCurve(c, cp1, pn) );
+		double a = onCurve(c, cp1, null);
+		assertTrue (1.0 > a );
+		double b = onCurve(c, cp1, pn);
+		assertTrue (1.0 > b );
 		
-		assertTrue (1.0 > onCurve(c, cp2, null) );
-		assertTrue (1.0 > onCurve(c, cp2, pn) );
+		double p = onCurve(c, cp2, null);
+		assertTrue (1.0 > p );
+		double q = onCurve(c, cp2, pn);
+		assertTrue (1.0 > q );
 	}
 	
 	@Test
