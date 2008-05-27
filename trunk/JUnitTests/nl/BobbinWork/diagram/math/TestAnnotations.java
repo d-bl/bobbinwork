@@ -31,7 +31,7 @@ import static nl.BobbinWork.diagram.math.Annotations.*;
 
 public class TestAnnotations {
 	
-	private static final double DOUBLE = 0/0.0;
+	private static final double NOT_A_NUMBER = 0/0.0;
 	private CubicCurve2D curve;
 	private Line2D expectedTwistMark;
 
@@ -68,11 +68,14 @@ public class TestAnnotations {
 				"bad test: line shorter than tolerance*2:", //
 				( 2 * tolerance <= expected.getP1().distance( expected.getP2() ) ) //
 		);
+		assertShortEqualLines (expected, actual, tolerance);
+	}
+	
+	private void assertShortEqualLines (Line2D expected, Line2D actual, double tolerance){
 
 		String message = "expected line " + lineToString(expected) //
         + " but got " + lineToString(actual);
-		assertTrue ( message, equalLines(expected, actual, tolerance) 
-                   );
+		assertTrue ( message, equalLines(expected, actual, tolerance) );
  	}
 
 	private boolean equalPoints (Point2D expected, Point2D actual, double tolerance){
@@ -98,9 +101,9 @@ public class TestAnnotations {
 	    assertFalse (equalPoints(new Point2D.Double(0,0), new Point2D.Double(1,1), 0));
 	    assertFalse (equalPoints(new Point2D.Double(0,0), new Point2D.Double(1,1), 1));
 	    assertTrue  (equalPoints(new Point2D.Double(0,0), new Point2D.Double(1,1), 2));
-	    assertTrue  (equalPoints(new Point2D.Double(DOUBLE,DOUBLE), new Point2D.Double(DOUBLE,DOUBLE), 0));
-	    assertFalse (equalPoints(new Point2D.Double(DOUBLE,DOUBLE), new Point2D.Double(DOUBLE,0), 0));
-	    assertFalse (equalPoints(new Point2D.Double(DOUBLE,DOUBLE), new Point2D.Double(0,DOUBLE), 0));
+	    assertTrue  (equalPoints(new Point2D.Double(NOT_A_NUMBER,NOT_A_NUMBER), new Point2D.Double(NOT_A_NUMBER,NOT_A_NUMBER), 0));
+	    assertFalse (equalPoints(new Point2D.Double(NOT_A_NUMBER,NOT_A_NUMBER), new Point2D.Double(NOT_A_NUMBER,0), 0));
+	    assertFalse (equalPoints(new Point2D.Double(NOT_A_NUMBER,NOT_A_NUMBER), new Point2D.Double(0,NOT_A_NUMBER), 0));
 	    
 	    assertTrue  (equalLines (new Line2D.Double(4.5,-1, 4.5,1),new Line2D.Double(4.5,-1, 4.5,1),0));
 	    assertTrue  (equalLines (new Line2D.Double(4.5,-1, 4.5,1),new Line2D.Double(4.5,1, 4.5,-1),0));
@@ -178,19 +181,19 @@ public class TestAnnotations {
 	@Test
 	public void impossibleTwistMark1() {
 		
-		expectedTwistMark.setLine(DOUBLE,DOUBLE, DOUBLE,DOUBLE); // 4*NaN
+		expectedTwistMark.setLine(NOT_A_NUMBER,NOT_A_NUMBER, NOT_A_NUMBER,NOT_A_NUMBER);
 		
 		curve.setCurve(0,0, 9,0, 9,0, 0,0);
-		assertEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
+		assertShortEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
 		
 	}
 	
 	@Test
 	public void impossibleTwistMark2() {
 		
-		expectedTwistMark.setLine(DOUBLE,DOUBLE, DOUBLE,DOUBLE); // 4*NaN
+		expectedTwistMark.setLine(NOT_A_NUMBER,NOT_A_NUMBER, NOT_A_NUMBER,NOT_A_NUMBER);
 		curve.setCurve(0,0, 0,0, 0,0, 0,0);
-		assertEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
+		assertShortEqualLines(expectedTwistMark, createTwistMark(curve,10,0), 0);
 	}
 
 	@Test
