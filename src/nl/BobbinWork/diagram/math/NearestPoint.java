@@ -105,8 +105,7 @@ public class NearestPoint {
             case 1 : { // Unique solution
                 // Stop recursion when the tree is deep enough
                 // if deep enough, return 1 solution at midpoint
-            	System.out.println(""+depth);
-                if (depth >= MAXDEPTH) {
+            	if (depth >= MAXDEPTH) {
                     t[0] = (w[0].getX() + w[W_DEGREE].getX()) / 2.0;
                     return 1;
                 }

@@ -23,6 +23,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.awt.geom.CubicCurve2D;
@@ -52,15 +53,15 @@ public class TestNearestPoint {
 	
 	@Test
     public void startPoint() {
-		assertEquals (0.0, onCurve(c, p1, null) );
-        assertEquals (0.0, onCurve(c, p1, pn) );
+		assertEquals (0.0, onCurve(c, p1, null), 0.0 );
+        assertEquals (0.0, onCurve(c, p1, pn), 0.0 );
         assertEquals (p1, pn );
 	}
 	
 	@Test
     public void endPoint() {
-		assertEquals (0.0, onCurve(c, p2, null) );
-        assertEquals (0.0, onCurve(c, p2, pn) );
+		assertEquals (0.0, onCurve(c, p2, null), 0.0 );
+        assertEquals (0.0, onCurve(c, p2, pn), 0.0 );
         assertEquals (p2, pn );
 	}
 	
@@ -81,7 +82,7 @@ public class TestNearestPoint {
     public void otherPoint1() {
 		
 		Point2D p = new Point2D.Double(-2, -1);
-        assertEquals (5.0, onCurve(c, p, pn) );
+        assertEquals (5.0, onCurve(c, p, pn), 0.0 );
         assertEquals (p1, pn );
 	}
 	
@@ -89,17 +90,18 @@ public class TestNearestPoint {
     public void otherPoint2() {
 		
 		Point2D p = new Point2D.Double(5, 1);
-        assertEquals (2.0, onCurve(c, p, pn) );
+        assertEquals (2.0, onCurve(c, p, pn), 0.0 );
         assertEquals (p2, pn );
 	}
 
-	private class subNearestPoint extends NearestPoint {
-		subNearestPoint () {
+	@Ignore // not a test class
+	private class NearestPointUtil extends NearestPoint {
+		NearestPointUtil () {
 		}
 	}
 
 	@Test
 	public void constructor() {
-		new subNearestPoint();
+		new NearestPointUtil();
 	}
 }

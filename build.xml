@@ -139,7 +139,7 @@
     </target>
             
     <target name="testRun" depends="testCompile" description="run test classes">
-        <junit printsummary="yes" haltonfailure="true">
+        <junit printsummary="yes" haltonfailure="false">
           <classpath refid="project.classpath"/>	
           <formatter type="brief"/>
           <batchtest todir="${build.dir}/tmptest">
