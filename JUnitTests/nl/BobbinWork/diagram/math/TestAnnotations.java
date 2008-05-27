@@ -209,4 +209,14 @@ public class TestAnnotations {
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.2 ), 0.7);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.15), 0.7);
 	}
+
+	private class subAnnotations extends Annotations {
+		subAnnotations () {
+		}
+	}
+
+	@Test
+	public void constructor() {
+		new subAnnotations();
+	}
 }
