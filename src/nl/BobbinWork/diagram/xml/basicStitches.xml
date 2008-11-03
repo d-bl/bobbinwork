@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<diagram xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation='http://bobbinwork.googlecode.com/svn/trunk/src/nl/BobbinWork/diagram/xml/bw.xsd'
+<diagram
+  xmlns="http://BobbinWork.googlecode.com/bw.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
 >
-
 <!-- Copyright 2008, J. Falkink-Pol
   
 This file is part of BobbinWork.
@@ -1418,7 +1419,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <pin position="98,65" />
       <copy of="ctc"  pairs="1-2"><move x="10" y="72"/></copy>
       <pin position="18,65" />
-      <group id="top" pairs="2-3">
+      <group id="top2" pairs="2-3">
         <copy of="ctc"  pairs="1-2"><move x="50" y="80"/></copy>
         <copy of="ctc"  pairs="1-2"><move x="50" y="112"/></copy>
         <pin position="58,105" />

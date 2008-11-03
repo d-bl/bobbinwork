@@ -1,9 +1,8 @@
-<?xml version='1.0' encoding="ISO-8859-1"?>
-<xsd:schema xmlns="http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd"
-            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-            targetNamespace="http://www.xs4all.nl/~falkink/lace/BobbinWork/bw.xsd"
+<?xml version='1.0'?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://BobbinWork.googlecode.com/bw.xsd"
+            xmlns:bw="http://BobbinWork.googlecode.com/bw.xsd"
             elementFormDefault="qualified"
-            attributeFormDefault="qualified" 
 >
 <!-- Copyright 2004, J. Falkink-Pol
 
@@ -42,7 +41,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     turning absolute coordinates into relative movements.
     -->
   <xsd:restriction base="xsd:string">
-   <xsd:pattern value="[+-]?[0-9]+,[+-]?[0-9]+"/>
+   <xsd:pattern value="[+\-]?[.0-9]+,[+\-]?[.0-9]+"/>
   </xsd:restriction>
  </xsd:simpleType>
 
@@ -66,9 +65,15 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   </xsd:restriction>
  </xsd:simpleType>
 
+ <xsd:simpleType name="yesno">
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="(YES|Yes|yes|NO|No|no|NONE|None|none)"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+
  <xsd:simpleType name="color">
   <xsd:restriction base="xsd:string">
-   <xsd:pattern value="([0-9A-F]{6}|red|green|blue|black|white|yellow|purple|orange|brown)"/>
+   <xsd:pattern value="(#[0-9A-F]{6}|red|green|blue|black|white|yellow|purple|orange|brown)"/>
    <!--
      000000=black  FFFFFF=white
      FF0000=red    00FF00=green  0000FF=blue
@@ -86,23 +91,37 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
  <xsd:complexType name="text">
    <xsd:simpleContent>
-     <xsd:extension base="xsd:string">
-       <xsd:attribute name="lang" type="xsd:string"/>
-     </xsd:extension>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="lang" type="xsd:string" />
+      </xsd:extension>
    </xsd:simpleContent>
  </xsd:complexType>
 
+ <xsd:complexType name="title">
+  <xsd:sequence>
+   <xsd:element   name="value"  type="bw:text"   minOccurs="0" maxOccurs="unbounded" />
+  </xsd:sequence>
+ </xsd:complexType>
+
  <xsd:complexType name="style">
-  <xsd:attribute  name="color"  type="color"               default="black"/>
+  <xsd:attribute  name="color"  type="bw:color"            default="black"/>
   <xsd:attribute  name="width"  type="xsd:positiveInteger" default="1"/>
-  <xsd:attribute  name="deco"   type="deco"                default="solid"/>
+  <xsd:attribute  name="deco"   type="bw:deco"             default="solid"/>
  </xsd:complexType>
 
  <xsd:complexType name="curve">
-  <xsd:attribute  name="start"  type="xy"/>
-  <xsd:attribute  name="c1"     type="xy"/>
-  <xsd:attribute  name="c2"     type="xy"/>
-  <xsd:attribute  name="end"    type="xy"/>
+  <xsd:attribute  name="start"  type="bw:xy"/>
+  <xsd:attribute  name="c1"     type="bw:xy"/>
+  <xsd:attribute  name="c2"     type="bw:xy"/>
+  <xsd:attribute  name="end"    type="bw:xy"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="pairCurve">
+  <xsd:attribute  name="start"  type="bw:xy"/>
+  <xsd:attribute  name="c1"     type="bw:xy"/>
+  <xsd:attribute  name="c2"     type="bw:xy"/>
+  <xsd:attribute  name="end"    type="bw:xy"/>
+  <xsd:attribute  name="mark"   type="xsd:string"/>
  </xsd:complexType>
 
  <!--
@@ -112,10 +131,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  <xsd:complexType name="meet">
   <!-- Overrides default adjustments connecting ends with starts. -->
   <xsd:choice>
-   <xsd:element   name="pair"   type="curve"/>
-   <xsd:element   name="back"   type="curve"/>
-   <xsd:element   name="gimp"   type="curve"/>
-   <xsd:element   name="front"  type="curve"/>
+   <xsd:element   name="pair"   type="bw:pairCurve"/>
+   <xsd:element   name="back"   type="bw:curve"/>
+   <xsd:element   name="gimp"   type="bw:curve"/>
+   <xsd:element   name="front"  type="bw:curve"/>
   </xsd:choice>
   <xsd:attribute  name="nr"     type="xsd:positiveInteger"/>
  </xsd:complexType>
@@ -125,10 +144,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     With a and b instead of angle a rotation includes resizing.
     All 3 points on a strait line is a resize without rotation.
     -->
-  <xsd:attribute  name="centre" type="xy" use="required"/>
+  <xsd:attribute  name="centre" type="bw:xy" use="required"/>
   <xsd:attribute  name="angle"  type="xsd:integer"/>
-  <xsd:attribute  name="a"      type="xy"/>
-  <xsd:attribute  name="b"      type="xy"/>
+  <xsd:attribute  name="a"      type="bw:xy"/>
+  <xsd:attribute  name="b"      type="bw:xy"/>
  </xsd:complexType>
 
  <xsd:complexType name="mirror">
@@ -137,23 +156,23 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     Note that back curves become front curves and vice versa,
     but starts don't become ends.
     -->
-  <xsd:attribute  name="a"      type="xy" use="required"/>
-  <xsd:attribute  name="b"      type="xy" use="required"/>
+  <xsd:attribute  name="a"      type="bw:xy" use="required"/>
+  <xsd:attribute  name="b"      type="bw:xy" use="required"/>
  </xsd:complexType>
 
  <xsd:complexType name="move">
-  <xsd:attribute  name="x"      type="xsd:integer" default="0"/>
-  <xsd:attribute  name="y"      type="xsd:integer" default="0"/>
+  <xsd:attribute  name="x"      type="xsd:decimal" default="0"/>
+  <xsd:attribute  name="y"      type="xsd:decimal" default="0"/>
  </xsd:complexType>
 
  <xsd:complexType name="copy">
-  <xsd:sequence                                 minOccurs="0" maxOccurs="unbounded" >
-   <xsd:element   name="move"     type="move"   minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="rotate"   type="rotate" minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="meet"     type="meet"   minOccurs="0" maxOccurs="unbounded" />
+  <xsd:sequence                                    minOccurs="0" maxOccurs="unbounded" >
+   <xsd:element   name="move"     type="bw:move"   minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="rotate"   type="bw:rotate" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="meet"     type="bw:meet"   minOccurs="0" maxOccurs="unbounded" />
    <!-- more to be developped, e.g. copy a rectangle into a fan -->
   </xsd:sequence>
-  <xsd:attribute  name="pairs" type="nm"        use="required"/>
+  <xsd:attribute  name="pairs" type="bw:nm"  />
   <xsd:attribute  name="of"    type="xsd:IDREF" use="required"/>
  </xsd:complexType>
 
@@ -162,7 +181,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  -->
 
  <xsd:complexType name="pin">
-  <xsd:attribute  name="position" type="xy" use="required"/>
+  <xsd:attribute  name="position" type="bw:xy" use="required"/>
  </xsd:complexType>
 
  <xsd:complexType name="bobbins">
@@ -174,27 +193,27 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     back.deco   = front.deco = solid.
     -->
   <xsd:sequence>
-   <xsd:element   name="thread" type="text"  minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="front"  type="style" minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="back"   type="style" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="thread" type="bw:text"  minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="front"  type="bw:style" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="back"   type="bw:style" minOccurs="0" maxOccurs="1" />
   </xsd:sequence>
-  <xsd:attribute  name="nrs"    type="nrs" use="required"/>
+  <xsd:attribute  name="nrs"    type="bw:nrs" use="required"/>
   <xsd:attribute  name="id"     type="xsd:ID" use="required"/>
  </xsd:complexType>
 
  <xsd:complexType name="switch">
   <xsd:sequence>
-   <xsd:element   name="back"   type="curve" minOccurs="1" maxOccurs="1" />
-   <xsd:element   name="gimp"   type="curve" minOccurs="0" maxOccurs="2"/>
-   <xsd:element   name="front"  type="curve" minOccurs="1" maxOccurs="1" />
+   <xsd:element   name="back"   type="bw:curve" minOccurs="1" maxOccurs="1" />
+   <xsd:element   name="gimp"   type="bw:curve" minOccurs="0" maxOccurs="2"/>
+   <xsd:element   name="front"  type="bw:curve" minOccurs="1" maxOccurs="1" />
   </xsd:sequence>
-  <xsd:attribute  name="bobbins" type="nm" use="required"/>
+  <xsd:attribute  name="bobbins" type="bw:nm" use="required"/>
  </xsd:complexType>
 
  <xsd:complexType name="stitch">
   <xsd:sequence>
-   <xsd:element   name="title"  type="text"  minOccurs="0" maxOccurs="unbounded" />
-   <xsd:element   name="pin"    type="pin"   minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="title"  type="bw:title" minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="pin"    type="bw:pin"   minOccurs="0" maxOccurs="unbounded" />
    <!--
      The style basically concerns colors,
      for black-and-white prints 'deco' and 'width' can replaces colors.
@@ -205,11 +224,11 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
      or starts and ends with cross-movements;
      otherwise use both 'open' and 'closed'.
      -->
-   <xsd:element   name="style"  type="style" minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="pair"   type="curve" minOccurs="1" maxOccurs="unbounded" />
-   <xsd:sequence                             minOccurs="1" maxOccurs="unbounded" >
-    <xsd:element  name="twist"  type="switch" minOccurs="0" maxOccurs="unbounded" />
-    <xsd:element  name="cross"  type="switch" minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="style"  type="bw:style"  minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="pair"   type="bw:pairCurve"  minOccurs="1" maxOccurs="unbounded" />
+   <xsd:sequence                                 minOccurs="1" maxOccurs="unbounded" >
+    <xsd:element  name="twist"  type="bw:switch" minOccurs="0" maxOccurs="unbounded" />
+    <xsd:element  name="cross"  type="bw:switch" minOccurs="0" maxOccurs="unbounded" />
     <!-- Twist: Even thread over preceding thread.
          Cross: Odd thread over next thread
          Pairs used as threads and gimps cause exceptions.
@@ -222,32 +241,36 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       -->
    </xsd:sequence>
   </xsd:sequence>
-  <xsd:attribute  name="pairs"  type="nm" use="required"/>
+  <xsd:attribute  name="pairs"  type="bw:nm" use="required"/>
   <xsd:attribute  name="id"     type="xsd:ID"/>
+  <xsd:attribute  name="display" type="bw:yesno" default="yes" />
  </xsd:complexType>
 
  <xsd:complexType name="group">
   <!-- Twists at group level are allways drawn as cross marks on pair curves. -->
+  <!-- TODO title maxOccurs 1 but implement comment -->
   <xsd:sequence>
-   <xsd:element   name="title"  type="text"   minOccurs="0" maxOccurs="unbounded" />
-   <xsd:sequence                              minOccurs="1" maxOccurs="unbounded" >
-     <xsd:element name="twist"  type="switch" minOccurs="0" maxOccurs="unbounded" />
-     <xsd:element name="group"  type="group"  minOccurs="0" maxOccurs="unbounded" />
-     <xsd:element name="stitch" type="stitch" minOccurs="0" maxOccurs="unbounded" />
-     <xsd:element name="copy"   type="copy"   minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="title"  type="bw:title"  minOccurs="0" maxOccurs="unbounded" />
+   <xsd:sequence                                 minOccurs="1" maxOccurs="unbounded" >
+     <xsd:element name="twist"  type="bw:switch" minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="group"  type="bw:group"  minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="stitch" type="bw:stitch" minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="copy"   type="bw:copy"   minOccurs="0" maxOccurs="unbounded" />
+     <xsd:element name="pin"    type="bw:pin"    minOccurs="0" maxOccurs="unbounded" />
    </xsd:sequence>
   </xsd:sequence>
-  <xsd:attribute  name="pairs"  type="nm" use="required"/>
-  <xsd:attribute  name="id"     type="xsd:ID"/>
+  <xsd:attribute  name="pairs"   type="bw:nm"    use="required"/>
+  <xsd:attribute  name="display" type="bw:yesno" default="yes" />
+  <xsd:attribute  name="id"      type="xsd:ID"/>
  </xsd:complexType>
 
  <xsd:complexType name="diagram">
   <xsd:sequence>
-   <xsd:element   name="title"  type="text"   minOccurs="0" maxOccurs="unbounded" />
-   <xsd:element   name="group"  type="group"  minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="title"  type="bw:title"  minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="group"  type="bw:group"  minOccurs="0" maxOccurs="unbounded" />
   </xsd:sequence>
  </xsd:complexType>
 
- <xsd:element     name="diagram"/>
+ <xsd:element     name="diagram" type="bw:diagram"/>
 
 </xsd:schema>
