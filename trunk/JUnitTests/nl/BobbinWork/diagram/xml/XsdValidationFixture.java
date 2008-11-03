@@ -10,7 +10,6 @@ import java.io.InputStream;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.stream.StreamSource;
-import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
@@ -21,45 +20,52 @@ public class XsdValidationFixture {
   protected static final String DIR = "src/nl/BobbinWork/diagram/xml/";
   private Validator validator;
 
-  public XsdValidationFixture() throws ParserConfigurationException,
-      SAXException {
-    validator = newValidator();
+  public XsdValidationFixture() 
+  throws ParserConfigurationException, SAXException {
+    
+    SchemaFactory factory = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI);
+    validator = factory.newSchema(new File(DIR + "bw.xsd")).newValidator();
   }
 
-  private static Validator newValidator() throws SAXException {
+  protected void validate(File xmlFile) 
+  throws IOException, SAXException {
 
-    String uri = XMLConstants.W3C_XML_SCHEMA_NS_URI;
-    SchemaFactory factory = SchemaFactory.newInstance(uri);
-    Schema newSchema = factory.newSchema(new File(DIR + "bw.xsd"));
-    return newSchema.newValidator();
+    validate(new StreamSource(xmlFile), xmlFile.getPath());
   }
 
-  protected void validate(File xmlFile) throws IOException, SAXException {
-    validate(new StreamSource(xmlFile), xmlFile.getName());
-  }
-
-  protected void validate(String xmlContent) throws SAXException, IOException {
+  protected void validate(String xmlContent) 
+  throws SAXException, IOException {
+    
     InputStream inputStream = new ByteArrayInputStream (xmlContent.getBytes());
     validate(new StreamSource(inputStream), "");
   }
   
-  private void validate(StreamSource streamSource, String prefix)
+  private void validate(StreamSource streamSource, String sourceName)
   throws SAXException, IOException {
+  
     try {
       validator.validate(streamSource);
     } catch (SAXParseException e) {
-      String msg = prefix+" " + "line:"+e.getLineNumber()+" col:"+e.getColumnNumber()+" "+e.getMessage();
+      String msg = "\n" + sourceName + "\n" + getLocation(e) +"\n"+e.getMessage();
       throw new SAXException(msg);
     }
   }
+
+  private String getLocation(SAXParseException e) {
+    
+    return "line:"+e.getLineNumber()+" col:"+e.getColumnNumber();
+  }
   
-  protected void assertParseException(String xmlContent, String regexp) throws IOException, SAXException {
+  protected void assertParseException(String xmlContent, String regexp) 
+  throws IOException, SAXException {
+    
+    InputStream inputStream = new ByteArrayInputStream (xmlContent.getBytes());
+    StreamSource streamSource = new StreamSource(inputStream);
     try {
-      InputStream inputStream = new ByteArrayInputStream (xmlContent.getBytes());
-      validator.validate(new StreamSource(inputStream));
+      validator.validate(streamSource);
     } catch (SAXParseException e) { 
       String s = e.getMessage();
-      assertTrue( e.getLineNumber()+","+e.getColumnNumber()+" expected [" + regexp + "] but got " + s, s.matches(regexp) );
+      assertTrue( getLocation(e) + " expected [" + regexp + "] but got " + s, s.matches(regexp) );
     }
   }
 }
