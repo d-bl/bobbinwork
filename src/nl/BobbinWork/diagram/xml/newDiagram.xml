@@ -3,14 +3,15 @@
   xmlns="http://BobbinWork.googlecode.com/bw.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
 >
-
+  <xi:include href='basicStitches.xml'/>
   <group pairs="1-130">
     <title>
       <value lang="en">Diagram</value>
       <value lang="nl">Werktekening</value>
       <value lang="de">Arbeitszeichnung</value>
     </title>
-    <!-- put the instructions here how to make the subsequent stitches -->
+    <!-- put here your instructions -->
   </group>  
 </diagram>

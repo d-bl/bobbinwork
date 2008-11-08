@@ -17,11 +17,9 @@
  */
 package nl.BobbinWork.viewer.gui;
 
+import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;
+
 import java.awt.Component;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Vector;
 
@@ -36,16 +34,17 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
+import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.ElementType;
-import nl.BobbinWork.diagram.xml.TreeBuilder;
+import nl.BobbinWork.diagram.xml.XmlHandler;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
-import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
@@ -60,12 +59,11 @@ public class BWTree extends JTree {
     /** outer this */
     private BWTree self = this; // for inner classes
 
-    private static TreeBuilder //
-            validatingTreeBuilder = new TreeBuilder(true),
-            TreeBuilder = new TreeBuilder(false);
+    private static XmlHandler xmlHandler;
     
-    public BWTree() {
+    public BWTree() throws ParserConfigurationException, SAXException {
         super(new Vector<String>());
+        xmlHandler = new XmlHandler();
         ToolTipManager.sharedInstance().registerComponent(this);
         setShowsRootHandles(false);
         setRootVisible(true);
@@ -76,7 +74,7 @@ public class BWTree extends JTree {
         
 		if (domRoot == null) {
             try {
-                domRoot = TreeBuilder.build("<diagram><title> </title></diagram>"); //$NON-NLS-1$
+                domRoot = xmlHandler.parse("<diagram><title> </title></diagram>").getDocumentElement(); //$NON-NLS-1$
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -117,56 +115,19 @@ public class BWTree extends JTree {
         }
     }
 
-    private static String basicStitches = null;
-
-    /** 
-     * Loads the definitions of the basic stitches.
-     * These definitions are loaded just once and inserted at the head of 
-     * every xml file of a diagram.
-     */
-    private void loadBasicStitches() {
-       InputStream is = getClass().getClassLoader().getResourceAsStream("nl/BobbinWork/diagram/xml/basicStitches.xml"); //$NON-NLS-1$
-       BufferedReader in = new BufferedReader(new InputStreamReader(is));
-       StringBuffer buffer = new StringBuffer();
-       String line;
-       try {
-           while ((line = in.readLine()) != null) {
-             buffer.append(line);
-           }
-           is.close();
-           basicStitches = buffer.toString();
-           int start = basicStitches.indexOf("<group"); //$NON-NLS-1$
-           int end = basicStitches.lastIndexOf("</group"); //$NON-NLS-1$
-           basicStitches = basicStitches.substring(start, end) + "</group>"; //$NON-NLS-1$
-       } catch (IOException e) {
-           // TODO Auto-generated catch block
-           e.printStackTrace();
-       }
-    }
-
-    void setDoc(String content1) {
-        
-        /* TODO workaround because
-         *     buildTree(viewModelRoot, basicStitches);
-         * didn't work out right in setDoc(Element)
-         * probably because the <copy> instruction doesn't work over different documents
-         *  
-         * rather only load once into the list of fragments
-        */
-        if (basicStitches==null) {
-            loadBasicStitches();
-        }
-        int i = content1.indexOf("<group"); //$NON-NLS-1$
-        String content = content1.substring(0, i) + basicStitches + content1.substring(i);
-        ////// end workaround
+    void setDoc(String content) {
         
         if (content == null || content.equals("")) { //$NON-NLS-1$
             setDoc((Element) null);
         } else {
             String caption = "XML_ERROR_caption"; //$NON-NLS-1$
             try {
-                String fileName = getDocName();
-                setDoc(validatingTreeBuilder.build(content));
+              String fileName = getDocName();
+
+              //DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder(); 
+              //setDoc(parser.parse(content).getDocumentElement());
+
+                setDoc(xmlHandler.parse(content).getDocumentElement());
                 setDocName(fileName);
             } catch (SAXParseException e) {
                 String s = "XML_ERROR_position" //$NON-NLS-1$

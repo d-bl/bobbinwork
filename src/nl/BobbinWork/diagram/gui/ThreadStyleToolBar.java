@@ -17,6 +17,8 @@
  */
 package nl.BobbinWork.diagram.gui;
 
+import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -35,14 +37,16 @@ import javax.swing.JToolBar;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.diagram.model.ThreadStyle;
 import nl.BobbinWork.diagram.model.Twist;
-import nl.BobbinWork.diagram.xml.TreeBuilder;
-import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
+import nl.BobbinWork.diagram.xml.XmlHandler;
+
+import org.w3c.dom.Element;
 
 @SuppressWarnings("serial")
-class ThreadStyleToolBar extends JToolBar {
+public class ThreadStyleToolBar extends JToolBar {
 
     private Twist twist;
 
@@ -57,13 +61,18 @@ class ThreadStyleToolBar extends JToolBar {
     // makes the style of the twist threads available
     private Preview preview = new Preview();
 
+    private static XmlHandler xmlHandler;
+    public static XmlHandler getXmlHandler() throws ParserConfigurationException {
+      if (xmlHandler == null )xmlHandler = new XmlHandler();
+      return xmlHandler;
+    }
+
     private class Preview extends JPanel {
 
         Preview() {
 
             int w = 12;
-            int wx2 = w * 2;
-
+            int wx2 = w*2;
             Dimension dim = new Dimension(wx2, wx2);
             setPreferredSize(dim);
             setMaximumSize(dim);
@@ -72,15 +81,9 @@ class ThreadStyleToolBar extends JToolBar {
             // setBorder(BorderFactory.createLoweredBevelBorder());
             // has side effects: increments together with coreSpinner
 
-            String s = "<?xml version='1.0' encoding='UTF-8'?>" + //$NON-NLS-1$
-                    "<twist bobbins='1-2'>" + //$NON-NLS-1$
-                    "<back start='0," + w + "' end='" + wx2 + "," + w + "'/>" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-                    "<front start='" + w + ",0' end='" + w + "," + wx2 + "' />" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-                    "</twist>"; //$NON-NLS-1$
             try {
-                TreeBuilder treeBuilder = new TreeBuilder(false);
-                org.w3c.dom.Element root = treeBuilder.build(s);
-                twist = new Twist(root);
+                Element el = getXmlHandler().getTwist(w).getDocumentElement();
+                twist = new Twist(el);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -171,8 +174,7 @@ class ThreadStyleToolBar extends JToolBar {
         
     }
     
-    ThreadStyleToolBar(ResourceBundle bundle) {
-
+    ThreadStyleToolBar(ResourceBundle bundle) throws ParserConfigurationException {
         setFloatable(false);
         setRollover(true);
         setBorder(null);

@@ -10,6 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import nl.BobbinWork.bwlib.io.NamedInputStream;
+import nl.BobbinWork.diagram.xml.XmlHandler;
 
 
 @SuppressWarnings("serial")
@@ -58,12 +59,13 @@ public class GroundChooser extends JMenu {
 				}			
 			}
 			//System.out.println(s);
-			s = "<?xml version='1.0' encoding='UTF-8'?>\n" //$NON-NLS-1$ 
-				+ "<diagram>\n<group pairs='1-" //$NON-NLS-1$
-				+ (pairShift*2*diagonalRows+pairs-pairShift) + "'>\n" //$NON-NLS-1$
-				+ "<title/>\n" // magically it makes the name of the stitch appear in the treeView $NON-NLS-1$
-				+ s
-				+ "</group>\n</diagram>"; //$NON-NLS-1$
+			s = "<?xml version='1.0' encoding='UTF-8'?>\n" + //$NON-NLS-1$ 
+			    "<diagram" + XmlHandler.ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
+				"\n<xi:include href='basicStitches.xml'/>\n" + //$NON-NLS-1$
+				"<group pairs='1-" + //$NON-NLS-1$
+				(pairShift*2*diagonalRows+pairs-pairShift) + "'>\n" + //$NON-NLS-1$
+				"<title/>\n" + //$NON-NLS-1$ magically it makes the name of the stitch appear in the treeView $NON-NLS-1$
+				s + "</group>\n</diagram>"; //$NON-NLS-1$
 			
 			JMenuItem item = new JMenuItem();
 			item.setActionCommand( s );
