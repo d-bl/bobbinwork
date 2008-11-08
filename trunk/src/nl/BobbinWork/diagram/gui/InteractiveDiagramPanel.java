@@ -17,6 +17,7 @@ import javax.swing.JMenu;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
+import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.CMenuBar;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
@@ -32,7 +33,8 @@ public class InteractiveDiagramPanel extends JPanel {
 	
     public InteractiveDiagramPanel(
     		final DiagramPanel diagramPanel, 
-    		final JFrame viewer) {
+    		final JFrame viewer) 
+    throws ParserConfigurationException {
 		
 		super(new BorderLayout());
 		

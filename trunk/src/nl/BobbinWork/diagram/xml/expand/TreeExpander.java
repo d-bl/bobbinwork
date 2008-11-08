@@ -107,7 +107,7 @@ public class TreeExpander {
         // el.getParentNode().getParentNode().getOwnerDocument()DocumentElement();
         // is original document
         Element root = el;
-        while ((root != null) && (root.getNodeName().equals(ElementType.diagram))) {
+        while ((root != null) && (root.getNodeName().equals(ElementType.diagram.toString()))) {
             root = (Element) root.getParentNode();
         }
         root = (Element) el.getOwnerDocument().getDocumentElement();

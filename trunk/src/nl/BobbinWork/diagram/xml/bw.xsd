@@ -271,6 +271,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   </xsd:sequence>
  </xsd:complexType>
 
+ <xsd:element     name="twist"  type="bw:switch"/>
  <xsd:element     name="diagram" type="bw:diagram"/>
 
 </xsd:schema>

@@ -47,6 +47,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
@@ -63,6 +64,7 @@ import nl.BobbinWork.viewer.guiUtils.LocaleButton;
 import nl.BobbinWork.viewer.guiUtils.SplitPane;
 
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class BWViewer {
 
@@ -89,7 +91,7 @@ public class BWViewer {
 	private DiagramPanel diagramPanel;
 
 
-	public BWViewer() {
+	public BWViewer() throws ParserConfigurationException, SAXException {
 
 		/* ---- create components and listeners ---- */
 
@@ -322,7 +324,7 @@ public class BWViewer {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParserConfigurationException, SAXException {
 
 		if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
 		new BWViewer().frame.setVisible(true);
