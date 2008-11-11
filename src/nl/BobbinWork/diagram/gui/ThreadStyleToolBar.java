@@ -44,6 +44,7 @@ import nl.BobbinWork.diagram.model.Twist;
 import nl.BobbinWork.diagram.xml.XmlHandler;
 
 import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 @SuppressWarnings("serial")
 public class ThreadStyleToolBar extends JToolBar {
@@ -62,7 +63,7 @@ public class ThreadStyleToolBar extends JToolBar {
     private Preview preview = new Preview();
 
     private static XmlHandler xmlHandler;
-    public static XmlHandler getXmlHandler() throws ParserConfigurationException {
+    public static XmlHandler getXmlHandler() throws ParserConfigurationException, SAXException {
       if (xmlHandler == null )xmlHandler = new XmlHandler();
       return xmlHandler;
     }

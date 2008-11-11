@@ -38,7 +38,7 @@ public class TreeExpander {
 
     public static final String //
             DOM_TO_VIEW = "view", //
-            CLONE_TO_ORPHANE = "original", //
+            CLONE_TO_ORPHAN = "original", //
             ORPHANE_TO_CLONE = "copy", //
             CLONED = "cloned";
 
@@ -165,12 +165,12 @@ public class TreeExpander {
             }
         }
 
-        clone.setUserData(CLONE_TO_ORPHANE, el, null);
+        clone.setUserData(CLONE_TO_ORPHAN, el, null);
         el.setUserData(ORPHANE_TO_CLONE, clone, null);
         return (Element) clone;
     }
 
-    public static void parse(Element el) {
+    public static void expand(Element el) {
 
         int idPrefix = 100000000;
         Node next = null;
@@ -181,7 +181,7 @@ public class TreeExpander {
             if (child.getNodeName().equals(ElementType.copy.toString())) {
                 el.replaceChild(expand((Element) child, ++idPrefix), child);
             } else if (child instanceof Element) {
-                parse((Element) child); // recursion
+                expand((Element) child); // recursion
             }
         }
     }

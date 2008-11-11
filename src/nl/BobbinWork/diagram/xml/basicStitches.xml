@@ -24,7 +24,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     <value lang="nl">Bibliotheek</value>
     <value lang="de">Bibliothek</value>
   </title>
-  <group pairs="1-1" display="no">
     <group pairs="1-1" display="no">
         <!-- signal compatibility issues with the version number in build.xml? 
          either when old diagrams might not work with the the new revision
@@ -1427,6 +1426,5 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <pin position="58,105" />
       </group>
     </group>
-  </group>
   </group>
 </group>

@@ -13,8 +13,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -34,17 +39,23 @@ public class XmlHandler {
 
   
   private Validator validator;
-  private SAXException validatorException;
   private DocumentBuilder parser;
+  private XPath path;
 
   public XmlHandler( ) 
-  throws ParserConfigurationException {
+  throws ParserConfigurationException, SAXException {
 
     validator = newValidator();
     parser = newParser();
+    path = XPathFactory.newInstance().newXPath();
+    
   }
   
-  /** Gets the XML definition of a twist. The thread segments for m a plus sign.
+  public NodeList evaluate (String xPath, Document document) throws XPathExpressionException {
+    return (NodeList) path.evaluate(xPath,document, XPathConstants.NODESET);
+  }
+  
+  /** Gets the XML definition of a twist. The thread segments form a plus sign.
    * The left thread (in the back) goes from east to west.
    * The right thread (in the front) goes from north to south.
    * 
@@ -53,6 +64,7 @@ public class XmlHandler {
    * @throws IOException 
    * @throws SAXException 
    */
+  // TODO move to new XmlResources class?
   public Document getTwist (int w) throws SAXException, IOException {
     String s = "<?xml version='1.0'?>" + //$NON-NLS-1$
     "<twist bobbins='1-2' " + ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
@@ -93,14 +105,12 @@ public class XmlHandler {
   public void validate(File xmlFile) 
   throws IOException, SAXException {
     
-    if (validator== null) throw validatorException;
     validator.validate(new DOMSource( parse(xmlFile) ));
   }
   
   public void validate(Document source) 
   throws IOException, SAXException {
     
-    if (validator== null) throw validatorException;
     DOMSource source2 = new DOMSource(source,SCHEMA_RESOURCE);
     validator.validate(source2);
   }
@@ -108,7 +118,6 @@ public class XmlHandler {
   public void validate(String xmlContent) 
   throws SAXException, IOException {
     
-    if (validator== null) throw validatorException;
     validator.validate(new DOMSource( parse(xmlContent)));
   }
   
@@ -121,15 +130,10 @@ public class XmlHandler {
     return factory.newDocumentBuilder();
   }
   
-  private Validator newValidator() {
+  private Validator newValidator() throws SAXException {
     
     SchemaFactory factory = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
-    try {
       return factory.newSchema( new File("src/"+SCHEMA_PATH) ).newValidator();
-    } catch (SAXException e) {
-      validatorException = e;
-      return null;
-    }
   }
 
   public String getLocation(SAXParseException e) {
