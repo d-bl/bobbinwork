@@ -6,18 +6,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.StringWriter;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.junit.BeforeClass;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
@@ -33,17 +26,8 @@ public class XmlFixture {
     xmlHandler = new XmlHandler();
   }
 
-  protected String toXmlString(Document doc) throws TransformerException {
-  
-    Transformer transformer = TransformerFactory.newInstance().newTransformer();
-    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-    StreamResult result = new StreamResult(new StringWriter());
-    transformer.transform(new DOMSource(doc), result);
-    return result.getWriter().toString();
-  }
-
   protected void assertException(String xmlContent, String regexp)
-      throws IOException, SAXException {
+      throws IOException, SAXException, TransformerException {
       
         xmlHandler.parse( xmlContent );
         try {

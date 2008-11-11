@@ -25,14 +25,14 @@ public class TestExpand extends XmlFixture {
   public void restore() throws SAXException, IOException, TransformerException, XPathExpressionException {
     
     Document document = xmlHandler.parse(XML_CONTENT);
-    String originalXml = toXmlString(document);
-    TreeExpander.expand(document.getDocumentElement());
+    String originalXml = xmlHandler.toXmlString(document);
+    TreeExpander.applyTransformations(document.getDocumentElement());
 
-    assertEquals("transformed xml not as predicted", EXPANDED_FILE, toXmlString(document));
+    assertEquals("transformed xml not as predicted", EXPANDED_FILE, xmlHandler.toXmlString(document));
     undoTransformations(document);
-    assertTrue("restored xml not equal to original",toXmlString(document).equals(originalXml));
+    assertTrue("restored xml not equal to original",xmlHandler.toXmlString(document).equals(originalXml));
     
-    xmlHandler.validate(toXmlString(document));
+    xmlHandler.validate(xmlHandler.toXmlString(document));
     xmlHandler.validate(XML_CONTENT);
   }
 

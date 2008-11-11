@@ -77,7 +77,9 @@
     <path id="project.classpath">
         <fileset dir="${env.JAVA_HOME}/lib" includes="*.jar" />
         <fileset dir="${build.dir}" includes="*.jar" />
-        <fileset dir="../3rdParty/junit4.4" includes="*.jar" />
+        <fileset dir="../vendor/junit4.4" includes="*.jar" />
+        <fileset dir="../vendor/uispec4j-1.5" includes="*.jar" />
+        <fileset dir="../vendor" includes="uispec4j-java6.jar" />
     </path>
 
     <target name="clean" description="Remove all generated files.">
