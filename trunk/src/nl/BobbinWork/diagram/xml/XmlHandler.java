@@ -5,12 +5,18 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import javax.xml.xpath.XPath;
@@ -111,14 +117,30 @@ public class XmlHandler {
   public void validate(Document source) 
   throws IOException, SAXException {
     
-    DOMSource source2 = new DOMSource(source,SCHEMA_RESOURCE);
-    validator.validate(source2);
+    validator.validate(new DOMSource(source,SCHEMA_RESOURCE));
   }
   
-  public void validate(String xmlContent) 
-  throws SAXException, IOException {
+  public String toXmlString(Document doc) throws TransformerException {
     
-    validator.validate(new DOMSource( parse(xmlContent)));
+    Transformer transformer = TransformerFactory.newInstance().newTransformer();
+    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+    StreamResult result = new StreamResult(new StringWriter());
+    transformer.transform(new DOMSource(doc), result);
+    return result.getWriter().toString();
+  }
+
+  public void validate(String xmlContent) 
+  throws SAXException, IOException, TransformerException {
+    
+    validator.validate( new DOMSource( workaround( parse(xmlContent))));
+  }
+
+  private Document workaround(Document document) 
+  throws TransformerException, IOException, SAXException {
+    //  http://norman.walsh.name/2005/04/01/xinclude
+    String ns1 = " xml:base=\"basicStitches.xml\"";
+    String wa = toXmlString(document).replaceFirst(ns1, "");
+    return parse(wa);
   }
   
   private static DocumentBuilder newParser() 

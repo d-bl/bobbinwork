@@ -170,7 +170,7 @@ public class TreeExpander {
         return (Element) clone;
     }
 
-    public static void expand(Element el) {
+    public static void applyTransformations(Element el) {
 
         int idPrefix = 100000000;
         Node next = null;
@@ -181,7 +181,7 @@ public class TreeExpander {
             if (child.getNodeName().equals(ElementType.copy.toString())) {
                 el.replaceChild(expand((Element) child, ++idPrefix), child);
             } else if (child instanceof Element) {
-                expand((Element) child); // recursion
+                applyTransformations((Element) child); // recursion
             }
         }
     }

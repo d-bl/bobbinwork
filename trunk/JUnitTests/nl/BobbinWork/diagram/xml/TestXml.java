@@ -20,7 +20,7 @@ public class TestXml extends XmlFixture {
   public void include() throws SAXException, IOException, TransformerException {
     
     String xmlContent = ROOT + "<xi:include href='basicStitches.xml'/></diagram>";
-    String xmlString = toXmlString(xmlHandler.parse(xmlContent));
+    String xmlString = xmlHandler.toXmlString(xmlHandler.parse(xmlContent));
     //new FileOutputStream("JUnitTests" + PATH + "expanded.xml").write(xmlString.getBytes());
     xmlHandler.validate(xmlContent);
     xmlHandler.validate(xmlString);
@@ -39,17 +39,17 @@ public class TestXml extends XmlFixture {
   }
   
   @Test
-  public void duplicateTitle() throws SAXException, IOException {
+  public void duplicateTitle() throws SAXException, IOException, TransformerException {
     assertException(ROOT + "<title/><title/></diagram>", ".*'title'.*:group.*");
   }
   
   @Test
-  public void noGroup() throws SAXException, IOException {
+  public void noGroup() throws SAXException, IOException, TransformerException {
     assertException(ROOT + "<something/></diagram>", ".*'something'.*:group.*");
   }
   
   @Test
-  public void duplicateGroup() throws SAXException, IOException {
+  public void duplicateGroup() throws SAXException, IOException, TransformerException {
     String s = "<group pairs='1-1'/>";
     String content = ROOT + s + s + "</diagram>";
     xmlHandler.validate(content);

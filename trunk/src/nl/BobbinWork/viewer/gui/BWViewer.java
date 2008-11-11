@@ -218,7 +218,7 @@ public class BWViewer {
 
 			private void treeChanged(TreeModelEvent e) {
 				BWTree.restoreOrphans(e);
-				TreeExpander.expand((Element) tree.getRootElement());
+				TreeExpander.applyTransformations((Element) tree.getRootElement());
 				diagramPanel.setPattern(new Diagram(tree.getRootElement()));
 				fragments.populate(tree.getRoot());
 			}
