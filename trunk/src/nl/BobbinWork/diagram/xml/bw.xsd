@@ -26,7 +26,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  <xsd:annotation>
   <xsd:documentation>
    The storage format reflects the working order for a lace maker.
-   Lace makers keywords: thread, gimp, pair, pin, bobbin, stitch, cross, twist, pattern, repeat.
+   Lace makers keywords: thread, gimp, pair, pin, bobbin, stitch, cross, twist, diagram, repeat.
   </xsd:documentation>
  </xsd:annotation>
 
