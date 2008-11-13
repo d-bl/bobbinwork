@@ -132,7 +132,7 @@ public class XmlHandler {
   public void validate(String xmlContent) 
   throws SAXException, IOException, TransformerException {
     
-    validator.validate( new DOMSource( workaround( parse(xmlContent))));
+    validator.validate( new DOMSource( parse(xmlContent)));
   }
 
   private Document workaround(Document document) 

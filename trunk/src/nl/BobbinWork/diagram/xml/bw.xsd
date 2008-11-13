@@ -22,7 +22,10 @@ You should have received a copy of the GNU General Public License
 along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
 -->
-
+ <xsd:import namespace="http://www.w3.org/XML/1998/namespace" 
+         schemaLocation="http://www.w3.org/2001/xml.xsd"
+         />
+ 
  <xsd:annotation>
   <xsd:documentation>
    The storage format reflects the working order for a lace maker.
@@ -82,17 +85,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   </xsd:restriction>
  </xsd:simpleType>
 
- <xsd:simpleType name="deco">
-  <xsd:restriction base="xsd:string">
-   <xsd:pattern value="(solid|dashes|dots|dashDot|dashDotDot|dashDashDot|Ztwist|Stwist)"/>
-   <!-- Ztwist and Stwist may be too ambitious -->
-  </xsd:restriction>
- </xsd:simpleType>
-
  <xsd:complexType name="text">
    <xsd:simpleContent>
       <xsd:extension base="xsd:string">
-        <xsd:attribute name="lang" type="xsd:string" />
+        <xsd:attribute name="lang" type="xsd:language" />
       </xsd:extension>
    </xsd:simpleContent>
  </xsd:complexType>
@@ -106,7 +102,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  <xsd:complexType name="style">
   <xsd:attribute  name="color"  type="bw:color"            default="black"/>
   <xsd:attribute  name="width"  type="xsd:positiveInteger" default="1"/>
-  <xsd:attribute  name="deco"   type="bw:deco"             default="solid"/>
  </xsd:complexType>
 
  <xsd:complexType name="curve">
@@ -128,17 +123,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
    Transformations
  -->
 
- <xsd:complexType name="meet">
-  <!-- Overrides default adjustments connecting ends with starts. -->
-  <xsd:choice>
-   <xsd:element   name="pair"   type="bw:pairCurve"/>
-   <xsd:element   name="back"   type="bw:curve"/>
-   <xsd:element   name="gimp"   type="bw:curve"/>
-   <xsd:element   name="front"  type="bw:curve"/>
-  </xsd:choice>
-  <xsd:attribute  name="nr"     type="xsd:positiveInteger"/>
- </xsd:complexType>
-
  <xsd:complexType name="rotate">
   <!--
     With a and b instead of angle a rotation includes resizing.
@@ -150,16 +134,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   <xsd:attribute  name="b"      type="bw:xy"/>
  </xsd:complexType>
 
- <xsd:complexType name="mirror">
-  <!--
-    Mirror in the line through a and b.
-    Note that back curves become front curves and vice versa,
-    but starts don't become ends.
-    -->
-  <xsd:attribute  name="a"      type="bw:xy" use="required"/>
-  <xsd:attribute  name="b"      type="bw:xy" use="required"/>
- </xsd:complexType>
-
  <xsd:complexType name="move">
   <xsd:attribute  name="x"      type="xsd:decimal" default="0"/>
   <xsd:attribute  name="y"      type="xsd:decimal" default="0"/>
@@ -169,7 +143,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   <xsd:sequence                                    minOccurs="0" maxOccurs="unbounded" >
    <xsd:element   name="move"     type="bw:move"   minOccurs="0" maxOccurs="1" />
    <xsd:element   name="rotate"   type="bw:rotate" minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="meet"     type="bw:meet"   minOccurs="0" maxOccurs="unbounded" />
    <!-- more to be developped, e.g. copy a rectangle into a fan -->
   </xsd:sequence>
   <xsd:attribute  name="pairs" type="bw:nm"  />
@@ -244,6 +217,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   <xsd:attribute  name="pairs"  type="bw:nm" use="required"/>
   <xsd:attribute  name="id"     type="xsd:ID"/>
   <xsd:attribute  name="display" type="bw:yesno" default="yes" />
+  <xsd:attribute  ref="xml:base"/>
  </xsd:complexType>
 
  <xsd:complexType name="group">
@@ -262,6 +236,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   <xsd:attribute  name="pairs"   type="bw:nm"    use="required"/>
   <xsd:attribute  name="display" type="bw:yesno" default="yes" />
   <xsd:attribute  name="id"      type="xsd:ID"/>
+  <xsd:attribute  ref="xml:base"/>
  </xsd:complexType>
 
  <xsd:complexType name="diagram">
