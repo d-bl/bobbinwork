@@ -135,14 +135,6 @@ public class XmlHandler {
     validator.validate( new DOMSource( parse(xmlContent)));
   }
 
-  private Document workaround(Document document) 
-  throws TransformerException, IOException, SAXException {
-    //  http://norman.walsh.name/2005/04/01/xinclude
-    String ns1 = " xml:base=\"basicStitches.xml\"";
-    String wa = toXmlString(document).replaceFirst(ns1, "");
-    return parse(wa);
-  }
-  
   private static DocumentBuilder newParser() 
   throws ParserConfigurationException {
     
