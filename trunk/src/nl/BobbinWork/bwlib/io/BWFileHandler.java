@@ -83,7 +83,7 @@ public class BWFileHandler {
 
     public InputStream open() {
         if (fileChooser.showOpenDialog(parent) == JFileChooser.APPROVE_OPTION) {
-            fileName = fileChooser.getSelectedFile().getAbsolutePath().toString();
+            fileName = fileChooser.getSelectedFile().getAbsolutePath();
             try {
                 return new FileInputStream(fileName);
             } catch (FileNotFoundException ioe) {

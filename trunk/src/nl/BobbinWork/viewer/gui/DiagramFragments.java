@@ -149,8 +149,8 @@ public class DiagramFragments extends JToolBar {
                 if (scale < 1) {
                     g2.scale(scale, scale);
                 }else{// put in the centre
-                    dy += ((DIM.height-2*borderWidth) - rect.height)/2;
-                    dx += ((DIM.width-2*borderWidth) - rect.width)/2;
+                    dy += ((DIM.height-2*borderWidth) - rect.height)/2D;
+                    dx += ((DIM.width-2*borderWidth) - rect.width)/2D;
                 }
                 g2.translate(dx, dy);
                 

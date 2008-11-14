@@ -76,7 +76,7 @@ public class DensityChange extends ConcentricCircle implements Dots {
      */
     public int getDotsPerRepeat(){
         int dots = ((Dots)this.getPrevious()).getDotsPerRepeat();
-        return dots = (int) Math.round( (double) dots *  this.legs.getValue() );
+        return (int) Math.round( (double) dots *  this.legs.getValue() );
     }
     
     /** Creates a new instance of DensityChange.

@@ -166,10 +166,10 @@ public class ThreadStyleToolBar extends JToolBar {
         if (p != null) {
             getStyleOfFrontThread().set(p);
             coreButton.setBackground(p.getColor());
-            ((SpinnerNumberModel) coreSpinner.getModel()).setValue(new Integer(p.getWidth()));
+            ((SpinnerNumberModel) coreSpinner.getModel()).setValue(Integer.valueOf(p.getWidth()));
             shadowButton.setBackground(p.getBackGround().getColor());
-            ((SpinnerNumberModel) shadowSpinner.getModel()).setValue(new Integer(p
-                    .getBackGround().getWidth()));
+            Integer width = Integer.valueOf(p.getBackGround().getWidth());
+            ((SpinnerNumberModel) shadowSpinner.getModel()).setValue(width);
             preview.update();
         }
         

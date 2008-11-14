@@ -31,10 +31,10 @@ import org.xml.sax.SAXParseException;
 
 public class XmlHandler {
 
-  private static final String BASE = "http://bobbinwork.googlecode.com/svn/trunk/src/";
-  private static final String SAMPLE_URL = "http://bobbinwork.googlecode.com/web/";
-  private static final String PATH = "nl/BobbinWork/diagram/xml/";
-  private static final String SCHEMA_PATH = PATH + "bw.xsd";
+  private static final String BASE = "http://bobbinwork.googlecode.com/svn/trunk/src/"; //$NON-NLS-1$
+  private static final String SAMPLE_URL = "http://bobbinwork.googlecode.com/web/";//$NON-NLS-1$
+  private static final String PATH = "nl/BobbinWork/diagram/xml/";//$NON-NLS-1$
+  private static final String SCHEMA_PATH = PATH + "bw.xsd";//$NON-NLS-1$
   private static final String SCHEMA_URL = BASE + SCHEMA_PATH;
   private static final String SCHEMA_RESOURCE = XmlHandler.class.getClassLoader().getResource(SCHEMA_PATH).toString();
   public  static final String ROOT_ATTRIBUTES = 
@@ -44,17 +44,13 @@ public class XmlHandler {
     " xmlns:xi='http://www.w3.org/2001/XInclude'" ; //$NON-NLS-1$
 
   
-  private Validator validator;
-  private DocumentBuilder parser;
-  private XPath path;
+  static private Validator validator = newValidator();
+  static private XPath path = XPathFactory.newInstance().newXPath();
+  private DocumentBuilder parser = newParser();
 
-  public XmlHandler( ) 
-  throws ParserConfigurationException, SAXException {
-
-    validator = newValidator();
-    parser = newParser();
-    path = XPathFactory.newInstance().newXPath();
-    
+  public XmlHandler( ) throws ParserConfigurationException 
+  {
+    if ( parser != null ) parser = newParser();
   }
   
   public NodeList evaluate (String xPath, Document document) throws XPathExpressionException {
@@ -70,13 +66,12 @@ public class XmlHandler {
    * @throws IOException 
    * @throws SAXException 
    */
-  // TODO move to new XmlResources class?
   public Document getTwist (int w) throws SAXException, IOException {
     String s = "<?xml version='1.0'?>" + //$NON-NLS-1$
     "<twist bobbins='1-2' " + ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
     "<back start='0," + w + "' end='" + (w*2) + "," + w + "'/>" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
     "<front start='" + w + ",0' end='" + w + "," + (w*2) + "' />" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-    "</twist>";
+    "</twist>"; //$NON-NLS-1$
     byte[] bytes = s.getBytes();
     ByteArrayInputStream inputStream = new ByteArrayInputStream (bytes);
     return parser.parse(inputStream);
@@ -111,12 +106,14 @@ public class XmlHandler {
   public void validate(File xmlFile) 
   throws IOException, SAXException {
     
+    if ( validator == null ) return;
     validator.validate(new DOMSource( parse(xmlFile) ));
   }
   
   public void validate(Document source) 
   throws IOException, SAXException {
     
+    if ( validator == null ) return;
     validator.validate(new DOMSource(source,SCHEMA_RESOURCE));
   }
   
@@ -132,7 +129,7 @@ public class XmlHandler {
   public void validate(String xmlContent) 
   throws SAXException, IOException, TransformerException {
     
-    validator.validate( new DOMSource( parse(xmlContent)));
+    newValidator().validate( new DOMSource( parse(xmlContent)));
   }
 
   private static DocumentBuilder newParser() 
@@ -144,10 +141,17 @@ public class XmlHandler {
     return factory.newDocumentBuilder();
   }
   
-  private Validator newValidator() throws SAXException {
+  private static Validator newValidator() {
     
     SchemaFactory factory = SchemaFactory.newInstance( XMLConstants.W3C_XML_SCHEMA_NS_URI );
+    try {
       return factory.newSchema( new File("src/"+SCHEMA_PATH) ).newValidator();
+    } catch (SAXException e) {
+      // validation is not essential
+      System.out.println("validation attempts will be ignored");
+      e.printStackTrace();
+      return null;
+    }
   }
 
   public String getLocation(SAXParseException e) {

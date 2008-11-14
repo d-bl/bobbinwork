@@ -31,7 +31,7 @@ class ViewMenu extends JMenu {
      * A fully dressed JMenu, controlling the appearance of the high lights on
      * the diagram
      */
-	private class DiagramHighlightsMenu extends JMenu {
+	static private class DiagramHighlightsMenu extends JMenu {
 
         private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final JFrame viewer) {
         	applyStrings(this, "MenuView_highlight");

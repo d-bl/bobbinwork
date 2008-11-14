@@ -212,7 +212,7 @@ public class TestAnnotations {
 	}
 
 	@Ignore // not a test class
-	private class AnnotationsUtil extends Annotations {
+	static private class AnnotationsUtil extends Annotations {
 		AnnotationsUtil () {
 		}
 	}
