@@ -116,7 +116,7 @@ public class PolarGridModel {
         
         Line2D result[] = new Line2D[ this.getNumberOfRepeats() ];
         
-        double aRadians = Math.toRadians( 360 / this.getNumberOfRepeats() );
+        double aRadians = Math.toRadians( 360D / this.getNumberOfRepeats() );
         double radius = ( this.getInnerCircle().getDiameter() / 2 ) * SCALE_MM;
         
         for ( int i=0 ; i<this.getNumberOfRepeats() ; i++ ){
@@ -153,7 +153,7 @@ public class PolarGridModel {
         int count = this.countCircles();
         Arc2D[] result = new Arc2D[count];
         
-        double aDegrees = 360 / this.getNumberOfRepeats();
+        double aDegrees = 360D / this.getNumberOfRepeats();
         
         ConcentricCircle p = this.getInnerCircle();
         for ( int i=0 ; i<count ; i++ ) {
@@ -169,7 +169,7 @@ public class PolarGridModel {
         
         Vector<Point2D.Double> v = new Vector<Point2D.Double>();
         
-        double aRadians = Math.toRadians( 360 / this.getNumberOfRepeats() );
+        double aRadians = Math.toRadians( 360D / this.getNumberOfRepeats() );
         
         // incremented variables
         double diameter = this.getInnerCircle().getDiameter()*SCALE_MM;

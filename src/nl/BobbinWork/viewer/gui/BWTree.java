@@ -63,7 +63,7 @@ public class BWTree extends JTree {
     
     public BWTree() throws ParserConfigurationException, SAXException {
         super(new Vector<String>());
-        xmlHandler = new XmlHandler();
+        if ( xmlHandler == null ) xmlHandler = new XmlHandler();
         ToolTipManager.sharedInstance().registerComponent(this);
         setShowsRootHandles(false);
         setRootVisible(true);
@@ -82,15 +82,15 @@ public class BWTree extends JTree {
         DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
         DefaultMutableTreeNode viewModelRoot = (DefaultMutableTreeNode) treeModel.getRoot();
 
-		// destoy old tree
+		// destroy old tree
         for (int i = viewModelRoot.getChildCount(); i > 0; viewModelRoot.remove(--i)) {
         }
 
 		buildTree(viewModelRoot, domRoot);
-        String s = (String) domRoot.getUserData("source"); //$NON-NLS-1$
-        if (s == null) {
-            s = ""; //$NON-NLS-1$
-        }
+		String s = "";
+        if ( domRoot != null ) s = (String) domRoot.getUserData("source"); //$NON-NLS-1$
+        if ( s == null )       s = ""; //$NON-NLS-1$
+        
 		viewModelRoot.setUserObject(s);
         treeModel.nodeStructureChanged(viewModelRoot);
     }
@@ -160,13 +160,13 @@ public class BWTree extends JTree {
             DefaultMutableTreeNode viewNode = (DefaultMutableTreeNode) getSelectionPath()
                     .getLastPathComponent();
             Node domNode = (Node) viewNode.getUserObject();
-            if ((viewNode != null) && (viewNode.toString().matches(".*copy:.*"))) { //$NON-NLS-1$
-                // from the orphaned dom node to the original node
+            if ((domNode != null) && (viewNode.toString().matches(".*copy:.*"))) { //$NON-NLS-1$
+                // from the orphaned DOM node to the original node
                 domNode = (Node) domNode.getUserData(TreeExpander.ORPHANE_TO_CLONE);
             }
             return ((Partition) domNode.getUserData(Partition.MODEL_TO_DOM));
-        } catch (Exception e) {
-            return null;
+        } catch (NullPointerException e) {
+          return null;
         }
     }
 
@@ -203,7 +203,7 @@ public class BWTree extends JTree {
              * filename and treeCellRenderer can retrieve the filename from the
              * DomNode
              */
-            mtn = (DefaultMutableTreeNode) mtn.getFirstChild();
+            //mtn = (DefaultMutableTreeNode) mtn.getFirstChild();
         } else {
             // restore the orphaned DOM node, and subsequent ones, back into
             // their original place in the DOM tree
@@ -309,8 +309,8 @@ public class BWTree extends JTree {
     }
 
     /**
-     * replaces the "of" attribute of the the selected dom element with the "id"
-     * attribute of hte alternative element and re-evaluate the dom tree
+     * replaces the "of" attribute of the the selected DOM element with the "id"
+     * attribute of the alternative element and re-evaluate the DOM tree
      */
     void replaceSelected(Element alternativeElement) {
         try {
@@ -331,7 +331,8 @@ public class BWTree extends JTree {
             m.reload(tnp);
             setSelectionPath(sp);
         } catch (Exception e) {
-
+          System.out.println(e);
+          // TODO explain user in some status bar why nothing happens
         }
     }
 
@@ -356,7 +357,7 @@ public class BWTree extends JTree {
      * Renders the dom elements with icons and minimal text, mainly numbers:
      * numbers of pairs, bobbins or co-ordinates.
      */
-    private class BWTreeCellRenderer extends DefaultTreeCellRenderer {
+    static private class BWTreeCellRenderer extends DefaultTreeCellRenderer {
 
         private ImageIcon[] icons;
 

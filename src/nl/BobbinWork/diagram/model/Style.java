@@ -72,7 +72,7 @@ public class Style {
     }
 
     public void setWidth(String width) {
-        if ((width != null) && (width != "")) {
+        if ((width != null) && ( ! width.equals(""))) {
             this.width = java.lang.Integer.decode(width).intValue();
         }
     }
@@ -100,7 +100,7 @@ public class Style {
      * @see java.awt.Color
      */
     public void setColor(String color) {
-        if ((color == null) || (color == "")) {
+        if ((color == null) || (color.equals(""))) {
         } else if (color.matches("#[0-9A-Fa-f]{6}")) {
             this.color = Integer.decode(color).intValue();
         } else if (color.equalsIgnoreCase("Black")) {

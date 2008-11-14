@@ -95,7 +95,7 @@ public class TestNearestPoint {
 	}
 
 	@Ignore // not a test class
-	private class NearestPointUtil extends NearestPoint {
+	static private class NearestPointUtil extends NearestPoint {
 		NearestPointUtil () {
 		}
 	}

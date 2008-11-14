@@ -16,10 +16,10 @@ import org.xml.sax.SAXParseException;
 
 public class XmlFixture {
 
-  protected static final String PATH = "/nl/BobbinWork/diagram/xml/";
-  protected static final String ROOT = "<?xml version='1.0' encoding='UTF-8'?>" + 
+  static final String PATH = "/nl/BobbinWork/diagram/xml/";
+  static final String ROOT = "<?xml version='1.0' encoding='UTF-8'?>" + 
     "<diagram" + XmlHandler.ROOT_ATTRIBUTES + ">";
-  protected static XmlHandler xmlHandler;
+  static XmlHandler xmlHandler;
 
   @BeforeClass
   public static void setup() throws ParserConfigurationException, SAXException {
@@ -42,7 +42,9 @@ public class XmlFixture {
       throws IOException, FileNotFoundException {
         
         char[] b = new char[ (int) file.length() ];
-        new FileReader(file).read(b);
+        FileReader reader = new FileReader(file);
+        try { reader.read(b); } 
+        finally { reader.close(); }
         String string = new String(b);
         assertTrue(message,transformedXml.equals(string));
       }

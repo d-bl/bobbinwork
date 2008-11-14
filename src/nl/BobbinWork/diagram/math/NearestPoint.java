@@ -76,7 +76,7 @@ public class NearestPoint {
         // Finally, look at distance to end point, where t = 1.0
         double distance = pa.distanceSq(c.getP2());
         if (distance < minDistance) {
-            minDistance = distance;
+            //minDistance = distance;
             t = 1.0;
         }
 

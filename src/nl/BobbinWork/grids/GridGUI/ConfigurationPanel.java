@@ -83,12 +83,12 @@ public class ConfigurationPanel extends JPanel {
         DensityChange dc = (DensityChange) pgm.getInnerCircle().getNext();
         
         // initial values from pgm to editable panel fields
-        spiNumberOfRepeats      .getModel().setValue(new Integer(pgm.getNumberOfRepeats()));
-        spiDotsPerRepeat        .getModel().setValue(new Integer(pgm.getDotsPerRepeat()));
-        spiAngleOnFootside      .getModel().setValue(new Integer(pgm.getAngleOnFootside()));
-        spiInnerDiameter        .getModel().setValue(new Double (pgm.getInnerCircle().getDiameter()));
-        spiOuterDiameter        .getModel().setValue(new Double (pgm.getOuterCircle().getDiameter()));
-        spiDiameterDensityChange.getModel().setValue(new Double (dc.getDiameter()));
+        spiNumberOfRepeats      .getModel().setValue(Integer.valueOf(pgm.getNumberOfRepeats()));
+        spiDotsPerRepeat        .getModel().setValue(Integer.valueOf(pgm.getDotsPerRepeat()));
+        spiAngleOnFootside      .getModel().setValue(Integer.valueOf(pgm.getAngleOnFootside()));
+        spiInnerDiameter        .getModel().setValue(Double.valueOf (pgm.getInnerCircle().getDiameter()));
+        spiOuterDiameter        .getModel().setValue(Double.valueOf (pgm.getOuterCircle().getDiameter()));
+        spiDiameterDensityChange.getModel().setValue(Double.valueOf (dc.getDiameter()));
         //TODO: cmbLegRatio     .setText( String.valueOf( dc.getLegRatio() ));
         cmbLegRatio             .setPossibleRatios( pgm.getDotsPerRepeat() );
         cbxAlternate            .setSelected      ( dc.getAlternate() );

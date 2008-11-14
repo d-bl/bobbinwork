@@ -92,8 +92,19 @@ public class LegRatio implements Comparable<LegRatio> {
         }
     }
     
+    public boolean equals (Object a) {
+      if ( a instanceof LegRatio ) 
+        return this.getValue() == ((LegRatio)a).getValue();
+      else 
+        return false;
+    }
+    
+    public int hashCode() {
+      return new Double(getValue()).hashCode();
+    }
+    
     /**
-     * Gets the possible leg ratios of the asymetrical spiders (or other figures) that increase the grid density.
+     * Gets the possible leg ratios of the asymmetrical spiders (or other figures) that increase the grid density.
      *
      * @param dotsPerRepeat the number of dots on one circle for one repeat
      * @return              example "(4:5);(3:4);(2:3);(3:5);(4:7);(1:2)"

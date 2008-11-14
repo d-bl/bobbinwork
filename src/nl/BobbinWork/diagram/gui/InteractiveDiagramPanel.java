@@ -81,7 +81,7 @@ public class InteractiveDiagramPanel extends JPanel {
 
     };
 
-    private class CToolBar extends JToolBar {
+    static private class CToolBar extends JToolBar {
         
     	public CToolBar(JToolBar toolBar, JMenu[] menu) {
             setFloatable(false);

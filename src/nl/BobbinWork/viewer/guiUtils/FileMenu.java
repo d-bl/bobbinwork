@@ -166,7 +166,7 @@ public class FileMenu extends JMenu {
 		if (fileChooser.showOpenDialog(this) != JFileChooser.APPROVE_OPTION) {
         	return false;
         }
-        String name = fileChooser.getSelectedFile().getAbsolutePath().toString();
+        String name = fileChooser.getSelectedFile().getAbsolutePath();
         try {
         	e.setSource(new NamedInputStream(name, new FileInputStream(name)));
         	return true;
