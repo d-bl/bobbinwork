@@ -5,71 +5,36 @@ import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 import nl.BobbinWork.bwlib.io.NamedInputStream;
-import nl.BobbinWork.diagram.xml.XmlHandler;
+import nl.BobbinWork.diagram.xml.Ground;
 
 
 @SuppressWarnings("serial")
 public class GroundChooser extends JMenu {
-	
-	public GroundChooser (final ActionListener externalActionListener){
-		
-		super();
-		applyStrings(this, "MenuGround_Choose"); //$NON-NLS-1$
 
-		JMenuItem[] data = {
-				createGroundMenuItem("vierge", 80, 80, 4, 2),//$NON-NLS-1$
-				createGroundMenuItem("sGravenmoers", 80, 80, 4, 2),//$NON-NLS-1$
-				createGroundMenuItem("spider", 80, 140, 6, 3),//$NON-NLS-1$
-				createGroundMenuItem("flanders", 55, 55, 4, 2),//$NON-NLS-1$
-				createGroundMenuItem("snowflake", 136, 100, 6, 4)};//$NON-NLS-1$
+  public GroundChooser (final ActionListener externalActionListener){
 
-		for (final JMenuItem item : data) {
-			item.addActionListener(new ActionListener () {
+    super();
+    applyStrings(this, "MenuGround_Choose"); //$NON-NLS-1$
 
-				public void actionPerformed(ActionEvent e) {
-					ByteArrayInputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
-					e.setSource(new NamedInputStream("ground.xml",is));
-					externalActionListener.actionPerformed(e);					
-				}
-			});
-			add(item);
-		}
-	}
-	
-	private JMenuItem createGroundMenuItem (String groundID, int x, int y, int pairs, int pairShift) {
-			
-			final int diagonalRows = 4;
-			int p = (diagonalRows - 1) * pairShift * 2 + pairs + 1;
-			String s = "<copy of='"+groundID+"' pairs='"+p+"-"+(p+pairs-1)+"'/>\n";
-			for (int i=0 ; i<diagonalRows ; i++){
-				int xx = (diagonalRows-1)*x+i*x;
-				int yy = i*y;
-				p = pairShift*(diagonalRows+i-1)+1; 
-				for (int j=0 ; j<diagonalRows && p>0; j++){
-					s = s + "<copy of='"+groundID+"' pairs='"+p+"-"+(p+pairs-1)+"'>"
-					+"<move x='"+(xx)+"' y='"+(yy)+"'/></copy>\n";
-					xx -= x;
-					yy += y;
-					p -= pairShift;
-				}			
-			}
-			//System.out.println(s);
-			s = "<?xml version='1.0' encoding='UTF-8'?>\n" + //$NON-NLS-1$ 
-			    "<diagram" + XmlHandler.ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
-				"\n<xi:include href='basicStitches.xml'/>\n" + //$NON-NLS-1$
-				"<group pairs='1-" + //$NON-NLS-1$
-				(pairShift*2*diagonalRows+pairs-pairShift) + "'>\n" + //$NON-NLS-1$
-				"<title/>\n" + //$NON-NLS-1$ magically it makes the name of the stitch appear in the treeView $NON-NLS-1$
-				s + "</group>\n</diagram>"; //$NON-NLS-1$
-			
-			JMenuItem item = new JMenuItem();
-			item.setActionCommand( s );
-			applyStrings(item, "MenuGround_"+groundID); //$NON-NLS-1$
-			return item;
-	}
+    for ( Ground g : Ground.values() ) {
+      final JMenuItem item = new JMenuItem();
+      item.setActionCommand( g.xmlString() );
+      applyStrings(item, "MenuGround_"+g.name()); //$NON-NLS-1$
+      item.addActionListener(new ActionListener () {
+
+        public void actionPerformed(ActionEvent event) {
+          InputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
+          event.setSource(new NamedInputStream("ground.xml",is));
+          externalActionListener.actionPerformed(event);                  
+        }
+      });
+      add(item);
+    }
+  }
 }
