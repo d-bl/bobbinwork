@@ -41,7 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.diagram.model.ThreadStyle;
 import nl.BobbinWork.diagram.model.Twist;
-import nl.BobbinWork.diagram.xml.XmlHandler;
+import nl.BobbinWork.diagram.xml.XmlResources;
 
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -62,19 +62,18 @@ public class ThreadStyleToolBar extends JToolBar {
     // makes the style of the twist threads available
     private Preview preview = new Preview();
 
-    private static XmlHandler xmlHandler;
-    public static XmlHandler getXmlHandler() throws ParserConfigurationException, SAXException {
-      if (xmlHandler == null )xmlHandler = new XmlHandler();
-      return xmlHandler;
+    private static XmlResources xmlResources;
+    public static XmlResources getXmlResources() throws ParserConfigurationException, SAXException {
+      if (xmlResources == null )xmlResources = new XmlResources();
+      return xmlResources;
     }
 
     private class Preview extends JPanel {
 
         Preview() {
 
-            int w = 12;
-            int wx2 = w*2;
-            Dimension dim = new Dimension(wx2, wx2);
+            int w = 20;
+            Dimension dim = new Dimension(w, w);
             setPreferredSize(dim);
             setMaximumSize(dim);
 
@@ -83,7 +82,7 @@ public class ThreadStyleToolBar extends JToolBar {
             // has side effects: increments together with coreSpinner
 
             try {
-                Element el = getXmlHandler().getTwist(w).getDocumentElement();
+                Element el = getXmlResources().getTwist(w).getDocumentElement();
                 twist = new Twist(el);
             } catch (Exception e) {
                 e.printStackTrace();

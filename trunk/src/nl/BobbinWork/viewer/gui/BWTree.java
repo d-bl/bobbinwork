@@ -38,7 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.ElementType;
-import nl.BobbinWork.diagram.xml.XmlHandler;
+import nl.BobbinWork.diagram.xml.XmlResources;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 import org.w3c.dom.Element;
@@ -56,29 +56,26 @@ import org.xml.sax.SAXParseException;
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class BWTree extends JTree {
 
+    private static final String XML_ERROR_POSITION = "XML_ERROR_position";
+    private static final String XML_ERROR_CAPTION = "XML_ERROR_caption";
+
     /** outer this */
     private BWTree self = this; // for inner classes
 
-    private static XmlHandler xmlHandler;
+    private static XmlResources xmlResources;
     
     public BWTree() throws ParserConfigurationException, SAXException {
         super(new Vector<String>());
-        if ( xmlHandler == null ) xmlHandler = new XmlHandler();
+        if ( xmlResources == null ) xmlResources = new XmlResources();
         ToolTipManager.sharedInstance().registerComponent(this);
         setShowsRootHandles(false);
         setRootVisible(true);
         setCellRenderer(new BWTreeCellRenderer());
         getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
     }
+    
     private void setDoc(Element domRoot) {
         
-		if (domRoot == null) {
-            try {
-                domRoot = xmlHandler.parse("<diagram><title> </title></diagram>").getDocumentElement(); //$NON-NLS-1$
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
         DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
         DefaultMutableTreeNode viewModelRoot = (DefaultMutableTreeNode) treeModel.getRoot();
 
@@ -86,10 +83,10 @@ public class BWTree extends JTree {
         for (int i = viewModelRoot.getChildCount(); i > 0; viewModelRoot.remove(--i)) {
         }
 
+        if (domRoot ==null) return;
 		buildTree(viewModelRoot, domRoot);
-		String s = "";
-        if ( domRoot != null ) s = (String) domRoot.getUserData("source"); //$NON-NLS-1$
-        if ( s == null )       s = ""; //$NON-NLS-1$
+		String s = (String) domRoot.getUserData("source"); //$NON-NLS-1$
+        if ( s == null ) s = ""; //$NON-NLS-1$
         
 		viewModelRoot.setUserObject(s);
         treeModel.nodeStructureChanged(viewModelRoot);
@@ -117,38 +114,23 @@ public class BWTree extends JTree {
 
     void setDoc(String content) {
         
-        if (content == null || content.equals("")) { //$NON-NLS-1$
-            setDoc((Element) null);
-        } else {
-            String caption = "XML_ERROR_caption"; //$NON-NLS-1$
-            try {
-              String fileName = getDocName();
-
-              //DocumentBuilder parser = DocumentBuilderFactory.newInstance().newDocumentBuilder(); 
-              //setDoc(parser.parse(content).getDocumentElement());
-
-                setDoc(xmlHandler.parse(content).getDocumentElement());
-                setDocName(fileName);
-            } catch (SAXParseException e) {
-                String s = "XML_ERROR_position" //$NON-NLS-1$
-                	.replaceFirst("<LLL>", e.getLineNumber()+"" )  //$NON-NLS-1$ //$NON-NLS-2$
-                	.replaceFirst("<CCC>", e.getColumnNumber()+"" ) //$NON-NLS-1$ //$NON-NLS-2$
-                	+ "\n"; //$NON-NLS-1$
-                JOptionPane.showMessageDialog( //
-                        self, // 
-                        s + e.getLocalizedMessage(), //
-                        caption, //
-                        JOptionPane.ERROR_MESSAGE);
-                setDoc((Element) null);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog( //
-                        self, // 
-                        e.getLocalizedMessage(), //
-                        caption, //
-                        JOptionPane.ERROR_MESSAGE);
-                setDoc((Element) null);
-            }
-        }
+      try {
+        setDoc(xmlResources.parse(content).getDocumentElement());
+        setDocName(getDocName());
+      } catch (SAXParseException e) {
+        String s = XML_ERROR_POSITION
+          .replaceFirst("<LLL>", Integer.toString(e.getLineNumber()) )  //$NON-NLS-1$ 
+          .replaceFirst("<CCC>", Integer.toString(e.getColumnNumber()) ) //$NON-NLS-1$
+          + "\n"; //$NON-NLS-1$
+        showError(s + e.getLocalizedMessage());
+      } catch (Exception e) {
+        showError(e.getLocalizedMessage());
+      }
+    }
+    
+    private void showError(String s) {
+      JOptionPane.showMessageDialog( self, s, XML_ERROR_CAPTION, JOptionPane.ERROR_MESSAGE);
+      setDoc((Element) null);
     }
 
     /**
@@ -175,7 +157,7 @@ public class BWTree extends JTree {
         return (DefaultMutableTreeNode) getModel().getRoot();
     }
 
-    /** gets the root element of the dom tree */
+    /** gets the root element of the DOM tree */
     Element getRootElement() {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode) getModel().getRoot();
         if (root.getUserObject().getClass().getName().matches(".*String.*")) { //$NON-NLS-1$
