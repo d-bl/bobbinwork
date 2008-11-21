@@ -421,7 +421,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                             </twist>
                         </stitch>
                     </group>    
-                    <copy of="ctctc"/>
+                    <copy of="ctctc" pairs="1-2"/>
                 </group>
                 
                 <group id="ltctctc" pairs="15-16">
