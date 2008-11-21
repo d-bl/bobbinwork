@@ -48,6 +48,7 @@ import javax.swing.event.TreeModelListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
@@ -218,7 +219,12 @@ public class BWViewer {
 
 			private void treeChanged(TreeModelEvent e) {
 				BWTree.restoreOrphans(e);
-				TreeExpander.applyTransformations((Element) tree.getRootElement());
+				try {
+				  TreeExpander.replaceCopyElements((Element) tree.getRootElement());
+				} catch (XPathExpressionException e1) {
+				  // TODO Auto-generated catch block
+				  e1.printStackTrace();
+				}
 				diagramPanel.setPattern(new Diagram(tree.getRootElement()));
 				fragments.populate(tree.getRoot());
 			}

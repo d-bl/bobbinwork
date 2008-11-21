@@ -19,22 +19,25 @@
 package nl.BobbinWork.diagram.xml.expand;
 
 /**
- * 
- * 
  * @author J. Falkink-Pol
  */
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.xpath.XPathExpressionException;
+
 import nl.BobbinWork.diagram.xml.ElementType;
+import nl.BobbinWork.diagram.xml.XmlResources;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class TreeExpander {
-
-    /** Only static methods, so hide the constructor. */
-    private TreeExpander() {
-    }
 
     public static final String //
             DOM_TO_VIEW = "view", //
@@ -42,10 +45,15 @@ public class TreeExpander {
             ORPHANE_TO_CLONE = "copy", //
             CLONED = "cloned";
 
+    /** Only static methods, so hide the constructor. */
+    private TreeExpander() {
+    }
+
     /** Apply one transformation to the element and its offspring. */
     static private void applyTransformation(VectorTransformation vt, Element el, Object view) {
 
         el.setUserData(DOM_TO_VIEW, view, null);
+        el.removeAttribute("id");
 
         String pointAttributes[] = ElementType.valueOf(el.getNodeName()).getPointAttributes();
         if (pointAttributes != null) {
@@ -69,120 +77,111 @@ public class TreeExpander {
         }
     }
 
-    /** Find <... id="..."> */
-    static private Element findElementById(String id, Element el) {
-
-        for (Node child = el.getFirstChild(); child != null; child = child.getNextSibling()) {
-            if (child.getNodeType() == Node.ELEMENT_NODE) {
-                Element childEl = (Element) child;
-
-                try {
-                    if (childEl.getAttributeNode("id").getNodeValue().equals(id)) {
-                        return childEl;
-                    }
-                } catch (NullPointerException e) {
-                }
-                Element x = findElementById(id, childEl);
-                if (x != null) {
-                    return x;
-                }
-            }
+    /**
+     * Replaces all &lt;copy of="x"&gt; elements by deep clones of &lt;... id="x"&gt;. 
+     * The transformations defined by children of the &lt;copy&gt; elements are applied 
+     * to the clone. The ID's of cloned children get a prefix to make them unique.
+     * The clones and replaced elements are linked to one another via 
+     * setUserData(CLONE_TO_ORPHAN) respective setUserData(ORPHAN_TO_CLONE). 
+     * 
+     * @param root gets its copy elements replaced.
+     * @throws XPathExpressionException
+     */
+    public static void replaceCopyElements(Element root) throws XPathExpressionException {
+      
+      Object userData = root.getUserData(DOM_TO_VIEW);
+      int idPrefix = 1000000000;
+      Map<String, Element> clonables = 
+        newIdMap( XmlResources.evaluate( "//@id", root ) );
+      
+      NodeList elements = XmlResources.evaluate( "//*[@of]", root );
+      for (int i=0 ; i < elements.getLength() ; i++) {
+        Element toBeReplaced = (Element) elements.item(i);
+        String id = toBeReplaced.getAttribute("of");
+        Element toBeCloned = clonables.get(id);
+        if ( toBeCloned == null  ) {
+          throw new RuntimeException("<copy of='" + id + 
+              "' ...> refers to nonexistent <... id='" + id + "'>");
         }
-        return null;
+        Element clone = replaceWithClone( toBeReplaced, toBeCloned );
+        setRange(toBeReplaced, id, clone);
+        List<VectorTransformation> list = getTransformations (toBeReplaced);
+        clone.setUserData(DOM_TO_VIEW, userData, null);
+        for (VectorTransformation vt : list) {
+          applyTransformation(vt, clone, userData );
+        }
+        clone.setAttribute( "id", ++idPrefix + "_" + id );    
+        clone.removeAttribute("display");    
+      }
+    }
+
+    private static List<VectorTransformation> getTransformations (Element toBeReplaced) {
+      
+      List<VectorTransformation> list = new ArrayList<VectorTransformation>();
+
+      for ( Node node = toBeReplaced.getFirstChild() ; node != null ; node = node.getNextSibling() ) {
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+          switch ( ElementType.valueOf( node.getNodeName() ) ) {
+          case move   : list.add(new Move  ( node.getAttributes() )); break;
+          case rotate : list.add(new Rotate( node.getAttributes() )); break;
+          }
+        }
+      }
+      return list;
+    }
+    
+    /** give the clone the pairs/bobbins of the replaced node */
+    private static void setRange(Element toBeReplaced, String id, Element clone) {
+      
+      String nodeName = toBeReplaced.getNodeName();
+      String attributeName = ElementType.getRangeAttribute(nodeName);
+      if (attributeName == null) {
+        throw new RuntimeException("<... of='" + id + "' ...> only allowed on <copy ...>");
+      }
+      String value = toBeReplaced.getAttribute(attributeName);
+      if ( value == null ) {
+        throw new RuntimeException("<"+nodeName+" id='" + id + "' ...> has no " + attributeName);
+      }
+      clone.setAttribute(attributeName, value);
     }
 
     /**
-     * Replace &lt;copy lib="x"&gt; by a clone of &lt;... id="x"&gt;. Apply the
-     * children of the &lt;copy&gt; to the clone. Provide the cloned ID's with a
-     * prefix to make it unique.
-     * 
-     * @param el
-     * @return exploded tree
-     * @throws NullPointerException
+     * @param attributes
+     * @return a map with the attribute values as key 
+     *         and elements containing the attribute as value
+     * @throws XPathExpressionException
      */
-    // TODO: not all ID's are yet unique, recompute pairs, etc.
-    static private Element expand(Element el, int idPrefix) throws NullPointerException {
-
-        // find the root
-        // el.getParentNode().getParentNode().getOwnerDocument()DocumentElement();
-        // is original document
-        Element root = el;
-        while ((root != null) && (root.getNodeName().equals(ElementType.diagram.toString()))) {
-            root = (Element) root.getParentNode();
-        }
-        root = (Element) el.getOwnerDocument().getDocumentElement();
-
-        // search starting at the root
-        String id;
-        try {
-            id = el.getAttributes().getNamedItem("of").getNodeValue();
-        } catch (NullPointerException e) {
-            throw new RuntimeException("<copy of='...'> lacks 'of'");
-        }
-        Node n = findElementById(id, root);
-
-        if (n == null) {
-            throw new RuntimeException("<copy " + el.getAttributes().getNamedItem("of")
-                    + " ...> refers to nonexistent <... id='" + id + "'>");
-        }
-
-        n.setUserData(CLONED, Boolean.valueOf(true), null);
-        Node clone = n.cloneNode(true);
-
-        // give the clone another id
-        Node att = clone.getAttributes().getNamedItem("id");
-        try {
-            att.setNodeValue(el.getAttributes().getNamedItem("id").getNodeValue());
-        } catch (java.lang.NullPointerException e) {
-            att.setNodeValue(idPrefix + "-" + att.getNodeValue());
-        }
-
-        // give the clone the pairs/bobbins of the replaced node
-        String rangeTag = ElementType.getRangeAttribute(el.getNodeName());
-        if (rangeTag != null) {
-            att = clone.getAttributes().getNamedItem(rangeTag);
-            try {
-                att.setNodeValue(el.getAttributes().getNamedItem(rangeTag).getNodeValue());
-            } catch (java.lang.NullPointerException e) {
-            }
-        }
-        clone.setUserData(DOM_TO_VIEW, el.getUserData(DOM_TO_VIEW), null);
-
-        // apply transformations
-        for (Node trans = el.getFirstChild(); trans != null; trans = trans.getNextSibling()) {
-            if (trans.getNodeType() == Node.ELEMENT_NODE) {
-
-                VectorTransformation vt = null;
-                String transName = trans.getNodeName();
-                if (transName.equals("move")) {
-                    vt = new Move(trans.getAttributes());
-                } else if (transName.equals("rotate")) {
-                    vt = new Rotate(trans.getAttributes());
-                }
-                if (vt != null) {
-                    applyTransformation(vt, (Element) clone, el.getUserData(DOM_TO_VIEW));
-                }
-            }
-        }
-
-        clone.setUserData(CLONE_TO_ORPHAN, el, null);
-        el.setUserData(ORPHANE_TO_CLONE, clone, null);
-        return (Element) clone;
+    private static Map<String, Element> newIdMap(NodeList attributes)
+    throws XPathExpressionException {
+      
+      int length = attributes.getLength();
+      int capacity = (int) ( length / 0.75 );
+      Map<String,Element> originals = new HashMap<String,Element>( capacity );
+      for (int i=0 ; i < length ; i++) {
+        Attr attribute = (Attr) attributes.item(i);
+        Element attrOwner = attribute.getOwnerElement();
+        String id = attribute.getNodeValue();
+        originals.put(id, attrOwner);
+      }
+      return originals;
     }
-
-    public static void applyTransformations(Element el) {
-
-        int idPrefix = 100000000;
-        Node next = null;
-
-        for (Node child = el.getFirstChild(); child != null; child = next) {
-            next = child.getNextSibling();
-
-            if (child.getNodeName().equals(ElementType.copy.toString())) {
-                el.replaceChild(expand((Element) child, ++idPrefix), child);
-            } else if (child instanceof Element) {
-                applyTransformations((Element) child); // recursion
-            }
-        }
+    
+    /**
+     * Replace a subtree with a clone of another subtree.
+     * Keep the replaced subtree linked with the cloned subtree.
+     * 
+     * @param toBeReplaced
+     * @param toBeCloned
+     */
+    private static Element replaceWithClone(Element toBeReplaced, Element toBeCloned) {
+      
+      Element deepClone = (Element) toBeCloned.cloneNode(true);
+      
+      deepClone.setUserData(CLONED, Boolean.valueOf(true), null);
+      deepClone.setUserData(CLONE_TO_ORPHAN, toBeReplaced, null);
+      toBeReplaced.setUserData(ORPHANE_TO_CLONE, deepClone, null);
+      
+      toBeReplaced.getParentNode().replaceChild( deepClone, toBeReplaced);
+      return deepClone;
     }
 }

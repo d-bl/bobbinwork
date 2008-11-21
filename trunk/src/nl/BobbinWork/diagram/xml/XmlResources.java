@@ -25,6 +25,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -63,6 +64,10 @@ public class XmlResources {
     return (NodeList) xPath.evaluate(xPathExp,document, XPathConstants.NODESET);
   }
   
+  static public NodeList evaluate (String xPathExp, Element document) throws XPathExpressionException {
+    return (NodeList) xPath.evaluate(xPathExp,document, XPathConstants.NODESET);
+  }
+  
   /** Gets the XML definition of a twist. 
    * The right thread goes over the left thread.
    * 
@@ -74,7 +79,7 @@ public class XmlResources {
   public Document getTwist (int w) throws SAXException, IOException {
     double w2 = (w/2D);
     String s = "<?xml version='1.0'?>" + //$NON-NLS-1$
-    "<twist bobbins='1-2' " + ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
+    "<twist id='t' bobbins='1-2' " + ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
     "<back start='0," + w2 + "' end='" + w + "," + w2 + "'/>" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
     "<front start='" + w2 + ",0' end='" + w2 + "," + w + "' />" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
     "</twist>"; //$NON-NLS-1$
@@ -103,6 +108,12 @@ public class XmlResources {
     throw new SAXException(messages);
   }
   
+  public Document parse(File file) 
+  throws IOException, SAXException {
+    
+     return parser.parse( file );
+  }
+  
   public void validate(File xmlFile) 
   throws IOException, SAXException {
     
@@ -129,7 +140,8 @@ public class XmlResources {
   public void validate(String xmlContent) 
   throws SAXException, IOException, TransformerException {
     
-    newValidator().validate( new DOMSource( parse(xmlContent)));
+    if ( validator == null ) return;
+    validator.validate( new DOMSource( parse(xmlContent)));
   }
 
   private static DocumentBuilder newParser() 

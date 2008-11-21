@@ -42,14 +42,16 @@ public class XmlFixture {
   }
 
   protected void assertEquals(String message, File file, String transformedXml)
-      throws IOException, FileNotFoundException {
-        
-        char[] b = new char[ (int) file.length() ];
-        FileReader reader = new FileReader(file);
-        try { reader.read(b); } 
-        finally { reader.close(); }
-        String string = new String(b);
-        assertTrue(message,transformedXml.equals(string));
-      }
+  throws IOException, FileNotFoundException {
+
+    if ( ((int) file.length()) != file.length() ) throw new IOException ("file too long");
+
+    char[] b = new char[ (int) file.length() ];
+    FileReader reader = new FileReader(file);
+    try { if ( file.length() != reader.read(b)) throw new IOException ("read wrong length"); } 
+    finally { reader.close(); }
+    String string = new String(b);
+    assertTrue(message,transformedXml.equals(string));
+  }
 
 }
