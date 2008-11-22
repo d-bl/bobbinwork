@@ -1,4 +1,5 @@
 #summary Before the project went open source
+#labels Featured
 
 The polar grid generator is developed without prior Java experience. The grid model is rather clumsy, to put it mildly. The GUI is not very user friendly: too mathematical for lace makers. Another GUI approach is sketched in the wish list. The GUI is developed with NetBeans.
 
