@@ -89,7 +89,6 @@ public class TreeExpander {
      */
     public static void replaceCopyElements(Element root) throws XPathExpressionException {
       
-      Object userData = root.getUserData(DOM_TO_VIEW);
       int idPrefix = 1000000000;
       Map<String, Element> clonables = 
         newIdMap( XmlResources.evaluate( "//@id", root ) );
@@ -106,6 +105,7 @@ public class TreeExpander {
         Element clone = replaceWithClone( toBeReplaced, toBeCloned );
         setRange(toBeReplaced, id, clone);
         List<VectorTransformation> list = getTransformations (toBeReplaced);
+        Object userData = toBeReplaced.getUserData(DOM_TO_VIEW);
         clone.setUserData(DOM_TO_VIEW, userData, null);
         for (VectorTransformation vt : list) {
           applyTransformation(vt, clone, userData );
