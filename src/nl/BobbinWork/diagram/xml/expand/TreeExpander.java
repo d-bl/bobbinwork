@@ -58,58 +58,33 @@ public class TreeExpander {
     /** Apply one transformation to the element and its offspring. */
     static private void applyTransformation(VectorTransformation vt, Element el, Object view) {
 
-      el.setUserData(DOM_TO_VIEW, view, null);
-      el.removeAttribute("id");
-      if ( vt == null ) {
+        el.setUserData(DOM_TO_VIEW, view, null);
+        el.removeAttribute("id");
+
         String pointAttributes[] = ElementType.valueOf(el.getNodeName()).getPointAttributes();
         if (pointAttributes != null) {
-          for (String tag : pointAttributes) {
-            Attr point = el.getAttributeNode(tag);
-            try {
-              point.setValue(vt.newXY(point));
-            } catch (NullPointerException e) {
-            } catch (NumberFormatException e) {
-              throw new RuntimeException("bad coordinates:\n<" //
-                  + el.getNodeName() + " ... " + tag //
-                  + "='" + point.getValue() + "' ...>");
+          if ( vt != null ) {
+            for (String tag : pointAttributes) {
+                Attr point = el.getAttributeNode(tag);
+                try {
+                    point.setValue(vt.newXY(point));
+                } catch (NullPointerException e) {
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("bad coordinates:\n<" //
+                            + el.getNodeName() + " ... " + tag //
+                            + "='" + point.getValue() + "' ...>");
+                }
             }
           }
-        } 
-      }
-      for (Node child = el.getFirstChild(); child != null; child = child.getNextSibling()) {
-        if (child.getNodeType() == Node.ELEMENT_NODE) {
-          applyTransformation(vt, (Element) child, view);
-        }
-      }
-    }
-
-    /** Apply one transformation to the element and its offspring. */
-    static private void applyTransformation2(List<VectorTransformation> list, NodeList els, Object view) {
-
-      for (int j=0 ; j < els.getLength() ; j++) {
-        Element el = (Element) els.item(j);
-        for (VectorTransformation vt : list) {
-          el.setUserData(DOM_TO_VIEW, view, null);
-          el.removeAttribute("id");
-
-          String pointAttributes[] = ElementType.valueOf(el.getNodeName()).getPointAttributes();
-          if ( pointAttributes == null ) return;
-
-          for (String tag : pointAttributes) {
-            Attr point = el.getAttributeNode(tag);
-            try {
-              point.setValue(vt.newXY(point));
-            } catch (NullPointerException e) {
-            } catch (NumberFormatException e) {
-              throw new RuntimeException("bad coordinates:\n<" //
-                  + el.getNodeName() + " ... " + tag //
-                  + "='" + point.getValue() + "' ...>");
+        } else {
+            for (Node child = el.getFirstChild(); child != null; child = child.getNextSibling()) {
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    applyTransformation(vt, (Element) child, view);
+                }
             }
-          }
         }
-      }
     }
-    
+
     /**
      * Replaces all &lt;copy of="x"&gt; elements by deep clones of &lt;... id="x"&gt;. 
      * The transformations defined by children of the &lt;copy&gt; elements are applied 
@@ -142,11 +117,7 @@ public class TreeExpander {
         clone.setUserData(DOM_TO_VIEW, userData, null);
 
         List<VectorTransformation> list = getTransformations (toBeReplaced);
-        list.add(null);
-        /* 10 times slower
-        NodeList els = (NodeList) x.evaluate( root, XPathConstants.NODESET );
-        applyTransformation2(list, els, userData );
-        */
+        if ( list.size() == 0 ) list.add(null); // make sure id's are removed 
         for (VectorTransformation vt : list) {
           applyTransformation(vt, clone, userData );
         }
