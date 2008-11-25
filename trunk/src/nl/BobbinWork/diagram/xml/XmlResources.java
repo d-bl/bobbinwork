@@ -101,8 +101,8 @@ public class XmlResources {
         
         boolean includeProblem = exception.getMessage().matches(".*nclude.*"); //$NON-NLS-1$
         if ( ! includeProblem ) throw exception;
-        if ( ! messages.equals("") ) throw new SAXException("include failed whith base: "+messages+"\n"+base);
-        messages += " \n"+base;
+        if ( ! messages.equals("") ) throw new SAXException("include failed with base: "+messages+" "+base);
+        messages += " "+base;
       }
     }
     throw new SAXException(messages);

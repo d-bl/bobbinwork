@@ -76,7 +76,7 @@ public class TestXml extends XmlFixture {
           Node orphan = (Node) clone.getUserData(TreeExpander.CLONE_TO_ORPHAN);
           if ( orphan != null ) {
             clone.getParentNode().replaceChild(orphan, clone);
-            orphan.setUserData(TreeExpander.ORPHANE_TO_CLONE, null, null);
+            orphan.setUserData(TreeExpander.ORPHAN_TO_CLONE, null, null);
             orphan.setUserData(TreeExpander.DOM_TO_VIEW, null, null);
             clone.setUserData(TreeExpander.CLONE_TO_ORPHAN, null, null);
             clone.setUserData(TreeExpander.DOM_TO_VIEW, null, null);

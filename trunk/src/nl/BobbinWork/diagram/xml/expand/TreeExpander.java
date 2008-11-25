@@ -27,7 +27,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import nl.BobbinWork.diagram.xml.ElementType;
 import nl.BobbinWork.diagram.xml.XmlResources;
@@ -39,11 +42,14 @@ import org.w3c.dom.NodeList;
 
 public class TreeExpander {
 
-    public static final String //
-            DOM_TO_VIEW = "view", //
-            CLONE_TO_ORPHAN = "original", //
-            ORPHANE_TO_CLONE = "copy", //
-            CLONED = "cloned";
+    /* A UserDataHandler could reduce knowledge of the outside world. 
+     * But this handler would need to traverse the subtrees again
+     * and thus reduce performance. */
+    public static final String DOM_TO_VIEW = "view";
+    
+    public static final String CLONE_TO_ORPHAN = "original";
+    public static final String ORPHAN_TO_CLONE = "copy";
+    public static final String CLONED = "cloned";
 
     /** Only static methods, so hide the constructor. */
     private TreeExpander() {
@@ -52,31 +58,58 @@ public class TreeExpander {
     /** Apply one transformation to the element and its offspring. */
     static private void applyTransformation(VectorTransformation vt, Element el, Object view) {
 
-        el.setUserData(DOM_TO_VIEW, view, null);
-        el.removeAttribute("id");
-
+      el.setUserData(DOM_TO_VIEW, view, null);
+      el.removeAttribute("id");
+      if ( vt == null ) {
         String pointAttributes[] = ElementType.valueOf(el.getNodeName()).getPointAttributes();
         if (pointAttributes != null) {
-            for (String tag : pointAttributes) {
-                Attr point = el.getAttributeNode(tag);
-                try {
-                    point.setValue(vt.newXY(point));
-                } catch (NullPointerException e) {
-                } catch (NumberFormatException e) {
-                    throw new RuntimeException("illegal coordinates:\n<" //
-                            + el.getNodeName() + " ... " + tag //
-                            + "='" + point.getValue() + "' ...>");
-                }
+          for (String tag : pointAttributes) {
+            Attr point = el.getAttributeNode(tag);
+            try {
+              point.setValue(vt.newXY(point));
+            } catch (NullPointerException e) {
+            } catch (NumberFormatException e) {
+              throw new RuntimeException("bad coordinates:\n<" //
+                  + el.getNodeName() + " ... " + tag //
+                  + "='" + point.getValue() + "' ...>");
             }
-        } else {
-            for (Node child = el.getFirstChild(); child != null; child = child.getNextSibling()) {
-                if (child.getNodeType() == Node.ELEMENT_NODE) {
-                    applyTransformation(vt, (Element) child, view);
-                }
-            }
+          }
+        } 
+      }
+      for (Node child = el.getFirstChild(); child != null; child = child.getNextSibling()) {
+        if (child.getNodeType() == Node.ELEMENT_NODE) {
+          applyTransformation(vt, (Element) child, view);
         }
+      }
     }
 
+    /** Apply one transformation to the element and its offspring. */
+    static private void applyTransformation2(List<VectorTransformation> list, NodeList els, Object view) {
+
+      for (int j=0 ; j < els.getLength() ; j++) {
+        Element el = (Element) els.item(j);
+        for (VectorTransformation vt : list) {
+          el.setUserData(DOM_TO_VIEW, view, null);
+          el.removeAttribute("id");
+
+          String pointAttributes[] = ElementType.valueOf(el.getNodeName()).getPointAttributes();
+          if ( pointAttributes == null ) return;
+
+          for (String tag : pointAttributes) {
+            Attr point = el.getAttributeNode(tag);
+            try {
+              point.setValue(vt.newXY(point));
+            } catch (NullPointerException e) {
+            } catch (NumberFormatException e) {
+              throw new RuntimeException("bad coordinates:\n<" //
+                  + el.getNodeName() + " ... " + tag //
+                  + "='" + point.getValue() + "' ...>");
+            }
+          }
+        }
+      }
+    }
+    
     /**
      * Replaces all &lt;copy of="x"&gt; elements by deep clones of &lt;... id="x"&gt;. 
      * The transformations defined by children of the &lt;copy&gt; elements are applied 
@@ -89,11 +122,12 @@ public class TreeExpander {
      */
     public static void replaceCopyElements(Element root) throws XPathExpressionException {
       
-      int idPrefix = 1000000000;
+      //XPathExpression x = XPathFactory.newInstance().newXPath().compile("//*");
       Map<String, Element> clonables = 
         newIdMap( XmlResources.evaluate( "//@id", root ) );
       
       NodeList elements = XmlResources.evaluate( "//*[@of]", root );
+      
       for (int i=0 ; i < elements.getLength() ; i++) {
         Element toBeReplaced = (Element) elements.item(i);
         String id = toBeReplaced.getAttribute("of");
@@ -104,13 +138,18 @@ public class TreeExpander {
         }
         Element clone = replaceWithClone( toBeReplaced, toBeCloned );
         setRange(toBeReplaced, id, clone);
-        List<VectorTransformation> list = getTransformations (toBeReplaced);
         Object userData = toBeReplaced.getUserData(DOM_TO_VIEW);
         clone.setUserData(DOM_TO_VIEW, userData, null);
+
+        List<VectorTransformation> list = getTransformations (toBeReplaced);
+        list.add(null);
+        /* 10 times slower
+        NodeList els = (NodeList) x.evaluate( root, XPathConstants.NODESET );
+        applyTransformation2(list, els, userData );
+        */
         for (VectorTransformation vt : list) {
           applyTransformation(vt, clone, userData );
         }
-        clone.setAttribute( "id", ++idPrefix + "_" + id );    
         clone.removeAttribute("display");    
       }
     }
@@ -136,7 +175,7 @@ public class TreeExpander {
       String nodeName = toBeReplaced.getNodeName();
       String attributeName = ElementType.getRangeAttribute(nodeName);
       if (attributeName == null) {
-        throw new RuntimeException("<... of='" + id + "' ...> only allowed on <copy ...>");
+        throw new RuntimeException("id not allowed on <" + nodeName + " ...> id='" + id + "'");
       }
       String value = toBeReplaced.getAttribute(attributeName);
       if ( value == null ) {
@@ -177,9 +216,10 @@ public class TreeExpander {
       
       Element deepClone = (Element) toBeCloned.cloneNode(true);
       
+      deepClone.removeAttribute("id");
       deepClone.setUserData(CLONED, Boolean.valueOf(true), null);
       deepClone.setUserData(CLONE_TO_ORPHAN, toBeReplaced, null);
-      toBeReplaced.setUserData(ORPHANE_TO_CLONE, deepClone, null);
+      toBeReplaced.setUserData(ORPHAN_TO_CLONE, deepClone, null);
       
       toBeReplaced.getParentNode().replaceChild( deepClone, toBeReplaced);
       return deepClone;
