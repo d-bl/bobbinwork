@@ -94,10 +94,12 @@ public class TestExpand extends XmlFixture {
     String resultingXml = XmlResources.toXmlString(document);
     undoTransformations(document);
     String restoredXml = XmlResources.toXmlString(document);
-    
+
+    /* an external tool could reveal the nature of a failure*/  
     OutputStream os = new FileOutputStream("tmp.xml");
     os.write(resultingXml.getBytes());
     os.close();
+    /**/
     
     assertTrue("restored xml not equal to original",restoredXml.equals(originalXml));
     xmlResources.validate(XML_CONTENT);
