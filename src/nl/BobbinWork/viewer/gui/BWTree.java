@@ -144,7 +144,7 @@ public class BWTree extends JTree {
             Node domNode = (Node) viewNode.getUserObject();
             if ((domNode != null) && (viewNode.toString().matches(".*copy:.*"))) { //$NON-NLS-1$
                 // from the orphaned DOM node to the original node
-                domNode = (Node) domNode.getUserData(TreeExpander.ORPHANE_TO_CLONE);
+                domNode = (Node) domNode.getUserData(TreeExpander.ORPHAN_TO_CLONE);
             }
             return ((Partition) domNode.getUserData(Partition.MODEL_TO_DOM));
         } catch (NullPointerException e) {
@@ -191,10 +191,10 @@ public class BWTree extends JTree {
             // their original place in the DOM tree
             for (DefaultMutableTreeNode next = mtn; next != null; next = next.getNextNode()) {
                 Element el = (Element) next.getUserObject();
-                Element clone = (Element) el.getUserData(TreeExpander.ORPHANE_TO_CLONE);
+                Element clone = (Element) el.getUserData(TreeExpander.ORPHAN_TO_CLONE);
                 if (clone != null) {
                     clone.getParentNode().replaceChild(el, clone);
-                    el.setUserData(TreeExpander.ORPHANE_TO_CLONE, null, null);
+                    el.setUserData(TreeExpander.ORPHAN_TO_CLONE, null, null);
                 }
             }
         }
@@ -216,7 +216,7 @@ public class BWTree extends JTree {
         Partition alternativePartition = (Partition) alternativeElement.getUserData(Partition.MODEL_TO_DOM);
         Partition selectedPartition = (Partition) selectedElement.getUserData(Partition.MODEL_TO_DOM);
         if (selectedPartition == null) {
-            Element clonedElement = (Element) selectedElement.getUserData(TreeExpander.ORPHANE_TO_CLONE);
+            Element clonedElement = (Element) selectedElement.getUserData(TreeExpander.ORPHAN_TO_CLONE);
             if (clonedElement != null) {
                 selectedPartition = (Partition) clonedElement.getUserData(Partition.MODEL_TO_DOM);
             }
@@ -269,7 +269,7 @@ public class BWTree extends JTree {
             }
 
             if (ElementType.copy.toString().equals(selectedElement.getNodeName())) {
-                selectedElement = (Element) selectedElement.getUserData(TreeExpander.ORPHANE_TO_CLONE); //$NON-NLS-1$
+                selectedElement = (Element) selectedElement.getUserData(TreeExpander.ORPHAN_TO_CLONE); //$NON-NLS-1$
             }
             MutableTreeNode tn = (MutableTreeNode) selectedElement.getUserData(TreeExpander.DOM_TO_VIEW); //$NON-NLS-1$
             MutableTreeNode tnp = (MutableTreeNode) tn.getParent();
@@ -409,7 +409,7 @@ public class BWTree extends JTree {
                         + element.getFirstChild().getNodeValue();
                     }
                     s += " " + getPrimaryTitle(element); //$NON-NLS-1$
-                    s += " " + getPrimaryTitle((Element) element.getUserData(TreeExpander.ORPHANE_TO_CLONE)); //$NON-NLS-1$
+                    s += " " + getPrimaryTitle((Element) element.getUserData(TreeExpander.ORPHAN_TO_CLONE)); //$NON-NLS-1$
 
                     s = s.replaceAll("\\s+", " "); //$NON-NLS-1$ //$NON-NLS-2$
                     s = s.replaceAll("^\\s*", ""); //$NON-NLS-1$ //$NON-NLS-2$

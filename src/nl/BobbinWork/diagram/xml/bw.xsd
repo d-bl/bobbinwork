@@ -180,6 +180,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
    <xsd:element   name="gimp"   type="bw:curve" minOccurs="0" maxOccurs="2"/>
    <xsd:element   name="front"  type="bw:curve" minOccurs="1" maxOccurs="1" />
   </xsd:sequence>
+  <xsd:attribute  name="id"      type="xsd:ID"/>
   <xsd:attribute  name="bobbins" type="bw:nm" use="required"/>
  </xsd:complexType>
 
