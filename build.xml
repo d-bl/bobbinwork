@@ -23,7 +23,7 @@
     <property name="build.dir" location="build" />
     <property name="svn.revision.of.published.jar" value="xxx" />
     <property file="../ant.properties" />
-    <property environment="env" /><!-- at least: JAVA_HOME (jdk, not jre) -->
+    <property environment="env" /><!-- at least: JAVA_HOME (jdk 5+, not jre) -->
             
     <property name="version" value="2.0.${svn.revision.of.published.jar}" /><!--  
         base number signals compatibillity issues with basicStitches.xml? -->
@@ -129,7 +129,7 @@
     	<property name="myclasspath" refid="project.classpath"/>
     	<echo message="Classpath = ${myclasspath}"/>
     	
-    	<javac srcdir="JUnitTests" destdir="${build.dir}/tmptest">
+    	<javac srcdir="JUnit4Tests" destdir="${build.dir}/tmptest">
             <classpath refid="project.classpath" />
         </javac>
     </target>
@@ -143,7 +143,7 @@
     <target name="testRun" depends="testCompile" description="run test classes">
         <junit printsummary="yes" haltonfailure="false">
           <classpath refid="project.classpath"/>	
-          <formatter type="brief"/>
+          <formatter type="xml"/>
           <batchtest todir="${build.dir}/tmptest">
           	<fileset dir="${build.dir}/tmptest" includes="**/Test*.class, "/>
           </batchtest>
