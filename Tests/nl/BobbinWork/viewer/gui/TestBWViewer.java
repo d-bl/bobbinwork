@@ -1,3 +1,5 @@
+package nl.BobbinWork.viewer.gui;
+
 import org.uispec4j.Button;
 import org.uispec4j.UISpec4J;
 import org.uispec4j.UISpecTestCase;
