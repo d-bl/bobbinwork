@@ -1,5 +1,3 @@
-package nl.BobbinWork.viewer.gui;
-
 import org.uispec4j.Button;
 import org.uispec4j.UISpec4J;
 import org.uispec4j.UISpecTestCase;
@@ -15,7 +13,7 @@ public class TestBWViewer extends UISpecTestCase {
 	protected void setUp() throws Exception {
 	    super.setUp();
 		setAdapter( new MainClassAdapter(
-				BWViewer.class, 
+				nl.BobbinWork.viewer.gui.BWViewer.class, 
 				new String[] {"nl"} 
 		));
 	    Window w = getMainWindow();
