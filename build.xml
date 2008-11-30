@@ -34,6 +34,16 @@
     <property name="target" value="1.5" />
     <property name="jar.suffix" value="-rel-${version}.jar" />
 
+    <path id="junit.classpath">
+        <fileset dir="${build.dir}" includes="*.jar" />
+        <fileset dir="../vendor/junit4.4" includes="*.jar" />
+    </path>
+	
+    <path id="profile.classpath">
+        <fileset dir="${build.dir}" includes="*.jar" />
+        <fileset dir="../vendor/junit3.8.1" includes="*.jar" />
+    </path>
+
     <macrodef name="jnlp">
         <attribute name="jnlp.base.name" default="NOT-SET"/>
         <attribute name="jnlp.main.class" default="NOT-SET"/>
@@ -74,14 +84,6 @@
         </sequential>
     </macrodef>
 
-    <path id="project.classpath">
-        <fileset dir="${env.JAVA_HOME}/lib" includes="*.jar" />
-        <fileset dir="${build.dir}" includes="*.jar" />
-        <fileset dir="../vendor/junit4.4" includes="*.jar" />
-        <fileset dir="../vendor/uispec4j-1.5" includes="*.jar" />
-        <fileset dir="../vendor" includes="uispec4j-java6.jar" />
-    </path>
-
     <target name="clean" description="Remove all generated files.">
         <delete dir="${build.dir}" />
     </target>
@@ -90,13 +92,12 @@
         description="Create the output directories.">
         <mkdir dir="${build.dir}/tmp" />
         <mkdir dir="${build.dir}/tmptest" />
+        <mkdir dir="${build.dir}/tmpprofile" />
         <mkdir dir="${build.dir}" />
     </target>
 
     <target name="compile" depends="prepare" description="create class files from java sources">
-        <javac srcdir="src" destdir="${build.dir}/tmp" target="${target}">
-            <classpath refid="project.classpath" />
-        </javac>
+        <javac srcdir="src" destdir="${build.dir}/tmp" target="${target}" classpath="${build.dir}/*.jar" />
     </target>
 
     <target name="diagrams" depends="compile" description="create viewer of bobbin lace working diagrams">
@@ -125,16 +126,10 @@
         </jar>
     </target>
     
-    <target name="testCompile" depends="compile" description="create class files from test sources">
-    	<property name="myclasspath" refid="project.classpath"/>
-    	<echo message="Classpath = ${myclasspath}"/>
-    	
-    	<javac srcdir="JUnit4Tests" destdir="${build.dir}/tmptest">
-            <classpath refid="project.classpath" />
+	<target name="testCompile" depends="compile" description="create class files and jars from test sources">
+    	<javac srcdir="JUnitTests" destdir="${build.dir}/tmptest">
+            <classpath refid="junit.classpath" />
         </javac>
-    </target>
-        
-    <target name="testJar" depends="testCompile" description="create jar from compiled test classes">
         <jar destfile="${build.dir}/test.jar">
             <fileset dir="${build.dir}/tmptest" includes="**/*.*"/>
         </jar>
@@ -142,10 +137,29 @@
             
     <target name="testRun" depends="testCompile" description="run test classes">
         <junit printsummary="yes" haltonfailure="false">
-          <classpath refid="project.classpath"/>	
-          <formatter type="xml"/>
+          <classpath refid="junit.classpath" />
+          <formatter type="plain"/>
           <batchtest todir="${build.dir}/tmptest">
           	<fileset dir="${build.dir}/tmptest" includes="**/Test*.class, "/>
+          </batchtest>
+        </junit>
+    </target>
+
+	<target name="profileCompile" depends="compile" description="create class files from test sources">
+    	<javac srcdir="Tests" destdir="${build.dir}/tmpprofile" includes="**/*Performance.java">
+            <classpath refid="profile.classpath" />
+        </javac>
+        <jar destfile="${build.dir}/profile.jar">
+            <fileset dir="${build.dir}/tmpprofile"/>
+        </jar>
+    </target>
+	
+    <target name="profileRun" depends="profileCompile" description="run test classes">
+        <junit printsummary="yes" haltonfailure="false" fork="true">
+          <classpath refid="profile.classpath" />
+          <formatter type="plain"/>
+          <batchtest todir="${build.dir}/tmpprofile">
+          	<fileset dir="${build.dir}/tmpprofile" includes="**/Test*.class, "/>
           </batchtest>
         </junit>
     </target>
@@ -165,6 +179,6 @@
         />
     </target>
     
-    <target name="all" depends="grids, diagrams, jnlp, testJar, testRun"/>
+    <target name="all" depends="grids, diagrams, jnlp, testRun, profileRun"/>
 
 </project>
