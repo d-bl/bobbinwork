@@ -1,0 +1,117 @@
+#summary get your environment up and running
+#labels Featured,Phase-Implementation
+
+= Introduction =
+
+*Users* can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
+
+*Developers* may use any IDE or whatever they are comfortable with. This page concentrates on the Ganymede release (june 2008) of *Eclipse* and list step-by-step how to get an environment that allows to run, debug, test, build and profile (gather statistics) the applications.
+
+You can checkout the project anonymously but as a contributing project member you can find the required subversion *password* [http://code.google.com/p/bobbinwork/source/checkout here]. To become a project member, drop a line on the [http://groups.google.com/group/bobbinwork discussion group] of the project.
+
+*If not following the installation instructions below:* The [http://code.google.com/p/bobbinwork/source/checkout checkout] page tells how to get the project with a command line Subversion client. For testing and building you don't only need _trunk_ but also _dev-tools_, see [http://code.google.com/p/bobbinwork/source/browse/dev-utils/README.TXT dev-utils/readme.txt].  
+
+= Project structure =
+_src_ 
+  has the main classes:
+  * nl.BobbinWork.viewer.gui.BWViewer
+  * nl.BobbinWork.grids.GridGUI.PolarGridPrinter
+_JUnitTests_ 
+  contains tests for JUnit4
+_Tests_ 
+  contains an attempt to use [http://www.uispec4j.org/download.html UISpec4J]. It should allow to test the GUI without the maintenance burden of tools based on recording. No luck so far (therefore not yet included in dev-tools) but not tried very hard yet.
+
+[http://www.eclemma.org/ eclemma] can show you which code is touched by tests or manual execution of the code.
+
+= Get Eclipse Ganymede with plug-ins =
+
+download and unzip eclipse-java-ganymede-SR1-win32
+you can get it from:
+  * [http://www.eclipse.org/downloads/ http://www.eclipse.org/downloads/]
+  * Eclipse IDE for Java Developers (85 MB)
+
+help
+
+software updates
+
+available software
+
+add site (Subversion, coverage, findbugs)
+  * http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/
+  * http://update.eclemma.org/
+  * http://findbugs.cs.umd.edu/eclipse
+
+back on "available software" check:
+
+  * `[ ]`Ganymede
+    * `[ ]` collaboration tools
+      * `[v]` Suvbersive SVN team provider (Incubation)
+    * `[ ]`testing and performance (otional)
+      * `[v]` TPTP Log and Trace Analyzer
+      * `[v]` TPTP Platform Project
+      * `[v]` TPTP Test Framework and Tools Project
+      * `[v]` TPTP Tracing and Profiling Tools Project
+  * `[ ]`http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/
+    * `[ ]`Suvbersive SVN connectors
+      * `[v]` Suvbersive SVN connectors
+      * `[v]` SVNKit 1.1.7 Implementation
+      * `[v]` SVNKit 1.2.1 Implementation
+  * `[v]` http://update.eclemma.org/
+  * `[v]` http://findbugs.cs.umd.edu/eclipse
+  * `[ ]`Web Tools Platform (WTP)
+    * `[v]` ... 3.0.3
+  * `[v]` ... (whatever you like)
+
+Install
+
+coffee break, in case of problems try smaller chunks
+
+= install and configure the project =
+
+menu: file 
+
+import
+  * SVN
+    * projects from SVN
+next 
+
+create new repository location (if not done already, path without trunk!):
+  * http://bobbinwork.googlecode.com/svn
+select trunk
+
+finish
+
+select new project wizard
+  * Java
+    * Java project
+next
+
+project name: for example: bw-trunk
+
+finish
+
+----
+
+see [http://code.google.com/p/bobbinwork/source/browse/dev-utils/README.TXT dev-utils/readme.txt]
+
+----
+
+in left panel
+
+select JUnitTests
+
+right click
+
+build path
+
+use as source folder
+
+----
+
+right click: JUnitTests
+
+run as
+
+run configurations
+
+test runner: junit4
