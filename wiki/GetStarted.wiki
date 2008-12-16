@@ -14,14 +14,14 @@ You can checkout the project anonymously but as a contributing project member yo
 = Project structure =
 _src_ 
   has the main classes:
-  * nl.BobbinWork.viewer.gui.BWViewer
-  * nl.BobbinWork.grids.GridGUI.PolarGridPrinter
+  * `nl.BobbinWork.viewer.gui.BWViewer`
+  * `nl.BobbinWork.grids.GridGUI.PolarGridPrinter`
 _JUnitTests_ 
   contains tests for JUnit4
 _Tests_ 
   contains an attempt to use [http://www.uispec4j.org/download.html UISpec4J]. It should allow to test the GUI without the maintenance burden of tools based on recording. No luck so far (therefore not yet included in dev-tools) but not tried very hard yet.
 
-[http://www.eclemma.org/ eclemma] can show you which code is touched by tests or manual execution of the code.
+The [http://www.eclemma.org/ eclemma] plug-in can show you which code is touched by tests or manual execution of the code.
 
 = Get Eclipse Ganymede with plug-ins =
 
