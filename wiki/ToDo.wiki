@@ -1,7 +1,8 @@
-#labels Featured
-  * complete the Java doc (include the Visio diagrams?)
-  * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level tests are available by visually checking and manipulating the sample diagrams
-  * replace the W3C-dom by jdom/xpath? A good moment to start with unit tests and gain performance on [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/xml/expand/TreeExpander.java expand()] which takes several seconds on [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/xml/basicStitches.xml basicStitches.xml].
+#summary some notes on what could/should be done
+
+  * complete the Java doc (use an alternative for the Visio diagrams?)
+  * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level tests are available by visually checking and manipulating the sample/ground diagrams
+  * identify performance bottle necks. On Windows XP SP2 with 0.5 MB memory it take 10-20 seconds to refresh a diagram. [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/xml/expand/TreeExpander.java expand()] might not be the only problem.
   * code review
   * see also 
     * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
