@@ -9,6 +9,9 @@ unzip each at bw-dev-utils (not at bw-dev-utils/...)
 use subversion for the download phase
 or download the zip files one by one 
 
+TODO: see section 1.10 Bootstrapping your build scripts
+Smart, John Ferguson. Java Power Tools. Beijing: O'Reilly, 2008. 
+
 the download procedure with Eclipse Ganymede
 
 menu: file - import
