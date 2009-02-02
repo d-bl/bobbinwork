@@ -5,7 +5,7 @@
 
 *Users* can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
 
-*Developers* may use any IDE or whatever they are comfortable with. This page concentrates on the Ganymede release (june 2008) of *Eclipse* and list step-by-step how to get an environment that allows to run, debug, test, build and profile (gather statistics) the applications.
+*Developers* may use any IDE or whatever they are comfortable with. This page concentrates on the Ganymede release (june 2008) of *Eclipse* and lists step-by-step how to get an environment that allows to run, debug, test, build and profile (gather statistics) the applications.
 
 You can checkout the project anonymously but as a contributing project member you can find the required subversion *password* [http://code.google.com/p/bobbinwork/source/checkout here]. To become a project member, drop a line on the [http://groups.google.com/group/bobbinwork discussion group] of the project.
 
@@ -51,13 +51,13 @@ back on "available software" check:
       * `[v]` TPTP Platform Project
       * `[v]` TPTP Test Framework and Tools Project
       * `[v]` TPTP Tracing and Profiling Tools Project
-  * `[ ]`http://www.polarion.org/projects/subversive/download/eclipse/2.0/update-site/
+  * `[v]` http://findbugs.cs.umd.edu/eclipse
+  * `[v]` http://update.eclemma.org/
+  * `[ ]`Suvbersive connectors site
     * `[ ]`Suvbersive SVN connectors
       * `[v]` Suvbersive SVN connectors
       * `[v]` SVNKit 1.1.7 Implementation
       * `[v]` SVNKit 1.2.1 Implementation
-  * `[v]` http://update.eclemma.org/
-  * `[v]` http://findbugs.cs.umd.edu/eclipse
   * `[ ]`Web Tools Platform (WTP)
     * `[v]` ... 3.0.3
   * `[v]` ... (whatever you like)
