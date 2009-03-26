@@ -54,9 +54,9 @@ public class Stitch extends MultiplePairsPartition {
             if (child.getNodeType() == Node.ELEMENT_NODE) {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
                 if ( childType == ElementType.cross ) {
-                    addChild(new Cross((Element) child));
+                    addChild(Builder.createCross((Element) child));
                 } else if ( childType == ElementType.twist ) {
-                    addChild(new Twist((Element) child));
+                    addChild(Builder.createTwist((Element) child));
                 } else if ( childType == ElementType.pin ) {
                     getPartitions().add(new Pin((Element) child));
                 } else if ( childType == ElementType.style ) {

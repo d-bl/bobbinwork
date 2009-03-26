@@ -18,14 +18,8 @@
 
 package nl.BobbinWork.diagram.model;
 
-import static nl.BobbinWork.diagram.xml.ElementType.front;
-import static nl.BobbinWork.diagram.xml.ElementType.back;
-import nl.BobbinWork.diagram.xml.ElementType;
-
-import org.w3c.dom.Element;
-
 /**
- * One bobbin going over one of its neighbours.
+ * Two bobbins next to one another change positions.
  * 
  * @author J. Falkink-Pol
  */
@@ -39,33 +33,17 @@ public abstract class Switch extends MultipleThreadsPartition {
 
     /**
      * Creates a new instance of a <code>Cross</code> or <code>Twist</code>.
-     * The difference beteen the two is made by the abstract method
-     * <code>setThreadEnds</code> determining wether the <code>frontThread</code>
+     * The difference between the two is made by the abstract method
+     * <code>setThreadEnds</code> determining whether the <code>frontThread</code>
      * starts as left bobbin, or the <code>backThread</code>.
-     * 
-     * @param element
-     *            an XML <code>&lt;cross&gt;</code> or
-     *            <code>&lt;twist&gt;</code> element:
-     * 
-     * <code><br>
-     *  &lt;... bobbins=&quot;<em>first</em>-<em>last</em>&quot;&gt;<br>
-     *  &nbsp;&nbsp;&lt;back ... /&gt;<br>
-     *  &nbsp;&nbsp;&lt;front ... /&gt;<br>
-     *  &lt;...&gt;<br>
-     * </code> The order of the <code>front</code> and <code>back</code>
-     * element doesn't matter.
      */
-    public Switch(Element element) {
-        super(element);
-        threadRange = new Range(element);
-        frontThread = createSegment(element,front);
-        backThread = createSegment(element,back);
-        setThreadEnds(); // TODO: catch NullPointerException throw XML validation error
-    }
-    private ThreadSegment createSegment (Element element, ElementType tag) {
-        return new ThreadSegment((Element) element.getElementsByTagName(tag.toString()).item(0));
-    }
-
+    Switch(Range range, ThreadSegment front, ThreadSegment back) {
+    	threadRange = range;
+    	frontThread = front;
+    	backThread = back;
+        setThreadEnds(); 
+	}
+    
     /**
      * Adds the <code>backThread</code> and
      * <code>frontThread</code> <code>ThreadSegment</code>s in the appropriate

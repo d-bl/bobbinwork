@@ -123,6 +123,10 @@ class Range {
         }
     }
 
+    public String toString(){
+    	return getFirst() + "-" + getLast();
+    }
+    
     private void invalidRange(String elementTag,String attributeTag, String value) {
         throw new RuntimeException("invalid or missing range:\n<"+elementTag+" ... " //
                 + attributeTag + "='" + value + "' ...>");
