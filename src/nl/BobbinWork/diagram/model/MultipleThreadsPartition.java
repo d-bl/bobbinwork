@@ -38,10 +38,13 @@ public abstract class MultipleThreadsPartition extends Partition {
      * 
      * @param element
      */
+    @Deprecated
     public MultipleThreadsPartition(Element element) {
         super(element);
     }
 
+    public MultipleThreadsPartition(){}
+    
     Ends getThreadEnds() {
         return threadEnds;
     }

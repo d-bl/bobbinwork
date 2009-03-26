@@ -39,8 +39,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 
+import nl.BobbinWork.diagram.model.Builder;
+import nl.BobbinWork.diagram.model.Switch;
 import nl.BobbinWork.diagram.model.ThreadStyle;
-import nl.BobbinWork.diagram.model.Twist;
 import nl.BobbinWork.diagram.xml.XmlResources;
 
 import org.w3c.dom.Element;
@@ -49,7 +50,7 @@ import org.xml.sax.SAXException;
 @SuppressWarnings("serial")
 public class ThreadStyleToolBar extends JToolBar {
 
-    private Twist twist;
+    private Switch twist;
 
     ThreadStyle getStyleOfFrontThread() {
         return twist.getFront().getStyle();
@@ -83,7 +84,7 @@ public class ThreadStyleToolBar extends JToolBar {
 
             try {
                 Element el = getXmlResources().getTwist(w).getDocumentElement();
-                twist = new Twist(el);
+                twist = Builder.createTwist(el);
             } catch (Exception e) {
                 e.printStackTrace();
             }

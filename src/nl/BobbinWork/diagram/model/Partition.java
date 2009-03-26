@@ -32,6 +32,9 @@ public abstract class Partition {
     /** Show (or hide) this section of the diagram. */
     protected boolean visible = true;
 
+    public Partition() {
+    }
+    
     /**
      * Create a new tree of Partition's from an XML Element.
      * 
@@ -39,6 +42,7 @@ public abstract class Partition {
      *            XML element &lt;pattern&gt;, &lt;group&gt;, &lt;cross&gt;,
      *            &lt;twist&gt; or &lt;pin&gt;
      */
+    @Deprecated
     public Partition(Element element) {
         element.setUserData(MODEL_TO_DOM, this, null);
 

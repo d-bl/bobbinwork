@@ -18,8 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import org.w3c.dom.Element;
-
 /**
  * 
  * A bobbin going over the previous bobbin.
@@ -32,16 +30,11 @@ import org.w3c.dom.Element;
  */
 public class Twist extends Switch {
 
-    /**
-     * @see nl.BobbinWork.diagram.model.Switch#Switch(Element) super
-     * @param element
-     *            XML element <code>&lt;twist&gt;</code>
-     */
-    public Twist(Element element) {
-        super(element);
-    }
+    public Twist(Range range, ThreadSegment frontSegment, ThreadSegment backSegment) {
+    	super (range, frontSegment,backSegment);
+	}
 
-    void setThreadEnds() {
+	void setThreadEnds() {
         Segment[] ins = { getBack(), getFront() };
         super.setThreadEnds(new Ends(ins));
     }

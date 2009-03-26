@@ -18,30 +18,23 @@
 
 package nl.BobbinWork.diagram.model;
 
-import org.w3c.dom.Element;
-
 /**
  * A bobbin going over the next bobbin.
  * 
  * Having two bobbins in each hand usually the right bobbin in the left hand
- * goes over the left bobbin in the right hand.
+ * goes over the left bobbin in the right hand. In other words, the second
+ * bobbin goes over the third.
  * 
  * @author J. Falkink-Pol
  */
 public class Cross extends Switch {
 
-    /**
-     * @see nl.BobbinWork.diagram.model.Switch#Switch(Element) super
-     * @param element
-     *            XML element <code>&lt;cross&gt;</code>
-     */
-    public Cross(Element element) {
-        super(element);
-    }
+    public Cross(Range range, ThreadSegment front, ThreadSegment back) {
+    	super (range, front, back);
+	}
 
-    void setThreadEnds() {
+	void setThreadEnds() {
         Segment[] ins = { getFront(), getBack() };
         super.setThreadEnds(new Ends(ins));
     }
-
 }
