@@ -20,10 +20,6 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Color;
 
-import org.w3c.dom.Element;
-
-import nl.BobbinWork.diagram.xml.ElementType;
-
 /**
  * 
  * @author J. Falkink-Pol
@@ -31,28 +27,6 @@ import nl.BobbinWork.diagram.xml.ElementType;
 public class ThreadStyle extends Style {//TODO inheritance->composition
 
     private Style backGround = null;
-
-    /**
-     * Creates a new instance of ThreadStyle from an XML element with style property
-     * attributes. 
-     * 
-     * @param element
-     *            XML element of the form:
-     *            &lt;style&nbsp;.../&gt;
-     *            or: &lt;style...&gt;&lt;shadow&nbsp;.../&gt;&lt;/style&gt;
-     */
-    // TODO: the shadow should also be expresible in percentages of the core.
-    public ThreadStyle(Element element) {
-        super(element);
-        try {
-            Element child = (Element) element.getFirstChild();
-            ElementType childType = ElementType.valueOf(child.getNodeName());
-            if (childType == ElementType.shadow) {
-                backGround = new Style(child);
-            }
-        } catch (Exception e) {
-        }
-    }
 
     public void setColor(Color color) {
         super.setColor(color);

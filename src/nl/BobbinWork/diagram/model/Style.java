@@ -20,8 +20,6 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Color;
 
-import org.w3c.dom.Element;
-
 /**
  * Drawing properties.
  * 
@@ -39,20 +37,7 @@ public class Style {
         setWidth(1);
     }
 
-    /**
-     * Creates a new instance of Style from an XML element with style property
-     * attributes.
-     * 
-     * @param element
-     *            XML element of the form
-     *            &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
-     */
-    public Style(Element element) {
-        setColor(element.getAttribute("color"));
-        setWidth(element.getAttribute("width"));
-    }
-
-    /**
+     /**
      * Creates a new instance (a clone) of Style.
      * 
      * @param style

@@ -60,7 +60,7 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
             if (child.getNodeType() == Node.ELEMENT_NODE) {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
                 if (childType == ElementType.new_bobbins) {
-                    ThreadStyle p = new ThreadStyle((Element) child.getFirstChild());
+                    ThreadStyle p = Builder.createThreadStyle((Element) child.getFirstChild());
                     String nrs[] = ((Element) child).getAttribute("nrs").split(",");
                     for (String nr:nrs) {
                         // lacemakers start counting with one,

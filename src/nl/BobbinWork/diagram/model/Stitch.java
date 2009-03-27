@@ -60,7 +60,7 @@ public class Stitch extends MultiplePairsPartition {
                 } else if ( childType == ElementType.pin ) {
                     getPartitions().add(new Pin((Element) child));
                 } else if ( childType == ElementType.style ) {
-                    style = new Style((Element) child);
+                    style = Builder.createStyle((Element) child);
                 } else if ( childType == ElementType.pair ) {
                     if (pairIndex < pairSegments.length) {
                         pairSegments[pairIndex++] = Builder.createPairSegment((Element) child);

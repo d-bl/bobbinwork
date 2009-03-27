@@ -1,7 +1,6 @@
 package nl.BobbinWork.diagram.model;
 
-import static nl.BobbinWork.diagram.xml.ElementType.back;
-import static nl.BobbinWork.diagram.xml.ElementType.front;
+import static nl.BobbinWork.diagram.xml.ElementType.*;
 import nl.BobbinWork.diagram.xml.AttributeType;
 import nl.BobbinWork.diagram.xml.ElementType;
 
@@ -18,9 +17,9 @@ public class Builder {
         
         SwitchFactory(Element element) {
             range = new Range(element);
-            frontSegment = createThread(element, front);
-            backSegment = createThread(element, back);
-            validateRange2(range);
+            frontSegment = createThreadSegment(getMandatoryElement(element, front));
+            backSegment = createThreadSegment(getMandatoryElement(element, back));
+            checkRangeIs2(range);
         }
         Cross createCross() {
             return new Cross(range, frontSegment, backSegment);
@@ -109,8 +108,7 @@ public class Builder {
     }
     
     /**
-     * Creates a new instance of Segment, from an XML element with segment
-     * property attributes.
+     * Creates a new instance of Segment.
      * 
      * @param element
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
@@ -119,16 +117,74 @@ public class Builder {
     	return new SegmentFactory(element).createPairSegment();
     }
     
-    private static ThreadSegment createThread(Element element, ElementType tag) {
-        String tagString = tag.toString();
+    private static void setStyle(Element element, Style style) {
+		style.setColor(element.getAttribute("color"));
+		style.setWidth(element.getAttribute("width"));
+	}
+
+    /**
+     * Creates a new instance of Style from an XML element with style property
+     * attributes.
+     * 
+     * @param element
+     *            XML element of the form
+     *            &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
+     */
+ 	public static Style createStyle(Element element) {
+
+		Style style = new Style();
+		setStyle(element, style);
+
+		return style;
+	}
+
+    /**
+     * Creates a new instance of ThreadStyle from an XML element with style property
+     * attributes. 
+     * 
+     * @param element
+     *            XML element of the form:<br>
+     *            &lt;style&nbsp;.../&gt;<br>
+     *            or: &lt;style...&gt;&lt;shadow&nbsp;.../&gt;&lt;/style&gt;
+     */
+    // TODO: the shadow should also be expresible in percentages of the core.
+	public static ThreadStyle createThreadStyle(Element element) {
+		
+		ThreadStyle style = new ThreadStyle();
+		setStyle(element, style);
+	
+		Element child = getOptionalElement(element, shadow);
+		if ( child == null ) return style;
+		
+		Style b = style.getBackGround();
+		String c = child.getAttribute("color");
+		String w = child.getAttribute("width");
+		if (c != null && !c.equals("")) b.setColor(c);
+		if (w != null && !w.equals("")) b.setWidth(w);
+		return style;
+	}
+    
+	private static Element getMandatoryElement(Element element, ElementType tag) {
+		String tagString = tag.toString();
         NodeList nodeList = element.getElementsByTagName(tagString);
         if (nodeList.getLength() != 1)
             throw new IllegalArgumentException("expecting exactly 1 "
                     + tagString + "; found " + nodeList.getLength());
-        return createThreadSegment(((Element) nodeList.item(0)));
-    }
+        return (Element) nodeList.item(0);
+	}
 
-    private static void validateRange2(Range range) {
+	private static Element getOptionalElement(Element element, ElementType tag) {
+		String tagString = tag.toString();
+		NodeList nodeList = element.getElementsByTagName(tagString);
+		int length = nodeList.getLength();
+		if (length < 1) return null;
+		if (length > 1)
+			throw new IllegalArgumentException("expecting at most 1 "
+					+ tagString + "; found " + length);
+		return (Element) nodeList.item(0);
+	}
+	
+    private static void checkRangeIs2(Range range) {
         if (range.getCount() != 2)
             throw new IllegalArgumentException(
                     "range should span 2 threads got: " + range.toString());
