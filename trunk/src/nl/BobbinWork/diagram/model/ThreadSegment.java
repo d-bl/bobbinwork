@@ -20,8 +20,6 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.BasicStroke;
 
-import org.w3c.dom.Element;
-
 /**
  * A segment of a thread. <br>
  * <br>
@@ -33,32 +31,9 @@ import org.w3c.dom.Element;
  */
 public class ThreadSegment extends Segment {
 
-    /** @see nl.BobbinWork.diagram.model.Segment#Segment(Point, Point) */
-    ThreadSegment(Point start, Point end) {
-        super(start, end);
-        style = (Style) new ThreadStyle();
-    }
-
-    /** @see nl.BobbinWork.diagram.model.Segment#Segment(Point, Point, Point) */
-    ThreadSegment(Point start, Point c, Point end) {
-        super(start, c, end);
-        style = (Style) new ThreadStyle();
-    }
-
     /** @see nl.BobbinWork.diagram.model.Segment#Segment(Point, Point, Point, Point) */
     ThreadSegment(Point start, Point c1, Point c2, Point end) {
-        super(start, c1, c2, end);
-        style = (Style) new ThreadStyle();
-    }
-
-    /** Creates a new instance of ThreadSegment. 
-     * 
-     * @param element
-     *            <code>&lt;front&nbsp;...&gt;</code> or
-     *            <code>&lt;back&nbsp;...&gt;</code>
-     */
-    ThreadSegment(Element element) {
-        super(element);
+        super(start, c1, c2, end, 0);
         style = (Style) new ThreadStyle();
     }
 

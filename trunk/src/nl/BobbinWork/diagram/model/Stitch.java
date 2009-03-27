@@ -63,7 +63,7 @@ public class Stitch extends MultiplePairsPartition {
                     style = new Style((Element) child);
                 } else if ( childType == ElementType.pair ) {
                     if (pairIndex < pairSegments.length) {
-                        pairSegments[pairIndex++] = new Segment((Element) child);
+                        pairSegments[pairIndex++] = Builder.createPairSegment((Element) child);
                     } else {
                         throw new RuntimeException("trying to define pair " +pairIndex+" while only "+pairSegments.length + " declared");
                     }
