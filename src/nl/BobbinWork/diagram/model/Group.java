@@ -36,7 +36,7 @@ public class Group extends ChainedPairsPartition {
     }
 
     void setPairRange(Element element) {
-        setPairRange(new Range(element));
+        setPairRange(Builder.createRange(element));
 
         // allocation as a preparation for the 2nd task of addChild
         int l = getPairRange().getCount();

@@ -24,10 +24,6 @@ import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 
-import nl.BobbinWork.diagram.xml.AttributeType;
-
-import org.w3c.dom.Element;
-
 /**
  * A pin supporting a stitch or pair.
  * 
@@ -38,14 +34,8 @@ public class Pin extends Partition {
 
     Point position = null;
 
-    /**
-     * @param element
-     *            an XML element of the form
-     *            <code>&lt;pin position"<em>x,y</em>"&gt;</code>
-     */
-    public Pin(Element element) {
-        super(element);
-        position = new Point(element.getAttribute(AttributeType.position.toString()));
+    public Pin(Point position2) {
+        position = position2;
     }
 
     /**

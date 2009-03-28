@@ -18,9 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import org.w3c.dom.Element;
-
-import nl.BobbinWork.diagram.xml.ElementType;
 
 /**
  * A range of individual bobbins (alias threads) or pairs of bobbins.
@@ -39,8 +36,6 @@ import nl.BobbinWork.diagram.xml.ElementType;
  * @author J. Falkink-Pol
  */
 class Range {
-
-    private static final String SEPARATOR = "-";
 
     private int first;
 
@@ -98,47 +93,10 @@ class Range {
         return last - first + 1;
     }
 
-    /**
-     * Creates a new instance of Range.
-     * 
-     * @param element
-     *            XML element of the form:
-     *            <ul>
-     *            <li><code>&lt;cross bobbins="<em>first-last</em>"&gt;</code></li>
-     *            <li><code>&lt;twist bobbins="<em>first-last</em>"&gt;</code></li>
-     *            <li><code>&lt;stitch  pairs="<em>first-last</em>"&gt;</code></li>
-     *            <li><code>&lt;group   pairs="<em>first-last</em>"&gt;</code></li>
-     *            <li><code>&lt;copy    pairs="<em>first-last</em>"&gt;</code></li>
-     *            </ul>
-     */
-    public Range(Element element) {
-        String tag = ElementType.getRangeAttribute(element.getNodeName());
-        String value = element.getAttribute(tag);
-        try {
-            setRange(value);
-        } catch (java.lang.NumberFormatException e) {
-            invalidRange(element.getNodeName(),tag, value);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            invalidRange(element.getNodeName(),tag, value);
-        }
-    }
-
     public String toString(){
     	return getFirst() + "-" + getLast();
     }
     
-    private void invalidRange(String elementTag,String attributeTag, String value) {
-        throw new RuntimeException("invalid or missing range:\n<"+elementTag+" ... " //
-                + attributeTag + "='" + value + "' ...>");
-    }
-
-    private void setRange(String s) {
-
-        String xy[] = s.split(SEPARATOR);
-        first = java.lang.Integer.valueOf(xy[0]).intValue();
-        last = java.lang.Integer.valueOf(xy[1]).intValue();
-    }
-
     /**
      * Duplicates an instance of Range.
      * 
@@ -149,5 +107,4 @@ class Range {
         this.first = range.first;
         this.last = range.last;
     }
-
 }
