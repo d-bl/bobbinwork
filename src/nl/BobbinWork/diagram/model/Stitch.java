@@ -19,70 +19,28 @@
 
 package nl.BobbinWork.diagram.model;
 
-import nl.BobbinWork.diagram.xml.ElementType;
+import java.util.Vector;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
-/**
- * 
- * @author J. Falkink-Pol
- */
 public class Stitch extends MultiplePairsPartition {
 
-    /**
-     * @param element XML element &lt;stitch%gt;
-     */
-    public Stitch(Element element) {
-        super(element);
-        setPairRange(new Range(element));
+    public Stitch(Range range, Vector<Segment> pairs, Vector<Switch> switches,
+			Vector<Pin> pins) {
+		
+        setPairRange(range);
+        int nrOfPairs = pairs.size();
+		setThreadEnds(new Ends(nrOfPairs * 2));
 
-        Style style = new Style();
-
-        // allocate arrays for pairEnds and threadEnds TODO: -> vector for new
-        // pairs
-        int pairCount = getPairRange().getCount();
-        Segment[] pairSegments = new Segment[pairCount];
-        setThreadEnds(new Ends(pairCount * 2));
-
-        int pairIndex = 0;
-        for //
-        (Node child = element.getFirstChild() //
-        ; child != null //
-        ; child = child.getNextSibling() //
-        ) {
-            if (child.getNodeType() == Node.ELEMENT_NODE) {
-                ElementType childType = ElementType.valueOf(child.getNodeName());
-                if ( childType == ElementType.cross ) {
-                    addChild(Builder.createCross((Element) child));
-                } else if ( childType == ElementType.twist ) {
-                    addChild(Builder.createTwist((Element) child));
-                } else if ( childType == ElementType.pin ) {
-                    getPartitions().add(new Pin((Element) child));
-                } else if ( childType == ElementType.style ) {
-                    style = Builder.createStyle((Element) child);
-                } else if ( childType == ElementType.pair ) {
-                    if (pairIndex < pairSegments.length) {
-                        pairSegments[pairIndex++] = Builder.createPairSegment((Element) child);
-                    } else {
-                        throw new RuntimeException("trying to define pair " +pairIndex+" while only "+pairSegments.length + " declared");
-                    }
-                }
-            }
+        Segment[] array = pairs.toArray(new Segment[nrOfPairs]);
+		setPairEnds(new Ends(array));
+        
+        Vector<Partition> partitions = getPartitions();
+        for (Pin pin:pins) partitions.add(pin);
+        for (Switch sw:switches) {
+        	partitions.add(sw);
+        	int start = sw.getThreadRange().getFirst() - 1;
+        	getThreadEnds().connect(sw.getThreadEnds(), start);
         }
-        setPairEnds(new Ends(pairSegments));
-        for (Segment segment:pairSegments) {
-            if (segment!=null){
-                segment.style = style;
-            }
-        }
-    }
-
-    private void addChild(Switch newSwitch) {
-        getPartitions().add(newSwitch);
-        int start = newSwitch.getThreadRange().getFirst() - 1;
-        getThreadEnds().connect(newSwitch.getThreadEnds(), start);
-    }
+	}
 
     public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
         if (pair) {

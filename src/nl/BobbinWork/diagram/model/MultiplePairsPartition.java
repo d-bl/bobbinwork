@@ -118,13 +118,14 @@ abstract class MultiplePairsPartition extends MultipleThreadsPartition {
         this.pairEnds = pairEnds;
     }
 
-    /** Create a new tree of MultipleThreadsPartition's. */
-    /**
+    /** Create a new tree of MultipleThreadsPartition's. 
+     * 
      * @param element
      *            XML element &lt;pattern&gt; or &lt;group&gt;
      */
     public MultiplePairsPartition(Element element) {
         super(element);
     }
+    public MultiplePairsPartition() {}
 
 }

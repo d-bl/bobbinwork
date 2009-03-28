@@ -1,10 +1,14 @@
 package nl.BobbinWork.diagram.model;
 
 import static nl.BobbinWork.diagram.xml.ElementType.*;
+
+import java.util.Vector;
+
 import nl.BobbinWork.diagram.xml.AttributeType;
 import nl.BobbinWork.diagram.xml.ElementType;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class Builder {
@@ -41,7 +45,7 @@ public class Builder {
 	 *            right.
 	 * @return
 	 */
-    static Cross createCross(Element element) {
+    private static Cross createCross(Element element) {
         Cross cross = new SwitchFactory(element).createCross();
         register(element, cross);
         return cross;
@@ -103,7 +107,7 @@ public class Builder {
      *            <code>&lt;front&nbsp;...&gt;</code> or
      *            <code>&lt;back&nbsp;...&gt;</code>
      */
-    public static ThreadSegment createThreadSegment(Element element) {
+    private static ThreadSegment createThreadSegment(Element element) {
     	return new SegmentFactory(element).createThreadSegment();
     }
     
@@ -113,7 +117,7 @@ public class Builder {
      * @param element
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
      */
-    public static Segment createPairSegment(Element element) {
+    static Segment createPairSegment(Element element) {
     	return new SegmentFactory(element).createPairSegment();
     }
     
@@ -130,7 +134,7 @@ public class Builder {
      *            XML element of the form
      *            &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
      */
- 	public static Style createStyle(Element element) {
+ 	private static Style createStyle(Element element) {
 
 		Style style = new Style();
 		setStyle(element, style);
@@ -148,7 +152,7 @@ public class Builder {
      *            or: &lt;style...&gt;&lt;shadow&nbsp;.../&gt;&lt;/style&gt;
      */
     // TODO: the shadow should also be expresible in percentages of the core.
-	public static ThreadStyle createThreadStyle(Element element) {
+	static ThreadStyle createThreadStyle(Element element) {
 		
 		ThreadStyle style = new ThreadStyle();
 		setStyle(element, style);
@@ -164,6 +168,48 @@ public class Builder {
 		return style;
 	}
     
+    static Stitch createStitch(Element element) {
+
+    	Range range = new Range(element);
+        Style style = new Style();
+        Vector<Pin> pins = new Vector<Pin>();
+        Vector<Switch> switches = new Vector<Switch>();
+        Vector<Segment> pairs = new Vector<Segment>(range.getCount());
+        int pairCountDown = range.getCount();
+
+        for //
+        (Node child = element.getFirstChild() //
+        ; child != null //
+        ; child = child.getNextSibling() //
+        ) {
+            if (child.getNodeType() == Node.ELEMENT_NODE) {
+                ElementType childType = ElementType.valueOf(child.getNodeName());
+                Element childElement = (Element) child;
+				if ( childType == ElementType.cross ) {
+                	switches.add(Builder.createCross(childElement));
+                } else if ( childType == ElementType.twist ) {
+                	switches.add(Builder.createTwist(childElement));
+                } else if ( childType == ElementType.pin ) {
+                    pins.add(new Pin(childElement));
+                } else if ( childType == ElementType.style ) {
+                    style = Builder.createStyle(childElement);
+                } else if ( childType == ElementType.pair ) {
+                    if (pairCountDown-- > 0) {
+                        pairs.add(Builder.createPairSegment(childElement));
+                    } else {
+                        throw new RuntimeException("adding pairs not yet implemented.");
+                    }
+                }
+            }
+        }
+        for (Segment segment:pairs) {
+            segment.style = style;
+        }
+        Stitch s = new Stitch(range,pairs,switches,pins);
+        register(element, s);
+		return s;
+    }
+
 	private static Element getMandatoryElement(Element element, ElementType tag) {
 		String tagString = tag.toString();
         NodeList nodeList = element.getElementsByTagName(tagString);
@@ -193,7 +239,7 @@ public class Builder {
     private static void register(Element element, Partition p) {
         element.setUserData(Switch.MODEL_TO_DOM, p, null);
         if (element.getAttribute(AttributeType.display.toString()).matches(
-                "(no)|(No)|(NO)")) {
+                "(no)|(No)|(NO)|(false)|(False)|(FALSE)")) {
             p.visible = false;
         }
     }

@@ -33,8 +33,8 @@ import nl.BobbinWork.diagram.xml.ElementType;
  * with one.<br>
  * <br>
  * The numbers are not overall numbers for the whole project, but relative
- * within the ancestor, that is the group of bobbins required for the sticth or
- * motiv being described.
+ * within the ancestor, that is the group of bobbins required for the stitch or
+ * motive being described.
  * 
  * @author J. Falkink-Pol
  */
