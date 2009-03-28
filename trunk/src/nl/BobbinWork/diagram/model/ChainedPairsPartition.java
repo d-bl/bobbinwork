@@ -59,9 +59,10 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
             Node child = child1;
             if (child.getNodeType() == Node.ELEMENT_NODE) {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
-                if (childType == ElementType.new_bobbins) {
+                Element childElement = (Element) child;
+				if (childType == ElementType.new_bobbins) {
                     ThreadStyle p = Builder.createThreadStyle((Element) child.getFirstChild());
-                    String nrs[] = ((Element) child).getAttribute("nrs").split(",");
+                    String nrs[] = childElement.getAttribute("nrs").split(",");
                     for (String nr:nrs) {
                         // lacemakers start counting with one,
                         // indexes with zero, so subtract one
@@ -79,11 +80,12 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
                         }                        
                     }
                 } else if (childType == ElementType.group) {
-                    addChild(new Group((Element) child));
+                    addChild(new Group(childElement));
                 } else if (childType == ElementType.stitch) {
-                    addChild(new Stitch((Element) child));
+                    //addChild(new Stitch((Element) child));
+                    addChild(Builder.createStitch(childElement));
                 } else if (childType == ElementType.pin) {
-                    getPartitions().add(new Pin((Element) child));
+                    getPartitions().add(new Pin(childElement));
                 }
             }
         }
