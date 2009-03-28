@@ -85,7 +85,7 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
                     //addChild(new Stitch((Element) child));
                     addChild(Builder.createStitch(childElement));
                 } else if (childType == ElementType.pin) {
-                    getPartitions().add(new Pin(childElement));
+                    getPartitions().add(Builder.createPin(childElement));
                 }
             }
         }

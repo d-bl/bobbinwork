@@ -13,6 +13,8 @@ import org.w3c.dom.NodeList;
 
 public class Builder {
 
+    private static final String RANGE_SEPARATOR = "-";
+
     private static class SwitchFactory {
 
         private Range range;
@@ -20,7 +22,7 @@ public class Builder {
         private ThreadSegment backSegment;
         
         SwitchFactory(Element element) {
-            range = new Range(element);
+            range = createRange(element);
             frontSegment = createThreadSegment(getMandatoryElement(element, front));
             backSegment = createThreadSegment(getMandatoryElement(element, back));
             checkRangeIs2(range);
@@ -170,7 +172,7 @@ public class Builder {
     
     static Stitch createStitch(Element element) {
 
-    	Range range = new Range(element);
+    	Range range = createRange(element);
         Style style = new Style();
         Vector<Pin> pins = new Vector<Pin>();
         Vector<Switch> switches = new Vector<Switch>();
@@ -186,16 +188,16 @@ public class Builder {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
                 Element childElement = (Element) child;
 				if ( childType == ElementType.cross ) {
-                	switches.add(Builder.createCross(childElement));
+                	switches.add(createCross(childElement));
                 } else if ( childType == ElementType.twist ) {
-                	switches.add(Builder.createTwist(childElement));
+                	switches.add(createTwist(childElement));
                 } else if ( childType == ElementType.pin ) {
-                    pins.add(new Pin(childElement));
+                    pins.add(createPin(childElement));
                 } else if ( childType == ElementType.style ) {
-                    style = Builder.createStyle(childElement);
+                    style = createStyle(childElement);
                 } else if ( childType == ElementType.pair ) {
                     if (pairCountDown-- > 0) {
-                        pairs.add(Builder.createPairSegment(childElement));
+                        pairs.add(createPairSegment(childElement));
                     } else {
                         throw new RuntimeException("adding pairs not yet implemented.");
                     }
@@ -210,7 +212,55 @@ public class Builder {
 		return s;
     }
 
-	private static Element getMandatoryElement(Element element, ElementType tag) {
+    /**
+     * @param element
+     *            an XML element of the form
+     *            <code>&lt;pin position"<em>x,y</em>"&gt;</code>
+     */
+    static Pin createPin(Element element) {
+        Point position = new Point(element.getAttribute(AttributeType.position.toString()));
+
+        Pin p = new Pin(position);
+        register(element, p);
+		return p;
+}
+
+    /**
+     * Creates a new instance of Range.
+     * 
+     * @param element
+     *            XML element of the form:
+     *            <ul>
+     *            <li><code>&lt;cross bobbins="<em>first-last</em>"&gt;</code></li>
+     *            <li><code>&lt;twist bobbins="<em>first-last</em>"&gt;</code></li>
+     *            <li><code>&lt;stitch  pairs="<em>first-last</em>"&gt;</code></li>
+     *            <li><code>&lt;group   pairs="<em>first-last</em>"&gt;</code></li>
+     *            <li><code>&lt;copy    pairs="<em>first-last</em>"&gt;</code></li>
+     *            </ul>
+     */
+    static Range createRange(Element element) {
+        String tag = ElementType.getRangeAttribute(element.getNodeName());
+        String value = element.getAttribute(tag);
+        int first;
+        int last;
+        String xy[] = value.split(RANGE_SEPARATOR);
+        if (xy.length!=2) throw invalidRange(element.getNodeName(), tag, value);
+        try {
+			first = java.lang.Integer.valueOf(xy[0]).intValue();
+			last = java.lang.Integer.valueOf(xy[1]).intValue();
+        } catch (java.lang.NumberFormatException e) {
+        	throw invalidRange(element.getNodeName(), tag, value);
+        }
+        return new Range(first,last);
+    }
+
+	private static RuntimeException invalidRange(String elementTag,
+			String attributeTag, String value) {
+		return new RuntimeException("invalid or missing range:\n<"+elementTag+" ... " //
+                + attributeTag + "='" + value + "' ...>");
+	}
+
+    private static Element getMandatoryElement(Element element, ElementType tag) {
 		String tagString = tag.toString();
         NodeList nodeList = element.getElementsByTagName(tagString);
         if (nodeList.getLength() != 1)
