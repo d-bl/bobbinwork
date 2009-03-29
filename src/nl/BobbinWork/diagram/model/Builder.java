@@ -185,16 +185,16 @@ public class Builder {
                 Element childElement = (Element) child;
 				if ( childType == ElementType.cross ) {
                 	Cross cross = createCross(childElement);
+                	register(childElement, cross);
 					switches.add(cross);
-					register(childElement, cross);
                 } else if ( childType == ElementType.twist ) {
                 	Twist twist = createTwist(childElement);
+                	register(childElement, twist);
 					switches.add(twist);
-					register(childElement, twist);
                 } else if ( childType == ElementType.pin ) {
                     Pin pin = createPin(childElement);
+                    register(childElement, pin);
 					pins.add(pin);
-					register(childElement, pin);
                 } else if ( childType == ElementType.style ) {
                     style = createStyle(childElement);
                 } else if ( childType == ElementType.pair ) {
@@ -286,7 +286,7 @@ public class Builder {
     }
 
     private static void register(Element element, Partition p) {
-        element.setUserData(Switch.MODEL_TO_DOM, p, null);
+        element.setUserData(Partition.MODEL_TO_DOM, p, null);
         if (element.getAttribute(AttributeType.display.toString()).matches(
                 "(no)|(No)|(NO)|(false)|(False)|(FALSE)")) {
             p.visible = false;
