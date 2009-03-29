@@ -17,6 +17,8 @@
  */
 package nl.BobbinWork.diagram.model;
 
+import java.util.Vector;
+
 import org.w3c.dom.Element;
 
 /**
@@ -32,23 +34,25 @@ public class Group extends ChainedPairsPartition {
      *            XML group Element, defining a group of Stitch's.
      */
     public Group(Element element) {
-        super(element);
+        super(element, Builder.createRange(element));
     }
 
-    void setPairRange(Element element) {
-        setPairRange(Builder.createRange(element));
-
-        // allocation as a preparation for the 2nd task of addChild
-        int l = getPairRange().getCount();
-        setPairEnds(new Ends(l));
-        setThreadEnds(new Ends(l * 2));
+    public Group(//
+    		Range range, //
+    		Vector<MultiplePairsPartition> parts,//
+    		Vector<Pin> pins) {
+    	super (range, parts, pins);
     }
-
-    void addChild(MultiplePairsPartition child) {
-        getPartitions().add(child);
-        int first = child.getPairRange().getFirst() - 1;
-        getPairEnds().connect(child.getPairEnds(), first);
-        getThreadEnds().connect(child.getThreadEnds(), first * 2);
+    
+    void initEnds() {
+    	int l = getPairRange().getCount();
+    	setPairEnds(new Ends(l));
+    	setThreadEnds(new Ends(l * 2));
     }
-
+    
+	void connectChild(MultiplePairsPartition part) {
+		int first = part.getPairRange().getFirst() - 1;
+        getPairEnds().connect(part.getPairEnds(), first);
+        getThreadEnds().connect(part.getThreadEnds(), first * 2);
+	}
 }
