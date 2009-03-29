@@ -36,10 +36,10 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
     /**
      * Adds a new child to the list and connects the thread/pair Ends's.
      * 
-     * @param child
+     * @param element
      *            a group or stitch that should become part of the group/pattern
      */
-    abstract void addChild(MultiplePairsPartition child);
+    abstract void addChild(MultiplePairsPartition element);
 
     /**
      * Creates a new (section of the) tree of Partition's.
@@ -49,60 +49,23 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
      */
     ChainedPairsPartition(org.w3c.dom.Element element) {
         super(element);
-        Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
         setPairRange(element);
         for //
-        (Node child1 = element.getFirstChild() //
-        ; child1 != null //
-        ; child1 = child1.getNextSibling()) //
+        (Node child = element.getFirstChild() //
+        ; child != null //
+        ; child = child.getNextSibling()) //
         {
-            Node child = child1;
             if (child.getNodeType() == Node.ELEMENT_NODE) {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
                 Element childElement = (Element) child;
-				if (childType == ElementType.new_bobbins) {
-                    ThreadStyle p = Builder.createThreadStyle((Element) child.getFirstChild());
-                    String nrs[] = childElement.getAttribute("nrs").split(",");
-                    for (String nr:nrs) {
-                        // lacemakers start counting with one,
-                        // indexes with zero, so subtract one
-                        
-                        try {
-                            int i = Integer.decode(nr).intValue() - 1;
-                            bobbins.setSize(Math.max(bobbins.size(), i+1));
-                            bobbins.set(i, p);
-                        } catch (NumberFormatException e) {
-                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
-                                    child.getAttributes().getNamedItem("nrs")+">"); 
-                        } catch (ArrayIndexOutOfBoundsException e) {
-                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
-                                    child.getAttributes().getNamedItem("nrs")+">"); 
-                        }                        
-                    }
-                } else if (childType == ElementType.group) {
+				if (childType == ElementType.group) {
                     addChild(new Group(childElement));
                 } else if (childType == ElementType.stitch) {
-                    //addChild(new Stitch((Element) child));
                     addChild(Builder.createStitch(childElement));
                 } else if (childType == ElementType.pin) {
                     getPartitions().add(Builder.createPin(childElement));
                 }
             }
         }
-        
-        // apply the collected thread styles to the starts of the thread segments
-        for (int i = 0; i < bobbins.size(); i++) {
-            if (bobbins.get(i) != null) {
-                ThreadStyle bobbin = bobbins.get(i);
-                ThreadStyle p2 = (ThreadStyle) getThreadEnds().getIns()[i].style;
-                p2.setColor(bobbin.getColor());
-                p2.setWidth(bobbin.getWidth());
-                if (bobbin.getBackGround() != null) {
-                    p2.getBackGround().setColor(bobbin.getBackGround().getColor());
-                    p2.getBackGround().setWidth(bobbin.getBackGround().getWidth());
-                }
-            }
-        }
     }
-
 }
