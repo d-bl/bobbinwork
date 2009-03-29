@@ -15,6 +15,50 @@ public class Builder {
 
     private static final String RANGE_SEPARATOR = "-";
 
+    private static class ChainedPairsPartitionFactory {
+        Element element;
+        Vector<Pin> pins = new Vector<Pin>();
+        Vector<MultiplePairsPartition> partitions = new Vector<MultiplePairsPartition>();
+        
+        ChainedPairsPartitionFactory(Element element) {
+            this.element = element;
+            for //
+            (Node child = element.getFirstChild() //
+            ; child != null //
+            ; child = child.getNextSibling()) //
+            {
+                if (child.getNodeType() == Node.ELEMENT_NODE) {
+                    ElementType childType = ElementType.valueOf(child.getNodeName());
+                    Element childElement = (Element) child;
+                    if (childType == ElementType.group) {
+                        Group group = Builder.createGroup(childElement);
+                        register(element, group);
+                        partitions.add(group);
+                    } else if (childType == ElementType.stitch) {
+                        Stitch stitch = createStitch(childElement);
+                        register(element, stitch);
+                        partitions.add(stitch);
+                    } else if (childType == ElementType.pin) {
+                        pins.add(Builder.createPin(childElement));
+                    }
+                }
+            }
+        }
+        Group createGroup() {
+            return null;//new Group(createRange(element), partitions, pins);
+        }
+        Diagram createDiagram() {
+            return null;//new Diagram(new Range(0, 0), partitions, pins);
+        }
+    }
+    static Group createGroup (Element element) {
+        return new ChainedPairsPartitionFactory(element).createGroup(); 
+    }
+    
+    static Diagram createDiagram (Element element) {
+        return new ChainedPairsPartitionFactory(element).createDiagram(); 
+    }
+    
     private static class SwitchFactory {
 
         private Range range;
@@ -35,68 +79,74 @@ public class Builder {
         }
     }
 
-	/**
-	 * @param element
-	 *            <code><br>
-	 *              &lt;cross bobbins=&quot;<em>first</em>-<em>last</em>&quot;&gt;<br>
-	 *              &nbsp;&nbsp;&lt;back ... /&gt;<br>
-	 *              &nbsp;&nbsp;&lt;front ... /&gt;<br>
-	 *              &lt;...&gt;<br>
+    /**
+     * @param element
+     *            <code><br>
+     *              &lt;cross bobbins=&quot;<em>first</em>-<em>last</em>&quot;&gt;<br>
+     *              &nbsp;&nbsp;&lt;back ... /&gt;<br>
+     *              &nbsp;&nbsp;&lt;front ... /&gt;<br>
+     *              &lt;/cross&gt;<br>
      *            </code> The order of the front and back element doesn't
-	 *            matter. By definition the front thread goes from left to
-	 *            right.
-	 * @return
-	 */
+     *            matter. By definition the front thread goes from left to
+     *            right.
+     * @return
+     */
     private static Cross createCross(Element element) {
         return new SwitchFactory(element).createCross();
     }
 
-	/**
-	 * @see #createTwist(Element)
-	 * @param element
-	 *            Like cross but the front thread goes from right to left.
-	 * @return
-	 */
+    /**
+     * @param element
+     *            <code><br>
+     *              &lt;twist bobbins=&quot;<em>first</em>-<em>last</em>&quot;&gt;<br>
+     *              &nbsp;&nbsp;&lt;back ... /&gt;<br>
+     *              &nbsp;&nbsp;&lt;front ... /&gt;<br>
+     *              &lt;/twist&gt;<br>
+     *            </code> The order of the front and back element doesn't
+     *            matter. By definition the front thread goes from right to
+     *            left.
+     * @return
+     */
     public static Twist createTwist(Element element) {
         return new SwitchFactory(element).createTwist();
     }
 
     private static class SegmentFactory {
-    	
-    	private Point start, c1, c2, end;
-    	private Element element;
-    	
-    	SegmentFactory(Element element){
-    		this.element = element;
-    		String start = element.getAttribute("start");
-    		String end = element.getAttribute("end");
-    		String c1 = element.getAttribute("c1");
-    		String c2 = element.getAttribute("c2");
-    		if ( (start == null) || start.equals("") ) 
-    			throw new IllegalArgumentException("mandatory attribute start is missing");
-    		if ( (end == null) || end.equals("") ) 
-    			throw new IllegalArgumentException("mandatory attribute end is missing");
-    		this.start = new Point(start);
-    		this.end = new Point(end);
-    		this.c1 = ( (c1 == null) || c1.equals("") ? null :  new Point(c1) );
-    		this.c2 = ( (c2 == null) || c2.equals("") ? null :  new Point(c2) );
-    	}
-    	
-    	Segment createPairSegment() {
-    		int twistMarkLength = 0;
-    		if (element.getAttributes().getNamedItem("mark") != null) {
-    			try {
-    				twistMarkLength = Integer.parseInt(element.getAttribute("mark"));
-    			} catch (NumberFormatException e) {
-    				twistMarkLength = 9 * new Style().getWidth();
-    			}
-    		}
-    		return new Segment(start, c1, c2, end, twistMarkLength);
-    	}
-    	
-    	ThreadSegment createThreadSegment() {
-    		return new ThreadSegment(start, c1, c2, end);
-    	}
+        
+        private Point start, c1, c2, end;
+        private Element element;
+        
+        SegmentFactory(Element element){
+            this.element = element;
+            String start = element.getAttribute("start");
+            String end = element.getAttribute("end");
+            String c1 = element.getAttribute("c1");
+            String c2 = element.getAttribute("c2");
+            if ( (start == null) || start.equals("") ) 
+                throw new IllegalArgumentException("mandatory attribute start is missing");
+            if ( (end == null) || end.equals("") ) 
+                throw new IllegalArgumentException("mandatory attribute end is missing");
+            this.start = new Point(start);
+            this.end = new Point(end);
+            this.c1 = ( (c1 == null) || c1.equals("") ? null :  new Point(c1) );
+            this.c2 = ( (c2 == null) || c2.equals("") ? null :  new Point(c2) );
+        }
+        
+        Segment createPairSegment() {
+            int twistMarkLength = 0;
+            if (element.getAttributes().getNamedItem("mark") != null) {
+                try {
+                    twistMarkLength = Integer.parseInt(element.getAttribute("mark"));
+                } catch (NumberFormatException e) {
+                    twistMarkLength = 9 * new Style().getWidth();
+                }
+            }
+            return new Segment(start, c1, c2, end, twistMarkLength);
+        }
+        
+        ThreadSegment createThreadSegment() {
+            return new ThreadSegment(start, c1, c2, end);
+        }
     }
     
     /** Creates a new instance of ThreadSegment. 
@@ -106,7 +156,7 @@ public class Builder {
      *            <code>&lt;back&nbsp;...&gt;</code>
      */
     private static ThreadSegment createThreadSegment(Element element) {
-    	return new SegmentFactory(element).createThreadSegment();
+        return new SegmentFactory(element).createThreadSegment();
     }
     
     /**
@@ -116,13 +166,13 @@ public class Builder {
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
      */
     private static Segment createPairSegment(Element element) {
-    	return new SegmentFactory(element).createPairSegment();
+        return new SegmentFactory(element).createPairSegment();
     }
     
     private static void setStyle(Element element, Style style) {
-		style.setColor(element.getAttribute("color"));
-		style.setWidth(element.getAttribute("width"));
-	}
+        style.setColor(element.getAttribute("color"));
+        style.setWidth(element.getAttribute("width"));
+    }
 
     /**
      * Creates a new instance of Style from an XML element with style property
@@ -132,13 +182,13 @@ public class Builder {
      *            XML element of the form
      *            &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
      */
- 	private static Style createStyle(Element element) {
+     private static Style createStyle(Element element) {
 
-		Style style = new Style();
-		setStyle(element, style);
+        Style style = new Style();
+        setStyle(element, style);
 
-		return style;
-	}
+        return style;
+    }
 
     /**
      * Creates a new instance of ThreadStyle from an XML element with style property
@@ -150,25 +200,25 @@ public class Builder {
      *            or: &lt;style...&gt;&lt;shadow&nbsp;.../&gt;&lt;/style&gt;
      */
     // TODO: the shadow should also be expresible in percentages of the core.
-	static ThreadStyle createThreadStyle(Element element) {
-		
-		ThreadStyle style = new ThreadStyle();
-		setStyle(element, style);
-	
-		Element child = getOptionalElement(element, shadow);
-		if ( child == null ) return style;
-		
-		Style b = style.getBackGround();
-		String c = child.getAttribute("color");
-		String w = child.getAttribute("width");
-		if (c != null && !c.equals("")) b.setColor(c);
-		if (w != null && !w.equals("")) b.setWidth(w);
-		return style;
-	}
+    static ThreadStyle createThreadStyle(Element element) {
+        
+        ThreadStyle style = new ThreadStyle();
+        setStyle(element, style);
+    
+        Element child = getOptionalElement(element, shadow);
+        if ( child == null ) return style;
+        
+        Style b = style.getBackGround();
+        String c = child.getAttribute("color");
+        String w = child.getAttribute("width");
+        if (c != null && !c.equals("")) b.setColor(c);
+        if (w != null && !w.equals("")) b.setWidth(w);
+        return style;
+    }
     
     static Stitch createStitch(Element element) {
 
-    	Range range = createRange(element);
+        Range range = createRange(element);
         Style style = new Style();
         Vector<Pin> pins = new Vector<Pin>();
         Vector<Switch> switches = new Vector<Switch>();
@@ -183,18 +233,18 @@ public class Builder {
             if (child.getNodeType() == Node.ELEMENT_NODE) {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
                 Element childElement = (Element) child;
-				if ( childType == ElementType.cross ) {
-                	Cross cross = createCross(childElement);
-                	register(childElement, cross);
-					switches.add(cross);
+                if ( childType == ElementType.cross ) {
+                    Cross cross = createCross(childElement);
+                    register(childElement, cross);
+                    switches.add(cross);
                 } else if ( childType == ElementType.twist ) {
-                	Twist twist = createTwist(childElement);
-                	register(childElement, twist);
-					switches.add(twist);
+                    Twist twist = createTwist(childElement);
+                    register(childElement, twist);
+                    switches.add(twist);
                 } else if ( childType == ElementType.pin ) {
                     Pin pin = createPin(childElement);
                     register(childElement, pin);
-					pins.add(pin);
+                    pins.add(pin);
                 } else if ( childType == ElementType.style ) {
                     style = createStyle(childElement);
                 } else if ( childType == ElementType.pair ) {
@@ -211,9 +261,9 @@ public class Builder {
         }
         Stitch s = new Stitch(range,pairs,switches,pins);
         register(element, s);
-		return s;
+        return s;
     }
-
+    
     /**
      * @param element
      *            an XML element of the form
@@ -221,7 +271,7 @@ public class Builder {
      */
     static Pin createPin(Element element) {
         String attribute = element.getAttribute(AttributeType.position.toString());
-		return new Pin(new Point(attribute));
+        return new Pin(new Point(attribute));
 }
 
     /**
@@ -245,40 +295,40 @@ public class Builder {
         String xy[] = value.split(RANGE_SEPARATOR);
         if (xy.length!=2) throw invalidRange(element.getNodeName(), tag, value);
         try {
-			first = java.lang.Integer.valueOf(xy[0]).intValue();
-			last = java.lang.Integer.valueOf(xy[1]).intValue();
+            first = java.lang.Integer.valueOf(xy[0]).intValue();
+            last = java.lang.Integer.valueOf(xy[1]).intValue();
         } catch (java.lang.NumberFormatException e) {
-        	throw invalidRange(element.getNodeName(), tag, value);
+            throw invalidRange(element.getNodeName(), tag, value);
         }
         return new Range(first,last);
     }
 
-	private static RuntimeException invalidRange(String elementTag,
-			String attributeTag, String value) {
-		return new RuntimeException("invalid or missing range:\n<"+elementTag+" ... " //
+    private static RuntimeException invalidRange(String elementTag,
+            String attributeTag, String value) {
+        return new RuntimeException("invalid or missing range:\n<"+elementTag+" ... " //
                 + attributeTag + "='" + value + "' ...>");
-	}
+    }
 
     private static Element getMandatoryElement(Element element, ElementType tag) {
-		String tagString = tag.toString();
+        String tagString = tag.toString();
         NodeList nodeList = element.getElementsByTagName(tagString);
         if (nodeList.getLength() != 1)
             throw new IllegalArgumentException("expecting exactly 1 "
                     + tagString + "; found " + nodeList.getLength());
         return (Element) nodeList.item(0);
-	}
+    }
 
-	private static Element getOptionalElement(Element element, ElementType tag) {
-		String tagString = tag.toString();
-		NodeList nodeList = element.getElementsByTagName(tagString);
-		int length = nodeList.getLength();
-		if (length < 1) return null;
-		if (length > 1)
-			throw new IllegalArgumentException("expecting at most 1 "
-					+ tagString + "; found " + length);
-		return (Element) nodeList.item(0);
-	}
-	
+    private static Element getOptionalElement(Element element, ElementType tag) {
+        String tagString = tag.toString();
+        NodeList nodeList = element.getElementsByTagName(tagString);
+        int length = nodeList.getLength();
+        if (length < 1) return null;
+        if (length > 1)
+            throw new IllegalArgumentException("expecting at most 1 "
+                    + tagString + "; found " + length);
+        return (Element) nodeList.item(0);
+    }
+    
     private static void checkRangeIs2(Range range) {
         if (range.getCount() != 2)
             throw new IllegalArgumentException(
