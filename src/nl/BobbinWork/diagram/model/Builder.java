@@ -48,9 +48,7 @@ public class Builder {
 	 * @return
 	 */
     private static Cross createCross(Element element) {
-        Cross cross = new SwitchFactory(element).createCross();
-        register(element, cross);
-        return cross;
+        return new SwitchFactory(element).createCross();
     }
 
 	/**
@@ -60,9 +58,7 @@ public class Builder {
 	 * @return
 	 */
     public static Twist createTwist(Element element) {
-        Twist twist = new SwitchFactory(element).createTwist();
-        register(element, twist);
-        return twist;
+        return new SwitchFactory(element).createTwist();
     }
 
     private static class SegmentFactory {
@@ -119,7 +115,7 @@ public class Builder {
      * @param element
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
      */
-    static Segment createPairSegment(Element element) {
+    private static Segment createPairSegment(Element element) {
     	return new SegmentFactory(element).createPairSegment();
     }
     
@@ -188,11 +184,17 @@ public class Builder {
                 ElementType childType = ElementType.valueOf(child.getNodeName());
                 Element childElement = (Element) child;
 				if ( childType == ElementType.cross ) {
-                	switches.add(createCross(childElement));
+                	Cross cross = createCross(childElement);
+					switches.add(cross);
+					register(childElement, cross);
                 } else if ( childType == ElementType.twist ) {
-                	switches.add(createTwist(childElement));
+                	Twist twist = createTwist(childElement);
+					switches.add(twist);
+					register(childElement, twist);
                 } else if ( childType == ElementType.pin ) {
-                    pins.add(createPin(childElement));
+                    Pin pin = createPin(childElement);
+					pins.add(pin);
+					register(childElement, pin);
                 } else if ( childType == ElementType.style ) {
                     style = createStyle(childElement);
                 } else if ( childType == ElementType.pair ) {
@@ -218,11 +220,8 @@ public class Builder {
      *            <code>&lt;pin position"<em>x,y</em>"&gt;</code>
      */
     static Pin createPin(Element element) {
-        Point position = new Point(element.getAttribute(AttributeType.position.toString()));
-
-        Pin p = new Pin(position);
-        register(element, p);
-		return p;
+        String attribute = element.getAttribute(AttributeType.position.toString());
+		return new Pin(new Point(attribute));
 }
 
     /**
