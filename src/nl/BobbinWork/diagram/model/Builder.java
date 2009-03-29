@@ -16,12 +16,12 @@ public class Builder {
     private static final String RANGE_SEPARATOR = "-";
 
     private static class ChainedPairsPartitionFactory {
-        Element element;
+    	Element element;
         Vector<Pin> pins = new Vector<Pin>();
-        Vector<MultiplePairsPartition> partitions = new Vector<MultiplePairsPartition>();
-        
-        ChainedPairsPartitionFactory(Element element) {
-            this.element = element;
+        Vector<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
+    	
+    	ChainedPairsPartitionFactory(Element element) {
+    		this.element = element;
             for //
             (Node child = element.getFirstChild() //
             ; child != null //
@@ -30,33 +30,33 @@ public class Builder {
                 if (child.getNodeType() == Node.ELEMENT_NODE) {
                     ElementType childType = ElementType.valueOf(child.getNodeName());
                     Element childElement = (Element) child;
-                    if (childType == ElementType.group) {
-                        Group group = Builder.createGroup(childElement);
-                        register(element, group);
-                        partitions.add(group);
-                    } else if (childType == ElementType.stitch) {
-                        Stitch stitch = createStitch(childElement);
-                        register(element, stitch);
-                        partitions.add(stitch);
-                    } else if (childType == ElementType.pin) {
+                    if (childType == ElementType.pin) {
                         pins.add(Builder.createPin(childElement));
-                    }
+                    } else if (childType == ElementType.group) {
+						MultiplePairsPartition part = Builder.createGroup(childElement);
+						register(element, part);
+						parts.add(part);
+					} else if (childType == ElementType.stitch) {
+						MultiplePairsPartition part = createStitch(childElement);
+						register(element, part);
+						parts.add(part);
+					}
                 }
             }
-        }
-        Group createGroup() {
-            return null;//new Group(createRange(element), partitions, pins);
+    	}
+    	Group createGroup() {
+            return new Group(createRange(element), parts, pins);
         }
         Diagram createDiagram() {
-            return null;//new Diagram(new Range(0, 0), partitions, pins);
+            return new Diagram(parts, pins);
         }
     }
     static Group createGroup (Element element) {
-        return new ChainedPairsPartitionFactory(element).createGroup(); 
+    	return new ChainedPairsPartitionFactory(element).createGroup(); 
     }
     
     static Diagram createDiagram (Element element) {
-        return new ChainedPairsPartitionFactory(element).createDiagram(); 
+    	return new ChainedPairsPartitionFactory(element).createDiagram(); 
     }
     
     private static class SwitchFactory {

@@ -17,6 +17,8 @@
  */
 package nl.BobbinWork.diagram.model;
 
+import java.util.Vector;
+
 import org.w3c.dom.Element;
 
 /**
@@ -31,17 +33,14 @@ public class Diagram extends ChainedPairsPartition {
      * @param element
      */
     public Diagram(Element element) {
-        super(element);
+        super(element, new Range(0, 0));
     }
 
-    /** Called by super constructor. */
-    void setPairRange(Element element) {
-        setPairRange(new Range(0, 0));
+    public Diagram(//
+    		Vector<MultiplePairsPartition> parts, //
+    		Vector<Pin> pins) {
+    	super (new Range(0, 0), parts, pins);
     }
-
-    /** Called by super constructor. */
-    void addChild(MultiplePairsPartition child) {
-        getPartitions().add(child);
-        // TODO init thread/pair-ends
-    }
+    void connectChild(MultiplePairsPartition part) {}
+    void initEnds() {}
 }
