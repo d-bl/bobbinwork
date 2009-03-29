@@ -55,16 +55,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     After each movement bobbins and pairs are recounted.
     For bobbins within a stitch the usual values are:
     2-3 for cross, either 1-2 or 3-4 for twist.
-    Pairs treated as threads create exeptions.
+    Pairs treated as threads create exceptions.
     -->
   <xsd:restriction base="xsd:string">
    <xsd:pattern value="[0-9]+\-[0-9]+"/>
-  </xsd:restriction>
- </xsd:simpleType>
-
- <xsd:simpleType name="nrs">
-  <xsd:restriction base="xsd:string">
-   <xsd:pattern value="[0-9]+(-[0-9]+)?(,[0-9]+(-[0-9]+))*"/>
   </xsd:restriction>
  </xsd:simpleType>
 
@@ -155,23 +149,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
  <xsd:complexType name="pin">
   <xsd:attribute  name="position" type="bw:xy" use="required"/>
- </xsd:complexType>
-
- <xsd:complexType name="bobbins">
-  <!--
-    Defaults:
-    front.color = black;
-    back.color  = grey;
-    back.width  = largestOf (3 * front.width, 5 + front.width).
-    back.deco   = front.deco = solid.
-    -->
-  <xsd:sequence>
-   <xsd:element   name="thread" type="bw:text"  minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="front"  type="bw:style" minOccurs="0" maxOccurs="1" />
-   <xsd:element   name="back"   type="bw:style" minOccurs="0" maxOccurs="1" />
-  </xsd:sequence>
-  <xsd:attribute  name="nrs"    type="bw:nrs" use="required"/>
-  <xsd:attribute  name="id"     type="xsd:ID" use="required"/>
  </xsd:complexType>
 
  <xsd:complexType name="switch">
