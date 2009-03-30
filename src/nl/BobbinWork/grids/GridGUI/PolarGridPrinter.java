@@ -46,7 +46,6 @@ import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
  * @author J. Falkink-Pol
  */
 
-@SuppressWarnings("serial")
 public class PolarGridPrinter {
     
 	private static final String YEARS = "2005-2008";  //$NON-NLS-1$  
