@@ -112,6 +112,7 @@ public class TreeExpander {
         setRange(toBeReplaced, id, clone);
         Object userData = toBeReplaced.getUserData(DOM_TO_VIEW);
         clone.setUserData(DOM_TO_VIEW, userData, null);
+        toBeCloned.setUserData(TreeExpander.CLONED, true, null);
 
         List<VectorTransformation> list = getTransformations (toBeReplaced);
         if ( list.size() == 0 ) list.add(null); // make sure id's are removed 
