@@ -20,8 +20,6 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Shape;
 
-import org.w3c.dom.Element;
-
 /**
  * DiagramPanel section containing multiple threads segments.
  * 
@@ -32,16 +30,6 @@ public abstract class MultipleThreadsPartition extends Partition {
 
     /** Threads going into and coming out of a Group/Stitch/Cross/Twist. */
     private Ends threadEnds;
-
-    /**
-     * Create a new tree of MultipleThreadsPartition's.
-     * 
-     * @param element
-     */
-    @Deprecated
-    public MultipleThreadsPartition(Element element) {
-        super(element);
-    }
 
     public MultipleThreadsPartition(){}
     

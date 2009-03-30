@@ -34,11 +34,11 @@ public class Builder {
                         pins.add(Builder.createPin(childElement));
                     } else if (childType == ElementType.group) {
 						MultiplePairsPartition part = Builder.createGroup(childElement);
-						register(element, part);
+						register(childElement, part);
 						parts.add(part);
 					} else if (childType == ElementType.stitch) {
 						MultiplePairsPartition part = createStitch(childElement);
-						register(element, part);
+						register(childElement, part);
 						parts.add(part);
 					}
                 }
@@ -51,11 +51,11 @@ public class Builder {
             return new Diagram(parts, pins);
         }
     }
-    static Group createGroup (Element element) {
+    private static Group createGroup (Element element) {
     	return new ChainedPairsPartitionFactory(element).createGroup(); 
     }
     
-    static Diagram createDiagram (Element element) {
+    public static Diagram createDiagram (Element element) {
     	return new ChainedPairsPartitionFactory(element).createDiagram(); 
     }
     
@@ -190,33 +190,7 @@ public class Builder {
         return style;
     }
 
-    /**
-     * Creates a new instance of ThreadStyle from an XML element with style property
-     * attributes. 
-     * 
-     * @param element
-     *            XML element of the form:<br>
-     *            &lt;style&nbsp;.../&gt;<br>
-     *            or: &lt;style...&gt;&lt;shadow&nbsp;.../&gt;&lt;/style&gt;
-     */
-    // TODO: the shadow should also be expresible in percentages of the core.
-    static ThreadStyle createThreadStyle(Element element) {
-        
-        ThreadStyle style = new ThreadStyle();
-        setStyle(element, style);
-    
-        Element child = getOptionalElement(element, shadow);
-        if ( child == null ) return style;
-        
-        Style b = style.getBackGround();
-        String c = child.getAttribute("color");
-        String w = child.getAttribute("width");
-        if (c != null && !c.equals("")) b.setColor(c);
-        if (w != null && !w.equals("")) b.setWidth(w);
-        return style;
-    }
-    
-    static Stitch createStitch(Element element) {
+    private static Stitch createStitch(Element element) {
 
         Range range = createRange(element);
         Style style = new Style();
@@ -269,10 +243,10 @@ public class Builder {
      *            an XML element of the form
      *            <code>&lt;pin position"<em>x,y</em>"&gt;</code>
      */
-    static Pin createPin(Element element) {
+    private static Pin createPin(Element element) {
         String attribute = element.getAttribute(AttributeType.position.toString());
         return new Pin(new Point(attribute));
-}
+    }
 
     /**
      * Creates a new instance of Range.
@@ -287,7 +261,7 @@ public class Builder {
      *            <li><code>&lt;copy    pairs="<em>first-last</em>"&gt;</code></li>
      *            </ul>
      */
-    static Range createRange(Element element) {
+    private static Range createRange(Element element) {
         String tag = ElementType.getRangeAttribute(element.getNodeName());
         String value = element.getAttribute(tag);
         int first;
@@ -318,17 +292,6 @@ public class Builder {
         return (Element) nodeList.item(0);
     }
 
-    private static Element getOptionalElement(Element element, ElementType tag) {
-        String tagString = tag.toString();
-        NodeList nodeList = element.getElementsByTagName(tagString);
-        int length = nodeList.getLength();
-        if (length < 1) return null;
-        if (length > 1)
-            throw new IllegalArgumentException("expecting at most 1 "
-                    + tagString + "; found " + length);
-        return (Element) nodeList.item(0);
-    }
-    
     private static void checkRangeIs2(Range range) {
         if (range.getCount() != 2)
             throw new IllegalArgumentException(

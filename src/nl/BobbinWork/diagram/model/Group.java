@@ -19,23 +19,11 @@ package nl.BobbinWork.diagram.model;
 
 import java.util.Vector;
 
-import org.w3c.dom.Element;
-
 /**
  * @author J. Falkink-Pol
  * 
  */
 public class Group extends ChainedPairsPartition {
-
-    /**
-     * Creates a new section of the model tree.
-     * 
-     * @param element
-     *            XML group Element, defining a group of Stitch's.
-     */
-    public Group(Element element) {
-        super(element, Builder.createRange(element));
-    }
 
     public Group(//
     		Range range, //
