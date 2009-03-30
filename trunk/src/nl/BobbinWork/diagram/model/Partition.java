@@ -26,7 +26,7 @@ public abstract class Partition {
     public static final String MODEL_TO_DOM = "model";
 
     /** Show (or hide) this section of the diagram. */
-    protected boolean visible = true;
+    private boolean visible = true;
 
     public Partition() {
     }
@@ -100,4 +100,12 @@ public abstract class Partition {
      * TODO First draw non-pins, then pins.
      */
     abstract public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread);
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+
+	public boolean isVisible() {
+		return visible;
+	}
 }

@@ -38,7 +38,7 @@ import java.awt.geom.CubicCurve2D;
  * @author J. Falkink-Pol
  */
 
-class Segment {
+public class Segment {
 
     private Point start, c1, c2, end;
 
@@ -46,7 +46,7 @@ class Segment {
 
     protected Segment previous = null, next = null;
 
-    protected Style style = new Style();
+    private Style style = new Style();
 
     private Point pointBetween(Point a, Point b, double t) {
         return new Point((a.getX() * (1 - t)) + (b.getX() * t), (a.getY() * (1 - t)) + (b.getY() * t));
@@ -192,7 +192,7 @@ class Segment {
     }
 
     void draw(java.awt.Graphics2D g2) {
-        Color color = style.getColor();
+        Color color = getStyle().getColor();
         g2.setPaint(color);
         g2.setStroke(new BasicStroke( //
                 getStyle().getWidth() * 1.0f, //
@@ -260,5 +260,9 @@ class Segment {
                 new int[] { (int) start.y, (int) c2.y, (int) end.x, (int) c1.y }, //
                 4);
     }
+
+	public void setStyle(Style style) {
+		this.style = style;
+	}
     
 }

@@ -56,7 +56,7 @@ import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.gui.InteractiveDiagramPanel;
-import nl.BobbinWork.diagram.model.Builder;
+import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 import nl.BobbinWork.viewer.guiUtils.CPanel;
 import nl.BobbinWork.viewer.guiUtils.CursorController;
@@ -225,7 +225,7 @@ public class BWViewer {
 				  // TODO Auto-generated catch block
 				  e1.printStackTrace();
 				}
-				diagramPanel.setPattern(Builder.createDiagram(tree.getRootElement()));
+				diagramPanel.setPattern(DiagramBuilder.createDiagram(tree.getRootElement()));
 				fragments.populate(tree.getRoot());
 			}
 

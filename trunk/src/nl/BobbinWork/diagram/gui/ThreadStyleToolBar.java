@@ -39,9 +39,9 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 
-import nl.BobbinWork.diagram.model.Builder;
 import nl.BobbinWork.diagram.model.Switch;
 import nl.BobbinWork.diagram.model.ThreadStyle;
+import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.XmlResources;
 
 import org.w3c.dom.Element;
@@ -84,7 +84,7 @@ public class ThreadStyleToolBar extends JToolBar {
 
             try {
                 Element el = getXmlResources().getTwist(w).getDocumentElement();
-                twist = Builder.createTwist(el);
+                twist = DiagramBuilder.createTwist(el);
             } catch (Exception e) {
                 e.printStackTrace();
             }
