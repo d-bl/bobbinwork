@@ -20,60 +20,11 @@ package nl.BobbinWork.diagram.model;
 
 import java.util.Vector;
 
-import nl.BobbinWork.diagram.xml.ElementType;
-
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-
 /**
  * 
  * @author J. Falkink-Pol
  */
 abstract class ChainedPairsPartition extends MultiplePairsPartition {
-
-    /**
-     * Adds a new child to the list and connects the thread/pair Ends's.
-     * 
-     * @param element
-     *            a group or stitch that should become part of the group/pattern
-     */
-    void addChild(MultiplePairsPartition child) {
-        getPartitions().add(child);
-        connectChild(child);
-    }
-
-    /**
-     * Creates a new (section of the) tree of Partition's.
-     * 
-     * @param element
-     *            XML element &lt;pattern&gt; or &lt;group&gt;
-     * @param range TODO
-     */
-    ChainedPairsPartition(org.w3c.dom.Element element, Range range) {
-        
-    	super(element);
-        
-    	setPairRange(range);
-        initEnds();
-        
-        for //
-        (Node child = element.getFirstChild() //
-        ; child != null //
-        ; child = child.getNextSibling()) //
-        {
-            if (child.getNodeType() == Node.ELEMENT_NODE) {
-                ElementType childType = ElementType.valueOf(child.getNodeName());
-                Element childElement = (Element) child;
-				if (childType == ElementType.group) {
-                    addChild(new Group(childElement));
-                } else if (childType == ElementType.stitch) {
-                    addChild(Builder.createStitch(childElement));
-                } else if (childType == ElementType.pin) {
-                    getPartitions().add(Builder.createPin(childElement));
-                }
-            }
-        }
-    }
 
     abstract void initEnds();
     abstract void connectChild(MultiplePairsPartition child);

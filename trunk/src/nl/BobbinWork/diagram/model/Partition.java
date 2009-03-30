@@ -19,10 +19,6 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Shape;
 
-import nl.BobbinWork.diagram.xml.AttributeType;
-
-import org.w3c.dom.Element;
-
 public abstract class Partition {
 
     static final String RANGE_SEPARATOR = "-";
@@ -35,22 +31,6 @@ public abstract class Partition {
     public Partition() {
     }
     
-    /**
-     * Create a new tree of Partition's from an XML Element.
-     * 
-     * @param element
-     *            XML element &lt;pattern&gt;, &lt;group&gt;, &lt;cross&gt;,
-     *            &lt;twist&gt; or &lt;pin&gt;
-     */
-    @Deprecated
-    public Partition(Element element) {
-        element.setUserData(MODEL_TO_DOM, this, null);
-
-        if (element.getAttribute(AttributeType.display.toString()).matches("(no)|(No)|(NO)")) {
-            visible = false;
-        }
-    }
-
     public abstract int getNrOfPairs();
 
     /**

@@ -19,22 +19,11 @@ package nl.BobbinWork.diagram.model;
 
 import java.util.Vector;
 
-import org.w3c.dom.Element;
-
 /**
  * @author J. Falkink-Pol
  * 
  */
 public class Diagram extends ChainedPairsPartition {
-
-    /**
-     * Creates a new tree of Partition's.
-     * 
-     * @param element
-     */
-    public Diagram(Element element) {
-        super(element, new Range(0, 0));
-    }
 
     public Diagram(//
     		Vector<MultiplePairsPartition> parts, //
