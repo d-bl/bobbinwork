@@ -35,7 +35,7 @@ package nl.BobbinWork.diagram.model;
  * 
  * @author J. Falkink-Pol
  */
-class Range {
+public class Range {
 
     private int first;
 

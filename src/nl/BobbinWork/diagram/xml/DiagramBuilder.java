@@ -1,17 +1,15 @@
-package nl.BobbinWork.diagram.model;
+package nl.BobbinWork.diagram.xml;
 
 import static nl.BobbinWork.diagram.xml.ElementType.*;
+import nl.BobbinWork.diagram.model.*;
 
 import java.util.Vector;
-
-import nl.BobbinWork.diagram.xml.AttributeType;
-import nl.BobbinWork.diagram.xml.ElementType;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class Builder {
+public class DiagramBuilder {
 
     private static final String RANGE_SEPARATOR = "-";
 
@@ -31,9 +29,9 @@ public class Builder {
                     ElementType childType = ElementType.valueOf(child.getNodeName());
                     Element childElement = (Element) child;
                     if (childType == ElementType.pin) {
-                        pins.add(Builder.createPin(childElement));
+                        pins.add(DiagramBuilder.createPin(childElement));
                     } else if (childType == ElementType.group) {
-						MultiplePairsPartition part = Builder.createGroup(childElement);
+						MultiplePairsPartition part = DiagramBuilder.createGroup(childElement);
 						register(childElement, part);
 						parts.add(part);
 					} else if (childType == ElementType.stitch) {
@@ -231,7 +229,7 @@ public class Builder {
             }
         }
         for (Segment segment:pairs) {
-            segment.style = style;
+            segment.setStyle(style);
         }
         Stitch s = new Stitch(range,pairs,switches,pins);
         register(element, s);
@@ -302,7 +300,7 @@ public class Builder {
         element.setUserData(Partition.MODEL_TO_DOM, p, null);
         if (element.getAttribute(AttributeType.display.toString()).matches(
                 "(no)|(No)|(NO)|(false)|(False)|(FALSE)")) {
-            p.visible = false;
+            p.setVisible(false);
         }
     }
 }

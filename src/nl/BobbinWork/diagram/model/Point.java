@@ -23,6 +23,7 @@ package nl.BobbinWork.diagram.model;
  * @author J. Falkink-Pol
  */
 @SuppressWarnings("serial")
+public
 class Point extends java.awt.geom.Point2D.Double { // TODO inheritance->composition
     
     private static final String SEPARATOR = ",";

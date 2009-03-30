@@ -32,9 +32,9 @@ import java.awt.BasicStroke;
 public class ThreadSegment extends Segment {
 
     /** @see nl.BobbinWork.diagram.model.Segment#Segment(Point, Point, Point, Point) */
-    ThreadSegment(Point start, Point c1, Point c2, Point end) {
+    public ThreadSegment(Point start, Point c1, Point c2, Point end) {
         super(start, c1, c2, end, 0);
-        style = (Style) new ThreadStyle();
+        setStyle((Style) new ThreadStyle());
     }
 
     void disconnectStart() {
@@ -44,7 +44,7 @@ public class ThreadSegment extends Segment {
 
         Segment segment = this;
         while (null != segment) {
-            segment.style = style;
+            segment.setStyle(style);
             segment = segment.getNext();
         }
     }
@@ -57,7 +57,7 @@ public class ThreadSegment extends Segment {
 
             Segment segment = getNext();
             while (null != segment) {
-                segment.style = style;
+                segment.setStyle(style);
                 segment = segment.getNext();
             }
         }
@@ -66,7 +66,7 @@ public class ThreadSegment extends Segment {
     void setNext(Segment next) {
         super.setNext(next);
         while (next != null) {
-            next.style = style;
+            next.setStyle(getStyle());
             next = next.getNext();
         }
     }
@@ -74,14 +74,14 @@ public class ThreadSegment extends Segment {
     void setPrevious(Segment previous) {
         super.setPrevious(previous);
         while (previous != null) {
-            previous.style = style;
+            previous.setStyle(getStyle());
             previous = previous.getNext();
         }
     }
 
     void draw(java.awt.Graphics2D g2) {
         // shadow part
-        ThreadStyle p = (ThreadStyle) style;
+        ThreadStyle p = (ThreadStyle) getStyle();
         g2.setPaint(p.getBackGround().getColor());
         g2.setStroke(new BasicStroke( //
                 p.getBackGround().getWidth() * 1, //
@@ -96,7 +96,7 @@ public class ThreadSegment extends Segment {
      * @return the style of the segment
      */
     public ThreadStyle getStyle() {
-        return (ThreadStyle) style;
+        return (ThreadStyle) getStyle();
     }
 
 }

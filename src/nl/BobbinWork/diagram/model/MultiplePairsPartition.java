@@ -27,7 +27,7 @@ import java.util.Vector;
  * @author J. Falkink-Pol
  * 
  */
-abstract class MultiplePairsPartition extends MultipleThreadsPartition {
+public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 
     private java.util.Vector<Partition> partitions = new java.util.Vector<Partition>();
 
@@ -36,7 +36,7 @@ abstract class MultiplePairsPartition extends MultipleThreadsPartition {
     }
 
     public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
-        if (visible) {
+        if (isVisible()) {
             java.util.Vector<Partition> v = getPartitions();
             for (int i = 0; i < v.size(); i++) {
                 Partition n = v.get(i);
