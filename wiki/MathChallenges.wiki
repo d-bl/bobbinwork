@@ -1,4 +1,5 @@
 #summary Mathematical issues that could improve the diagrams
+<wiki:toc max_depth="3" />
 = Introduction =
 
 The basic idea to draw thread diagrams is drawing small curved segments of lines. A shadow for each segment creates the over/under effect. A shadow with a colour identical to the background creates the traditional diagrams:
