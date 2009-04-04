@@ -28,7 +28,7 @@ public abstract class Partition {
     /** Show (or hide) this section of the diagram. */
     private boolean visible = true;
 
-    public Partition() {
+    Partition() {
     }
     
     public abstract int getNrOfPairs();

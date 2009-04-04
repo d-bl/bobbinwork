@@ -3,6 +3,7 @@ package nl.BobbinWork.diagram.xml;
 import static nl.BobbinWork.diagram.xml.ElementType.*;
 import nl.BobbinWork.diagram.model.*;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.w3c.dom.Element;
@@ -15,8 +16,8 @@ public class DiagramBuilder {
 
     private static class ChainedPairsPartitionFactory {
     	Element element;
-        Vector<Pin> pins = new Vector<Pin>();
-        Vector<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
+        List<Pin> pins = new Vector<Pin>();
+        List<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
     	
     	ChainedPairsPartitionFactory(Element element) {
     		this.element = element;
@@ -192,9 +193,9 @@ public class DiagramBuilder {
 
         Range range = createRange(element);
         Style style = new Style();
-        Vector<Pin> pins = new Vector<Pin>();
-        Vector<Switch> switches = new Vector<Switch>();
-        Vector<Segment> pairs = new Vector<Segment>(range.getCount());
+        List<Pin> pins = new Vector<Pin>();
+        List<Switch> switches = new Vector<Switch>();
+        List<Segment> pairs = new Vector<Segment>(range.getCount());
         int pairCountDown = range.getCount();
 
         for //

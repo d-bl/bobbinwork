@@ -19,12 +19,13 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.List;
 import java.util.Vector;
 
 public class Stitch extends MultiplePairsPartition {
 
-    public Stitch(Range range, Vector<Segment> pairs, Vector<Switch> switches,
-			Vector<Pin> pins) {
+    public Stitch(Range range, List<Segment> pairs, List<Switch> switches,
+    		List<Pin> pins) {
 		
         setPairRange(range);
         int nrOfPairs = pairs.size();

@@ -31,7 +31,7 @@ public abstract class MultipleThreadsPartition extends Partition {
     /** Threads going into and coming out of a Group/Stitch/Cross/Twist. */
     private Ends threadEnds;
 
-    public MultipleThreadsPartition(){}
+    MultipleThreadsPartition(){}
     
     Ends getThreadEnds() {
         return threadEnds;
