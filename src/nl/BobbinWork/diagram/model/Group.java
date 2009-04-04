@@ -17,7 +17,7 @@
  */
 package nl.BobbinWork.diagram.model;
 
-import java.util.Vector;
+import java.util.List;
 
 /**
  * @author J. Falkink-Pol
@@ -27,8 +27,8 @@ public class Group extends ChainedPairsPartition {
 
     public Group(//
     		Range range, //
-    		Vector<MultiplePairsPartition> parts,//
-    		Vector<Pin> pins) {
+    		List<MultiplePairsPartition> parts,//
+    		List<Pin> pins) {
     	super (range, parts, pins);
     }
     

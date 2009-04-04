@@ -26,7 +26,7 @@ import java.awt.Color;
  */
 public class ThreadStyle extends Style {//TODO inheritance->composition
 
-    private Style backGround = null;
+    private Style shadow = null;
 
     public void setColor(Color color) {
         super.setColor(color);
@@ -36,27 +36,27 @@ public class ThreadStyle extends Style {//TODO inheritance->composition
         r += ((0xFF - r) * 4) / 5;
         g += ((0xFF - g) * 4) / 5;
         b += ((0xFF - b) * 4) / 5;
-        if (backGround == null) {
-            backGround = new Style();
+        if (shadow == null) {
+            shadow = new Style();
         }
-        backGround.setColor(new Color(r, g, b));
+        shadow.setColor(new Color(r, g, b));
     }
 
     /** Sets a default shadow width along with the front width. */
     public void setWidth(int width) {
         super.setWidth(width);
-        if (backGround == null) {
-            backGround = new Style();
+        if (shadow == null) {
+            shadow = new Style();
         }
-        backGround.setWidth(width * 5);
+        shadow.setWidth(width * 5);
     }
 
     /** Creates a new instance of ThreadStyle with default values. */
     public ThreadStyle() {
         super();
-        backGround = new Style();
-        backGround.setColor(Color.LIGHT_GRAY);
-        backGround.setWidth(5);
+        shadow = new Style();
+        shadow.setColor(Color.LIGHT_GRAY);
+        shadow.setWidth(5);
     }
 
     /**
@@ -67,17 +67,17 @@ public class ThreadStyle extends Style {//TODO inheritance->composition
      */
     public ThreadStyle(ThreadStyle threadStyle) {
         super(threadStyle);
-        backGround = new Style(threadStyle.getBackGround());
+        shadow = new Style(threadStyle.getBackGround());
     }
 
     public Style getBackGround() {
-        return backGround;
+        return shadow;
     }
 
     public void set(ThreadStyle threadStyle) {
         setColor(threadStyle.getColor());
         setWidth(threadStyle.getWidth());
-        backGround.setColor(threadStyle.getBackGround().getColor());
-        backGround.setWidth(threadStyle.getBackGround().getWidth());
+        shadow.setColor(threadStyle.getBackGround().getColor());
+        shadow.setWidth(threadStyle.getBackGround().getWidth());
     }
 }

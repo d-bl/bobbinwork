@@ -18,6 +18,7 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -29,10 +30,10 @@ abstract class ChainedPairsPartition extends MultiplePairsPartition {
     abstract void initEnds();
     abstract void connectChild(MultiplePairsPartition child);
 
-    public ChainedPairsPartition(//
+    ChainedPairsPartition(//
     		Range range, //
-    		Vector<MultiplePairsPartition> newParts, //
-			Vector<Pin> pins) {
+    		List<MultiplePairsPartition> newParts, //
+    		List<Pin> pins) {
     	
     	setPairRange(range);
     	initEnds();

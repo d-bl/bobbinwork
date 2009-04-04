@@ -116,6 +116,6 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
         this.pairEnds = pairEnds;
     }
 
-    public MultiplePairsPartition() {}
+    MultiplePairsPartition() {}
 
 }

@@ -17,7 +17,7 @@
  */
 package nl.BobbinWork.diagram.model;
 
-import java.util.Vector;
+import java.util.List;
 
 /**
  * @author J. Falkink-Pol
@@ -26,8 +26,8 @@ import java.util.Vector;
 public class Diagram extends ChainedPairsPartition {
 
     public Diagram(//
-    		Vector<MultiplePairsPartition> parts, //
-    		Vector<Pin> pins) {
+    		List<MultiplePairsPartition> parts, //
+    		List<Pin> pins) {
     	super (new Range(0, 0), parts, pins);
     }
     void connectChild(MultiplePairsPartition part) {}
