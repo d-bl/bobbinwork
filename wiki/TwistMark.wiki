@@ -1,0 +1,18 @@
+#Bezier calculations for twist marks in pair diagrams
+
+= Introduction =
+
+By conventions lace makers mark twists in pair diagrams with short perpendicular lines. In our application this line goes approximately through the centre of a pair segment.
+
+= Calculations =
+
+The figures below inspired the approximation (no need to be exact) of t as calculated in [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/math/Annotations.java createTwistMark]. The black figures are adapted screen shots from [http://www.ablestable.com/play/bezier/ ablestable], follow the link to _Understanding Bezier Curves_
+
+The basic idea for calculation: the ratio of the distances of the end points to both control points. Just R1/(R1+R4) is too simple as thus the direction would play no role.
+[http://code.google.com/p/bobbinwork/source/browse/wiki/images/bezier/Divide.gif]
+
+Inspiration for the correction:
+[http://code.google.com/p/bobbinwork/source/browse/wiki/images/bezier/divide2.png]
+
+The following diagram illustrates the variables used in further calculations.
+[http://code.google.com/p/bobbinwork/source/browse/wiki/images/bezier/Casteljau.png]
