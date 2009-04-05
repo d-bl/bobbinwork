@@ -1,6 +1,10 @@
-#summary class diagrams, object diagrams and other technical overviews
+#summary class diagrams and object diagrams
 
-= originals =
+== oops ==
+
+the mime type for images should be set in the repository
+
+= visio originals =
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/class-diagrams vsd]
 
@@ -9,3 +13,5 @@
 [http://bobbinwork.googlecode.com/svn/wiki/images/class-tree.png class tree]
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/object-tree.png object tree]
+
+[http://bobbinwork.googlecode.com/svn/wiki/images/XML-TreeView-DiagramModel.png relations] between the XML-DOM, the treeview (a JTree) and the diagram model
