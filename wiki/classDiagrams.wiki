@@ -1,0 +1,11 @@
+#summary class diagrams, object diagrams and other technical overviews
+
+= originals =
+
+[http://bobbinwork.googlecode.com/svn/wiki/images/class-diagrams vsd]
+
+= png copies =
+
+[http://bobbinwork.googlecode.com/svn/wiki/images/class-tree.png class tree]
+
+[http://bobbinwork.googlecode.com/svn/wiki/images/object-tree.png object tree]
