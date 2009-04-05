@@ -1,12 +1,12 @@
 #summary Bezier calculations for twist marks in pair diagrams
 
-= Introduction =
+= grids =
+
+see [http://bw-en.wikispaces.com/grid+math grid mathematics]
+
+= Twist marks =
 
 By conventions lace makers mark twists in pair diagrams with short perpendicular lines. In our application this line goes approximately through the centre of a pair segment.
-
-see also [http://bw-en.wikispaces.com/grid+math grid mathematics]
-
-= Calculations =
 
 The figures below inspired the approximation (no need to be exact) of `t`. The final calculation can be found in the method [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/math/Annotations.java createTwistMark]. The black figures are adapted screen shots from the interactive pages of [http://www.ablestable.com/play/bezier/ AbleStable], follow the link to _Understanding Bezier Curves_
 
