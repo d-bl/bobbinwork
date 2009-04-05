@@ -31,9 +31,9 @@ import java.awt.BasicStroke;
  */
 public class ThreadSegment extends Segment {
 
-    /** @see nl.BobbinWork.diagram.model.Segment#Segment(Point, Point, Point, Point) */
+    /** @see nl.BobbinWork.diagram.model.PairSegment#Segment(Point, Point, Point, Point) */
     public ThreadSegment(Point start, Point c1, Point c2, Point end) {
-        super(start, c1, c2, end, 0);
+        super(start, c1, c2, end);
         setStyle((Style) new ThreadStyle());
     }
 
@@ -96,7 +96,7 @@ public class ThreadSegment extends Segment {
      * @return the style of the segment
      */
     public ThreadStyle getStyle() {
-        return (ThreadStyle) getStyle();
+        return (ThreadStyle) super.getStyle();
     }
 
 }

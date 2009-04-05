@@ -24,14 +24,14 @@ import java.util.Vector;
 
 public class Stitch extends MultiplePairsPartition {
 
-    public Stitch(Range range, List<Segment> pairs, List<Switch> switches,
+    public Stitch(Range range, List<PairSegment> pairs, List<Switch> switches,
     		List<Pin> pins) {
 		
         setPairRange(range);
         int nrOfPairs = pairs.size();
 		setThreadEnds(new Ends(nrOfPairs * 2));
 
-        Segment[] array = pairs.toArray(new Segment[nrOfPairs]);
+        PairSegment[] array = pairs.toArray(new PairSegment[nrOfPairs]);
 		setPairEnds(new Ends(array));
         
         Vector<Partition> partitions = getPartitions();
@@ -45,7 +45,7 @@ public class Stitch extends MultiplePairsPartition {
 
     public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
         if (pair) {
-            Segment v[] = getPairEnds().getIns();
+            PairSegment v[] = (PairSegment[])(getPairEnds().getIns());
             for (int i = 0; i < v.length; i++) {
                 if (v[i]!=null) {
                     v[i].draw(g2);

@@ -131,7 +131,7 @@ public class DiagramBuilder {
             this.c2 = ( (c2 == null) || c2.equals("") ? null :  new Point(c2) );
         }
         
-        Segment createPairSegment() {
+        PairSegment createPairSegment() {
             int twistMarkLength = 0;
             if (element.getAttributes().getNamedItem("mark") != null) {
                 try {
@@ -140,7 +140,7 @@ public class DiagramBuilder {
                     twistMarkLength = 9 * new Style().getWidth();
                 }
             }
-            return new Segment(start, c1, c2, end, twistMarkLength);
+            return new PairSegment(start, c1, c2, end, twistMarkLength);
         }
         
         ThreadSegment createThreadSegment() {
@@ -164,7 +164,7 @@ public class DiagramBuilder {
      * @param element
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
      */
-    private static Segment createPairSegment(Element element) {
+    private static PairSegment createPairSegment(Element element) {
         return new SegmentFactory(element).createPairSegment();
     }
     
@@ -195,7 +195,7 @@ public class DiagramBuilder {
         Style style = new Style();
         List<Pin> pins = new Vector<Pin>();
         List<Switch> switches = new Vector<Switch>();
-        List<Segment> pairs = new Vector<Segment>(range.getCount());
+        List<PairSegment> pairs = new Vector<PairSegment>(range.getCount());
         int pairCountDown = range.getCount();
 
         for //

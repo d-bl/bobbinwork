@@ -35,7 +35,7 @@ public class Twist extends Switch {
 	}
 
 	void setThreadEnds() {
-        Segment[] ins = { getBack(), getFront() };
+        ThreadSegment[] ins = { getBack(), getFront() };
         super.setThreadEnds(new Ends(ins));
     }
 }
