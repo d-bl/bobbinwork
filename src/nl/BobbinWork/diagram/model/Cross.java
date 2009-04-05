@@ -18,6 +18,9 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.List;
+import java.util.Vector;
+
 /**
  * A bobbin going over the next bobbin.
  * 
@@ -34,7 +37,9 @@ public class Cross extends Switch {
 	}
 
 	void setThreadEnds() {
-        ThreadSegment[] ins = { getFront(), getBack() };
-        super.setThreadEnds(new Ends(ins));
+        List<ThreadSegment> ins = new Vector<ThreadSegment>(2);
+        ins.add(getFront());
+        ins.add(getBack());
+        super.setThreadEnds(new Ends<ThreadSegment>(ins));
     }
 }

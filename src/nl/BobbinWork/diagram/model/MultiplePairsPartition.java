@@ -106,13 +106,13 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
     }
 
     /** Pairs going into and coming out of a Group/Stitch. */
-    private Ends pairEnds = null;
+    private Ends<PairSegment> pairEnds = null;
 
-    Ends getPairEnds() {
+    Ends<PairSegment> getPairEnds() {
         return pairEnds;
     }
 
-    void setPairEnds(Ends pairEnds) {
+    void setPairEnds(Ends<PairSegment> pairEnds) {
         this.pairEnds = pairEnds;
     }
 

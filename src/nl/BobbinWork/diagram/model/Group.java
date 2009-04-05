@@ -33,9 +33,9 @@ public class Group extends ChainedPairsPartition {
     }
     
     void initEnds() {
-    	int l = getPairRange().getCount();
-    	setPairEnds(new Ends(l));
-    	setThreadEnds(new Ends(l * 2));
+    	int count = getPairRange().getCount();
+    	setPairEnds(new Ends<PairSegment>(count));
+    	setThreadEnds(new Ends<ThreadSegment>(count * 2));
     }
     
 	void connectChild(MultiplePairsPartition part) {

@@ -1,4 +1,4 @@
-/* Ends.java Copyright 2006-2007 by J. Falkink-Pol
+/* Ends.java Copyright 2006-2009 by J. Falkink-Pol
  *
  * This file is part of BobbinWork.
  *
@@ -20,6 +20,8 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Polygon;
 import java.awt.Shape;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * Keeps track of the thread/pair segments of a diagram partition.
@@ -29,11 +31,11 @@ import java.awt.Shape;
  * 
  * @author J. Falkink-Pol
  */
-class Ends {
+class Ends<T extends Segment> {
 
-    private Segment[] ins;
+    private List<T> ins;
 
-    private Segment[] outs;
+    private List<T> outs;
 
     /**
      * Creates a populated instance of <code>Ends</code>.
@@ -42,12 +44,11 @@ class Ends {
      *            in incomming order, for the outgoing segments, the order is
      *            reversed.
      */
-    Ends(Segment[] segments) {
+    Ends(List<T> segments) {
         ins = segments;
-        outs = new Segment[segments.length];
-        int max = segments.length - 1;
-        for (int i = 0; i <= max; i++) {
-            outs[i] = ins[max - i];
+        outs = new Vector<T>(segments.size());
+        for (int i = segments.size(); --i >=0; ) {
+        	outs.add(segments.get(i));
         }
     }
 
@@ -59,10 +60,11 @@ class Ends {
      *            the number of chained thread/pair segments.
      */
     Ends(int count) {
-        ins = new Segment[count];
-        outs = new Segment[count];
-        for (int i = 0; i < count; i++) {
-            ins[i] = outs[i] = null;
+        ins = new Vector<T>(count);
+        outs = new Vector<T>(count);
+        for (int i=0;i<count;i++) {
+        	ins.add(null);
+        	outs.add(null);
         }
     }
 
@@ -75,22 +77,22 @@ class Ends {
      * @param offset
      *            first bobbin/pair used by the sub partition
      */
-    void connect(Ends child, int offset) {
+    void connect(Ends<T> child, int offset) {
         // visualisation of a diagram partition (stitches/switches):
         // _____
         // |x x|
         // | x |
         // |x x|
         // |_x_|
-        int end = Math.min(child.getIns().length, ins.length - offset);
+        int end = Math.min(child.getIns().size(), ins.size() - offset);
         for (int i = 0; i < end; i++) {
-            if (ins[offset + i] == null) {
-                ins[offset + i] = child.getIns()[i];
-            } else if (outs[offset + i] != null) {
-                outs[offset + i].setNext(child.getIns()[i]);
+            if (ins.get(offset + i) == null) {
+                ins.set(offset + i, child.getIns().get(i));
+            } else if (outs.get(offset + i) != null) {
+                outs.get(offset + i).setNext(child.getIns().get(i));
             }
-            if (child.outs[i] != null) {
-                outs[offset + i] = child.outs[i];
+            if (child.outs.get(i) != null) {
+                outs.set(offset + i, child.outs.get(i));
             }
         }
     }
@@ -99,21 +101,21 @@ class Ends {
      * @return the thread/pair segments at the start of the diagram partion from
      *         left to right
      */
-    Segment[] getIns() {
+    List<T> getIns() {
         return ins;
     }
 
     /** @return @see Partition#getHull() */
     Shape getHull() {
         Polygon shape = new Polygon();
-        for (int i = 0; i < ins.length; i++) {
-            if (ins[i] != null) {
-                shape.addPoint((int) ins[i].getStart().x, (int) ins[i].getStart().y);
+        for (int i = 0; i < ins.size(); i++) {
+            if (ins.get(i) != null) {
+                shape.addPoint((int) ins.get(i).getStart().x, (int) ins.get(i).getStart().y);
             }
         }
-        for (int i = outs.length - 1; i >= 0; i--) {
-            if (outs[i] != null) {
-                shape.addPoint((int) outs[i].getEnd().x, (int) outs[i].getEnd().y);
+        for (int i = outs.size() - 1; i >= 0; i--) {
+            if (outs.get(i) != null) {
+                shape.addPoint((int) outs.get(i).getEnd().x, (int) outs.get(i).getEnd().y);
             }
         }
         // TODO take C1/C2 of ins/out[ 0 / length-1] into account

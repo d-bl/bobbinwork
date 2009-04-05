@@ -29,10 +29,8 @@ public class Stitch extends MultiplePairsPartition {
 		
         setPairRange(range);
         int nrOfPairs = pairs.size();
-		setThreadEnds(new Ends(nrOfPairs * 2));
-
-        PairSegment[] array = pairs.toArray(new PairSegment[nrOfPairs]);
-		setPairEnds(new Ends(array));
+		setThreadEnds(new Ends<ThreadSegment>(nrOfPairs * 2));
+		setPairEnds(new Ends<PairSegment>(pairs));
         
         Vector<Partition> partitions = getPartitions();
         for (Pin pin:pins) partitions.add(pin);
@@ -45,10 +43,10 @@ public class Stitch extends MultiplePairsPartition {
 
     public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
         if (pair) {
-            PairSegment v[] = (PairSegment[])(getPairEnds().getIns());
-            for (int i = 0; i < v.length; i++) {
-                if (v[i]!=null) {
-                    v[i].draw(g2);
+            List<PairSegment> v = getPairEnds().getIns();
+            for (int i = 0; i < v.size(); i++) {
+                if (v.get(i)!=null) {
+                    v.get(i).draw(g2);
                 }
             }
         }
