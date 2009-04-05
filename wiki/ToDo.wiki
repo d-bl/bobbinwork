@@ -1,4 +1,5 @@
 #summary some notes on what could/should be done
+#labels Phase-Requirements
 
   * complete the Java doc (use an alternative for the Visio diagrams?)
   * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level tests are available by visually checking and manipulating the sample/ground diagrams
