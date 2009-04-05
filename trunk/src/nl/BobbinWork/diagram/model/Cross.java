@@ -34,7 +34,7 @@ public class Cross extends Switch {
 	}
 
 	void setThreadEnds() {
-        Segment[] ins = { getFront(), getBack() };
+        ThreadSegment[] ins = { getFront(), getBack() };
         super.setThreadEnds(new Ends(ins));
     }
 }
