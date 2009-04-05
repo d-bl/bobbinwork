@@ -29,11 +29,11 @@ import java.awt.Shape;
 public abstract class MultipleThreadsPartition extends Partition {
 
     /** Threads going into and coming out of a Group/Stitch/Cross/Twist. */
-    private Ends threadEnds;
+    private Ends<ThreadSegment> threadEnds;
 
     MultipleThreadsPartition(){}
     
-    Ends getThreadEnds() {
+    Ends<ThreadSegment> getThreadEnds() {
         return threadEnds;
     }
 
@@ -44,7 +44,7 @@ public abstract class MultipleThreadsPartition extends Partition {
      * 
      * @param threadEnds
      */
-    void setThreadEnds(Ends threadEnds) {
+    void setThreadEnds(Ends<ThreadSegment> threadEnds) {
         this.threadEnds = threadEnds;
     }
 
@@ -54,7 +54,7 @@ public abstract class MultipleThreadsPartition extends Partition {
     }
     
     public int getNrOfPairs() {
-        return threadEnds.getIns().length;
+        return threadEnds.getIns().size();
     }
 
 }
