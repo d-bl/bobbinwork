@@ -5,9 +5,9 @@
 
 the mime type for images should be set in the repository
 
-= visio originals =
+= originals =
 
-[http://bobbinwork.googlecode.com/svn/wiki/images/class-diagrams vsd]
+[http://bobbinwork.googlecode.com/svn/wiki/images/class-diagrams.vsd multiple visio sheets]
 
 = png copies =
 
