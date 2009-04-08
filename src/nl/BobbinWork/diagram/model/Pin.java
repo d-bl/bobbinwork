@@ -39,7 +39,7 @@ public class Pin extends Partition {
     }
 
     /**
-     * Adss a black dot to the drawing.
+     * Ads a black dot to the drawing.
      * 
      * @param g2
      *            the drawing

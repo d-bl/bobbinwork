@@ -188,7 +188,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         if (threadSegment != null) {
             g2.setPaint(threadHighlight);
             g2.setStroke(new BasicStroke( //
-                    threadSegment.getStyle().getBackGround().getWidth() * 1.7f, //
+                    threadSegment.getStyle().getShadow().getWidth() * 1.7f, //
                     BasicStroke.CAP_BUTT, //
                     BasicStroke.JOIN_MITER));
             if (threadSegment.getPrevious() != null) {
@@ -218,7 +218,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
             y /= getScreenScale();
             ThreadSegment threadSegment = diagram.getThreadAt(x, y);
             if (threadSegment != null) {
-                threadSegment.getStyle().set(threadStyle);
+                threadSegment.getStyle().apply(threadStyle);
                 repaint();
             }
         }

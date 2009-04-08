@@ -21,17 +21,28 @@ package nl.BobbinWork.diagram.model;
 import java.awt.BasicStroke;
 
 /**
- * A segment of a thread. <br>
- * <br>
+ * A segment of a thread.
  * 
- * The full chain of segments shares a single style object. Uppon
- * connect/disconnect style objects are disposed/cloned.
+ * All segments in one chain share a single style instance. Different chains
+ * have different style instances. Segments in a single cross or switch stick
+ * together like Siamese twins. Movements are also restricted by pins. When
+ * connecting threads the downstream part gets the Style of the upstream part.
  * 
  * @author J. Falkink-Pol
  */
 public class ThreadSegment extends Segment {
 
-    /** @see nl.BobbinWork.diagram.model.PairSegment#Segment(Point, Point, Point, Point) */
+    /** Creates an unconnected ThreadSegment with a default Style.
+     *  
+	 * @param start
+	 *            start point of the bezier curve
+	 * @param c1
+	 *            optional first control point of the bezier curve
+	 * @param c2
+	 *            optional second control point of the bezier curve
+	 * @param end
+	 *            end point of the bezier curve
+     */
     public ThreadSegment(Point start, Point c1, Point c2, Point end) {
         super(start, c1, c2, end);
         setStyle((Style) new ThreadStyle());
@@ -39,7 +50,7 @@ public class ThreadSegment extends Segment {
 
     void disconnectStart() {
 
-        ThreadStyle style = new ThreadStyle((ThreadStyle) previous.getStyle());
+        ThreadStyle style = new ThreadStyle((ThreadStyle) getPrevious().getStyle());
         super.disconnectStart();
 
         Segment segment = this;
@@ -51,8 +62,8 @@ public class ThreadSegment extends Segment {
 
     void disconnectEnd() {
 
-        if (previous != null) {
-            ThreadStyle style = new ThreadStyle((ThreadStyle) previous.getStyle());
+        if (getPrevious() != null) {
+            ThreadStyle style = new ThreadStyle((ThreadStyle) getPrevious().getStyle());
             super.disconnectEnd();
 
             Segment segment = getNext();
@@ -82,9 +93,9 @@ public class ThreadSegment extends Segment {
     void draw(java.awt.Graphics2D g2) {
         // shadow part
         ThreadStyle p = (ThreadStyle) getStyle();
-        g2.setPaint(p.getBackGround().getColor());
+        g2.setPaint(p.getShadow().getColor());
         g2.setStroke(new BasicStroke( //
-                p.getBackGround().getWidth() * 1, //
+                p.getShadow().getWidth() * 1, //
                 BasicStroke.CAP_BUTT, //
                 BasicStroke.JOIN_MITER));
         g2.draw(getCurve ());
@@ -92,9 +103,6 @@ public class ThreadSegment extends Segment {
         super.draw(g2);
     }
 
-    /**
-     * @return the style of the segment
-     */
     public ThreadStyle getStyle() {
         return (ThreadStyle) super.getStyle();
     }

@@ -21,7 +21,7 @@ package nl.BobbinWork.diagram.model;
 import java.awt.Color;
 
 /**
- * Drawing properties.
+ * The looks for a line segment.
  * 
  * @author J. Falkink-Pol
  */
@@ -31,7 +31,7 @@ public class Style {
 
     private int width = 1;
 
-    /** Creates a new instance of Style. */
+    /** Creates a new instance with default properties. */
     public Style() {
         setColor(Color.BLACK);
         setWidth(1);
@@ -156,5 +156,10 @@ public class Style {
             return "#" + Integer.toHexString(c.getRGB()).replaceFirst("..", "");
         }
     }
+
+	public void apply(Style newStyle) {
+        setColor(newStyle.getColor());
+        setWidth(newStyle.getWidth());
+	}
 
 }

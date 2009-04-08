@@ -26,7 +26,7 @@ package nl.BobbinWork.diagram.model;
  * the (pairs of) bobbins. That means after each cross/twist/stitch the bobbins
  * are counted again from left to right. <br>
  * <br>
- * Lacemakers start counting with one, so in the XML source, numbers also start
+ * Lace makers start counting with one, so in the XML source, numbers also start
  * with one.<br>
  * <br>
  * The numbers are not overall numbers for the whole project, but relative
@@ -49,7 +49,7 @@ public class Range {
      * 
      * @return the number of the first (pair of) bobbins.
      */
-    public int getFirst() {
+    int getFirst() {
         return first;
     }
 
@@ -61,14 +61,8 @@ public class Range {
      * 
      * @return the number of the last (pair of) bobbins
      */
-    public int getLast() {
+    int getLast() {
         return last;
-    }
-
-    /** Creates a new instance of Range. */
-    public Range() {
-        first = 0;
-        last = 0;
     }
 
     /**
@@ -95,16 +89,5 @@ public class Range {
 
     public String toString(){
     	return getFirst() + "-" + getLast();
-    }
-    
-    /**
-     * Duplicates an instance of Range.
-     * 
-     * @param range
-     *            The object to be copied.
-     */
-    public Range(Range range) {
-        this.first = range.first;
-        this.last = range.last;
     }
 }
