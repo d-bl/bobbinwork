@@ -18,6 +18,7 @@ public class DiagramBuilder {
     	Element element;
         List<Pin> pins = new Vector<Pin>();
         List<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
+        Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
     	
     	ChainedPairsPartitionFactory(Element element) {
     		this.element = element;
@@ -39,12 +40,41 @@ public class DiagramBuilder {
 						MultiplePairsPartition part = createStitch(childElement);
 						register(childElement, part);
 						parts.add(part);
+					} else if (childType == ElementType.new_bobbins) {
+	                    Element coreStyle = (Element) child.getFirstChild();
+	                    Element shadow = (Element) coreStyle.getFirstChild();
+						Style style = createStyle(coreStyle);
+						ThreadStyle p = new ThreadStyle();
+						p.setColor(style.getColor());
+						p.setWidth(style.getWidth());
+						if (shadow != null) {
+							Style s = createStyle(shadow);
+							p.getShadow().setColor(s.getColor());
+							p.getShadow().setWidth(s.getWidth());
+						}
+	                    String nrs[] = childElement.getAttribute("nrs").split(",");
+	                    for (String nr:nrs) {
+	                        // lacemakers start counting with one,
+	                        // indexes with zero, so subtract one
+	                        
+	                        try {
+	                            int i = Integer.decode(nr).intValue() - 1;
+	                            bobbins.setSize(Math.max(bobbins.size(), i+1));
+	                            bobbins.set(i, p);
+	                        } catch (NumberFormatException e) {
+	                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
+	                                    child.getAttributes().getNamedItem("nrs")+">"); 
+	                        } catch (ArrayIndexOutOfBoundsException e) {
+	                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
+	                                    child.getAttributes().getNamedItem("nrs")+">"); 
+	                        }                        
+	                    }
 					}
                 }
             }
     	}
     	Group createGroup() {
-            return new Group(createRange(element), parts, pins);
+            return new Group(createRange(element), parts, pins, bobbins);
         }
         Diagram createDiagram() {
             return new Diagram(parts, pins);

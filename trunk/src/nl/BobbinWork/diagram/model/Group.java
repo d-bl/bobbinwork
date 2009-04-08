@@ -17,6 +17,7 @@
  */
 package nl.BobbinWork.diagram.model;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,8 +29,15 @@ public class Group extends ChainedPairsPartition {
     public Group(//
     		Range range, //
     		List<MultiplePairsPartition> parts,//
-    		List<Pin> pins) {
+    		List<Pin> pins, //
+    		List<ThreadStyle> styles) //
+    {
     	super (range, parts, pins);
+    	Iterator<ThreadStyle> st = styles.iterator();
+    	Iterator<ThreadSegment> segments = getThreadEnds().getIns().iterator();
+    	while (st.hasNext() && segments.hasNext()) {
+    		segments.next().getStyle().apply(st.next());
+    	}
     }
     
     void initEnds() {
