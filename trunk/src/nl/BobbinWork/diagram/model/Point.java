@@ -24,18 +24,12 @@ package nl.BobbinWork.diagram.model;
  */
 @SuppressWarnings("serial")
 public
-class Point extends java.awt.geom.Point2D.Double { // TODO inheritance->composition
+class Point extends java.awt.geom.Point2D.Double { 
     
     private static final String SEPARATOR = ",";
     
-    /** Creates a new instance of Point. */
-    public Point() {
-        x = 0;
-        y = 0;
-    }
-
-    /** Creates a new instance of Point. */
-    /**
+    /** Creates a new instance of Point. 
+     * 
      * @param x
      * @param y
      */
@@ -44,8 +38,8 @@ class Point extends java.awt.geom.Point2D.Double { // TODO inheritance->composit
         this.y = y;
     }
 
-    /** Creates a new instance of Point, by splitting the string in an x and y component.*/
-    /**
+    /** Creates a new instance of Point, by splitting the string in an x and y component.
+     * 
      * @param s 
      */
     public Point(String s) {
@@ -57,14 +51,12 @@ class Point extends java.awt.geom.Point2D.Double { // TODO inheritance->composit
         } catch (java.lang.NumberFormatException e){ }
     }
 
-    /** Creates a new instance of Point. */
-    /**
-     * @param p
+    /** Creates a new instance of Point. 
+     * 
+     * @param p the point to clone.
      */
     public Point(Point p) {
-        this.x = p.x;
-        this.y = p.y;
+        x = p.x;
+        y = p.y;
     }
-    
-    // TODO add translate/rotate methods etc.
 }

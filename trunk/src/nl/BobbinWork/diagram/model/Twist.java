@@ -27,12 +27,25 @@ import java.util.Vector;
  * 
  * Having two bobbins in each hand usually the right bobbins in both hands go
  * over left bobbin in the same hand. A <code>Twist</code> describes what
- * happens in one hand.
+ * happens in one hand. Note that each pair has it own instances: Though lace
+ * makers shorthand describes a cloth stitch as CTC, we will have a left twist
+ * and a right twist.
  * 
  * @author J. Falkink-Pol
  */
 public class Twist extends Switch {
 
+	/**
+	 * @param range
+	 *            select which threads/bobbins of the parent should be used
+	 *            counting form left to right. Usually the left two bobbins or
+	 *            right two bobbins of a stitch. 
+	 * @param frontSegment
+	 *            represents the thread going from right to left over the other.
+	 * @param backSegment
+	 *            represents the thread going from left to right behind the
+	 *            other.
+	 */
     public Twist(Range range, ThreadSegment frontSegment, ThreadSegment backSegment) {
     	super (range, frontSegment,backSegment);
 	}

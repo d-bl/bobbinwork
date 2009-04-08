@@ -6,15 +6,20 @@ import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.CubicCurve2D;
 
+/**
+ * A segment of a continuous line. From straight to S-shape. Subsequent segments
+ * in a chain share their start and end point.
+ * 
+ */
 public class Segment {
 
-	protected Point start;
-	protected Point c1;
-	protected Point c2;
-	protected Point end;
-	protected Segment previous = null;
-	protected Segment next = null;
-	protected Style style = new Style();
+	private Point start;
+	private Point c1;
+	private Point c2;
+	private Point end;
+	private Segment previous = null;
+	private Segment next = null;
+	private Style style = new Style();
 
     /**
 	 * @param start

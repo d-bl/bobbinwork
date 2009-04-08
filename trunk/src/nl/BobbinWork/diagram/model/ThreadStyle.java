@@ -21,63 +21,79 @@ package nl.BobbinWork.diagram.model;
 import java.awt.Color;
 
 /**
- * 
+ * The looks for a line segment drawn in two strokes.
+ *
  * @author J. Falkink-Pol
  */
 public class ThreadStyle extends Style {//TODO inheritance->composition
 
+	/** The stroke which is drawn as first. */
     private Style shadow = null;
 
+	/**
+	 * Sets the color of the top stroke. The shadow color is set to a default related
+	 * to the top stroke.
+	 */
     public void setColor(Color color) {
         super.setColor(color);
-        int r = color.getRed();
-        int g = color.getGreen();
-        int b = color.getBlue();
-        r += ((0xFF - r) * 4) / 5;
-        g += ((0xFF - g) * 4) / 5;
-        b += ((0xFF - b) * 4) / 5;
-        if (shadow == null) {
-            shadow = new Style();
-        }
-        shadow.setColor(new Color(r, g, b));
+        setShadowDefaultColor();
     }
 
-    /** Sets a default shadow width along with the front width. */
+	/**
+	 * Sets the width of the top stroke. The shadow width is set to a default related
+	 * to the top stroke.
+	 */
     public void setWidth(int width) {
         super.setWidth(width);
-        if (shadow == null) {
-            shadow = new Style();
-        }
-        shadow.setWidth(width * 5);
+        setShadowDefaultWidth();
     }
 
-    /** Creates a new instance of ThreadStyle with default values. */
+    private void setShadowDefaultColor() {
+    	Color color = getColor();
+    	int r = color.getRed();
+    	int g = color.getGreen();
+    	int b = color.getBlue();
+    	r += ((0xFF - r) * 4) / 5;
+    	g += ((0xFF - g) * 4) / 5;
+    	b += ((0xFF - b) * 4) / 5;
+    	if (shadow == null) {
+    		shadow = new Style();
+    	}
+    	shadow.setColor(new Color(r, g, b));
+    }
+    
+	private void setShadowDefaultWidth() {
+		if (shadow == null) {
+            shadow = new Style();
+        }
+        shadow.setWidth(getWidth() * 5);
+	}
+
+    /** Creates a new instance with default values. */
     public ThreadStyle() {
         super();
-        shadow = new Style();
-        shadow.setColor(Color.LIGHT_GRAY);
-        shadow.setWidth(5);
+        setShadowDefaultColor();
+        setShadowDefaultWidth();
     }
 
     /**
-     * Creates a new instance (a clone) of ThreadStyle.
+     * Creates a new instance of threadStyle.
      * 
      * @param threadStyle
-     *            object to be copied.
+     *            object to be cloned.
      */
     public ThreadStyle(ThreadStyle threadStyle) {
         super(threadStyle);
-        shadow = new Style(threadStyle.getBackGround());
+        shadow = new Style(threadStyle.getShadow());
     }
 
-    public Style getBackGround() {
+    public Style getShadow() {
         return shadow;
     }
 
-    public void set(ThreadStyle threadStyle) {
-        setColor(threadStyle.getColor());
-        setWidth(threadStyle.getWidth());
-        shadow.setColor(threadStyle.getBackGround().getColor());
-        shadow.setWidth(threadStyle.getBackGround().getWidth());
+    public void apply(ThreadStyle newStyle) {
+    	super.apply(newStyle);
+        shadow.setColor(newStyle.getShadow().getColor());
+        shadow.setWidth(newStyle.getShadow().getWidth());
     }
 }

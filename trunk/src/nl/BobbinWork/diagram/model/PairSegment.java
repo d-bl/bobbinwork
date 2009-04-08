@@ -20,21 +20,30 @@ package nl.BobbinWork.diagram.model;
 
 import static nl.BobbinWork.diagram.math.Annotations.createTwistMark;
 
-
 /**
- * A segment of a continuous line. From straight to S-shape.
- * </p>
- * <p>
+ * A line segment representing a pair of threads.
  * 
- * Subsequent segments in a chain share their start and end point. For pairs
- * each segment has its own Style. Threads have a single ThreadStyle for the
- * whole chain.
+ * All segments in one stitch share a single style instance. Different stitches
+ * have different style instances. Segments in a single stitch stick together
+ * like Siamese twins. Movements are also restricted by pins.
  * 
  * @author J. Falkink-Pol
  */
 
 public class PairSegment extends Segment {
 
+	/**
+	 * A value > zero implies a twist mark should be drawn in a pair diagram. 
+	 * Only allowed in "pseudo" stitches of just one pair.
+	 * 
+	 * Not yet implemented: 
+	 * 
+	 * A non-zero value should exceed (at least by 4?) the width of the style.
+	 * 
+	 * The style in such a "pseudo" stitch is shared with a sibling:
+	 * in an open diagram with the next stitch, in a close diagram with the
+	 * preceding stitch.
+	 */
 	private int twistMarkLength = 0;
 	
     /**
@@ -47,7 +56,7 @@ public class PairSegment extends Segment {
 	 * @param end
 	 *            end point of the bezier curve
 	 * @param twistMarkLength
-	 *            length of the linesegment perpendiculair through the pair
+	 *            length of the line segment perpendicular through the pair
 	 *            segment to indicate a twist
 	 */
     public PairSegment(Point start, Point c1, Point c2, Point end, int twistMarkLength) {
