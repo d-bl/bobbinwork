@@ -51,7 +51,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">crossed turning stitch</value>
                     <value lang="nl">gekruiste omkeer slag</value>
                 </title>
-                <style width="2" />
                 <pair start="0,6.6" end="16.6,23.3" />
                 <pair start="16.6,6.6" end="0,23.3" />
                 <cross bobbins="2-3">
@@ -88,7 +87,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">turning stitch</value>
                     <value lang="nl">omkeer slag</value>
                 </title>
-                <style width="2" />
                 <pair start="0,6.6" end="16.6,23.3" />
                 <pair start="16.6,6.6" end="0,23.3" />
                 <cross bobbins="2-3">
@@ -122,7 +120,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">turn even threads</value>
                     <value lang="nl">even draden keren</value>
                 </title>
-                <style width="2" />
                 <pair start="16.6,6.6" end="0,23.3" />
                 <pair start="0,6.6" end="16.6,23.3" />
                 <cross bobbins="2-3">
@@ -152,7 +149,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">turn odd threads</value>
                     <value lang="nl">oneven draden keren</value>
                 </title>
-                <style width="2" />
                 <pair start="16.6,6.6" end="0,23.3" />
                 <pair start="0,6.6" end="16.6,23.3" />
                 <cross bobbins="2-3">
@@ -182,7 +178,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">cloth stitch</value>
                     <value lang="nl">linnenslag</value>
                 </title>
-                <style color="#AA00FF" width="2"/>
                 <pair start="3,3" end="13.5,13.5" />
                 <pair start="13.5,3" end="3,13.3" />
                 <cross bobbins="2-3">
@@ -250,7 +245,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">half stitch</value>
                     <value lang="nl">netslag</value>
                 </title>
-                <style width="2" color="#00BB00"/>
                 <pair start="3,13.3" end="13.5,3" />
                 <pair start="3,3" end="13.5,13.5" />
                 <twist bobbins="1-2">
@@ -272,7 +266,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">half Stitch - weaving from left to right</value>
                     <value lang="nl">netslag - loper van links naar rechts</value>
                 </title>
-                <style color="#009933" />
                 <pair start="8,15" end="22,15" />
                 <pair start="15,8" end="15,22" />
                 <twist bobbins="1-2">
@@ -294,7 +287,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <value lang="en">half Stitch - weaving from right to left</value>
                     <value lang="nl">netslag - loper van rechts naar links</value>
                 </title>
-                <style color="#009933" />
                 <pair start="15,8" end="15,22" />
                 <pair start="8,15" end="22,15" />
                 <twist bobbins="3-4">
@@ -1233,8 +1225,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         </title>
         <group id="vert" pairs="1-10" display="none">
             <stitch pairs="1-8" >
-                <style width="1" color="#EEEEEE"/>
-                <pair start="10,0" end="10,1200"/>
+               <pair start="10,0" end="10,1200"/>
                 <pair start="20,0" end="20,1200"/>
                 <pair start="30,0" end="30,1200"/>
                 <pair start="40,0" end="40,1200"/>
@@ -1244,11 +1235,9 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <pair start="90,0" end="90,1200"/>
             </stitch>
             <stitch pairs="9-9" >
-                <style width="2" color="#EEEEEE" />
                 <pair start="50,0" end="50,1200"/>
             </stitch>
             <stitch pairs="10-10" >
-                <style width="3" color="#EEEEEE" />
                 <pair start="100,0" end="100,1200"/>
             </stitch>
         </group>
@@ -1263,7 +1252,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
         <group id="hor" pairs="201-210" display="none">
             <stitch pairs="1-8" >
-                <style width="1" color="#EEEEEE"/>
                 <pair start="0,10" end="900,10"/>
                 <pair start="0,20" end="900,20"/>
                 <pair start="0,30" end="900,30"/>
@@ -1274,11 +1262,9 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <pair start="0,90" end="900,90"/>
             </stitch>
             <stitch pairs="9-9" >
-                <style width="2" color="#EEEEEE" />
                 <pair start="0,50" end="900,50"/>
             </stitch>
             <stitch pairs="10-10" >
-                <style width="3" color="#EEEEEE" />
                 <pair start="0,100" end="900,100"/>
             </stitch>
         </group>

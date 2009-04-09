@@ -41,18 +41,8 @@ public class DiagramBuilder {
 						register(childElement, part);
 						parts.add(part);
 					} else if (childType == ElementType.new_bobbins) {
-	                    Element coreStyle = (Element) child.getFirstChild();
-	                    Element shadow = (Element) coreStyle.getFirstChild();
-						Style style = createStyle(coreStyle);
-						ThreadStyle p = new ThreadStyle();
-						p.setColor(style.getColor());
-						p.setWidth(style.getWidth());
-						if (shadow != null) {
-							Style s = createStyle(shadow);
-							p.getShadow().setColor(s.getColor());
-							p.getShadow().setWidth(s.getWidth());
-						}
-	                    String nrs[] = childElement.getAttribute("nrs").split(",");
+						ThreadStyle p = createThreadStyle(child.getFirstChild());
+						String nrs[] = childElement.getAttribute("nrs").split(",");
 	                    for (String nr:nrs) {
 	                        // lacemakers start counting with one,
 	                        // indexes with zero, so subtract one
@@ -198,11 +188,6 @@ public class DiagramBuilder {
         return new SegmentFactory(element).createPairSegment();
     }
     
-    private static void setStyle(Element element, Style style) {
-        style.setColor(element.getAttribute("color"));
-        style.setWidth(element.getAttribute("width"));
-    }
-
     /**
      * Creates a new instance of Style from an XML element with style property
      * attributes.
@@ -219,9 +204,22 @@ public class DiagramBuilder {
         return style;
     }
 
-    private static Stitch createStitch(Element element) {
+ 	private static ThreadStyle createThreadStyle(Node child) {
+		ThreadStyle threadStyle = new ThreadStyle();
+		setStyle ((Element)child, threadStyle);
+		setStyle ((Element) child.getFirstChild(), threadStyle.getShadow());
+		return threadStyle;
+	}
 
-        Range range = createRange(element);
+     private static void setStyle(Element element, Style style) {
+    	 if ( element == null ) return;
+         style.setColor(element.getAttribute("color"));
+         style.setWidth(element.getAttribute("width"));
+     }
+
+	private static Stitch createStitch(Element element) {
+
+		Range range = createRange(element);
         Style style = new Style();
         List<Pin> pins = new Vector<Pin>();
         List<Switch> switches = new Vector<Switch>();
