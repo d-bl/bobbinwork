@@ -23,6 +23,9 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * A pin supporting a stitch or pair.
@@ -65,4 +68,20 @@ public class Pin extends Partition {
         return 0;
     }
 
+    final public Iterator<Drawable> threadIterator () {
+		return iterator();
+	}
+
+	final public Iterator<Drawable> pairIterator () {
+		return iterator();
+	}
+	
+	private Iterator<Drawable> iterator() {
+		Style style = new Style();
+		int diameter = 2;
+		Shape shape = new Ellipse2D.Double(position.x - diameter, position.y - diameter, diameter*2, diameter*2);
+		List<Drawable> list = new Vector<Drawable>();
+		list.add(new Drawable(shape,style));
+		return list.iterator();
+	}
 }

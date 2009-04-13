@@ -37,6 +37,7 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.diagram.model.Partition;
+import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.ElementType;
 import nl.BobbinWork.diagram.xml.XmlResources;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
@@ -146,7 +147,7 @@ public class BWTree extends JTree {
                 // from the orphaned DOM node to the original node
                 domNode = (Node) domNode.getUserData(TreeExpander.ORPHAN_TO_CLONE);
             }
-            return ((Partition) domNode.getUserData(Partition.MODEL_TO_DOM));
+            return ((Partition) domNode.getUserData(DiagramBuilder.MODEL_TO_DOM));
         } catch (NullPointerException e) {
           return null;
         }
@@ -213,12 +214,12 @@ public class BWTree extends JTree {
         if (selectedElement == null || alternativeElement == null) {
             return false;
         }
-        Partition alternativePartition = (Partition) alternativeElement.getUserData(Partition.MODEL_TO_DOM);
-        Partition selectedPartition = (Partition) selectedElement.getUserData(Partition.MODEL_TO_DOM);
+        Partition alternativePartition = (Partition) alternativeElement.getUserData(DiagramBuilder.MODEL_TO_DOM);
+        Partition selectedPartition = (Partition) selectedElement.getUserData(DiagramBuilder.MODEL_TO_DOM);
         if (selectedPartition == null) {
             Element clonedElement = (Element) selectedElement.getUserData(TreeExpander.ORPHAN_TO_CLONE);
             if (clonedElement != null) {
-                selectedPartition = (Partition) clonedElement.getUserData(Partition.MODEL_TO_DOM);
+                selectedPartition = (Partition) clonedElement.getUserData(DiagramBuilder.MODEL_TO_DOM);
             }
         }
         if (selectedPartition == null || alternativePartition == null) {

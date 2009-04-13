@@ -36,10 +36,10 @@ public class Cross extends Switch {
     	super (range, front, back);
 	}
 
-	void setThreadEnds() {
+	void setThreadConnectors() {
         List<ThreadSegment> ins = new Vector<ThreadSegment>(2);
         ins.add(getFront());
         ins.add(getBack());
-        super.setThreadEnds(new Ends<ThreadSegment>(ins));
+        super.setThreadConnectors(new Connectors<ThreadSegment>(ins));
     }
 }

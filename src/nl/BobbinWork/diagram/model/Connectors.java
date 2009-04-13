@@ -1,4 +1,4 @@
-/* Ends.java Copyright 2006-2009 by J. Falkink-Pol
+/* Connectors.java Copyright 2006-2009 by J. Falkink-Pol
  *
  * This file is part of BobbinWork.
  *
@@ -24,27 +24,29 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Keeps track of the thread/pair segments of a diagram partition.
+ * Manages line segments like connectors on pieces of a jig saw puzzle.
+ * Connected pieces result into a bigger piece with less connectors than the sum
+ * of connectors of the individual pieces.
  * 
- * The <em>points</em> at the border of a diagram partition are
+ * The <em>point</em>s at the border of a partition are
  * <code>getIns(i).getStart()</code> and <code>getOut(i).getEnd()</code>.
  * 
  * @author J. Falkink-Pol
  */
-class Ends<T extends Segment> {
+class Connectors<T extends Segment> {
 
     private List<T> ins;
 
     private List<T> outs;
 
     /**
-     * Creates a populated instance of <code>Ends</code>.
+     * Creates a populated instance of <code>Connectors</code>.
      * 
      * @param segments
      *            in incomming order, for the outgoing segments, the order is
      *            reversed.
      */
-    Ends(List<T> segments) {
+    Connectors(List<T> segments) {
         ins = segments;
         outs = new Vector<T>(segments.size());
         for (int i = segments.size(); --i >=0; ) {
@@ -53,13 +55,13 @@ class Ends<T extends Segment> {
     }
 
     /**
-     * Creates a new instance of <code>Ends</code> to be populated by
+     * Creates a new instance of <code>Connectors</code> to be populated by
      * <code>connect()</code>.
      * 
      * @param count
      *            the number of chained thread/pair segments.
      */
-    Ends(int count) {
+    Connectors(int count) {
         ins = new Vector<T>(count);
         outs = new Vector<T>(count);
         for (int i=0;i<count;i++) {
@@ -73,11 +75,11 @@ class Ends<T extends Segment> {
      * of preceding diagram partitions.
      * 
      * @param child
-     *            ends of a sub partition of the diagram
+     *            Connectors of a sub partition of the diagram
      * @param offset
      *            first bobbin/pair used by the sub partition
      */
-    void connect(Ends<T> child, int offset) {
+    void connect(Connectors<T> child, int offset) {
         // visualisation of a diagram partition (stitches/switches):
         // _____
         // |x x|

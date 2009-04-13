@@ -18,12 +18,9 @@
 package nl.BobbinWork.diagram.model;
 
 import java.awt.Shape;
+import java.util.Iterator;
 
 public abstract class Partition {
-
-    static final String RANGE_SEPARATOR = "-";
-
-    public static final String MODEL_TO_DOM = "model";
 
     /** Show (or hide) this section of the diagram. */
     private boolean visible = true;
@@ -108,4 +105,7 @@ public abstract class Partition {
 	public boolean isVisible() {
 		return visible;
 	}
+	
+	public abstract Iterator<Drawable> threadIterator ();
+	public abstract Iterator<Drawable> pairIterator ();
 }

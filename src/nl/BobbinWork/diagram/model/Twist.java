@@ -50,10 +50,10 @@ public class Twist extends Switch {
     	super (range, frontSegment,backSegment);
 	}
 
-	void setThreadEnds() {
+	void setThreadConnectors() {
         List<ThreadSegment> ins = new Vector<ThreadSegment>(2);
         ins.add(getBack());
         ins.add(getFront());
-        super.setThreadEnds(new Ends<ThreadSegment>(ins));
+        super.setThreadConnectors(new Connectors<ThreadSegment>(ins));
     }
 }

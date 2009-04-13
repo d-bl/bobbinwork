@@ -18,6 +18,10 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+
 /**
  * Two bobbins next to one another change positions.
  * 
@@ -34,20 +38,20 @@ public abstract class Switch extends MultipleThreadsPartition {
     /**
      * Creates a new instance of a <code>Cross</code> or <code>Twist</code>.
      * The difference between the two is made by the abstract method
-     * <code>setThreadEnds</code> determining whether the <code>frontThread</code>
+     * <code>setThreadConnectors</code> determining whether the <code>frontThread</code>
      * starts as left bobbin, or the <code>backThread</code>.
      */
     Switch(Range range, ThreadSegment front, ThreadSegment back) {
     	threadRange = range;
     	frontThread = front;
     	backThread = back;
-        setThreadEnds(); 
+        setThreadConnectors(); 
 	}
     
     /**
      * Adds the <code>backThread</code> and
      * <code>frontThread</code> <code>ThreadSegment</code>s in the appropriate
-     * order to the <code>ThreadEnds</code>.
+     * order to the <code>ThreadConnectors</code>.
      * 
      * For a <code>Cross</code> the <code>frontThread</code> segment starts as the
      * left bobbin, for a <code>Twist</code> the <code>backThread</code>.
@@ -59,7 +63,7 @@ public abstract class Switch extends MultipleThreadsPartition {
      * maker performs these actions, these segments are connected, eliminating
      * gaps and giving the whole thread a single style (color/width).
      */
-    abstract void setThreadEnds();
+    abstract void setThreadConnectors();
 
     /**
      * Gets the numbers of the thread/bobbin positions involved in the
@@ -94,4 +98,21 @@ public abstract class Switch extends MultipleThreadsPartition {
             frontThread.draw(g2);
         }
     }
+
+    @Override
+	final public Iterator<Drawable> threadIterator () {
+		List<Drawable> list = new Vector<Drawable>(4);
+		ThreadSegment[] threadSegments = {backThread,frontThread};
+		for (ThreadSegment t:threadSegments){
+			ThreadStyle style = t.getStyle();
+			list.add(new Drawable(t.getCurve(), style.getShadow()));
+			list.add(new Drawable(t.getCurve(), style));
+		}
+		return list.iterator();
+	}
+
+	@Override
+	final public Iterator<Drawable> pairIterator() {
+		return new Vector<Drawable>().iterator();
+	}
 }

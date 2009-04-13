@@ -41,6 +41,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import nl.BobbinWork.diagram.model.Partition;
+import nl.BobbinWork.diagram.xml.DiagramBuilder;
 
 import org.w3c.dom.Element;
 
@@ -176,7 +177,7 @@ public class DiagramFragments extends JToolBar {
                 //setForeground(list.getForeground());
             }
             Element element = (Element) value;
-            partition = (Partition) element.getUserData(Partition.MODEL_TO_DOM);
+            partition = (Partition) element.getUserData(DiagramBuilder.MODEL_TO_DOM);
             setToolTipText("<html><body><p><strong>" + // //$NON-NLS-1$
                     element.getAttribute("id") + // //$NON-NLS-1$
                     "</strong></p><p>" + // //$NON-NLS-1$
