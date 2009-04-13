@@ -19,6 +19,8 @@
 
 package nl.BobbinWork.diagram.model;
 import java.awt.Shape;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -29,15 +31,15 @@ import java.util.Vector;
  */
 public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 
-    private java.util.Vector<Partition> partitions = new java.util.Vector<Partition>();
+    private List<Partition> partitions = new java.util.Vector<Partition>();
 
-    public java.util.Vector<Partition> getPartitions() {
+    public List<Partition> getPartitions() {
         return partitions;
     }
 
     public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
         if (isVisible()) {
-            java.util.Vector<Partition> v = getPartitions();
+            List<Partition> v = getPartitions();
             for (int i = 0; i < v.size(); i++) {
                 Partition n = v.get(i);
                 n.draw(g2, pair, thread);
@@ -64,10 +66,10 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
      * @return null or a <code>Cross</code> or <code>Twist</code> with the
      *         coordinates within its bounds.
      * 
-     * @see nl.BobbinWork.diagram.model.Ends#getHull
+     * @see nl.BobbinWork.diagram.model.Connectors#getHull
      */
     public MultipleThreadsPartition getSwitchAt(int x, int y) {
-        Vector<Partition> v = getPartitions();
+        List<Partition> v = getPartitions();
         for (int i = v.size() - 1; i >= 0; i--) {
             Partition p = v.get(i);
             if (p instanceof MultipleThreadsPartition) {
@@ -106,16 +108,66 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
     }
 
     /** Pairs going into and coming out of a Group/Stitch. */
-    private Ends<PairSegment> pairEnds = null;
+    private Connectors<PairSegment> pairConnectors = null;
 
-    Ends<PairSegment> getPairEnds() {
-        return pairEnds;
+    Connectors<PairSegment> getPairConnectors() {
+        return pairConnectors;
     }
 
-    void setPairEnds(Ends<PairSegment> pairEnds) {
-        this.pairEnds = pairEnds;
+    void setPairConnectors(Connectors<PairSegment> pairEnds) {
+        this.pairConnectors = pairEnds;
     }
 
     MultiplePairsPartition() {}
 
+	public Iterator<Drawable> threadIterator () {
+		if ( ! isVisible() ) return new Vector<Drawable>().iterator();
+		return new It(partitions.iterator()){
+			void nextSibling() {
+				current = siblings.next().threadIterator();
+			}
+		};
+	}
+
+	public Iterator<Drawable> pairIterator () {
+		if ( ! isVisible() ) return new Vector<Drawable>().iterator();
+		return new It(partitions.iterator()){
+			void nextSibling() {
+				current = siblings.next().pairIterator();
+			}
+		};
+	}
+	
+	private abstract static class It implements Iterator<Drawable>{
+		
+		Iterator<Partition> siblings;
+		Iterator<Drawable> current;
+
+		public It(Iterator<Partition> siblings) {
+			this.siblings = siblings;
+			nextSibling(); 
+		}
+
+		abstract void nextSibling();
+
+		@Override
+		public boolean hasNext() {
+			if ( ! current.hasNext() ) {
+				if ( siblings.hasNext() ) {
+					nextSibling();
+				}
+			}
+			return current.hasNext();
+		}
+		
+		@Override
+		public Drawable next() {
+			return current.next();
+		}
+		
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException ();
+		}
+	}
 }

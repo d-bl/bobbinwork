@@ -34,21 +34,21 @@ public class Group extends ChainedPairsPartition {
     {
     	super (range, parts, pins);
     	Iterator<ThreadStyle> st = styles.iterator();
-    	Iterator<ThreadSegment> segments = getThreadEnds().getIns().iterator();
+    	Iterator<ThreadSegment> segments = getThreadConnectors().getIns().iterator();
     	while (st.hasNext() && segments.hasNext()) {
     		segments.next().getStyle().apply(st.next());
     	}
     }
     
-    void initEnds() {
+    void initConnectors() {
     	int count = getPairRange().getCount();
-    	setPairEnds(new Ends<PairSegment>(count));
-    	setThreadEnds(new Ends<ThreadSegment>(count * 2));
+    	setPairConnectors(new Connectors<PairSegment>(count));
+    	setThreadConnectors(new Connectors<ThreadSegment>(count * 2));
     }
     
 	void connectChild(MultiplePairsPartition part) {
 		int first = part.getPairRange().getFirst() - 1;
-        getPairEnds().connect(part.getPairEnds(), first);
-        getThreadEnds().connect(part.getThreadEnds(), first * 2);
+        getPairConnectors().connect(part.getPairConnectors(), first);
+        getThreadConnectors().connect(part.getThreadConnectors(), first * 2);
 	}
 }

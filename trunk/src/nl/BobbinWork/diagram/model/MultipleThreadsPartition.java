@@ -29,32 +29,32 @@ import java.awt.Shape;
 public abstract class MultipleThreadsPartition extends Partition {
 
     /** Threads going into and coming out of a Group/Stitch/Cross/Twist. */
-    private Ends<ThreadSegment> threadEnds;
+    private Connectors<ThreadSegment> threadConnectors;
 
     MultipleThreadsPartition(){}
     
-    Ends<ThreadSegment> getThreadEnds() {
-        return threadEnds;
+    Connectors<ThreadSegment> getThreadConnectors() {
+        return threadConnectors;
     }
 
     /**
      * Puts thread segments in the ins and outs. The constructor of the subclasses
      * Cross and Twist offer the back and front segments in the correct order for
-     * the ins. The Ends class sets the outs in the the reversed order.
+     * the ins. The Connectors class sets the outs in the the reversed order.
      * 
-     * @param threadEnds
+     * @param threadConnectors
      */
-    void setThreadEnds(Ends<ThreadSegment> threadEnds) {
-        this.threadEnds = threadEnds;
+    void setThreadConnectors(Connectors<ThreadSegment> threadConnectors) {
+        this.threadConnectors = threadConnectors;
     }
 
     public Shape getHull(){
-        return getThreadEnds().getHull();
+        return getThreadConnectors().getHull();
         
     }
     
     public int getNrOfPairs() {
-        return threadEnds.getIns().size();
+        return threadConnectors.getIns().size();
     }
 
 }

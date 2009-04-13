@@ -26,8 +26,6 @@ package nl.BobbinWork.diagram.model;
 public
 class Point extends java.awt.geom.Point2D.Double { 
     
-    private static final String SEPARATOR = ",";
-    
     /** Creates a new instance of Point. 
      * 
      * @param x
@@ -36,19 +34,6 @@ class Point extends java.awt.geom.Point2D.Double {
     public Point(double x, double y) {
         this.x = x;
         this.y = y;
-    }
-
-    /** Creates a new instance of Point, by splitting the string in an x and y component.
-     * 
-     * @param s 
-     */
-    public Point(String s) {
-        
-        String xy [] = s.split(SEPARATOR);
-        try {
-            x = java.lang.Double.valueOf(xy[0]).doubleValue();
-            y = java.lang.Double.valueOf(xy[1]).doubleValue();
-        } catch (java.lang.NumberFormatException e){ }
     }
 
     /** Creates a new instance of Point. 

@@ -19,6 +19,7 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,21 +30,21 @@ public class Stitch extends MultiplePairsPartition {
 		
         setPairRange(range);
         int nrOfPairs = pairs.size();
-		setThreadEnds(new Ends<ThreadSegment>(nrOfPairs * 2));
-		setPairEnds(new Ends<PairSegment>(pairs));
+		setThreadConnectors(new Connectors<ThreadSegment>(nrOfPairs * 2));
+		setPairConnectors(new Connectors<PairSegment>(pairs));
         
-        Vector<Partition> partitions = getPartitions();
+        List<Partition> partitions = getPartitions();
         for (Pin pin:pins) partitions.add(pin);
         for (Switch sw:switches) {
         	partitions.add(sw);
         	int start = sw.getThreadRange().getFirst() - 1;
-        	getThreadEnds().connect(sw.getThreadEnds(), start);
+        	getThreadConnectors().connect(sw.getThreadConnectors(), start);
         }
 	}
 
     public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
         if (pair) {
-            List<PairSegment> v = getPairEnds().getIns();
+            List<PairSegment> v = getPairConnectors().getIns();
             for (int i = 0; i < v.size(); i++) {
                 if (v.get(i)!=null) {
                     v.get(i).draw(g2);
@@ -52,4 +53,13 @@ public class Stitch extends MultiplePairsPartition {
         }
         super.draw(g2,pair,thread);
     }
+
+    @Override
+	final public Iterator<Drawable> pairIterator () {
+		List<Drawable> list = new Vector<Drawable>(4);
+		for (Segment segment:this.getPairConnectors().getIns()){
+			list.add(new Drawable(segment.getCurve(), segment.getStyle()));
+		}
+		return list.iterator();
+	}
 }

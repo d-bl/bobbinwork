@@ -1,10 +1,28 @@
 package nl.BobbinWork.diagram.xml;
 
-import static nl.BobbinWork.diagram.xml.ElementType.*;
-import nl.BobbinWork.diagram.model.*;
+import static java.lang.Double.valueOf;
+import static nl.BobbinWork.diagram.xml.ElementType.back;
+import static nl.BobbinWork.diagram.xml.ElementType.front;
 
 import java.util.List;
 import java.util.Vector;
+
+import nl.BobbinWork.diagram.model.Cross;
+import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Group;
+import nl.BobbinWork.diagram.model.MultiplePairsPartition;
+import nl.BobbinWork.diagram.model.PairSegment;
+import nl.BobbinWork.diagram.model.Partition;
+import nl.BobbinWork.diagram.model.Pin;
+import nl.BobbinWork.diagram.model.Point;
+import nl.BobbinWork.diagram.model.Range;
+import nl.BobbinWork.diagram.model.Segment;
+import nl.BobbinWork.diagram.model.Stitch;
+import nl.BobbinWork.diagram.model.Style;
+import nl.BobbinWork.diagram.model.Switch;
+import nl.BobbinWork.diagram.model.ThreadSegment;
+import nl.BobbinWork.diagram.model.ThreadStyle;
+import nl.BobbinWork.diagram.model.Twist;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -12,7 +30,9 @@ import org.w3c.dom.NodeList;
 
 public class DiagramBuilder {
 
+    private static final String SEPARATOR = ",";
     private static final String RANGE_SEPARATOR = "-";
+    public static final String MODEL_TO_DOM = "model";
 
     private static class ChainedPairsPartitionFactory {
     	Element element;
@@ -145,10 +165,10 @@ public class DiagramBuilder {
                 throw new IllegalArgumentException("mandatory attribute start is missing");
             if ( (end == null) || end.equals("") ) 
                 throw new IllegalArgumentException("mandatory attribute end is missing");
-            this.start = new Point(start);
-            this.end = new Point(end);
-            this.c1 = ( (c1 == null) || c1.equals("") ? null :  new Point(c1) );
-            this.c2 = ( (c2 == null) || c2.equals("") ? null :  new Point(c2) );
+            this.start = createPoint(start);
+            this.end = createPoint(end);
+            this.c1 = ( (c1 == null) || c1.equals("") ? null :  createPoint(c1) );
+            this.c2 = ( (c2 == null) || c2.equals("") ? null :  createPoint(c2) );
         }
         
         PairSegment createPairSegment() {
@@ -272,7 +292,7 @@ public class DiagramBuilder {
      */
     private static Pin createPin(Element element) {
         String attribute = element.getAttribute(AttributeType.position.toString());
-        return new Pin(new Point(attribute));
+        return new Pin(createPoint(attribute));
     }
 
     /**
@@ -306,7 +326,7 @@ public class DiagramBuilder {
 
     private static RuntimeException invalidRange(String elementTag,
             String attributeTag, String value) {
-        return new RuntimeException("invalid or missing range:\n<"+elementTag+" ... " //
+        return new IllegalArgumentException("invalid or missing range:\n<"+elementTag+" ... " //
                 + attributeTag + "='" + value + "' ...>");
     }
 
@@ -326,10 +346,24 @@ public class DiagramBuilder {
     }
 
     private static void register(Element element, Partition p) {
-        element.setUserData(Partition.MODEL_TO_DOM, p, null);
+        element.setUserData(MODEL_TO_DOM, p, null);
         if (element.getAttribute(AttributeType.display.toString()).matches(
                 "(no)|(No)|(NO)|(false)|(False)|(FALSE)")) {
             p.setVisible(false);
         }
     }
+    
+    public static Point createPoint(String s) {
+        
+        String xy [] = s.split(SEPARATOR);
+        try {
+        	return new Point(//
+        			valueOf(xy[0]).doubleValue(),//
+        			valueOf(xy[1]).doubleValue());
+        } catch (NumberFormatException e){ 
+            throw new IllegalArgumentException(
+                    "invalid coordinates: " + s);
+        }
+    }
+    
 }

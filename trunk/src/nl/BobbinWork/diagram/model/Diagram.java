@@ -31,5 +31,5 @@ public class Diagram extends ChainedPairsPartition {
     	super (new Range(0, 0), parts, pins);
     }
     void connectChild(MultiplePairsPartition part) {}
-    void initEnds() {}
+    void initConnectors() {}
 }
