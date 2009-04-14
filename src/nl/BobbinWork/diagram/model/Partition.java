@@ -47,8 +47,8 @@ public abstract class Partition {
 		return visible;
 	}
 	
-	public abstract Iterator<Drawable> threadIterator ();
-	public abstract Iterator<Drawable> pairIterator ();
+	abstract Iterator<Drawable> threadIterator ();
+	abstract Iterator<Drawable> pairIterator ();
 	abstract class Drawables implements Iterable<Drawable>{};
 	public final Iterable<Drawable> threads = new Drawables () {
 
