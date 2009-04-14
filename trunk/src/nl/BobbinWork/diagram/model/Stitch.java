@@ -43,7 +43,7 @@ public class Stitch extends MultiplePairsPartition {
 	}
 
     @Override
-	final public Iterator<Drawable> pairIterator () {
+	final Iterator<Drawable> pairIterator () {
 		List<Drawable> list = new Vector<Drawable>(4);
 		for (PairSegment segment:this.getPairConnectors().getIns()){
 			list.add(new Drawable(segment.getCurve(), segment.getStyle()));

@@ -54,11 +54,11 @@ public class Pin extends Partition {
         return 0;
     }
 
-    final public Iterator<Drawable> threadIterator () {
+    final Iterator<Drawable> threadIterator () {
 		return iterator();
 	}
 
-	final public Iterator<Drawable> pairIterator () {
+	final Iterator<Drawable> pairIterator () {
 		return iterator();
 	}
 	

@@ -63,4 +63,15 @@ Selecting threads has an obvious bug. The current strategy is drizzling into the
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/high-lights.PNG]
 
-In the Image above, the green dots show the end points of the selected group of stitches. These points define the shape for the highlights. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. This is not even the worst example. So here has to change something too.
+In the Image above, the green dots show the end points of the selected group of stitches. These points define the shape for the highlights. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. Multiple foot side stitches along a curve would be even worse. So here has to change something too.
+
+The Connectors objects loose information about internal segments.
+We should also merge the bounding polygons of the children 
+and store the result with the parent. 
+The rectangles of bounding boxes would cause overlap.
+We can't use overlap when drizzling down the tree to find which thread is pointed at. 
+Hints:
+
+http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html
+
+http://cgm.cs.mcgill.ca/~orm/mergech.html

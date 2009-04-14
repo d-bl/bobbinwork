@@ -110,7 +110,7 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 
     MultiplePairsPartition() {}
 
-	public Iterator<Drawable> threadIterator () {
+	Iterator<Drawable> threadIterator () {
 		if ( ! isVisible() ) return new Vector<Drawable>().iterator();
 		return new It(partitions.iterator()){
 			void nextSibling() {
@@ -119,7 +119,7 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 		};
 	}
 
-	public Iterator<Drawable> pairIterator () {
+	Iterator<Drawable> pairIterator () {
 		if ( ! isVisible() ) return new Vector<Drawable>().iterator();
 		return new It(partitions.iterator()){
 			void nextSibling() {

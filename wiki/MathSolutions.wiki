@@ -1,4 +1,4 @@
-#summary Bezier calculations for twist marks in pair diagrams
+#summary Bezier calculations for twist marks and polar grids
 #labels Phase-Implementation
 
 = grids =

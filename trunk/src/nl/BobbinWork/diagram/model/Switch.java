@@ -94,7 +94,7 @@ public abstract class Switch extends MultipleThreadsPartition {
     }
 
     @Override
-	final public Iterator<Drawable> threadIterator () {
+	final Iterator<Drawable> threadIterator () {
 		CubicCurve2D backCurve = backThread.getCurve();
 		CubicCurve2D frontCurve = frontThread.getCurve();
 		ThreadStyle backStyle = backThread.getStyle();
@@ -109,7 +109,7 @@ public abstract class Switch extends MultipleThreadsPartition {
 	}
 
 	@Override
-	final public Iterator<Drawable> pairIterator() {
+	final Iterator<Drawable> pairIterator() {
 		return new Vector<Drawable>().iterator();
 	}
 }
