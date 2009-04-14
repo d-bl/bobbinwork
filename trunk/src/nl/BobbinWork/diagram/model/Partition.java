@@ -39,65 +39,6 @@ public abstract class Partition {
      */
     public abstract Shape getHull();
 
-    /**
-     * Draws a section of a diagram.
-     * </p>
-     * <p>
-     * Pins are shown as dots in all types of diagrams. Lines are shown as
-     * connected Cubic Bezier curves. Cubic Bezier curves can vary from straight
-     * lines to C-like or S-like curves.
-     * </p>
-     * <p>
-     * The most obvious valid call is having either <code>pair</code> or
-     * <code>thread</code> set to true. Having both true might be usefull for
-     * debugging purposes but makes no sense otherwise.
-     * 
-     * For some types of lace (such as Honiton) a pricking consists of dots
-     * only. So <code>pair</code> and </code>thread</code> both false is
-     * valid. For other lace types the pricking will be incomplete. As
-     * <em>BobbinWork</em> stands for <em>Bobbin Lace Working diagrams</em>,
-     * identifying runners/weavers and other pairs that should be drawn
-     * (slightly different than in the pair view) in pricking, is not supported.
-     * 
-     * @param g2
-     *            The diagram.
-     *            </P>
-     *            <P>
-     * @param pair
-     *            The diagram shows pairs.
-     *            </P>
-     *            <P>
-     *            Pairs of threads are drawn as single lines. Colors and
-     *            annotation symbols indicate different types of stitches.
-     *            </P>
-     *            <P>
-     * @param thread
-     *            The diagram shows threads.
-     *            </P>
-     *            <P>
-     *            Though lace seems to have a 2D nature, threads going over and
-     *            under each other cause a 3D effect. This effect is mimiced by
-     *            giving the threads a simplistic shadow. This shadow is a
-     *            brighter color along both sides of the core. To complete the
-     *            effect, the lines are segmented. First the segments in the
-     *            back are drawn, then the segments in front. The lines hence
-     *            consist of visually connected cubic Bezier curves.
-     *            </P>
-     *            <P>
-     *            For pure black-and-white diagrams the shadow should have the
-     *            same colour as the background. Then the threads in the
-     *            background will appear interrupted what is the traditional way
-     *            of drawing.
-     */
-    /*
-     * TODO combine the boolean parameters into a diagram properties object. an
-     * option for black and white diagram for printing would also be usefull. In
-     * that case the shadow should be rendered with the background color.
-     *
-     * TODO First draw non-pins, then pins.
-     */
-    abstract public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread);
-
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
@@ -108,4 +49,21 @@ public abstract class Partition {
 	
 	public abstract Iterator<Drawable> threadIterator ();
 	public abstract Iterator<Drawable> pairIterator ();
+	abstract class Drawables implements Iterable<Drawable>{};
+	public final Iterable<Drawable> threads = new Drawables () {
+
+		@Override
+		public Iterator<Drawable> iterator() {
+			return threadIterator();
+		}
+		
+	};
+	public final Iterable<Drawable> pairs = new Drawables () {
+		
+		@Override
+		public Iterator<Drawable> iterator() {
+			return pairIterator();
+		}
+		
+	};
 }

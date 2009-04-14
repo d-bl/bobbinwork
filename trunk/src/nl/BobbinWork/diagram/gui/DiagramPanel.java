@@ -18,6 +18,8 @@
 
 package nl.BobbinWork.diagram.gui;
 
+import static java.awt.BasicStroke.CAP_BUTT;
+import static java.awt.BasicStroke.JOIN_MITER;
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.KEY_INTERPOLATION;
 import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
@@ -32,11 +34,14 @@ import java.awt.Shape;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import java.util.List;
+import java.util.Vector;
 
 import javax.swing.JPanel;
 
 import nl.BobbinWork.bwlib.gui.PrintMenu.PrintablePreviewer;
 import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Drawable;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.ThreadSegment;
 import nl.BobbinWork.diagram.model.ThreadStyle;
@@ -102,10 +107,30 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         Graphics2D g2 = (Graphics2D) g;
         g2.scale(PRINT_SCALE, PRINT_SCALE);
         g2.translate(pf.getImageableX() / PRINT_SCALE, pf.getImageableY() / PRINT_SCALE);
-        diagram.draw(g2, showPairs, showThreads);
+        if (showPairs) paintPartitions (g2,diagram.pairs);
+        if (showThreads) paintPartitions (g2,diagram.threads);
+        
         return Printable.PAGE_EXISTS;
     }
 
+    public static void paintPartitions (Graphics2D g, Iterable<Drawable> drawables){
+    	List<Drawable> pins = new Vector<Drawable>();
+    	for (Drawable drawable:drawables){
+            int width = drawable.getStyle().getWidth() * 1;
+			if (width > 0) {
+				g.setPaint(drawable.getStyle().getColor());
+				g.setStroke(new BasicStroke(width, CAP_BUTT, JOIN_MITER));
+				g.draw(drawable.getShape());
+			} else {
+				pins.add(drawable);
+            }
+    	}
+    	for (Drawable drawable:pins){
+    		g.setPaint(drawable.getStyle().getColor());
+    		g.fill(drawable.getShape());
+    	}
+    }
+    
     /** Sets the XML definition and redraws the diagram. */
     public void setPattern(Diagram diagram) {
         this.diagram = diagram;
@@ -136,8 +161,8 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
                 g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
                 g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
             }
-
-            diagram.draw(g2, showPairs, showThreads);
+            if (showPairs) paintPartitions (g2,diagram.pairs);
+            if (showThreads) paintPartitions (g2,diagram.threads);
             revalidate();
         }
     }

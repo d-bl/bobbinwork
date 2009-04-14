@@ -18,7 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import java.awt.BasicStroke;
 
 /**
  * A segment of a thread.
@@ -88,19 +87,6 @@ public class ThreadSegment extends Segment {
             previous.setStyle(getStyle());
             previous = previous.getNext();
         }
-    }
-
-    void draw(java.awt.Graphics2D g2) {
-        // shadow part
-        ThreadStyle p = (ThreadStyle) getStyle();
-        g2.setPaint(p.getShadow().getColor());
-        g2.setStroke(new BasicStroke( //
-                p.getShadow().getWidth() * 1, //
-                BasicStroke.CAP_BUTT, //
-                BasicStroke.JOIN_MITER));
-        g2.draw(getCurve ());
-        // front part
-        super.draw(g2);
     }
 
     public ThreadStyle getStyle() {

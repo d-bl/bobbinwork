@@ -94,7 +94,7 @@ public class ThreadStyleToolBar extends JToolBar {
 
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;
-            twist.draw(g2, false, true);
+            DiagramPanel.paintPartitions (g2,twist.threads);
         }
 
         private void update() {
