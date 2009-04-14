@@ -25,6 +25,10 @@ import java.awt.Color;
  * 
  * @author J. Falkink-Pol
  */
+/**
+ * @author User
+ *
+ */
 public class Style {
 
     private int color = Color.BLACK.getRGB();
@@ -52,6 +56,12 @@ public class Style {
         return width;
     }
 
+    /**
+	 * Sets the with of the stroke used to draw a line.
+	 * 
+	 * @param width
+	 *            The value zero implies a fill rather than a stroke.
+	 */
     public void setWidth(int width) {
         this.width = width;
     }

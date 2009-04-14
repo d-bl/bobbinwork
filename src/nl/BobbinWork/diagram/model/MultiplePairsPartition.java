@@ -37,16 +37,6 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
         return partitions;
     }
 
-    public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
-        if (isVisible()) {
-            List<Partition> v = getPartitions();
-            for (int i = 0; i < v.size(); i++) {
-                Partition n = v.get(i);
-                n.draw(g2, pair, thread);
-            }
-        }
-    }
-
     public Shape getHull() {
         return super.getHull();
         // TODO merge with partions[].getBounds for pins
@@ -141,11 +131,15 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 	private abstract static class It implements Iterator<Drawable>{
 		
 		Iterator<Partition> siblings;
-		Iterator<Drawable> current;
+		Iterator<Drawable> current = null;
 
 		public It(Iterator<Partition> siblings) {
 			this.siblings = siblings;
-			nextSibling(); 
+			if ( siblings.hasNext() ) {
+				nextSibling(); 
+			} else {
+				current = new Vector<Drawable>().iterator();
+			}
 		}
 
 		abstract void nextSibling();

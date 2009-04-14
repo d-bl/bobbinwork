@@ -1,7 +1,5 @@
 package nl.BobbinWork.diagram.model;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.CubicCurve2D;
@@ -151,17 +149,6 @@ public class Segment {
 
 	public void setStyle(Style style) {
 		this.style = style;
-	}
-
-	void draw(java.awt.Graphics2D g2) {
-		Color color = getStyle().getColor();
-	    g2.setPaint(color);
-	    g2.setStroke(new BasicStroke( //
-	            getStyle().getWidth() * 1.0f, //
-	            BasicStroke.CAP_BUTT, //
-	            BasicStroke.JOIN_MITER //
-	            ));
-	    g2.draw(getCurve());
 	}
 
 	/**

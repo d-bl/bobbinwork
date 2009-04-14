@@ -18,14 +18,11 @@
 
 package nl.BobbinWork.diagram.model;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
 
 /**
  * A pin supporting a stitch or pair.
@@ -35,25 +32,14 @@ import java.util.Vector;
  */
 public class Pin extends Partition {
 
+	private static final int DIAMETER = 2;
+	private static final int RADIUS = DIAMETER*2;
+	private static final Style STYLE = new Style();
     Point position = null;
 
     public Pin(Point position2) {
+		STYLE.setWidth(0);
         position = position2;
-    }
-
-    /**
-     * Ads a black dot to the drawing.
-     * 
-     * @param g2
-     *            the drawing
-     * @param pair
-     *            ignored
-     * @param thread
-     *            ignored
-     */
-    public void draw(Graphics2D g2, boolean pair, boolean thread) {
-        g2.setPaint(Color.BLACK);
-        g2.fill(new Ellipse2D.Double(position.x - 2, position.y - 2, 4, 4));
     }
 
     public Shape getHull() {
@@ -77,11 +63,10 @@ public class Pin extends Partition {
 	}
 	
 	private Iterator<Drawable> iterator() {
-		Style style = new Style();
-		int diameter = 2;
-		Shape shape = new Ellipse2D.Double(position.x - diameter, position.y - diameter, diameter*2, diameter*2);
-		List<Drawable> list = new Vector<Drawable>();
-		list.add(new Drawable(shape,style));
-		return list.iterator();
+		double x = position.x - DIAMETER;
+		double y = position.y - DIAMETER;
+		Ellipse2D.Double dot = new Ellipse2D.Double(x, y, RADIUS, RADIUS);
+		Drawable[] a = {new Drawable(dot,STYLE)};
+		return Arrays.asList(a).iterator();
 	}
 }

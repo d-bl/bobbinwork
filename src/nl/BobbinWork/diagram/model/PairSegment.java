@@ -20,6 +20,8 @@ package nl.BobbinWork.diagram.model;
 
 import static nl.BobbinWork.diagram.math.Annotations.createTwistMark;
 
+import java.awt.Shape;
+
 /**
  * A line segment representing a pair of threads.
  * 
@@ -64,11 +66,11 @@ public class PairSegment extends Segment {
     	this.twistMarkLength = twistMarkLength;
     }
     
-    void draw(java.awt.Graphics2D g2) {
-        super.draw(g2);
-        if (twistMarkLength > 0) {
-            g2.draw(createTwistMark(getCurve(),twistMarkLength));
-        }
+    public boolean hasTwistMark () {
+		return twistMarkLength > 0;
+    	
     }
-    
+    public Shape getTwistMark () {
+    	return createTwistMark(getCurve(),twistMarkLength);
+    }
 }

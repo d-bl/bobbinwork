@@ -40,6 +40,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
 
@@ -155,7 +156,8 @@ public class DiagramFragments extends JToolBar {
                 }
                 g2.translate(dx, dy);
                 
-                partition.draw(g2, showPairs, showThreads);
+                if (showPairs) DiagramPanel.paintPartitions (g2,partition.pairs);
+                if (showThreads) DiagramPanel.paintPartitions (g2,partition.threads);
                 
                 g2.translate(-dx, -dy);
                 if (scale < 1) {

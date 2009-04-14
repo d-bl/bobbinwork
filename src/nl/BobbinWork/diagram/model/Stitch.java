@@ -42,23 +42,14 @@ public class Stitch extends MultiplePairsPartition {
         }
 	}
 
-    public void draw(java.awt.Graphics2D g2, boolean pair, boolean thread) {
-        if (pair) {
-            List<PairSegment> v = getPairConnectors().getIns();
-            for (int i = 0; i < v.size(); i++) {
-                if (v.get(i)!=null) {
-                    v.get(i).draw(g2);
-                }
-            }
-        }
-        super.draw(g2,pair,thread);
-    }
-
     @Override
 	final public Iterator<Drawable> pairIterator () {
 		List<Drawable> list = new Vector<Drawable>(4);
-		for (Segment segment:this.getPairConnectors().getIns()){
+		for (PairSegment segment:this.getPairConnectors().getIns()){
 			list.add(new Drawable(segment.getCurve(), segment.getStyle()));
+			if (segment.hasTwistMark()){
+				list.add(new Drawable(segment.getTwistMark(), segment.getStyle()));
+			}
 		}
 		return list.iterator();
 	}
