@@ -1,18 +1,16 @@
 #summary Mathematical issues that could improve the diagrams
 #labels Phase-Requirements
-<wiki:toc max_depth="3" />
-= Introduction =
 
 The basic idea to draw thread diagrams is drawing small curved segments of lines. A shadow for each segment creates the over/under effect. A shadow with a colour identical to the background creates the traditional diagrams:
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/shadow.PNG]
 
-= Problems still to solve =
+<wiki:toc max_depth="3" />
 
-Unlike traditional diagrams, the diagram above shows no ends come out of the stitch going to the bobbins. That is a technical work-around for better chaining the stitches together. Saying that, an idea is coming up how to improve it: the program should extend the loose ends for a while. This is rather a programming challenge than a mathematical challenge, though it might be tricky in what direction to extend the loose ends.
+= Shortened ends =
+Unlike traditional diagrams, the diagram above shows no ends come out of the stitch going to the bobbins. That is a technical work-around for better chaining the stitches together. If the chaining can not be improved, such that it can deal with overlapping ends, the program should extend the loose ends for a while. This is rather a programming challenge than a mathematical challenge, though it might be tricky in what direction to extend the loose ends.
 
-== Gaps == 
-
+= Gaps =
 The following code snippet shows how to define the Bezier curves of a half stitch. Note that the "." is for the decimals and the "," separates X from Y. X being the horizontal distance from the left side of the canvas, and Y the vertical distance from the top side of the canvas, so 0,0 is the top left corner.
 {{{
 <stitch id="tc" pairs="15-16">
@@ -41,7 +39,7 @@ Combining two of such twists and a cross, would result in the left diagram. The 
 
 As shown in the picture above, not only the black end and red start should be on the same spot, but they should also be on a straight line with black c2 and red c1. That might be a smaller challenge than extending the ends discussed above. But it adds to the tension challenge discussed below.
 
-== Tension ==
+= Tension =
 In this example of a striped Vierge ground, the drunken coloured lines show that the program doesn't know how to tension the threads.
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/drunken.PNG]
@@ -53,22 +51,20 @@ After making the segment ends meet and put the control points in a straight line
 
 On a pair level flattening lines is less an issue but when an X turns into a T is not so well defined.
 
-== Highlights ==
-
-=== Threads ===
+= Highlighting threads =
 
 Selecting threads has an obvious bug. The current strategy is drizzling into the details of the tree until the cross or twist is found that contains the mouse pointer. Then nearest thread is highlighted. The following issue show why some sections at the edge sometimes can't be selected.
 
-=== Groups of stitches ===
+= Highlighting (groups of) stitches =
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/high-lights.PNG]
 
 In the Image above, the green dots show the end points of the selected group of stitches. These points define the shape for the highlights. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. Multiple foot side stitches along a curve would be even worse. So here has to change something too.
 
-The Connectors objects loose information about internal segments.
+The Connectors class looses information about internal segments.
 We should also merge the bounding polygons of the children 
 and store the result with the parent. 
-The rectangles of bounding boxes would cause overlap.
+Using polygons is more complex than rectangular bounding boxes, but rectangles would cause overlap.
 We can't use overlap when drizzling down the tree to find which thread is pointed at. 
 Hints:
 
