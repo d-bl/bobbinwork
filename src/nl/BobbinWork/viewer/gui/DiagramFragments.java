@@ -156,8 +156,8 @@ public class DiagramFragments extends JToolBar {
                 }
                 g2.translate(dx, dy);
                 
-                if (showPairs) DiagramPanel.paintPartitions (g2,partition.pairs);
-                if (showThreads) DiagramPanel.paintPartitions (g2,partition.threads);
+                if (showPairs) DiagramPanel.paintPartitions (g2,partition.getPairs());
+                if (showThreads) DiagramPanel.paintPartitions (g2,partition.getThreads());
                 
                 g2.translate(-dx, -dy);
                 if (scale < 1) {

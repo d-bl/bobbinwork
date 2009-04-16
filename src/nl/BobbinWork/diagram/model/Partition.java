@@ -46,11 +46,14 @@ public abstract class Partition {
 	public boolean isVisible() {
 		return visible;
 	}
-	
-	abstract Iterator<Drawable> threadIterator ();
-	abstract Iterator<Drawable> pairIterator ();
+
 	abstract class Drawables implements Iterable<Drawable>{};
-	public final Iterable<Drawable> threads = new Drawables () {
+	
+	abstract Iterator<Drawable> pairIterator ();
+	public Iterable<Drawable> getPairs() {
+		return pairs;
+	}
+	private final Iterable<Drawable> threads = new Drawables () {
 
 		@Override
 		public Iterator<Drawable> iterator() {
@@ -58,11 +61,29 @@ public abstract class Partition {
 		}
 		
 	};
-	public final Iterable<Drawable> pairs = new Drawables () {
+
+	abstract Iterator<Drawable> threadIterator ();
+	public Iterable<Drawable> getThreads() {
+		return threads;
+	}
+	private final Iterable<Drawable> pairs = new Drawables () {
 		
 		@Override
 		public Iterator<Drawable> iterator() {
 			return pairIterator();
+		}
+		
+	};
+
+	abstract Iterator<Drawable> pinIterator ();
+	public Iterable<Drawable> getPins() {
+		return pins;
+	}
+	private final Iterable<Drawable> pins = new Drawables () {
+		
+		@Override
+		public Iterator<Drawable> iterator() {
+			return pinIterator();
 		}
 		
 	};

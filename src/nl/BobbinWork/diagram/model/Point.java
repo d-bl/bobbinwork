@@ -18,15 +18,18 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.awt.geom.Point2D;
+
 /**
  *
  * @author J. Falkink-Pol
  */
-@SuppressWarnings("serial")
 public
-class Point extends java.awt.geom.Point2D.Double { 
+class Point extends Point2D.Double { 
     
-    /** Creates a new instance of Point. 
+	private static final long serialVersionUID = 1L;
+
+	/** Creates a new instance of Point. 
      * 
      * @param x
      * @param y
@@ -36,6 +39,11 @@ class Point extends java.awt.geom.Point2D.Double {
         this.y = y;
     }
 
+    public Point(Point2D point) {
+    	this.x = point.getX();
+    	this.y = point.getY();
+    }
+    
     /** Creates a new instance of Point. 
      * 
      * @param p the point to clone.

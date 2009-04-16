@@ -62,6 +62,10 @@ public class Pin extends Partition {
 		return iterator();
 	}
 	
+	final Iterator<Drawable> pinIterator () {
+		return iterator();
+	}
+	
 	private Iterator<Drawable> iterator() {
 		double x = position.x - DIAMETER;
 		double y = position.y - DIAMETER;
