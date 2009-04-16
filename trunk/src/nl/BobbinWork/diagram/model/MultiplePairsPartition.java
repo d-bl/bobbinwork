@@ -128,6 +128,15 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 		};
 	}
 	
+	Iterator<Drawable> pinIterator () {
+		if ( ! isVisible() ) return new Vector<Drawable>().iterator();
+		return new It(partitions.iterator()){
+			void nextSibling() {
+				current = siblings.next().pinIterator();
+			}
+		};
+	}
+	
 	private abstract static class It implements Iterator<Drawable>{
 		
 		Iterator<Partition> siblings;

@@ -112,4 +112,9 @@ public abstract class Switch extends MultipleThreadsPartition {
 	final Iterator<Drawable> pairIterator() {
 		return new Vector<Drawable>().iterator();
 	}
+	
+	@Override
+	final Iterator<Drawable> pinIterator() {
+		return new Vector<Drawable>().iterator();
+	}
 }

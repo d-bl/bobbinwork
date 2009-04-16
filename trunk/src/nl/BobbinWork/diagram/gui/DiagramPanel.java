@@ -107,8 +107,8 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         Graphics2D g2 = (Graphics2D) g;
         g2.scale(PRINT_SCALE, PRINT_SCALE);
         g2.translate(pf.getImageableX() / PRINT_SCALE, pf.getImageableY() / PRINT_SCALE);
-        if (showPairs) paintPartitions (g2,diagram.pairs);
-        if (showThreads) paintPartitions (g2,diagram.threads);
+        if (showPairs) paintPartitions (g2,diagram.getPairs());
+        if (showThreads) paintPartitions (g2,diagram.getThreads());
         
         return Printable.PAGE_EXISTS;
     }
@@ -161,8 +161,8 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
                 g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
                 g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
             }
-            if (showPairs) paintPartitions (g2,diagram.pairs);
-            if (showThreads) paintPartitions (g2,diagram.threads);
+            if (showPairs) paintPartitions (g2,diagram.getPairs());
+            if (showThreads) paintPartitions (g2,diagram.getThreads());
             revalidate();
         }
     }

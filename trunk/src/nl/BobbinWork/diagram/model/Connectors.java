@@ -35,27 +35,94 @@ import java.util.Vector;
  */
 class Connectors<T extends Segment> {
 
-    private List<T> ins;
+    /** segments along the top edge of the jig saw piece (left to right) */
+	private List<T> ins;
 
-    private List<T> outs;
+	/** segments along the bottom edge of the jig saw piece (left to right) */
+	private List<T> outs;
+	
+	/**
+	 * points along the left edge of the jig saw piece, in bottom up (clockwise)
+	 * order
+	 */
+	private List<Point> lefts;
+	
+	/**
+	 * points along the right edge of the jig saw piece, in top down (clockwise)
+	 * order
+	 */
+	private List<Point> rights;
 
     /**
-     * Creates a populated instance of <code>Connectors</code>.
-     * 
-     * @param segments
-     *            in incomming order, for the outgoing segments, the order is
-     *            reversed.
-     */
+	 * Creates a populated instance for threads of a switch or pairs of a
+	 * stitch.
+	 * 
+	 * <pre>
+	 * ins:   a   b 
+	 *         \ /  
+	 *          X   
+	 *         / \  
+	 * outs:  b   a
+	 * </pre>
+	 * 
+	 * @param segments
+	 *            ordered (a,b) as shown in the figure.
+	 */
     Connectors(List<T> segments) {
+        // TODO take the widths of the threads into account
         ins = segments;
-        outs = new Vector<T>(segments.size());
+        outs = reverse(segments);
+        rights = new Vector<Point>(2);
+        lefts = new Vector<Point>(2);
+        Shape tmpBounds = getHull();
+        T a = segments.get(0);
+        T b = segments.get(segments.size()-1);
+        /*                 rights
+         *         a     b                 
+         *         (     )          C1a   ___ a
+         *        / \   / \         C1b  / __ b
+         *      C1   \ /   C1           / /
+         *            X                 |/
+         *      C2   / \   C2           |\
+         *        \ /   \ /         C1a | \__ a
+         *         (     )          C1b  \___ b
+         *         b     a
+         *    left      
+         *    
+         *       solved              TODO
+         */
+		addPoint(tmpBounds,rights,b.getC1());
+		addPoint(tmpBounds,rights,a.getC2());
+        addPoint(tmpBounds,lefts,b.getC2());
+        addPoint(tmpBounds,lefts,a.getC1());
+    }
+
+	/** Creates a copy of the list with the elements in reversed order.
+	 * 
+	 * @param segments
+	 * @return
+	 */
+	private List<T> reverse(List<T> segments) {
+		List<T> list = new Vector<T>(segments.size());
         for (int i = segments.size(); --i >=0; ) {
-        	outs.add(segments.get(i));
+        	list.add(segments.get(i));
         }
+		return list;
+	}
+    
+    /** Adds point to list if point is outside bounds.
+     * 
+     * @param bounds
+     * @param list
+     * @param point
+     */
+    private void addPoint(Shape bounds, List<Point> list, Point point){
+        if ( ! bounds.contains(point) )
+        	rights.add(point);
     }
 
     /**
-     * Creates a new instance of <code>Connectors</code> to be populated by
+     * Creates a new instance to be populated by
      * <code>connect()</code>.
      * 
      * @param count
@@ -64,6 +131,8 @@ class Connectors<T extends Segment> {
     Connectors(int count) {
         ins = new Vector<T>(count);
         outs = new Vector<T>(count);
+        rights = new Vector<Point>(2);
+        lefts = new Vector<Point>(2);
         for (int i=0;i<count;i++) {
         	ins.add(null);
         	outs.add(null);
@@ -97,6 +166,7 @@ class Connectors<T extends Segment> {
                 outs.set(offset + i, child.outs.get(i));
             }
         }
+        // TODO take lefts/rights of children into account
     }
 
     /**
@@ -107,23 +177,30 @@ class Connectors<T extends Segment> {
         return ins;
     }
 
+    private class Bounds extends Polygon {
+		private static final long serialVersionUID = 1L;
+		void add(Point point){
+			addPoint((int) point.x, (int) point.y);
+		}
+    }
+    
     /** @return @see Partition#getHull() */
     Shape getHull() {
-        Polygon shape = new Polygon();
-        for (int i = 0; i < ins.size(); i++) {
-            if (ins.get(i) != null) {
-                shape.addPoint((int) ins.get(i).getStart().x, (int) ins.get(i).getStart().y);
-            }
+    	Bounds shape = new Bounds();
+        for (T in:ins) {
+        	if (in != null)
+        		shape.add(in.getStart());
         }
-        for (int i = outs.size() - 1; i >= 0; i--) {
-            if (outs.get(i) != null) {
-                shape.addPoint((int) outs.get(i).getEnd().x, (int) outs.get(i).getEnd().y);
-            }
+        for (Point p:rights) {
+        		shape.add(p);
         }
-        // TODO take C1/C2 of ins/out[ 0 / length-1] into account
-        // TODO take the widths of the threads into account
-        // TODO make upper and lower edge more convex but avoid overlap
+        for (T out:reverse(outs)) {
+        	if (out != null)
+        		shape.add(out.getEnd());
+        }
+        for (Point p:lefts) {
+        	shape.add(p);
+        }
         return shape;
     }
-
 }
