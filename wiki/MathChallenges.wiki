@@ -71,3 +71,15 @@ Hints:
 http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html
 
 http://cgm.cs.mcgill.ca/~orm/mergech.html
+
+http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244
+implements an improvement at stitch level. It needs the following changes but how to test the condition?
+<pre>
+addPoint(*b.getStart(), a.getEnd()*,rights,b.getC1());
+addPoint(*b.getStart(), a.getEnd()*,rights,a.getC2());
+addPoint(*b.getEnd(), a.getStart()*,lefts,b.getC2());
+addPoint(*b.getEnd(), a.getStart()*,lefts,a.getC1());
+...
+/`*``*` Adds east to list if the compas is only rotated and not mirrored. `*`/
+private void addPoint(*Point north, Point south*, List<Point> list, Point *east*){
+</pre>
