@@ -59,21 +59,16 @@ Selecting threads has an obvious bug. The current strategy is drizzling into the
 
 [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/high-lights.PNG]
 
-In the Image above, the green dots show the end points of the selected group of stitches. These points define the shape for the highlights. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. Multiple foot side stitches along a curve would be even worse. So here has to change something too.
+In the Image above, the yellow area is the bounding polygon of a group of stitches, used to highlight them. The green dots show the start points and end points of the selected group of stitches that define the polygon. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. Multiple foot side stitches along a curve would be even worse. So here has to change something too.
 
 The Connectors class looses information about internal segments.
 We should also merge the bounding polygons of the children 
 and store the result with the parent. 
 Using polygons is more complex than rectangular bounding boxes, but rectangles would cause overlap.
 We can't use overlap when drizzling down the tree to find which thread is pointed at. 
-Hints:
-
-http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html
-
-http://cgm.cs.mcgill.ca/~orm/mergech.html
 
 http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244
-implements an improvement at stitch level. It needs the following changes but how to test the condition?
+implements an improvement at stitch level. It tries to use control points too, this needs the following changes:
 <pre>
 addPoint(*b.getStart(), a.getEnd()*,rights,b.getC1());
 addPoint(*b.getStart(), a.getEnd()*,rights,a.getC2());
@@ -83,3 +78,36 @@ addPoint(*b.getEnd(), a.getStart()*,lefts,a.getC1());
 /`*``*` Adds east to list if the compas is only rotated and not mirrored. `*`/
 private void addPoint(*Point north, Point south*, List<Point> list, Point *east*){
 </pre>
+
+=Question=
+
+How to implement the following isMirrored?
+
+<pre>
+import java.awt.geom.Point2D;
+public class Compas {
+  private static boolean isMirrored(
+       Point2D north, 
+       Point2D east, 
+       Point2D south)
+  {
+     return false;
+  }
+  public static void main (String[] args) {
+    Point2D[][] ps = { 
+      // (0,0) is north-west corner of canvas, compass may be rotated
+      {new Point2D.Float(1,0),new Point2D.Float(1,2),new Point2D.Float(2,1)},//false
+      {new Point2D.Float(1,1),new Point2D.Float(1,2),new Point2D.Float(0,1)},//true
+    };
+    for ( Point2D[] p:ps ) {
+      System.out.println(isMirrored(p[0],p[1],p[2]));
+    }
+  }
+}
+</pre>
+
+Rotate east and and south together around north and return (rotatedEast.x < north.x) ?
+
+Calculate a line through east perpendicular on north-south and do something with the direction of both lines?
+
+Would java.awt.geom.AffineTransform and/or java.awt.Graphics2D be useful?
