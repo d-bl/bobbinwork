@@ -68,22 +68,22 @@ Using polygons is more complex than rectangular bounding boxes, but rectangles w
 We can't use overlap when drizzling down the tree to find which thread is pointed at. 
 
 http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244
-implements an improvement at stitch level. It tries to use control points too, this needs the following changes:
-<pre>
-addPoint(*b.getStart(), a.getEnd()*,rights,b.getC1());
-addPoint(*b.getStart(), a.getEnd()*,rights,a.getC2());
-addPoint(*b.getEnd(), a.getStart()*,lefts,b.getC2());
-addPoint(*b.getEnd(), a.getStart()*,lefts,a.getC1());
+implements an improvement at stitch level. It tries to use control points too, but needs the following changes:
+{{{
+addPoint(b.getStart(), a.getEnd(),rights,b.getC1());
+addPoint(b.getStart(), a.getEnd(),rights,a.getC2());
+addPoint(b.getEnd(), a.getStart(),lefts,b.getC2());
+addPoint(b.getEnd(), a.getStart(),lefts,a.getC1());
 ...
-/`*``*` Adds east to list if the compas is only rotated and not mirrored. `*`/
-private void addPoint(*Point north, Point south*, List<Point> list, Point *east*){
-</pre>
+/** Adds east to list if the compas is only rotated and not mirrored. */
+private void addPoint(Point north, Point south, List<Point> list, Point east){
+}}}
 
 =Question=
 
 How to implement the following isMirrored?
 
-<pre>
+{{{
 import java.awt.geom.Point2D;
 public class Compas {
   private static boolean isMirrored(
@@ -104,10 +104,10 @@ public class Compas {
     }
   }
 }
-</pre>
+}}}
 
 Rotate east and and south together around north and return (rotatedEast.x < north.x) ?
 
 Calculate a line through east perpendicular on north-south and do something with the direction of both lines?
 
-Would java.awt.geom.AffineTransform and/or java.awt.Graphics2D be useful?
+Would `java.awt.geom.AffineTransform` and/or `java.awt.Graphics2D` be useful?
