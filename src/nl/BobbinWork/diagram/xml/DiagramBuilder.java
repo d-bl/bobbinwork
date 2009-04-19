@@ -224,10 +224,12 @@ public class DiagramBuilder {
         return style;
     }
 
- 	private static ThreadStyle createThreadStyle(Node child) {
+     private static ThreadStyle createThreadStyle(Node child) {
+		Element grandChild = (Element) child.getFirstChild();
 		ThreadStyle threadStyle = new ThreadStyle();
-		setStyle ((Element)child, threadStyle);
-		setStyle ((Element) child.getFirstChild(), threadStyle.getShadow());
+		threadStyle.apply(createStyle((Element) child));
+		if (grandChild != null)
+			threadStyle.getShadow().apply(createStyle(grandChild));
 		return threadStyle;
 	}
 
