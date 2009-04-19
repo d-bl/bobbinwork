@@ -36,7 +36,7 @@ public class ThreadStyle extends Style {//TODO inheritance->composition
 	 */
     public void setColor(Color color) {
         super.setColor(color);
-        setShadowDefaultColor();
+        setDefaultShadow();
     }
 
 	/**
@@ -45,10 +45,9 @@ public class ThreadStyle extends Style {//TODO inheritance->composition
 	 */
     public void setWidth(int width) {
         super.setWidth(width);
-        setShadowDefaultWidth();
     }
 
-    private void setShadowDefaultColor() {
+    private void setDefaultShadow() {
     	Color color = getColor();
     	int r = color.getRed();
     	int g = color.getGreen();
@@ -60,22 +59,34 @@ public class ThreadStyle extends Style {//TODO inheritance->composition
     		shadow = new Style();
     	}
     	shadow.setColor(new Color(r, g, b));
+        shadow.setWidth(getWidth() * 5);
     }
     
-	private void setShadowDefaultWidth() {
-		if (shadow == null) {
-            shadow = new Style();
-        }
-        shadow.setWidth(getWidth() * 5);
-	}
-
     /** Creates a new instance with default values. */
     public ThreadStyle() {
         super();
-        setShadowDefaultColor();
-        setShadowDefaultWidth();
+        setDefaultShadow();
     }
 
+	/**
+	 * Creates a new instance with custom values.
+	 * 
+	 * @param core
+	 *            The stroke drawn on top of the shadow.
+	 * @param shadow
+	 *            The first drawn stroke. Null defaults to brighter and wider
+	 *            than the core.
+	 */
+	public ThreadStyle(Style core, Style shadow) {
+		super(core);
+		if (shadow == null) {
+			setDefaultShadow();
+		} else {
+			getShadow().setColor(shadow.getColor());
+			getShadow().setWidth(shadow.getWidth());
+		}
+	}
+    
     /**
      * Creates a new instance of threadStyle.
      * 

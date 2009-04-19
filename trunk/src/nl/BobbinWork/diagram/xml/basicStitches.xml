@@ -261,7 +261,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </cross>
             </stitch>
                 
-            <stitch id="tc_ltr" pairs="5-6">
+            <stitch id="tc_ltr" pairs="17-18">
                 <title>
                     <value lang="en">half Stitch - weaving from left to right</value>
                     <value lang="nl">netslag - loper van links naar rechts</value>
@@ -282,7 +282,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </cross>
             </stitch>
 
-            <stitch id="tc_rtl" pairs="7-8">
+            <stitch id="tc_rtl" pairs="19-20">
                 <title>
                     <value lang="en">half Stitch - weaving from right to left</value>
                     <value lang="nl">netslag - loper van rechts naar links</value>
@@ -305,13 +305,13 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     
         </group>
                     
-        <group pairs="1-1" display="no">
+        <group pairs="2-2" display="no">
 
             <title>
                 <value lang="en">at most 2 preceding twists</value>
                 <value lang="nl">maximaal 2 voorafgaande draaien</value>
             </title>
-            <group pairs="1-1" display="no">
+            <group pairs="21-21" display="no">
     
                 <title>
                     <value lang="en">crossed turning stitch with varying preceding twists</value>
@@ -471,7 +471,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="2-2" display="no">
+            <group pairs="22-22" display="no">
     
                 <title>
                     <value lang="en">turning stitch with varying preceding twists</value>
@@ -553,7 +553,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="3-3" display="no">
+            <group pairs="23-23" display="no">
     
                 <title>
                     <value lang="en">turn even threads with varying preceding twists</value>
@@ -635,7 +635,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="4-4" display="no">
+            <group pairs="24-24" display="no">
     
                 <title>
                     <value lang="en">turn odd threads with varying preceding twists</value>
@@ -717,7 +717,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="5-5" display="no">
+            <group pairs="25-25" display="no">
     
                 <title>
                     <value lang="en">cloth stitch with varying preceding twists</value>
@@ -799,7 +799,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="6-6" display="no">
+            <group pairs="26-26" display="no">
     
                 <title>
                     <value lang="en">no left twist with varying preceding twists</value>
@@ -881,7 +881,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="7-7" display="no">
+            <group pairs="27-27" display="no">
     
                 <title>
                     <value lang="en">no right twist with varying preceding twists</value>
@@ -963,7 +963,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="8-8" display="no">
+            <group pairs="28-28" display="no">
     
                 <title>
                     <value lang="en">half stitch with varying preceding twists</value>
@@ -1047,19 +1047,16 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
             </group>
         </group>
 
-        <group pairs="1-1" display="no">
-
+        <group pairs="3-3" display="no">
             <title>
                 <value lang="en">3 preceding twists</value>
                 <value lang="nl">3 voorafgaande draaien</value>
             </title>
-            <group pairs="1-1" display="no">
-    
                 <title>
                     <value lang="en">crossed turning stitch with varying preceding twists</value>
                     <value lang="nl">gekruiste omkeer slag met variaties in draaien vooraf</value>
                 </title>
-                <group id="tttctctc" pairs="3-4">
+                <group id="tttctctc" pairs="28-29">
                     <title>
                         <value lang="en">triple twists, crossed turning stitch</value>
                         <value lang="nl">3x draaien, gekruiste omkeer slag</value>
@@ -1131,8 +1128,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     </group>    
                     <copy of="ctctc" pairs="1-2" />         
                 </group>
-                
-                <group id="lttctctc" pairs="9-10">
+                <group id="lttctctc" pairs="30-31">
                     <title>
                         <value lang="en">3 twists left, 2 twists right, crossed turning stitch</value>
                         <value lang="nl">3x linker paar draaien, 2x rechter paar draaien, gekruiste omkeer slag</value>
@@ -1141,7 +1137,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="rr" pairs="2-2" />
                     <copy of="ctctc" pairs="1-2" />
                 </group>    
-                <group id="lltctctc" pairs="11-12">
+                <group id="lltctctc" pairs="32-33">
                     <title>
                         <value lang="en">3 twists left, 1 twist right, crossed turning stitch</value>
                         <value lang="nl">3x linker paar draaien, 1x rechter paar draaien, gekruiste omkeer slag</value>
@@ -1150,7 +1146,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="r" pairs="2-2" />
                     <copy of="ctctc" pairs="1-2" />
                 </group>    
-                <group id="lllctctc" pairs="13-14">
+                <group id="lllctctc" pairs="34-35">
                     <title>
                         <value lang="en">3 twists left, crossed turning stitch</value>
                         <value lang="nl">3x linker paar draaien, gekruiste omkeer slag</value>
@@ -1158,8 +1154,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="lll" pairs="1-1" />
                     <copy of="ctctc" pairs="1-2" />
                 </group>    
-    
-                <group id="rttctctc" pairs="21-22">
+                <group id="rttctctc" pairs="36-37">
                     <title>
                         <value lang="en">2 twists left, 3 twists right, crossed turning stitch</value>
                         <value lang="nl">2x linker paar draaien, 3x rechter paar draaien, gekruiste omkeer slag</value>
@@ -1168,7 +1163,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="rrr" pairs="2-2" />
                     <copy of="ctctc" pairs="1-2" />
                 </group>    
-                <group id="rrtctctc" pairs="23-24">
+                <group id="rrtctctc" pairs="38-39">
                     <title>
                         <value lang="en">1 twist left, 3 twist right, crossed turning stitch</value>
                         <value lang="nl">1x linker paar draaien, 3x rechter paar draaien, gekruiste omkeer slag</value>
@@ -1177,7 +1172,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="rrr" pairs="2-2" />
                     <copy of="ctctc" pairs="1-2" />
                 </group>    
-                <group id="rrrctctc" pairs="25-26">
+                <group id="rrrctctc" pairs="40-41">
                     <title>
                         <value lang="en">3 twists right, crossed turning stitch</value>
                         <value lang="nl">3x rechter paar draaien, gekruiste omkeer slag</value>
@@ -1185,9 +1180,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="rrr" pairs="2-2" />
                     <copy of="ctctc" pairs="1-2" />
                 </group>    
-    
-            </group>
-    
         </group>
 
 
@@ -1218,7 +1210,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
     </group>
 
-    <group pairs="1-1">
+    <group pairs="2-2">
         <title>
             <value lang="en">grid (shown if pairs are shown)</value>
             <value lang="nl">raster (wordt getoond als paren getoond worden)</value>
@@ -1281,7 +1273,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <copy of="hor"  pairs="351-360"><move y="1100"/></copy>
 
     </group>
-  <group pairs="1-1" display="no">
+  <group pairs="3-3" display="no">
     <title>
       <value lang="en">composed stitches (building blocks for grounds)</value>
       <value lang="nl">samengestelde slagen (bouwstenen voor gronden)</value>

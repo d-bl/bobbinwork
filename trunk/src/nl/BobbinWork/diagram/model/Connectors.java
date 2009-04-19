@@ -77,19 +77,20 @@ class Connectors<T extends Segment> {
         Shape tmpBounds = getHull();
         T a = segments.get(0);
         T b = segments.get(segments.size()-1);
-        /*                 rights
-         *         a     b                 
-         *         (     )          C1a   ___ a
-         *        / \   / \         C1b  / __ b
-         *      C1   \ /   C1           / /
-         *            X                 |/
-         *      C2   / \   C2           |\
-         *        \ /   \ /         C1a | \__ a
-         *         (     )          C1b  \___ b
-         *         b     a
-         *    left      
+        /*
+         *     a.s   b.s                    a.C1     b.C1
+         *      (     )     a.C1  ___ a.s    /__     __\
+         *     / \   / \    b.C1 / __ b.s   /   \   /   \
+         * a.C1   \ /  b.C1     / /       a.s    \ /    b.s
+         *         X            |/                X
+         * b.C2   / \  a.C2     |\               / \
+         *     \ /   \ /    a.C2| \__ a.e       /   \
+         *      (     )     b.C2 \___ b.e     b.e  a.e 
+         *     b.e   a.e
          *    
-         *       solved              TODO
+         * a.s,b.s,b.c1,a.c2,a.e,b.e,b.c2,a.c1
+         * a.s,b.s,a.e,b.e,b.c2,a.c2,b.c1,a.c1
+         * a.s,a.c1,b.c1,b.s,a.e,b.e
          */
 		addPoint(tmpBounds,rights,b.getC1());
 		addPoint(tmpBounds,rights,a.getC2());

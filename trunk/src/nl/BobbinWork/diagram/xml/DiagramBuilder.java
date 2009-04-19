@@ -61,7 +61,7 @@ public class DiagramBuilder {
 						register(childElement, part);
 						parts.add(part);
 					} else if (childType == ElementType.new_bobbins) {
-						ThreadStyle p = createThreadStyle(child.getFirstChild());
+						ThreadStyle p = createThreadStyle((Element)child.getFirstChild());
 						String nrs[] = childElement.getAttribute("nrs").split(",");
 	                    for (String nr:nrs) {
 	                        // lacemakers start counting with one,
@@ -188,8 +188,7 @@ public class DiagramBuilder {
         }
     }
     
-    /** Creates a new instance of ThreadSegment. 
-     * 
+    /**
      * @param element
      *            <code>&lt;front&nbsp;...&gt;</code> or
      *            <code>&lt;back&nbsp;...&gt;</code>
@@ -199,8 +198,6 @@ public class DiagramBuilder {
     }
     
     /**
-     * Creates a new instance of Segment.
-     * 
      * @param element
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
      */
@@ -209,35 +206,30 @@ public class DiagramBuilder {
     }
     
     /**
-     * Creates a new instance of Style from an XML element with style property
-     * attributes.
-     * 
      * @param element
-     *            XML element of the form
      *            &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
      */
      private static Style createStyle(Element element) {
 
+    	if (element == null) return null;
         Style style = new Style();
-        setStyle(element, style);
-
+        style.setColor(element.getAttribute("color"));
+        style.setWidth(element.getAttribute("width"));
         return style;
     }
 
-     private static ThreadStyle createThreadStyle(Node child) {
-		Element grandChild = (Element) child.getFirstChild();
-		ThreadStyle threadStyle = new ThreadStyle();
-		threadStyle.apply(createStyle((Element) child));
-		if (grandChild != null)
-			threadStyle.getShadow().apply(createStyle(grandChild));
-		return threadStyle;
+     /**
+      * @param element
+      *            <pre>
+      *            &lt;...&nbsp;width="..."&nbsp;color="...">;
+      *            	 &lt;...&nbsp;width="..."&nbsp;color="..."/>;
+      *            &lt;/...>;
+      *            </pre>
+      */
+     private static ThreadStyle createThreadStyle(Element child) {
+    	Style shadowStyle = createStyle((Element) child.getFirstChild());
+		return new ThreadStyle(createStyle(child), shadowStyle);
 	}
-
-     private static void setStyle(Element element, Style style) {
-    	 if ( element == null ) return;
-         style.setColor(element.getAttribute("color"));
-         style.setWidth(element.getAttribute("width"));
-     }
 
 	private static Stitch createStitch(Element element) {
 
