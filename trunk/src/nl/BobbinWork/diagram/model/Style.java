@@ -36,10 +36,7 @@ public class Style {
     private int width = 1;
 
     /** Creates a new instance with default properties. */
-    public Style() {
-        setColor(Color.BLACK);
-        setWidth(1);
-    }
+    public Style() {}
 
      /**
      * Creates a new instance (a clone) of Style.
