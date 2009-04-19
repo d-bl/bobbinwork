@@ -57,9 +57,22 @@ Selecting threads has an obvious bug. The current strategy is drizzling into the
 
 = Highlighting (groups of) stitches =
 
-[http://bobbinwork.googlecode.com/svn/wiki/images/bezier/high-lights.PNG]
+(a) [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/high-lights.PNG]
+(b) [http://bobbinwork.googlecode.com/svn/wiki/images/bezier/highlight-complication.PNG]
 
-In the Image above, the yellow area is the bounding polygon of a group of stitches, used to highlight them. The green dots show the start points and end points of the selected group of stitches that define the polygon. That is a quick and dirty solution. It usually works when just drawing grounds. But the red curve at the left of this highlight should also be included. Multiple foot side stitches along a curve would be even worse. So here has to change something too.
+In the images above, the yellow areas are the bounding polygons of a group of stitches, used to highlight them. The coloured dots show the start points and end points of the selected group of stitches that define the polygon. That is a quick and dirty solution. It usually works when just drawing grounds. But the polygon in (a) should extend to the right and the polygon in (b) should extend at the top. Stitches chained to a moon slice would be even worse.
+
+The green dots 
+[http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244#190]<br>
+The red dots 
+[http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244#190]<br>
+
+The improved approach below adds dots between the green and red dots. That should improve (a). However we need additional points between the green dots in (b). So I'm afraid we have to store the polygon in a field, and merge them in the method connect. Possible hints on:<br>
+[http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html]<br>
+[http://cgm.cs.mcgill.ca/~orm/mergech.html]
+
+
+== Improved approach ==
 
 The Connectors class looses information about internal segments.
 We should also merge the bounding polygons of the children 
@@ -79,9 +92,7 @@ addPoint(b.getEnd(), a.getStart(),lefts,a.getC1());
 private void addPoint(Point north, Point south, List<Point> list, Point east){
 }}}
 
-=Question=
-
-How to implement the following isMirrored?
+The method addPoint would need the method isMirrored below, but how to imlement it?
 
 {{{
 import java.awt.geom.Point2D;
