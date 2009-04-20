@@ -231,7 +231,7 @@ public class DiagramBuilder {
 		return new ThreadStyle(createStyle(child), shadowStyle);
 	}
 
-	private static Stitch createStitch(Element element) {
+	static public Stitch createStitch(Element element) {
 
 		Range range = createRange(element);
         Style style = new Style();
