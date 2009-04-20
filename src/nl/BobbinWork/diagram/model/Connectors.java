@@ -178,30 +178,28 @@ class Connectors<T extends Segment> {
         return ins;
     }
 
-    private class Bounds extends Polygon {
-		private static final long serialVersionUID = 1L;
-		void add(Point point){
-			addPoint((int) point.x, (int) point.y);
-		}
-    }
-    
     /** @return @see Partition#getHull() */
     Shape getHull() {
     	Bounds shape = new Bounds();
+    	System.out.println();
         for (T in:ins) {
         	if (in != null)
         		shape.add(in.getStart());
         }
+        /*
         for (Point p:rights) {
         		shape.add(p);
         }
+        */
         for (T out:reverse(outs)) {
         	if (out != null)
         		shape.add(out.getEnd());
         }
+        /*
         for (Point p:lefts) {
         	shape.add(p);
         }
+        */
         return shape;
     }
 }
