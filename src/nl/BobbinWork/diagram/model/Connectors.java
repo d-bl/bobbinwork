@@ -18,7 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import java.awt.Polygon;
 import java.awt.Shape;
 import java.util.List;
 import java.util.Vector;
@@ -74,7 +73,7 @@ class Connectors<T extends Segment> {
         outs = reverse(segments);
         rights = new Vector<Point>(2);
         lefts = new Vector<Point>(2);
-        Shape tmpBounds = getHull();
+        Shape tmpBounds = getBounds();
         T a = segments.get(0);
         T b = segments.get(segments.size()-1);
         /*
@@ -178,28 +177,18 @@ class Connectors<T extends Segment> {
         return ins;
     }
 
-    /** @return @see Partition#getHull() */
-    Shape getHull() {
+    /** @return @see Partition#getBounds() */
+    Shape getBounds() {
     	Bounds shape = new Bounds();
     	System.out.println();
         for (T in:ins) {
         	if (in != null)
         		shape.add(in.getStart());
         }
-        /*
-        for (Point p:rights) {
-        		shape.add(p);
-        }
-        */
         for (T out:reverse(outs)) {
         	if (out != null)
         		shape.add(out.getEnd());
         }
-        /*
-        for (Point p:lefts) {
-        	shape.add(p);
-        }
-        */
         return shape;
     }
 }
