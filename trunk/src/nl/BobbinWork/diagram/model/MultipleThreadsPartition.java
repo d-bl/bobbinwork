@@ -48,8 +48,8 @@ public abstract class MultipleThreadsPartition extends Partition {
         this.threadConnectors = threadConnectors;
     }
 
-    public Shape getHull(){
-        return getThreadConnectors().getHull();
+    public Shape getBounds(){
+        return getThreadConnectors().getBounds();
         
     }
     

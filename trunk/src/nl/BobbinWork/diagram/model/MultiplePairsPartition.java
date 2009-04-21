@@ -37,8 +37,8 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
         return partitions;
     }
 
-    public Shape getHull() {
-        return super.getHull();
+    public Shape getBounds() {
+        return super.getBounds();
         // TODO merge with partions[].getBounds for pins
     }
 
@@ -49,14 +49,14 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
      * 
      * 
      * @param x
-     *            position alon the x-axis
+     *            position along the x-axis, zero is left, minus is out of sight
      * @param y
-     *            position alon the y-axis
+     *            position along the y-axis, zero is top, minus is out of sight
      * 
      * @return null or a <code>Cross</code> or <code>Twist</code> with the
      *         coordinates within its bounds.
      * 
-     * @see nl.BobbinWork.diagram.model.Connectors#getHull
+     * @see nl.BobbinWork.diagram.model.Connectors#getBounds
      */
     public MultipleThreadsPartition getSwitchAt(int x, int y) {
         List<Partition> v = getPartitions();
@@ -64,7 +64,7 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
             Partition p = v.get(i);
             if (p instanceof MultipleThreadsPartition) {
                 MultipleThreadsPartition n = (MultipleThreadsPartition) p;
-                if (n.getHull().contains(x, y)) {
+                if (n.getBounds().contains(x, y)) {
                     if (n instanceof Switch) {
                         return n;
                     } else if (n instanceof MultiplePairsPartition) {

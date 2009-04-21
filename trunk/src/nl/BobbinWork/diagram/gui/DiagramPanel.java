@@ -177,7 +177,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         // clear previous highlights
         paintImmediately(getBounds());
         if (partition != null) {
-            Shape shape = partition.getHull();
+            Shape shape = partition.getBounds();
             if (shape != null) {
                 // set new highlight
                 Graphics2D g2 = (Graphics2D) getGraphics();
@@ -208,7 +208,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
 
         if (lastHigLight != null) {
             g2.setPaint(areaHighlight);
-            g2.fill(lastHigLight.getHull());
+            g2.fill(lastHigLight.getBounds());
         }
         if (threadSegment != null) {
             g2.setPaint(threadHighlight);

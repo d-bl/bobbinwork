@@ -37,7 +37,7 @@ public abstract class Partition {
      *         Adjacent hulls should not overlap but preferably touch one
      *         another with a (complex) line in stead of individual points.
      */
-    public abstract Shape getHull();
+    public abstract Shape getBounds();
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;

@@ -42,7 +42,7 @@ public class Pin extends Partition {
         position = position2;
     }
 
-    public Shape getHull() {
+    public Shape getBounds() {
         Polygon p = new Polygon();
         for (int i = 0; i < 4; i++) {
             p.addPoint((int) position.x, (int) position.y);

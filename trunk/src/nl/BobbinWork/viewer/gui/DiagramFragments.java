@@ -143,7 +143,7 @@ public class DiagramFragments extends JToolBar {
             if (partition != null) {
                 
                 Graphics2D g2 = (Graphics2D) g;
-                Rectangle rect = partition.getHull().getBounds();
+                Rectangle rect = partition.getBounds().getBounds();
                 double scale = (((double) (DIM.height-2*borderWidth)) / ((double) rect.height));
                 double dx =  -rect.x + borderWidth;
                 double dy =  -rect.y + borderWidth;

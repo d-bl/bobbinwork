@@ -118,8 +118,8 @@ public class PointsInSwitches {
 	private static String getSwitchAt(MultiplePairsPartition partition, int x, int y) throws Exception {
 		MultipleThreadsPartition switchAtXy = partition.getSwitchAt(x, y);
 		if (switchAtXy == null) throw new Exception("no cross or twist at ("+x+","+y+")\n" +
-				"bounding polygon for the whole thing: "+((Bounds)partition.getHull()));
-		return ((Bounds) switchAtXy.getHull()).toString();
+				"bounding polygon for the whole thing: "+((Bounds)partition.getBounds()));
+		return ((Bounds) switchAtXy.getBounds()).toString();
 	}
 
 	private static MultiplePairsPartition createPart(String partition)
