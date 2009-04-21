@@ -79,38 +79,37 @@ public class PointsInSwitches {
         MultiplePairsPartition tctc = createPart(TCTC);
         final Object[][] testCaseParameters = new Object[][] {
         		
-        		{ctctc,8,3,ctctc,7,3},
+        		{ctctc,8,3,7,3},
         		
         		// just above end of front end in cross
-        		{tctc,202,98,tctc,202,98},
+        		{tctc,202,98,202,98},
         		
         		// start of front thread in cross
-        		{tctc,200,94,tctc,200,94},
+        		{tctc,200,94,200,94},
 
         		// end of back of left twist; checks merging polygons 
-        		{tctc,186,83,tctc,186,83},
+        		{tctc,186,83,186,83},
         /**/};
         return Arrays.asList(testCaseParameters);
     }
 
-    MultiplePairsPartition a,b;
+    MultiplePairsPartition partition;
     int xa,xb,ya,yb;
 	
-	/** Creates a test object for one of test cases of data(). */
-	public PointsInSwitches(MultiplePairsPartition a, int xa, int ya, MultiplePairsPartition b, int xb, int yb){
-		this.a = a;
-		this.b = b;
+	/** Creates a test object for a test case in data(). */
+	public PointsInSwitches(MultiplePairsPartition p, int xa, int ya, int xb, int yb){
+		this.partition = p;
 		this.xa = xa;
 		this.xb = xb;
 		this.ya = ya;
 		this.yb = yb;
 	}
 	
-	/** Executed for each test case in data(). */
+	/** Executes the test for a case in data(). */
 	@Test
 	public void sameSwitches () throws Exception {
-		String sa = getSwitchAt(a,xa,ya);
-		String sb = getSwitchAt(b,xb,yb);
+		String sa = getSwitchAt(partition,xa,ya);
+		String sb = getSwitchAt(partition,xb,yb);
 		assertTrue (sa+" =/= "+sb,sa.equals(sb));
 	}
 	
