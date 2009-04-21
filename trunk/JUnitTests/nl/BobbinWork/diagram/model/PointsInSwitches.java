@@ -14,10 +14,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /** Positive tests that check the shape of bounding polygons. */
-/**
- * @author User
- *
- */
 @RunWith(Parameterized.class)
 public class PointsInSwitches {
 	
@@ -67,8 +63,10 @@ public class PointsInSwitches {
 	"</cross>"+
 	"</stitch>";
 	
-	/* Extract more examples from a diagram:
-	 * 
+	/*  TODO visualize with a variant of ThreadStyleToolBar.Preview
+
+	    To extract more examples from a diagram:
+	  
 	   	Document tmp = xr.parse(s);
 		TreeExpander.replaceCopyElements(tmp.getDocumentElement());
 		System.out.println( XmlResources.toXmlString(tmp));
@@ -108,6 +106,7 @@ public class PointsInSwitches {
 		this.yb = yb;
 	}
 	
+	/** Executed for each test case in data(). */
 	@Test
 	public void sameSwitches () throws Exception {
 		String sa = getSwitchAt(a,xa,ya);
@@ -115,6 +114,9 @@ public class PointsInSwitches {
 		assertTrue (sa+" =/= "+sb,sa.equals(sb));
 	}
 	
+	/** Searches for a cross or twist in the partition at position (x,y).
+	 * @return the bounding polygon in string format.
+	 */
 	private static String getSwitchAt(MultiplePairsPartition partition, int x, int y) throws Exception {
 		MultipleThreadsPartition switchAtXy = partition.getSwitchAt(x, y);
 		if (switchAtXy == null) throw new Exception("no cross or twist at ("+x+","+y+")\n" +
@@ -122,6 +124,7 @@ public class PointsInSwitches {
 		return ((Bounds) switchAtXy.getBounds()).toString();
 	}
 
+	/** Creates a diagram object model from an XML string. */
 	private static MultiplePairsPartition createPart(String partition)
 			throws Exception {
 		return DiagramBuilder.createStitch(xr.parse(partition).getDocumentElement());
