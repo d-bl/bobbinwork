@@ -67,7 +67,9 @@ The green dots
 The red dots 
 [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244#190]<br>
 
-The improved approach below adds dots between the green and red dots. That should improve (a). However we need additional points between the green dots in (b). So I'm afraid we have to store the polygon in a field, and merge them in the method connect. Possible hints on:<br>
+The improved approach below adds dots between the green and red dots. That should improve (a). However we need additional points between the green dots in (b). So I'm afraid we have to store the polygon in a field, and merge them in the method connect. 
+The stored polygons should reflect changes made by setNext in Connectors.connect
+Possible hints on:<br>
 [http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html]<br>
 [http://cgm.cs.mcgill.ca/~orm/mergech.html]
 
