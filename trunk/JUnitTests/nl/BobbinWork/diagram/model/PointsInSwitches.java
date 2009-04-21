@@ -63,9 +63,7 @@ public class PointsInSwitches {
 	"</cross>"+
 	"</stitch>";
 	
-	/*  TODO visualize with a variant of ThreadStyleToolBar.Preview
-
-	    To extract more examples from a diagram:
+	/*  To extract more examples from a diagram:
 	  
 	   	Document tmp = xr.parse(s);
 		TreeExpander.replaceCopyElements(tmp.getDocumentElement());
