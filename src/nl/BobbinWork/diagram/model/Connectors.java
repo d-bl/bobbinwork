@@ -18,7 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import java.awt.Shape;
 import java.util.List;
 import java.util.Vector;
 
@@ -26,10 +25,10 @@ import java.util.Vector;
  * Manages line segments like connectors on pieces of a jig saw puzzle.
  * Connected pieces result into a bigger piece with less connectors than the sum
  * of connectors of the individual pieces.
- * 
+ *
  * The <em>point</em>s at the border of a partition are
  * <code>getIns(i).getStart()</code> and <code>getOut(i).getEnd()</code>.
- * 
+ *
  * @author J. Falkink-Pol
  */
 class Connectors<T extends Segment> {
@@ -39,100 +38,54 @@ class Connectors<T extends Segment> {
 
 	/** segments along the bottom edge of the jig saw piece (left to right) */
 	private List<T> outs;
-	
-	/**
-	 * points along the left edge of the jig saw piece, in bottom up (clockwise)
-	 * order
-	 */
-	private List<Point> lefts;
-	
-	/**
-	 * points along the right edge of the jig saw piece, in top down (clockwise)
-	 * order
-	 */
-	private List<Point> rights;
+
+	private Bounds<T> bounds = null;
+	List<Connectors<T>> children = new Vector<Connectors<T>>();
 
     /**
 	 * Creates a populated instance for threads of a switch or pairs of a
 	 * stitch.
-	 * 
+	 *
 	 * <pre>
-	 * ins:   a   b 
-	 *         \ /  
-	 *          X   
-	 *         / \  
+	 * ins:   a   b
+	 *         \ /
+	 *          X
+	 *         / \
 	 * outs:  b   a
 	 * </pre>
-	 * 
+	 *
 	 * @param segments
 	 *            ordered (a,b) as shown in the figure.
 	 */
     Connectors(List<T> segments) {
-        // TODO take the widths of the threads into account
         ins = segments;
         outs = reverse(segments);
-        rights = new Vector<Point>(2);
-        lefts = new Vector<Point>(2);
-        Shape tmpBounds = getBounds();
-        T a = segments.get(0);
-        T b = segments.get(segments.size()-1);
-        /*
-         *     a.s   b.s                    a.C1     b.C1
-         *      (     )     a.C1  ___ a.s    /__     __\
-         *     / \   / \    b.C1 / __ b.s   /   \   /   \
-         * a.C1   \ /  b.C1     / /       a.s    \ /    b.s
-         *         X            |/                X
-         * b.C2   / \  a.C2     |\               / \
-         *     \ /   \ /    a.C2| \__ a.e       /   \
-         *      (     )     b.C2 \___ b.e     b.e  a.e 
-         *     b.e   a.e
-         *    
-         * a.s,b.s,b.c1,a.c2,a.e,b.e,b.c2,a.c1
-         * a.s,b.s,a.e,b.e,b.c2,a.c2,b.c1,a.c1
-         * a.s,a.c1,b.c1,b.s,a.e,b.e
-         */
-		addPoint(tmpBounds,rights,b.getC1());
-		addPoint(tmpBounds,rights,a.getC2());
-        addPoint(tmpBounds,lefts,b.getC2());
-        addPoint(tmpBounds,lefts,a.getC1());
+        bounds = new Bounds<T>(ins);
     }
 
-	/** Creates a copy of the list with the elements in reversed order.
-	 * 
-	 * @param segments
-	 * @return
-	 */
-	private List<T> reverse(List<T> segments) {
-		List<T> list = new Vector<T>(segments.size());
+    /** Creates a copy of the list with the elements in reversed order.
+     *
+     * @param segments
+     * @return
+     */
+    private List<T> reverse(List<T> segments) {
+        List<T> list = new Vector<T>(segments.size());
         for (int i = segments.size(); --i >=0; ) {
         	list.add(segments.get(i));
         }
-		return list;
-	}
-    
-    /** Adds point to list if point is outside bounds.
-     * 
-     * @param bounds
-     * @param list
-     * @param point
-     */
-    private void addPoint(Shape bounds, List<Point> list, Point point){
-        if ( ! bounds.contains(point) )
-        	rights.add(point);
+        return list;
     }
 
     /**
      * Creates a new instance to be populated by
      * <code>connect()</code>.
-     * 
+     *
      * @param count
      *            the number of chained thread/pair segments.
      */
     Connectors(int count) {
         ins = new Vector<T>(count);
         outs = new Vector<T>(count);
-        rights = new Vector<Point>(2);
-        lefts = new Vector<Point>(2);
         for (int i=0;i<count;i++) {
         	ins.add(null);
         	outs.add(null);
@@ -142,11 +95,11 @@ class Connectors<T extends Segment> {
     /**
      * Connects the starting segments of a diagram partition to the end segments
      * of preceding diagram partitions.
-     * 
+     *
      * @param child
      *            Connectors of a sub partition of the diagram
      * @param offset
-     *            first bobbin/pair used by the sub partition
+     *            first bobbin/pair used by the child
      */
     void connect(Connectors<T> child, int offset) {
         // visualisation of a diagram partition (stitches/switches):
@@ -166,7 +119,12 @@ class Connectors<T extends Segment> {
                 outs.set(offset + i, child.outs.get(i));
             }
         }
-        // TODO take lefts/rights of children into account
+        children.add(child);
+        
+        bounds = new Bounds<T>();
+        for (Connectors<T> c:children) {
+        	bounds.merge(c.getBounds());
+        }
     }
 
     /**
@@ -178,17 +136,14 @@ class Connectors<T extends Segment> {
     }
 
     /** @return @see Partition#getBounds() */
-    Shape getBounds() {
-    	Bounds shape = new Bounds();
-    	System.out.println();
-        for (T in:ins) {
-        	if (in != null)
-        		shape.add(in.getStart());
+    Bounds<T> getBounds() {
+    	
+    	// TODO remove when merge is implemented or properly stubbed
+    	boolean merged = ins.get(0) != outs.get(outs.size()-1); 
+    	
+    	if (merged || bounds == null || bounds.xpoints.length == 0) {
+        	bounds = new Bounds<T>(ins,outs);
         }
-        for (T out:reverse(outs)) {
-        	if (out != null)
-        		shape.add(out.getEnd());
-        }
-        return shape;
+        return bounds;
     }
 }
