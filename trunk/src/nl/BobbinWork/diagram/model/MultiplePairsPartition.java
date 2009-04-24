@@ -153,7 +153,6 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 
 		abstract void nextSibling();
 
-		@Override
 		public boolean hasNext() {
 			if ( ! current.hasNext() ) {
 				if ( siblings.hasNext() ) {
@@ -163,12 +162,10 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 			return current.hasNext();
 		}
 		
-		@Override
 		public Drawable next() {
 			return current.next();
 		}
 		
-		@Override
 		public void remove() {
 			throw new UnsupportedOperationException ();
 		}

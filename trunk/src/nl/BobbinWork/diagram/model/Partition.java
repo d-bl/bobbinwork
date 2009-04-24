@@ -55,7 +55,6 @@ public abstract class Partition {
 	}
 	private final Iterable<Drawable> threads = new Drawables () {
 
-		@Override
 		public Iterator<Drawable> iterator() {
 			return threadIterator();
 		}
@@ -68,7 +67,6 @@ public abstract class Partition {
 	}
 	private final Iterable<Drawable> pairs = new Drawables () {
 		
-		@Override
 		public Iterator<Drawable> iterator() {
 			return pairIterator();
 		}
@@ -81,7 +79,6 @@ public abstract class Partition {
 	}
 	private final Iterable<Drawable> pins = new Drawables () {
 		
-		@Override
 		public Iterator<Drawable> iterator() {
 			return pinIterator();
 		}
