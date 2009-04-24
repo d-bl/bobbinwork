@@ -19,6 +19,17 @@ public class PointsInSwitches {
 	
 	private static XmlResources xr = null;
 	
+	private static final String BASIC_STITCHES = 
+	"<diagram" +
+	"  xmlns='http://BobbinWork.googlecode.com/bw.xsd'" +
+	"  xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'" +
+	"  xsi:schemaLocation='http://BobbinWork.googlecode.com bw.xsd'" +
+	"  xmlns:xi='http://www.w3.org/2001/XInclude'" +
+	">" +
+	"  <xi:include href='basicStitches.xml'/>" +
+	"  <copy of='ctctc' pairs='1-2'/>" +
+	"</diagram>";
+	
 	private static final String CTCTC= ""+
 	"<stitch id='ctctc' pairs='1-2'>"+
 	"<pair start='0,6.6' end='16.6,23.3'/>"+
@@ -73,20 +84,22 @@ public class PointsInSwitches {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
     	xr = new XmlResources();
-        MultiplePairsPartition ctctc = createPart(CTCTC);
-        MultiplePairsPartition tctc = createPart(TCTC);
-        final Object[][] testCaseParameters = new Object[][] {
+    	MultiplePairsPartition tctc = createPart(TCTC);
+        MultiplePairsPartition ctctc1 = createPart(CTCTC);
+		MultiplePairsPartition ctctc2 = extractPart(BASIC_STITCHES);
+		final Object[][] testCaseParameters = new Object[][] {
         		
-        		{ctctc,8,3,7,3},
+        		{ctctc1,8,3,7,3},
+        		{ctctc2,8,3,7,3}, // FIXME do we actually select the copied ctctc?
         		
         		// just above end of front end in cross
         		{tctc,202,98,202,98},
         		
         		// start of front thread in cross
-        		{tctc,200,94,200,94},
+        		{tctc,200,94,200,94}, // FIXME r269 introduced the problem
 
         		// end of back of left twist; checks merging polygons 
-        		{tctc,186,83,186,83},
+        		{tctc,186,83,186,83}, // TODO merge not yet implemented
         /**/};
         return Arrays.asList(testCaseParameters);
     }
@@ -109,21 +122,31 @@ public class PointsInSwitches {
 		String sa = getSwitchAt(partition,xa,ya);
 		String sb = getSwitchAt(partition,xb,yb);
 		assertTrue (sa+" =/= "+sb,sa.equals(sb));
+		assertTrue ( "empty bounds for switch", ! sa.equals(""));
+		String b = partition.getBounds().toString();
+		assertTrue ( "no bounds for whole thing: "+b, b.matches(".*\\) \\(.*"));
 	}
 	
 	/** Searches for a cross or twist in the partition at position (x,y).
-	 * @return the bounding polygon in string format.
+	 * @return the points of the bounding polygon of the found switch.
 	 */
 	private static String getSwitchAt(MultiplePairsPartition partition, int x, int y) throws Exception {
 		MultipleThreadsPartition switchAtXy = partition.getSwitchAt(x, y);
 		if (switchAtXy == null) throw new Exception("no cross or twist at ("+x+","+y+")\n" +
-				"bounding polygon for the whole thing: "+((Bounds)partition.getBounds()));
-		return ((Bounds) switchAtXy.getBounds()).toString();
+				"bounding polygon for the whole thing: "+(partition.getBounds()));
+		return (switchAtXy.getBounds()).toString();
 	}
 
 	/** Creates a diagram object model from an XML string. */
 	private static MultiplePairsPartition createPart(String partition)
 			throws Exception {
 		return DiagramBuilder.createStitch(xr.parse(partition).getDocumentElement());
+	}
+	
+	/** Creates a diagram object model from an XML string. */
+	private static MultiplePairsPartition extractPart(String partition)
+	throws Exception {
+		Diagram diagram = DiagramBuilder.createDiagram(xr.parse(partition).getDocumentElement());
+		return (MultiplePairsPartition)diagram.getPartitions().get(0);
 	}
 }
