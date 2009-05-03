@@ -1,3 +1,20 @@
+/* PointsInSwitches.java Copyright 2009 by J. Falkink-Pol
+ *
+ * This file is part of BobbinWork.
+ *
+ * BobbinWork is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BobbinWork is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package nl.BobbinWork.diagram.xml;
 
 import static java.lang.Double.valueOf;
@@ -61,7 +78,7 @@ public class DiagramBuilder {
 						register(childElement, part);
 						parts.add(part);
 					} else if (childType == ElementType.new_bobbins) {
-						ThreadStyle p = createThreadStyle((Element)child.getFirstChild());
+						ThreadStyle p = createThreadStyle(child.getFirstChild());
 						String nrs[] = childElement.getAttribute("nrs").split(",");
 	                    for (String nr:nrs) {
 	                        // lacemakers start counting with one,
@@ -188,7 +205,8 @@ public class DiagramBuilder {
         }
     }
     
-    /**
+    /** Creates a new instance of ThreadSegment. 
+     * 
      * @param element
      *            <code>&lt;front&nbsp;...&gt;</code> or
      *            <code>&lt;back&nbsp;...&gt;</code>
@@ -198,6 +216,8 @@ public class DiagramBuilder {
     }
     
     /**
+     * Creates a new instance of Segment.
+     * 
      * @param element
      *            XML element, one of: <pair ...>, <back ...>, <front ...>
      */
@@ -206,32 +226,37 @@ public class DiagramBuilder {
     }
     
     /**
+     * Creates a new instance of Style from an XML element with style property
+     * attributes.
+     * 
      * @param element
+     *            XML element of the form
      *            &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
      */
      private static Style createStyle(Element element) {
 
-    	if (element == null) return null;
         Style style = new Style();
-        style.setColor(element.getAttribute("color"));
-        style.setWidth(element.getAttribute("width"));
+        setStyle(element, style);
+
         return style;
     }
 
-     /**
-      * @param element
-      *            <pre>
-      *            &lt;...&nbsp;width="..."&nbsp;color="...">;
-      *            	 &lt;...&nbsp;width="..."&nbsp;color="..."/>;
-      *            &lt;/...>;
-      *            </pre>
-      */
-     private static ThreadStyle createThreadStyle(Element child) {
-    	Style shadowStyle = createStyle((Element) child.getFirstChild());
-		return new ThreadStyle(createStyle(child), shadowStyle);
+     private static ThreadStyle createThreadStyle(Node child) {
+		Element grandChild = (Element) child.getFirstChild();
+		ThreadStyle threadStyle = new ThreadStyle();
+		threadStyle.apply(createStyle((Element) child));
+		if (grandChild != null)
+			threadStyle.getShadow().apply(createStyle(grandChild));
+		return threadStyle;
 	}
 
-	static public Stitch createStitch(Element element) {
+     private static void setStyle(Element element, Style style) {
+    	 if ( element == null ) return;
+         style.setColor(element.getAttribute("color"));
+         style.setWidth(element.getAttribute("width"));
+     }
+
+	public static Stitch createStitch(Element element) {
 
 		Range range = createRange(element);
         Style style = new Style();
