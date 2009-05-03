@@ -50,10 +50,10 @@ public class SampleDiagramChooser extends JMenu {
 	private static final String BASE_URL = "http://bobbinwork.googlecode.com/svn-history/r278/wiki/diagrams/"; //$NON-NLS-1$
     private static final String[] SAMPLE_URLS = new String[] {//
     	  "snow.xml", //$NON-NLS-1$
-    	// FIXME "flanders.xml", //$NON-NLS-1$
-    	// FIXME "braid-half-stitch.xml", //$NON-NLS-1$
+    	  "flanders.xml", //$NON-NLS-1$
+    	  "braid-half-stitch.xml", //$NON-NLS-1$
     	  "braid-chaos.xml", //$NON-NLS-1$
-    	// FIXME  "braid-row-cloth-row-half-stitch.xml", //$NON-NLS-1$
+    	  "braid-row-cloth-row-half-stitch.xml", //$NON-NLS-1$
     };
     /**
      * Handed down to dialogs.
