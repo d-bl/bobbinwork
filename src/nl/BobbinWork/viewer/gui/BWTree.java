@@ -241,7 +241,7 @@ public class BWTree extends JTree {
         }
     }
 
-    boolean SelectedElementIsDeletable() {
+    boolean selectedElementIsDeletable() {
         try {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) getSelectionPath().getLastPathComponent();
             Element element = (Element) node.getUserObject();
@@ -314,7 +314,7 @@ public class BWTree extends JTree {
             m.reload(tnp);
             setSelectionPath(sp);
         } catch (Exception e) {
-          System.out.println(e);
+          System.out.println("replace failed\n"+e);
           // TODO explain user in some status bar why nothing happens
         }
     }
