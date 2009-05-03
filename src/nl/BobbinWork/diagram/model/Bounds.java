@@ -74,23 +74,7 @@ public class Bounds<T extends Segment> extends Polygon {
 	 * </pre>
 	 */
 	Bounds(List<T> segments) {
-		// TODO make it work for all three situations
-		T a = segments.get(0);
-		T b = segments.get(segments.size() - 1);
-		Bounds<T> tmpBounds = new Bounds<T>();
-		for (T segment : segments) {
-			if (segment != null)
-				add(segment.getStart());
-			tmpBounds.add(segment.getStart());
-		}
-		add(tmpBounds, b.getC1());
-		add(tmpBounds, a.getC2());
-		for (T segment : reverse(segments)) {
-			if (segment != null)
-				tmpBounds.add(segment.getEnd());
-		}
-		add(tmpBounds, b.getC2());
-		add(tmpBounds, a.getC1());
+		qadInit (segments,reverse(segments));
 	}
 
 	Bounds() {
@@ -102,9 +86,13 @@ public class Bounds<T extends Segment> extends Polygon {
 	
 	/** TODO Delete when merge is implemented. */
 	Bounds(List<T> ins, List<T> outs) {
+		qadInit(ins, outs);
+	}
+
+	/** quick and dirty implementation */
+	private void qadInit(List<T> ins, List<T> outs) {
 		for (T segment : ins) {
 			if (segment != null) {
-				add(segment.getStart());
 				add(segment.getStart());
 			}
 		}
@@ -127,11 +115,6 @@ public class Bounds<T extends Segment> extends Polygon {
 			list.add(segments.get(i));
 		}
 		return list;
-	}
-
-	private void add(Bounds<T> tmpBounds, Point point) {
-		if (!tmpBounds.contains(point))
-			add(point);
 	}
 
 	private void add(Point point) {
