@@ -3,6 +3,7 @@ package nl.BobbinWork.diagram.model;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.CubicCurve2D;
+import java.awt.geom.Point2D;
 
 /**
  * A segment of a continuous line. From straight to S-shape. Subsequent segments
@@ -11,6 +12,7 @@ import java.awt.geom.CubicCurve2D;
  */
 public class Segment {
 
+	private static final double BOUNDS_PROXIMITY = 0.6;
 	private Point start;
 	private Point c1;
 	private Point c2;
@@ -19,7 +21,7 @@ public class Segment {
 	private Segment next = null;
 	private Style style = new Style();
 
-    /**
+	/**
 	 * @param start
 	 *            start point of the bezier curve
 	 * @param c1
@@ -29,7 +31,7 @@ public class Segment {
 	 * @param end
 	 *            end point of the bezier curve
 	 * @param twistMarkLength
-	 *            length of the linesegment perpendiculair through the pair
+	 *            length of the line perpendicular through the center of a pair
 	 *            segment to indicate a twist
 	 */
     public Segment(Point start, Point c1, Point c2, Point end) {
@@ -47,7 +49,7 @@ public class Segment {
     	}
     }
     
-	protected Point pointBetween(Point a, Point b, double t) {
+	protected static Point pointBetween(Point2D a, Point2D b, double t) {
 	    return new Point((a.getX() * (1 - t)) + (b.getX() * t), (a.getY() * (1 - t)) + (b.getY() * t));
 	}
 
@@ -63,10 +65,20 @@ public class Segment {
 	    return c1;
 	}
 
+	/** @return a point between start and C1 for tight bounds */
+	Point getC1c() {
+		return pointBetween(start, c1, BOUNDS_PROXIMITY);
+	}
+	
 	void setC1(Point c1) {
 	    this.c1.setLocation(c1);
 	}
 
+	/** @return a point between end and C2 for tight bounds */
+	Point getC2c() {
+		return pointBetween(start, c1, 1f - BOUNDS_PROXIMITY);
+	}
+	
 	Point getC2() {
 	    return c2;
 	}
