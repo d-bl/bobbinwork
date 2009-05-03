@@ -1293,7 +1293,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <!-- S  --><copy of="tctc" pairs="2-3"><move y="50" x="30"/></copy>
       </group>
     </group>
-    <group id="snowflake" pairs="1-6">
+    <group id="snowflake" pairs="11-16">
      <title>
       <value lang="en">snowflake</value>
       <value lang="nl">sneeuwvlok</value>
@@ -1336,7 +1336,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <!-- 18 --><copy of="ctc" pairs="3-4"><move x="70" y="150"/></copy>
      </group>
     </group>
-    <group id="spider" pairs="1-6">
+    <group id="spider" pairs="21-26">
       <title>
         <value lang="en">spider</value>
         <value lang="nl">spin</value>
@@ -1357,7 +1357,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <pin position="78,93"/>
       <copy of="spider_bottom" pairs='1-6'/>
     </group>
-    <group id="vierge" pairs="1-4">
+    <group id="vierge" pairs="31-34">
       <title>
         <value lang="en">vierge</value>
         <value lang="nl">maagdengrond</value>
@@ -1378,7 +1378,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <copy of="ctc"  pairs="2-3"><move x="50" y="112"/></copy>
       <pin position="58,105" />
     </group>
-    <group id="sGravenmoers" pairs="1-4">
+    <group id="sGravenmoers" pairs="41-44">
       <title>
         <value lang="en">sGravenmoers</value>
         <value lang="nl">sGravenmoers</value>
