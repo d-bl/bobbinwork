@@ -26,22 +26,51 @@ public class Bounds<T extends Segment> extends Polygon {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Creates a shape through points of (usually 2) segments. Some examples:
+	 * Creates a shape around (usually 2) crossing segments.<br>
+	 * <br>
+	 * For more or less straight segments, the bounding polygon would be:
+	 * a.s,b.s,a.e,b.e. The figures below show some examples where the curves
+	 * are not completely within the bounds described above. The start of a
+	 * third segment would always be between a.s/b.s and its end between a.e/b.e
 	 * 
 	 * <pre>
-	 *     a.s   b.s                    a.C1     b.C1
-	 *      (     )     a.C1  ___ a.s    /__     __\
-	 *     / \   / \    b.C1 / __ b.s   /   \   /   \
-	 * a.C1   \ /  b.C1     / /       a.s    \ /    b.s
-	 *         X            |/                X
-	 * b.C2   / \  a.C2     |\               / \
-	 *     \ /   \ /    a.C2| \__ a.e       /   \
-	 *      (     )     b.C2 \___ b.e     b.e  a.e 
+	 *   in a plait      head side     in false foot side
+	 * 
+	 *     a.s   b.s                     a.C1     b.C1
+	 *      (     /     a.C1   ___ a.s    /__     __\
+	 *     / \   /       b.C1 / __ b.s   /   \   /   \
+	 * a.C1   \ /            / /       a.s    \ /    b.s
+	 *         X             |/                X
+	 * b.C2   / \            |\               / \
+	 *     \ /   \       a.C2| \__ a.e       /   \
+	 *      (     \     b.C2  \___ b.e     b.e  a.e 
 	 *     b.e   a.e
-	 *    
-	 * a.s,b.s,b.c1,a.c2,a.e,b.e,b.c2,a.c1
-	 * a.s,b.s,a.e,b.e,b.c2,a.c2,b.c1,a.c1
-	 * a.s,a.c1,b.c1,b.s,a.e,b.e
+	 * </pre>
+	 * 
+	 * The proper polygons would be:
+	 * 
+	 * <pre>
+	 * a.s,b.s,a.e,b.e,b.C2,a.C1
+	 * a.s,b.s,a.e,b.e,b.C2,a.C1
+	 * a.s,a.C1,b.C1,b.s,a.e,b.e
+	 * </pre>
+	 * 
+	 * To avoid overlap in adjacent bounds (which at the same time avoids
+	 * crossing control lines), use getC1c getC2c rather than getC2 getC2<br>
+	 * <br>
+	 * a formal expression applied to one of the corners:
+	 * 
+	 * <pre>
+	 * if( corner(b.e,a.s,a.C1) &lt; corner(a.C1,a.s,b.s) )
+	 * then a.C1 before a.s otherwise a.C1 after a.s
+	 * </pre>
+	 * 
+	 * This does not cover the center figure. Another approach:
+	 * 
+	 * <pre>
+	 * merge a.s,b.s,a.e,b.e with:
+	 * if ( Line2D.linesIntersect(a.c1/a.c2,b.c1/b.c2) )
+	 * then a.c1,b.c1,a.c2,b.c2 otherwise b.c1,a.c1,a.c2,b.c2
 	 * </pre>
 	 */
 	Bounds(List<T> segments) {
