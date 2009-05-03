@@ -62,17 +62,4 @@ class Rotate extends VectorTransformation {
         return  ( rx + (dx*cos) - (dy*sin) )
         + "," + ( ry + (dx*sin) + (dy*cos) );
     }
-    public static void main(String[] args) throws java.io.IOException {
-        double angleRad;
-        angleRad = ( 45 * java.lang.Math.PI ) /180;
-        System.out.println(java.lang.Math.sin(angleRad)+" "+java.lang.Math.cos(angleRad));
-        angleRad = ( 90 * java.lang.Math.PI ) /180;
-        System.out.println(java.lang.Math.sin(angleRad)+" "+java.lang.Math.cos(angleRad));
-        angleRad = ( 180 * java.lang.Math.PI ) /180;
-        System.out.println(java.lang.Math.sin(angleRad)+" "+java.lang.Math.cos(angleRad));
-        angleRad = ( 270 * java.lang.Math.PI ) /180;
-        System.out.println(java.lang.Math.sin(angleRad)+" "+java.lang.Math.cos(angleRad));
-        
-    }
-
 }
