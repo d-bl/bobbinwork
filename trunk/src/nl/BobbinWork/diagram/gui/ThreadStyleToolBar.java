@@ -28,7 +28,6 @@ import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
