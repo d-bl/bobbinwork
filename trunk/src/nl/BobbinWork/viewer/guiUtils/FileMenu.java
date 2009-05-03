@@ -109,7 +109,7 @@ public class FileMenu extends JMenu {
         jMenuItem = new LocaleMenuItem( "MenuFile_exit", VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //System.exit(0);
+            	throw new ThreadDeath();
             }
         });
         add(jMenuItem);
