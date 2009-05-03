@@ -42,6 +42,7 @@ import javax.swing.JPanel;
 import nl.BobbinWork.bwlib.gui.PrintMenu.PrintablePreviewer;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.model.Drawable;
+import nl.BobbinWork.diagram.model.MultipleThreadsPartition;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.ThreadSegment;
 import nl.BobbinWork.diagram.model.ThreadStyle;
@@ -188,6 +189,11 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         }
     }
 
+    void highlightSwitchAt(int x, int y) {
+    	MultipleThreadsPartition part = diagram.getSwitchAt(x, y);
+    	highLight(part);
+    }    
+    
     /**
      * Highlights the thread segment at the specified position of the diagram
      * 

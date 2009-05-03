@@ -179,9 +179,6 @@ public class ThreadStyleToolBar extends JToolBar {
         setFloatable(false);
         setRollover(true);
         setBorder(null);
-        JButton hint = new JButton(new ImageIcon(ThreadStyleToolBar.class.getResource("styleTooltip.gif"))); //$NON-NLS-1$
-        hint.setMinimumSize(new Dimension(0,0));
-        //hint.setEnabled(false);
         
         // tooltips
         applyStrings(preview, "ThreadStyle"); //$NON-NLS-1$
@@ -189,7 +186,6 @@ public class ThreadStyleToolBar extends JToolBar {
         applyStrings(shadowSpinner, "ThreadStyle_shadow_width"); //$NON-NLS-1$
         applyStrings(coreButton, "ThreadStyle_core_color"); //$NON-NLS-1$
         applyStrings(shadowButton, "ThreadStyle_shadow_color"); //$NON-NLS-1$
-        applyStrings(hint, "ThreadStyle_mouseHint"); //$NON-NLS-1$
  
         // dimensions
         Dimension dim = new Dimension(//
@@ -213,7 +209,6 @@ public class ThreadStyleToolBar extends JToolBar {
         add(Box.createHorizontalStrut(6));
         add(preview);
         add(Box.createHorizontalStrut(0));
-        add(hint);
 
         // the width spinners are mutually constrained and therefore should
         // listen to each other

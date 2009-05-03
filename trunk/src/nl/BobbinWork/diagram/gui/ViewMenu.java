@@ -12,7 +12,6 @@ import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseMotionListener;
 
 import javax.swing.JColorChooser;
 import javax.swing.JFrame;
@@ -72,8 +71,7 @@ class ViewMenu extends JMenu {
     ViewMenu(
     		final DiagramPanel diagramPanel, 
     		final JFrame viewer,
-    		final ThreadStyleToolBar threadStyleToolBar,
-    		final MouseMotionListener mouseMotionListener) {
+    		final ThreadStyleToolBar threadStyleToolBar) {
     	
         applyStrings(this, "MenuView_view"); //$NON-NLS-1$
 
@@ -113,9 +111,6 @@ class ViewMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 diagramPanel.setDiagramType(true, false);
-                if (diagramPanel.getMouseMotionListeners().length <= 0) {
-                    diagramPanel.addMouseMotionListener(mouseMotionListener);
-                }
                 threadStyleToolBar.setVisible(true);
             }
         });
@@ -125,9 +120,6 @@ class ViewMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 diagramPanel.setDiagramType(false, true);
-                if (diagramPanel.getMouseMotionListeners().length > 0) {
-                    diagramPanel.removeMouseMotionListener(mouseMotionListener);
-                }
                 threadStyleToolBar.setVisible(false);
             }
         });
@@ -137,9 +129,6 @@ class ViewMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 diagramPanel.setDiagramType(true, true);
-                if (diagramPanel.getMouseMotionListeners().length <= 0) {
-                    diagramPanel.addMouseMotionListener(mouseMotionListener);
-                }
                 threadStyleToolBar.setVisible(true);
             }
         });
