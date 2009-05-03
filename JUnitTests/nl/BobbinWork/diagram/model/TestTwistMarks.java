@@ -1,4 +1,4 @@
-package nl.BobbinWork.diagram.math;
+package nl.BobbinWork.diagram.model;
 /* Copyright 2008 by J. Falkink-Pol
 *
 * This file is part of BobbinWork.
@@ -18,19 +18,18 @@ package nl.BobbinWork.diagram.math;
 */
 
 
+import static nl.BobbinWork.diagram.model.PairSegment.createTwistMark;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Point2D;
 
-import static org.junit.Assert.*;
-
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import static nl.BobbinWork.diagram.math.Annotations.*;
-
-public class TestAnnotations {
+public class TestTwistMarks {
 	
 	private static final double NOT_A_NUMBER = 0/0.0;
 	private CubicCurve2D curve;
@@ -121,7 +120,7 @@ public class TestAnnotations {
 	@Test
 	public void symmetricStraightLines() {
 		curve.setCurve(0,0, 0,0, 9,0, 9,0);
-	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2,0), 0);
+	    assertEqualLines(expectedTwistMark, PairSegment.createTwistMark(curve,2,0), 0);
 	    
 		curve.setCurve(0,0, 4,0, 5,0, 9,0);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,2,0), 0);
@@ -172,11 +171,6 @@ public class TestAnnotations {
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0   ), 4.5);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.2 ), 0.11);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.15), 1.1);
-
-	    assertEqualLines(
-	    		createTwistMark(curve,10, Annotations.DEFAULT_CORRECTION), 
-	    		createTwistMark(curve,10), 0.0
-	    );
 	}
 	
 	@Test
@@ -209,16 +203,5 @@ public class TestAnnotations {
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0   ), 0.7);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.2 ), 0.7);
 	    assertEqualLines(expectedTwistMark, createTwistMark(curve,10, 0.15), 0.7);
-	}
-
-	@Ignore // not a test class
-	static private class AnnotationsUtil extends Annotations {
-		AnnotationsUtil () {
-		}
-	}
-
-	@Test
-	public void constructor() {
-		new AnnotationsUtil();
 	}
 }
