@@ -51,6 +51,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
+import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
@@ -174,6 +175,7 @@ public class BWViewer {
 		jMenuBar.add(new SampleDiagramChooser(frame,inputStreamListener2));
 		jMenuBar.add(new GroundChooser(inputStreamListener2)); 
 		jMenuBar.add(helpMenu); 
+		jMenuBar.add(new HeapStatusWidget()); 
 		frame.setJMenuBar(jMenuBar);
 	}
 	
@@ -256,7 +258,7 @@ public class BWViewer {
 									// perform the actions:
 									replace.setEnabled(BWTree.elementsMatch(tree.getSelectedElement(),
 											fragments.getSelectedElement()));
-									delete.setEnabled(tree.SelectedElementIsDeletable());
+									delete.setEnabled(tree.selectedElementIsDeletable());
 									diagramPanel.highLight(tree.getSelectedPartition());
 								}
 							}
