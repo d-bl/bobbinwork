@@ -32,7 +32,7 @@ class ViewMenu extends JMenu {
      */
 	static private class DiagramHighlightsMenu extends JMenu {
 
-        private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final JFrame viewer) {
+        private DiagramHighlightsMenu(final DiagramPanel diagramPanel, final JFrame parentForDialogs) {
         	applyStrings(this, "MenuView_highlight");
         	
         	JMenuItem//
@@ -42,7 +42,7 @@ class ViewMenu extends JMenu {
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Color color = JColorChooser.showDialog(//
-                            viewer, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
+                    		parentForDialogs, getString("Dialog_AreaHiglight"), diagramPanel.getAreaHighlight());
                     if (color != null) {
                         ((JMenuItem) e.getSource()).setBackground(color);
                         diagramPanel.setAreaHighlight(color);
@@ -56,7 +56,7 @@ class ViewMenu extends JMenu {
             jMenuItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Color color = JColorChooser.showDialog(//
-                            viewer, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
+                            parentForDialogs, getString("Dialog_ThreadHighlight"), diagramPanel.getThreadHighlight());
                     if (color != null) {
                         ((JMenuItem) e.getSource()).setBackground(color);
                         diagramPanel.setThreadHighlight(color);
@@ -70,7 +70,7 @@ class ViewMenu extends JMenu {
     /** Creates a fully dressed JMenu, controlling the view of the diagram */
     ViewMenu(
     		final DiagramPanel diagramPanel, 
-    		final JFrame viewer,
+    		final JFrame parentForDialogs,
     		final ThreadStyleToolBar threadStyleToolBar) {
     	
         applyStrings(this, "MenuView_view"); //$NON-NLS-1$
@@ -103,7 +103,7 @@ class ViewMenu extends JMenu {
 
         add(new javax.swing.JSeparator());
 
-        add(new DiagramHighlightsMenu(diagramPanel,viewer));
+        add(new DiagramHighlightsMenu(diagramPanel,parentForDialogs));
 
         add(new javax.swing.JSeparator());
 
