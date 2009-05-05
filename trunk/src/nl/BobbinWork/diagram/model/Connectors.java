@@ -138,10 +138,7 @@ class Connectors<T extends Segment> {
     /** @return @see Partition#getBounds() */
     Bounds<T> getBounds() {
     	
-    	// TODO remove when merge is implemented or properly stubbed
-    	boolean merged = ins.get(0) != outs.get(outs.size()-1); 
-    	
-    	if (merged || bounds == null || bounds.xpoints.length == 0) {
+    	if ( bounds == null || bounds.npoints == 0) {
         	bounds = new Bounds<T>(ins,outs);
         }
         return bounds;
