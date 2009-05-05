@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.XmlResources;
@@ -65,40 +66,40 @@ public class PointsInSwitches {
 	
 	/** figure (b) on http://code.google.com/p/bobbinwork/wiki/MathChallenges#Highlighting_(groups_of)_stitches */
 	private static final String TCTC_BASED_ON_BASIC_STITCHES = ""+
-	"<group pairs='1-8'>\n"+
+	"<group pairs='1-2'>\n"+
 	"<copy of='l'   pairs='1-1'><rotate centre='15,15' angle='-45'/><move x='188' y='73'/></copy>"+
     "<copy of='r'   pairs='2-2'><rotate centre='15,15' angle='75' /><move x='215' y='92'/></copy>"+
     "<copy of='ctc' pairs='1-2'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
     "</group>";
 	
-	/** same drawing but differently grouped. TODO should get same bounds for whole thing */
+	/** same drawing but differently grouped. */
 	private static final String TCTC_BUILDING_OWN_STITCHES= ""+
 	"<stitch pairs='1-2'>"+
-	"<pair end='206.69291333853582,99.65124117072072' start='201.61417332292834,85.69751765855855'/>"+
-	"<pair end='197.26120522699915,95.03248786503605' start='211.13040508681317,90.1350094068359'/>"+
+	"<pair end='206.692,99.651' start='201.614,85.697'/>"+
+	"<pair end='197.261,95.032' start='211.130,90.13'/>"+
 	"<twist bobbins='1-2'>"+
-	"<back c1='186.45370132023479,92.66690475583121' c2='177.96841994599623,83.33309524416879' end='186.45370132023479,83.33309524416879' start='177.96841994599623,92.66690475583121'/>"+
-	"<front c1='186.45370132023479,83.33309524416879' c2='177.96841994599623,92.66690475583121' end='186.45370132023479,92.66690475583121' start='177.96841994599623,83.33309524416879'/>"+
+	"<back c1='186.453,92.666' c2='177.968,83.333' end='186.453,83.333' start='177.968,92.666'/>"+
+	"<front c1='186.453,83.333' c2='177.968,92.666' end='186.453,92.666' start='177.968,83.333'/>"+
 	"</twist>"+
 	"<twist bobbins='3-4'>"+
-	"<back c1='243.19479216882343,98.28808519201685' c2='245.87635664134174,110.61404203032062' end='238.52788741299221,106.37140134320134' start='250.54326139717296,102.53072587913613'/>"+
-	"<front c1='238.52788741299221,106.37140134320134' c2='250.54326139717296,102.53072587913613' end='243.19479216882343,98.28808519201685' start='245.87635664134174,110.61404203032062'/>"+
+	"<back c1='243.194,98.288' c2='245.876,110.614' end='238.527,106.371' start='250.543,102.530'/>"+
+	"<front c1='238.527,106.371' c2='250.543,102.530' end='243.194,98.288' start='245.876,110.614'/>"+
 	"</twist>"+
 	"<cross bobbins='2-3'>"+
-	"<back end='202.58155237352025,88.35536975611325' start='209.226182617407,85.9369221296335'/>"+
-	"<front end='208.56318376796213,91.14465028360186' start='206.14473614148238,84.50002003971512'/>"+
+	"<back end='202.581,88.355' start='209.2,85.93'/>"+
+	"<front end='208.563,91.144' start='206.144,84.500'/>"+
 	"</cross>"+
 	"<twist bobbins='1-2'>"+
-	"<back end='199.79227184603164,94.33700115055514' start='197.3738242195519,87.6923709066684'/>"+
-	"<front end='195.9369221296335,90.77381738259301' start='202.58155237352025,88.35536975611325'/>"+
+	"<back end='199.792,94.337' start='197.37,87.69'/>"+
+	"<front end='195.93,90.773' start='202.581,88.355'/>"+
 	"</twist>"+
 	"<twist bobbins='3-4'>"+
-	"<back end='210.98163139444188,97.78928052748861' start='208.56318376796213,91.14465028360186'/>"+
-	"<front end='205.77390324047352,97.12628167804375' start='212.41853348436027,94.707834051564'/>"+
+	"<back end='210.981,97.789' start='208.563,91.144'/>"+
+	"<front end='205.773,97.126' start='212.418,94.7'/>"+
 	"</twist>"+
 	"<cross bobbins='2-3'>"+
-	"<back end='199.12927299658676,99.54472930452351' start='205.77390324047352,97.12628167804375'/>"+
-	"<front end='202.3375049510336,100.7097390583309' start='199.79227184603164,94.33700115055514'/>"+
+	"<back end='199.129,99.544' start='205.773,97.126'/>"+
+	"<front end='202.33,100.70' start='199.792,94.337'/>"+
 	"</cross>"+
 	"</stitch>";
 
@@ -114,21 +115,21 @@ public class PointsInSwitches {
     	MultiplePairsPartition tctcOS = createPart(TCTC_BUILDING_OWN_STITCHES);
 		MultiplePairsPartition ctctcBS = extractPart("<copy of='ctctc' pairs='1-2'/>");
 		MultiplePairsPartition ctctcOS = createPart(CTCTC);
-		System.out.println( XmlResources.toXmlString( parseEmbedded( TCTC_BASED_ON_BASIC_STITCHES )));
+		//System.out.println( XmlResources.toXmlString( parseEmbedded( TCTC_BASED_ON_BASIC_STITCHES )));
 
 		
 		final Object[][] testCaseParameters = new Object[][] {
         		
-        		{ctctcOS,ctctcBS,8,3,7,3}, 
+        		{ctctcBS,ctctcOS,8,3,7,3}, 
         		
         		// just above end of front end in cross
-        		{tctcOS,tctcBS,202,98,202,98},
+        		{tctcBS,tctcOS,202,98,202,98},
         		
-        		// start of front thread in cross
-        		{tctcOS,tctcBS,200,94,200,94}, // FIXME r269 introduced the problem
+        		// start of front thread in second cross
+        		{tctcBS,tctcOS,200,95,200,95}, 
 
         		// end of back of left twist; checks merging polygons 
-        		{tctcOS,tctcOS,186,83,186,83}, // TODO merge not yet implemented
+        		{tctcBS,tctcOS,186,83,186,83}, // TODO merge not yet implemented
         /**/};
         return Arrays.asList(testCaseParameters);
     }
@@ -199,7 +200,6 @@ public class PointsInSwitches {
 	
 	private void assertEqualShapes(Drawable drawableP, Drawable drawableQ) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	private String getBounds(MultiplePairsPartition part) {
@@ -238,8 +238,9 @@ public class PointsInSwitches {
 	private static MultiplePairsPartition extractPart(String partition)
 	throws Exception {
 		Element parsed = parseEmbedded(partition).getDocumentElement();
-		Diagram diagram = DiagramBuilder.createDiagram(parsed);
-		return (MultiplePairsPartition)diagram.getPartitions().get(1);
+		List<Partition> parts = DiagramBuilder.createDiagram(parsed).getPartitions();
+		MultiplePairsPartition part = (MultiplePairsPartition)parts.get(parts.size()-1);
+		return (MultiplePairsPartition) part.getPartitions().get(0);
 	}
 
 	private static Document parseEmbedded(String s) throws Exception {

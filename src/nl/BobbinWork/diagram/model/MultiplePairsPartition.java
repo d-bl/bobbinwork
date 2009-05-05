@@ -18,7 +18,6 @@
 
 
 package nl.BobbinWork.diagram.model;
-import java.awt.Shape;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -37,9 +36,8 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
         return partitions;
     }
 
-    public Shape getBounds() {
+    public Bounds<ThreadSegment> getBounds() {
         return super.getBounds();
-        // TODO merge with partions[].getBounds for pins
     }
 
     /**

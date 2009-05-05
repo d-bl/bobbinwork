@@ -74,23 +74,24 @@ public class Bounds<T extends Segment> extends Polygon {
 	 * </pre>
 	 */
 	Bounds(List<T> segments) {
-		qadInit (segments,reverse(segments));
+		init (segments,reverse(segments));
 	}
 
 	Bounds() {
 	}
 	
-	void merge(Bounds<T> newBounds) {
+	void merge(Bounds<T> childBounds) {
 		// TODO implement this stub
+		npoints = 0;
 	}
 	
 	/** TODO Delete when merge is implemented. */
 	Bounds(List<T> ins, List<T> outs) {
-		qadInit(ins, outs);
+		init(ins, outs);
 	}
 
 	/** quick and dirty implementation */
-	private void qadInit(List<T> ins, List<T> outs) {
+	private void init(List<T> ins, List<T> outs) {
 		for (T segment : ins) {
 			if (segment != null) {
 				add(segment.getStart());
@@ -128,5 +129,4 @@ public class Bounds<T extends Segment> extends Polygon {
 		}
 		return s;
 	}
-
 }

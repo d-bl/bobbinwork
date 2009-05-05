@@ -76,7 +76,7 @@ public class TestExpand extends XmlFixture {
   private void check(File expected, String xmlContent) throws Exception {
 
     String resultingXml = check(xmlContent);
-
+System.out.println(resultingXml);
     if ( expected != null ) {
       assertEquals(
           "transformed xml not as predicted", 

@@ -18,7 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import java.awt.Shape;
 
 /**
  * DiagramPanel section containing multiple threads segments.
@@ -48,8 +47,8 @@ public abstract class MultipleThreadsPartition extends Partition {
         this.threadConnectors = threadConnectors;
     }
 
-    public Shape getBounds(){
-        return getThreadConnectors().getBounds();
+    public Bounds<ThreadSegment> getBounds(){
+        return threadConnectors.getBounds();
         
     }
     

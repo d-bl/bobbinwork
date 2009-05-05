@@ -57,7 +57,7 @@ public class Range {
      * Get the number of the last (pair of) bobbins.
      * 
      * Count the positions of the (pairs of) bobbins from left to right starting
-     * with 1 and relative within the ancester in terms of XML elements.
+     * with 1 and relative within the ancestor in terms of XML elements.
      * 
      * @return the number of the last (pair of) bobbins
      */
