@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -76,7 +77,11 @@ public class TestExpand extends XmlFixture {
   private void check(File expected, String xmlContent) throws Exception {
 
     String resultingXml = check(xmlContent);
-System.out.println(resultingXml);
+    
+    PrintStream x = new PrintStream("tmp2.xml");
+    x.println(resultingXml);
+    x.close();
+    
     if ( expected != null ) {
       assertEquals(
           "transformed xml not as predicted", 
