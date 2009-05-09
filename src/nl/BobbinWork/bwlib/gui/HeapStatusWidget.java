@@ -25,27 +25,20 @@ package nl.BobbinWork.bwlib.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DecimalFormat;
 import java.text.MessageFormat;
-import java.text.NumberFormat;
 
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
-/**
- * An updating widget showing memory consumption
- */
+/** An updating widget showing memory consumption */
 public class HeapStatusWidget extends JProgressBar {
   
   private static final long serialVersionUID = 1L;
 
-  private final static NumberFormat FORMAT = new DecimalFormat("0.0");
-  
-  private MessageFormat tooltip = new MessageFormat("Heap: {0}MB used {1}MB free {2}MB max");
+  private MessageFormat caption = new MessageFormat(Localizer.getString("heap_caption"));
 
-  /**
-   * constructor
-   */
+  private MessageFormat tooltip = new MessageFormat(Localizer.getString("heap_tooltip"));
+
   public HeapStatusWidget() {
     super(0,100);
     setValue(0);
@@ -73,18 +66,16 @@ public class HeapStatusWidget extends JProgressBar {
     
     // set status
     setValue(percent);
-    setString(format(used, true)+"MB ("+percent+"%)");
+    setString(caption.format(new String[]{ format(used), ""+percent}));
 
     // add tip
     super.setToolTipText(null);
-    super.setToolTipText(tooltip.format(new String[]{ format(used, false), format(free, false), format(max, false)}));
-    
-    // done
+    super.setToolTipText(tooltip.format(new String[]{ format(used), format(free), format(max)}));
   }
   
-  private String format(long mb, boolean decimals) {
+  private String format(long mb) {
     double val = mb/1000000D;
-    return decimals ? FORMAT.format(mb/1000000D) : Integer.toString((int)Math.round(val));
+    return Integer.toString((int)Math.round(val));
   }
 
   /**
@@ -96,5 +87,4 @@ public class HeapStatusWidget extends JProgressBar {
     // blank for now
     super.setToolTipText("");
   }
-  
 }
