@@ -73,6 +73,7 @@ public class InteractiveDiagramPanel extends JPanel {
     	}
     }
     
+    /** a button allowing the user to get the style of the selected thread */
     private class GetButton extends MyButton {
     	GetButton () {
     		super("pipette.gif");//$NON-NLS-1$
@@ -86,6 +87,7 @@ public class InteractiveDiagramPanel extends JPanel {
     	}
     }
     
+    /** a button allowing the user to apply the style to the selected thread */
     private class SetButton extends MyButton {
     	SetButton () {
     		super("pinsel.gif");//$NON-NLS-1$
@@ -111,8 +113,8 @@ public class InteractiveDiagramPanel extends JPanel {
             add(new CMenuBar(menu));
             add(Box.createHorizontalGlue());
             add(toolBar);
-            add(new GetButton());
-            add(new SetButton());
+            toolBar.add(new GetButton());
+            toolBar.add(new SetButton());
     	}
     }
 }
