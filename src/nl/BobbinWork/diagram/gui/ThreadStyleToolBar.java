@@ -25,7 +25,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ResourceBundle;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -117,9 +116,11 @@ public class ThreadStyleToolBar extends JToolBar {
 
     private abstract class ColorButton extends JButton implements ActionListener {
 
-        ColorButton(Color color) {
+        ColorButton(Color color, String caption) {
 
+        	super(caption); //$NON-NLS-1$
             setBackground(color);
+            setForeground(color);
             Dimension dim = new Dimension(20, 20);
             setPreferredSize(dim);
             setMaximumSize(dim);
@@ -133,6 +134,7 @@ public class ThreadStyleToolBar extends JToolBar {
             Color color = JColorChooser.showDialog(this, this.getText(), source.getBackground());
             if (color != null) {
                 source.setBackground(color);
+                source.setForeground(color);
                 setThreadPen(color);
                 preview.update();
             }
@@ -141,13 +143,13 @@ public class ThreadStyleToolBar extends JToolBar {
         protected abstract void setThreadPen(Color color);
     }
 
-    private ColorButton shadowButton = new ColorButton(getStyleOfFrontThread().getShadow().getColor()) {
+    private ColorButton shadowButton = new ColorButton(getStyleOfFrontThread().getShadow().getColor(), "=") {
         protected void setThreadPen(Color color) {
             getStyleOfFrontThread().getShadow().setColor(color);
         }
     };
 
-    private ColorButton coreButton = new ColorButton(getStyleOfFrontThread().getColor()) {
+    private ColorButton coreButton = new ColorButton(getStyleOfFrontThread().getColor(), "-") {
         protected void setThreadPen(Color color) {
             getStyleOfFrontThread().setColor(color);
             if (shadowButton.getBackground().getRGB() == -1) {
@@ -174,7 +176,7 @@ public class ThreadStyleToolBar extends JToolBar {
         
     }
     
-    ThreadStyleToolBar(ResourceBundle bundle) throws ParserConfigurationException {
+    ThreadStyleToolBar() throws ParserConfigurationException {
         setFloatable(false);
         setRollover(true);
         setBorder(null);

@@ -2,7 +2,6 @@ package nl.BobbinWork.diagram.gui;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.PAGE_START;
-import static nl.BobbinWork.bwlib.gui.Localizer.getBundle;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
-import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,18 +32,21 @@ import nl.BobbinWork.diagram.model.Point;
 public class InteractiveDiagramPanel extends JPanel {
 
 	private final DiagramPanel diagramPanel;
+	private final ThreadStyleToolBar threadStyleToolBar;
 	private Point selected = null;
-	private final ThreadStyleToolBar threadStyleToolBar = new ThreadStyleToolBar(getBundle());
 	
     public InteractiveDiagramPanel(
-    		final DiagramPanel diagramPanel, 
-    		final JFrame viewer) 
+    		final DiagramPanel panel, 
+    		final JFrame parentForDialogs) 
     throws ParserConfigurationException {
 		
 		super(new BorderLayout());
 		
-		this.diagramPanel = diagramPanel;
+		threadStyleToolBar = new ThreadStyleToolBar();
+		threadStyleToolBar.add(new GetButton());
+		threadStyleToolBar.add(new SetButton());
 		
+		diagramPanel = panel;
         diagramPanel.setDiagramType(true, false);
         diagramPanel.addMouseListener(new MouseAdapter() {
 
@@ -58,7 +59,7 @@ public class InteractiveDiagramPanel extends JPanel {
 
         JMenu menuList[] = new JMenu[] { 
         		new PrintMenu(diagramPanel), 
-        		new ViewMenu(diagramPanel, viewer, threadStyleToolBar)};
+        		new ViewMenu(diagramPanel, parentForDialogs, threadStyleToolBar)};
         
         add (new CToolBar( threadStyleToolBar, menuList ), PAGE_START);
         add(new JScrollPane(diagramPanel), CENTER);
@@ -78,7 +79,6 @@ public class InteractiveDiagramPanel extends JPanel {
     	GetButton () {
     		super("pipette.gif");//$NON-NLS-1$
     		addActionListener(new ActionListener(){
-    			@Override
     			public void actionPerformed(ActionEvent e) {
     				if ( selected == null ) return;
     				threadStyleToolBar.setStyleOfFrontThread//
@@ -92,7 +92,6 @@ public class InteractiveDiagramPanel extends JPanel {
     	SetButton () {
     		super("pinsel.gif");//$NON-NLS-1$
     		addActionListener(new ActionListener(){
-    			@Override
     			public void actionPerformed(ActionEvent e) {
     				if ( selected == null ) return;
                     diagramPanel.setThreadStyleAt(//
@@ -111,10 +110,8 @@ public class InteractiveDiagramPanel extends JPanel {
             setBorder(null);
 
             add(new CMenuBar(menu));
-            add(Box.createHorizontalGlue());
+            // add(Box.createHorizontalGlue()); // would hide most on ubuntu
             add(toolBar);
-            toolBar.add(new GetButton());
-            toolBar.add(new SetButton());
     	}
     }
 }
