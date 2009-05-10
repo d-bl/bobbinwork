@@ -7,7 +7,7 @@
 >
   <!-- This file is licensed under http://creativecommons.org/licenses/by/3.0/ 
     -->
-  <xi:include href='http://bobbinwork.googlecode.com/svn-history/r278/trunk/src/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <xi:include href='http://bobbinwork.googlecode.com/svn-history/r288/trunk/src/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group id="snow" pairs="32761-32766">
     <pin position="58,0"/>
     <pin position="0,43"/>
