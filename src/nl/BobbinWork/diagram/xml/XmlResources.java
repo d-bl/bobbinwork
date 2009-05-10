@@ -52,7 +52,7 @@ public class XmlResources {
   static final String ROOT = "<?xml version='1.0' encoding='UTF-8'?>" + 
   "<diagram" + XmlResources.ROOT_ATTRIBUTES + ">";
   
-  static private Validator validator = newValidator();
+  static private Validator validator = null;
   static private XPath xPath = XPathFactory.newInstance().newXPath();
   static private DocumentBuilder parser;
   
@@ -117,14 +117,14 @@ public class XmlResources {
   public void validate(File xmlFile) 
   throws IOException, SAXException {
     
-    if ( validator == null ) return;
+    if ( validator == null && null == (validator=newValidator()) ) return;
     validator.validate(new DOMSource( parser.parse(xmlFile) ));
   }
   
   public static void validate(Document source) 
   throws IOException, SAXException {
     
-    if ( validator == null ) return;
+    if ( validator == null && null == (validator=newValidator()) ) return;
     validator.validate(new DOMSource(source));
   }
   
@@ -140,7 +140,7 @@ public class XmlResources {
   public void validate(String xmlContent) 
   throws SAXException, IOException, TransformerException {
     
-    if ( validator == null ) return;
+	if ( validator == null && null == (validator=newValidator()) ) return;
     validator.validate( new DOMSource( parse(xmlContent)));
   }
 
