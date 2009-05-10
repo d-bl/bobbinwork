@@ -25,8 +25,10 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
@@ -37,6 +39,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.xml.parsers.ParserConfigurationException;
 
+import nl.BobbinWork.diagram.model.Style;
 import nl.BobbinWork.diagram.model.Switch;
 import nl.BobbinWork.diagram.model.ThreadStyle;
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
@@ -50,14 +53,39 @@ public class ThreadStyleToolBar extends JToolBar {
 
     private Switch twist;
 
-    ThreadStyle getStyleOfFrontThread() {
+    ThreadStyle getCoreStyle() {
         return twist.getFront().getStyle();
     }
-
-    private ThreadStyle getStyleOfBackThread() {
-        return twist.getBack().getStyle();
+    private Style getShadowStyle() {
+    	return twist.getFront().getStyle().getShadow();
     }
 
+    private int getCoreWidth() {
+    	return getCoreStyle().getWidth();
+    }
+    
+    private int getShadowWidth() {
+    	return getShadowStyle().getWidth();
+    }
+    
+    private void setCoreWidth(int value) {
+    	twist.getFront().getStyle().setWidth(value);
+    	twist.getBack().getStyle().setWidth(value);
+    }
+    private void setShadowWidth(int value) {
+    	twist.getFront().getStyle().getShadow().setWidth(value);
+    	twist.getBack().getStyle().getShadow().setWidth(value);
+    }
+    
+    private void setCoreColor(Color value) {
+    	twist.getFront().getStyle().setColor(value);
+    	twist.getBack().getStyle().setColor(value);
+    }
+    private void setShadowColor(Color value) {
+    	twist.getFront().getStyle().getShadow().setColor(value);
+    	twist.getBack().getStyle().getShadow().setColor(value);
+    }
+    
     // makes the style of the twist threads available
     private Preview preview = new Preview();
 
@@ -96,17 +124,15 @@ public class ThreadStyleToolBar extends JToolBar {
         }
 
         private void update() {
-            getStyleOfBackThread().apply(getStyleOfFrontThread());
             preview.repaint();
         }
     }
 
     private JSpinner coreSpinner = new JSpinner(new SpinnerNumberModel //
-            (getStyleOfFrontThread().getWidth(), 1, getStyleOfFrontThread().getShadow().getWidth() - 2, 1));
+            (getCoreWidth(), 1, getShadowWidth() - 2, 1));
 
     private JSpinner shadowSpinner = new JSpinner(new SpinnerNumberModel //
-            (getStyleOfFrontThread().getShadow().getWidth(), getStyleOfFrontThread().getWidth() + 2, 20,
-                    2));
+            (getShadowWidth(), getCoreWidth() + 2, 20, 2));
 
     private int getSpinnerValue(ChangeEvent e) {
 
@@ -116,59 +142,58 @@ public class ThreadStyleToolBar extends JToolBar {
 
     private abstract class ColorButton extends JButton implements ActionListener {
 
-        ColorButton(Color color, String caption) {
+        ColorButton(String fileName) {
 
-        	super(caption); //$NON-NLS-1$
-            setBackground(color);
-            setForeground(color);
-            Dimension dim = new Dimension(20, 20);
-            setPreferredSize(dim);
-            setMaximumSize(dim);
-
+    		URL url = ThreadStyleToolBar.class.getResource(fileName);
+			setIcon(new ImageIcon(url));
             addActionListener(this);
         }
 
         public void actionPerformed(ActionEvent e) {
 
-            JButton source = (JButton) e.getSource();
-            Color color = JColorChooser.showDialog(this, this.getText(), source.getBackground());
+            Color color = JColorChooser.showDialog(this, this.getText(), getColor());
             if (color != null) {
-                source.setBackground(color);
-                source.setForeground(color);
-                setThreadPen(color);
+                setColor(color);
                 preview.update();
             }
         }
 
-        protected abstract void setThreadPen(Color color);
+        protected abstract Color getColor();
+        protected abstract void setColor(Color color);
     }
 
-    private ColorButton shadowButton = new ColorButton(getStyleOfFrontThread().getShadow().getColor(), "=") {
-        protected void setThreadPen(Color color) {
-            getStyleOfFrontThread().getShadow().setColor(color);
+    private ColorButton shadowButton = new ColorButton("back.PNG") { //$NON-NLS-1$
+    	
+    	protected Color getColor() {
+    		return getShadowStyle().getColor();
+    	}
+        protected void setColor(Color color) {
+            setShadowColor(color);
         }
     };
 
-    private ColorButton coreButton = new ColorButton(getStyleOfFrontThread().getColor(), "-") {
-        protected void setThreadPen(Color color) {
-            getStyleOfFrontThread().setColor(color);
-            if (shadowButton.getBackground().getRGB() == -1) {
+    private ColorButton coreButton = new ColorButton("front.PNG") { //$NON-NLS-1$
+    	
+    	protected Color getColor() {
+    		return getCoreStyle().getColor();
+    	}
+        protected void setColor(Color color) {
+        	Color shadowColor = getShadowStyle().getColor();
+        	int shadowRGB = shadowColor.getRGB();
+            setCoreColor(color);
+			if (shadowRGB == -1) {
                 // once the shadow is white, it should stay white
                 // so override the default brighter background set by the model
-                getStyleOfFrontThread().getShadow().setColor(shadowButton.getBackground());
-            } else {
-                // use the default brighter background set by the model
-                shadowButton.setBackground(getStyleOfFrontThread().getShadow().getColor());
+                setShadowColor(new Color(-1));
             }
         }
     };
 
-    void setStyleOfFrontThread(ThreadStyle p) {
+    void setCoreStyle(ThreadStyle p) {
         if (p != null) {
-            getStyleOfFrontThread().apply(p);
-            coreButton.setBackground(p.getColor());
+            getCoreStyle().apply(p);
+            twist.getBack().getStyle().apply(p);
             ((SpinnerNumberModel) coreSpinner.getModel()).setValue(Integer.valueOf(p.getWidth()));
-            shadowButton.setBackground(p.getShadow().getColor());
             Integer width = Integer.valueOf(p.getShadow().getWidth());
             ((SpinnerNumberModel) shadowSpinner.getModel()).setValue(width);
             preview.update();
@@ -194,9 +219,6 @@ public class ThreadStyleToolBar extends JToolBar {
                 coreSpinner.getPreferredSize().height);
         coreSpinner.setMaximumSize(dim);
         shadowSpinner.setMaximumSize(dim);
-        dim = new Dimension((int) dim.getHeight(), (int) dim.getHeight());
-        coreButton.setMaximumSize(dim);
-        shadowButton.setMaximumSize(dim);
 
         // put the components on the toolbar
         add(Box.createHorizontalStrut(3));
@@ -224,11 +246,11 @@ public class ThreadStyleToolBar extends JToolBar {
 
                 int i = getSpinnerValue(e);
                 shadowModel.setMinimum(Integer.valueOf(i + 2));
-                getStyleOfFrontThread().setWidth(i);
+                setCoreWidth(i);
 
-                // override the default background set by ThreadStyle
+                // override the default shadow set by ThreadStyle
                 i = shadowModel.getNumber().intValue();
-                getStyleOfFrontThread().getShadow().setWidth(i);
+                setShadowWidth(i);
 
                 preview.update();
             }
@@ -242,7 +264,7 @@ public class ThreadStyleToolBar extends JToolBar {
 
                 int i = getSpinnerValue(e);
                 coreModel.setMaximum(Integer.valueOf(i - 2));
-                getStyleOfFrontThread().getShadow().setWidth(i);
+                setShadowWidth(i);
 
                 preview.update();
             }
