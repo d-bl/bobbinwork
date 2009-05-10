@@ -47,7 +47,7 @@ import nl.BobbinWork.bwlib.io.NamedInputStream;
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class SampleDiagramChooser extends JMenu {
 
-	private static final String BASE_URL = "http://bobbinwork.googlecode.com/svn-history/r278/wiki/diagrams/"; //$NON-NLS-1$
+	private static final String BASE_URL = "http://bobbinwork.googlecode.com/svn-history/r293/wiki/diagrams/"; //$NON-NLS-1$
     private static final String[] SAMPLE_URLS = new String[] {//
     	  "snow.xml", //$NON-NLS-1$
     	  "flanders.xml", //$NON-NLS-1$
