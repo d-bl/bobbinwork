@@ -81,7 +81,7 @@ public class InteractiveDiagramPanel extends JPanel {
     		addActionListener(new ActionListener(){
     			public void actionPerformed(ActionEvent e) {
     				if ( selected == null ) return;
-    				threadStyleToolBar.setStyleOfFrontThread//
+    				threadStyleToolBar.setCoreStyle//
     				(diagramPanel.getThreadStyleAt((int)selected.getX(), (int)selected.getY()));
     			}});
     	}
@@ -95,7 +95,7 @@ public class InteractiveDiagramPanel extends JPanel {
     			public void actionPerformed(ActionEvent e) {
     				if ( selected == null ) return;
                     diagramPanel.setThreadStyleAt(//
-                            threadStyleToolBar.getStyleOfFrontThread(), //
+                            threadStyleToolBar.getCoreStyle(), //
                             (int)selected.getX(), //
                             (int)selected.getY());
     			}});
