@@ -52,7 +52,8 @@ public class InteractiveDiagramPanel extends JPanel {
 
             public void mouseClicked(MouseEvent e) {
             	selected = new Point(e.getX(), e.getY());
-            	diagramPanel.highlightSwitchAt(e.getX(), e.getY());
+            	//diagramPanel.highlightSwitchAt(e.getX(), e.getY()); 
+            	// too slow to traverse the tree twice?
             	diagramPanel.highlightThreadAt(e.getX(), e.getY());
             }
         });
