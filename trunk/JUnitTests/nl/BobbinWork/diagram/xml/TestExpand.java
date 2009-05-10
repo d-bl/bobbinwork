@@ -78,9 +78,12 @@ public class TestExpand extends XmlFixture {
 
     String resultingXml = check(xmlContent);
     
-    PrintStream x = new PrintStream("tmp2.xml");
+    /* useful to synchronize expanded.xml (delete last line) 
+    
+    PrintStream x = new PrintStream("build/new-expanded.xml");
     x.println(resultingXml);
     x.close();
+    */
     
     if ( expected != null ) {
       assertEquals(
@@ -100,8 +103,9 @@ public class TestExpand extends XmlFixture {
     undoTransformations(document);
     String restoredXml = XmlResources.toXmlString(document);
 
-    /* an external tool could reveal the nature of a failure*/  
-    OutputStream os = new FileOutputStream("tmp.xml");
+    /* an external tool could reveal the nature of a failure  
+    
+    OutputStream os = new FileOutputStream("build/tmp.xml");
     os.write(resultingXml.getBytes());
     os.close();
     /**/
