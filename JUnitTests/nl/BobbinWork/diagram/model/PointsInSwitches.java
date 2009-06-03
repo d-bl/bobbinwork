@@ -111,67 +111,74 @@ public class PointsInSwitches {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
     	xr = new XmlResources();
-    	MultiplePairsPartition tctcBS = extractPart(TCTC_BASED_ON_BASIC_STITCHES);
-    	MultiplePairsPartition tctcOS = createPart(TCTC_BUILDING_OWN_STITCHES);
-		MultiplePairsPartition ctctcBS = extractPart("<copy of='ctctc' pairs='1-2'/>");
-		MultiplePairsPartition ctctcOS = createPart(CTCTC);
+    	final MultiplePairsPartition tctcBS = extractPart(TCTC_BASED_ON_BASIC_STITCHES);
+    	final MultiplePairsPartition tctcOS = createPart(TCTC_BUILDING_OWN_STITCHES);
+    	final MultiplePairsPartition ctctcBS = extractPart("<copy of='ctctc' pairs='1-2'/>");
+    	final MultiplePairsPartition ctctcOS = createPart(CTCTC);
 		//System.out.println( XmlResources.toXmlString( parseEmbedded( TCTC_BASED_ON_BASIC_STITCHES )));
 
 		
-		final Object[][] testCaseParameters = new Object[][] {
+		final Object[][] testCaseParameters = new P[][] {
         		
-        		{ctctcBS,ctctcOS,8,3,7,3}, 
+        		{new P(ctctcBS,ctctcOS,8,3,7,3)}, 
         		
         		// just above end of front end in cross
-        		{tctcBS,tctcOS,202,98,202,98},
+        		{new P(tctcBS,tctcOS,202,98,202,98)},
         		
         		// start of front thread in second cross
-        		{tctcBS,tctcOS,200,95,200,95}, 
+        		{new P(tctcBS,tctcOS,200,95,200,95)}, 
 
         		// end of back of left twist; checks merging polygons 
-        		{tctcBS,tctcOS,186,83,186,83}, // TODO merge not yet implemented
+        		{new P(tctcBS,tctcOS,186,83,186,83)}, // TODO merge not yet implemented
         /**/};
         return Arrays.asList(testCaseParameters);
     }
 
-    MultiplePairsPartition partP, partQ;
-    int xa,xb,ya,yb;
+    P params;
+	
+	private static class P {
+		MultiplePairsPartition partP, partQ;
+		int xa,xb,ya,yb;
+		P (MultiplePairsPartition variantP, MultiplePairsPartition variantQ, int xa, int ya, int xb, int yb){
+			this.partP = variantP;
+			this.partQ = variantQ;
+			this.xa = xa;
+			this.xb = xb;
+			this.ya = ya;
+			this.yb = yb;
+		}
+	}
 	
 	/** Creates a test object for a test case in data(). */
-	public PointsInSwitches(MultiplePairsPartition variantP, MultiplePairsPartition variantQ, int xa, int ya, int xb, int yb){
-		this.partP = variantP;
-		this.partQ = variantQ;
-		this.xa = xa;
-		this.xb = xb;
-		this.ya = ya;
-		this.yb = yb;
+	public PointsInSwitches(P parameters){
+		params = parameters;
 	}
 	
 	/** Executes tests for a case in data(). */
 	@Test
 	public void variantP () throws Exception {
-		assertEqualSwitchBounds(partP);
+		assertEqualSwitchBounds(params.partP);
 	}
 
 	/** Executes tests for a case in data(). */
 	@Test
 	public void variantQ () throws Exception {
-		assertEqualSwitchBounds(partQ);
+		assertEqualSwitchBounds(params.partQ);
 	}
 	
 	/** Executes a test for a case in data(). */
 	@Test
 	public void equalBounds () throws Exception {
-		String p = getBounds(partP);
-		String q = getBounds(partQ);
+		String p = getBounds(params.partP);
+		String q = getBounds(params.partQ);
 		assertTrue (p+" =/= "+q,p.equals(q));
 	}
 
 	/** Executes a test for a case in data(). */
 	@Test
 	public void equalDrawables () throws Exception {
-		Iterator<Drawable> iteratorP = partP.threadIterator();
-		Iterator<Drawable> iteratorQ = partQ.threadIterator();
+		Iterator<Drawable> iteratorP = params.partP.threadIterator();
+		Iterator<Drawable> iteratorQ = params.partQ.threadIterator();
 		int count = 0;
 		while ( iteratorP.hasNext() && iteratorQ.hasNext() ) {
 			count++;
@@ -209,8 +216,8 @@ public class PointsInSwitches {
 	}
 	
 	private void assertEqualSwitchBounds(MultiplePairsPartition part) throws Exception {
-		String boundsA = getSwitchAt(part,xa,ya);
-		String boundsB = getSwitchAt(part,xb,yb);
+		String boundsA = getSwitchAt(part,params.xa,params.ya);
+		String boundsB = getSwitchAt(part,params.xb,params.yb);
 		assertTrue (boundsA+" =/= "+boundsB,boundsA.equals(boundsB));
 	}
 	
