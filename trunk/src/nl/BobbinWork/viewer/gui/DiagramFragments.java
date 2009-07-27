@@ -77,7 +77,7 @@ public class DiagramFragments extends JToolBar {
 
         setFloatable(false);
 
-        list.setCellRenderer(new MyListRenderer());
+        list.setCellRenderer(new FragmentListRenderer());
         list.setFixedCellWidth(DIM.width);
         list.setFixedCellHeight(DIM.height);
         // list.setLayoutOrientation(JList.VERTICAL_WRAP);
@@ -121,13 +121,13 @@ public class DiagramFragments extends JToolBar {
         abstract void selectedValueChanged();
     }
 
-    private class MyListRenderer extends JPanel implements ListCellRenderer {
+    private class FragmentListRenderer extends JPanel implements ListCellRenderer {
 
         private final Border lowered = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
         private final Border raised = BorderFactory.createBevelBorder(BevelBorder.RAISED);
         private final int borderWidth = lowered.getBorderInsets(this).left;
 
-        MyListRenderer() {
+        FragmentListRenderer() {
             setPreferredSize(DIM);
             setMinimumSize(DIM);
             setMaximumSize(DIM);
@@ -135,14 +135,13 @@ public class DiagramFragments extends JToolBar {
 
         private Partition partition;
 
-        /** The rendering method of the returend component. */
         public void paintComponent(Graphics g) {
 
             super.paintComponent(g);
 
             if (partition != null) {
                 
-                Graphics2D g2 = (Graphics2D) g;
+                Graphics2D g2 = (Graphics2D) g.create();
                 Rectangle rect = partition.getBounds().getBounds();
                 double scale = (((double) (DIM.height-2*borderWidth)) / ((double) rect.height));
                 double dx =  -rect.x + borderWidth;
@@ -150,7 +149,7 @@ public class DiagramFragments extends JToolBar {
                 
                 if (scale < 1) {
                     g2.scale(scale, scale);
-                }else{// put in the centre
+                }else{// put in the center
                     dy += ((DIM.height-2*borderWidth) - rect.height)/2D;
                     dx += ((DIM.width-2*borderWidth) - rect.width)/2D;
                 }
@@ -158,11 +157,6 @@ public class DiagramFragments extends JToolBar {
                 
                 if (showPairs) DiagramPanel.paintPartitions (g2,partition.getPairs());
                 if (showThreads) DiagramPanel.paintPartitions (g2,partition.getThreads());
-                
-                g2.translate(-dx, -dy);
-                if (scale < 1) {
-                    g2.scale(1/scale, 1/scale);
-                }
             }
         }
 

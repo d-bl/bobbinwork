@@ -93,7 +93,7 @@ public class BWViewer {
 	private DiagramPanel diagramPanel;
 
 
-	public BWViewer() throws ParserConfigurationException, SAXException {
+	public BWViewer() throws ParserConfigurationException, SAXException, IOException {
 
 		/* ---- create components and listeners ---- */
 
@@ -332,7 +332,7 @@ public class BWViewer {
 				JOptionPane.ERROR_MESSAGE);
 	}
 
-	public static void main(String[] args) throws ParserConfigurationException, SAXException {
+	public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException {
 
 		if (args.length > 0) setBundle(LOCALIZER_BUNDLE_NAME, new Locale(args[0]));
 		new BWViewer().frame.setVisible(true);

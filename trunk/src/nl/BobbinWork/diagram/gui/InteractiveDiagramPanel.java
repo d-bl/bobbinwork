@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.ImageIcon;
@@ -18,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import nl.BobbinWork.bwlib.gui.CMenuBar;
 import nl.BobbinWork.bwlib.gui.Localizer;
@@ -38,7 +41,7 @@ public class InteractiveDiagramPanel extends JPanel {
     public InteractiveDiagramPanel(
     		final DiagramPanel panel, 
     		final JFrame parentForDialogs) 
-    throws ParserConfigurationException {
+    throws ParserConfigurationException, SAXException, IOException {
 		
 		super(new BorderLayout());
 		
