@@ -25,6 +25,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.Box;
@@ -42,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import nl.BobbinWork.diagram.model.Style;
 import nl.BobbinWork.diagram.model.Switch;
 import nl.BobbinWork.diagram.model.ThreadStyle;
+import nl.BobbinWork.diagram.model.Twist;
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.XmlResources;
 
@@ -51,7 +53,7 @@ import org.xml.sax.SAXException;
 @SuppressWarnings("serial")
 public class ThreadStyleToolBar extends JToolBar {
 
-    private Switch twist;
+    private Switch twist = createTwist();
 
     ThreadStyle getCoreStyle() {
         return twist.getFront().getStyle();
@@ -87,7 +89,8 @@ public class ThreadStyleToolBar extends JToolBar {
     }
     
     // makes the style of the twist threads available
-    private Preview preview = new Preview();
+    private final Preview preview = new Preview(new Dimension(PREVIEW_WITH, PREVIEW_WITH));
+    private static final int PREVIEW_WITH = 20;
 
     private static XmlResources xmlResources;
     public static XmlResources getXmlResources() throws ParserConfigurationException, SAXException {
@@ -97,23 +100,14 @@ public class ThreadStyleToolBar extends JToolBar {
 
     private class Preview extends JPanel {
 
-        Preview() {
+		Preview(Dimension dim) {
 
-            int w = 20;
-            Dimension dim = new Dimension(w, w);
             setPreferredSize(dim);
             setMaximumSize(dim);
 
             setBackground(new Color(0xFFFFFF));
             // setBorder(BorderFactory.createLoweredBevelBorder());
             // has side effects: increments together with coreSpinner
-
-            try {
-                Element el = getXmlResources().getTwist(w).getDocumentElement();
-                twist = DiagramBuilder.createTwist(el);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
         }
 
         public void paintComponent(Graphics g) {
@@ -121,10 +115,6 @@ public class ThreadStyleToolBar extends JToolBar {
             super.paintComponent(g);
             Graphics2D g2 = (Graphics2D) g;
             DiagramPanel.paintPartitions (g2,twist.getThreads());
-        }
-
-        private void update() {
-            preview.repaint();
         }
     }
 
@@ -154,7 +144,7 @@ public class ThreadStyleToolBar extends JToolBar {
             Color color = JColorChooser.showDialog(this, this.getText(), getColor());
             if (color != null) {
                 setColor(color);
-                preview.update();
+                preview.repaint();
             }
         }
 
@@ -196,12 +186,13 @@ public class ThreadStyleToolBar extends JToolBar {
             ((SpinnerNumberModel) coreSpinner.getModel()).setValue(Integer.valueOf(p.getWidth()));
             Integer width = Integer.valueOf(p.getShadow().getWidth());
             ((SpinnerNumberModel) shadowSpinner.getModel()).setValue(width);
-            preview.update();
+            preview.repaint();
         }
         
     }
     
-    ThreadStyleToolBar() throws ParserConfigurationException {
+    ThreadStyleToolBar() throws SAXException, IOException, ParserConfigurationException {
+    	
         setFloatable(false);
         setRollover(true);
         setBorder(null);
@@ -252,7 +243,7 @@ public class ThreadStyleToolBar extends JToolBar {
                 i = shadowModel.getNumber().intValue();
                 setShadowWidth(i);
 
-                preview.update();
+                preview.repaint();
             }
         });
 
@@ -266,9 +257,13 @@ public class ThreadStyleToolBar extends JToolBar {
                 coreModel.setMaximum(Integer.valueOf(i - 2));
                 setShadowWidth(i);
 
-                preview.update();
+                preview.repaint();
             }
         });
 
     }
+	private Twist createTwist() throws SAXException, IOException, ParserConfigurationException {
+            Element el = getXmlResources().getTwist(PREVIEW_WITH).getDocumentElement();
+            return DiagramBuilder.createTwist(el);
+	}
 }

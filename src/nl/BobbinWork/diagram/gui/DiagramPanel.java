@@ -106,10 +106,8 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
             return Printable.NO_SUCH_PAGE;
         }
         Graphics2D g2 = (Graphics2D) g;
-        g2.scale(PRINT_SCALE, PRINT_SCALE);
-        g2.translate(pf.getImageableX() / PRINT_SCALE, pf.getImageableY() / PRINT_SCALE);
-        if (showPairs) paintPartitions (g2,diagram.getPairs());
-        if (showThreads) paintPartitions (g2,diagram.getThreads());
+        g2.translate(pf.getImageableX(), pf.getImageableY());
+        paintPartitions (g2,PRINT_SCALE);
         
         return Printable.PAGE_EXISTS;
     }
@@ -157,17 +155,22 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
             g2.fillRect((int) (pw * getScreenScale()), 0, sw - (int) (pw * getScreenScale()), sh);
             g2.fillRect(0, (int) (ph * getScreenScale()), sw, sh - (int) (ph * getScreenScale()));
 
-            g2.scale(getScreenScale(), getScreenScale());
-            if (getScreenScale() > 1.5) { // more accurate but slower?
-                g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
-                g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-            }
-            if (showPairs) paintPartitions (g2,diagram.getPairs());
-            if (showThreads) paintPartitions (g2,diagram.getThreads());
+            paintPartitions (g2,getScreenScale());
             revalidate();
         }
     }
 
+	private void paintPartitions(Graphics2D g2, double scale) {
+        g2.scale(scale, scale);
+        if (scale > 1.5) { 
+        	// more accurate but slower?
+            g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
+            g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
+        }
+		if (showPairs) paintPartitions (g2,diagram.getPairs());
+		if (showThreads) paintPartitions (g2,diagram.getThreads());
+	}
+	
     private Partition lastHigLight;
 
     /** Highlight a section of the diagram corresponding with a node of the tree. */
