@@ -1,4 +1,4 @@
-/* Twist.java Copyright 2006-2007 by J. Falkink-Pol
+/* Twist.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -31,7 +31,7 @@ import java.util.Vector;
  * makers shorthand describes a cloth stitch as CTC, we will have a left twist
  * and a right twist.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class Twist extends Switch {
 

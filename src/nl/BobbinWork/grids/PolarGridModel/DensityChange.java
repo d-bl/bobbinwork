@@ -1,4 +1,4 @@
-/* DensityChange.java Copyright 2005-2007 by J. Falkink-Pol
+/* DensityChange.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -21,7 +21,7 @@ package nl.BobbinWork.grids.PolarGridModel;
 /**
  * Defines how and where the density of dot changes.
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class DensityChange extends ConcentricCircle implements Dots {
     

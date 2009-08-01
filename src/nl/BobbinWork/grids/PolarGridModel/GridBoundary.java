@@ -1,4 +1,4 @@
-/* GridBoundary.java Copyright 2005-2007 by J. Falkink-Pol
+/* GridBoundary.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -20,7 +20,7 @@ package nl.BobbinWork.grids.PolarGridModel;
 
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 class GridBoundary extends ConcentricCircle {
 

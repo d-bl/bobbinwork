@@ -1,4 +1,4 @@
-/* InnerGridCircle.java Copyright 2005-2007 by J. Falkink-Pol
+/* InnerGridCircle.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -22,7 +22,7 @@ package nl.BobbinWork.grids.PolarGridModel;
 
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 class InnerGridCircle extends GridBoundary implements Dots {
     

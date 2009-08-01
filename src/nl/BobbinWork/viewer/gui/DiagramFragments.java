@@ -1,4 +1,4 @@
-/* Fragments.java Copyright 2006-2007 by J. Falkink-Pol
+/* DiagramFragments.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *

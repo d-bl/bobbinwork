@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <jnlp spec="1.0+" codebase="http://bobbinwork.googlecode.com/files" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/bwpGrid.jnlp">
-	<!-- Copyright 2008, J. Falkink-Pol
+	<!-- Copyright 2008, J. Pol
 		
 		This file is part of BobbinWork.
 		
@@ -25,7 +25,7 @@
     	move to http://bobbinwork.googlecode.com/svn/trunk/webstart and commit AFTER uploading and testing 
     -->
     <title>BobbinWork Polar Grid generator 2.0.115</title>
-    <vendor>J. Falkink-Pol</vendor>
+    <vendor>J. Pol</vendor>
     <homepage href="http://bobbinwork.googlecode.com/"/>
     <description>Polar grids for bobbin lace</description>
     <description kind="short">Polar grids that don't distort</description>

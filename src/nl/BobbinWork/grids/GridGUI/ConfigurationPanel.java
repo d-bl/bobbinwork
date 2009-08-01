@@ -1,4 +1,4 @@
-/* PolarGridDefinitionPanel.java Copyright 2005-2007 by J. Falkink-Pol
+/* PolarGridDefinitionPanel.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -33,7 +33,7 @@ import nl.BobbinWork.grids.PolarGridModel.DensityChange;
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 /**
  *
- * @author  J. Falkink-Pol
+ * @author  J. Pol
  */
 @SuppressWarnings("serial")
 public class ConfigurationPanel extends JPanel {

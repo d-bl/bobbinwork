@@ -1,4 +1,4 @@
-/* BWFileHandler.java Copyright 2006-2007 by J. Falkink-Pol
+/* NamedOutputStream.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *

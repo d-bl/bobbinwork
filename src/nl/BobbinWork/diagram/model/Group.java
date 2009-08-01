@@ -1,4 +1,4 @@
-/* Group.java Copyright 2006-2007 by J. Falkink-Pol
+/* Group.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * @author J. Falkink-Pol
+ * @author J. Pol
  * 
  */
 public class Group extends ChainedPairsPartition {

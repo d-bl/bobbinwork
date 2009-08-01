@@ -1,4 +1,4 @@
-/* Range.java Copyright 2006-2007 by J. Falkink-Pol
+/* Range.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -33,7 +33,7 @@ package nl.BobbinWork.diagram.model;
  * within the ancestor, that is the group of bobbins required for the stitch or
  * motive being described.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class Range {
 

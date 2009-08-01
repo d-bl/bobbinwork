@@ -1,4 +1,4 @@
-/* VectorTransformation.java Copyright 2006-2007 by J. Falkink-Pol
+/* VectorTransformation.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -20,7 +20,7 @@ package nl.BobbinWork.diagram.xml.expand;
 
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 abstract public class VectorTransformation {
     

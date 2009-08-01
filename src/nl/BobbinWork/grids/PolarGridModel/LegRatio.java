@@ -1,4 +1,4 @@
-/* LegRatio.java Copyright 2005-2007 by J. Falkink-Pol
+/* LegRatio.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -37,7 +37,7 @@ import java.util.TreeSet;
  *
  *</pre>
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class LegRatio implements Comparable<LegRatio> {
     

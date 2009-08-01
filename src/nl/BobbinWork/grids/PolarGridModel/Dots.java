@@ -1,4 +1,4 @@
-/* Dots.java Copyright 2005-2007 by J. Falkink-Pol
+/* Dots.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -21,7 +21,7 @@ package nl.BobbinWork.grids.PolarGridModel;
 /**
  * Makes the number of dots on repeat of a ring generaly available.
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public interface Dots {
     

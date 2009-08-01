@@ -1,4 +1,4 @@
-/* LocaleButton.java Copyright 2006-2008 by J. Falkink-Pol
+/* LocaleButton.java Copyright 2006-2008 by J. Pol
  *
  * This file is part of BobbinWork.
  *

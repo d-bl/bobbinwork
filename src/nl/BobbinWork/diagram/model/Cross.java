@@ -1,4 +1,4 @@
-/* Cross.java Copyright 2006-2007 by J. Falkink-Pol
+/* Cross.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -28,7 +28,7 @@ import java.util.Vector;
  * goes over the left bobbin in the right hand. In other words, the second
  * bobbin goes over the third.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class Cross extends Switch {
 

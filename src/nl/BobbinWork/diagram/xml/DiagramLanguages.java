@@ -1,4 +1,4 @@
-/* DiagramLanguages.java Copyright 2006-2007 by J. Falkink-Pol
+/* DiagramLanguages.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -27,7 +27,7 @@ import nl.BobbinWork.diagram.xml.ElementType;
  * Manages the languages encountered in diagrams and their order as preferred by
  * the user. A diagram may support another set of languages than the application.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  * 
  */
 public class DiagramLanguages {

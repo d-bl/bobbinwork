@@ -1,4 +1,4 @@
-/* SampleDiagramChooser.java Copyright 2006-2008 by J. Falkink-Pol
+/* SampleDiagramChooser.java Copyright 2006-2008 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -41,7 +41,7 @@ import nl.BobbinWork.bwlib.io.NamedInputStream;
  * Most menu items specify predefined URLs of sample diagrams. 
  * One item launches a dialog allowing a user to enter a URL.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  *
  */
 @SuppressWarnings("serial") //$NON-NLS-1$

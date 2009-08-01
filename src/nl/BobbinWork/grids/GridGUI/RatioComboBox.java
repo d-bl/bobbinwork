@@ -1,4 +1,4 @@
-/* RatioComboBox.java Copyright 2005-2007 by J. Falkink-Pol
+/* RatioComboBox.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -22,7 +22,7 @@ import nl.BobbinWork.grids.PolarGridModel.LegRatio;
 
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 @SuppressWarnings("serial")
 public class RatioComboBox extends javax.swing.JComboBox {

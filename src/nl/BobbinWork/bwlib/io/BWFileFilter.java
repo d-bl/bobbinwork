@@ -1,5 +1,5 @@
 
-/* BWFileFilter.java Copyright 2007 by J. Falkink-Pol
+/* BWFileFilter.java Copyright 2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
