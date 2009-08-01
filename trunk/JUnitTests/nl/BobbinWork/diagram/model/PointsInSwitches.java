@@ -1,4 +1,4 @@
-/* PointsInSwitches.java Copyright 2009 by J. Falkink-Pol
+/* PointsInSwitches.java Copyright 2009 by J. Pol
  *
  * This file is part of BobbinWork.
  *

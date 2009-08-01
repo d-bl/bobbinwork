@@ -1,4 +1,4 @@
-/* Localizer.java Copyright 2006-2007 by J. Falkink-Pol
+/* Localizer.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -46,7 +46,7 @@ import javax.swing.JComponent;
  * several forms: with or without starting capitals for words in the suffix,
  * with our without underscores preceding the words in the suffix.
  * 
- * @author J Falkink-Pol
+ * @author J Pol
  * 
  */
 public class Localizer {

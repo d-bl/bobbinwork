@@ -1,4 +1,4 @@
-/* DoubleChainedObject.java Copyright 2005-2007 by J. Falkink-Pol
+/* DoubleChainedObject.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -21,7 +21,7 @@ package nl.BobbinWork.grids.PolarGridModel;
 /**
  * Element for an open chain linked in both directions.
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  *
  */
 // TODO: extension of an interface?

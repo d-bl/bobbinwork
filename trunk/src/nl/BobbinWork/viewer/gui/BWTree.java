@@ -1,4 +1,4 @@
-/* BWTree.java Copyright 2006-2008 by J. Falkink-Pol
+/* BWTree.java Copyright 2006-2008 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -51,7 +51,7 @@ import org.xml.sax.SAXParseException;
 /**
  * Visual presentation of the dom tree of the xml code for a diagram.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  * 
  */
 @SuppressWarnings("serial") //$NON-NLS-1$

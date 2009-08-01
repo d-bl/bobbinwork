@@ -1,4 +1,4 @@
-/* DiagramPanel.java Copyright 2006-2007 by J. Falkink-Pol
+/* DiagramPanel.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -50,7 +50,7 @@ import nl.BobbinWork.diagram.model.ThreadStyle;
 /**
  * Bobbin lace Working diagram, a thread and/or pair diagram.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 @SuppressWarnings("serial")
 public class DiagramPanel extends JPanel implements PrintablePreviewer {
@@ -83,20 +83,20 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
     /*
      * In Java Foundation Classes in a Nutshell, Flanagan tells us,
      * 
-     * “When drawing to a screen or an off-screen image, X and Y coordinates are
+     * When drawing to a screen or an off-screen image, X and Y coordinates are
      * measured in pixels. When drawing to a printer or other high-resolution
      * device, however, X and Y coordinates are measured in points instead of
-     * pixels (and there are 72 points in one inch).”
+     * pixels (and there are 72 points in one inch).
      * 
      * Flanagan goes on to tell us
      * 
-     * “By default, when drawing to a screen or image, user space is the same as
+     * By default, when drawing to a screen or image, user space is the same as
      * device space. However, the Graphics2D class defines methods that allow
      * you to trivially modify the default coordinate system... By default, when
      * drawing to the screen, one unit in user space corresponds to one pixel in
      * device space. The scale() method changes this. If you scale the
      * coordinate system by a factor of 10, one unit of user space corresponds
-     * to 10 pixels in device space...”
+     * to 10 pixels in device space...
      */
     private static final double PRINT_SCALE = 0.72;
 

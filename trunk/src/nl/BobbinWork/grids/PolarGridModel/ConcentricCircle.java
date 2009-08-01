@@ -1,4 +1,4 @@
-/* ConcentricCircle.java Copyright 2005-2007 by J. Falkink-Pol
+/* ConcentricCircle.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -21,7 +21,7 @@ package nl.BobbinWork.grids.PolarGridModel;
 /**
  * A circle in a chain with increasing diameters.
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class ConcentricCircle extends DoubleChainedObject {
     

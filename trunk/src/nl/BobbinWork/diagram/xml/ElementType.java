@@ -1,4 +1,4 @@
-/* ElementType.java Copyright 2006-2007 by J. Falkink-Pol
+/* ElementType.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 /*
  * Names of XML elements.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  * 
  */
 

@@ -1,4 +1,4 @@
-/* Segment.java Copyright 2006-2007 by J. Falkink-Pol
+/* Segment.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -30,7 +30,7 @@ import java.awt.geom.Point2D;
  * have different style instances. Segments in a single stitch stick together
  * like Siamese twins. Movements are also restricted by pins.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 
 public class PairSegment extends Segment {

@@ -1,4 +1,4 @@
-/* BWFileHandler.java Copyright 2006-2007 by J. Falkink-Pol
+/* BWFileHandler.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
 /**
  * Maintains the name of the last read/written file.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class BWFileHandler {
 

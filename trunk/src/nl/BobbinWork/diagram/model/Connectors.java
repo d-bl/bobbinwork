@@ -1,4 +1,4 @@
-/* Connectors.java Copyright 2006-2009 by J. Falkink-Pol
+/* Connectors.java Copyright 2006-2009 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -29,7 +29,7 @@ import java.util.Vector;
  * The <em>point</em>s at the border of a partition are
  * <code>getIns(i).getStart()</code> and <code>getOut(i).getEnd()</code>.
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 class Connectors<T extends Segment> {
 

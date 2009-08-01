@@ -1,4 +1,4 @@
-/* Move.java Copyright 2006-2007 by J. Falkink-Pol
+/* Move.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -22,7 +22,7 @@ import org.w3c.dom.NamedNodeMap;
 
 /**
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 class Move extends VectorTransformation {
 

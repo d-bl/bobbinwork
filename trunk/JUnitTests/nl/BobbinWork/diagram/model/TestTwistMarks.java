@@ -1,5 +1,5 @@
 package nl.BobbinWork.diagram.model;
-/* Copyright 2008 by J. Falkink-Pol
+/* Copyright 2008 by J. Pol
 *
 * This file is part of BobbinWork.
 *

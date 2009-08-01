@@ -1,4 +1,4 @@
-/* Switch.java Copyright 2006-2007 by J. Falkink-Pol
+/* Switch.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -26,7 +26,7 @@ import java.util.Vector;
 /**
  * Two bobbins next to one another change positions.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public abstract class Switch extends MultipleThreadsPartition {
 

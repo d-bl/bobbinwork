@@ -1,4 +1,4 @@
-/* PolarGridDrawPanel.java Copyright 2005-2007 by J. Falkink-Pol
+/* PolarGridDrawPanel.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -20,7 +20,7 @@ package nl.BobbinWork.grids.GridGUI;
 
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 import java.awt.Color;
 import java.awt.Dimension;

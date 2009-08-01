@@ -1,4 +1,4 @@
-/* Point.java Copyright 2006-2007 by J. Falkink-Pol
+/* Point.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -22,7 +22,7 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public
 class Point extends Point2D.Double { 

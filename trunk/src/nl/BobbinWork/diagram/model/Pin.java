@@ -1,4 +1,4 @@
-/* Pin.java Copyright 2006-2007 by J. Falkink-Pol
+/* Pin.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -27,7 +27,7 @@ import java.util.Iterator;
 /**
  * A pin supporting a stitch or pair.
  * 
- * @author J. Falkink-Pol
+ * @author J. Pol
  * 
  */
 public class Pin extends Partition {

@@ -1,4 +1,4 @@
-/* PolarGridModel.java Copyright 2005-2007 by J. Falkink-Pol
+/* PolarGridModel.java Copyright 2005-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -24,7 +24,7 @@ import java.awt.geom.Point2D;
 import java.util.Vector;
 /**
  *
- * @author J. Falkink-Pol
+ * @author J. Pol
  */
 public class PolarGridModel {
     

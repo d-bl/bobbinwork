@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="BobbinWork" default="all" basedir=".">
 
-    <!-- Copyright 2008-2009, J. Falkink-Pol
+    <!-- Copyright 2008-2009, J. Pol
         
         This file is part of BobbinWork.
         
@@ -52,7 +52,7 @@
                 <jnlp spec="1.0+" codebase="${jnlp.code.base}" href="${jnlp.deploy}/@{jnlp.base.name}.jnlp">
                   <information>
                     <title>BobbinWork @{jnlp.application.name} ${version}</title>
-                    <vendor>J. Falkink-Pol</vendor>
+                    <vendor>J. Pol</vendor>
                     <homepage href="http://bobbinwork.googlecode.com"/>
                     <description>@{jnlp.application.description}</description>
                     <description kind="short">@{jnlp.application.kind}</description>

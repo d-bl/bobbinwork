@@ -2,7 +2,7 @@
 <jnlp codebase="http://bobbinwork.googlecode.com/files" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/bwViewer.jnlp" spec="1.0+">
   <information>
     <title>BobbinWork Diagram Viewer 2.0.294</title>
-    <vendor>J. Falkink-Pol</vendor>
+    <vendor>J. Pol</vendor>
     <homepage href="http://bobbinwork.googlecode.com" />
     <description>Working diagrams for bobbin lace</description>
     <description kind="short">Play with grounds</description>
