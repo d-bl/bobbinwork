@@ -30,7 +30,7 @@ import java.awt.geom.CubicCurve2D;
 import java.awt.geom.Point2D;
 
 
-public class TestNearestPoint {
+public class NearestPointTest {
 
 	private Point2D pn;
 	private Point2D p1;

@@ -32,7 +32,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class TestXml extends XmlFixture {
+public class XmlTest extends XmlFixture {
 
   @Test
   public void twist() throws SAXException, IOException {

@@ -33,7 +33,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class TestExpand extends XmlFixture {
+public class ExpandTest extends XmlFixture {
 
   private static final String XML_CONTENT = XmlResources.ROOT + "<xi:include href='basicStitches.xml'/></diagram>";
   private static final File EXPANDED_FILE = new File ("JUnitTests"+PATH+"expanded.xml");

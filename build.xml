@@ -93,7 +93,7 @@
     </target>
 
     <target name="compile" depends="prepare" description="create class files from java sources">
-        <javac srcdir="src" destdir="${build.dir}/tmp" target="${target}" classpath="${build.dir}/*.jar" />
+        <javac srcdir="src/main/java" destdir="${build.dir}/tmp" target="${target}" classpath="${build.dir}/*.jar" />
     </target>
 
     <target name="diagrams" depends="compile" description="create viewer of bobbin lace working diagrams">
@@ -123,7 +123,7 @@
     </target>
     
 	<target name="testCompile" depends="compile" description="create class files and jars from test sources">
-    	<javac srcdir="JUnitTests" destdir="${build.dir}/tmptest">
+    	<javac srcdir="src/test/java" destdir="${build.dir}/tmptest">
             <classpath refid="junit.classpath" />
         </javac>
         <jar destfile="${build.dir}/test.jar">
