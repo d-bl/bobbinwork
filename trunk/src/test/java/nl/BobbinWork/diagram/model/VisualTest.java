@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 
-public class Visualizer {
+public class VisualTest {
 	
 	private JFrame frame = new JFrame("visualizer"); 
 
@@ -59,7 +59,7 @@ public class Visualizer {
         }
 	}
 
-    public Visualizer(MultiplePairsPartition part, int scale) throws Exception {
+    public VisualTest(MultiplePairsPartition part, int scale) throws Exception {
     	MyPanel myPanel = new MyPanel( part, scale );
     	frame.setSize(new Dimension(800, 300));
 		frame.getContentPane().add( myPanel);
@@ -67,7 +67,7 @@ public class Visualizer {
     
     private static MultiplePairsPartition getPart(int caseNr, int variantNr)
     throws Exception {
-    	Object[] testcases = PointsInSwitches.data().toArray();
+    	Object[] testcases = PointsInSwitchesTest.data().toArray();
     	Object[] testCase = (Object[]) testcases[caseNr];
     	return (MultiplePairsPartition) testCase[variantNr];
     }
@@ -75,7 +75,7 @@ public class Visualizer {
 	public static void main (String[] args){
     	try {
     		int caseNr = 1, variantNr = 0, scale = 2;
-			new Visualizer(getPart(caseNr, variantNr), scale).frame.setVisible(true);
+			new VisualTest(getPart(caseNr, variantNr), scale).frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

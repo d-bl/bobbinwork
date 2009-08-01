@@ -29,7 +29,7 @@ import java.awt.geom.Point2D;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestTwistMarks {
+public class TwistMarksTest {
 	
 	private static final double NOT_A_NUMBER = 0/0.0;
 	private CubicCurve2D curve;

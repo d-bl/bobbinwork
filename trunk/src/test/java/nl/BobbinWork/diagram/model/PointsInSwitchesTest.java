@@ -37,7 +37,7 @@ import org.w3c.dom.Element;
 
 /** Positive tests that check the shape of bounding polygons. */
 @RunWith(Parameterized.class)
-public class PointsInSwitches {
+public class PointsInSwitchesTest {
 	
 	private static XmlResources xr = null;
 	
@@ -150,7 +150,7 @@ public class PointsInSwitches {
 	}
 	
 	/** Creates a test object for a test case in data(). */
-	public PointsInSwitches(P parameters){
+	public PointsInSwitchesTest(P parameters){
 		params = parameters;
 	}
 	
