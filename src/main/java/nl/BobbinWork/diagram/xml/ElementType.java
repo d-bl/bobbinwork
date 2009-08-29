@@ -215,9 +215,8 @@ public enum ElementType {
     private ImageIcon icon;
 
     private void setIcon() {
-        String dir = getClass().getPackage().getName().replaceAll("\\.", "/") + "/elicons/";
-        String f = dir + this.name() + ".gif";
-        java.net.URL iconURL = getClass().getClassLoader().getResource(f);
+    	String f = "elicons/" + this.name() + ".gif";
+        java.net.URL iconURL = ElementType.class.getResource(f);
         if (iconURL != null) {
             icon = new ImageIcon(iconURL);
         } else {
