@@ -52,7 +52,8 @@ public class DiagramBuilder {
     public static final String MODEL_TO_DOM = "model";
 
     private static class ChainedPairsPartitionFactory {
-    	Element element;
+    	private static final ThreadStyle DEFAULT_THREAD_STYLE = new ThreadStyle();
+		Element element;
         List<Pin> pins = new Vector<Pin>();
         List<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
         Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
@@ -67,37 +68,47 @@ public class DiagramBuilder {
                 if (child.getNodeType() == Node.ELEMENT_NODE) {
                     ElementType childType = ElementType.valueOf(child.getNodeName());
                     Element childElement = (Element) child;
-                    if (childType == ElementType.pin) {
-                        pins.add(DiagramBuilder.createPin(childElement));
-                    } else if (childType == ElementType.group) {
+                    switch (childType) {
+					case pin:
+						pins.add(DiagramBuilder.createPin(childElement));
+						break;
+					case group:
 						MultiplePairsPartition part = DiagramBuilder.createGroup(childElement);
 						register(childElement, part);
 						parts.add(part);
-					} else if (childType == ElementType.stitch) {
-						MultiplePairsPartition part = createStitch(childElement);
-						register(childElement, part);
-						parts.add(part);
-					} else if (childType == ElementType.new_bobbins) {
+						break;
+					case stitch:
+						MultiplePairsPartition part2 = createStitch(childElement);
+						register(childElement, part2);
+						parts.add(part2);
+						break;
+					case new_bobbins:
 						ThreadStyle style = createThreadStyle(child.getFirstChild());
 						String ranges[] = childElement.getAttribute("nrs").split(",");
-	                    for (String range:ranges) {
-	                        
-	                        try {
-	                        	final String[] nrs = range.split("-");
-	                            final int start = parseRangeNr(nrs[0]);
-	                            final int end = (nrs.length>1?parseRangeNr(nrs[1]):start);
-	                            bobbins.setSize(Math.max(bobbins.size(), end+1));
-	                            for (int i=start;i<=end;i++){
-		                            bobbins.set(i, style);
-	                            }
-	                        } catch (NumberFormatException e) {
-	                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
-	                                    child.getAttributes().getNamedItem("nrs")+">"); 
-	                        } catch (ArrayIndexOutOfBoundsException e) {
-	                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
-	                                    child.getAttributes().getNamedItem("nrs")+">"); 
-	                        }                        
-	                    }
+						for (String range:ranges) {
+							final String[] nrs = range.split("-");
+							final int start;
+							final int end;
+							try {
+								start = parseRangeNr(nrs[0]);
+								end = (nrs.length>1?parseRangeNr(nrs[1]):start);
+							} catch (NumberFormatException e) {
+								throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
+										child.getAttributes().getNamedItem("nrs")+">"); 
+							}    
+							int i=bobbins.size();
+							bobbins.setSize(Math.max(bobbins.size(), end+1));
+							for (;i<start;i++){
+								bobbins.set(i, DEFAULT_THREAD_STYLE);
+							}
+							for (i=start;i<=end;i++){
+								bobbins.set(i, style);
+							}
+						}
+						break;
+
+					default:
+						break;
 					}
                 }
             }
