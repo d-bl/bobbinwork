@@ -47,7 +47,6 @@
       <value lang="en">ground</value>
       <value lang="nl">grond</value>
     </title>
-    <new_bobbins nrs="1-32"><style color="#000000"></style></new_bobbins>
     <new_bobbins nrs="28,33"><style color="#AA33FF"></style></new_bobbins>
     <new_bobbins nrs="27,34"><style color="#33AA00"></style></new_bobbins>
     <new_bobbins nrs="26,35"><style color="#0000FF"></style></new_bobbins>
