@@ -48,15 +48,13 @@ import org.xml.sax.SAXException;
 
 public class XmlResources {
 
-  private static final String PATH = "nl/BobbinWork/diagram/xml/"; //$NON-NLS-1$
-  private static final String SCHEMA = PATH + "bw.xsd"; //$NON-NLS-1$
-  private static final URL SCHEMA_RESOURCE = XmlResources.class.getClassLoader().getResource(SCHEMA);
+  private static final URL SCHEMA_RESOURCE = XmlResources.class.getResource("bw.xsd"); //$NON-NLS-1$
   
   /** base's for URI's to try until parsing does not fail with an include problem */
   private static final String [] INCLUDE_BASES = {
     SCHEMA_RESOURCE.toString(),
     null,
-    "http://bobbinwork.googlecode.com/svn/trunk/src/" + SCHEMA, //$NON-NLS-1$
+    "http://bobbinwork.googlecode.com/svn/trunk/src/main/java/" + SCHEMA_RESOURCE, //$NON-NLS-1$
     "http://bobbinwork.googlegroups.com/web/"}; //$NON-NLS-1$
   
   /**  attributes for the root element required for includes and validation against the schema */

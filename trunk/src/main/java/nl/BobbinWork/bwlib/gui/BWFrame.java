@@ -29,8 +29,6 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class BWFrame extends JFrame {
 
-	protected static final String ICON = "nl/BobbinWork/bwlib/gui/bobbin.gif";
-
 	public BWFrame (String bundle) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -39,9 +37,10 @@ public class BWFrame extends JFrame {
         }
         setPreferredSize(new Dimension(790, 500));
         setBundle(bundle);
-        URL iocnURL = getClass().getClassLoader().getResource(ICON);
-		setSize(700, 500);
+        URL iocnURL = BWFrame.class.getResource("bobbin.gif");
+    	if (iocnURL != null) 
+    		setIconImage(getToolkit().getImage(iocnURL));
+        setSize(700, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setIconImage(getToolkit().getImage(iocnURL));
 	}
 }
