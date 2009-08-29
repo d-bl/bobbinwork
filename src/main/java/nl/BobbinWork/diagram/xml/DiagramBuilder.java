@@ -78,16 +78,18 @@ public class DiagramBuilder {
 						register(childElement, part);
 						parts.add(part);
 					} else if (childType == ElementType.new_bobbins) {
-						ThreadStyle p = createThreadStyle(child.getFirstChild());
-						String nrs[] = childElement.getAttribute("nrs").split(",");
-	                    for (String nr:nrs) {
-	                        // lacemakers start counting with one,
-	                        // indexes with zero, so subtract one
+						ThreadStyle style = createThreadStyle(child.getFirstChild());
+						String ranges[] = childElement.getAttribute("nrs").split(",");
+	                    for (String range:ranges) {
 	                        
 	                        try {
-	                            int i = Integer.decode(nr).intValue() - 1;
-	                            bobbins.setSize(Math.max(bobbins.size(), i+1));
-	                            bobbins.set(i, p);
+	                        	final String[] nrs = range.split("-");
+	                            final int start = parseRangeNr(nrs[0]);
+	                            final int end = (nrs.length>1?parseRangeNr(nrs[1]):start);
+	                            bobbins.setSize(Math.max(bobbins.size(), end+1));
+	                            for (int i=start;i<=end;i++){
+		                            bobbins.set(i, style);
+	                            }
 	                        } catch (NumberFormatException e) {
 	                            throw new RuntimeException ("invalid number:\n<"+child.getNodeName()+" "+//
 	                                    child.getAttributes().getNamedItem("nrs")+">"); 
@@ -100,13 +102,21 @@ public class DiagramBuilder {
                 }
             }
     	}
+    	
+		private int parseRangeNr(final String nr) {
+            // lacemakers start counting with one,
+            // indexes with zero, so subtract one
+			return Integer.decode(nr).intValue() - 1;
+		}
     	Group createGroup() {
             return new Group(createRange(element), parts, pins, bobbins);
         }
+    	
         Diagram createDiagram() {
             return new Diagram(parts, pins);
         }
     }
+    
     private static Group createGroup (Element element) {
     	return new ChainedPairsPartitionFactory(element).createGroup(); 
     }
