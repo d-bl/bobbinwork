@@ -48,9 +48,6 @@ public class Segment {
 	 *            optional second control point of the bezier curve
 	 * @param end
 	 *            end point of the bezier curve
-	 * @param twistMarkLength
-	 *            length of the line perpendicular through the center of a pair
-	 *            segment to indicate a twist
 	 */
     public Segment(Point start, Point c1, Point c2, Point end) {
     	this.start = new Point(start);

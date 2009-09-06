@@ -87,7 +87,7 @@ public class XmlResources {
    * The right thread goes over the left thread.
    * 
    * @param w width and height of the bounding box 
-   * @return
+   * @return a HTML-dom that describes a twist.
    * @throws IOException 
    * @throws SAXException 
    */

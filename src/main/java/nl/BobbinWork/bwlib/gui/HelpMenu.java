@@ -34,11 +34,6 @@ import javax.swing.JOptionPane;
 @SuppressWarnings("serial")
 public class HelpMenu extends JMenu {
 	
-    /**
-     * @param parent
-     * @param details
-     * @param simpleCaption
-     */
     public HelpMenu(final Component parent, final String years, final String simpleCaption) {
 
     	this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
