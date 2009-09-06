@@ -18,6 +18,10 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.awt.geom.CubicCurve2D;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 
 /**
  * A segment of a thread.
@@ -73,6 +77,23 @@ public class ThreadSegment extends Segment {
         }
     }
 
+	public Iterable<CubicCurve2D> getThread () {
+		
+		final ArrayList<CubicCurve2D> list = new ArrayList<CubicCurve2D>();
+		
+		Segment curve = this;
+		do { list.add(curve.getCurve()); } while (null!=(curve=curve.getNext()));
+		curve = getPrevious();
+		do { list.add(curve.getCurve()); } while (null!=(curve=curve.getPrevious()));
+		
+		return new Iterable<CubicCurve2D> () {
+
+			public Iterator<CubicCurve2D> iterator() {
+				return list.iterator();
+			}
+		};
+	}
+    
     void setNext(Segment next) {
         super.setNext(next);
         while (next != null) {
