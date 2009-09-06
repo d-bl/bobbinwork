@@ -116,7 +116,7 @@ public class Segment {
 	/** Gets the cubic bezier curve defining the shape of the segment. 
 	 * @return the curve defining the shape of the segment
 	 */
-	public CubicCurve2D getCurve() {
+	protected CubicCurve2D getCurve() {
 	    return new CubicCurve2D.Double(start.x, start.y, c1.x, c1.y, c2.x, c2.y, end.x, end.y);
 	}
 
