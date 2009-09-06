@@ -41,7 +41,7 @@ import nl.BobbinWork.bwlib.gui.PrintMenu.PrintablePreviewer;
 import nl.BobbinWork.grids.PolarGridModel.PolarGridModel;
 
 @SuppressWarnings("serial")
-public class PreviewPanel extends JPanel implements Printable, PrintablePreviewer {
+public class PreviewPanel extends JPanel implements PrintablePreviewer {
     
     private PolarGridModel pgm = null;
 	private PageFormat pageFormat = new PageFormat();

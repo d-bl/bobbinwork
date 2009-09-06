@@ -141,6 +141,19 @@
         </junit>
     </target>
 
+    <target name="JavaDoc" description="generate Javadoc files">
+    	  <javadoc
+    	           destdir="doc/api"
+    	           author="true"
+    	           version="true"
+    	           use="true"
+    	           windowtitle="Test API">
+    	    <packageset dir="src/main/java" defaultexcludes="yes">
+    	      <include name="nl/BobbinWork/**"/>
+    	    </packageset>
+    	  </javadoc>
+    </target>
+
     <target name="jnlp" depends="prepare" description="generate jnlp files">
         <jnlp jnlp.base.name="bwViewer" 
               jnlp.main.class="nl.BobbinWork.viewer.gui.BWViewer" 
