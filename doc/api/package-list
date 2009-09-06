@@ -1,0 +1,11 @@
+nl.BobbinWork.bwlib.gui
+nl.BobbinWork.bwlib.io
+nl.BobbinWork.diagram.gui
+nl.BobbinWork.diagram.math
+nl.BobbinWork.diagram.model
+nl.BobbinWork.diagram.xml
+nl.BobbinWork.diagram.xml.expand
+nl.BobbinWork.grids.GridGUI
+nl.BobbinWork.grids.PolarGridModel
+nl.BobbinWork.viewer.gui
+nl.BobbinWork.viewer.guiUtils
