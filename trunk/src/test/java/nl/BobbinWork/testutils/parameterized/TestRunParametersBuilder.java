@@ -47,11 +47,11 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expects(
+  SadBuilder expects(
       final Class<? extends Exception> expectedExceptionClass,
       final String... patterns)
   {
-    return new SadTestRunParameters.Builder( tag, expectedExceptionClass,
+    return new SadBuilder( tag, expectedExceptionClass,
         patterns );
   }
 
@@ -62,7 +62,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expectsIllegalArgument(
+  PhraseBuilder expectsIllegalArgument(
       final String... patterns)
   {
     return expects( IllegalArgumentException.class, patterns );
@@ -75,7 +75,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expectsNullPointer(
+  PhraseBuilder expectsNullPointer(
       final String... patterns)
   {
     return expects( NullPointerException.class, patterns );
@@ -88,7 +88,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expectsIndexOutOfBounds(
+  PhraseBuilder expectsIndexOutOfBounds(
       final String... patterns)
   {
     return expects( IndexOutOfBoundsException.class, patterns );
@@ -101,7 +101,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expectsUnsupportedOperation(
+  PhraseBuilder expectsUnsupportedOperation(
       final String... patterns)
   {
     return expects( UnsupportedOperationException.class, patterns );
@@ -114,7 +114,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expectsIOException(
+  PhraseBuilder expectsIOException(
       final String... patterns)
   {
     return expects( IOException.class, patterns );
@@ -127,7 +127,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadTestRunParameters.Builder expectsArrayIndexOutOfBounds(
+  PhraseBuilder expectsArrayIndexOutOfBounds(
       final String... patterns)
   {
     return expects( ArrayIndexOutOfBoundsException.class, patterns );
@@ -146,11 +146,11 @@ public class TestRunParametersBuilder
    * 
    * @return an extended builder
    */
-  public HappyTestRunParameters.Builder expects(
+  public HappyBuilder expects(
       final Double[] deltas,
       final Object... expectedValues)
   {
-    return new HappyTestRunParameters.Builder( tag, expectedValues, deltas );
+    return new HappyBuilder( tag, expectedValues, deltas );
   }
 
   /**
@@ -162,9 +162,9 @@ public class TestRunParametersBuilder
    * 
    * @return an extended builder
    */
-  public HappyTestRunParameters.Builder expects(
+  public HappyBuilder expects(
       final Object... expectedValues)
   {
-    return new HappyTestRunParameters.Builder( tag, expectedValues, null );
+    return new HappyBuilder( tag, expectedValues, null );
   }
 }

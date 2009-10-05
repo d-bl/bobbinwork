@@ -17,35 +17,6 @@ public class SadTestRunParameters
   private final String[]                   messagePatterns;
   private final Class<? extends Exception> exceptionClass;
 
-  public static class Builder
-      implements TestRunParameters.Builder
-  {
-
-    private final String                     description;
-    private final Class<? extends Exception> exceptionClass;
-    private final String[]                   messagePatterns;
-
-    Builder(
-        String description,
-        Class<? extends Exception> exceptionClass,
-        String[] messagePatterns)
-    {
-      this.description = description;
-      this.exceptionClass = exceptionClass;
-      this.messagePatterns = messagePatterns;
-    }
-
-    @Override
-    public Object[] withInput(
-        Object... inputParamaters)
-    {
-      return new Object[] {
-        new SadTestRunParameters( description, inputParamaters, exceptionClass,
-            messagePatterns )
-      };
-    }
-  }
-
   /**
    * Constructs a an object for a test run that does <i>not</i> throw an
    * exception.

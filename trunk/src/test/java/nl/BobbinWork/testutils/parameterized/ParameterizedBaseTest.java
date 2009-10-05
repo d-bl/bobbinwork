@@ -36,7 +36,8 @@ public abstract class ParameterizedBaseTest
   {
     if (parameters == null)
       throw new IllegalArgumentException( "parameters should not be null" );
-    this.parameters = parameters;
+    /* the cast causes clearer error reporting than reflection */
+    this.parameters = (TestRunParameters) parameters;
   }
 
   /**
