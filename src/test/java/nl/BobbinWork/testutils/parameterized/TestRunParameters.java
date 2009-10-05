@@ -10,20 +10,6 @@ public abstract class TestRunParameters
   private final String   description;
   private final Object[] input;
 
-  static interface Builder
-  {
-    /**
-     * Creates an object array for the parameters method of a
-     * {@link Parameterized} class.
-     * 
-     * @param inputParamaters
-     *          input arguments for the test run
-     * @return a TestRunParameters object wrapped in an object array
-     */
-    public abstract Object[] withInput(
-        Object... inputParamaters);
-  }
-
   TestRunParameters(final String description, final Object[] input)
   {
     /* Not public: disables subclasses outside the package */

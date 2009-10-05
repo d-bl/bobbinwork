@@ -2,8 +2,7 @@ package nl.BobbinWork.testutils.parameterized;
 
 import static nl.BobbinWork.testutils.parameterized.TestRunParametersBuilder.run;
 
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
@@ -40,31 +39,35 @@ public class Template
   protected Object[] produceActualResults(
       final Object[] input)
   {
-    final Double a = (Double) input[0];
-    final Double b = (Double) input[1];
+    TemplateClassUnderTest x = new TemplateClassUnderTest( (Double) input[0],
+        (Double) input[1] );
     return new Object[] {
-        Math.pow( a, b ), a * b
+        x.getP(), x.getQ()
     };
   }
 
   @Parameters
-  public static Collection<Object[]> createParameters()
+  public static Collection<TestRunParameters[]> createParameters()
   {
-
-    final Object[][] resultValue = new Object[][] {
+    final TestRunParameters[][] resultValue = new TestRunParameters[][] {
         run( "1" ).expectsArrayIndexOutOfBounds().withInput(),
         run( "2" ).expects( 1d, 10d ).withInput( 1d, 10d ),
         run( "3" ).expects( 32d, 10d ).withInput( 2d, 5d ),
         run( "4a" ).expectsNullPointer().withInput( null, null ),
         run( "4b" ).expects( NPE ).withInput( null, null ),
-        run( "5" ).expects( SOME_TOLERANCE, 2.5d, 11d ).withInput( 1.1d, 10d ),
-        run( "6" ).expects( ZERO_TOLERANCE, 2.6d, 11d ).withInput( 1.1d, 10d ),
+        run( "5a" ).expects( SOME_TOLERANCE, 2.5d, 11d ).withInput( 1.1d, 10d ),
+        run( "5b" ).expects( ZERO_TOLERANCE, 2.5937424601000023d, 11d )
+            .withInput( 1.1d, 10d ),
 
         /*
          * subsequent ones fail intentionally to demonstrate the reporting and
          * increase coverage of testing the test code
          */
         // TODO improve the failure reporting
+        run( "5c" ).expects( ZERO_TOLERANCE, 2.59d, 11d ).withInput(
+            1.1d, 10d ),
+        run( "5d" ).expects( ZERO_TOLERANCE, 2.3d, 11d ).withInput( 1.1d, 10d ),
+        run( "5e" ).expects( SOME_TOLERANCE, 2.7d, 11d ).withInput( 1.1d, 10d ),
         run( null ).expects().withInput(),
         run( "no exception expected at all" ).expects().withInput(),
         run( "no exception expected at all" ).expects( 1d, 1d ).withInput(
@@ -81,37 +84,9 @@ public class Template
         run( "2" ).expects().withInput( 1d, 10d ),
         run( "no exception expected" ).expects( NULL ).withInput( NULL ),
 
-        // the next one reports the error in the test code
-        new Object[] {
-          null
-        },//
-
-        /*
-         * subsequent errors don't tell they can't create the Template instance
-         * 
-         * just: java.lang.reflect.Constructor.newInstance,
-         * 
-         * the order seems to influence the details of the
-         * IllegalArgumentException
-         */
-
-        // IllegalArgumentException: argument type mismatch
-        new Object[] {
-          ""
-        },
-
-        // IllegalArgumentException: wrong number of arguments
-        new Object[] {},
-
-        // IllegalArgumentException
-        new Object[] {
-            null, null
-        },
-
-    /* initialization errors that prevent to run any test: */
-
+    // an initialization error that prevent to run any test:
     // Template.createParameters() must return a Collection of arrays.
-    // (Object[])null,
+    // (TestRunParameters[])null,
     };
     return Arrays.asList( resultValue );
   }

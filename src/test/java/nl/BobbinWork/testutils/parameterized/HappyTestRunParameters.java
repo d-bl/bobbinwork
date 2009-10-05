@@ -19,35 +19,6 @@ public class HappyTestRunParameters
   private final Object[] expectedResult;
   private final Double[] deltas;
 
-  public static class Builder
-      implements TestRunParameters.Builder
-  {
-
-    private final String   description;
-    private final Object[] expectedResult;
-    private final Double[] deltas;
-
-    Builder(
-        final String description,
-        final Object[] expectedResult,
-        final Double[] deltas)
-    {
-      this.description = description;
-      this.expectedResult = expectedResult;
-      this.deltas = deltas;
-    }
-
-    @Override
-    public Object[] withInput(
-        final Object... inputParamaters)
-    {
-      return new Object[] {
-        new HappyTestRunParameters( description, inputParamaters,
-            expectedResult, deltas )
-      };
-    }
-  }
-
   /**
    * Constructs a an object for a test run that does <i>not</i> throw an
    * exception.
