@@ -47,29 +47,32 @@ public class HappyTestRunParameters
   @Override
   public String toString()
   {
-    final StringBuffer result = new StringBuffer();
-
-    /* directly after the actual result for easy visual comparison */
-    result.append( NEW_LINE + "expected:"
-        + Arrays.deepToString( expectedResult ) );
+    final StringBuffer message = new StringBuffer();
+    message.append( super.toString() );
     if (deltas != null && deltas.length > 0) {
-      result.append( NEW_LINE + "tolerance: " + Arrays.deepToString( deltas ) );
+      message.append( NEW_LINE );
+      message.append( "tolerance: " );
+      message.append( Arrays.deepToString( deltas ) );
     }
-    result.append( super.toString() );
-    return result.toString();
+    message.append( NEW_LINE );
+    message.append( "expected: " );
+    message.append( Arrays.deepToString( expectedResult ) );
+    return message.toString();
   }
 
   @Override
   void assertResult(
       Object[] actual)
   {
-    assertArraysEqualsTolerant( toString(), expectedResult, actual, deltas );
+    String message = toString() + NEW_LINE + "got: "
+        + Arrays.deepToString( actual );
+    assertArraysEqualsTolerant( message, expectedResult, actual, deltas );
   }
 
   @Override
   void assertResult(
       Exception exception)
   {
-    fail( "no exception expected at all" + toString(), exception );
+    fail( toString(), exception );
   }
 }

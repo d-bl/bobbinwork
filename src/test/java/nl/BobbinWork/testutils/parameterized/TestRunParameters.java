@@ -1,7 +1,6 @@
 package nl.BobbinWork.testutils.parameterized;
 
 import java.util.Arrays;
-import org.junit.runners.Parameterized;
 
 public abstract class TestRunParameters
 {
@@ -21,15 +20,17 @@ public abstract class TestRunParameters
   @Override
   public String toString()
   {
-    final StringBuffer returnValue = new StringBuffer();
+    final StringBuffer message = new StringBuffer();
 
-    returnValue
-        .append( NEW_LINE + "input:" + Arrays.deepToString( getInput() ) );
     if (description != null) {
-      returnValue.append( NEW_LINE + "tag: " + description );
+      message.append( NEW_LINE );
+      message.append( "tag: " );
+      message.append( description );
     }
-    returnValue.append( NEW_LINE );
-    return returnValue.toString();
+    message.append( NEW_LINE );
+    message.append( "input:" );
+    message.append( Arrays.deepToString( getInput() ) );
+    return message.toString();
   }
 
   abstract void assertResult(

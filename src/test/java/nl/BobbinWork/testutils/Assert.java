@@ -1,7 +1,6 @@
 package nl.BobbinWork.testutils;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
+import java.io.*;
 
 public class Assert
     extends org.junit.Assert
@@ -14,7 +13,7 @@ public class Assert
   static final String NEW_LINE = System.getProperty( "line.separator" );
 
   /**
-   * @param messageExtension
+   * @param identifyingMessage
    *          will be attached to a detailed description of an inequality
    * @param expected
    * @param actual
@@ -24,19 +23,20 @@ public class Assert
    *          of deltas are compared without a tolerance.
    */
   public static void assertArraysEqualsTolerant(
-      String messageExtension,
+      String identifyingMessage,
       Object[] expected,
       Object[] actual,
       Double[] deltas)
   {
-    assertEquals( "expected another number of result fields" + NEW_LINE
-        + messageExtension, expected.length, actual.length );
+    assertEquals( identifyingMessage + "number of fields ", expected.length,
+        actual.length );
 
     for (int i = 0; i < expected.length; i++) {
-      final String msg = "expected[" + i + "] != actual[" + i + "]" + NEW_LINE
-          + messageExtension;
+      final String msg = identifyingMessage + NEW_LINE + "fails at index " + i + "; ";
       if (deltas == null || i >= deltas.length || deltas[i] == null) {
-        assertEquals( msg, expected[i], actual[i] );
+        // TODO why does org.junit.Assert.assertEquals fail to fail?
+        org.junit.Assert.assertEquals( msg, expected[i], actual[i] );
+        junit.framework.Assert.assertEquals( msg, expected[i], actual[i] );
       } else {
         assertEquals( msg, expected[i].getClass(), actual[i].getClass() );
         assertEquals( msg, (Double) expected[i], (Double) actual[i], deltas[i] );
@@ -45,26 +45,30 @@ public class Assert
   }
 
   /**
-   * Asserts that all the patterns are found in the value.
+   * Asserts that essential information is present in the message of the
+   * exception.
    * 
-   * @param messageExtension
-   * @param value
-   * @param patterns
-   *          regular expressions
+   * @param identifyingMessage
+   * @param expected
+   *          regular expressions that should all be found in the message of the
+   *          thrown exception
+   * @param actual
+   *          the exception that is thrown
    */
   public static void assertContains(
-      String messageExtension,
-      String value,
-      String[] patterns)
+      String identifyingMessage,
+      String[] expected,
+      Throwable actual)
   {
-    for (final String pattern : patterns) {
-      assertTrue( pattern + " not found" + NEW_LINE + messageExtension, value
-          .toString().matches( ".*" + pattern + ".*" ) );
+    String thrownMessage = actual.getMessage();
+    final String msg = identifyingMessage + NEW_LINE + "could not find: ";
+    for (final String pattern : expected) {
+      assertTrue( msg + pattern, thrownMessage.matches( ".*" + pattern + ".*" ) );
     }
   }
 
   /**
-   * @param message
+   * @param identifyingMessage
    *          an identifying message describing the context of the problem
    * @param expected
    *          the class or a superclass of the expected exception
@@ -72,7 +76,7 @@ public class Assert
    *          the exception that was actually thrown
    */
   public static void assertSubClass(
-      String message,
+      String identifyingMessage,
       Class<? extends Throwable> expected,
       Throwable actual)
   {
@@ -80,37 +84,37 @@ public class Assert
       actual.getClass().asSubclass( expected );
     } catch (Exception ClassCastException) {
       StringBuffer stringBuffer = new StringBuffer();
-      stringBuffer.append( "got: " + actual.getClass().getName() + NEW_LINE );
-      if (message != null) stringBuffer.append( message + NEW_LINE );
+      if (identifyingMessage != null)
+        stringBuffer.append( identifyingMessage + NEW_LINE );
+      stringBuffer.append( "got: " + actual.getClass().getName() );
       fail( stringBuffer.toString() );
     }
   }
 
   /**
-   * Fails with a concatenation of the specified message,
-   * the message of the cause and the stack trace of the cause.
+   * Fails with a concatenation of the specified message, the message of the
+   * cause and the stack trace of the cause.
    * 
-   * @param message
+   * @param identifyingMessage
    *          a message describing the details of the problem
    * @param cause
    *          the exception that was thrown but not expected.
    */
   public static void fail(
-      String message,
+      String identifyingMessage,
       Throwable cause)
   {
 
     final StringWriter stringWriter = new StringWriter();
     final PrintWriter printWriter = new PrintWriter( stringWriter );
 
-    if (message != null) printWriter.append( message + NEW_LINE );
-    String string = cause.getMessage();
-    if (string != null) printWriter.append( "----"+string + "----"+ NEW_LINE );
+    if (identifyingMessage != null)
+      printWriter.append( identifyingMessage + NEW_LINE );
+    printWriter.append( "got: " );
     cause.printStackTrace( printWriter );
 
     printWriter.flush();
     stringWriter.flush();
-
     fail( stringWriter.toString() );
   }
 }
