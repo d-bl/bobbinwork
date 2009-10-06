@@ -1,9 +1,9 @@
 package nl.BobbinWork.testutils.parameterized;
 
-import java.util.Arrays;
-
-import static junit.framework.Assert.fail;
+import static java.util.Arrays.deepToString;
 import static nl.BobbinWork.testutils.Assert.*;
+
+import java.util.Arrays;
 
 /**
  * Represents the test parameters fed to one test run of a parameterized test.
@@ -45,34 +45,33 @@ public class SadTestRunParameters
   @Override
   public String toString()
   {
-    final StringBuffer result = new StringBuffer();
-    String string = String.format(
-        "expected exception class: %s or a subclass", exceptionClass );
-    result.append( NEW_LINE + string );
+    final StringBuffer stringBuffer = new StringBuffer();
+    stringBuffer.append( super.toString() );
+    stringBuffer.append( NEW_LINE );
+    stringBuffer.append( "expected exception class: " );
+    stringBuffer.append( exceptionClass );
+    stringBuffer.append( " or a subclass" );
     if (messagePatterns != null && messagePatterns.length > 0) {
-      result.append( NEW_LINE + "expected excpetion message contains all of: "
-          + Arrays.toString( messagePatterns ) );
+      stringBuffer.append( NEW_LINE );
+      stringBuffer.append( "expected excpetion message contains all of: " );
+      stringBuffer.append( Arrays.toString( messagePatterns ) );
     }
-    result.append( super.toString() );
-    return result.toString();
+    return stringBuffer.toString();
   }
 
   @Override
   void assertResult(
       final Object[] actual)
   {
-    fail( "expected an exception but got: " + Arrays.deepToString( actual )
-        + toString() );
+    fail( toString() + NEW_LINE + "got: " + deepToString( actual ) );
   }
 
   @Override
   void assertResult(
       final Exception actual)
   {
-    final String string = toString();
-    assertSubClass( "expected another exception class" + string,
-        exceptionClass, actual );
-    assertContains( "expected another exception message" + string, //
-        actual.toString(), messagePatterns );
+    String message = toString();
+    assertSubClass( message, exceptionClass, actual );
+    assertContains( message, messagePatterns, actual );
   }
 }

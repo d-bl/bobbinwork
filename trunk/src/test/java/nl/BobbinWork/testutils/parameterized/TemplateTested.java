@@ -1,11 +1,11 @@
 package nl.BobbinWork.testutils.parameterized;
 
-class TemplateClassUnderTest
+class TemplateTested
 {
   private double p;
   private double q;
 
-  TemplateClassUnderTest(final Double a, final Double b)
+  TemplateTested(final Double a, final Double b)
   {
     p = Math.pow( a, b );
     q = a * b;
