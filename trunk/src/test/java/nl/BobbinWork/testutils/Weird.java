@@ -1,4 +1,4 @@
-package nl.BobbinWork.testutils.parameterized;
+package nl.BobbinWork.testutils;
 
 import org.junit.Test;
 
