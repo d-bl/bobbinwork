@@ -2,6 +2,8 @@ package nl.BobbinWork.testutils.parameterized;
 
 import java.io.IOException;
 
+import org.junit.Ignore;
+
 /**
  * A description of a to-be-instantiated {@link HappyTestRunParameters} object.<br>
  * <br>
@@ -11,6 +13,7 @@ import java.io.IOException;
  * 
  * @author Joke Pol
  */
+@Ignore("This is a test tool, not a tester")
 public class TestRunParametersBuilder
 {
   private final String tag;

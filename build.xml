@@ -23,7 +23,7 @@
     <property name="build.dir" location="build" />
     <property name="svn.revision.of.published.jar" value="xxx" />
     <property file="../ant.properties" />
-    <property environment="env" /><!-- at least: JAVA_HOME (jdk 5+, not jre) -->
+    <property environment="env" /><!-- at least: JAVA_HOME (jdk 6+, not jre) -->
             
     <property name="version" value="2.0.${svn.revision.of.published.jar}" /><!--  
         base number signals compatibillity issues with basicStitches.xml? -->
@@ -32,7 +32,7 @@
     <property name="jnlp.code.base" value="http://bobbinwork.googlecode.com/files" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
     <property name="dev.utils" value="../bw-dev-utils" />
-    <property name="target" value="1.5" />
+    <property name="target" value="1.6" />
     <property name="jar.suffix" value="-rel-${version}.jar" />
 
     <path id="junit.classpath">
@@ -132,11 +132,13 @@
     </target>
             
     <target name="testRun" depends="testCompile" description="run test classes">
+        <delete dir="${build.dir}/tmptest/TEST-*" />
         <junit printsummary="yes" haltonfailure="false">
           <classpath refid="junit.classpath" />
           <formatter type="plain"/>
           <batchtest todir="${build.dir}/tmptest">
-          	<fileset dir="${build.dir}/tmptest" includes="**/Test*.class, "/>
+          	<fileset dir="${build.dir}/tmptest" includes="**/*Test.class, "/>
+          	<fileset dir="${build.dir}/tmptest" includes="**/Weird.class, "/>
           </batchtest>
         </junit>
     </target>

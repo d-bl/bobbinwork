@@ -30,8 +30,11 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import org.junit.Ignore;
+
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 
+@Ignore("this is java application, not a JUnit")
 public class VisualTest {
 	
 	private JFrame frame = new JFrame("visualizer"); 

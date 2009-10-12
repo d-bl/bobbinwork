@@ -20,23 +20,18 @@ package nl.BobbinWork.diagram.xml;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.io.PrintStream;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 import org.junit.Test;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 public class ExpandTest extends XmlFixture {
 
   private static final String XML_CONTENT = XmlResources.ROOT + "<xi:include href='basicStitches.xml'/></diagram>";
-  private static final File EXPANDED_FILE = new File ("JUnitTests"+PATH+"expanded.xml");
+  private static final File EXPANDED_FILE = new File ("src/test/java"+PATH+"expanded.xml");
 
   @Test
   public void emptyDiagram() throws Exception {
@@ -84,7 +79,7 @@ public class ExpandTest extends XmlFixture {
   
   @Test
   public void newDiagram() throws Exception  {
-    File file = new File("src" + PATH + "newDiagram.xml");
+    File file = new File(SRC + PATH + "newDiagram.xml");
     Document document = xmlResources.parse(file);
     TreeExpander.replaceCopyElements(document.getDocumentElement());
     String xmlString = XmlResources.toXmlString(document);

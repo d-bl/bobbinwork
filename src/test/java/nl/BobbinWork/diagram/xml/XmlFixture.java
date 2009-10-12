@@ -35,6 +35,7 @@ import org.xml.sax.SAXParseException;
 public class XmlFixture {
 
   static final String PATH = "/nl/BobbinWork/diagram/xml/";
+  protected static final String SRC = "src/main/java";
   static XmlResources xmlResources;
 
   @BeforeClass

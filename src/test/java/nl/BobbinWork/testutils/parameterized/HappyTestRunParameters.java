@@ -4,6 +4,7 @@ import static nl.BobbinWork.testutils.Assert.*;
 
 import java.util.Arrays;
 
+import org.junit.Ignore;
 import org.junit.runners.Parameterized;
 
 /**
@@ -12,6 +13,7 @@ import org.junit.runners.Parameterized;
  * 
  * @author Joke Pol
  */
+@Ignore("This is a test tool, not a tester")
 public class HappyTestRunParameters
     extends TestRunParameters
 {

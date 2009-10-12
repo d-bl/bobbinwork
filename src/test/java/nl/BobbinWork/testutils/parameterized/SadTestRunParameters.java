@@ -5,11 +5,14 @@ import static nl.BobbinWork.testutils.Assert.*;
 
 import java.util.Arrays;
 
+import org.junit.Ignore;
+
 /**
  * Represents the test parameters fed to one test run of a parameterized test.
  * 
  * @author Joke Pol
  */
+@Ignore("This is a test tool, not a tester")
 public class SadTestRunParameters
     extends TestRunParameters
 {
