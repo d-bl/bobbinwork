@@ -129,7 +129,9 @@ public class PointsInSwitchesTest {
         		{new P(tctcBS,tctcOS,200,95,200,95)}, 
 
         		// end of back of left twist; checks merging polygons 
-        		{new P(tctcBS,tctcOS,186,83,186,83)}, // TODO merge not yet implemented
+        		{new P(tctcBS,tctcOS,186,83,186,83)}, 
+        		// TODO merge not yet implemented
+        		// TODO perhaps see http://blog.schauderhaft.de/2009/10/04/junit-rules/  
         /**/};
         return Arrays.asList(testCaseParameters);
     }

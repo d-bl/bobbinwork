@@ -58,7 +58,7 @@ public class XmlTest extends XmlFixture {
 
   @Test
   public void newDiagram() throws SAXException, IOException, TransformerException {
-    File file = new File("src" + PATH + "newDiagram.xml");
+    File file = new File(SRC + PATH + "newDiagram.xml");
     xmlResources.validate(file);
   }
 
