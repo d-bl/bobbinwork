@@ -36,7 +36,7 @@ public class Assert
       if (deltas == null || i >= deltas.length || deltas[i] == null) {
         // TODO why does org.junit.Assert.assertEquals fail to fail?
         org.junit.Assert.assertEquals( msg, expected[i], actual[i] );
-        junit.framework.Assert.assertEquals( msg, expected[i], actual[i] );
+        junit.framework.Assert.assertEquals( msg+NEW_LINE+"should have failed earlier"+NEW_LINE, expected[i], actual[i] );
       } else {
         assertEquals( msg, expected[i].getClass(), actual[i].getClass() );
         assertEquals( msg, (Double) expected[i], (Double) actual[i], deltas[i] );
