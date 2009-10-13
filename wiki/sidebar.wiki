@@ -11,6 +11,12 @@
 
   * [GetStarted]
 
+*technical documentation*
+
+  * [http://bobbinwork.googlecode.com/svn/trunk/doc/api/index.html JavaDoc]
+  * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.gif class tree]
+  * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams3.gif object tree]
+
 *plans and ideas*
 
   * [MathChallenges mathematical challenges]
