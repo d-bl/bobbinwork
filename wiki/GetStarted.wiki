@@ -6,7 +6,7 @@
 *Users* can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
 
 *Developers* may use any IDE or whatever they are comfortable with. 
-For testing and building you'll need Ant ant JUnit 4.5+ and [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html this conversation]. 
+For testing and building you'll need Ant ant JUnit 4.5+ for the latter see this [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html conversation]. 
 How it once used to work with Eclipse is described step by step on an [http://code.google.com/p/bobbinwork/source/browse/wiki/GetStarted.wiki?r=196 old version] of this page.
 The optional [http://www.eclemma.org/ EclEmma] plug-in for Eclipse can show you which code is touched by tests or manual execution of the code.
 
