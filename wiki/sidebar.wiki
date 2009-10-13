@@ -9,11 +9,11 @@
 
 * technical documentation *
 
-    * [GetStarted development environment]
     * API
-      * [http://bobbinwork.googlecode.com/svn/api/index.html JavaDoc]
+      * [http://bobbinwork.googlecode.com/svn/doc/api/index.html JavaDoc]
       * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.gif class tree]
       * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams3.gif object tree]
+    * [GetStarted development environment]
     * [http://www.ohloh.net/p/bobbinwork/analyses code analyses]
 * plans and ideas *
     * [MathChallenges mathematical challenges]
