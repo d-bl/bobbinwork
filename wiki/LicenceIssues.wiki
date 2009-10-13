@@ -12,7 +12,7 @@ Discussions about these issues:
 
 The [http://www.gnu.org/licenses/gpl-faq.html#GPLOutput GNU/GPL-FAQ] states:
  when a program translates its input into some other form, the copyright status of the output inherits that of the input it was generated from.
-Therefore, as long as the XML files with diagrams (or fractions of diagrams) are bundled with the code under the GPL license, lacemakers can't publish copyrighted patterns illustrating the technique with !BobbinWork diagrams ([http://dictionary.lp.findlaw.com/scripts/results.pl?co=dictionary.lp.findlaw.com&topic=f3/f34c6efa8bcf2d5f656a80f181c3274d sublicenses]) unless the BobbinWork copyright holders provides another license too, see [http://en.wikipedia.org/wiki/Multi-licensing wikipedia] about multi licensing.
+Therefore, as long as the XML files with diagrams (or fractions of diagrams) are bundled with the code under the GPL license, lacemakers can't publish copyrighted patterns illustrating the technique with !BobbinWork diagrams ([http://dictionary.lp.findlaw.com/scripts/results.pl?co=dictionary.lp.findlaw.com&topic=f3/f34c6efa8bcf2d5f656a80f181c3274d sublicenses]) unless the !BobbinWork copyright holders provides another license too, see [http://en.wikipedia.org/wiki/Multi-licensing wikipedia] about multi licensing.
 
 Problems:
   * Over time the project may get more contributors/authors, each would have to agree with the other license or their code could not be used
