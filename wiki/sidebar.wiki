@@ -1,8 +1,11 @@
 #summary One-sentence summary of this page.
-[history]<br>
-[MathSolutions]<br>
-[LicenceIssues]<br>
-[GetStarted]<br>
-[MathChallenges]<br>
-[ToDo]<br>
-[GuiRequirements]<br>
+*background information*
+  * [history]
+  * [MathSolutions]
+  * [LicenceIssues]
+*development environment*
+  * [GetStarted]
+*plans and ideas*
+  * [MathChallenges]
+  * [ToDo]
+  * [GuiRequirements]
