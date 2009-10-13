@@ -6,15 +6,12 @@
 *Users* can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
 
 *Developers* may use any IDE or whatever they are comfortable with. 
-
-To become a project member, drop a line or post patches on the [http://groups.google.com/group/bobbinwork discussion group] of the project. 
-
-For testing and building you'll need Ant ant JUnit 4.5+ see [http://code.google.com/p/bobbinwork/source/browse/dev-utils/README.TXT dev-utils/readme.txt] and [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html this conversation].  
-
+For testing and building you'll need Ant ant JUnit 4.5+ see [http://code.google.com/p/bobbinwork/source/browse/dev-utils/README.TXT dev-utils/readme.txt] and [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html this conversation]. 
 How it once used to work with Eclipse is described step by step on an [http://code.google.com/p/bobbinwork/source/browse/wiki/GetStarted.wiki?r=196 old version] of this page.
-
 The [http://www.eclemma.org/ eclemma] plug-in can show you which code is touched by tests or manual execution of the code.
 
+To become a project member or start contributing, drop a line or post patches on the [http://groups.google.com/group/bobbinwork discussion group] of the project. 
+ 
 = Project structure =
 the project is moving from Ant to at least a Maven like organisation but the resources are not yet separated from the java sources. That requires some rework to read the built-in xml samples and keep that working not only when packaged in a Jar but also when launching directly within eclipse.
 
