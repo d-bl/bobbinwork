@@ -1,14 +1,18 @@
 #summary by default on every page
 
-background information
+*background information*
   * [history]
   * [LicenceIssues diagrams code and licenses]
   * mathematical solutions
     * [http://bw-en.wikispaces.com/grid+math polar grids]
     * [MathSolutions twist marks]
-development environment
+
+*development environment*
+
   * [GetStarted]
-plans and ideas
+
+*plans and ideas*
+
   * [MathChallenges mathematical challenges]
   * [ToDo]
   * [GuiRequirements]
