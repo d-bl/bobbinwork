@@ -1,4 +1,4 @@
-#summary xml sources defining diagrams and GNU-GPLv3 compatible licences in the repository
+#summary diagrams source-code and licences
 #labels Phase-Requirements
 
 Discussions about these issues:
@@ -8,22 +8,17 @@ Discussions about these issues:
 [http://groups.google.com/group/bobbinwork/browse_thread/thread/d84ecad9e8f65e71/ 4]
 [http://groups.google.com/group/google-code-hosting/browse_thread/thread/24cf5157ebbb5613/70dbbca5ff488fdd?lnk=gst&q=branches#70dbbca5ff488fdd 5]
 
-=GNU-GPLv3 compatible licences=
-
-How does Google want us to (not) import code/sources with GNU-GPLv3?
-
-=Diagrams=
 == Introduction ==
 
 The [http://www.gnu.org/licenses/gpl-faq.html#GPLOutput GNU/GPL-FAQ] states:
  when a program translates its input into some other form, the copyright status of the output inherits that of the input it was generated from.
-Therefore, as long as the XML files are embedded within the program, lacemakers can't publish copyrighted patterns illustrating the technique with !BobbinWork diagrams ([http://dictionary.lp.findlaw.com/scripts/results.pl?co=dictionary.lp.findlaw.com&topic=f3/f34c6efa8bcf2d5f656a80f181c3274d sublicenses]).
+Therefore, as long as the XML files with diagrams (or fractions of diagram) are embedded within the program, lacemakers can't publish copyrighted patterns illustrating the technique with !BobbinWork diagrams ([http://dictionary.lp.findlaw.com/scripts/results.pl?co=dictionary.lp.findlaw.com&topic=f3/f34c6efa8bcf2d5f656a80f181c3274d sublicenses]).
 
 The [http://opensource.org/licenses/artistic-license-2.0.php artistic license 2.0] states:
  You are always permitted to make arrangements wholly outside of this license directly with the Copyright Holder of a given Package. If the terms of this license do not permit the full use that you propose to make of the Package, you should contact the Copyright Holder and seek a different licensing arrangement.
-It seems logical that this applies to any license or resource with copyrights; legally, maybe not always ethically. But over time the project may get more contributors/authors what might make arrangements problematic.
+Over time the project may get more contributors/authors what might make arrangements problematic.
 
 
 == Arrangements ==
 
-The XML sources are [http://groups.google.com/group/bobbinwork/files published separately] allowing any license/copyright. However, the definitions of the basic stitches are kept together with the rest the code and are implicitly included.
+The diagrams are placed in the wiki section of the subversion repository. The [http://code.google.com/p/bobbinwork/source/browse/#svn/wiki wiki] section has another license than the [http://code.google.com/p/bobbinwork/source/browse/#svn/trunk source code] section. The diagram section in the wiki serves as input for the software. However, the definitions of the basic stitches are kept together with the rest of the code and are included in the distributed jar file.
