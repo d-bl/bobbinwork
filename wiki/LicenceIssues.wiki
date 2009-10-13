@@ -12,13 +12,13 @@ Discussions about these issues:
 
 The [http://www.gnu.org/licenses/gpl-faq.html#GPLOutput GNU/GPL-FAQ] states:
  when a program translates its input into some other form, the copyright status of the output inherits that of the input it was generated from.
-Therefore, as long as the XML files with diagrams (or fractions of diagram) are embedded within the program, lacemakers can't publish copyrighted patterns illustrating the technique with !BobbinWork diagrams ([http://dictionary.lp.findlaw.com/scripts/results.pl?co=dictionary.lp.findlaw.com&topic=f3/f34c6efa8bcf2d5f656a80f181c3274d sublicenses]).
+Therefore, as long as the XML files with diagrams (or fractions of diagrams) are bundled with the code under the GPL license, lacemakers can't publish copyrighted patterns illustrating the technique with !BobbinWork diagrams ([http://dictionary.lp.findlaw.com/scripts/results.pl?co=dictionary.lp.findlaw.com&topic=f3/f34c6efa8bcf2d5f656a80f181c3274d sublicenses]) unless the BobbinWork copyright holders provides another license too, see [http://en.wikipedia.org/wiki/Multi-licensing wikipedia] about multi licensing.
 
-The [http://opensource.org/licenses/artistic-license-2.0.php artistic license 2.0] states:
- You are always permitted to make arrangements wholly outside of this license directly with the Copyright Holder of a given Package. If the terms of this license do not permit the full use that you propose to make of the Package, you should contact the Copyright Holder and seek a different licensing arrangement.
-Over time the project may get more contributors/authors what might make arrangements problematic.
+Problems:
+  * Over time the project may get more contributors/authors, each would have to agree with the other license or their code could not be used
+  * Google Code doesn't want to host projects with multiple licenses
+  * users would have to ask for license arangements
 
+== Solution ==
 
-== Arrangements ==
-
-The diagrams are placed in the wiki section of the subversion repository. The [http://code.google.com/p/bobbinwork/source/browse/#svn/wiki wiki] section has another license than the [http://code.google.com/p/bobbinwork/source/browse/#svn/trunk source code] section. The diagram section in the wiki serves as input for the software. However, the definitions of the basic stitches are kept together with the rest of the code and are included in the distributed jar file.
+The diagrams are separated from the code and placed in the wiki section of the !SubVersion repository. The [http://code.google.com/p/bobbinwork/source/browse/#svn/wiki wiki] section has another license than the [http://code.google.com/p/bobbinwork/source/browse/#svn/trunk source code] section. The diagram section in the wiki serves as input for the software. However, the definitions of the basic stitches are kept together with the rest of the code and are included in the distributed jar file.
