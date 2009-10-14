@@ -6,9 +6,9 @@
 *Users* can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
 
 *Developers* may use any IDE or whatever they are comfortable with. 
-For testing and building you'll need Ant ant JUnit 4.5+. For the latter see this [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html conversation]. 
-How it once used to work with Eclipse is described step by step on an [http://code.google.com/p/bobbinwork/source/browse/wiki/GetStarted.wiki?r=196 old version] of this page.
-The optional [http://www.eclemma.org/ EclEmma] plug-in for Eclipse can show you which code is touched by tests or manual execution of the code.
+The project builds with Java 1.5+ Ant 1.7.0 and JUnit 4.3 though JUnit 4.5 is recommended. For the proper JUnit version in Eclipse see this [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html conversation]. 
+
+How everything once used to work with Eclipse is described step by step on an [http://code.google.com/p/bobbinwork/source/browse/wiki/GetStarted.wiki?r=196 old version] of this page. The optional [http://www.eclemma.org/ EclEmma] plug-in for Eclipse can show you which code is touched by tests or manual execution of the code.
 
 To become a project member or start contributing, drop a line or post patches on the [http://groups.google.com/group/bobbinwork discussion group] of the project. 
  
