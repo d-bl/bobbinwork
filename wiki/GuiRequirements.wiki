@@ -3,9 +3,6 @@
 
 Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids.
 
-=palet of stitches=
-  * Currently all elements with an id are presented as a sequential list of thumbnail-diagrams. The list should become tool bar button showing the selected item, clicking it should activate something to select another item. Perhaps a menu reflecting the XML tree structure with thumbnails.
-
 =Bidirectional synchronisation between the other three panels=
 
 Just a tree to select a diagram section could be too intimidating. On the other hand, when clicking the diagram it is usually not clear which level is meant (thread/twist/stitch/group of stitches). To solve the dilemma and keep the user interface simple: first click the diagram, a corresponding tree element gets highlighted (at the default level of stitches), then click a higher or lower level in the tree if you want to manipulate a larger or smaller section. 
