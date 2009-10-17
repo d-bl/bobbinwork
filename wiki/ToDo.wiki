@@ -6,7 +6,7 @@
   * see also 
     * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
     * to do's in the code
-    * the [http://bw-en.wikispaces.com/viewer+wish+list wish list]s in the [http://bw-en.wikispaces.com/ user guide]
+    * the [http://bobbinwork.wikispaces.com/grids+wish+list grid] and [http://bobbinwork.wikispaces.com/diagrams+wish+list diagram] wish lists in the [http://bw-en.wikispaces.com/ user guide]
     * [http://code.google.com/p/bobbinwork/issues/list issues]
 
 *Code reviews*
