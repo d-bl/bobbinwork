@@ -11,7 +11,7 @@
     * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.gif class tree]
     * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams3.gif object tree]
     * [GetStarted development environment]
-    * [http://www.ohloh.net/p/bobbinwork/analyses code analyses]
+    * [http://www.ohloh.net/p/bobbinwork/analyses code statistics]
   * plans and ideas
     * [MathChallenges mathematical challenges]
     * [ToDo]
