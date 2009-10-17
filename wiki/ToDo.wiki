@@ -4,7 +4,7 @@
   * complete the Java doc (use an alternative for the Visio diagrams?)
   * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level tests are available by visually checking and manipulating the sample/ground diagrams
   * see also 
-    * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
+    * [GuiRequirements GUI requirements].
     * to do's in the code
     * the [http://bobbinwork.wikispaces.com/grids+wish+list grid] and [http://bobbinwork.wikispaces.com/diagrams+wish+list diagram] wish lists in the [http://bw-en.wikispaces.com/ user guide]
     * [http://code.google.com/p/bobbinwork/issues/list issues]
