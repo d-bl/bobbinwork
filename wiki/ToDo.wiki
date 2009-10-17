@@ -3,9 +3,17 @@
 
   * complete the Java doc (use an alternative for the Visio diagrams?)
   * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level tests are available by visually checking and manipulating the sample/ground diagrams
-  * identify performance bottle necks. On Windows XP SP2 with 0.5 MB memory it take 10-20 seconds to refresh a diagram. [http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/xml/expand/TreeExpander.java expand()] might not be the only problem.
-  * code review
   * see also 
     * [http://code.google.com/p/bobbinwork/wiki/GUI GUI requirements].
     * to do's in the code
     * the [http://bw-en.wikispaces.com/viewer+wish+list wish list]s in the [http://bw-en.wikispaces.com/ user guide]
+    * [http://code.google.com/p/bobbinwork/issues/list issues]
+
+*Code reviews*
+
+Even questions about the code might trigger improvements. You need to sign in with a Google account but don't need to join the project: See how reviews work on http://code.google.com/p/support/wiki/CodeReviews 
+
+In short: 
+  * browse the source code online
+  * double click a code line to enter you comment or question
+  * when done publish your comment so others get notified
