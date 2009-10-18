@@ -38,7 +38,7 @@ import org.xml.sax.SAXException;
  * @author Joke Pol
  *
  */
-public class XmlTree
+public class XmlTreeTester
 {
 
   private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels";         //$NON-NLS-1$
@@ -48,10 +48,10 @@ public class XmlTree
   private BWFrame             frame                 = new BWFrame(
                                                         LOCALIZER_BUNDLE_NAME );
 
-  public XmlTree(String name)
+  public XmlTreeTester(String name)
       throws ParserConfigurationException, SAXException, IOException, URISyntaxException
   {
-    BWTree tree = new BWTree();
+    XmlTree tree = new XmlTree();
     tree.setDoc( readFile(name) );
     tree.setDocName( name );
 
@@ -61,7 +61,7 @@ public class XmlTree
   private static String readFile(
       String name) throws IOException, URISyntaxException
   {
-    final InputStream inputStream = BWTree.class.getClassLoader()
+    final InputStream inputStream = XmlTree.class.getClassLoader()
         .getResourceAsStream( name );
     java.net.URI uri = XmlTree.class.getClassLoader().getResource( name ).toURI();
 
@@ -77,7 +77,7 @@ public class XmlTree
     if (args.length > 0)
       setBundle( LOCALIZER_BUNDLE_NAME, new Locale( args[0] ) );
     try {
-      new XmlTree(NEW_DIAGRAM).frame.setVisible( true );
+      new XmlTreeTester(NEW_DIAGRAM).frame.setVisible( true );
     } catch (Exception exception) {
       exception.printStackTrace();
     }
