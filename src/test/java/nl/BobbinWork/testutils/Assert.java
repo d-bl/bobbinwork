@@ -23,10 +23,10 @@ public class Assert
    *          of deltas are compared without a tolerance.
    */
   public static void assertArraysEqualsTolerant(
-      String identifyingMessage,
-      Object[] expected,
-      Object[] actual,
-      Double[] deltas)
+      final String identifyingMessage,
+      final Object[] expected,
+      final Object[] actual,
+      final Double[] deltas)
   {
     assertEquals( identifyingMessage + "number of fields ", expected.length,
         actual.length );
@@ -34,14 +34,24 @@ public class Assert
     for (int i = 0; i < expected.length; i++) {
       final String msg = identifyingMessage + NEW_LINE + "fails at index " + i + "; ";
       if (deltas == null || i >= deltas.length || deltas[i] == null) {
-        // TODO why does org.junit.Assert.assertEquals fail to fail?
-        org.junit.Assert.assertEquals( msg, expected[i], actual[i] );
-        junit.framework.Assert.assertEquals( msg+NEW_LINE+"should have failed earlier"+NEW_LINE, expected[i], actual[i] );
+        assertEquals( msg, expected[i], actual[i] );
       } else {
         assertEquals( msg, expected[i].getClass(), actual[i].getClass() );
         assertEquals( msg, (Double) expected[i], (Double) actual[i], deltas[i] );
       }
     }
+  }
+
+  public static void assertEquals(
+      final String msg,
+      final Object expected,
+      final Object actual)
+  {
+    org.junit.Assert.assertEquals( msg, expected, actual );
+    
+    // safety net for JUnit 4.3.1. which comes with Eclipse   
+    final String note = NEW_LINE+"should have failed earlier, fixed in JUnit 4.5 or later"+NEW_LINE;
+    junit.framework.Assert.assertEquals( msg+note, expected, actual );
   }
 
   /**
@@ -56,11 +66,11 @@ public class Assert
    *          the exception that is thrown
    */
   public static void assertContains(
-      String identifyingMessage,
-      String[] expected,
-      Throwable actual)
+      final String identifyingMessage,
+      final String[] expected,
+      final Throwable actual)
   {
-    String thrownMessage = actual.getMessage();
+    final String thrownMessage = actual.getMessage();
     final String msg = identifyingMessage + NEW_LINE + "could not find: ";
     for (final String pattern : expected) {
       assertTrue( msg + pattern, thrownMessage.matches( ".*" + pattern + ".*" ) );
@@ -76,14 +86,14 @@ public class Assert
    *          the exception that was actually thrown
    */
   public static void assertSubClass(
-      String identifyingMessage,
-      Class<? extends Throwable> expected,
-      Throwable actual)
+      final String identifyingMessage,
+      final Class<? extends Throwable> expected,
+      final Throwable actual)
   {
     try {
       actual.getClass().asSubclass( expected );
     } catch (Exception ClassCastException) {
-      StringBuffer stringBuffer = new StringBuffer();
+      final StringBuffer stringBuffer = new StringBuffer();
       if (identifyingMessage != null)
         stringBuffer.append( identifyingMessage + NEW_LINE );
       stringBuffer.append( "got: " + actual.getClass().getName() );
@@ -101,8 +111,8 @@ public class Assert
    *          the exception that was thrown but not expected.
    */
   public static void fail(
-      String identifyingMessage,
-      Throwable cause)
+      final String identifyingMessage,
+      final Throwable cause)
   {
 
     final StringWriter stringWriter = new StringWriter();
