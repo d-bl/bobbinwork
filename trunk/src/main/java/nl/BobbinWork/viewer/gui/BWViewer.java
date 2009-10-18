@@ -84,7 +84,7 @@ public class BWViewer {
 	private SourcePanel source;
 
 	/** tree view of the XML elements */
-	private BWTree tree;
+	private XmlTree tree;
 
 	/** Fragments of the diagram that can be used again (referred to with &lt;copy of=".."&gt;) */
 	private DiagramFragments fragments;
@@ -102,7 +102,7 @@ public class BWViewer {
 				tree.setDoc(source.getText());
 			}
 		});
-		tree = new BWTree();
+		tree = new XmlTree();
 		diagramPanel = new DiagramPanel();
 		fragments = new DiagramFragments();
 		JButton delete = new LocaleButton(false, "TreeToolBar_delete");//$NON-NLS-1$
@@ -211,7 +211,7 @@ public class BWViewer {
 		fragments.addSelectionListener(fragments.new SelectionListener() {
 
 			void selectedValueChanged() {
-				replace.setEnabled(BWTree.elementsMatch(//
+				replace.setEnabled(XmlTree.elementsMatch(//
 						tree.getSelectedElement(), //
 						fragments.getSelectedElement()));
 			}
@@ -220,7 +220,7 @@ public class BWViewer {
 		tree.getModel().addTreeModelListener(new TreeModelListener() {
 
 			private void treeChanged(TreeModelEvent e) {
-				BWTree.restoreOrphans(e);
+				XmlTree.restoreOrphans(e);
 				try {
 				  TreeExpander.replaceCopyElements((Element) tree.getRootElement());
 				} catch (XPathExpressionException e1) {
@@ -256,7 +256,7 @@ public class BWViewer {
 								if ((now - lastTime) > delay) {
 									lastTime = new GregorianCalendar().getTimeInMillis();
 									// perform the actions:
-									replace.setEnabled(BWTree.elementsMatch(tree.getSelectedElement(),
+									replace.setEnabled(XmlTree.elementsMatch(tree.getSelectedElement(),
 											fragments.getSelectedElement()));
 									delete.setEnabled(tree.selectedElementIsDeletable());
 									diagramPanel.highLight(tree.getSelectedPartition());

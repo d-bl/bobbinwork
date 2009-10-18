@@ -55,17 +55,17 @@ import org.xml.sax.SAXParseException;
  * 
  */
 @SuppressWarnings("serial") //$NON-NLS-1$
-public class BWTree extends JTree {
+public class XmlTree extends JTree {
 
     private static final String XML_ERROR_POSITION = "XML_ERROR_position";
     private static final String XML_ERROR_CAPTION = "XML_ERROR_caption";
 
     /** outer this */
-    private BWTree self = this; // for inner classes
+    private XmlTree self = this; // for inner classes
 
     private static XmlResources xmlResources;
     
-    public BWTree() throws ParserConfigurationException, SAXException {
+    public XmlTree() throws ParserConfigurationException, SAXException {
         super(new Vector<String>());
         if ( xmlResources == null ) xmlResources = new XmlResources();
         ToolTipManager.sharedInstance().registerComponent(this);
