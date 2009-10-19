@@ -65,6 +65,12 @@ public class XmlTree extends JTree {
 
     private static XmlResources xmlResources;
     
+    public XmlTree(String name, String input) throws ParserConfigurationException, SAXException {
+      this();
+      setDoc( input );
+      setDocName( name );
+    }
+    
     public XmlTree() throws ParserConfigurationException, SAXException {
         super(new Vector<String>());
         if ( xmlResources == null ) xmlResources = new XmlResources();
