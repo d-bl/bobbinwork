@@ -19,56 +19,36 @@ package nl.BobbinWork.viewer.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
+import java.io.*;
+import java.net.*;
 import java.util.Locale;
 
 import javax.swing.JScrollPane;
-import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 
-import org.xml.sax.SAXException;
-
 /**
- * Show the xml based tree in a frame for a visual test. 
+ * Show the xml based tree in a frame for a visual test.
  * 
  * @author Joke Pol
- *
+ * 
  */
 public class XmlTreeTester
 {
-
   private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels";         //$NON-NLS-1$
 
-  private static final String NEW_DIAGRAM           = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
-
-  private BWFrame             frame                 = new BWFrame(
-                                                        LOCALIZER_BUNDLE_NAME );
-
-  public XmlTreeTester(String name)
-      throws ParserConfigurationException, SAXException, IOException, URISyntaxException
-  {
-    XmlTree tree = new XmlTree();
-    tree.setDoc( readFile(name) );
-    tree.setDocName( name );
-
-    frame.getContentPane().add( new JScrollPane( tree ) );
-  }
+  private static final String DIAGRAM               = "nl/BobbinWork/diagram/xml/newDiagram.xml"; //$NON-NLS-1$
 
   private static String readFile(
-      String name) throws IOException, URISyntaxException
+      URI uri) throws IOException, URISyntaxException
   {
-    final InputStream inputStream = XmlTree.class.getClassLoader()
-        .getResourceAsStream( name );
-    java.net.URI uri = XmlTree.class.getClassLoader().getResource( name ).toURI();
+    final File file = new File( uri );
+    final InputStream inputStream = new FileInputStream( file );
 
-    final byte[] buffer = new byte[(int) new File( uri ).length()];
+    final byte[] buffer = new byte[(int) file.length()];
     inputStream.read( buffer );
     inputStream.close();
-    return new String (buffer);
+    return new String( buffer );
   }
 
   public static void main(
@@ -77,7 +57,12 @@ public class XmlTreeTester
     if (args.length > 0)
       setBundle( LOCALIZER_BUNDLE_NAME, new Locale( args[0] ) );
     try {
-      new XmlTreeTester(NEW_DIAGRAM).frame.setVisible( true );
+      BWFrame frame = new BWFrame( LOCALIZER_BUNDLE_NAME );
+      URI uri = XmlTree.class.getClassLoader().getResource( DIAGRAM ).toURI();
+      XmlTree tree = new XmlTree( uri.toString(), readFile( uri ) );
+      frame.getContentPane().add( new JScrollPane( tree ) );
+      frame.setVisible( true );
+
     } catch (Exception exception) {
       exception.printStackTrace();
     }
