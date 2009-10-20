@@ -144,7 +144,7 @@ public class Localizer {
      * @param keyBase
      *            base of the key to search in the bundle
      * 
-     * @return the compent as a convenience
+     * @return the component as a convenience
      */
     public static AbstractButton applyStrings(AbstractButton abstractButton, String keyBase) {
 
