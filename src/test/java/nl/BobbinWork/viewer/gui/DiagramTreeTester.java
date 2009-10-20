@@ -41,7 +41,7 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
  * @author Joke Pol
  * 
  */
-public class VoodooTreeTester
+public class DiagramTreeTester
 {
   private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels";         //$NON-NLS-1$
 
@@ -55,7 +55,7 @@ public class VoodooTreeTester
     try {
       BWFrame frame = new BWFrame( LOCALIZER_BUNDLE_NAME );
       
-      VoodooTree tree = new VoodooTree( createDiagram() );
+      DiagramTree tree = new DiagramTree( createDiagram() );
       frame.getContentPane().add( new JScrollPane( tree ) );
       frame.setVisible( true );
 
@@ -80,7 +80,7 @@ public class VoodooTreeTester
       throws URISyntaxException, IOException, SAXException,
       ParserConfigurationException, XPathExpressionException
   {
-    URI uri = VoodooTree.class.getClassLoader().getResource( DIAGRAM ).toURI();
+    URI uri = DiagramTree.class.getClassLoader().getResource( DIAGRAM ).toURI();
     Document parsed = new XmlResources().parse(readFile( uri ));
     TreeExpander.replaceCopyElements(parsed.getDocumentElement());
     return DiagramBuilder.createDiagram( parsed.getDocumentElement() );

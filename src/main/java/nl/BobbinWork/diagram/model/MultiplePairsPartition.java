@@ -18,9 +18,7 @@
 
 
 package nl.BobbinWork.diagram.model;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 /**
  * DiagramPanel section containing multiple pair segments.
@@ -168,7 +166,9 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 			throw new UnsupportedOperationException ();
 		}
 	}
-  public String getCaption() {
-    return super.getCaption() + " with pairs " + pairRange;
+
+  public String getCaption()
+  {
+    return String.format( super.getCaption(), pairRange.getFirst(), pairRange.getLast() );
   }
 }

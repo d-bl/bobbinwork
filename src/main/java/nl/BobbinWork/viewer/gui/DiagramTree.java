@@ -24,7 +24,7 @@ import javax.swing.tree.*;
 
 import nl.BobbinWork.diagram.model.*;
 
-public class VoodooTree
+public class DiagramTree
     extends JTree
 {
   private static class Renderer
@@ -56,15 +56,15 @@ public class VoodooTree
     private void decorate(
         MultipleThreadsPartition p)
     {
-      setToolTipText( p.getTooltip() );
       setText( p.getCaption() );
-      setIcon( p.getIcon() );
+      if (p.getTooltip() != null) setToolTipText( p.getTooltip() );
+      if (p.getIcon() != null) setIcon( p.getIcon() );
     };
   };
 
-  public VoodooTree(final Diagram diagram)
+  public DiagramTree(final Diagram diagram)
   {
-    super( new DefaultMutableTreeNode( "root" ) );
+    super( new DefaultMutableTreeNode( diagram ) );
     ToolTipManager.sharedInstance().registerComponent( this );
     setShowsRootHandles( false );
     setRootVisible( true );

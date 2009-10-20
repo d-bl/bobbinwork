@@ -19,9 +19,11 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Shape;
 import java.net.URL;
-import java.util.Iterator;
+import java.util.*;
 
 import javax.swing.*;
+
+import nl.BobbinWork.bwlib.gui.Localizer;
 
 public abstract class Partition {
 
@@ -88,18 +90,33 @@ public abstract class Partition {
 		
 	};
 
-	public String getCaption() {
-    return getClass().getSimpleName();
-	}
-	public String getTooltip() {
-	  return getCaption();
-	}
-	
-	public Icon getIcon() {
+  public String getCaption()
+  {
+    return Localizer.getString( "VoodooTree_"+getClass().getSimpleName() );
+  }
+
+  public String getTooltip()
+  {
+    String s = Localizer.getString( "VoodooTree_"+getClass().getSimpleName()+"_hint" );
+    if (s != null) {
+      s = s.replaceAll("\n", "<br>");
+    }
+    return "<html><body>" + s + "</body></html>";
+  }
+
+	private static Map<Class<? extends Partition>, Icon> icons = new HashMap<Class<? extends Partition>, Icon>();
+
+  public Icon getIcon() {
+	  Icon icon = icons.get( getClass() );
+	  if (icon != null) return icon;
 	  String name = getClass().getSimpleName().toLowerCase()+".gif";
 	  URL iconURL = getClass().getResource(name);
-    if (iconURL != null)
-      return new ImageIcon(iconURL);
-	  return null;
+    if (iconURL == null) {
+      icons.put( getClass(), null );
+      return null;
+    }
+    icon = new ImageIcon(iconURL);
+    icons.put( getClass(), icon );
+	  return icon;
 	}
 }
