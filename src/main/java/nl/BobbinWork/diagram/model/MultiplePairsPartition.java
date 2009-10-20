@@ -168,4 +168,7 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 			throw new UnsupportedOperationException ();
 		}
 	}
+  public String getCaption() {
+    return super.getCaption() + " with pairs " + pairRange;
+  }
 }

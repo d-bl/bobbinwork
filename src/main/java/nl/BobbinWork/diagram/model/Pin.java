@@ -73,4 +73,8 @@ public class Pin extends Partition {
 		Drawable[] a = {new Drawable(dot,STYLE)};
 		return Arrays.asList(a).iterator();
 	}
+
+  public String getTooltip() {
+    return getCaption() + " at " + position;
+  }
 }

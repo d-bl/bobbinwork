@@ -18,7 +18,10 @@
 package nl.BobbinWork.diagram.model;
 
 import java.awt.Shape;
+import java.net.URL;
 import java.util.Iterator;
+
+import javax.swing.*;
 
 public abstract class Partition {
 
@@ -84,4 +87,19 @@ public abstract class Partition {
 		}
 		
 	};
+
+	public String getCaption() {
+    return getClass().getSimpleName();
+	}
+	public String getTooltip() {
+	  return getCaption();
+	}
+	
+	public Icon getIcon() {
+	  String name = getClass().getSimpleName().toLowerCase()+".gif";
+	  URL iconURL = getClass().getResource(name);
+    if (iconURL != null)
+      return new ImageIcon(iconURL);
+	  return null;
+	}
 }
