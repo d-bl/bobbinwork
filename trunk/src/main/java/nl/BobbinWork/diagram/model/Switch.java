@@ -117,4 +117,8 @@ public abstract class Switch extends MultipleThreadsPartition {
 	final Iterator<Drawable> pinIterator() {
 		return new Vector<Drawable>().iterator();
 	}
+
+  public String getCaption() {
+    return super.getCaption() + " bobbins " + threadRange;
+  }
 }
