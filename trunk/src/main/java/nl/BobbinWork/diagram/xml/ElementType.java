@@ -215,14 +215,13 @@ public enum ElementType {
     private ImageIcon icon;
 
     private void setIcon() {
-    	String f = "elicons/" + this.name() + ".gif";
+    	  String f = name() + ".gif";
         java.net.URL iconURL = ElementType.class.getResource(f);
         if (iconURL != null) {
             icon = new ImageIcon(iconURL);
         } else {
             icon = null;
         }
-
     }
 
     /**
