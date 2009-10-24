@@ -21,14 +21,12 @@ import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagram;
 
-import java.awt.event.*;
 import java.util.Locale;
 
 import javax.swing.JScrollPane;
-import javax.swing.event.*;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
-import nl.BobbinWork.diagram.gui.*;
+import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.viewer.guiUtils.SplitPane;
 
@@ -45,7 +43,7 @@ public class TreeAndDiagram
 {
   private static final String DIAGRAM = "<copy of='ctctc' pairs='1-2'><move x='10' y='10'/></copy>";
 
-  private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
+  private static final String BUNDLE  = "nl/BobbinWork/viewer/gui/labels";
 
   public static void main(
       String[] args)
@@ -57,16 +55,16 @@ public class TreeAndDiagram
       DiagramTree tree = new DiagramTree( model );
       DiagramPanel canvas = new DiagramPanel();
       canvas.setPattern( model );
-      
-      canvas.addMouseListener( new DiagramTreeMouseListener(tree) );
-      tree.addTreeSelectionListener( new DiagramTreeSelectionListener(canvas) );
-      
+
+      // canvas.addMouseListener( new DiagramTreeMouseListener(tree) );
+      // tree.addTreeSelectionListener( new DiagramTreeSelectionListener(canvas) );
+
       frame.getContentPane().add( new SplitPane( //
           200, // dividerPosition
           HORIZONTAL_SPLIT, // orientation
           new JScrollPane( tree ), // left
           new JScrollPane( canvas ) // right
-      ) );
+          ) );
       frame.setVisible( true );
     } catch (Exception exception) {
       exception.printStackTrace();
