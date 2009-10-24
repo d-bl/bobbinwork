@@ -18,6 +18,7 @@
 package nl.BobbinWork.viewer.gui;
 
 import java.awt.Component;
+import java.util.*;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -45,10 +46,8 @@ public class DiagramTree
       Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
       if (userObject == null) return this;
 
-      if (userObject instanceof MultiplePairsPartition) {
-        decorate( (MultiplePairsPartition) userObject );
-      } else if (userObject instanceof Switch) {
-        decorate( (Switch) userObject );
+      if (userObject instanceof MultipleThreadsPartition) {
+        decorate( (MultipleThreadsPartition) userObject );
       }
       return this;
     }
@@ -73,6 +72,8 @@ public class DiagramTree
     buildTree( getRoot(), diagram );
     ((DefaultTreeModel) getModel()).nodeStructureChanged( getRoot() );
   }
+  
+  private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map = new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>();
 
   private void buildTree(
       final DefaultMutableTreeNode treeNode,
@@ -84,8 +85,19 @@ public class DiagramTree
         final DefaultMutableTreeNode child = new DefaultMutableTreeNode( p );
         treeNode.add( child );
         buildTree( child, p );
+        if (p instanceof MultipleThreadsPartition)
+          map.put( (MultipleThreadsPartition)p, child );
       }
     }
+  }
+  
+  void select(MultipleThreadsPartition p){
+    final DefaultMutableTreeNode node = map.get( p );
+    if (node==null) return;
+    
+    final TreePath path = new TreePath( node.getPath());
+    setSelectionPath( path );
+    scrollPathToVisible( path );
   }
 
   private void setSelectionMode()

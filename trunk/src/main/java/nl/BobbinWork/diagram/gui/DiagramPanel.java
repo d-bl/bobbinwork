@@ -74,6 +74,12 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
     	setBackground(Color.white);
     }
 
+    public DiagramPanel(Diagram model)
+    {
+      this();
+      setPattern( model );
+    }
+
     /** Registers whether threads and/or pairs are drawn. */
     public void setDiagramType(boolean showThreads, boolean showPairs) {
         this.showThreads = showThreads;

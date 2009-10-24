@@ -1,4 +1,4 @@
-/* BWViewer.java Copyright 2006-2008 by J. Pol
+/* BWViewer.java Copyright 2009 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -21,7 +21,7 @@ import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagram;
 
-import java.util.Locale;
+import java.util.*;
 
 import javax.swing.JScrollPane;
 
@@ -33,7 +33,7 @@ import nl.BobbinWork.viewer.guiUtils.SplitPane;
 import org.junit.Ignore;
 
 /**
- * Show a tree in a frame for a visual test based on the diagram model.
+ * Show a tree and diagram in a frame for a visual test based on the diagram model.
  * 
  * @author Joke Pol
  * 
@@ -41,26 +41,25 @@ import org.junit.Ignore;
 @Ignore("this is java application, not a JUnit test")
 public class TreeAndDiagram
 {
-  private static final String DIAGRAM = "<copy of='ctctc' pairs='1-2'><move x='10' y='10'/></copy>";
+  private static final String DIAGRAM =
+      "<copy of='ctctc' pairs='1-2'><move x='10' y='10'/></copy>";
 
-  private static final String BUNDLE  = "nl/BobbinWork/viewer/gui/labels";
+  private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
 
   public static void main(
-      String[] args)
+      final String[] args)
   {
     if (args.length > 0) setBundle( BUNDLE, new Locale( args[0] ) );
     try {
-      BWFrame frame = new BWFrame( BUNDLE );
-      Diagram model = createDiagram( DIAGRAM );
-      DiagramTree tree = new DiagramTree( model );
-      DiagramPanel canvas = new DiagramPanel();
-      canvas.setPattern( model );
+      final BWFrame frame = new BWFrame( BUNDLE );
 
-      // canvas.addMouseListener( new DiagramTreeMouseListener(tree) );
-      // tree.addTreeSelectionListener( new DiagramTreeSelectionListener(canvas) );
+      final Diagram model = createDiagram( DIAGRAM );
+      final DiagramTree tree = new DiagramTree( model );
+      final DiagramPanel canvas = new DiagramPanel( model );
+      new DiagramTreeLink( tree, canvas );
 
       frame.getContentPane().add( new SplitPane( //
-          200, // dividerPosition
+          frame.getBounds().width / 3, // dividerPosition
           HORIZONTAL_SPLIT, // orientation
           new JScrollPane( tree ), // left
           new JScrollPane( canvas ) // right
