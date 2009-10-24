@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.diagram.model;
+package nl.BobbinWork.viewer.gui;
 
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.KEY_INTERPOLATION;
@@ -33,9 +33,10 @@ import javax.swing.JPanel;
 import org.junit.Ignore;
 
 import nl.BobbinWork.diagram.gui.DiagramPanel;
+import nl.BobbinWork.diagram.model.*;
 
 @Ignore("this is java application, not a JUnit")
-public class VisualTest {
+public class SwitchesSelectedByPoint {
 	
 	private JFrame frame = new JFrame("visualizer"); 
 
@@ -62,7 +63,7 @@ public class VisualTest {
         }
 	}
 
-    public VisualTest(MultiplePairsPartition part, int scale) throws Exception {
+    public SwitchesSelectedByPoint(MultiplePairsPartition part, int scale) throws Exception {
     	MyPanel myPanel = new MyPanel( part, scale );
     	frame.setSize(new Dimension(800, 300));
 		frame.getContentPane().add( myPanel);
@@ -77,8 +78,8 @@ public class VisualTest {
 
 	public static void main (String[] args){
     	try {
-    		int caseNr = 1, variantNr = 0, scale = 2;
-			new VisualTest(getPart(caseNr, variantNr), scale).frame.setVisible(true);
+    		int caseNr = 0, variantNr = 0, scale = 2;
+			new SwitchesSelectedByPoint(getPart(caseNr, variantNr), scale).frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

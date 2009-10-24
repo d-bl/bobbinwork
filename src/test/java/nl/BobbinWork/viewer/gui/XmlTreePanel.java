@@ -25,6 +25,8 @@ import java.util.Locale;
 
 import javax.swing.JScrollPane;
 
+import org.junit.Ignore;
+
 import nl.BobbinWork.bwlib.gui.BWFrame;
 
 /**
@@ -33,7 +35,8 @@ import nl.BobbinWork.bwlib.gui.BWFrame;
  * @author Joke Pol
  * 
  */
-public class XmlTreeTester
+@Ignore("this is java application, not a JUnit")
+public class XmlTreePanel
 {
   private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels";         //$NON-NLS-1$
 
