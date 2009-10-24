@@ -4,6 +4,7 @@ import static nl.BobbinWork.testutils.parameterized.TestRunParametersBuilder.run
 
 import java.util.*;
 
+import org.junit.Ignore;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
@@ -13,6 +14,7 @@ import org.junit.runners.Parameterized.Parameters;
  * @author Joke Pol
  * 
  */
+@Ignore("the template demontrates how failures are reported")
 public class TemplateTester
     extends ParameterizedBaseTest
 {
