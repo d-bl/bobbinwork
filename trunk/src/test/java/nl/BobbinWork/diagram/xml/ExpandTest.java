@@ -19,7 +19,7 @@ package nl.BobbinWork.diagram.xml;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
+import java.io.*;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -38,7 +38,7 @@ public class ExpandTest extends XmlFixture {
     check (EXPANDED_FILE,XML_CONTENT);
   }
   
-  @Test(timeout=25)
+  @Test(timeout=60)
   public void performance1() throws Exception {
     xmlResources.parse(XML_CONTENT);
   }
@@ -49,7 +49,7 @@ public class ExpandTest extends XmlFixture {
     TreeExpander.replaceCopyElements(document.getDocumentElement());
   }
   
-  @Test //(timeout=60)
+  @Test(timeout=20)
   public void basics() throws Exception {
     
     int w = 5;
@@ -77,7 +77,7 @@ public class ExpandTest extends XmlFixture {
     }
   }
   
-  @Test
+  @Test(timeout=5500)
   public void newDiagram() throws Exception  {
     File file = new File(SRC + PATH + "newDiagram.xml");
     Document document = xmlResources.parse(file);
@@ -90,20 +90,26 @@ public class ExpandTest extends XmlFixture {
 
     String resultingXml = check(xmlContent);
     
-    /* useful to synchronize expanded.xml (delete last line) 
+    //* useful to synchronize expanded.xml (delete last line) 
     
     PrintStream x = new PrintStream("build/new-expanded.xml");
-    x.println(resultingXml);
+    x.print(strip( resultingXml ));
     x.close();
-    */
+    /**/
     
     if ( expected != null ) {
       assertEquals(
           "transformed xml not as predicted", 
           expected, 
-          resultingXml
+          strip(resultingXml)
       );
     }
+  }
+
+  private String strip(
+      String resultingXml)
+  {
+    return resultingXml.replaceAll( ">\\s+<", "><" ).replaceAll( "[\\r\\n]+", " " );
   }
 
   private String check(String xmlContent) throws Exception {

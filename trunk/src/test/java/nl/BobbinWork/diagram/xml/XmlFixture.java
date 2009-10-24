@@ -27,6 +27,8 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
+import junit.framework.Assert;
+
 
 import org.junit.BeforeClass;
 import org.xml.sax.SAXException;
@@ -35,7 +37,7 @@ import org.xml.sax.SAXParseException;
 public class XmlFixture {
 
   static final String PATH = "/nl/BobbinWork/diagram/xml/";
-  protected static final String SRC = "src/main/java";
+  protected static final String SRC = "src/main/resources";
   static XmlResources xmlResources;
 
   @BeforeClass
@@ -69,7 +71,7 @@ public class XmlFixture {
     try { if ( file.length() != reader.read(b)) throw new IOException ("read wrong length"); } 
     finally { reader.close(); }
     String string = new String(b);
-    assertTrue(message,transformedXml.equals(string));
+    Assert.assertEquals(message,transformedXml,string);
   }
 
 }
