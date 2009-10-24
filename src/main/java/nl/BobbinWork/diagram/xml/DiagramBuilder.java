@@ -18,32 +18,20 @@
 package nl.BobbinWork.diagram.xml;
 
 import static java.lang.Double.valueOf;
-import static nl.BobbinWork.diagram.xml.ElementType.back;
-import static nl.BobbinWork.diagram.xml.ElementType.front;
+import static nl.BobbinWork.diagram.xml.ElementType.*;
 
-import java.util.List;
-import java.util.Vector;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
-import nl.BobbinWork.diagram.model.Cross;
-import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.model.Group;
-import nl.BobbinWork.diagram.model.MultiplePairsPartition;
-import nl.BobbinWork.diagram.model.PairSegment;
-import nl.BobbinWork.diagram.model.Partition;
-import nl.BobbinWork.diagram.model.Pin;
-import nl.BobbinWork.diagram.model.Point;
-import nl.BobbinWork.diagram.model.Range;
-import nl.BobbinWork.diagram.model.Segment;
-import nl.BobbinWork.diagram.model.Stitch;
-import nl.BobbinWork.diagram.model.Style;
-import nl.BobbinWork.diagram.model.Switch;
-import nl.BobbinWork.diagram.model.ThreadSegment;
-import nl.BobbinWork.diagram.model.ThreadStyle;
-import nl.BobbinWork.diagram.model.Twist;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.xml.expand.TreeExpander;
+
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 public class DiagramBuilder {
 
@@ -134,6 +122,43 @@ public class DiagramBuilder {
     
     public static Diagram createDiagram (Element element) {
     	return new ChainedPairsPartitionFactory(element).createDiagram(); 
+    }
+    
+    public static Diagram createDiagram (final String xmlContent) 
+    throws IOException, SAXException, ParserConfigurationException, XPathExpressionException 
+    {
+      final String s = 
+          "<diagram" +
+          " xmlns='http://BobbinWork.googlecode.com/bw.xsd'" +
+          " xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'" +
+          " xsi:schemaLocation='http://BobbinWork.googlecode.com bw.xsd'" +
+          " xmlns:xi='http://www.w3.org/2001/XInclude'" +
+          "><xi:include href='basicStitches.xml'/>" +
+          xmlContent + "</diagram>";
+      Document parsed = new XmlResources().parse(s);
+      TreeExpander.replaceCopyElements(parsed.getDocumentElement());
+      return new ChainedPairsPartitionFactory(parsed.getDocumentElement()).createDiagram(); 
+    }
+
+    public static Diagram createDiagram(URI uri)
+    throws URISyntaxException, IOException, SAXException,
+    ParserConfigurationException, XPathExpressionException
+    {
+      Document parsed = new XmlResources().parse(readFile( uri ));
+      TreeExpander.replaceCopyElements(parsed.getDocumentElement());
+      return DiagramBuilder.createDiagram( parsed.getDocumentElement() );
+    }
+    
+    private static String readFile(
+        URI uri) throws IOException, URISyntaxException
+    {
+      final File file = new File( uri );
+      final InputStream inputStream = new FileInputStream( file );
+
+      final byte[] buffer = new byte[(int) file.length()];
+      inputStream.read( buffer );
+      inputStream.close();
+      return new String( buffer );
     }
     
     private static class SwitchFactory {
