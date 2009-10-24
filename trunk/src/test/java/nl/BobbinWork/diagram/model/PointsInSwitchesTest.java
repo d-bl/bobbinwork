@@ -39,7 +39,7 @@ import org.w3c.dom.Element;
 @RunWith(Parameterized.class)
 public class PointsInSwitchesTest {
 	
-	private static XmlResources xr = null;
+	static XmlResources xr = null;
 	
 	private static final String DIAGRAM_ROOT = 
 	"<diagram" +
@@ -51,7 +51,7 @@ public class PointsInSwitchesTest {
 
 	private static final String DIAGRAM_ROOT_END = "</group></diagram>";
 
-	private static final String CTCTC= ""+
+	protected static final String CTCTC= ""+
 	"<stitch id='ctctc' pairs='1-2'>"+
 	"<pair start='0,6.6' end='16.6,23.3'/>"+
 	"<pair start='16.6,6.6' end='0,23.3'/>"+
@@ -65,7 +65,7 @@ public class PointsInSwitchesTest {
 	"</stitch>";
 	
 	/** figure (b) on http://code.google.com/p/bobbinwork/wiki/MathChallenges#Highlighting_(groups_of)_stitches */
-	private static final String TCTC_BASED_ON_BASIC_STITCHES = ""+
+	static final String TCTC_BASED_ON_BASIC_STITCHES = ""+
 	"<group pairs='1-2'>\n"+
 	"<copy of='l'   pairs='1-1'><rotate centre='15,15' angle='-45'/><move x='188' y='73'/></copy>"+
     "<copy of='r'   pairs='2-2'><rotate centre='15,15' angle='75' /><move x='215' y='92'/></copy>"+
@@ -73,7 +73,7 @@ public class PointsInSwitchesTest {
     "</group>";
 	
 	/** same drawing but differently grouped. */
-	private static final String TCTC_BUILDING_OWN_STITCHES= ""+
+	protected static final String TCTC_BUILDING_OWN_STITCHES= ""+
 	"<stitch pairs='1-2'>"+
 	"<pair end='206.692,99.651' start='201.614,85.697'/>"+
 	"<pair end='197.261,95.032' start='211.130,90.13'/>"+
@@ -111,25 +111,22 @@ public class PointsInSwitchesTest {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
     	xr = new XmlResources();
+      final MultiplePairsPartition ctctcBS = extractPart("<copy of='ctctc' pairs='1-2'/>");
+      final MultiplePairsPartition ctctcOS = createPart(CTCTC);
     	final MultiplePairsPartition tctcBS = extractPart(TCTC_BASED_ON_BASIC_STITCHES);
     	final MultiplePairsPartition tctcOS = createPart(TCTC_BUILDING_OWN_STITCHES);
-    	final MultiplePairsPartition ctctcBS = extractPart("<copy of='ctctc' pairs='1-2'/>");
-    	final MultiplePairsPartition ctctcOS = createPart(CTCTC);
-		//System.out.println( XmlResources.toXmlString( parseEmbedded( TCTC_BASED_ON_BASIC_STITCHES )));
-
+      //System.out.println( XmlResources.toXmlString( parseEmbedded( TCTC_BASED_ON_BASIC_STITCHES )));
 		
-		final Object[][] testCaseParameters = new P[][] {
+      final Object[][] testCaseParameters = new P[][] {
         		
-        		{new P(ctctcBS,ctctcOS,8,3,7,3)}, 
-        		
-        		// just above end of front end in cross
-        		{new P(tctcBS,tctcOS,202,98,202,98)},
-        		
-        		// start of front thread in second cross
+            {new P(ctctcBS,ctctcOS,8,3,7,3)}, 
+            
+            // just above end of front end in cross
+            {new P(tctcBS,tctcOS,202,98,202,98)},
+
+            // start of front thread in second cross
         		{new P(tctcBS,tctcOS,200,95,200,95)}, 
 
-        		// end of back of left twist; checks merging polygons 
-        		{new P(tctcBS,tctcOS,186,83,186,83)}, 
         		// TODO merge not yet implemented
         		// TODO perhaps see http://blog.schauderhaft.de/2009/10/04/junit-rules/  
         /**/};
@@ -138,7 +135,7 @@ public class PointsInSwitchesTest {
 
     P params;
 	
-	private static class P {
+	static class P {
 		MultiplePairsPartition partP, partQ;
 		int xa,xb,ya,yb;
 		P (MultiplePairsPartition variantP, MultiplePairsPartition variantQ, int xa, int ya, int xb, int yb){
@@ -238,13 +235,13 @@ public class PointsInSwitchesTest {
 	}
 
 	/** Creates an object model from an XML string. */
-	private static MultiplePairsPartition createPart(String partition)
+	protected static MultiplePairsPartition createPart(String partition)
 			throws Exception {
 		return DiagramBuilder.createStitch(parse(partition).getDocumentElement());
 	}
 	
 	/** Creates an object model using the basic stitches. */
-	private static MultiplePairsPartition extractPart(String partition)
+	protected static MultiplePairsPartition extractPart(String partition)
 	throws Exception {
 		Element parsed = parseEmbedded(partition).getDocumentElement();
 		List<Partition> parts = DiagramBuilder.createDiagram(parsed).getPartitions();
