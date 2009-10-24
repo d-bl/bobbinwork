@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
  */
 @Ignore("the template demontrates how failures are reported")
 public class TemplateTester
-    extends ParameterizedBaseTest
+    extends ParameterizedFixture
 {
 
   private static final Object[]                    NULL           = (Object[]) null;

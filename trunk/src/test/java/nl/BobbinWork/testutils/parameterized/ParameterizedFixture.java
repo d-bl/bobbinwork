@@ -20,7 +20,7 @@ import org.junit.runners.Parameterized;
  * @author Joke Pol
  */
 @RunWith(Parameterized.class)
-public abstract class ParameterizedBaseTest
+public abstract class ParameterizedFixture
 {
   private final TestRunParameters parameters;
 
@@ -32,7 +32,7 @@ public abstract class ParameterizedBaseTest
    *          the parameters (input and expected output) to use in this run of
    *          the test
    */
-  protected ParameterizedBaseTest(final TestRunParameters parameters)
+  protected ParameterizedFixture(final TestRunParameters parameters)
   {
     if (parameters == null)
       throw new IllegalArgumentException( "parameters should not be null" );

@@ -138,7 +138,6 @@
           <formatter type="plain"/>
           <batchtest todir="${build.dir}/tmptest">
           	<fileset dir="${build.dir}/tmptest" includes="**/*Test.class, "/>
-          	<fileset dir="${build.dir}/tmptest" includes="**/Weird.class, "/>
           </batchtest>
         </junit>
     </target>

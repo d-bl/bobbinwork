@@ -27,6 +27,7 @@ import javax.swing.JScrollPane;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.junit.Ignore;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -41,7 +42,8 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
  * @author Joke Pol
  * 
  */
-public class DiagramTreeTester
+@Ignore("this is java application, not a JUnit")
+public class DiagramTreePanel
 {
   private static final String LOCALIZER_BUNDLE_NAME = "nl/BobbinWork/viewer/gui/labels";         //$NON-NLS-1$
 

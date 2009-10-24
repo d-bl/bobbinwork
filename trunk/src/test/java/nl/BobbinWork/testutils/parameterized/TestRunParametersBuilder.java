@@ -8,7 +8,7 @@ import org.junit.Ignore;
  * A description of a to-be-instantiated {@link HappyTestRunParameters} object.<br>
  * <br>
  * Usage example in a method annotated with @<code>Parameters</code> in a
- * subclass of {@link ParameterizedBaseTest}:<br>
+ * subclass of {@link ParameterizedFixture}:<br>
  * <code>run("tag").expects("1").withInput(1)</code>
  * 
  * @author Joke Pol
@@ -145,7 +145,7 @@ public class TestRunParametersBuilder
    *          tolerance
    * @param expectedValues
    *          the objects expected to be returned by
-   *          {@link ParameterizedBaseTest#produceTestResults}
+   *          {@link ParameterizedFixture#produceTestResults}
    * 
    * @return an extended builder
    */
@@ -161,7 +161,7 @@ public class TestRunParametersBuilder
    * 
    * @param expectedValues
    *          the objects expected to be returned by
-   *          {@link ParameterizedBaseTest#produceTestResults}
+   *          {@link ParameterizedFixture#produceTestResults}
    * 
    * @return an extended builder
    */
