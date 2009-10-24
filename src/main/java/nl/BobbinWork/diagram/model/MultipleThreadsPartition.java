@@ -48,6 +48,7 @@ public abstract class MultipleThreadsPartition extends Partition {
     }
 
     public Bounds<ThreadSegment> getBounds(){
+        if (threadConnectors==null) return null;
         return threadConnectors.getBounds();
         
     }
