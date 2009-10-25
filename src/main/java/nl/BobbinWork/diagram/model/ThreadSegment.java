@@ -83,8 +83,9 @@ public class ThreadSegment extends Segment {
 		
 		Segment curve = this;
 		do { list.add(curve.getCurve()); } while (null!=(curve=curve.getNext()));
-		curve = getPrevious();
-		do { list.add(curve.getCurve()); } while (null!=(curve=curve.getPrevious()));
+		curve = this.getPrevious();
+		if (curve != null)
+		  do { list.add(curve.getCurve()); } while (null!=(curve=curve.getPrevious()));
 		
 		return new Iterable<CubicCurve2D> () {
 
