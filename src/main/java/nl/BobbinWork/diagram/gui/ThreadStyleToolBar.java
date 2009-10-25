@@ -191,7 +191,7 @@ public class ThreadStyleToolBar extends JToolBar {
         
     }
     
-    ThreadStyleToolBar() throws SAXException, IOException, ParserConfigurationException {
+    public ThreadStyleToolBar() throws SAXException, IOException, ParserConfigurationException {
     	
         setFloatable(false);
         setRollover(true);

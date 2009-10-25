@@ -26,7 +26,7 @@ import javax.swing.JToolBar;
 public class CButtonBar extends JToolBar {
 
     /** Convenience JToolBar constructor */
-	public CButtonBar(Component[] components) {
+	public CButtonBar(Component... components) {
         setFloatable(false);
         setRollover(true);
         setBorder(null);
