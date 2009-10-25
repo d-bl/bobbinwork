@@ -72,10 +72,42 @@ public class DiagramTreeLink
       final TreeSelectionEvent event)
   {
     final TreePath path = event.getPath();
-    final DefaultMutableTreeNode node =
-        (DefaultMutableTreeNode) path
-            .getPathComponent( path.getPathCount() - 1 );
-    canvas.highLight( (Partition) node.getUserObject() );
+    if (!isVisible( path ))
+      canvas.highLight( getDiagram() );
+    else
+      canvas.highLight( getSelectedPartition( path ) );
+  }
+
+  private static boolean isVisible(
+      final TreePath path)
+  {
+    if (path.getPathCount() < 2) return false;
+    return getSubRootPartition( path ).isVisible();
+  }
+
+  private static Partition getSubRootPartition(
+      final TreePath path)
+  {
+    return (Partition) getSubRootNode( path ).getUserObject();
+  }
+
+  private static DefaultMutableTreeNode getSubRootNode(
+      final TreePath path)
+  {
+    return (DefaultMutableTreeNode) path.getPathComponent( 1 );
+  }
+
+  private static Partition getSelectedPartition(
+      final TreePath path)
+  {
+    return (Partition) getSelectedNode( path ).getUserObject();
+  }
+
+  private static DefaultMutableTreeNode getSelectedNode(
+      final TreePath path)
+  {
+    return (DefaultMutableTreeNode) path
+        .getPathComponent( path.getPathCount() - 1 );
   }
 
   private MultipleThreadsPartition getSwitchAt(
@@ -86,10 +118,10 @@ public class DiagramTreeLink
 
   private Diagram getDiagram()
   {
-    return (Diagram) getNode().getUserObject();
+    return (Diagram) getRootNode().getUserObject();
   }
 
-  private DefaultMutableTreeNode getNode()
+  private DefaultMutableTreeNode getRootNode()
   {
     return (DefaultMutableTreeNode) tree.getPathForRow( 0 )
         .getPathComponent( 0 );
