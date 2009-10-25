@@ -17,15 +17,11 @@
  */
 package nl.BobbinWork.viewer.guiUtils;
 
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.PAGE_START;
+import static java.awt.BorderLayout.*;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 
-import javax.swing.AbstractButton;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import nl.BobbinWork.bwlib.gui.CMenuBar;
 
@@ -34,14 +30,14 @@ import nl.BobbinWork.bwlib.gui.CMenuBar;
 public class CPanel extends JPanel {
 
     /** Convenience JPanel constructor */
-	public CPanel(AbstractButton[] buttons, Component content) {
+	public CPanel(Component content, Component... buttonsAndMenus) {
         super(new BorderLayout());
-        add(new CButtonBar(buttons), PAGE_START);
+        add(new CButtonBar(buttonsAndMenus), PAGE_START);
         add(content, CENTER);
     }
 
     /** Convenience JPanel constructor */
-	public CPanel(JMenu menu, Component content) {
+	public CPanel(Component content, JMenu menu) {
         super(new BorderLayout());
         add(new CMenuBar(menu), PAGE_START);
         add(content, CENTER);

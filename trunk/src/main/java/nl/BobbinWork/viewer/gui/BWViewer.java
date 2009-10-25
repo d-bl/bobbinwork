@@ -124,11 +124,11 @@ public class BWViewer {
 				dividerPosition, 
 				HORIZONTAL_SPLIT, // 
 				new CPanel( // component of spiltPane
-						new AbstractButton[] { delete, replace }, // tool bar
-						new JScrollPane(tree)),
+						new JScrollPane(tree), // tree
+						new AbstractButton[] { delete, replace }), // // tool bar
 				new CPanel( // component of spiltPane
-						createFragmentsViewMenu(), // tool bar
-						fragments)); 
+						fragments, // 
+						createFragmentsViewMenu())); // tool bar 
 
 		splitPane = new SplitPane(//
 				1000, // dividerPosition

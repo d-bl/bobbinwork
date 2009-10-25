@@ -42,7 +42,7 @@ import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
  * A menu controlling the appearance of the diagram.
  */
 @SuppressWarnings("serial")
-class ViewMenu extends JMenu {
+public class ViewMenu extends JMenu {
 
     /**
      * A fully dressed JMenu, controlling the appearance of the high lights on
@@ -86,7 +86,7 @@ class ViewMenu extends JMenu {
     }
 
     /** Creates a fully dressed JMenu, controlling the view of the diagram */
-    ViewMenu(
+    public ViewMenu(
     		final DiagramPanel diagramPanel, 
     		final JFrame parentForDialogs,
     		final ThreadStyleToolBar threadStyleToolBar) {
@@ -129,7 +129,7 @@ class ViewMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 diagramPanel.setDiagramType(true, false);
-                threadStyleToolBar.setVisible(true);
+                if (threadStyleToolBar!=null)threadStyleToolBar.setVisible(true);
             }
         });
         add(jMenuItem);
@@ -138,7 +138,7 @@ class ViewMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 diagramPanel.setDiagramType(false, true);
-                threadStyleToolBar.setVisible(false);
+                if (threadStyleToolBar!=null)threadStyleToolBar.setVisible(false);
             }
         });
         add(jMenuItem);
@@ -147,7 +147,7 @@ class ViewMenu extends JMenu {
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 diagramPanel.setDiagramType(true, true);
-                threadStyleToolBar.setVisible(true);
+                if (threadStyleToolBar!=null)threadStyleToolBar.setVisible(true);
             }
         });
         add(jMenuItem);
