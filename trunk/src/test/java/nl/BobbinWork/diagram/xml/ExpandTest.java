@@ -90,7 +90,7 @@ public class ExpandTest extends XmlFixture {
 
     String resultingXml = check(xmlContent);
     
-    //* useful to synchronize expanded.xml (delete last line) 
+    /* useful to synchronize expanded.xml (delete last line) 
     
     PrintStream x = new PrintStream("build/new-expanded.xml");
     x.print(strip( resultingXml ));
