@@ -19,13 +19,15 @@ package nl.BobbinWork.viewer.gui;
 
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
-import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagram;
+import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 
-import java.awt.*;
+import java.awt.Dimension;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.*;
 import nl.BobbinWork.diagram.gui.*;
@@ -33,6 +35,7 @@ import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.viewer.guiUtils.*;
 
 import org.junit.Ignore;
+import org.xml.sax.SAXException;
 
 /**
  * Prototype for the new version of the viewer.
@@ -56,81 +59,58 @@ public class Redesign
       // must be first for the system look and feel
       final BWFrame frame = new BWFrame( BUNDLE );
 
-      final Diagram model = createDiagram( DIAGRAM );
+      final Diagram model = createDiagramModel( DIAGRAM );
+
       final DiagramPanel canvas = new DiagramPanel( model );
       final DiagramTree tree = new DiagramTree( model );
-      final JComponent menuBar = new CMenuBar( //
-          // TODO file menu listeners
-          new LocaleMenu( true, "MenuFile_file",//
-              new LocaleMenuItem( "MenuFile_open" ), // 
-              new LocaleMenuItem( "MenuFile_Download" ) ), //
-          new HelpMenu( null, "2009", "BobbinWork diagrams" ),//
-          new HeapStatusWidget() //
-          );
-      final JComponent diagramToolbar = new CMenuBar( //
-          new PrintMenu( canvas ), //
-          new ViewMenu( canvas, null, null ), //
-          new ThreadStyleToolBar(), //
-          new PlaceHolder( 6, 1 ), //
-          // TODO listeners and hints, same looks as colour choosers
-          new JButton( createIcon( "pipette.gif" ) ), // 
-          new JButton( createIcon( "pinsel.gif" ) ) // 
-          );
-      final JComponent treeToolbar = new CMenuBar( //
-          // TODO listener(s), arrange buttons below one another
-          new LocaleButton( false, "TreeToolBar_copy" ), // 
-          new LocaleButton( false, "TreeToolBar_paste" ), // 
-          new LocaleButton( false, "TreeToolBar_delete" ), // 
-          new LocaleButton( false, "TreeToolBar_showHide" ), //
-          new ClipBoard( 80, 80 ) //
-          );
-      final JComponent splitPane = new CSplitPane( //
-          frame.getBounds().width / 3, // dividerPosition
-          HORIZONTAL_SPLIT, // orientation
-          new CPanel( new JScrollPane( tree ), treeToolbar ), // left
-          new CPanel( new JScrollPane( canvas ), diagramToolbar ) // right
-          );
+      final TreeToolBar treeToolBar = new TreeToolBar();
+
+      tree.addTreeSelectionListener( treeToolBar );
       new DiagramTreeLink( tree, canvas );
-      frame.getContentPane().add( new CPanel( splitPane, menuBar ) );
+
+      final int dividerposition = frame.getBounds().width / 3;
+      final CPanel left = new CPanel( new JScrollPane( tree ), treeToolBar );
+      final CPanel right =
+          new CPanel( new JScrollPane( canvas ), createDiagramTools( canvas ) );
+      final JComponent splitPane =
+          new CSplitPane( dividerposition, HORIZONTAL_SPLIT, left, right );
+
+      frame.getContentPane().add( new CPanel( splitPane, createMenu() ) );
       frame.setVisible( true );
+
     } catch (Exception exception) {
       exception.printStackTrace();
     }
   }
 
-  private static class PlaceHolder
-      extends JComponent
+  private static JComponent createDiagramTools(
+      final DiagramPanel canvas)
+      throws SAXException, IOException, ParserConfigurationException
   {
-    PlaceHolder(int width, int height)
-    {
-      setMaximumSize( new Dimension( width, height ) );
-    }
+    final JComponent diagramTools = new JMenuBar();
+    diagramTools.add( new PrintMenu( canvas ) );
+    diagramTools.add( new ViewMenu( canvas, null, null ) );
+    diagramTools.add( new ThreadStyleToolBar() );
+    diagramTools.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
+    // TODO listeners and hints, same looks as colour choosers
+    diagramTools.add( new JButton( createIcon( "pipette.gif" ) ) );
+    diagramTools.add( new JButton( createIcon( "pinsel.gif" ) ) );
+    return diagramTools;
   }
 
-  private static class ClipBoard
-      extends JPanel
+  private static JComponent createMenu()
   {
+    // TODO listeners
+    final JMenu fileMenu = new JMenu();
+    applyStrings( fileMenu, "MenuFile_file" );
+    fileMenu.add( new LocaleMenuItem( "MenuFile_open" ) );
+    fileMenu.add( new LocaleMenuItem( "MenuFile_Download" ) );
 
-    ClipBoard(int width, int height)
-    {
-      Dimension dim = new Dimension( width, height );
-      setPreferredSize( dim );
-      setMaximumSize( dim );
-      // TODO hint
-      applyStrings( this, "Clipboard" );
-      setBackground( new Color( 0xFFFFFF ) );
-      setBorder( BorderFactory.createLoweredBevelBorder() );
-    }
-
-    public void paintComponent(
-        Graphics g)
-    {
-
-      super.paintComponent( g );
-      Graphics2D g2 = (Graphics2D) g;
-      // TODO listen to copy button, then show tree.selected.userObject
-      // DiagramPanel.paintPartitions (g2,twist.getThreads());
-    }
+    final JComponent menuBar = new JMenuBar();
+    menuBar.add( fileMenu );
+    menuBar.add( new HelpMenu( null, "2009", "diagrams" ) );
+    menuBar.add( new HeapStatusWidget() );
+    return menuBar;
   }
 
   private static Icon createIcon(

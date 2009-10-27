@@ -36,14 +36,6 @@ public class CPanel extends JPanel {
         add(content, CENTER);
     }
 
-	/** Convenience JPanel constructor */
-	public CPanel(Component content, int width, int height, Component... buttonsAndMenus) {
-	  super(new BorderLayout());
-	  setMaximumSize( new Dimension(width,height) );
-	  add(new CButtonBar(buttonsAndMenus), PAGE_START);
-	  add(content, CENTER);
-	}
-	
     /** Convenience JPanel constructor */
 	public CPanel(Component content, JMenu menu) {
         super(new BorderLayout());

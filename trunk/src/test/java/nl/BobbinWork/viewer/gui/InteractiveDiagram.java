@@ -18,7 +18,7 @@
 package nl.BobbinWork.viewer.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
-import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagram;
+import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 
 import java.util.Locale;
 
@@ -50,7 +50,7 @@ public class InteractiveDiagram
     if (args.length > 0) setBundle( BUNDLE, new Locale( args[0] ) );
     try {
       final BWFrame frame = new BWFrame( BUNDLE );
-      DiagramPanel canvas = new DiagramPanel( createDiagram( DIAGRAM ) );
+      DiagramPanel canvas = new DiagramPanel( createDiagramModel( DIAGRAM ) );
       frame.getContentPane().add(
           new JScrollPane( new InteractiveDiagramPanel( canvas, frame ) ) );
       frame.setVisible( true );

@@ -194,8 +194,6 @@ public class ThreadStyleToolBar extends JToolBar {
     public ThreadStyleToolBar() throws SAXException, IOException, ParserConfigurationException {
     	
         setFloatable(false);
-        setRollover(true);
-        setBorder(null);
         
         // tooltips
         applyStrings(preview, "ThreadStyle"); //$NON-NLS-1$

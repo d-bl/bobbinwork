@@ -18,7 +18,7 @@
 package nl.BobbinWork.viewer.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
-import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagram;
+import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 
 import java.net.URI;
 import java.util.Locale;
@@ -48,7 +48,7 @@ public class DiagramTreePanel
     try {
       BWFrame frame = new BWFrame( BUNDLE );
       URI diagram = DiagramTree.class.getClassLoader().getResource( "http://bobbinwork.googlecode.com/svn/wiki/diagrams/flanders.xml" ).toURI();
-      DiagramTree tree = new DiagramTree( createDiagram(diagram) );
+      DiagramTree tree = new DiagramTree( createDiagramModel(diagram) );
       frame.getContentPane().add( new JScrollPane( tree ) );
       frame.setVisible( true );
     } catch (Exception exception) {
