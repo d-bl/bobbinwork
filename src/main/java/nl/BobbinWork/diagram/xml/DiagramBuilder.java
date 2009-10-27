@@ -124,7 +124,7 @@ public class DiagramBuilder {
     	return new ChainedPairsPartitionFactory(element).createDiagram(); 
     }
     
-    public static Diagram createDiagram (final String xmlContent) 
+    public static Diagram createDiagramModel (final String xmlContent) 
     throws IOException, SAXException, ParserConfigurationException, XPathExpressionException 
     {
       final String s = 
@@ -140,7 +140,7 @@ public class DiagramBuilder {
       return new ChainedPairsPartitionFactory(parsed.getDocumentElement()).createDiagram(); 
     }
 
-    public static Diagram createDiagram(URI uri)
+    public static Diagram createDiagramModel(URI uri)
     throws URISyntaxException, IOException, SAXException,
     ParserConfigurationException, XPathExpressionException
     {

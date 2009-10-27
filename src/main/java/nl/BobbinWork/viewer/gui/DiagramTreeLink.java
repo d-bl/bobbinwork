@@ -24,6 +24,7 @@ import javax.swing.tree.*;
 
 import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.model.*;
+import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.*;
 
 /**
  * A bidirectional listener that highlights the selected element in both
@@ -76,38 +77,6 @@ public class DiagramTreeLink
       canvas.highLight( getDiagram() );
     else
       canvas.highLight( getSelectedPartition( path ) );
-  }
-
-  private static boolean isVisible(
-      final TreePath path)
-  {
-    if (path.getPathCount() < 2) return false;
-    return getSubRootPartition( path ).isVisible();
-  }
-
-  private static Partition getSubRootPartition(
-      final TreePath path)
-  {
-    return (Partition) getSubRootNode( path ).getUserObject();
-  }
-
-  private static DefaultMutableTreeNode getSubRootNode(
-      final TreePath path)
-  {
-    return (DefaultMutableTreeNode) path.getPathComponent( 1 );
-  }
-
-  private static Partition getSelectedPartition(
-      final TreePath path)
-  {
-    return (Partition) getSelectedNode( path ).getUserObject();
-  }
-
-  private static DefaultMutableTreeNode getSelectedNode(
-      final TreePath path)
-  {
-    return (DefaultMutableTreeNode) path
-        .getPathComponent( path.getPathCount() - 1 );
   }
 
   private MultipleThreadsPartition getSwitchAt(
