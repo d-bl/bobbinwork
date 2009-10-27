@@ -20,6 +20,7 @@ package nl.BobbinWork.viewer.gui;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagram;
 
+import java.net.URI;
 import java.util.Locale;
 
 import javax.swing.JScrollPane;
@@ -38,7 +39,7 @@ import org.junit.Ignore;
 public class DiagramTreePanel
 {
   private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
-
+  
   public static void main(
       String[] args)
   {
@@ -46,7 +47,8 @@ public class DiagramTreePanel
       setBundle( BUNDLE, new Locale( args[0] ) );
     try {
       BWFrame frame = new BWFrame( BUNDLE );
-      DiagramTree tree = new DiagramTree( createDiagram("") );
+      URI diagram = DiagramTree.class.getClassLoader().getResource( "http://bobbinwork.googlecode.com/svn/wiki/diagrams/flanders.xml" ).toURI();
+      DiagramTree tree = new DiagramTree( createDiagram(diagram) );
       frame.getContentPane().add( new JScrollPane( tree ) );
       frame.setVisible( true );
     } catch (Exception exception) {
