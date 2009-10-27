@@ -63,7 +63,7 @@ import nl.BobbinWork.viewer.guiUtils.CPanel;
 import nl.BobbinWork.viewer.guiUtils.CursorController;
 import nl.BobbinWork.viewer.guiUtils.FileMenu;
 import nl.BobbinWork.viewer.guiUtils.LocaleButton;
-import nl.BobbinWork.viewer.guiUtils.SplitPane;
+import nl.BobbinWork.viewer.guiUtils.CSplitPane;
 
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -115,12 +115,12 @@ public class BWViewer {
 		/* ---- put components and their local menu's/toolbars together ---- */
 
 		int dividerPosition = TOTAL_LEFT_WIDTH 
-		- SplitPane.DIVIDER_WIDTH 
+		- CSplitPane.DIVIDER_WIDTH 
 		- (int) fragments.getMinimumSize().getWidth();
 
 		JSplitPane splitPane;
 
-		splitPane = new SplitPane(//
+		splitPane = new CSplitPane(//
 				dividerPosition, 
 				HORIZONTAL_SPLIT, // 
 				new CPanel( // component of spiltPane
@@ -130,13 +130,13 @@ public class BWViewer {
 						fragments, // 
 						createFragmentsViewMenu())); // tool bar 
 
-		splitPane = new SplitPane(//
+		splitPane = new CSplitPane(//
 				1000, // dividerPosition
 				VERTICAL_SPLIT, // orientation
 				splitPane, // 
 				source); // 
 
-		splitPane = new SplitPane(//
+		splitPane = new CSplitPane(//
 				TOTAL_LEFT_WIDTH, // dividerPosition
 				HORIZONTAL_SPLIT, // orientation
 				splitPane, // left component of spiltPane
