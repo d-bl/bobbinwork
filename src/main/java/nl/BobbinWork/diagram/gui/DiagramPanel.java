@@ -77,7 +77,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
     public DiagramPanel(Diagram model)
     {
       this();
-      if (model != null) return;
+      if (model == null) return;
       setPattern( model );
     }
 
