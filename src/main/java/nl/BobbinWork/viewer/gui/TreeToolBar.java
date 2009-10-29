@@ -6,11 +6,14 @@ package nl.BobbinWork.viewer.gui;
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.getSelectedPartition;
 
+import java.awt.*;
+import java.awt.event.*;
+
 import javax.swing.*;
 import javax.swing.event.*;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
-import nl.BobbinWork.diagram.gui.DiagramPanel;
+import nl.BobbinWork.diagram.gui.*;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.viewer.guiUtils.LocaleButton;
 
@@ -26,13 +29,35 @@ class TreeToolBar
   private static final String HIDE = PREFIX + "hide";
   private static final String SHOW = PREFIX + "show";
 
-  private final DiagramPanel clipBoard = new DiagramPanel( null );
+  /** shown in {@link #clipBoard} */
+  private Partition copied = null;
+
+  /** to be manipulated by the buttons */
+  private Partition current = null;
+
+  /** to be repainted when a change was made to a diagram {@link #current} */
+  private JComponent source = null;
+
   private final JButton showHide = new LocaleButton( false, SHOW_HIDE );
   private final JButton delete = new LocaleButton( false, DELETE );
   private final JButton paste = new LocaleButton( false, PASTE );
   private final JButton copy = new LocaleButton( false, COPY );
-  private Partition copied = null;
+  private final JComponent clipBoard = new JPanel()
+  {
+    public void paintComponent(
+        Graphics g)
+    {
+      if (current == null) return;
+      super.paintComponent( g );
+      Graphics2D g2 = (Graphics2D) g;
+      DiagramPanel.paintPartitions( g2, current.getThreads() );
+    }
+  };
 
+  /**
+   * Creates a tool bar instance that can listen to one {@link DiagramTree}
+   * instance.
+   */
   TreeToolBar()
   {
     setFloatable( false );
@@ -48,33 +73,63 @@ class TreeToolBar
 
     add( buttons );
     add( clipBoard );
+    clipBoard.setBackground( Color.white );
+
+    copy.addActionListener( new ActionListener()
+    {
+
+      @Override
+      public void actionPerformed(
+          final ActionEvent arg0)
+      {
+        copied = current;
+        clipBoard.repaint();
+      }
+    } );
+    showHide.addActionListener( new ActionListener()
+    {
+      @Override
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        current.setVisible( !current.isVisible() );
+        source.repaint();
+        setShowHideCaption();
+      }
+    } );
   }
 
   @Override
   public void valueChanged(
-      TreeSelectionEvent event)
+      final TreeSelectionEvent event)
   {
-    final Partition partition = getSelectedPartition( event.getPath() );
-    // TODO debug
-    if (partition == null) {
+    source = (JComponent) event.getSource();
+    current = getSelectedPartition( event.getPath() );
+    if (current == null) {
       copy.setEnabled( false );
       delete.setEnabled( false );
       paste.setEnabled( false );
-      if (showHide.isEnabled()) {
-        showHide.setText( Localizer.getString( SHOW_HIDE ) );
-        showHide.setEnabled( false );
-      }
+      showHide.setEnabled( false );
     } else {
-      copy.setEnabled( true );
+      copy.setEnabled( current.isVisible() );
       delete.setEnabled( true );
       showHide.setEnabled( true );
-      paste.setEnabled( copied != null
-          && copied.getNrOfPairs() == partition.getNrOfPairs() );
-      if (partition.isVisible()) {
-        showHide.setText( Localizer.getString( HIDE ) );
-      } else {
-        showHide.setText( Localizer.getString( SHOW ) );
-      }
+      paste.setEnabled( copied != null 
+          && copied.getNrOfPairs() == current.getNrOfPairs() );
     }
+    setShowHideCaption();
+  }
+
+  private void setShowHideCaption()
+  {
+    String caption = "";
+    if (current == null) {
+      caption = Localizer.getString( SHOW_HIDE );
+    } else if (current.isVisible()) {
+      caption = Localizer.getString( HIDE );
+    } else {
+      caption = Localizer.getString( SHOW );
+    }
+    showHide.setText( caption );
   }
 }

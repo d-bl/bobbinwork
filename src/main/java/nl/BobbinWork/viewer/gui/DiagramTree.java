@@ -55,7 +55,11 @@ public class DiagramTree
     private void decorate(
         MultipleThreadsPartition p)
     {
-      setText( p.getCaption() );
+      if (p.isVisible()){
+        setText( p.getCaption() );
+      } else {
+        setText( "<html><em>" + p.getCaption() + "</em></html>" );
+      }
       if (p.getTooltip() != null) setToolTipText( p.getTooltip() );
       if (p.getIcon() != null) setIcon( p.getIcon() );
     };
