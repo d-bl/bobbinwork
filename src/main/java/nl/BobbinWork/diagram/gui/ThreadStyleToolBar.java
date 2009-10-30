@@ -19,33 +19,17 @@ package nl.BobbinWork.diagram.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.URL;
 
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JColorChooser;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.JToolBar;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.xml.parsers.ParserConfigurationException;
 
-import nl.BobbinWork.diagram.model.Style;
-import nl.BobbinWork.diagram.model.Switch;
-import nl.BobbinWork.diagram.model.ThreadStyle;
-import nl.BobbinWork.diagram.model.Twist;
-import nl.BobbinWork.diagram.xml.DiagramBuilder;
-import nl.BobbinWork.diagram.xml.XmlResources;
+import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.xml.*;
 
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
@@ -113,8 +97,7 @@ public class ThreadStyleToolBar extends JToolBar {
         public void paintComponent(Graphics g) {
 
             super.paintComponent(g);
-            Graphics2D g2 = (Graphics2D) g;
-            DiagramPanel.paintPartitions (g2,twist.getThreads());
+            DiagramPainter.paint ((Graphics2D) g,twist.getThreads());
         }
     }
 

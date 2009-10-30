@@ -32,7 +32,7 @@ import javax.swing.JPanel;
 
 import org.junit.Ignore;
 
-import nl.BobbinWork.diagram.gui.DiagramPanel;
+import nl.BobbinWork.diagram.gui.DiagramPainter;
 import nl.BobbinWork.diagram.model.*;
 
 @Ignore("this is java application, not a JUnit")
@@ -59,7 +59,7 @@ public class SwitchesSelectedByPoint {
             g2.scale(scale, scale);
             g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
             g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-			DiagramPanel.paintPartitions (g2,shapes);
+            DiagramPainter.paint (g2,shapes);
         }
 	}
 
