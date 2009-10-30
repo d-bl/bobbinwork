@@ -47,10 +47,10 @@ class TreeToolBar
     public void paintComponent(
         Graphics g)
     {
-      if (current == null) return;
       super.paintComponent( g );
-      Graphics2D g2 = (Graphics2D) g;
-      DiagramPanel.paintPartitions( g2, current.getThreads() );
+      if (current == null) return;
+      final Graphics2D g2 = DiagramPainter.fit(g,current.getBounds(),this);
+      DiagramPainter.paint (g2,current.getThreads());
     }
   };
 
@@ -61,7 +61,6 @@ class TreeToolBar
   TreeToolBar()
   {
     setFloatable( false );
-    applyStrings( clipBoard, "Clipboard" );
 
     // TODO equal width buttons / listeners
     final JComponent buttons = new JPanel();
@@ -73,6 +72,7 @@ class TreeToolBar
 
     add( buttons );
     add( clipBoard );
+    applyStrings( clipBoard, "Clipboard" );
     clipBoard.setBackground( Color.white );
 
     copy.addActionListener( new ActionListener()

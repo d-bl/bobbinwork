@@ -19,28 +19,15 @@ package nl.BobbinWork.viewer.gui;
 
 import static nl.BobbinWork.diagram.xml.DiagramLanguages.getPrimaryTitle;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.Enumeration;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.ListCellRenderer;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import nl.BobbinWork.diagram.gui.DiagramPanel;
+import nl.BobbinWork.diagram.gui.DiagramPainter;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
 
@@ -125,7 +112,6 @@ public class DiagramFragments extends JToolBar {
 
         private final Border lowered = BorderFactory.createBevelBorder(BevelBorder.LOWERED);
         private final Border raised = BorderFactory.createBevelBorder(BevelBorder.RAISED);
-        private final int borderWidth = lowered.getBorderInsets(this).left;
 
         FragmentListRenderer() {
             setPreferredSize(DIM);
@@ -138,25 +124,10 @@ public class DiagramFragments extends JToolBar {
         public void paintComponent(Graphics g) {
 
             super.paintComponent(g);
-
             if (partition != null) {
-                
-                Graphics2D g2 = (Graphics2D) g.create();
-                Rectangle rect = partition.getBounds().getBounds();
-                double scale = (((double) (DIM.height-2*borderWidth)) / ((double) rect.height));
-                double dx =  -rect.x + borderWidth;
-                double dy =  -rect.y + borderWidth;
-                
-                if (scale < 1) {
-                    g2.scale(scale, scale);
-                }else{// put in the center
-                    dy += ((DIM.height-2*borderWidth) - rect.height)/2D;
-                    dx += ((DIM.width-2*borderWidth) - rect.width)/2D;
-                }
-                g2.translate(dx, dy);
-                
-                if (showPairs) DiagramPanel.paintPartitions (g2,partition.getPairs());
-                if (showThreads) DiagramPanel.paintPartitions (g2,partition.getThreads());
+                final Graphics2D g2 = DiagramPainter.fit(g,partition.getBounds(),this);
+                if (showPairs) DiagramPainter.paint (g2,partition.getPairs());
+                if (showThreads) DiagramPainter.paint (g2,partition.getThreads());
             }
         }
 

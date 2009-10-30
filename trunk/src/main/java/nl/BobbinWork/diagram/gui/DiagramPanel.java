@@ -18,35 +18,16 @@
 
 package nl.BobbinWork.diagram.gui;
 
-import static java.awt.BasicStroke.CAP_BUTT;
-import static java.awt.BasicStroke.JOIN_MITER;
-import static java.awt.RenderingHints.KEY_ANTIALIASING;
-import static java.awt.RenderingHints.KEY_INTERPOLATION;
-import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON;
-import static java.awt.RenderingHints.VALUE_INTERPOLATION_BILINEAR;
+import static java.awt.RenderingHints.*;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.geom.CubicCurve2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.util.List;
-import java.util.Vector;
+import java.awt.print.*;
 
 import javax.swing.JPanel;
 
 import nl.BobbinWork.bwlib.gui.PrintMenu.PrintablePreviewer;
-import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.model.Drawable;
-import nl.BobbinWork.diagram.model.MultipleThreadsPartition;
-import nl.BobbinWork.diagram.model.Partition;
-import nl.BobbinWork.diagram.model.ThreadSegment;
-import nl.BobbinWork.diagram.model.ThreadStyle;
+import nl.BobbinWork.diagram.model.*;
 
 /**
  * Bobbin lace Working diagram, a thread and/or pair diagram.
@@ -120,24 +101,6 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         return Printable.PAGE_EXISTS;
     }
 
-    public static void paintPartitions (Graphics2D g, Iterable<Drawable> drawables){
-    	List<Drawable> pins = new Vector<Drawable>();
-    	for (Drawable drawable:drawables){
-            int width = drawable.getStyle().getWidth() * 1;
-			if (width > 0) {
-				g.setPaint(drawable.getStyle().getColor());
-				g.setStroke(new BasicStroke(width, CAP_BUTT, JOIN_MITER));
-				g.draw(drawable.getShape());
-			} else {
-				pins.add(drawable);
-            }
-    	}
-    	for (Drawable drawable:pins){
-    		g.setPaint(drawable.getStyle().getColor());
-    		g.fill(drawable.getShape());
-    	}
-    }
-    
     /** Sets the XML definition and redraws the diagram. */
     public void setPattern(Diagram diagram) {
         this.diagram = diagram;
@@ -149,7 +112,6 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
 
         super.paintComponent(g);
 
-        Graphics2D g2 = (Graphics2D) g;
         if (diagram != null) {
             // determine space available on paper (default A4 minus 25.4 mm margin)
         	int pw = (int) (pageFormat.getImageableWidth() / PRINT_SCALE);
@@ -157,27 +119,27 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
             setPreferredSize(new Dimension((int) (pw * getScreenScale()), (int) (ph * getScreenScale())));
 
             // make the off-page area grey
-            g2.setColor(new Color(0xDDDDDD));
+            g.setColor(new Color(0xDDDDDD));
             int sw = getSize().width;
             int sh = getSize().height;
-            g2.fillRect((int) (pw * getScreenScale()), 0, sw - (int) (pw * getScreenScale()), sh);
-            g2.fillRect(0, (int) (ph * getScreenScale()), sw, sh - (int) (ph * getScreenScale()));
+            g.fillRect((int) (pw * getScreenScale()), 0, sw - (int) (pw * getScreenScale()), sh);
+            g.fillRect(0, (int) (ph * getScreenScale()), sw, sh - (int) (ph * getScreenScale()));
 
-            paintPartitions (g2,getScreenScale());
+            paintPartitions ((Graphics2D) g,getScreenScale());
             revalidate();
         }
     }
 
-	private void paintPartitions(Graphics2D g2, double scale) {
-        g2.scale(scale, scale);
-        if (scale > 1.5) { 
-        	// more accurate but slower?
-            g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
-            g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-        }
-		if (showPairs) paintPartitions (g2,diagram.getPairs());
-		if (showThreads) paintPartitions (g2,diagram.getThreads());
-	}
+    private void paintPartitions(Graphics2D g2, double scale) {
+      g2.scale(scale, scale);
+      if (scale > 1.5) { 
+      	// more accurate but slower?
+          g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
+          g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
+      }
+  		if (showPairs) DiagramPainter.paint (g2,diagram.getPairs());
+  		if (showThreads) DiagramPainter.paint (g2,diagram.getThreads());
+  	}
 	
     private Partition lastHigLight;
 
