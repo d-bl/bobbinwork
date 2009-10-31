@@ -55,21 +55,27 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
      * @see nl.BobbinWork.diagram.model.Connectors#getBounds
      */
     public MultipleThreadsPartition getSwitchAt(int x, int y) {
-        List<Partition> v = getPartitions();
-        for (int i = v.size() - 1; i >= 0; i--) {
-            Partition p = v.get(i);
-            if (p instanceof MultipleThreadsPartition) {
-                MultipleThreadsPartition n = (MultipleThreadsPartition) p;
-                if (n.getBounds().contains(x, y)) {
-                    if (n instanceof Switch) {
-                        return n;
-                    } else if (n instanceof MultiplePairsPartition) {
-                        return ((MultiplePairsPartition) n).getSwitchAt(x, y);
-                    }
-                }
-            }
-        }
+        MultipleThreadsPartition partitionAt = getPartitionAt( x, y );
+        if (partitionAt instanceof Switch) 
+          return partitionAt;
         return null;
+    }
+
+    public MultipleThreadsPartition getPartitionAt(
+        int x,
+        int y)
+    {
+      if (getBounds()!=null && !getBounds().contains(x, y)) return null;
+      for (Partition partition : getPartitions()){
+        if (partition.isVisible()){
+          if (partition.getBounds().contains(x, y)){
+            if (partition instanceof Switch) 
+              return (Switch)partition;
+            return ((MultiplePairsPartition)partition).getPartitionAt( x, y );
+          }
+        }
+      }
+      return this;
     }
 
     public ThreadSegment getThreadAt(int x, int y) {

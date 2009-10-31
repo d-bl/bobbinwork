@@ -292,4 +292,9 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
 		this.pageFormat = pageFormat;
 	}
 
+  public Diagram getDiagram()
+  {
+    return diagram;
+  }
+
 }

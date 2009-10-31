@@ -18,6 +18,8 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.List;
+
 
 /**
  * DiagramPanel section containing multiple threads segments.
@@ -54,7 +56,8 @@ public abstract class MultipleThreadsPartition extends Partition {
     }
     
     public int getNrOfPairs() {
-        return threadConnectors.getIns().size();
+        final List<ThreadSegment> ins = threadConnectors.getIns();
+        if (ins == null)return 0;
+        return ins.size();
     }
-
 }
