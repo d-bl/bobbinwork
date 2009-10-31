@@ -79,26 +79,27 @@ public class FileMenu extends JMenu {
         	
         } catch (java.security.AccessControlException e) { }
         
-        JMenuItem jMenuItem;
-        
-        jMenuItem = new LocaleMenuItem("MenuFile_SaveAs"); //$NON-NLS-1$
-        addConditionalItem ( jMenuItem, new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		if ( getSaveAsFileName(e) ) saveListener.actionPerformed(e);
-        	}
-        });
-        
-        jMenuItem = new LocaleMenuItem ("MenuFile_save", VK_S, CTRL_DOWN_MASK); //$NON-NLS-1$
-        addConditionalItem( jMenuItem, new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		if (fileChooser.getSelectedFile() == null) {
-        			if ( getSaveAsFileName(e) ) saveListener.actionPerformed(e);
-        		} else {
-        			e.setSource(fileChooser.getSelectedFile());
-        			saveListener.actionPerformed(e);
-        		}
-        	}
-        });
+          JMenuItem jMenuItem;
+          if (saveListener!=null) {
+            jMenuItem = new LocaleMenuItem("MenuFile_SaveAs"); //$NON-NLS-1$
+            addConditionalItem ( jMenuItem, new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		if ( getSaveAsFileName(e) ) saveListener.actionPerformed(e);
+            	}
+            });
+            
+            jMenuItem = new LocaleMenuItem ("MenuFile_save", VK_S, CTRL_DOWN_MASK); //$NON-NLS-1$
+            addConditionalItem( jMenuItem, new ActionListener() {
+            	public void actionPerformed(ActionEvent e) {
+            		if (fileChooser.getSelectedFile() == null) {
+            			if ( getSaveAsFileName(e) ) saveListener.actionPerformed(e);
+            		} else {
+            			e.setSource(fileChooser.getSelectedFile());
+            			saveListener.actionPerformed(e);
+            		}
+            	}
+            });
+          }
         
         jMenuItem = new LocaleMenuItem( "MenuFile_open", VK_O, CTRL_DOWN_MASK); //$NON-NLS-1$
         addConditionalItem ( jMenuItem, new ActionListener() {

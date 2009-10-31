@@ -36,8 +36,10 @@ public class HelpMenu extends JMenu {
 	
     public HelpMenu(final Component parent, final String years, final String simpleCaption) {
 
-    	this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
-    		+ this.getClass().getPackage().getImplementationVersion();
+    	String version = this.getClass().getPackage().getImplementationVersion();
+    	if (version==null) version = "[release unknown]";
+      this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
+    		+ version;
 
     	final String description = "<html> "
     		+ versionedCaption + "<br>Copyright  "  //$NON-NLS-1$ 

@@ -15,7 +15,7 @@ import javax.swing.event.*;
 import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.diagram.gui.*;
 import nl.BobbinWork.diagram.model.Partition;
-import nl.BobbinWork.viewer.guiUtils.LocaleButton;
+import nl.BobbinWork.viewer.guiUtils.*;
 
 class TreeToolBar
     extends JToolBar
@@ -49,8 +49,8 @@ class TreeToolBar
     {
       super.paintComponent( g );
       if (current == null) return;
-      final Graphics2D g2 = DiagramPainter.fit(g,current.getBounds(),this);
-      DiagramPainter.paint (g2,current.getThreads());
+      final Graphics2D g2 = DiagramPainter.fit( g, current.getBounds(), this );
+      DiagramPainter.paint( g2, current.getThreads() );
     }
   };
 
@@ -61,19 +61,12 @@ class TreeToolBar
   TreeToolBar()
   {
     setFloatable( false );
-
-    // TODO equal width buttons / listeners
-    final JComponent buttons = new JPanel();
-    buttons.setLayout( new BoxLayout( buttons, BoxLayout.PAGE_AXIS ) );
-    buttons.add( copy );
-    buttons.add( paste );
-    buttons.add( delete );
-    buttons.add( showHide );
-
-    add( buttons );
+    setLayout( new GridLayout(1,0) );
+    add( createButtonsPanel() );
     add( clipBoard );
     applyStrings( clipBoard, "Clipboard" );
     clipBoard.setBackground( Color.white );
+    clipBoard.setMinimumSize( new Dimension(50,50) );
 
     copy.addActionListener( new ActionListener()
     {
@@ -99,6 +92,17 @@ class TreeToolBar
     } );
   }
 
+  private JComponent createButtonsPanel()
+  {
+    final JComponent buttons = new JPanel();
+    buttons.setLayout( new GridLayout(0,1) );
+    buttons.add( copy );
+    buttons.add( paste );
+    buttons.add( delete );
+    buttons.add( showHide );
+    return buttons;
+  }
+
   @Override
   public void valueChanged(
       final TreeSelectionEvent event)
@@ -114,8 +118,10 @@ class TreeToolBar
       copy.setEnabled( current.isVisible() );
       delete.setEnabled( true );
       showHide.setEnabled( true );
-      paste.setEnabled( copied != null 
-          && copied.getNrOfPairs() == current.getNrOfPairs() );
+      paste.setEnabled( copied != null //
+          && copied != current //
+          && copied.getNrOfPairs() == current.getNrOfPairs() //
+          );
     }
     setShowHideCaption();
   }
