@@ -49,22 +49,22 @@ public class DiagramTree
       Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
       if (userObject == null) return this;
 
-      if (userObject instanceof MultipleThreadsPartition) {
-        decorate( (MultipleThreadsPartition) userObject );
+      if (userObject instanceof Partition) {
+        decorate( (Partition) userObject );
       }
       return this;
     }
 
     private void decorate(
-        MultipleThreadsPartition p)
+        Partition p)
     {
       if (p.isVisible()) {
         setText( p.getCaption() );
       } else {
         setText( "<html><em>" + p.getCaption() + "</em></html>" );
       }
-      if (p.getTooltip() != null) setToolTipText( p.getTooltip() );
       if (p.getIcon() != null) setIcon( p.getIcon() );
+      if (p.getTooltip() != null) setToolTipText( p.getTooltip() );
     };
   };
 
@@ -82,8 +82,8 @@ public class DiagramTree
   void setDiagramModel(
       final Diagram diagram)
   {
-    final DefaultMutableTreeNode root = getRoot();
     final DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
+    final DefaultMutableTreeNode root = (DefaultMutableTreeNode) treeModel.getRoot();
     root.removeAllChildren();
     buildTree( root, diagram );
     treeModel.nodeStructureChanged( root );
@@ -120,11 +120,5 @@ public class DiagramTree
   {
     getSelectionModel().setSelectionMode(
         TreeSelectionModel.SINGLE_TREE_SELECTION );
-  }
-
-  private DefaultMutableTreeNode getRoot()
-  {
-    final DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
-    return (DefaultMutableTreeNode) treeModel.getRoot();
   }
 }
