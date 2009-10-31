@@ -38,6 +38,7 @@ class TreeToolBar
   /** to be repainted when a change was made to a diagram {@link #current} */
   private JComponent source = null;
 
+  private final Component repaintOnDiagramChange;
   private final JButton showHide = new LocaleButton( false, SHOW_HIDE );
   private final JButton delete = new LocaleButton( false, DELETE );
   private final JButton paste = new LocaleButton( false, PASTE );
@@ -48,27 +49,60 @@ class TreeToolBar
         Graphics g)
     {
       super.paintComponent( g );
-      if (current == null) return;
-      final Graphics2D g2 = DiagramPainter.fit( g, current.getBounds(), this );
-      DiagramPainter.paint( g2, current.getThreads() );
+      if (copied == null) return;
+      if (copied.isVisible()) {
+        final Graphics2D g2 = DiagramPainter.fit( g, copied.getBounds(), this );
+        DiagramPainter.paint( g2, copied.getThreads() );
+      } else {
+        paste.setEnabled( false );
+        copied = null;
+      }
     }
   };
 
   /**
-   * Creates a tool bar instance that can listen to one {@link DiagramTree}
-   * instance.
+   * Creates a tool bar instance that listens to and manipulates one
+   * {@link DiagramTree} instance.
+   * 
+   * @param repaintOnDiagramChange
+   *          another component that should be repainted when the diagram model
+   *          changes
    */
-  TreeToolBar()
+  TreeToolBar(final Component repaintOnDiagramChange)
   {
+    this.repaintOnDiagramChange = repaintOnDiagramChange;
     setFloatable( false );
-    setLayout( new GridLayout(1,0) );
+    setLayout( new GridLayout( 1, 0 ) );
     add( createButtonsPanel() );
     add( clipBoard );
     applyStrings( clipBoard, "Clipboard" );
     clipBoard.setBackground( Color.white );
-    clipBoard.setMinimumSize( new Dimension(50,50) );
+    copy.addActionListener( createCopyListener() );
+    showHide.addActionListener( createShowHideListener() );
+  }
 
-    copy.addActionListener( new ActionListener()
+  private ActionListener createShowHideListener()
+  {
+    return new ActionListener()
+    {
+      @Override
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        if (current != null) current.setVisible( !current.isVisible() );
+        source.repaint();
+        if (copied == current) {
+          clipBoard.repaint();
+        }
+        setShowHideCaption();
+        repaintOnDiagramChange.repaint();
+      }
+    };
+  }
+
+  private ActionListener createCopyListener()
+  {
+    return new ActionListener()
     {
 
       @Override
@@ -78,24 +112,13 @@ class TreeToolBar
         copied = current;
         clipBoard.repaint();
       }
-    } );
-    showHide.addActionListener( new ActionListener()
-    {
-      @Override
-      public void actionPerformed(
-          final ActionEvent event)
-      {
-        current.setVisible( !current.isVisible() );
-        source.repaint();
-        setShowHideCaption();
-      }
-    } );
+    };
   }
 
   private JComponent createButtonsPanel()
   {
     final JComponent buttons = new JPanel();
-    buttons.setLayout( new GridLayout(0,1) );
+    buttons.setLayout( new GridLayout( 0, 1 ) );
     buttons.add( copy );
     buttons.add( paste );
     buttons.add( delete );
@@ -121,7 +144,7 @@ class TreeToolBar
       paste.setEnabled( copied != null //
           && copied != current //
           && copied.getNrOfPairs() == current.getNrOfPairs() //
-          );
+      );
     }
     setShowHideCaption();
   }

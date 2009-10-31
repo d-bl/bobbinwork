@@ -89,7 +89,7 @@ public class Redesign
       final DiagramTree tree)
       throws SAXException, IOException, ParserConfigurationException
   {
-    final TreeToolBar treeToolBar = new TreeToolBar();
+    final TreeToolBar treeToolBar = new TreeToolBar(canvas);
     tree.addTreeSelectionListener( treeToolBar );
 
     final JPanel left = createBorderPanel();
