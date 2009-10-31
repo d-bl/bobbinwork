@@ -28,6 +28,9 @@ import nl.BobbinWork.diagram.model.*;
 public class DiagramTree
     extends JTree
 {
+  private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map =
+      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>();
+
   private static class Renderer
       extends DefaultTreeCellRenderer
   {
@@ -55,7 +58,7 @@ public class DiagramTree
     private void decorate(
         MultipleThreadsPartition p)
     {
-      if (p.isVisible()){
+      if (p.isVisible()) {
         setText( p.getCaption() );
       } else {
         setText( "<html><em>" + p.getCaption() + "</em></html>" );
@@ -73,11 +76,15 @@ public class DiagramTree
     setRootVisible( true );
     setCellRenderer( new Renderer() );
     setSelectionMode();
+    setDiagramModel( diagram );
+  }
+
+  void setDiagramModel(
+      final Diagram diagram)
+  {
     buildTree( getRoot(), diagram );
     ((DefaultTreeModel) getModel()).nodeStructureChanged( getRoot() );
   }
-  
-  private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map = new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>();
 
   private void buildTree(
       final DefaultMutableTreeNode treeNode,
@@ -90,16 +97,18 @@ public class DiagramTree
         treeNode.add( child );
         buildTree( child, p );
         if (p instanceof MultipleThreadsPartition)
-          map.put( (MultipleThreadsPartition)p, child );
+          map.put( (MultipleThreadsPartition) p, child );
       }
     }
   }
-  
-  void select(MultipleThreadsPartition p){
+
+  void select(
+      final MultipleThreadsPartition p)
+  {
     final DefaultMutableTreeNode node = map.get( p );
-    if (node==null) return;
-    
-    final TreePath path = new TreePath( node.getPath());
+    if (node == null) return;
+
+    final TreePath path = new TreePath( node.getPath() );
     setSelectionPath( path );
     scrollPathToVisible( path );
   }

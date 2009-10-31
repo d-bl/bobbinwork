@@ -140,25 +140,24 @@ public class DiagramBuilder {
       return new ChainedPairsPartitionFactory(parsed.getDocumentElement()).createDiagram(); 
     }
 
+    private static Diagram convert(
+      final Document parsed) throws XPathExpressionException
+    {
+      TreeExpander.replaceCopyElements( parsed.getDocumentElement() );
+      return createDiagram( parsed.getDocumentElement() );
+    }
+    
     public static Diagram createDiagramModel(URI uri)
     throws URISyntaxException, IOException, SAXException,
     ParserConfigurationException, XPathExpressionException
     {
-      Document parsed = new XmlResources().parse(readFile( uri ));
-      TreeExpander.replaceCopyElements(parsed.getDocumentElement());
-      return DiagramBuilder.createDiagram( parsed.getDocumentElement() );
+      return convert( new XmlResources().parse( uri ) );
     }
-    
-    private static String readFile(
-        URI uri) throws IOException, URISyntaxException
-    {
-      final File file = new File( uri );
-      final InputStream inputStream = new FileInputStream( file );
 
-      final byte[] buffer = new byte[(int) file.length()];
-      inputStream.read( buffer );
-      inputStream.close();
-      return new String( buffer );
+    public static Diagram createDiagramModel(final InputStream inputStream)
+    throws XPathExpressionException, SAXException, IOException, ParserConfigurationException
+    {
+      return convert( new XmlResources().parse( inputStream ) );
     }
     
     private static class SwitchFactory {

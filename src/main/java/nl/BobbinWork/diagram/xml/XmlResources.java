@@ -17,12 +17,8 @@
  */
 package nl.BobbinWork.diagram.xml;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.net.URL;
+import java.io.*;
+import java.net.*;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -104,13 +100,23 @@ public class XmlResources {
   public Document parse(String xmlContent) 
   throws IOException, SAXException {
 
+    return parse( new ByteArrayInputStream (xmlContent.getBytes()));
+  }
+  
+  public Document parse(File file) 
+  throws IOException, SAXException {
+    
+     return parse( new FileInputStream(file) );
+  }
+
+  public Document parse(
+      InputStream inputStream) throws SAXException, IOException
+  {
     String messages = "";
     for (String base : INCLUDE_BASES ) {
       try {
 
-        byte[] bytes = xmlContent.getBytes();
-        InputStream is = new ByteArrayInputStream (bytes);
-        return parser.parse( is, base );
+        return parser.parse( inputStream, base );
 
       } catch (SAXException exception) {
         
@@ -122,11 +128,11 @@ public class XmlResources {
     }
     throw new SAXException(messages);
   }
-  
-  public Document parse(File file) 
-  throws IOException, SAXException {
-    
-     return parser.parse( file );
+
+  public Document parse(
+      URI uri) throws SAXException, IOException
+  {
+    return parser.parse( uri.toString() );
   }
   
   public void validate(File xmlFile) 
