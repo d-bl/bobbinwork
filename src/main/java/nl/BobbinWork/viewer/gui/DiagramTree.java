@@ -82,8 +82,11 @@ public class DiagramTree
   void setDiagramModel(
       final Diagram diagram)
   {
-    buildTree( getRoot(), diagram );
-    ((DefaultTreeModel) getModel()).nodeStructureChanged( getRoot() );
+    final DefaultMutableTreeNode root = getRoot();
+    final DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
+    root.removeAllChildren();
+    buildTree( root, diagram );
+    treeModel.nodeStructureChanged( root );
   }
 
   private void buildTree(
@@ -91,8 +94,8 @@ public class DiagramTree
       final Partition partition)
   {
     if (partition instanceof MultiplePairsPartition) {
-      for (final Partition p : ((MultiplePairsPartition) partition)
-          .getPartitions()) {
+      final MultiplePairsPartition ps = (MultiplePairsPartition) partition;
+      for (final Partition p : ps.getPartitions()) {
         final DefaultMutableTreeNode child = new DefaultMutableTreeNode( p );
         treeNode.add( child );
         buildTree( child, p );

@@ -37,7 +37,6 @@ public class DiagramTreeLink
     extends MouseAdapter
     implements TreeSelectionListener
 {
-
   private final DiagramTree tree;
   private final DiagramPanel canvas;
 
@@ -62,7 +61,7 @@ public class DiagramTreeLink
   public void mouseClicked(
       final MouseEvent event)
   {
-    final MultipleThreadsPartition partition = getSwitchAt( event );
+    final MultipleThreadsPartition partition = getPartitionAt( event );
     if (partition == null) return;
     canvas.highLight( partition );
     tree.select( partition );
@@ -74,25 +73,15 @@ public class DiagramTreeLink
   {
     final TreePath path = event.getPath();
     if (!isVisible( path ))
-      canvas.highLight( getDiagram() );
+      canvas.highLight( null );
     else
       canvas.highLight( getSelectedPartition( path ) );
   }
 
-  private MultipleThreadsPartition getSwitchAt(
+  private MultipleThreadsPartition getPartitionAt(
       final MouseEvent event)
   {
-    return getDiagram().getSwitchAt( event.getX(), event.getY() );
-  }
-
-  private Diagram getDiagram()
-  {
-    return (Diagram) getRootNode().getUserObject();
-  }
-
-  private DefaultMutableTreeNode getRootNode()
-  {
-    return (DefaultMutableTreeNode) tree.getPathForRow( 0 )
-        .getPathComponent( 0 );
+    DiagramPanel panel = (DiagramPanel)event.getSource();
+    return panel.getDiagram().getPartitionAt( event.getX(), event.getY() );
   }
 }

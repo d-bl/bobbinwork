@@ -72,7 +72,8 @@ public class Redesign
       new DiagramTreeLink( tree, canvas );
 
       final JPanel mainPanel = createBorderPanel();
-      mainPanel.add( createMainMenu( frame, createFileListener(tree,canvas) ), NORTH );
+      mainPanel.add(
+          createMainMenu( frame, createFileListener( tree, canvas ) ), NORTH );
       mainPanel.add( createSplitPane( canvas, tree ), CENTER );
 
       frame.getContentPane().add( mainPanel );
@@ -129,7 +130,9 @@ public class Redesign
     return menuBar;
   }
 
-  private static ActionListener createFileListener(final DiagramTree tree, final DiagramPanel canvas)
+  private static ActionListener createFileListener(
+      final DiagramTree tree,
+      final DiagramPanel canvas)
   {
     return new ActionListener()
     {
@@ -137,9 +140,8 @@ public class Redesign
           final ActionEvent event)
       {
         try {
-          final InputStream stream = ((NamedInputStream) event.getSource())
-              .getStream();
-          final Diagram model = createDiagramModel( stream );
+          final NamedInputStream source = (NamedInputStream) event.getSource();
+          final Diagram model = createDiagramModel( source.getStream() );
           tree.setDiagramModel( model );
           canvas.setPattern( model );
         } catch (SAXException exception) {

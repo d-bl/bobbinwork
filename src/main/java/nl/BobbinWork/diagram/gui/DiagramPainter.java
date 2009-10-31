@@ -34,6 +34,9 @@ public class DiagramPainter
       final Shape shape,
       final JPanel panel)
   {
+    // TODO why is this safeguard needed?
+    if (shape==null)return (Graphics2D) graphics;
+    
     final int avaiableHeight;
     final Rectangle bounds = shape.getBounds();
     final Insets insets;
