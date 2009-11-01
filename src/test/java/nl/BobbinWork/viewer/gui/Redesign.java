@@ -65,8 +65,8 @@ public class Redesign
       new DiagramTreeLink( tree, canvas );
 
       final JPanel mainPanel = createBorderPanel();
-      mainPanel.add(
-          createMainMenu( frame, createFileListener( tree, canvas ) ), NORTH );
+      final ActionListener fileListener = createFileListener( tree, canvas );
+      mainPanel.add( createMainMenu( frame, fileListener ), NORTH );
       mainPanel.add( createSplitPane( canvas, tree ), CENTER );
 
       frame.getContentPane().add( mainPanel );
@@ -100,14 +100,53 @@ public class Redesign
       final DiagramPanel canvas)
       throws SAXException, IOException, ParserConfigurationException
   {
+    final ThreadStyleToolBar threadStyleToolBar = new ThreadStyleToolBar();
+    final JButton pipette = createIconButton( "pipette.gif" );
+    final JButton pinsel = createIconButton( "pinsel.gif" );
+    pipette.addActionListener( createPipetteListener( canvas, threadStyleToolBar ) );
+    pinsel.addActionListener( createPinselListener( canvas, threadStyleToolBar ) );
+
     final JComponent diagramTools = new JMenuBar();
     diagramTools.add( new PrintMenu( canvas ) );
     diagramTools.add( new ViewMenu( canvas, null, null ) );
-    diagramTools.add( new ThreadStyleToolBar() );
+    diagramTools.add( threadStyleToolBar );
     diagramTools.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
-    diagramTools.add( createIconButton( "pipette.gif" ) );
-    diagramTools.add( createIconButton( "pinsel.gif" ) );
+    diagramTools.add( pipette );
+    diagramTools.add( pinsel );
     return diagramTools;
+  }
+
+  private static ActionListener createPinselListener(
+      final DiagramPanel canvas,
+      final ThreadStyleToolBar threadStyleToolBar)
+  {
+    return new ActionListener(){
+
+      @Override
+      public void actionPerformed(
+          ActionEvent e)
+      {
+        // TODO rather disable the buttons
+        if (canvas.getSelectedThread() == null) return;
+        canvas.getSelectedThread().getStyle().apply( threadStyleToolBar.getCoreStyle() );
+        canvas.repaint();
+      }};
+  }
+
+  private static ActionListener createPipetteListener(
+      final DiagramPanel canvas,
+      final ThreadStyleToolBar threadStyleToolBar)
+  {
+    return new ActionListener()
+    {
+      @Override
+      public void actionPerformed(
+          ActionEvent e)
+      {
+        if (canvas.getSelectedThread() == null) return;
+        threadStyleToolBar.setCoreStyle( canvas.getSelectedThread().getStyle() );
+      }
+    };
   }
 
   private static JComponent createMainMenu(

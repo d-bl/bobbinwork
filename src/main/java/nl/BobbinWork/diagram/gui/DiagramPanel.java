@@ -38,6 +38,10 @@ import nl.BobbinWork.diagram.model.*;
 @SuppressWarnings("serial")
 public class DiagramPanel extends JPanel implements PrintablePreviewer {
 
+    private Partition lastHigLight;
+  
+    private ThreadSegment highlightedThread;
+
     private Color //
             areaHighlight = new Color(0xFF, 0xFF, 0x33, 0x77),//
             threadHighlight = new Color(0x00, 0xFF, 0x00, 0x77);
@@ -142,7 +146,6 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
   		if (showThreads) DiagramPainter.paint (g2,diagram.getThreads());
   	}
 	
-    private Partition lastHigLight;
 
     /** Highlight a section of the diagram corresponding with a node of the tree. */
     public void highLight(Partition partition) {
@@ -188,6 +191,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
     public void highlight(
         ThreadSegment threadSegment)
     {
+      highlightedThread = threadSegment;
       paintImmediately(getBounds());
       Graphics2D g2 = (Graphics2D) getGraphics();
       g2.scale(getScreenScale(), getScreenScale());
@@ -310,6 +314,11 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
   public Diagram getDiagram()
   {
     return diagram;
+  }
+  
+  public ThreadSegment getSelectedThread()
+  {
+    return highlightedThread;
   }
 
 }

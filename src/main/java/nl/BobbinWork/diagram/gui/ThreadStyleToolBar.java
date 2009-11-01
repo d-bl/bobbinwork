@@ -39,7 +39,7 @@ public class ThreadStyleToolBar extends JToolBar {
 
     private Switch twist = createTwist();
 
-    ThreadStyle getCoreStyle() {
+    public ThreadStyle getCoreStyle() {
         return twist.getFront().getStyle();
     }
     private Style getShadowStyle() {
@@ -162,7 +162,7 @@ public class ThreadStyleToolBar extends JToolBar {
         }
     };
 
-    void setCoreStyle(ThreadStyle p) {
+    public void setCoreStyle(ThreadStyle p) {
         if (p != null) {
             getCoreStyle().apply(p);
             twist.getBack().getStyle().apply(p);
