@@ -83,7 +83,8 @@ public class DiagramTree
       final Diagram diagram)
   {
     final DefaultTreeModel treeModel = (DefaultTreeModel) getModel();
-    final DefaultMutableTreeNode root = (DefaultMutableTreeNode) treeModel.getRoot();
+    final DefaultMutableTreeNode root =
+        (DefaultMutableTreeNode) treeModel.getRoot();
     root.removeAllChildren();
     buildTree( root, diagram );
     treeModel.nodeStructureChanged( root );
@@ -108,6 +109,7 @@ public class DiagramTree
   void select(
       final MultipleThreadsPartition p)
   {
+    if (p == null) return;
     final DefaultMutableTreeNode node = map.get( p );
     if (node == null) return;
 
