@@ -17,14 +17,14 @@
  */
 package nl.BobbinWork.viewer.gui;
 
-import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
-import static nl.BobbinWork.bwlib.gui.Localizer.*;
-import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 import static java.awt.BorderLayout.*;
+import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
+import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
+import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Locale;
 
@@ -36,7 +36,7 @@ import nl.BobbinWork.bwlib.gui.*;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.*;
 import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.viewer.guiUtils.*;
+import nl.BobbinWork.viewer.guiUtils.FileMenu;
 
 import org.junit.Ignore;
 import org.xml.sax.SAXException;
@@ -50,12 +50,6 @@ import org.xml.sax.SAXException;
 @Ignore("this is java application, not a JUnit test")
 public class Redesign
 {
-  private static final String DIAGRAM_FILE =
-      "nl/BobbinWork/diagram/xml/newDiagram.xml";
-
-  private static final String DIAGRAM =
-      "<copy of='ctctc' pairs='1-2'><move x='10' y='10'/></copy>";
-
   private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
 
   public static void main(
@@ -66,9 +60,8 @@ public class Redesign
       // must be first for the system look and feel
       final BWFrame frame = new BWFrame( BUNDLE );
 
-      final Diagram model = createDiagramModel( DIAGRAM );
-      final DiagramPanel canvas = new DiagramPanel( model );
-      final DiagramTree tree = new DiagramTree( model );
+      final DiagramPanel canvas = new DiagramPanel();
+      final DiagramTree tree = new DiagramTree();
       new DiagramTreeLink( tree, canvas );
 
       final JPanel mainPanel = createBorderPanel();
@@ -89,7 +82,7 @@ public class Redesign
       final DiagramTree tree)
       throws SAXException, IOException, ParserConfigurationException
   {
-    final TreeToolBar treeToolBar = new TreeToolBar(canvas);
+    final TreeToolBar treeToolBar = new TreeToolBar( canvas );
     tree.addTreeSelectionListener( treeToolBar );
 
     final JPanel left = createBorderPanel();
@@ -122,7 +115,7 @@ public class Redesign
       final ActionListener inputStreamListener)
   {
     final JComponent menuBar = new JMenuBar();
-    menuBar.add( new FileMenu( inputStreamListener, null, DIAGRAM_FILE ) );
+    menuBar.add( new FileMenu( inputStreamListener, null, null ) );
     menuBar.add( new SampleDiagramChooser( menuBar, inputStreamListener ) );
     menuBar.add( new GroundChooser( inputStreamListener ) );
     menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );

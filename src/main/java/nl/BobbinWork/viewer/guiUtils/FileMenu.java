@@ -108,21 +108,22 @@ public class FileMenu extends JMenu {
         	}
         });
 
-        add(new JSeparator());
-        
-        jMenuItem = new LocaleMenuItem("MenuFile_New", VK_N, CTRL_MASK); //$NON-NLS-1$
-        jMenuItem.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		clearSelectedFile();
-        		InputStream stream = getClass().getClassLoader().getResourceAsStream(newFileName);
-            	e.setSource(new NamedInputStream(newFileName, stream));
-            	inputStreamListener.actionPerformed(e);
-        	}
-
-        });
-        add(jMenuItem);
-
-        add(new JSeparator());
+        if (newFileName != null){
+          add(new JSeparator());
+          
+          jMenuItem = new LocaleMenuItem("MenuFile_New", VK_N, CTRL_MASK); //$NON-NLS-1$
+          jMenuItem.addActionListener(new ActionListener() {
+          	public void actionPerformed(ActionEvent e) {
+          		clearSelectedFile();
+          		InputStream stream = getClass().getClassLoader().getResourceAsStream(newFileName);
+              	e.setSource(new NamedInputStream(newFileName, stream));
+              	inputStreamListener.actionPerformed(e);
+          	}
+  
+          });
+          add(jMenuItem);
+          add(new JSeparator());
+        }
 
         jMenuItem = new LocaleMenuItem( "MenuFile_exit", VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
         jMenuItem.addActionListener(new ActionListener() {
