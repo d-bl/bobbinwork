@@ -68,6 +68,10 @@ import nl.BobbinWork.viewer.guiUtils.CSplitPane;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+/**
+ * See the Redesign in the test section
+ */
+@Deprecated
 public class BWViewer {
 
 	private static final String YEARS = "2006-2008";  //$NON-NLS-1$  

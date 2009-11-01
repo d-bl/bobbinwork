@@ -171,26 +171,35 @@ public class Redesign
       public void actionPerformed(
           final ActionEvent event)
       {
+        final NamedInputStream source = (NamedInputStream) event.getSource();
         try {
-          final NamedInputStream source = (NamedInputStream) event.getSource();
           final Diagram model = createDiagramModel( source.getStream() );
           tree.setDiagramModel( model );
           canvas.setPattern( model );
         } catch (SAXException exception) {
-          // TODO Auto-generated catch block
-          exception.printStackTrace(); // error in xml content
+          showError(source.getName(),exception);
+        } catch (IllegalArgumentException exception) {
+          showError(source.getName(),exception);
         } catch (IOException exception) {
-          // TODO Auto-generated catch block
-          exception.printStackTrace(); // environment/user error
+          showError(source.getName(),exception);
         } catch (XPathExpressionException exception) {
-          exception.printStackTrace(); // programming error
+          showError(source.getName(),exception);
         } catch (ParserConfigurationException exception) {
-          exception.printStackTrace(); // programming error
+          showError(source.getName(),exception);
         }
       }
     };
   }
 
+  private static void showError(String fileName, Exception exception) {
+    
+    JOptionPane.showMessageDialog(null, //
+        fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
+        "I/O error or unsupported format", //
+        JOptionPane.ERROR_MESSAGE);
+    exception.printStackTrace();
+  }
+  
   private static JPanel createBorderPanel()
   {
     return new JPanel( new BorderLayout() );
