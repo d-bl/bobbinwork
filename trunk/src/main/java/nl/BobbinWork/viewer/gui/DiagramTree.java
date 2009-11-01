@@ -68,15 +68,14 @@ public class DiagramTree
     };
   };
 
-  public DiagramTree(final Diagram diagram)
+  public DiagramTree()
   {
-    super( new DefaultMutableTreeNode( diagram ) );
+    super( new DefaultMutableTreeNode( null ) );
     ToolTipManager.sharedInstance().registerComponent( this );
     setShowsRootHandles( false );
     setRootVisible( true );
     setCellRenderer( new Renderer() );
     setSelectionMode();
-    setDiagramModel( diagram );
   }
 
   void setDiagramModel(

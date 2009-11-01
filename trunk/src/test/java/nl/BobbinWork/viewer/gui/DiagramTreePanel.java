@@ -48,7 +48,8 @@ public class DiagramTreePanel
     try {
       BWFrame frame = new BWFrame( BUNDLE );
       URI diagram = DiagramTree.class.getClassLoader().getResource( "http://bobbinwork.googlecode.com/svn/wiki/diagrams/flanders.xml" ).toURI();
-      DiagramTree tree = new DiagramTree( createDiagramModel(diagram) );
+      DiagramTree tree = new DiagramTree();
+      tree.setDiagramModel( createDiagramModel(diagram) );
       frame.getContentPane().add( new JScrollPane( tree ) );
       frame.setVisible( true );
     } catch (Exception exception) {
