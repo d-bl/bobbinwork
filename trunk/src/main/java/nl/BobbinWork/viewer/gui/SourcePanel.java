@@ -41,6 +41,10 @@ import nl.BobbinWork.bwlib.gui.CMenuBar;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import static nl.BobbinWork.bwlib.gui.Localizer.*;
 
+/**
+ * See the Redesign in the test section
+ */
+@Deprecated
 @SuppressWarnings("serial")
 class SourcePanel extends JPanel {
 

@@ -36,7 +36,10 @@ import org.w3c.dom.Element;
 /**
  * A palette that allows the user to select a fragment of the diagram that can
  * be used again.
+ * 
+ * See the Redesign in the test section
  */
+@Deprecated
 @SuppressWarnings("serial")
 public class DiagramFragments extends JToolBar {
 

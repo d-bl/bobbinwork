@@ -48,7 +48,9 @@ import nl.BobbinWork.diagram.model.Point;
 /**
  * A diagram panel together with a tool bar to interact with the diagram.
  *
+ * See the Redesign in the test section
  */
+@Deprecated
 @SuppressWarnings("serial")
 public class InteractiveDiagramPanel extends JPanel {
 

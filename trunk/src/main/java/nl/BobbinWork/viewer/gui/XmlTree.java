@@ -53,7 +53,9 @@ import org.xml.sax.SAXParseException;
  * 
  * @author J. Pol
  * 
+ * See the Redesign in the test section
  */
+@Deprecated
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class XmlTree extends JTree {
 
