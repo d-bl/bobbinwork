@@ -21,6 +21,7 @@ package nl.BobbinWork.diagram.gui;
 import static java.awt.RenderingHints.*;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.awt.geom.CubicCurve2D;
 import java.awt.print.*;
 
@@ -181,24 +182,30 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
         y /= getScreenScale();
         ThreadSegment threadSegment = diagram.getThreadAt(x, y);
 
-        paintImmediately(getBounds());
-        Graphics2D g2 = (Graphics2D) getGraphics();
-        g2.scale(getScreenScale(), getScreenScale());
+        highlight( threadSegment );
+    }
 
-        if (lastHigLight != null) {
-            g2.setPaint(areaHighlight);
-            g2.fill(lastHigLight.getBounds());
-        }
-        if (threadSegment != null) {
-            g2.setPaint(threadHighlight);
-            g2.setStroke(new BasicStroke( //
-                    threadSegment.getStyle().getShadow().getWidth() * 1.7f, //
-                    BasicStroke.CAP_BUTT, //
-                    BasicStroke.JOIN_MITER));
-            for (CubicCurve2D curve:threadSegment.getThread()){
-            	g2.draw(curve);
-            }
-        }
+    public void highlight(
+        ThreadSegment threadSegment)
+    {
+      paintImmediately(getBounds());
+      Graphics2D g2 = (Graphics2D) getGraphics();
+      g2.scale(getScreenScale(), getScreenScale());
+
+      if (lastHigLight != null) {
+          g2.setPaint(areaHighlight);
+          g2.fill(lastHigLight.getBounds());
+      }
+      if (threadSegment != null) {
+          g2.setPaint(threadHighlight);
+          g2.setStroke(new BasicStroke( //
+                  threadSegment.getStyle().getShadow().getWidth() * 1.7f, //
+                  BasicStroke.CAP_BUTT, //
+                  BasicStroke.JOIN_MITER));
+          for (CubicCurve2D curve:threadSegment.getThread()){
+          	g2.draw(curve);
+          }
+      }
     }
 
     /**
@@ -260,6 +267,14 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
      */
     double getScreenScale() {
         return screenScale;
+    }
+    
+    public MultipleThreadsPartition getPartitionAt (MouseEvent event){
+      
+      final int x = (int) (event.getX() / getScreenScale());
+      final int y = (int) (event.getY() / getScreenScale());
+      
+      return getDiagram().getPartitionAt( x, y );
     }
 
     Color getAreaHighlight() {
