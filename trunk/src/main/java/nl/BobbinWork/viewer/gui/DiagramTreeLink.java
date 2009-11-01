@@ -61,6 +61,7 @@ public class DiagramTreeLink
   public void mouseClicked(
       final MouseEvent event)
   {
+    canvas.highlight( null );
     final MultipleThreadsPartition partition = canvas.getPartitionAt( event );
     if (partition == null) return;
 
