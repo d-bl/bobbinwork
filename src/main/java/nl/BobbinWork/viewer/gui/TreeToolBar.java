@@ -17,6 +17,12 @@ import nl.BobbinWork.diagram.gui.*;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.viewer.guiUtils.*;
 
+/**
+ * A tool bar to manipulate the selected item of a {@link DiagramTree}.
+ * 
+ * @author Joke Pol
+ * 
+ */
 class TreeToolBar
     extends JToolBar
     implements TreeSelectionListener
@@ -32,10 +38,14 @@ class TreeToolBar
   /** shown in {@link #clipBoard} */
   private Partition copied = null;
 
-  /** to be manipulated by the buttons */
-  private Partition current = null;
+  /** The selected diagram element. Subject to manipulations by the buttons */
+  private Partition selected = null;
 
-  /** to be repainted when a change was made to a diagram {@link #current} */
+  /**
+   * The source of the selection change events. To be repainted when a change
+   * was made to the {@link #selected} element. In practice the source will be
+   * the {@link DiagramTree} listened to.
+   */
   private JComponent source = null;
 
   private final Component repaintOnDiagramChange;
@@ -61,12 +71,11 @@ class TreeToolBar
   };
 
   /**
-   * Creates a tool bar instance that listens to and manipulates one
-   * {@link DiagramTree} instance.
+   * Creates a tool bar instance for a {@link DiagramTree}.
    * 
    * @param repaintOnDiagramChange
    *          another component that should be repainted when the diagram model
-   *          changes
+   *          changes. Typically the panel containing the diagram.
    */
   TreeToolBar(final Component repaintOnDiagramChange)
   {
@@ -81,6 +90,10 @@ class TreeToolBar
     showHide.addActionListener( createShowHideListener() );
   }
 
+  /**
+   * Creates a listener for the button that toggles visibility of the selected
+   * diagram element.
+   */
   private ActionListener createShowHideListener()
   {
     return new ActionListener()
@@ -89,9 +102,9 @@ class TreeToolBar
       public void actionPerformed(
           final ActionEvent event)
       {
-        if (current != null) current.setVisible( !current.isVisible() );
+        if (selected != null) selected.setVisible( !selected.isVisible() );
         source.repaint();
-        if (copied == current) {
+        if (copied == selected) {
           clipBoard.repaint();
         }
         setShowHideCaption();
@@ -100,16 +113,19 @@ class TreeToolBar
     };
   }
 
+  /**
+   * Creates a listener for the button that copies the selected diagram element
+   * to the clip board.
+   */
   private ActionListener createCopyListener()
   {
     return new ActionListener()
     {
-
       @Override
       public void actionPerformed(
-          final ActionEvent arg0)
+          final ActionEvent event)
       {
-        copied = current;
+        copied = selected;
         clipBoard.repaint();
       }
     };
@@ -131,30 +147,34 @@ class TreeToolBar
       final TreeSelectionEvent event)
   {
     source = (JComponent) event.getSource();
-    current = getSelectedPartition( event.getPath() );
-    if (current == null) {
+    selected = getSelectedPartition( event.getPath() );
+    if (selected == null) {
       copy.setEnabled( false );
       delete.setEnabled( false );
       paste.setEnabled( false );
       showHide.setEnabled( false );
     } else {
-      copy.setEnabled( current.isVisible() );
+      copy.setEnabled( selected.isVisible() );
       delete.setEnabled( true );
       showHide.setEnabled( true );
       paste.setEnabled( copied != null //
-          && copied != current //
-          && copied.getNrOfPairs() == current.getNrOfPairs() //
+          && copied != selected //
+          && copied.getNrOfPairs() == selected.getNrOfPairs() //
       );
     }
     setShowHideCaption();
   }
 
+  /**
+   * Sets the caption of the button that toggles visibility of the selected
+   * diagram element.
+   */
   private void setShowHideCaption()
   {
     String caption = "";
-    if (current == null) {
+    if (selected == null) {
       caption = Localizer.getString( SHOW_HIDE );
-    } else if (current.isVisible()) {
+    } else if (selected.isVisible()) {
       caption = Localizer.getString( HIDE );
     } else {
       caption = Localizer.getString( SHOW );
