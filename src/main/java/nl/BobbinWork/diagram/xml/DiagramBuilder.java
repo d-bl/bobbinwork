@@ -43,14 +43,16 @@ public class DiagramBuilder
   private static class ChainedPairsPartitionFactory
   {
     private static final ThreadStyle DEFAULT_THREAD_STYLE = new ThreadStyle();
-    Element element;
-    List<Pin> pins = new Vector<Pin>();
-    List<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
-    Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
-
+    final Element element;
+    final List<Pin> pins = new Vector<Pin>();
+    final List<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
+    final Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
+    final String partitionTitle;
+    
     ChainedPairsPartitionFactory(Element element)
     {
       this.element = element;
+      partitionTitle = getTitle(element);
       for //
       (Node child = element.getFirstChild() //
       ; child != null //
@@ -117,13 +119,28 @@ public class DiagramBuilder
 
     Group createGroup()
     {
-      return new Group( createRange( element ), parts, pins, bobbins );
+      return new Group( createRange( element ), parts, pins, bobbins, partitionTitle );
     }
 
     Diagram createDiagram()
     {
       return new Diagram( parts, pins );
     }
+  }
+  
+  private static Element getFirst(Element element,ElementType type){
+    NodeList titleList = element.getElementsByTagName(type.toString());
+    if (titleList==null||titleList.getLength()<=0)return null;
+    return ((Element)titleList.item( 0 ));
+  }
+  
+  private static String getTitle(Element element){
+    Element t = getFirst(element,ElementType.title);
+    if (t==null)return null;
+    Element v = getFirst(t,ElementType.value);
+    if (v==null )return null;
+    // TODO get the value of the locale language
+    return v.getTextContent();
   }
 
   private static Group createGroup(
@@ -392,7 +409,7 @@ public class DiagramBuilder
     for (Segment segment : pairs) {
       segment.setStyle( style );
     }
-    Stitch s = new Stitch( range, pairs, switches, pins );
+    Stitch s = new Stitch( range, pairs, switches, pins, getTitle( element ) );
     register( element, s );
     return s;
   }
