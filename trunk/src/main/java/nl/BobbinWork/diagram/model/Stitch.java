@@ -25,9 +25,12 @@ import java.util.Vector;
 
 public class Stitch extends MultiplePairsPartition {
 
+    private final String title;
+
     public Stitch(Range range, List<PairSegment> pairs, List<Switch> switches,
-    		List<Pin> pins) {
+    		List<Pin> pins, String title) {
 		
+        this.title = title;
         setPairRange(range);
         int nrOfPairs = pairs.size();
 		setThreadConnectors(new Connectors<ThreadSegment>(nrOfPairs * 2));
@@ -53,4 +56,14 @@ public class Stitch extends MultiplePairsPartition {
 		}
 		return list.iterator();
 	}
+
+  public String getCaption()
+  {
+    if (title != null) {
+      return pairRange.toString() + ": " + title;
+    } else {
+      return super.getCaption();
+    }
+  }
+
 }

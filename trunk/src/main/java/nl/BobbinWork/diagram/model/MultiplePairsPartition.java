@@ -89,7 +89,7 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
     }
 
     /** Range of pairs of the parent used in this Group/Stitch. */
-    private Range pairRange = null;
+    protected Range pairRange = null;
 
     Range getPairRange() {
         return pairRange;
@@ -175,6 +175,6 @@ public abstract class MultiplePairsPartition extends MultipleThreadsPartition {
 
   public String getCaption()
   {
-    return String.format( super.getCaption(), pairRange.getFirst(), pairRange.getLast() );
+    return pairRange.toString();
   }
 }

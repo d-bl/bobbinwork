@@ -120,6 +120,6 @@ public abstract class Switch extends MultipleThreadsPartition {
 
 	public String getCaption()
   {
-    return String.format( super.getCaption(), threadRange.getFirst(), threadRange.getLast() );
+    return threadRange.toString()+": " + super.getCaption();
   }
 }
