@@ -33,7 +33,7 @@ import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.*;
  * @author Joke Pol
  * 
  */
-public class DiagramTreeLink
+public class SelectionListener
     extends MouseAdapter
     implements TreeSelectionListener
 {
@@ -49,7 +49,7 @@ public class DiagramTreeLink
    * @param canvas
    *          ads the created object as a listener to mouse clicks
    */
-  public DiagramTreeLink(final DiagramTree tree, final DiagramPanel canvas)
+  public SelectionListener(final DiagramTree tree, final DiagramPanel canvas)
   {
     this.tree = tree;
     this.canvas = canvas;

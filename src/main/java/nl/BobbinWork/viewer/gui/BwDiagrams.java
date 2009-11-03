@@ -62,7 +62,7 @@ public class BwDiagrams
 
       final DiagramPanel canvas = new DiagramPanel();
       final DiagramTree tree = new DiagramTree();
-      new DiagramTreeLink( tree, canvas );
+      new SelectionListener( tree, canvas );
 
       final JPanel mainPanel = createBorderPanel();
       final ActionListener fileListener = createFileListener( tree, canvas );
@@ -82,14 +82,14 @@ public class BwDiagrams
       final DiagramTree tree)
       throws SAXException, IOException, ParserConfigurationException
   {
-    final TreeToolBar treeToolBar = new TreeToolBar( canvas );
-    tree.addTreeSelectionListener( treeToolBar );
+    final EditForm editForm = new EditForm( canvas );
+    tree.addTreeSelectionListener( editForm );
 
-    final JPanel left = createBorderPanel();
-    left.add( treeToolBar, NORTH );
+    final JComponent left = createBorderPanel();
+    left.add( editForm, NORTH );
     left.add( new JScrollPane( tree ), CENTER );
 
-    final JPanel right = createBorderPanel();
+    final JComponent right = createBorderPanel();
     right.add( createDiagramTools( canvas ), NORTH );
     right.add( new JScrollPane( canvas ), CENTER );
 
