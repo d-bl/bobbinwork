@@ -61,14 +61,14 @@ public class DiagramTreeLink
   public void mouseClicked(
       final MouseEvent event)
   {
-    canvas.highlight( null );
+    canvas.highlight( (ThreadSegment) null );
     final MultipleThreadsPartition partition = canvas.getPartitionAt( event );
     if (partition == null) return;
 
     // triggers valueChanged, what replaces all previous highlights
     tree.select( partition );
 
-    if (partition instanceof Switch) {
+    if (partition instanceof Switch && canvas.isThreadsVisible()) {
       final Switch s = (Switch) partition;
       canvas.highlight( s.getFront() );
     }
@@ -80,8 +80,8 @@ public class DiagramTreeLink
   {
     final TreePath path = event.getPath();
     if (!isVisible( path ))
-      canvas.highLight( null );
+      canvas.highlight( (Partition)null );
     else
-      canvas.highLight( getSelectedPartition( path ) );
+      canvas.highlight( getSelectedPartition( path ) );
   }
 }

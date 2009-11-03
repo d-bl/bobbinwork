@@ -263,7 +263,7 @@ public class BWViewer {
 									replace.setEnabled(XmlTree.elementsMatch(tree.getSelectedElement(),
 											fragments.getSelectedElement()));
 									delete.setEnabled(tree.selectedElementIsDeletable());
-									diagramPanel.highLight(tree.getSelectedPartition());
+									diagramPanel.highlight(tree.getSelectedPartition());
 								}
 							}
 						});

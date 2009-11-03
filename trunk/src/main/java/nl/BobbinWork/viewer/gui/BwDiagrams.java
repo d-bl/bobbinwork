@@ -48,7 +48,7 @@ import org.xml.sax.SAXException;
  * 
  */
 @Ignore("this is java application, not a JUnit test")
-public class Redesign
+public class BwDiagrams
 {
   private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
 
