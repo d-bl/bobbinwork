@@ -148,7 +148,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
 	
 
     /** Highlight a section of the diagram corresponding with a node of the tree. */
-    public void highLight(Partition partition) {
+    public void highlight(Partition partition) {
     	
     	lastHigLight = partition; // remember for higlightThreadAt()
     	
@@ -168,7 +168,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
 
     void highlightSwitchAt(int x, int y) {
     	MultipleThreadsPartition part = diagram.getSwitchAt(x, y);
-    	highLight(part);
+    	highlight(part);
     }    
     
     /**
@@ -319,6 +319,11 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
   public ThreadSegment getSelectedThread()
   {
     return highlightedThread;
+  }
+
+  public boolean isThreadsVisible()
+  {
+    return showThreads;
   }
 
 }
