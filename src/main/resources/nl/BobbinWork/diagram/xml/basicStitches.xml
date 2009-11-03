@@ -1077,8 +1077,8 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         
                         <group id="lll" pairs="1-1" display="none">
                             <title>
-                                <value lang="en">triple twists with the left pair</value>
-                                <value lang="nl">3x draaien met het linker paar</value>
+                                <value lang="en">triple twists</value>
+                                <value lang="nl">3x draaien</value>
                             </title>
         
                             <stitch pairs="1-1" >
@@ -1106,8 +1106,8 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                         
                         <group id="rrr" pairs="2-2" display="none">
                             <title>
-                                <value lang="en">triple twists with the right pair</value>
-                                <value lang="nl">3x draaien met het rechter paar</value>
+                                <value lang="en">triple twists</value>
+                                <value lang="nl">3x draaien</value>
                             </title>
         
                             <stitch pairs="1-1">
@@ -1322,21 +1322,44 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
      <copy of="legpair" pairs="1-2"><rotate centre="78,10" angle="-70" /><move x='-51' y='40' /></copy>
      <copy of="legpair" pairs="5-6"><rotate centre="78,10" angle="70" /><move x='51' y='40' /></copy>
      <group id="spider_top" pairs='1-6'>
-      <!-- 1 --><copy of="ctc" pairs="3-4"><move x="70" y="15"/></copy>
-      <!-- 2 --><copy of="ctc" pairs="2-3"><move x="48" y="33"/></copy>
-      <!-- 3 --><copy of="ctc" pairs="1-2"><move x="30" y="55"/></copy>
-        
-      <!-- 4 --><copy of="ctc" pairs="4-5"><move x="93" y="33"/></copy>
-      <!-- 5 --><copy of="ctc" pairs="3-4"><move x="70" y="43"/></copy>
-      <!-- 6 --><copy of="ctc" pairs="2-3"><move x="50" y="63"/></copy>
-        
-      <!-- 7 --><copy of="ctc" pairs="5-6"><move x="110" y="55"/></copy>
-      <!-- 8 --><copy of="ctc" pairs="4-5"><move x="90" y="63"/></copy>
-      <!-- 9 --><copy of="ctc" pairs="3-4"><move x="70" y="70"/></copy>
-        
-      <!-- 10 --><copy of="ctc"  pairs="3-4"><move x="70" y="100"/></copy>
+      <title>
+       <value lang="en">cloth stitches with the right pairs through the left pairs</value>
+       <value lang="nl">rechter paren in linnenslag door de linker paren</value>
+      </title>
+      <group pairs="1-6">
+        <title>
+          <value lang="en">4th pair through 3 to the left</value>
+          <value lang="nl">4e paar door 3 naar links</value>
+        </title>
+        <!-- 1 --><copy of="ctc" pairs="3-4"><move x="70" y="15"/></copy>
+        <!-- 2 --><copy of="ctc" pairs="2-3"><move x="48" y="33"/></copy>
+        <!-- 3 --><copy of="ctc" pairs="1-2"><move x="30" y="55"/></copy>
+      </group>
+      <group pairs="1-6">
+        <title>
+          <value lang="en">5th pair through 3 to the left</value>
+          <value lang="nl">5e paar door 3 naar links</value>
+        </title>
+        <!-- 4 --><copy of="ctc" pairs="4-5"><move x="93" y="33"/></copy>
+        <!-- 5 --><copy of="ctc" pairs="3-4"><move x="70" y="43"/></copy>
+        <!-- 6 --><copy of="ctc" pairs="2-3"><move x="50" y="63"/></copy>
+      </group>
+      <group pairs="1-6">
+        <title>
+          <value lang="en">5th pair through 3 to the left</value>
+          <value lang="nl">5e paar door 3 naar links</value>
+        </title>
+        <!-- 7 --><copy of="ctc" pairs="5-6"><move x="110" y="55"/></copy>
+        <!-- 8 --><copy of="ctc" pairs="4-5"><move x="90" y="63"/></copy>
+        <!-- 9 --><copy of="ctc" pairs="3-4"><move x="70" y="70"/></copy>
+      </group>        
      </group>
      <group id="spider_bottom" pairs='1-6'>
+      <title>
+       <value lang="en">cloth stitches with the right pairs through the left pairs</value>
+       <value lang="nl">rechter paren in linnenslag door de linker paren</value>
+      </title>
+      <!-- 10 --><copy of="ctc"  pairs="3-4"><move x="70" y="100"/></copy>
       <!-- 11 --><copy of="ctc" pairs="2-3"><move x="50" y="108"/></copy>
       <!-- 12 --><copy of="ctc" pairs="1-2"><move x="30" y="115"/></copy>
         
@@ -1354,18 +1377,18 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <value lang="en">spider</value>
         <value lang="nl">spin</value>
       </title>
-      <group id="spider_l" pairs='1-3'>
-        <copy of="l" pairs="3-3"><move x="55" y="0"/></copy>
-        <copy of="l" pairs="2-2"><move x="33" y="18"/></copy>
-        <copy of="l" pairs="1-1"><move x="15" y="40"/></copy>
+      <group pairs="1-6">
+        <title>
+          <value lang="en">triple twist all pairs</value>
+          <value lang="nl">draai alle paren 3x</value>
+        </title>
+        <copy of="lll" pairs="3-3"><move x="63" y="9"/></copy>
+        <copy of="lll" pairs="2-2"><move x="45" y="29"/></copy>
+        <copy of="lll" pairs="1-1"><move x="22" y="48"/></copy>
+        <copy of="rrr" pairs="4-4"><move x="75" y="9"/></copy>
+        <copy of="rrr" pairs="5-5"><move x="96" y="28"/></copy>
+        <copy of="rrr" pairs="6-6"><move x="115" y="48"/></copy>
       </group>
-      <copy of="spider_l" pairs="1-3"><move x="10" y="10"/></copy>
-      <group id="spider_r" pairs='4-6'>
-        <copy of="r" pairs="1-1"><move x="85" y="0"/></copy>
-        <copy of="r" pairs="2-2"><move x="108" y="18"/></copy>
-        <copy of="r" pairs="3-3"><move x="125" y="40"/></copy>
-      </group>
-      <copy of="spider_r" pairs="4-6"><move x="-10" y="10"/></copy>
       <copy of="spider_top" pairs='1-6'/>
       <pin position="78,93"/>
       <copy of="spider_bottom" pairs='1-6'/>
