@@ -23,7 +23,7 @@ import nl.BobbinWork.viewer.guiUtils.*;
  * @author Joke Pol
  * 
  */
-class TreeToolBar
+class EditForm
     extends JToolBar
     implements TreeSelectionListener
 {
@@ -77,10 +77,9 @@ class TreeToolBar
    *          another component that should be repainted when the diagram model
    *          changes. Typically the panel containing the diagram.
    */
-  TreeToolBar(final Component repaintOnDiagramChange)
+  EditForm(final Component repaintOnDiagramChange)
   {
     this.repaintOnDiagramChange = repaintOnDiagramChange;
-    setFloatable( false );
     setLayout( new GridLayout( 1, 0 ) );
     add( createButtonsPanel() );
     add( clipBoard );
