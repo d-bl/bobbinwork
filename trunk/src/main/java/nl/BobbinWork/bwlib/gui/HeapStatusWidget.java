@@ -42,10 +42,7 @@ public class HeapStatusWidget extends JProgressBar {
   public HeapStatusWidget() {
     super(0,100);
     setValue(0);
-    setBorderPainted(true);
     setStringPainted(true);
-    setBackground(new Color(0xEEEEFF));
-    setForeground(new Color(0xCCCCFF));
     new Timer(3000, new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         update();
