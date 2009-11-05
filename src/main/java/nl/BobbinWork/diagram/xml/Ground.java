@@ -43,7 +43,7 @@ public enum Ground {
   public String xmlString () {
  
     int p = (DIAGONAL_ROWS - 1) * pairShift * 2 + pairs + 1;
-    String s = newCopyTag(p) + "</copy>";
+    String s = "";//newCopyTag(p) + "</copy>";
     for (int i=0 ; i<DIAGONAL_ROWS ; i++){
         int xx = (DIAGONAL_ROWS-1)*x+i*x;
         int yy = i*y;
