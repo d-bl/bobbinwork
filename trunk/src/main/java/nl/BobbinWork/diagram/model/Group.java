@@ -27,13 +27,12 @@ import java.util.List;
 public class Group extends ChainedPairsPartition {
 
     private final String title;
-    public Group(//
-    		Range range, //
-    		List<MultiplePairsPartition> parts,//
-    		List<Pin> pins, //
+    public Group(
+    		Range range, 
+    		List<Partition> parts, 
     		List<ThreadStyle> styles, String partitionTitle) //
     {
-    	super (range, parts, pins);
+    	super (range, parts);
     	title = partitionTitle;
     	Iterator<ThreadStyle> st = styles.iterator();
     	Iterator<ThreadSegment> segments = getThreadConnectors().getIns().iterator();

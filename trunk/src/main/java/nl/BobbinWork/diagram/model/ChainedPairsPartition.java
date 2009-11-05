@@ -24,24 +24,24 @@ import java.util.List;
  * 
  * @author J. Pol
  */
-abstract class ChainedPairsPartition extends MultiplePairsPartition {
+abstract class ChainedPairsPartition
+    extends MultiplePairsPartition
+{
 
-    abstract void initConnectors();
-    abstract void connectChild(MultiplePairsPartition child);
+  abstract void initConnectors();
 
-    ChainedPairsPartition(//
-    		Range range, //
-    		List<MultiplePairsPartition> newParts, //
-    		List<Pin> pins) {
-    	
-    	setPairRange(range);
-    	initConnectors();
-    	
-    	List<Partition> parts = getPartitions();
-    	for (Pin pin:pins) parts.add(pin);
-    	for (MultiplePairsPartition newPart:newParts) {
-    		parts.add(newPart);
-    		connectChild(newPart); 
-    	}
-	}
+  abstract void connectChild(
+      MultiplePairsPartition child);
+
+  ChainedPairsPartition(Range range, List<Partition> newParts)
+  {
+    setPairRange( range );
+    initConnectors();
+    List<Partition> parts = getPartitions();
+    for (Partition newPart : newParts) {
+      parts.add( newPart );
+      if (!(newPart instanceof Pin))
+        connectChild( (MultiplePairsPartition) newPart );
+    }
+  }
 }

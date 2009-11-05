@@ -44,8 +44,7 @@ public class DiagramBuilder
   {
     private static final ThreadStyle DEFAULT_THREAD_STYLE = new ThreadStyle();
     final Element element;
-    final List<Pin> pins = new Vector<Pin>();
-    final List<MultiplePairsPartition> parts = new Vector<MultiplePairsPartition>();
+    final List<Partition> parts = new Vector<Partition>();
     final Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
     final String partitionTitle;
     
@@ -63,7 +62,7 @@ public class DiagramBuilder
           Element childElement = (Element) child;
           switch (childType) {
           case pin:
-            pins.add( DiagramBuilder.createPin( childElement ) );
+            parts.add( DiagramBuilder.createPin( childElement ) );
             break;
           case group:
             MultiplePairsPartition part =
@@ -119,12 +118,12 @@ public class DiagramBuilder
 
     Group createGroup()
     {
-      return new Group( createRange( element ), parts, pins, bobbins, partitionTitle );
+      return new Group( createRange( element ), parts, bobbins, partitionTitle );
     }
 
     Diagram createDiagram()
     {
-      return new Diagram( parts, pins );
+      return new Diagram( parts );
     }
   }
   
