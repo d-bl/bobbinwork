@@ -25,10 +25,9 @@ import java.util.List;
  */
 public class Diagram extends ChainedPairsPartition {
 
-    public Diagram(//
-    		List<MultiplePairsPartition> parts, //
-    		List<Pin> pins) {
-    	super (new Range(0, 0), parts, pins);
+    public Diagram(
+    		List<Partition> parts) {
+    	super (new Range(0, 0), parts);
     }
     void connectChild(MultiplePairsPartition part) {}
     void initConnectors() {}
