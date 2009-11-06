@@ -20,52 +20,63 @@ package nl.BobbinWork.diagram.xml;
 
 public enum Ground {
 
-  vierge(80, 80, 4, 2),
-  sGravenmoers(80, 80, 4, 2),
-  spider(80, 140, 6, 3),
-  flanders(55, 55, 4, 2),
-  snowflake(136, 100, 6, 4);
-  
+  vierge      (4, 4, 2, 80, 80), //
+  sGravenmoers(4, 4, 2, 80, 80), //
+  spider      (4, 6, 3, 80, 140), //
+  flanders    (4, 4, 2, 55, 55), //
+  snowflake   (4, 6, 4, 136, 100);
+
   private static final String BASIC_STITCHES = "basicStitches.xml";
-  private final static int DIAGONAL_ROWS = 4;
-  private int x; 
-  private int y; 
-  private int pairs; 
-  private int pairShift;
-  
-  Ground (int x, int y, int pairs, int pairShift) {
+  private final int x;
+  private final int y;
+  private final int pairs;
+  private final int pairShift;
+  private final int rows;
+
+  Ground(
+      final int rows,
+      final int pairs,
+      final int pairShift,
+      final int x,
+      final int y)
+  {
     this.x = x;
     this.y = y;
     this.pairs = pairs;
     this.pairShift = pairShift;
-  }
-  
-  public String xmlString () {
- 
-    int p = (DIAGONAL_ROWS - 1) * pairShift * 2 + pairs + 1;
-    String s = "";//newCopyTag(p) + "</copy>";
-    for (int i=0 ; i<DIAGONAL_ROWS ; i++){
-        int xx = (DIAGONAL_ROWS-1)*x+i*x;
-        int yy = i*y;
-        p = pairShift*(DIAGONAL_ROWS+i-1)+1; 
-        for (int j=0 ; j<DIAGONAL_ROWS && p>0; j++){
-            s += newCopyTag(p)
-            +"<move x='"+(xx)+"' y='"+(yy)+"'/></copy>\n";
-            xx -= x;
-            yy += y;
-            p -= pairShift;
-        }           
-    }
-    int nrOfPairs = pairShift * 2 * DIAGONAL_ROWS + pairs - pairShift;
-    
-    return XmlResources.ROOT + 
-    "\n<xi:include href='" + BASIC_STITCHES + "'/>\n" + //$NON-NLS-1$ //$NON-NLS-2$
-    "<group pairs='1-" + nrOfPairs + "'>\n" + //$NON-NLS-1$ //$NON-NLS-2$
-    "<title/>\n" + //$NON-NLS-1$ magically it makes the name of the stitch appear in the treeView $NON-NLS-1$
-    s + "</group>\n</diagram>"; //$NON-NLS-1$
+    this.rows = rows;
   }
 
-  private String newCopyTag(int p) {
-    return "<copy of='"+name()+"' pairs='"+p+"-"+(p+pairs-1)+"'>\n";
+  public String xmlString()
+  {
+
+    int leftPair = (rows - 1) * pairShift * 2 + pairs + 1;
+    String copies = "";// newCopyTag(p) + "</copy>";
+    for (int i = 0; i < rows; i++) {
+      int xx = (rows - 1) * x + i * x;
+      int yy = i * y;
+      leftPair = pairShift * (rows + i - 1) + 1;
+      for (int j = 0; j < rows && leftPair > 0; j++) {
+        copies += newCopyTag( leftPair, xx, yy );
+        xx -= x;
+        yy += y;
+        leftPair -= pairShift;
+      }
+    }
+    int nrOfPairs = pairShift * 2 * rows + pairs - pairShift;
+    final String s =
+        String.format( "<xi:include href='%s'/><group pairs='1-%d'>%s</group>", //$NON-NLS-1$
+            BASIC_STITCHES, nrOfPairs, copies );
+    return XmlResources.ROOT + s + "</diagram>"; //$NON-NLS-1$
+  }
+
+  private String newCopyTag(
+      final int start,
+      final int x,
+      final int y)
+  {
+    return String.format( "<copy of='%s' pairs='%d-%d'>", //$NON-NLS-1$
+        name(), start, start + pairs - 1 )
+        + String.format( "<move x='%d' y='%d'/></copy>", x, y );//$NON-NLS-1$
   }
 }
