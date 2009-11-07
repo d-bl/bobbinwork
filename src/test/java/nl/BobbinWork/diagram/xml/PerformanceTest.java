@@ -28,19 +28,29 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 import org.junit.Test;
 import org.w3c.dom.*;
 
-public class ExpandTest extends XmlFixture {
+public class PerformanceTest extends XmlFixture {
 
   private static final String XML_CONTENT = XmlResources.ROOT + "<xi:include href='basicStitches.xml'/></diagram>";
   private static final File EXPANDED_FILE = new File ("src/test/java"+PATH+"expanded.xml");
 
   @Test
-  public void emptyDiagram() throws Exception {
-    check (EXPANDED_FILE,XML_CONTENT);
-  }
-  
-  @Test(timeout=35)
-  public void performance1() throws Exception {
-    xmlResources.parse(XML_CONTENT);
+  public void expansion() throws Exception {
+    String resultingXml = check(XML_CONTENT);
+    
+    /* useful to synchronize expanded.xml  
+    
+    PrintStream x = new PrintStream("build/new-expanded.xml");
+    x.print(strip( resultingXml ));
+    x.close();
+    /**/
+    
+    if ( EXPANDED_FILE != null ) {
+      assertEquals(
+          "transformed xml not as predicted", 
+          EXPANDED_FILE, 
+          strip(resultingXml)
+      );
+    }
   }
   
   @Test(timeout=200)
@@ -86,26 +96,10 @@ public class ExpandTest extends XmlFixture {
     XmlResources.validate(xmlResources.parse(xmlString));
   }
 
-  private void check(File expected, String xmlContent) throws Exception {
-
-    String resultingXml = check(xmlContent);
-    
-    /* useful to synchronize expanded.xml (delete last line) 
-    
-    PrintStream x = new PrintStream("build/new-expanded.xml");
-    x.print(strip( resultingXml ));
-    x.close();
-    /**/
-    
-    if ( expected != null ) {
-      assertEquals(
-          "transformed xml not as predicted", 
-          expected, 
-          strip(resultingXml)
-      );
-    }
-  }
-
+  /**
+   * strip white space from the an XML string. A one liner as expected epansion
+   * prevents erratic statistics for ohloh
+   */
   private String strip(
       String resultingXml)
   {

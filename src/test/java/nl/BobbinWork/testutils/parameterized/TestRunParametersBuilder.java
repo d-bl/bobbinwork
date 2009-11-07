@@ -50,7 +50,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  SadBuilder expects(
+  public SadBuilder expects(
       final Class<? extends Exception> expectedExceptionClass,
       final String... patterns)
   {
@@ -65,7 +65,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  PhraseBuilder expectsIllegalArgument(
+  public PhraseBuilder expectsIllegalArgument(
       final String... patterns)
   {
     return expects( IllegalArgumentException.class, patterns );
@@ -78,7 +78,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  PhraseBuilder expectsNullPointer(
+  public PhraseBuilder expectsNullPointer(
       final String... patterns)
   {
     return expects( NullPointerException.class, patterns );
@@ -91,7 +91,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  PhraseBuilder expectsIndexOutOfBounds(
+  public PhraseBuilder expectsIndexOutOfBounds(
       final String... patterns)
   {
     return expects( IndexOutOfBoundsException.class, patterns );
@@ -104,7 +104,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  PhraseBuilder expectsUnsupportedOperation(
+  public PhraseBuilder expectsUnsupportedOperation(
       final String... patterns)
   {
     return expects( UnsupportedOperationException.class, patterns );
@@ -117,7 +117,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  PhraseBuilder expectsIOException(
+  public PhraseBuilder expectsIOException(
       final String... patterns)
   {
     return expects( IOException.class, patterns );
@@ -130,7 +130,7 @@ public class TestRunParametersBuilder
    *          list of patterns that must be found in the exception's message
    * @return a builder that only needs the input for the test run
    */
-  PhraseBuilder expectsArrayIndexOutOfBounds(
+  public PhraseBuilder expectsArrayIndexOutOfBounds(
       final String... patterns)
   {
     return expects( ArrayIndexOutOfBoundsException.class, patterns );

@@ -54,6 +54,7 @@ public class XmlResources {
     SCHEMA_RESOURCE.toString(),
     null,
     "http://bobbinwork.googlecode.com/svn/trunk/src/main/java/" + SCHEMA_RESOURCE, //$NON-NLS-1$
+    "http://bobbinwork.googlecode.com/svn/wiki/diagrams/", //$NON-NLS-1$
     "http://bobbinwork.googlegroups.com/web/"}; //$NON-NLS-1$
   
   /**  attributes for the root element required for includes and validation against the schema */
@@ -100,10 +101,19 @@ public class XmlResources {
     return parse(s);
   }
   
-  public Document parse(String xmlContent) 
-  throws IOException, SAXException {
-
-    return parse( new ByteArrayInputStream (xmlContent.getBytes()));
+  public Document parse(
+      String xmlContent,
+      String... includes) throws IOException, SAXException
+  {
+    String src = xmlContent;
+    if (includes != null && includes.length > 0) {
+      src = ROOT;
+      for (String include : includes) {
+        src += String.format( "<xi:include href='%s'", include );
+      }
+      src += xmlContent + "</diagram>";
+    }
+    return parse( new ByteArrayInputStream( src.getBytes() ) );
   }
   
   public Document parse(File file) 
@@ -148,14 +158,14 @@ public class XmlResources {
       } catch (SAXException exception) {
 
         if (!exception.getMessage().matches( ".*nclude.*" )) {//$NON-NLS-1$
-          messages += NEWLINE + buffer.toString();
+          messages = buffer.toString() + NEWLINE + messages;
           throw new SAXException(messages,exception);
         }
 //        if (!messages.equals( "" )) {//$NON-NLS-1$
 //          throw new SAXException( "include failed with base: " + messages + " "//$NON-NLS-1$ //$NON-NLS-2$
 //              + base );
 //        }
-        messages += NEWLINE + base;
+        messages = exception.getMessage() + " [" + base + "] " + messages;
       } finally {
         System.setErr( saved );
       }
