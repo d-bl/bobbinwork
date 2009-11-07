@@ -1,6 +1,7 @@
 package nl.BobbinWork.testutils;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Assert
     extends org.junit.Assert
@@ -32,7 +33,8 @@ public class Assert
         actual.length );
 
     for (int i = 0; i < expected.length; i++) {
-      final String msg = identifyingMessage + NEW_LINE + "fails at index " + i + "; ";
+      final String msg =
+          identifyingMessage + NEW_LINE + "fails at index " + i + "; ";
       if (deltas == null || i >= deltas.length || deltas[i] == null) {
         assertEquals( msg, expected[i], actual[i] );
       } else {
@@ -48,10 +50,12 @@ public class Assert
       final Object actual)
   {
     org.junit.Assert.assertEquals( msg, expected, actual );
-    
-    // safety net for JUnit 4.3.1. which comes with Eclipse   
-    final String note = NEW_LINE+"should have failed earlier, fixed in JUnit 4.5 or later"+NEW_LINE;
-    junit.framework.Assert.assertEquals( msg+note, expected, actual );
+
+    // safety net for JUnit 4.3.1. which comes with Eclipse
+    final String note =
+        NEW_LINE + "should have failed earlier, fixed in JUnit 4.5 or later"
+            + NEW_LINE;
+    junit.framework.Assert.assertEquals( msg + note, expected, actual );
   }
 
   /**
@@ -70,9 +74,16 @@ public class Assert
       final String[] expected,
       final Throwable actual)
   {
-    final String thrownMessage = actual.getMessage();
-    final String msg = identifyingMessage + NEW_LINE + "could not find: ";
+    if (expected == null || expected.length == 0) return;
+    assertTrue( identifyingMessage + NEW_LINE + "got no message at all", actual
+        .getMessage() != null );
+    
+    // new lines break the matches method
+    final String thrownMessage = actual.getMessage().replaceAll( "\\s+", " " );
+    
     for (final String pattern : expected) {
+      final String msg = identifyingMessage + NEW_LINE + //
+          "expected: " + pattern + NEW_LINE + "got: " + actual;
       assertTrue( msg + pattern, thrownMessage.matches( ".*" + pattern + ".*" ) );
     }
   }

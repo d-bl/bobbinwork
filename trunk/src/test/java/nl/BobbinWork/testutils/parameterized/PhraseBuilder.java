@@ -8,7 +8,7 @@ import org.junit.runners.Parameterized;
  * @author Joke Pol
  *
  */
-interface PhraseBuilder
+public interface PhraseBuilder
 {
   /**
    * Creates an object array for the parameters method of a

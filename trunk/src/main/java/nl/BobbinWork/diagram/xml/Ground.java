@@ -20,54 +20,90 @@ package nl.BobbinWork.diagram.xml;
 
 public enum Ground {
 
-  vierge      (4, 4, 2, 80, 80), //
-  sGravenmoers(4, 4, 2, 80, 80), //
-  spider      (4, 6, 3, 80, 140), //
-  flanders    (4, 4, 2, 55, 55), //
-  snowflake   (4, 6, 4, 136, 100);
+  vierge(4, 4, 0, 80, 80), //
+  sGravenmoers(4, 4, 0, 80, 80), //
+  spider(4, 6, 0, 80, 140), //
+  flanders(4, 4, 0, 55, 55), //
+  snowflake(4, 6, 2, 136, 100);
 
-  private static final String BASIC_STITCHES = "basicStitches.xml";
-  private final int x;
-  private final int y;
+  private static final String INCLUDE =
+      "<xi:include href='basicStitches.xml'/>";
+  private final int dX;
+  private final int dY;
   private final int pairs;
   private final int pairShift;
   private final int rows;
+  private final int skippedPairs;
 
   Ground(
       final int rows,
       final int pairs,
-      final int pairShift,
+      final int skippedPairs,
       final int x,
       final int y)
   {
-    this.x = x;
-    this.y = y;
+    this.skippedPairs = skippedPairs;
+    this.dX = x;
+    this.dY = y;
     this.pairs = pairs;
-    this.pairShift = pairShift;
+    this.pairShift = (pairs + skippedPairs) / 2;
     this.rows = rows;
   }
 
+  public String square()
+  {
+    return XmlResources.ROOT + INCLUDE + //
+        createDiagonal( 1, pairs * 1, dX * 0 ) + //
+        createDiagonal( 3, pairs * 2, dX * 1 ) + //
+        createDiagonal( 5, pairs * 3, dX * 2 ) + //
+        "</diagram>";
+  }
+
+  public String createDiagonal(
+      final int count,
+      final int pEnd,
+      final int xStart)
+  {
+    String stitches = "";//$NON-NLS-1$
+    int p = pEnd - pairs;
+    int xx = xStart;
+    int yy = 0;
+    for (int i = count; i > 0 && p > 0; i--) {
+      stitches += newCopyTag( p, xx, yy );
+      p -= skippedPairs;
+      xx -= dX;
+      yy += dY;
+    }
+    String string = String.format( "<group pairs='%d-%d'>%s</group>", //$NON-NLS-1$
+        1, pEnd, stitches );
+    return string;
+  }
+
   public String xmlString()
+  {
+    return diamond();
+  }
+
+  public String diamond()
   {
 
     int leftPair = (rows - 1) * pairShift * 2 + pairs + 1;
     String copies = "";// newCopyTag(p) + "</copy>";
     for (int i = 0; i < rows; i++) {
-      int xx = (rows - 1) * x + i * x;
-      int yy = i * y;
+      int xx = (rows - 1) * dX + i * dX;
+      int yy = i * dY;
       leftPair = pairShift * (rows + i - 1) + 1;
       for (int j = 0; j < rows && leftPair > 0; j++) {
         copies += newCopyTag( leftPair, xx, yy );
-        xx -= x;
-        yy += y;
+        xx -= dX;
+        yy += dY;
         leftPair -= pairShift;
       }
     }
     int nrOfPairs = pairShift * 2 * rows + pairs - pairShift;
-    final String s =
-        String.format( "<xi:include href='%s'/><group pairs='1-%d'>%s</group>", //$NON-NLS-1$
-            BASIC_STITCHES, nrOfPairs, copies );
-    return XmlResources.ROOT + s + "</diagram>"; //$NON-NLS-1$
+    final String s = String.format( "<group pairs='1-%d'>%s</group>", //$NON-NLS-1$
+        nrOfPairs, copies );
+    return XmlResources.ROOT + INCLUDE + s + "</diagram>"; //$NON-NLS-1$
   }
 
   private String newCopyTag(
