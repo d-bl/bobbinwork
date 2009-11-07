@@ -44,6 +44,9 @@ import org.xml.sax.SAXException;
 
 public class XmlResources {
 
+  public static String NEWLINE = " ";//FIXME breaks some JUnit tests  
+  // System.getProperty("line.separator"); //$NON-NLS-1$
+  
   private static final URL SCHEMA_RESOURCE = XmlResources.class.getResource("bw.xsd"); //$NON-NLS-1$
   
   /** base's for URI's to try until parsing does not fail with an include problem */
@@ -109,37 +112,68 @@ public class XmlResources {
      return parse( new FileInputStream(file) );
   }
 
+  private static class BufferOutputStream extends OutputStream {
+    private StringBuffer buffer = new StringBuffer();
+
+    public void write(int b) {
+        buffer.append((char)b);
+    }
+    
+    public PrintStream getPrintStream(){
+      return new PrintStream(this){
+        public String toString(){
+          return buffer.toString();
+        }
+      }; 
+    }
+    
+    public String toString(){
+      return buffer.toString();
+    }
+  }
+
   public Document parse(
       InputStream inputStream) throws SAXException, IOException
   {
-    String messages = "";
-    for (String base : INCLUDE_BASES ) {
-      try {
+    String messages = ""; //$NON-NLS-1$
+    for (String base : INCLUDE_BASES) {
+      
+      PrintStream saved = System.out;
+      PrintStream buffer = new BufferOutputStream().getPrintStream();
+      System.setErr( buffer );
 
+      try {
         return parser.parse( inputStream, base );
 
       } catch (SAXException exception) {
-        
-        boolean includeProblem = exception.getMessage().matches(".*nclude.*"); //$NON-NLS-1$
-        if ( ! includeProblem ) throw exception;
-        if ( ! messages.equals("") ) throw new SAXException("include failed with base: "+messages+" "+base);
-        messages += " "+base;
+
+        if (!exception.getMessage().matches( ".*nclude.*" )) {//$NON-NLS-1$
+          messages += NEWLINE + buffer.toString();
+          throw new SAXException(messages,exception);
+        }
+//        if (!messages.equals( "" )) {//$NON-NLS-1$
+//          throw new SAXException( "include failed with base: " + messages + " "//$NON-NLS-1$ //$NON-NLS-2$
+//              + base );
+//        }
+        messages += NEWLINE + base;
+      } finally {
+        System.setErr( saved );
       }
     }
-    throw new SAXException(messages);
+    throw new SAXException( messages );
   }
 
   public Document parse(
       URI uri) throws SAXException, IOException
   {
-    return parser.parse( uri.toString() );
+    return parse( new FileInputStream(new File(uri)) );
   }
   
   public void validate(File xmlFile) 
   throws IOException, SAXException {
     
     if ( validator == null && null == (validator=newValidator()) ) return;
-    validator.validate(new DOMSource( parser.parse(xmlFile) ));
+    validator.validate(new DOMSource( parse(xmlFile) ));
   }
   
   public static void validate(Document source) 
@@ -161,7 +195,7 @@ public class XmlResources {
   public void validate(String xmlContent) 
   throws SAXException, IOException, TransformerException {
     
-	if ( validator == null && null == (validator=newValidator()) ) return;
+  if ( validator == null && null == (validator=newValidator()) ) return;
     validator.validate( new DOMSource( parse(xmlContent)));
   }
 

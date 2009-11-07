@@ -52,11 +52,11 @@ public class XmlFixture {
       xmlResources.parse( xmlContent );
       xmlResources.validate( xmlContent );
     } catch (SAXParseException e) { 
-      String s = e.getMessage();
+      String s = e.getMessage().replaceAll( "^\\s*", "" ).replaceAll( "\\s*$", "" );
       assertTrue( "line:"+e.getLineNumber()+" col:"+e.getColumnNumber() + 
           " expected [" + regExp + "] but got\n" + s, s.matches(regExp) );
     } catch (SAXException e) { 
-      String s = e.getMessage();
+      String s = e.getMessage().replaceAll( "^\\s*", "" ).replaceAll( "\\s*$", "" );
       assertTrue( " expected [" + regExp + "] but got \n" + s, s.matches(regExp) );
     }
   }
