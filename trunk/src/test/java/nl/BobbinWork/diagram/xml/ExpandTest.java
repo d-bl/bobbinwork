@@ -38,12 +38,12 @@ public class ExpandTest extends XmlFixture {
     check (EXPANDED_FILE,XML_CONTENT);
   }
   
-  @Test(timeout=60)
+  @Test(timeout=35)
   public void performance1() throws Exception {
     xmlResources.parse(XML_CONTENT);
   }
   
-  @Test(timeout=800)
+  @Test(timeout=200)
   public void performance2() throws Exception {
     Document document = xmlResources.parse(XML_CONTENT);
     TreeExpander.replaceCopyElements(document.getDocumentElement());
@@ -63,21 +63,21 @@ public class ExpandTest extends XmlFixture {
       " <copy of='t' bobbins='3-4'><move x='10' y='10'/></copy>\n" +
       " <copy of='t' pairs='5-6'><rotate centre='"+w+","+w+"' angle='45'/></copy>\n" +
       "</diagram>\n";
-    System.out.println(s);
+    //System.out.println(s);
     
     Document doc = xmlResources.parse(s);
     TreeExpander.replaceCopyElements( doc.getDocumentElement() );
-    System.out.println( XmlResources.toXmlString(doc) );
+    //System.out.println( XmlResources.toXmlString(doc) );
   }
   
-  @Test(timeout=31000)
+  @Test(timeout=5000)
   public void grounds() throws Exception {
     for ( Ground g : Ground.values() ) {
       check(g.xmlString());
     }
   }
   
-  @Test(timeout=5500)
+  @Test(timeout=450)
   public void newDiagram() throws Exception  {
     File file = new File(SRC + PATH + "newDiagram.xml");
     Document document = xmlResources.parse(file);
