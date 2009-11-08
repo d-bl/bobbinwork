@@ -22,9 +22,9 @@ public enum Ground {
 
   vierge      (4, 4, 0,  80,  80, 800L, 600L), //
   sGravenmoers(4, 4, 0,  80,  80, 650L, 500L), //
-  spider      (4, 6, 0,  80, 140, 850L, 575L), //
+  spider      (4, 6, 0,  80, 140, 850L, 600L), //
   flanders    (4, 4, 0,  55,  55, 500L, 450L), //
-  snowflake   (4, 6, 2, 136, 100,1100L, 600L);
+  snowflake   (4, 6, 2, 136, 100, 850L, 600L);
 
   private final int dX;
   private final int dY;
@@ -85,7 +85,7 @@ public enum Ground {
 
   public String xmlString()
   {
-    return square();
+    return diamond();
   }
 
   public String diamond()
