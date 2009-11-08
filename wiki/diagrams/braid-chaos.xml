@@ -147,11 +147,11 @@
         </group>
 
         <pin position="50,170"/>
-        <title>
+        <!-- title>
           <value lang="en">odd number of twist on one side to maintain couloured workers</value>
           <value lang="nl"><![CDATA[aan <i>&euml;&euml;n</i> kant een oneven aantal draaien om de gekleeurede lopers in het spel
                            te houden]]></value>
-        </title>
+        </title-->
         <group pairs="1-2">
           <title>
             <value lang="en">twisted cloth stitch</value>

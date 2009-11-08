@@ -20,39 +20,43 @@ package nl.BobbinWork.diagram.xml;
 
 public enum Ground {
 
-  vierge(4, 4, 0, 80, 80), //
-  sGravenmoers(4, 4, 0, 80, 80), //
-  spider(4, 6, 0, 80, 140), //
-  flanders(4, 4, 0, 55, 55), //
-  snowflake(4, 6, 2, 136, 100);
+  vierge      (4, 4, 0,  80,  80, 800L, 600L), //
+  sGravenmoers(4, 4, 0,  80,  80, 650L, 500L), //
+  spider      (4, 6, 0,  80, 140, 850L, 575L), //
+  flanders    (4, 4, 0,  55,  55, 500L, 450L), //
+  snowflake   (4, 6, 2, 136, 100,1100L, 600L);
 
-  private static final String INCLUDE =
-      "<xi:include href='basicStitches.xml'/>";
   private final int dX;
   private final int dY;
   private final int pairs;
   private final int pairShift;
   private final int rows;
   private final int skippedPairs;
+  final long diamondLapse;
+  final long squareLapse;
 
   Ground(
       final int rows,
       final int pairs,
       final int skippedPairs,
       final int x,
-      final int y)
+      final int y,
+      final long diamondLapse,// elapse time
+      final long squareLapse)// elapse time
   {
     this.skippedPairs = skippedPairs;
     this.dX = x;
     this.dY = y;
     this.pairs = pairs;
+    this.diamondLapse = diamondLapse;
+    this.squareLapse = squareLapse;
     this.pairShift = (pairs + skippedPairs) / 2;
     this.rows = rows;
   }
 
   public String square()
   {
-    return XmlResources.ROOT + INCLUDE + //
+    return XmlResources.ROOT + XmlResources.INCLUDE + //
         createDiagonal( 1, pairs * 1, dX * 0 ) + //
         createDiagonal( 3, pairs * 2, dX * 1 ) + //
         createDiagonal( 5, pairs * 3, dX * 2 ) + //
@@ -81,7 +85,7 @@ public enum Ground {
 
   public String xmlString()
   {
-    return diamond();
+    return square();
   }
 
   public String diamond()
@@ -103,7 +107,7 @@ public enum Ground {
     int nrOfPairs = pairShift * 2 * rows + pairs - pairShift;
     final String s = String.format( "<group pairs='1-%d'>%s</group>", //$NON-NLS-1$
         nrOfPairs, copies );
-    return XmlResources.ROOT + INCLUDE + s + "</diagram>"; //$NON-NLS-1$
+    return XmlResources.ROOT + XmlResources.INCLUDE + s + "</diagram>"; //$NON-NLS-1$
   }
 
   private String newCopyTag(

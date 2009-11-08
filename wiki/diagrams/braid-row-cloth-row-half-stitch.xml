@@ -16,7 +16,7 @@
       <value lang="nl">Werktekening</value>
     </title>
 
-    <new_bobbins nrs="1,2,7,8,9,10"><style color="#0000FF"></style></new_bobbins>
+    <new_bobbins nrs="1,2,7,8,9,10"><style color="#0000FF"/></new_bobbins>
     <new_bobbins nrs="3,4,5,6"><style color="#FF0000"><shadow color="#FFBBBB" width="5"/></style></new_bobbins>
     <group id="start" pairs="1-9">
       <title>
@@ -149,11 +149,11 @@
         </group>
 
         <pin position="50,170"/>
-        <title>
+        <!-- title>
           <value lang="en">odd number of twist on one side to maintain couloured workers</value>
           <value lang="nl"><![CDATA[aan <i>&euml;&euml;n</i> kant een oneven aantal draaien om de gekleeurede lopers in het spel
                            te houden]]></value>
-        </title>
+        </title-->
         <group pairs="1-2">
           <title>
             <value lang="en">twisted cloth stitch</value>

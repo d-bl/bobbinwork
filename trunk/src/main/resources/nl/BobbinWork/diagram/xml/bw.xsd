@@ -48,7 +48,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   </xsd:restriction>
  </xsd:simpleType>
 
- <xsd:simpleType name="nm">
+ <xsd:simpleType name="range">
   <!--
     Select pairs or bobbins of the ancestor
     counting them from left to right, starting at 1.
@@ -59,6 +59,12 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     -->
   <xsd:restriction base="xsd:string">
    <xsd:pattern value="[0-9]+\-[0-9]+"/>
+  </xsd:restriction>
+ </xsd:simpleType>
+
+ <xsd:simpleType name="list">
+  <xsd:restriction base="xsd:string">
+   <xsd:pattern value="[0-9]+(,[0-9]+)*"/>
   </xsd:restriction>
  </xsd:simpleType>
 
@@ -94,6 +100,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  </xsd:complexType>
 
  <xsd:complexType name="style">
+  <!-- TODO no infinite recursion of shadows  -->
+  <xsd:sequence>
+   <xsd:element   name="shadow" type="bw:style"  minOccurs="0" maxOccurs="1" />
+  </xsd:sequence>
   <xsd:attribute  name="color"  type="bw:color"            default="black"/>
   <xsd:attribute  name="width"  type="xsd:positiveInteger" default="1"/>
  </xsd:complexType>
@@ -111,6 +121,13 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
   <xsd:attribute  name="c2"     type="bw:xy"/>
   <xsd:attribute  name="end"    type="bw:xy"/>
   <xsd:attribute  name="mark"   type="xsd:string"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="new">
+  <xsd:sequence>
+   <xsd:element   name="style"  type="bw:style"  minOccurs="0" maxOccurs="1" />
+  </xsd:sequence>
+  <xsd:attribute  name="nrs"    type="bw:list"     use="required"/>
  </xsd:complexType>
 
  <!--
@@ -139,7 +156,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
    <xsd:element   name="rotate"   type="bw:rotate" minOccurs="0" maxOccurs="1" />
    <!-- more to be developped, e.g. copy a rectangle into a fan -->
   </xsd:sequence>
-  <xsd:attribute  name="pairs" type="bw:nm"     use="required"/>
+  <xsd:attribute  name="pairs" type="bw:range"     use="required"/>
   <xsd:attribute  name="of"    type="xsd:IDREF" use="required"/>
  </xsd:complexType>
 
@@ -158,7 +175,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
    <xsd:element   name="front"  type="bw:curve" minOccurs="1" maxOccurs="1" />
   </xsd:sequence>
   <xsd:attribute  name="id"      type="xsd:ID"/>
-  <xsd:attribute  name="bobbins" type="bw:nm" use="required"/>
+  <xsd:attribute  name="bobbins" type="bw:range" use="required"/>
  </xsd:complexType>
 
  <xsd:complexType name="stitch">
@@ -192,17 +209,18 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       -->
    </xsd:sequence>
   </xsd:sequence>
-  <xsd:attribute  name="pairs"  type="bw:nm" use="required"/>
+  <xsd:attribute  name="pairs"  type="bw:range" use="required"/>
   <xsd:attribute  name="id"     type="xsd:ID"/>
   <xsd:attribute  name="display" type="bw:yesno" default="yes" />
   <xsd:attribute  ref="xml:base"/>
  </xsd:complexType>
 
  <xsd:complexType name="group">
-  <!-- Twists at group level are allways drawn as cross marks on pair curves. -->
-  <!-- TODO title maxOccurs 1 but implement comment -->
+  <!-- TODO draw twists at group level as cross marks on pair curves. -->
+  <!-- TODO title maxOccurs 1 but implement annotation -->
   <xsd:sequence>
    <xsd:element   name="title"  type="bw:title"  minOccurs="0" maxOccurs="unbounded" />
+   <xsd:element   name="new_bobbins"    type="bw:new"    minOccurs="0" maxOccurs="unbounded" />
    <xsd:sequence                                 minOccurs="1" maxOccurs="unbounded" >
      <xsd:element name="twist"  type="bw:switch" minOccurs="0" maxOccurs="unbounded" />
      <xsd:element name="group"  type="bw:group"  minOccurs="0" maxOccurs="unbounded" />
@@ -211,7 +229,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
      <xsd:element name="pin"    type="bw:pin"    minOccurs="0" maxOccurs="unbounded" />
    </xsd:sequence>
   </xsd:sequence>
-  <xsd:attribute  name="pairs"   type="bw:nm"    use="required"/>
+  <xsd:attribute  name="pairs"   type="bw:range"    use="required"/>
   <xsd:attribute  name="display" type="bw:yesno" default="yes" />
   <xsd:attribute  name="id"      type="xsd:ID"/>
   <xsd:attribute  ref="xml:base"/>
