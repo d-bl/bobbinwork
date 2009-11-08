@@ -70,6 +70,8 @@ public class XmlResources {
   static private Validator validator = null;
   static private XPath xPath = XPathFactory.newInstance().newXPath();
   static private DocumentBuilder parser;
+
+  public static final String INCLUDE = "<xi:include href='basicStitches.xml'/>";
   
   public XmlResources( ) throws ParserConfigurationException {
     if (parser == null ) parser = newParser();

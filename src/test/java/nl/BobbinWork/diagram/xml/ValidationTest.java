@@ -19,13 +19,17 @@ import org.xml.sax.SAXException;
 public class ValidationTest
     extends ParameterizedFixture
 {
+  private static final String DIR = "../wiki/diagrams/";
+
   private static XmlResources xmlResources;
 
   private static final String EMPTY = XmlResources.ROOT + "</diagram>";
   private static final URL NEW =
       XmlResources.class.getResource( "newDiagram.xml" );
 
-  private static final Object[] OK = (Object[]) new Object[] {};
+  private static final Object[] OK = (Object[]) new Object[] {
+    "ok"
+  };
 
   private static final String EOF = "Premature end of file";
   private static final Class<SAXException> SE = SAXException.class;
@@ -36,21 +40,42 @@ public class ValidationTest
   public static Collection<TestRunParameters[]> createParameters()
       throws Exception
   {
-    List<TestRunParameters[]> resultList = new ArrayList<TestRunParameters[]>();
+    final List<TestRunParameters[]> resultList =
+        new ArrayList<TestRunParameters[]>();
+
     resultList.addAll( Arrays.asList( new TestRunParameters[][] {
-        run( "1" ).expects( SE, EOF ).withInput( "" ),
-        run( "2" ).expects( NPE ).withInput( (Object) null ),
-        run( "new" ).expects( OK ).withInput( NEW.toURI() ),
-        run( "empty" ).expects( OK ).withInput( EMPTY ),
-        run( "basic" ).expects( OK ).withInput( "", "basicStitches.xml" ),
-        run( "include error" ).expects( SE, "[iI]nclude" ).withInput( "",
+        run( "1" ).expects( SE, EOF ).withInput( 777L, "" ),
+        run( "2" ).expects( NPE ).withInput( 20L, (Object) null ),
+        // new should stay first, caching influences elapse times
+        run( "new" ).expects( OK ).withInput( 1200L, NEW.toURI() ),
+        run( "empty" ).expects( OK ).withInput( 20L, EMPTY ),
+        run( "include error" ).expects( SE, "[iI]nclude" ).withInput( 20L, "",
             "non-existent.xml" ),
     } ) );
-    for (Ground g : Ground.values()) {
+    
+    for (final Ground g : Ground.values()) {
       resultList.add( run( g.name() + ".diamond" ).expects( OK ).withInput(
-      g.diamond() ) );
+          g.diamondLapse, g.diamond() ) );
       resultList.add( run( g.name() + ".square" ).expects( OK ).withInput(
-      g.square() ) );
+          g.squareLapse, g.square() ) );
+    }
+
+    for (final Object[] sample : new Object[][] {
+        {
+            1700L, new File( DIR + "snow.xml" )
+        }, {
+            1200L, new File( DIR + "flanders.xml" )
+        }, {
+            1500L, new File( DIR + "braid-chaos.xml" )
+        }, {
+            1350L, new File( DIR + "braid-half-stitch.xml" )
+        }, {
+            1250L, new File( DIR + "braid-row-cloth-row-half-stitch.xml" )
+        },
+
+    }) {
+      resultList.add( run( "sample" ).expects( OK ).withInput(
+          (Long) sample[0], (File) sample[1] ) );
     }
     return resultList;
   }
@@ -70,28 +95,42 @@ public class ValidationTest
   protected Object[] produceActualResults(
       Object[] inputs) throws Exception
   {
+    final long maxElapsed = (Long) inputs[0];
+    final Object input = inputs[1];
+    final int includeStart = 2;
+
+    final long start = System.currentTimeMillis();
     final Document parsed;
-    if (inputs.length > 1) {
+    if (inputs.length > includeStart) {
       String src = XmlResources.ROOT;
-      for (int i = 1; i < inputs.length; i++)
+      for (int i = includeStart; i < inputs.length; i++)
         src += String.format( "<xi:include href='%s'/>", inputs[i] );
       parsed = xmlResources.parse( src + "</diagram>" );
-    } else if (inputs[0] instanceof String) {
-      parsed = xmlResources.parse( (String) inputs[0] );
-    } else if (inputs[0] instanceof File) {
-      parsed = xmlResources.parse( (File) inputs[0] );
-    } else if (inputs[0] instanceof InputStream) {
-      parsed = xmlResources.parse( (InputStream) inputs[0] );
-    } else if (inputs[0] instanceof URI) {
-      parsed = xmlResources.parse( (URI) inputs[0] );
-    } else
-      throw new IllegalArgumentException( "got: "
-          + inputs[0].getClass().getName() );
+    } else {
+      if (input instanceof String) {
+        parsed = xmlResources.parse( (String) input );
+      } else if (input instanceof File) {
+        parsed = xmlResources.parse( (File) input );
+      } else if (input instanceof InputStream) {
+        parsed = xmlResources.parse( (InputStream) input );
+      } else if (input instanceof URI) {
+        parsed = xmlResources.parse( (URI) input );
+      } else
+        throw new IllegalArgumentException( "got: "
+            + input.getClass().getName() );
+    }
+    final long elapsed = System.currentTimeMillis() - start;
+    XmlResources.validate( parsed );
+    final long start2 = System.currentTimeMillis();
 
-    XmlResources.validate( parsed );
     TreeExpander.replaceCopyElements( (Element) parsed.getFirstChild() );
-    XmlResources.validate( parsed );
     DiagramBuilder.createDiagram( (Element) parsed.getFirstChild() );
+
+    final long elapsedTotal = System.currentTimeMillis() - start2 + elapsed;
+    XmlResources.validate( parsed );
+    if (elapsedTotal > maxElapsed) return new String[] {
+      "elapse time exceeded. expected: " + maxElapsed + " got: " + elapsedTotal
+    };
     return OK;
   }
 }
