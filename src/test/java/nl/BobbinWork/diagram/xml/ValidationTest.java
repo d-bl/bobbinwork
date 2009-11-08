@@ -47,7 +47,7 @@ public class ValidationTest
         run( "1" ).expects( SE, EOF ).withInput( 777L, "" ),
         run( "2" ).expects( NPE ).withInput( 20L, (Object) null ),
         // new should stay first, caching influences elapse times
-        run( "new" ).expects( OK ).withInput( 1200L, NEW.toURI() ),
+        run( "new" ).expects( OK ).withInput( 1000L, NEW.toURI() ),
         run( "empty" ).expects( OK ).withInput( 20L, EMPTY ),
         run( "include error" ).expects( SE, "[iI]nclude" ).withInput( 20L, "",
             "non-existent.xml" ),
@@ -62,15 +62,15 @@ public class ValidationTest
 
     for (final Object[] sample : new Object[][] {
         {
-            1700L, new File( DIR + "snow.xml" )
+            2000L, new File( DIR + "snow.xml" )
         }, {
-            1200L, new File( DIR + "flanders.xml" )
+            1500L, new File( DIR + "flanders.xml" )
         }, {
-            1500L, new File( DIR + "braid-chaos.xml" )
+            1900L, new File( DIR + "braid-chaos.xml" )
         }, {
-            1350L, new File( DIR + "braid-half-stitch.xml" )
+            1500L, new File( DIR + "braid-half-stitch.xml" )
         }, {
-            1250L, new File( DIR + "braid-row-cloth-row-half-stitch.xml" )
+            1800L, new File( DIR + "braid-row-cloth-row-half-stitch.xml" )
         },
 
     }) {
@@ -95,6 +95,7 @@ public class ValidationTest
   protected Object[] produceActualResults(
       Object[] inputs) throws Exception
   {
+    // TODO set elapse to zero to reevaluate
     final long maxElapsed = (Long) inputs[0];
     final Object input = inputs[1];
     final int includeStart = 2;
