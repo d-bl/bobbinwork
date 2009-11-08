@@ -8,25 +8,37 @@
   <title>
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
-  <xi:include href='http://bobbinwork.googlecode.com/svn-history/r288/trunk/src/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/421/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group id="snow" pairs="32761-32766">
     <title>
       <value lang="en">snow flake</value>
       <value lang="nl">sneeuwvlok</value>
     </title>
-    <pin position="58,0"/>
-    <pin position="0,43"/>
-    <pin position="116,43"/>
-    <!-- 1 --><copy of="ttctc"  pairs="3-4"><move x="50" y="10"/></copy>
-    <!-- 2 --><copy of="llctc"  pairs="2-3"><move x="28" y="33"/></copy>
-    <!-- 3 --><copy of="llctc"  pairs="1-2"><move x="10" y="55"/></copy>
+    <group pairs="1-6">
+      <title>
+        <value lang="en">twist the legs</value>
+        <value lang="nl">draai de poten</value>
+      </title>
+      <pin position="-10,43"/>
+      <copy of="ll"  pairs="1-1"><rotate centre="0,0" angle="-30" /><move x="-10" y="60"/></copy>
+      <copy of="ll"  pairs="2-2"><rotate centre="0,0" angle="-30" /><move x="8" y="33"/></copy>
+      <pin position="57,-5"/>
+      <copy of="lll"  pairs="3-3"><rotate centre="0,0" angle="45" /><move x="45" y="3"/></copy>
+      <copy of="rrr" pairs="4-4"><rotate centre="0,0" angle="-45" /><move x="58" y="15"/></copy>
+      <pin position="120,43"/>
+      <copy of="rrr" pairs="5-5"><rotate centre="0,0" angle="30" /><move x="93" y="23"/></copy>
+      <copy of="rrr" pairs="6-6"><rotate centre="0,0" angle="30" /><move x="110" y="50"/></copy>
+    </group>
+    <!-- 1 --><copy of="ctc"  pairs="3-4"><move x="50" y="10"/></copy>
+    <!-- 2 --><copy of="ctc"  pairs="2-3"><move x="28" y="33"/></copy>
+    <!-- 3 --><copy of="ctc"  pairs="1-2"><move x="10" y="55"/></copy>
      
-    <!-- 4 --><copy of="rctc"  pairs="4-5"><move x="73" y="33"/></copy>
+    <!-- 4 --><copy of="ctc"  pairs="4-5"><move x="73" y="33"/></copy>
 
     <!-- 5 --><copy of="tc"  pairs="3-4"><move x="50" y="43"/></copy>
     <!-- 6 --><copy of="tc"  pairs="2-3"><move x="30" y="63"/></copy>
       
-    <!-- 7 --><copy of="rctc"  pairs="5-6"><move x="90" y="55"/></copy>
+    <!-- 7 --><copy of="ctc"  pairs="5-6"><move x="90" y="55"/></copy>
     <!-- 8 --><copy of="tc"  pairs="4-5"><move x="70" y="63"/></copy>
     <!-- 9 --><copy of="tc"  pairs="3-4"><move x="50" y="82"/></copy>
       
