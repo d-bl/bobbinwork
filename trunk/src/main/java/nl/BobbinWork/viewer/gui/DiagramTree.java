@@ -1,4 +1,4 @@
-/* BWTree.java Copyright 2006-2008 by J. Pol
+/* BWTree.java Copyright 2009 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -23,13 +23,16 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 
+import org.w3c.dom.Element;
+
 import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 
 public class DiagramTree
     extends JTree
 {
   private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map =
-      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>();
+      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>( 5000 );
 
   private static class Renderer
       extends DefaultTreeCellRenderer
@@ -46,7 +49,8 @@ public class DiagramTree
       super.getTreeCellRendererComponent( tree, value, sel, expanded, leaf,
           row, hasFocus );
 
-      Object userObject = ((DefaultMutableTreeNode) value).getUserObject();
+      final Object userObject =
+          ((DefaultMutableTreeNode) value).getUserObject();
       if (userObject == null) return this;
 
       if (userObject instanceof Partition) {
@@ -56,13 +60,16 @@ public class DiagramTree
     }
 
     private void decorate(
-        Partition p)
+        final Partition p)
     {
-      if (p.isVisible()) {
-        setText( p.getCaption() );
-      } else {
-        setText( "<html><em>" + p.getCaption() + "</em></html>" );
+      String caption = p.getCaption();
+      if (!p.isVisible()) {
+        caption = "<html><em>" + caption + "</em></html>";
       }
+      if (DiagramRebuilder.canReplace( p )) {
+        caption = "<html><strong>" + caption + "</strong></html>";
+      }
+      setText( caption );
       if (p.getIcon() != null) setIcon( p.getIcon() );
       if (p.getTooltip() != null) setToolTipText( p.getTooltip() );
     };
@@ -85,6 +92,7 @@ public class DiagramTree
     final DefaultMutableTreeNode root =
         (DefaultMutableTreeNode) treeModel.getRoot();
     root.removeAllChildren();
+    map.clear();
     buildTree( root, diagram );
     treeModel.nodeStructureChanged( root );
   }

@@ -36,6 +36,7 @@ import nl.BobbinWork.bwlib.gui.*;
 import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.*;
 import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.viewer.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.viewer.guiUtils.FileMenu;
 
 import org.junit.Ignore;
@@ -82,7 +83,8 @@ public class BwDiagrams
       final DiagramTree tree)
       throws SAXException, IOException, ParserConfigurationException
   {
-    final EditForm editForm = new EditForm( canvas );
+    final EditForm editForm =
+        new EditForm( canvas, createDiagramReplacedListener( tree, canvas ) );
     tree.addTreeSelectionListener( editForm );
 
     final JComponent left = createBorderPanel();
@@ -96,6 +98,23 @@ public class BwDiagrams
     return new JSplitPane( HORIZONTAL_SPLIT, left, right );
   }
 
+  private static DiagramReplacedListener createDiagramReplacedListener(
+      final DiagramTree tree,
+      final DiagramPanel canvas)
+  {
+    return new EditForm.DiagramReplacedListener()
+    {
+
+      @Override
+      public void rebuild(
+          final Diagram newDiagram)
+      {
+        canvas.setPattern( newDiagram );
+        tree.setDiagramModel( newDiagram );
+      }
+    };
+  }
+
   private static JComponent createDiagramTools(
       final DiagramPanel canvas)
       throws SAXException, IOException, ParserConfigurationException
@@ -103,8 +122,10 @@ public class BwDiagrams
     final ThreadStyleToolBar threadStyleToolBar = new ThreadStyleToolBar();
     final JButton pipette = createIconButton( "pipette.gif" );
     final JButton pinsel = createIconButton( "pinsel.gif" );
-    pipette.addActionListener( createPipetteListener( canvas, threadStyleToolBar ) );
-    pinsel.addActionListener( createPinselListener( canvas, threadStyleToolBar ) );
+    pipette.addActionListener( createPipetteListener( canvas,
+        threadStyleToolBar ) );
+    pinsel
+        .addActionListener( createPinselListener( canvas, threadStyleToolBar ) );
 
     final JComponent diagramTools = new JMenuBar();
     diagramTools.add( new PrintMenu( canvas ) );
@@ -120,7 +141,8 @@ public class BwDiagrams
       final DiagramPanel canvas,
       final ThreadStyleToolBar threadStyleToolBar)
   {
-    return new ActionListener(){
+    return new ActionListener()
+    {
 
       @Override
       public void actionPerformed(
@@ -128,9 +150,11 @@ public class BwDiagrams
       {
         // TODO rather disable the buttons
         if (canvas.getSelectedThread() == null) return;
-        canvas.getSelectedThread().getStyle().apply( threadStyleToolBar.getCoreStyle() );
+        canvas.getSelectedThread().getStyle().apply(
+            threadStyleToolBar.getCoreStyle() );
         canvas.repaint();
-      }};
+      }
+    };
   }
 
   private static ActionListener createPipetteListener(
@@ -177,29 +201,32 @@ public class BwDiagrams
           tree.setDiagramModel( model );
           canvas.setPattern( model );
         } catch (SAXException exception) {
-          showError(source.getName(),exception);
+          showError( source.getName(), exception );
         } catch (IllegalArgumentException exception) {
-          showError(source.getName(),exception);
+          showError( source.getName(), exception );
         } catch (IOException exception) {
-          showError(source.getName(),exception);
+          showError( source.getName(), exception );
         } catch (XPathExpressionException exception) {
-          showError(source.getName(),exception);
+          showError( source.getName(), exception );
         } catch (ParserConfigurationException exception) {
-          showError(source.getName(),exception);
+          showError( source.getName(), exception );
         }
       }
     };
   }
 
-  private static void showError(String fileName, Exception exception) {
-    
-    JOptionPane.showMessageDialog(null, //
+  private static void showError(
+      String fileName,
+      Exception exception)
+  {
+
+    JOptionPane.showMessageDialog( null, //
         fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
         "I/O error or unsupported format", //
-        JOptionPane.ERROR_MESSAGE);
+        JOptionPane.ERROR_MESSAGE );
     exception.printStackTrace();
   }
-  
+
   private static JPanel createBorderPanel()
   {
     return new JPanel( new BorderLayout() );
