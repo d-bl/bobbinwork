@@ -33,26 +33,6 @@ public class PerformanceTest extends XmlFixture {
   private static final String XML_CONTENT = XmlResources.ROOT + "<xi:include href='basicStitches.xml'/></diagram>";
   private static final File EXPANDED_FILE = new File ("src/test/java"+PATH+"expanded.xml");
 
-  @Test
-  public void expansion() throws Exception {
-    String resultingXml = check(XML_CONTENT);
-    
-    /* useful to synchronize expanded.xml  
-    
-    PrintStream x = new PrintStream("build/new-expanded.xml");
-    x.print(strip( resultingXml ));
-    x.close();
-    /**/
-    
-    if ( EXPANDED_FILE != null ) {
-      assertEquals(
-          "transformed xml not as predicted", 
-          EXPANDED_FILE, 
-          strip(resultingXml)
-      );
-    }
-  }
-  
   @Test(timeout=200)
   public void performance2() throws Exception {
     Document document = xmlResources.parse(XML_CONTENT);
