@@ -1,4 +1,4 @@
-/* BWdom.java Copyright 2006-2007 by J. Pol
+  /* BWdom.java Copyright 2006-2007 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -32,10 +32,7 @@ import javax.xml.xpath.XPathExpressionException;
 import nl.BobbinWork.diagram.xml.ElementType;
 import nl.BobbinWork.diagram.xml.XmlResources;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 
 public class TreeExpander {
 
@@ -45,8 +42,10 @@ public class TreeExpander {
     public static final String DOM_TO_VIEW = "view";
     
     public static final String CLONE_TO_ORPHAN = "original";
+    public static final String INDIRECT_CLONE_TO_ORPHAN = "indirect";
     public static final String ORPHAN_TO_CLONE = "copy";
     public static final String CLONED = "cloned";
+
 
     /** Only static methods, so hide the constructor. */
     private TreeExpander() {
@@ -187,10 +186,34 @@ public class TreeExpander {
       
       deepClone.removeAttribute("id");
       deepClone.setUserData(CLONED, Boolean.valueOf(true), null);
-      deepClone.setUserData(CLONE_TO_ORPHAN, toBeReplaced, null);
+      deepClone.setUserData(CLONE_TO_ORPHAN, toBeReplaced, createColeToOrphanHandler());
       toBeReplaced.setUserData(ORPHAN_TO_CLONE, deepClone, null);
       
       toBeReplaced.getParentNode().replaceChild( deepClone, toBeReplaced);
       return deepClone;
+    }
+
+    private static UserDataHandler createColeToOrphanHandler()
+    {
+      return new UserDataHandler()
+      {
+  
+        @Override
+        public void handle(
+            short operation,
+            String key,
+            Object data,
+            Node src,
+            Node dst)
+      {
+        if (operation == NODE_CLONED //
+            && (key.equals( CLONE_TO_ORPHAN ) //
+            || key.equals( INDIRECT_CLONE_TO_ORPHAN )//
+            )) {
+          Object orphan = src.getUserData( key );
+          dst.setUserData( INDIRECT_CLONE_TO_ORPHAN, orphan, null );
+        }
+      }
+      };
     }
 }

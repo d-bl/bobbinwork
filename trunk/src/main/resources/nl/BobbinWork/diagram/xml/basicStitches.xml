@@ -1420,18 +1420,18 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <copy of="ctc" pairs="1-2"><rotate centre="8.2,8.4" angle="-55"/><move x="10" y="15"/></copy>
       <copy of="ctc" pairs="3-4"><rotate centre="8.2,8.4" angle="55"/><move x="90" y="15"/></copy>
       <copy of="ctc"  pairs="2-3"><move x="50" y="0"/></copy>
-      <copy of="ctc"  pairs="2-3"><move x="50" y="32"/></copy>
       <pin position="58,25" />
+      <copy of="ctc"  pairs="2-3"><move x="50" y="32"/></copy>
       <copy of="ctc"  pairs="3-4"><move x="90" y="40"/></copy>
-      <copy of="ctc"  pairs="3-4"><move x="90" y="72"/></copy>
       <pin position="98,65" />
+      <copy of="ctc"  pairs="3-4"><move x="90" y="72"/></copy>
       <copy of="ctc" pairs="2-3"><rotate centre="8.2,8.4" angle="55"/><move x="50" y="57"/></copy>
       <copy of="ctc"  pairs="1-2"><move x="10" y="40"/></copy>
-      <copy of="ctc"  pairs="1-2"><move x="10" y="72"/></copy>
       <pin position="18,65" />
+      <copy of="ctc"  pairs="1-2"><move x="10" y="72"/></copy>
       <copy of="ctc"  pairs="2-3"><move x="50" y="80"/></copy>
-      <copy of="ctc"  pairs="2-3"><move x="50" y="112"/></copy>
       <pin position="58,105" />
+      <copy of="ctc"  pairs="2-3"><move x="50" y="112"/></copy>
     </group>
     <group id="sGravenmoers" pairs="41-44">
       <title>

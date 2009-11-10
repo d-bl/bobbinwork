@@ -33,6 +33,14 @@ public class DiagramRebuilder
     return (id != null && !id.equals( "" ));
   }
 
+  public static boolean canCopy(
+      Partition p)
+  {
+    if (p.getSourceObject() == null) return false;
+    final String id = ((Element) p.getSourceObject()).getAttribute( "id" );
+    return (id != null && !id.equals( "" ));
+  }
+  
   public static Diagram delete(
       final Partition selected)
   {
