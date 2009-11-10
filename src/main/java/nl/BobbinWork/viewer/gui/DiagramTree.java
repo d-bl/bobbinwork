@@ -23,8 +23,6 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.tree.*;
 
-import org.w3c.dom.Element;
-
 import nl.BobbinWork.diagram.model.*;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 
@@ -64,10 +62,13 @@ public class DiagramTree
     {
       String caption = p.getCaption();
       if (!p.isVisible()) {
+        caption = "<html><s>" + caption + "</s></html>";
+      }
+      if (!DiagramRebuilder.canReplace( p )) {
         caption = "<html><em>" + caption + "</em></html>";
       }
-      if (DiagramRebuilder.canReplace( p )) {
-        caption = "<html><strong>" + caption + "</strong></html>";
+      if (DiagramRebuilder.canCopy( p )) {
+        caption = "<html><strong>" + caption + "</stronng></html>";
       }
       setText( caption );
       if (p.getIcon() != null) setIcon( p.getIcon() );

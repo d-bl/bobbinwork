@@ -152,7 +152,7 @@ class EditForm
       }
     };
   }
-  
+
   private void rebuild(
       Diagram newDiagram)
   {
@@ -225,14 +225,14 @@ class EditForm
       paste.setEnabled( false );
       showHide.setEnabled( false );
     } else {
-      copy.setEnabled( selected.isVisible() );
+      copy.setEnabled( selected.isVisible()
+          && DiagramRebuilder.canCopy( selected ) );
       delete.setEnabled( true );
       showHide.setEnabled( true );
       paste.setEnabled( copied != null //
           && copied != selected //
           && copied.getNrOfPairs() == selected.getNrOfPairs() //
-          && DiagramRebuilder.canReplace( selected )
-      );
+          && DiagramRebuilder.canReplace( selected ) );
     }
     setShowHideCaption();
   }
