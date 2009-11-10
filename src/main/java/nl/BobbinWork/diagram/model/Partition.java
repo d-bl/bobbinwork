@@ -29,6 +29,7 @@ public abstract class Partition {
 
     /** Show (or hide) this section of the diagram. */
     private boolean visible = true;
+    private Object sourceObject;
 
     Partition() {
     }
@@ -119,4 +120,15 @@ public abstract class Partition {
     icons.put( getClass(), icon );
 	  return icon;
 	}
+
+  public void setSourceObject(
+      Object sourceObject)
+  {
+    this.sourceObject = sourceObject;
+  }
+
+  public Object getSourceObject()
+  {
+    return sourceObject;
+  }
 }

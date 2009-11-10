@@ -1,7 +1,20 @@
-/**
- * 
- */
-package nl.BobbinWork.viewer.gui;
+/* EditForm.java Copyright 2009 by J. Pol
+ *
+ * This file is part of BobbinWork.
+ *
+ * BobbinWork is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BobbinWork is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+ */package nl.BobbinWork.viewer.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.getSelectedPartition;
@@ -13,9 +26,10 @@ import javax.swing.*;
 import javax.swing.event.*;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
-import nl.BobbinWork.diagram.gui.*;
-import nl.BobbinWork.diagram.model.Partition;
-import nl.BobbinWork.viewer.guiUtils.*;
+import nl.BobbinWork.diagram.gui.DiagramPainter;
+import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.xml.DiagramRebuilder;
+import nl.BobbinWork.viewer.guiUtils.LocaleButton;
 
 /**
  * A tool bar to manipulate the selected item of a {@link DiagramTree}.
@@ -34,6 +48,14 @@ class EditForm
   private static final String SHOW_HIDE = PREFIX + "showHide";
   private static final String HIDE = PREFIX + "hide";
   private static final String SHOW = PREFIX + "show";
+
+  public interface DiagramReplacedListener
+  {
+    public void rebuild(
+        final Diagram newDiagram);
+  }
+
+  private final DiagramReplacedListener diagramReplacedListener;
 
   /** shown in {@link #clipBoard} */
   private Partition copied = null;
@@ -76,17 +98,67 @@ class EditForm
    * @param repaintOnDiagramChange
    *          another component that should be repainted when the diagram model
    *          changes. Typically the panel containing the diagram.
+   * @param diagramReplacedListener
+   *          TODO
    */
-  EditForm(final Component repaintOnDiagramChange)
+  EditForm(
+      final Component repaintOnDiagramChange,
+      DiagramReplacedListener diagramReplacedListener)
   {
     this.repaintOnDiagramChange = repaintOnDiagramChange;
+    this.diagramReplacedListener = diagramReplacedListener;
     setLayout( new GridLayout( 1, 0 ) );
     add( createButtonsPanel() );
     add( clipBoard );
     applyStrings( clipBoard, "Clipboard" );
     clipBoard.setBackground( Color.white );
     copy.addActionListener( createCopyListener() );
+    paste.addActionListener( createPasteListener() );
+    delete.addActionListener( createDeleteListener() );
     showHide.addActionListener( createShowHideListener() );
+  }
+
+  /**
+   * Creates a listener for the button that replaces the selected node with the
+   * clip board content.
+   */
+  private ActionListener createPasteListener()
+  {
+    return new ActionListener()
+    {
+      @Override
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        rebuild( DiagramRebuilder.replace( selected, copied ) );
+      }
+
+    };
+  }
+
+  /**
+   * Creates a listener for the button that replaces the selected node with the
+   * clip board content.
+   */
+  private ActionListener createDeleteListener()
+  {
+    return new ActionListener()
+    {
+      @Override
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        rebuild( DiagramRebuilder.delete( selected ) );
+      }
+    };
+  }
+  
+  private void rebuild(
+      Diagram newDiagram)
+  {
+    if (newDiagram != null && diagramReplacedListener != null) {
+      diagramReplacedListener.rebuild( newDiagram );
+    }
   }
 
   /**
@@ -159,6 +231,7 @@ class EditForm
       paste.setEnabled( copied != null //
           && copied != selected //
           && copied.getNrOfPairs() == selected.getNrOfPairs() //
+          && DiagramRebuilder.canReplace( selected )
       );
     }
     setShowHideCaption();
