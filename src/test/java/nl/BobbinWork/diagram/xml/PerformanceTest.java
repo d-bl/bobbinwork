@@ -19,8 +19,6 @@ package nl.BobbinWork.diagram.xml;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.*;
-
 import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
@@ -31,14 +29,6 @@ import org.w3c.dom.*;
 public class PerformanceTest extends XmlFixture {
 
   private static final String XML_CONTENT = XmlResources.ROOT + "<xi:include href='basicStitches.xml'/></diagram>";
-  private static final File EXPANDED_FILE = new File ("src/test/java"+PATH+"expanded.xml");
-
-  @Test(timeout=200)
-  public void performance2() throws Exception {
-    Document document = xmlResources.parse(XML_CONTENT);
-    TreeExpander.replaceCopyElements(document.getDocumentElement());
-  }
-  
   @Test(timeout=20)
   public void basics() throws Exception {
     
@@ -67,25 +57,6 @@ public class PerformanceTest extends XmlFixture {
     }
   }
   
-  @Test(timeout=450)
-  public void newDiagram() throws Exception  {
-    File file = new File(SRC + PATH + "newDiagram.xml");
-    Document document = xmlResources.parse(file);
-    TreeExpander.replaceCopyElements(document.getDocumentElement());
-    String xmlString = XmlResources.toXmlString(document);
-    XmlResources.validate(xmlResources.parse(xmlString));
-  }
-
-  /**
-   * strip white space from the an XML string. A one liner as expected epansion
-   * prevents erratic statistics for ohloh
-   */
-  private String strip(
-      String resultingXml)
-  {
-    return resultingXml.replaceAll( ">\\s+<", "><" ).replaceAll( "[\\r\\n]+", " " );
-  }
-
   private String check(String xmlContent) throws Exception {
     
     Document document = xmlResources.parse(xmlContent);
