@@ -39,7 +39,6 @@ import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.viewer.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.viewer.guiUtils.FileMenu;
 
-import org.junit.Ignore;
 import org.xml.sax.SAXException;
 
 /**
@@ -48,7 +47,6 @@ import org.xml.sax.SAXException;
  * @author Joke Pol
  * 
  */
-@Ignore("this is java application, not a JUnit test")
 public class BwDiagrams
 {
   private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
