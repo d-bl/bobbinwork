@@ -20,9 +20,9 @@
         
     -->
 
+    <property file="../ant.properties" />
     <property name="build.dir" location="build" />
     <property name="svn.revision.of.published.jar" value="xxx" />
-    <property file="../ant.properties" />
     <property environment="env" /><!-- at least: JAVA_HOME (jdk 6+, not jre) -->
             
     <property name="version" value="2.0.${svn.revision.of.published.jar}" /><!--  
