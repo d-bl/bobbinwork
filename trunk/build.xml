@@ -25,7 +25,7 @@
     <property name="svn.revision.of.published.jar" value="xxx" />
     <property environment="env" /><!-- at least: JAVA_HOME (jdk 6+, not jre) -->
             
-    <property name="version" value="2.0.${svn.revision.of.published.jar}" /><!--  
+    <property name="version" value="2.1.${svn.revision.of.published.jar}" /><!--  
         base number signals compatibillity issues with basicStitches.xml? -->
     
     <property name="jnlp.deploy" value="http://bobbinwork.googlecode.com/svn/trunk/webstart" />
