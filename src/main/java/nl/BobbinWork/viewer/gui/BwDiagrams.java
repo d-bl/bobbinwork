@@ -118,8 +118,8 @@ public class BwDiagrams
       throws SAXException, IOException, ParserConfigurationException
   {
     final ThreadStyleToolBar threadStyleToolBar = new ThreadStyleToolBar();
-    final JButton pipette = createIconButton( "pipette.gif" );
-    final JButton pinsel = createIconButton( "pinsel.gif" );
+    final JButton pipette = createThreadStyleButton( "pipette" );
+    final JButton pinsel = createThreadStyleButton( "pinsel" );
     pipette.addActionListener( createPipetteListener( canvas,
         threadStyleToolBar ) );
     pinsel
@@ -128,10 +128,10 @@ public class BwDiagrams
     final JComponent diagramTools = new JMenuBar();
     diagramTools.add( new PrintMenu( canvas ) );
     diagramTools.add( new ViewMenu( canvas, null, null ) );
-    diagramTools.add( threadStyleToolBar );
-    diagramTools.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
     diagramTools.add( pipette );
     diagramTools.add( pinsel );
+    diagramTools.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
+    diagramTools.add( threadStyleToolBar );
     return diagramTools;
   }
 
@@ -230,10 +230,12 @@ public class BwDiagrams
     return new JPanel( new BorderLayout() );
   }
 
-  private static JButton createIconButton(
-      final String imageFileName)
+  private static JButton createThreadStyleButton(
+      final String name)
   {
-    final URL url = ThreadStyleToolBar.class.getResource( imageFileName );
-    return new JButton( new ImageIcon( url ) );
+    final URL url = ThreadStyleToolBar.class.getResource( name+".gif" );
+    JButton button = new JButton( new ImageIcon( url ) );
+    Localizer.applyStrings( button, "ThreadStyle_"+name );
+    return button;
   }
 }
