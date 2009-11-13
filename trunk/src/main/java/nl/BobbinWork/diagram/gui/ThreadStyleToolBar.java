@@ -193,6 +193,8 @@ public class ThreadStyleToolBar extends JToolBar {
         shadowSpinner.setMaximumSize(dim);
 
         // put the components on the toolbar
+        //add(Box.createHorizontalStrut(3));
+        add(preview);
         add(Box.createHorizontalStrut(3));
         add(coreButton);
         add(Box.createHorizontalStrut(3));
@@ -201,9 +203,7 @@ public class ThreadStyleToolBar extends JToolBar {
         add(shadowButton);
         add(Box.createHorizontalStrut(3));
         add(shadowSpinner);
-        add(Box.createHorizontalStrut(6));
-        add(preview);
-        add(Box.createHorizontalStrut(0));
+        add(Box.createHorizontalStrut(3));
 
         // the width spinners are mutually constrained and therefore should
         // listen to each other
