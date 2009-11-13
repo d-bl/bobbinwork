@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<group pairs="32317-32767" display="no" xmlns="http://BobbinWork.googlecode.com/bw.xsd">
+<group pairs="32767-32767" xmlns="http://BobbinWork.googlecode.com/bw.xsd">
 <!-- Copyright 2008, J. Pol
   
 This file is part of BobbinWork.
@@ -24,7 +24,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     <value lang="nl">Bibliotheek</value>
     <value lang="de">Bibliothek</value>
   </title>
-    <group pairs="1-200" display="no">
+    <group pairs="1" display="no">
         <!-- signal compatibility issues with the version number in build.xml? 
          either when old diagrams might not work with the the new revision
          or when new diagrams might not work with the the old revision
@@ -40,7 +40,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
             <value lang="fr">                        t = tourner, c = croiser, l = croiser gauche,      r = croiser droit</value>
         </title>
 
-        <group pairs="1-20" display="no">
+        <group pairs="1" display="no">
 
             <title>
                 <value lang="en">stitches without preceding twists</value>
@@ -313,7 +313,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     
         </group>
                     
-        <group pairs="21-21" display="no">
+        <group pairs="2" display="no">
 
             <title>
                 <value lang="en">at most 2 preceding twists</value>
@@ -1065,7 +1065,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
             </group>
         </group>
 
-        <group pairs="151-200" display="no">
+        <group pairs="3" display="no">
             <title>
                 <value lang="en">3 preceding twists</value>
                 <value lang="nl">3 voorafgaande draaien</value>
@@ -1228,12 +1228,13 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
     </group>
 
-    <group pairs="201-400">
+    <group pairs="2" display="no">
         <title>
-            <value lang="en">grid (shown if pairs are shown)</value>
-            <value lang="nl">raster (wordt getoond als paren getoond worden)</value>
+            <value lang="en">grid</value>
+            <value lang="nl">raster</value>
         </title>
         <group id="vert" pairs="1-10" display="none">
+            <new_bobbins nrs="1,2,3,4,5,6,7,8"><style color="#EEEEEE"></style></new_bobbins>
             <stitch pairs="1-8" >
                 <style width="1" color="#EEEEEE"/>
                 <pair start="10,0" end="10,1200"/>
@@ -1244,12 +1245,32 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <pair start="70,0" end="70,1200"/>
                 <pair start="80,0" end="80,1200"/>
                 <pair start="90,0" end="90,1200"/>
+                <twist bobbins="1-2">
+                   <back start="10,0" end="10,1200" />
+                   <front start="20,0" end="20,1200" />
+                </twist>
+                <twist bobbins="3-4">
+                   <back start="30,0" end="30,1200" />
+                   <front start="40,0" end="40,1200" />
+                </twist>
+                <twist bobbins="5-6">
+                   <back start="60,0" end="60,1200" />
+                   <front start="70,0" end="70,1200" />
+                </twist>
+                <twist bobbins="7-8">
+                   <back start="80,0" end="80,1200" />
+                   <front start="90,0" end="90,1200" />
+                </twist>
             </stitch>
-            <stitch pairs="9-9" >
+            <stitch pairs="9" >
                 <style width="2" color="#EEEEEE" />
                 <pair start="50,0" end="50,1200"/>
+                <twist bobbins="1-2">
+                   <back start="50,0" end="50,1200" />
+                   <front start="100,0" end="100,1200" />
+                </twist>
             </stitch>
-            <stitch pairs="10-10" >
+            <stitch pairs="10" >
                 <style width="3" color="#EEEEEE" />
                 <pair start="100,0" end="100,1200"/>
             </stitch>
@@ -1264,6 +1285,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <copy of="vert" pairs="121-130"><move x="800"/></copy>
 
         <group id="hor" pairs="201-210" display="none">
+            <new_bobbins nrs="1,2,3,4,5,6,7,8"><style color="#EEEEEE"></style></new_bobbins>
             <stitch pairs="1-8" >
                 <style width="1" color="#EEEEEE"/>
                 <pair start="0,10" end="900,10"/>
@@ -1274,10 +1296,30 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <pair start="0,70" end="900,70"/>
                 <pair start="0,80" end="900,80"/>
                 <pair start="0,90" end="900,90"/>
+                <twist bobbins="1-2">
+                   <back start="0,10" end="900,10" />
+                   <front start="0,20" end="900,20" />
+                </twist>
+                <twist bobbins="3-4">
+                   <back start="0,30" end="900,30" />
+                   <front start="0,40" end="900,40" />
+                </twist>
+                <twist bobbins="5-6">
+                   <back start="0,60" end="900,60" />
+                   <front start="0,70" end="900,70" />
+                </twist>
+                <twist bobbins="7-8">
+                   <back start="0,80" end="900,80" />
+                   <front start="0,90" end="900,90" />
+                </twist>
             </stitch>
             <stitch pairs="9-9" >
                 <style width="2" color="#EEEEEE" />
                 <pair start="0,50" end="900,50"/>
+                <twist bobbins="1-2">
+                   <back start="0,50" end="900,50" />
+                   <front start="0,100" end="900,100" />
+                </twist>
             </stitch>
             <stitch pairs="10-10" >
                 <style width="3" color="#EEEEEE" />
@@ -1297,12 +1339,12 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <copy of="hor"  pairs="351-360"><move y="1100"/></copy>
 
     </group>
-  <group pairs="401-450" display="no">
+  <group pairs="3" display="no">
     <title>
       <value lang="en">composed stitches (building blocks for grounds)</value>
       <value lang="nl">samengestelde slagen (bouwstenen voor gronden)</value>
     </title>
-    <group id="flanders"  pairs="1-4">
+    <group id="flanders"  pairs="1">
       <title>
         <value lang="en">flanders</value>
         <value lang="nl">vlaanders</value>
@@ -1317,7 +1359,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <!-- S  --><copy of="tctc" pairs="2-3"><move y="50" x="30"/></copy>
       </group>
     </group>
-    <group id="snowflake" pairs="11-16">
+    <group id="snowflake" pairs="2">
      <title>
       <value lang="en">snowflake</value>
       <value lang="nl">sneeuwvlok</value>
@@ -1391,7 +1433,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <!-- 18 --><copy of="ctc" pairs="3-4"><move x="70" y="150"/></copy>
      </group>
     </group>
-    <group id="spider" pairs="21-26">
+    <group id="spider" pairs="3">
       <title>
         <value lang="en">spider</value>
         <value lang="nl">spin</value>
@@ -1412,7 +1454,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <pin position="78,93"/>
       <copy of="spider_bottom" pairs='1-6'/>
     </group>
-    <group id="vierge" pairs="31-34">
+    <group id="vierge" pairs="4">
       <title>
         <value lang="en">vierge</value>
         <value lang="nl">maagdengrond</value>
@@ -1433,7 +1475,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
       <pin position="58,105" />
       <copy of="ctc"  pairs="2-3"><move x="50" y="112"/></copy>
     </group>
-    <group id="sGravenmoers" pairs="41-44">
+    <group id="sGravenmoers" pairs="5">
       <title>
         <value lang="en">sGravenmoers</value>
         <value lang="nl">sGravenmoers</value>

@@ -441,16 +441,21 @@ public class DiagramBuilder
   private static Range createRange(
       Element element)
   {
-    String tag = ElementType.getRangeAttribute( element.getNodeName() );
-    String value = element.getAttribute( tag );
-    int first;
-    int last;
-    String xy[] = value.split( RANGE_SEPARATOR );
-    if (xy.length != 2)
-      throw invalidRange( element.getNodeName(), tag, value );
+    final String tag = ElementType.getRangeAttribute( element.getNodeName() );
+    final String value = element.getAttribute( tag );
+    final int first;
+    final int last;
+    final String xy[] = value.split( RANGE_SEPARATOR );
     try {
-      first = java.lang.Integer.valueOf( xy[0] ).intValue();
-      last = java.lang.Integer.valueOf( xy[1] ).intValue();
+      if (xy.length == 1) {
+        first = java.lang.Integer.valueOf( xy[0] ).intValue();
+        last = java.lang.Integer.valueOf( xy[0] ).intValue();
+      } else if (xy.length == 2) {
+        first = java.lang.Integer.valueOf( xy[0] ).intValue();
+        last = java.lang.Integer.valueOf( xy[1] ).intValue();
+      } else {
+        throw invalidRange( element.getNodeName(), tag, value );
+      }
     } catch (java.lang.NumberFormatException e) {
       throw invalidRange( element.getNodeName(), tag, value );
     }
