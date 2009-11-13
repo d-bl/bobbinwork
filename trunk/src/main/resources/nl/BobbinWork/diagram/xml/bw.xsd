@@ -58,7 +58,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
     Pairs treated as threads create exceptions.
     -->
   <xsd:restriction base="xsd:string">
-   <xsd:pattern value="[0-9]+\-[0-9]+"/>
+   <xsd:pattern value="[0-9]+(\-[0-9]+)?"/>
   </xsd:restriction>
  </xsd:simpleType>
 

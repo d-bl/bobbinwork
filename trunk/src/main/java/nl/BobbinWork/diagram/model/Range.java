@@ -88,6 +88,8 @@ public class Range {
     }
 
     public String toString(){
+      if (getFirst()==getLast())
+        return getFirst() + "";
     	return getFirst() + "-" + getLast();
     }
 }

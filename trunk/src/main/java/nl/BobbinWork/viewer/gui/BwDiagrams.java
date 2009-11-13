@@ -125,12 +125,13 @@ public class BwDiagrams
     pinsel
         .addActionListener( createPinselListener( canvas, threadStyleToolBar ) );
 
+    threadStyleToolBar.add( Box.createRigidArea( new Dimension( 5, 0 ) ),0 );
+    threadStyleToolBar.add( pinsel,0 );
+    threadStyleToolBar.add( pipette,0 );
+
     final JComponent diagramTools = new JMenuBar();
     diagramTools.add( new PrintMenu( canvas ) );
     diagramTools.add( new ViewMenu( canvas, null, null ) );
-    diagramTools.add( pipette );
-    diagramTools.add( pinsel );
-    diagramTools.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
     diagramTools.add( threadStyleToolBar );
     return diagramTools;
   }
@@ -220,7 +221,7 @@ public class BwDiagrams
 
     JOptionPane.showMessageDialog( null, //
         fileName + "\n" + exception.getLocalizedMessage(), //$NON-NLS-1$
-        "I/O error or unsupported format", //
+        "I/O error or format error", //
         JOptionPane.ERROR_MESSAGE );
     exception.printStackTrace();
   }
