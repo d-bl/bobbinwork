@@ -19,6 +19,7 @@ package nl.BobbinWork.viewer.gui;
 
 import java.awt.event.*;
 
+import javax.swing.JComponent;
 import javax.swing.event.*;
 import javax.swing.tree.*;
 
@@ -39,6 +40,7 @@ public class SelectionListener
 {
   private final DiagramTree tree;
   private final DiagramPanel canvas;
+  private final JComponent[] enableWhenThreadSelected;
 
   /**
    * Creates a bidirectional listener that highlights the selected element in
@@ -49,10 +51,11 @@ public class SelectionListener
    * @param canvas
    *          ads the created object as a listener to mouse clicks
    */
-  public SelectionListener(final DiagramTree tree, final DiagramPanel canvas)
+  public SelectionListener(final DiagramTree tree, final DiagramPanel canvas, final JComponent... enableWhenThreadSelected)
   {
     this.tree = tree;
     this.canvas = canvas;
+    this.enableWhenThreadSelected = enableWhenThreadSelected;
     canvas.addMouseListener( this );
     tree.addTreeSelectionListener( this );
   }
@@ -71,6 +74,13 @@ public class SelectionListener
     if (partition instanceof Switch && canvas.isThreadsVisible()) {
       final Switch s = (Switch) partition;
       canvas.highlight( s.getFront() );
+      for (JComponent x:enableWhenThreadSelected){
+        x.setEnabled( true );
+      }
+    } else {
+      for (JComponent x:enableWhenThreadSelected){
+        x.setEnabled( false );
+      }
     }
   }
 

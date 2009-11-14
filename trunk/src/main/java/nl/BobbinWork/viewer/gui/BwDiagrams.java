@@ -59,14 +59,31 @@ public class BwDiagrams
       // must be first for the system look and feel
       final BWFrame frame = new BWFrame( BUNDLE );
 
+      final JButton pipette = createThreadStyleButton( "pipette" );
+      final JButton pinsel = createThreadStyleButton( "pinsel" );
+
       final DiagramPanel canvas = new DiagramPanel();
       final DiagramTree tree = new DiagramTree();
-      new SelectionListener( tree, canvas );
+      new SelectionListener( tree, canvas, pipette, pinsel );
+
+      final ActionListener fileListener = createFileListener( tree, canvas );
+      final EditForm editForm =
+          new EditForm( canvas, createChangeListener( tree, canvas ) );
+      tree.addTreeSelectionListener( editForm );
+
+      final JComponent left = createBorderPanel();
+      left.add( editForm, NORTH );
+      left.add( new JScrollPane( tree ), CENTER );
+      
+      final JComponent right = createBorderPanel();
+      right.add( createDiagramTools( canvas, pipette, pinsel ), NORTH );
+      right.add( new JScrollPane( canvas ), CENTER );
+      
+      final JComponent splitPane = new JSplitPane( HORIZONTAL_SPLIT, left, right );
 
       final JPanel mainPanel = createBorderPanel();
-      final ActionListener fileListener = createFileListener( tree, canvas );
       mainPanel.add( createMainMenu( frame, fileListener ), NORTH );
-      mainPanel.add( createSplitPane( canvas, tree ), CENTER );
+      mainPanel.add( splitPane, CENTER );
 
       frame.getContentPane().add( mainPanel );
       frame.setVisible( true );
@@ -76,27 +93,7 @@ public class BwDiagrams
     }
   }
 
-  private static JComponent createSplitPane(
-      final DiagramPanel canvas,
-      final DiagramTree tree)
-      throws SAXException, IOException, ParserConfigurationException
-  {
-    final EditForm editForm =
-        new EditForm( canvas, createDiagramReplacedListener( tree, canvas ) );
-    tree.addTreeSelectionListener( editForm );
-
-    final JComponent left = createBorderPanel();
-    left.add( editForm, NORTH );
-    left.add( new JScrollPane( tree ), CENTER );
-
-    final JComponent right = createBorderPanel();
-    right.add( createDiagramTools( canvas ), NORTH );
-    right.add( new JScrollPane( canvas ), CENTER );
-
-    return new JSplitPane( HORIZONTAL_SPLIT, left, right );
-  }
-
-  private static DiagramReplacedListener createDiagramReplacedListener(
+  private static DiagramReplacedListener createChangeListener(
       final DiagramTree tree,
       final DiagramPanel canvas)
   {
@@ -114,12 +111,10 @@ public class BwDiagrams
   }
 
   private static JComponent createDiagramTools(
-      final DiagramPanel canvas)
+      final DiagramPanel canvas, final JButton pipette, final JButton pinsel)
       throws SAXException, IOException, ParserConfigurationException
   {
     final ThreadStyleToolBar threadStyleToolBar = new ThreadStyleToolBar();
-    final JButton pipette = createThreadStyleButton( "pipette" );
-    final JButton pinsel = createThreadStyleButton( "pinsel" );
     pipette.addActionListener( createPipetteListener( canvas,
         threadStyleToolBar ) );
     pinsel
@@ -237,6 +232,7 @@ public class BwDiagrams
     final URL url = ThreadStyleToolBar.class.getResource( name+".gif" );
     JButton button = new JButton( new ImageIcon( url ) );
     Localizer.applyStrings( button, "ThreadStyle_"+name );
+    button.setEnabled( false );
     return button;
   }
 }
