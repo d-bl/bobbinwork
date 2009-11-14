@@ -1228,13 +1228,12 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
     </group>
 
-    <group pairs="2" display="no">
+    <group pairs="3" display="no">
         <title>
-            <value lang="en">grid</value>
-            <value lang="nl">raster</value>
+            <value lang="en">grid, shown in pair view</value>
+            <value lang="nl">raster, getoond met draden</value>
         </title>
         <group id="vert" pairs="1-10" display="none">
-            <new_bobbins nrs="1,2,3,4,5,6,7,8"><style color="#EEEEEE"></style></new_bobbins>
             <stitch pairs="1-8" >
                 <style width="1" color="#EEEEEE"/>
                 <pair start="10,0" end="10,1200"/>
@@ -1245,33 +1244,13 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <pair start="70,0" end="70,1200"/>
                 <pair start="80,0" end="80,1200"/>
                 <pair start="90,0" end="90,1200"/>
-                <twist bobbins="1-2">
-                   <back start="10,0" end="10,1200" />
-                   <front start="20,0" end="20,1200" />
-                </twist>
-                <twist bobbins="3-4">
-                   <back start="30,0" end="30,1200" />
-                   <front start="40,0" end="40,1200" />
-                </twist>
-                <twist bobbins="5-6">
-                   <back start="60,0" end="60,1200" />
-                   <front start="70,0" end="70,1200" />
-                </twist>
-                <twist bobbins="7-8">
-                   <back start="80,0" end="80,1200" />
-                   <front start="90,0" end="90,1200" />
-                </twist>
             </stitch>
             <stitch pairs="9" >
                 <style width="2" color="#EEEEEE" />
                 <pair start="50,0" end="50,1200"/>
-                <twist bobbins="1-2">
-                   <back start="50,0" end="50,1200" />
-                   <front start="100,0" end="100,1200" />
-                </twist>
             </stitch>
             <stitch pairs="10" >
-                <style width="3" color="#EEEEEE" />
+                <style width="2" color="#EEEEEE" />
                 <pair start="100,0" end="100,1200"/>
             </stitch>
         </group>
@@ -1285,7 +1264,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <copy of="vert" pairs="121-130"><move x="800"/></copy>
 
         <group id="hor" pairs="201-210" display="none">
-            <new_bobbins nrs="1,2,3,4,5,6,7,8"><style color="#EEEEEE"></style></new_bobbins>
             <stitch pairs="1-8" >
                 <style width="1" color="#EEEEEE"/>
                 <pair start="0,10" end="900,10"/>
@@ -1296,32 +1274,12 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <pair start="0,70" end="900,70"/>
                 <pair start="0,80" end="900,80"/>
                 <pair start="0,90" end="900,90"/>
-                <twist bobbins="1-2">
-                   <back start="0,10" end="900,10" />
-                   <front start="0,20" end="900,20" />
-                </twist>
-                <twist bobbins="3-4">
-                   <back start="0,30" end="900,30" />
-                   <front start="0,40" end="900,40" />
-                </twist>
-                <twist bobbins="5-6">
-                   <back start="0,60" end="900,60" />
-                   <front start="0,70" end="900,70" />
-                </twist>
-                <twist bobbins="7-8">
-                   <back start="0,80" end="900,80" />
-                   <front start="0,90" end="900,90" />
-                </twist>
             </stitch>
-            <stitch pairs="9-9" >
+            <stitch pairs="9" >
                 <style width="2" color="#EEEEEE" />
                 <pair start="0,50" end="900,50"/>
-                <twist bobbins="1-2">
-                   <back start="0,50" end="900,50" />
-                   <front start="0,100" end="900,100" />
-                </twist>
             </stitch>
-            <stitch pairs="10-10" >
+            <stitch pairs="10" >
                 <style width="3" color="#EEEEEE" />
                 <pair start="0,100" end="900,100"/>
             </stitch>
@@ -1339,7 +1297,8 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
         <copy of="hor"  pairs="351-360"><move y="1100"/></copy>
 
     </group>
-  <group pairs="3" display="no">
+    
+  <group pairs="4" display="no">
     <title>
       <value lang="en">composed stitches (building blocks for grounds)</value>
       <value lang="nl">samengestelde slagen (bouwstenen voor gronden)</value>
