@@ -37,7 +37,11 @@ public class Group extends ChainedPairsPartition {
     	Iterator<ThreadStyle> st = styles.iterator();
     	Iterator<ThreadSegment> segments = getThreadConnectors().getIns().iterator();
     	while (st.hasNext() && segments.hasNext()) {
-    		segments.next().getStyle().apply(st.next());
+    		ThreadSegment threadSegment = segments.next();
+        if (threadSegment == null) break;
+    		ThreadStyle threadStyle = st.next();
+    		if (threadSegment == null) break;
+        threadSegment.getStyle().apply(threadStyle);
     	}
     }
     
