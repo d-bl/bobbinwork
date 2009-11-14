@@ -137,11 +137,8 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
 
     private void paintPartitions(Graphics2D g2, double scale) {
       g2.scale(scale, scale);
-      if (scale > 1.5) { 
-      	// more accurate but slower?
-          g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
-          g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-      }
+      g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
+      g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
   		if (showPairs) DiagramPainter.paint (g2,diagram.getPairs());
   		if (showThreads) DiagramPainter.paint (g2,diagram.getThreads());
   	}
@@ -278,6 +275,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
       final int x = (int) (event.getX() / getScreenScale());
       final int y = (int) (event.getY() / getScreenScale());
       
+      if ( getDiagram() == null) return null;
       return getDiagram().getPartitionAt( x, y );
     }
 
