@@ -23,8 +23,6 @@ import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.JMenu;
