@@ -16,7 +16,7 @@
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package nl.BobbinWork.grids.GridGUI;
+package nl.BobbinWork.grids.gui;
 
 import nl.BobbinWork.grids.PolarGridModel.LegRatio;
 

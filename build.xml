@@ -117,7 +117,7 @@
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
-                    value="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" />
+                    value="nl.BobbinWork.grids.gui.PolarGridPrinter" />
             </manifest>
         </jar>
     </target>
@@ -163,7 +163,7 @@
               jnlp.application.kind="Play with grounds"
         />
         <jnlp jnlp.base.name="bwpGrid" 
-              jnlp.main.class="nl.BobbinWork.grids.GridGUI.PolarGridPrinter" 
+              jnlp.main.class="nl.BobbinWork.grids.gui.PolarGridPrinter" 
               jnlp.application.name="Polar Grid Generator"
               jnlp.application.description="Polar grids for bobbin lace"
               jnlp.application.kind= "Polar grids that don't distort"
