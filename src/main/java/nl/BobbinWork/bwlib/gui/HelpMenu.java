@@ -20,10 +20,10 @@ package nl.BobbinWork.bwlib.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -32,44 +32,61 @@ import javax.swing.JOptionPane;
  * A menu with at least an about item.
  */
 @SuppressWarnings("serial")
-public class HelpMenu extends JMenu {
-	
-    public HelpMenu(final Component parent, final String years, final String simpleCaption) {
+public class HelpMenu
+    extends JMenu
+{
 
-    	String version = this.getClass().getPackage().getImplementationVersion();
-    	if (version==null) version = "[release unknown]";
-      this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
-    		+ version;
+  public HelpMenu(
+      final JFrame parent,
+      final String years,
+      final String simpleCaption)
+  {
 
-    	final String description = "<html> "
-    		+ versionedCaption + "<br>Copyright  "  //$NON-NLS-1$ 
-    		+ years + " "  //$NON-NLS-1$
-    		+ "J. Pol" //$NON-NLS-1$   
-    		+ "<hr>"  //$NON-NLS-1$ 
-    		+ Localizer.getString("MenuHelp_About_License").replaceAll("\\n", "<br>") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-    		+ "<hr>"  //$NON-NLS-1$ 
-    		+ Localizer.getString("MenuHelp_About_URLs").replaceAll("\\n", "<br>") //$NON-NLS-1$ //$NON-NLS-2$
-    		+ "</html>"  //$NON-NLS-1$ 
-    		;
+    String version = this.getClass().getPackage().getImplementationVersion();
+    if (version == null) version = "[release unknown]";
+    this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
+        + version;
 
-    	applyStrings(this, "MenuHelp_help"); //$NON-NLS-1$
+    final String description =
+        "<html> "
+            + versionedCaption
+            + "<br>Copyright  " //$NON-NLS-1$ 
+            + years
+            + " " //$NON-NLS-1$
+            + "J. Pol" //$NON-NLS-1$   
+            + "<hr>" //$NON-NLS-1$ 
+            + Localizer
+                .getString( "MenuHelp_About_License" ).replaceAll( "\\n", "<br>" ) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+            + "<hr>" //$NON-NLS-1$ 
+            + Localizer
+                .getString( "MenuHelp_About_URLs" ).replaceAll( "\\n", "<br>" ) //$NON-NLS-1$ //$NON-NLS-2$
+            + "</html>" //$NON-NLS-1$ 
+    ;
 
-        JMenuItem//
+    applyStrings( this, "MenuHelp_help" ); //$NON-NLS-1$
 
-        jMenuItem = new LocaleMenuItem("MenuHelp_About"); //$NON-NLS-1$
-        jMenuItem.addActionListener(new ActionListener() {
+    JMenuItem//
 
-			public void actionPerformed(ActionEvent arg0) {
-                JOptionPane.showMessageDialog(parent, description, simpleCaption,
-                        JOptionPane.INFORMATION_MESSAGE);
-            }
-        });
-        add(jMenuItem);
-    }
+    jMenuItem = new LocaleMenuItem( "MenuHelp_About" ); //$NON-NLS-1$
+    jMenuItem.addActionListener( new ActionListener()
+    {
 
-	private String versionedCaption;
-	public String getVersionedCaption() {
-		return versionedCaption;
-	}
+      public void actionPerformed(
+          ActionEvent arg0)
+      {
+        JOptionPane.showMessageDialog( parent, description, simpleCaption,
+            JOptionPane.INFORMATION_MESSAGE );
+      }
+    } );
+    add( jMenuItem );
+    parent.setTitle( getVersionedCaption() );
+  }
+
+  private String versionedCaption;
+
+  public String getVersionedCaption()
+  {
+    return versionedCaption;
+  }
 
 }
