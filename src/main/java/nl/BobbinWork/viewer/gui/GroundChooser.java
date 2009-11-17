@@ -27,7 +27,6 @@ import java.io.InputStream;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.xml.Ground;
 
 
@@ -47,7 +46,7 @@ public class GroundChooser extends JMenu {
 
         public void actionPerformed(ActionEvent event) {
           InputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
-          event.setSource(new NamedInputStream("ground.xml",is));
+          event.setSource(is);
           externalActionListener.actionPerformed(event);                  
         }
       });

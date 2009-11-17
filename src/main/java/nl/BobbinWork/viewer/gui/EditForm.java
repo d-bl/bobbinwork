@@ -19,17 +19,26 @@
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.getSelectedPartition;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
-import javax.swing.event.*;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.diagram.gui.DiagramPainter;
-import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
-import nl.BobbinWork.viewer.guiUtils.LocaleButton;
 
 /**
  * A tool bar to manipulate the selected item of a {@link DiagramTree}.
@@ -71,10 +80,10 @@ class EditForm
   private JComponent source = null;
 
   private final Component repaintOnDiagramChange;
-  private final JButton showHide = new LocaleButton( false, SHOW_HIDE );
-  private final JButton delete = new LocaleButton( false, DELETE );
-  private final JButton paste = new LocaleButton( false, PASTE );
-  private final JButton copy = new LocaleButton( false, COPY );
+  private final JButton showHide = createButton( SHOW_HIDE );
+  private final JButton delete = createButton( DELETE );
+  private final JButton paste = createButton( PASTE );
+  private final JButton copy = createButton( COPY );
   private final JComponent clipBoard = new JPanel()
   {
     public void paintComponent(
@@ -252,5 +261,12 @@ class EditForm
       caption = Localizer.getString( SHOW );
     }
     showHide.setText( caption );
+  }
+  
+  private JButton createButton(String key){
+    JButton button = new JButton();
+    applyStrings(button, key); 
+    button.setEnabled(false);
+    return button;  
   }
 }

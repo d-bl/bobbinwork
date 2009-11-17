@@ -19,7 +19,7 @@
  * 
  * based on an article by Simon White on http://www.catalysoft.com/articles/busyCursor.html
  */
-package nl.BobbinWork.viewer.guiUtils;
+package nl.BobbinWork.viewer.gui;
 
 import java.awt.Component;
 import java.awt.Cursor;
