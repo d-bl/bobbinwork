@@ -41,6 +41,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 public class XmlResources {
 
@@ -150,8 +151,8 @@ public class XmlResources {
     String messages = ""; //$NON-NLS-1$
     for (String base : INCLUDE_BASES) {
       
-      PrintStream saved = System.out;
-      PrintStream buffer = new BufferOutputStream().getPrintStream();
+      final PrintStream saved = System.out;
+      final PrintStream buffer = new BufferOutputStream().getPrintStream();
       System.setErr( buffer );
 
       try {
@@ -161,6 +162,12 @@ public class XmlResources {
 
         if (!exception.getMessage().matches( ".*nclude.*" )) {//$NON-NLS-1$
           messages = buffer.toString() + NEWLINE + messages;
+          if (exception instanceof SAXParseException) {
+            final SAXParseException spe = (SAXParseException) exception;
+            messages =
+                String.format( "line %d position %d %s", spe.getLineNumber(),
+                    spe.getColumnNumber(), messages );
+          }
           throw new SAXException(messages,exception);
         }
 //        if (!messages.equals( "" )) {//$NON-NLS-1$

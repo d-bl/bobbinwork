@@ -34,7 +34,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
-import nl.BobbinWork.bwlib.io.NamedInputStream;
 
 /**
  * A menu that lets a user open a web page as a stream.
@@ -47,7 +46,8 @@ import nl.BobbinWork.bwlib.io.NamedInputStream;
 @SuppressWarnings("serial") //$NON-NLS-1$
 public class SampleDiagramChooser extends JMenu {
 
-	private static final String BASE_URL = "http://bobbinwork.googlecode.com/svn-history/r293/wiki/diagrams/"; //$NON-NLS-1$
+  // TODO keep revision number synchronized
+	private static final String BASE_URL = "http://bobbinwork.googlecode.com/svn-history/r425/wiki/diagrams/"; //$NON-NLS-1$
     private static final String[] SAMPLE_URLS = new String[] {//
     	  "snow.xml", //$NON-NLS-1$
     	  "flanders.xml", //$NON-NLS-1$
@@ -62,8 +62,6 @@ public class SampleDiagramChooser extends JMenu {
     
     private ActionListener externalActionListener;
     private InputStream inputStream = null;
-    private String inputStreamName = null;
-    
     /**
      * Gives anonymous ActionListener's access to fields.
      */
@@ -78,10 +76,8 @@ public class SampleDiagramChooser extends JMenu {
 	 */
 	private void createInputStream(ActionEvent e, String url) {
 		try {
-			inputStreamName = ""; //$NON-NLS-1$
 			inputStream = (new URL(url)).openStream();
-			inputStreamName = url;
-			e.setSource(new NamedInputStream(inputStreamName, inputStream));
+			e.setSource(inputStream);
 			externalActionListener.actionPerformed(e);
 
 		} catch (MalformedURLException e1) {
@@ -138,7 +134,7 @@ public class SampleDiagramChooser extends JMenu {
         add(jMenuItem);
         
     	// TODO enhancements to prepare in the background
-    	// replace with actual links from http://groups.google.com/group/bobbinwork/files
+    	// replace with actual links from BASE_URL
     	// cache files 
     	// cache preview images for the drop down list
 	}
