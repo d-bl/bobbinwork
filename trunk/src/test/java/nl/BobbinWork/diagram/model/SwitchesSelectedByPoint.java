@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.model;
 
 import static java.awt.RenderingHints.KEY_ANTIALIASING;
 import static java.awt.RenderingHints.KEY_INTERPOLATION;
@@ -30,10 +30,9 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import org.junit.Ignore;
-
 import nl.BobbinWork.diagram.gui.DiagramPainter;
-import nl.BobbinWork.diagram.model.*;
+
+import org.junit.Ignore;
 
 @Ignore("this is java application, not a JUnit")
 public class SwitchesSelectedByPoint {

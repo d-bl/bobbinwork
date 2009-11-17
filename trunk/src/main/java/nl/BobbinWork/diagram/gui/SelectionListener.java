@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import java.awt.event.*;
 
@@ -23,9 +23,8 @@ import javax.swing.JComponent;
 import javax.swing.event.*;
 import javax.swing.tree.*;
 
-import nl.BobbinWork.diagram.gui.DiagramPanel;
 import nl.BobbinWork.diagram.model.*;
-import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.*;
+import static nl.BobbinWork.diagram.gui.TreeSelectionUtil.*;
 
 /**
  * A bidirectional listener that highlights the selected element in both

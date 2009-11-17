@@ -14,10 +14,10 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
- */package nl.BobbinWork.viewer.gui;
+ */package nl.BobbinWork.diagram.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
-import static nl.BobbinWork.viewer.gui.TreeSelectionUtil.getSelectedPartition;
+import static nl.BobbinWork.diagram.gui.TreeSelectionUtil.getSelectedPartition;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -35,7 +35,6 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
-import nl.BobbinWork.diagram.gui.DiagramPainter;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;

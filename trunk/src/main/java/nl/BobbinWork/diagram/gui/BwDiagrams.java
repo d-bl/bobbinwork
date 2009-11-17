@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
@@ -60,11 +60,8 @@ import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
-import nl.BobbinWork.diagram.gui.DiagramPanel;
-import nl.BobbinWork.diagram.gui.ThreadStyleToolBar;
-import nl.BobbinWork.diagram.gui.ViewMenu;
+import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.viewer.gui.EditForm.DiagramReplacedListener;
 
 import org.xml.sax.SAXException;
 

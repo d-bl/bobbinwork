@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
@@ -26,6 +26,7 @@ import java.util.Locale;
 import javax.swing.JScrollPane;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
+import nl.BobbinWork.diagram.gui.DiagramTree;
 
 import org.junit.Ignore;
 
