@@ -110,9 +110,7 @@ public class PolarGridPrinter {
         addScaleMenuItem(menu, "MenuView_mm", false);
         addScaleMenuItem(menu, "MenuView_inch", false);
         
-		final HelpMenu helpMenu = new HelpMenu(frame, YEARS,BASE_CAPTION);
-		frame.setTitle(helpMenu.getVersionedCaption());
-		jMenuBar.add( helpMenu );
+		jMenuBar.add( new HelpMenu(frame, YEARS,BASE_CAPTION) );
 		return jMenuBar;
 	}
 
