@@ -1,7 +1,7 @@
 package nl.BobbinWork.testutils;
 
-import java.io.*;
-import java.util.Arrays;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 
 public class Assert
     extends org.junit.Assert

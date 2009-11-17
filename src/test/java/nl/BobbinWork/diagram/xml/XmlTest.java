@@ -21,12 +21,8 @@ package nl.BobbinWork.diagram.xml;
 import java.io.IOException;
 
 import javax.xml.transform.TransformerException;
-import javax.xml.xpath.XPathExpressionException;
-
-import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 import org.junit.Test;
-import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 public class XmlTest extends XmlFixture {
@@ -52,20 +48,4 @@ public class XmlTest extends XmlFixture {
     String content = XmlResources.ROOT + s + s + "</diagram>";
     xmlResources.validate(content);
   }
-
-  private void undoTransformations(Document document)
-      throws XPathExpressionException {
-        NodeList nodes = XmlResources.evaluate("//*[@id]",document);
-        for (int i=0 ; i < nodes.getLength() ; i++ ) {
-          Node clone = nodes.item(i);
-          Node orphan = (Node) clone.getUserData(TreeExpander.CLONE_TO_ORPHAN);
-          if ( orphan != null ) {
-            clone.getParentNode().replaceChild(orphan, clone);
-            orphan.setUserData(TreeExpander.ORPHAN_TO_CLONE, null, null);
-            orphan.setUserData(TreeExpander.DOM_TO_VIEW, null, null);
-            clone.setUserData(TreeExpander.CLONE_TO_ORPHAN, null, null);
-            clone.setUserData(TreeExpander.DOM_TO_VIEW, null, null);
-          }
-        }
-      }
 }
