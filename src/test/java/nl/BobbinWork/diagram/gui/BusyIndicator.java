@@ -1,9 +1,10 @@
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import java.net.URL;
 
 import javax.swing.*;
 
+import nl.BobbinWork.diagram.gui.BwDiagrams;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 
 /**

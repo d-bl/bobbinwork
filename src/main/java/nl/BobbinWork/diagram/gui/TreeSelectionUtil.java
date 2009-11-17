@@ -1,4 +1,4 @@
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import javax.swing.tree.*;
 

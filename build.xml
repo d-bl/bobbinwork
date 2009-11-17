@@ -104,7 +104,7 @@
                 <attribute name="Java-Version" value="${target}" /> 
                 <attribute name="Implementation-Version" value="${version}" /> 
                 <attribute name="Main-Class"
-                    value="nl.BobbinWork.viewer.gui.BwDiagrams" />
+                    value="nl.BobbinWork.diagram.gui.BwDiagrams" />
             </manifest>
         </jar>
     </target>
@@ -157,7 +157,7 @@
 
     <target name="jnlp" depends="prepare" description="generate jnlp files">
         <jnlp jnlp.base.name="BwDiagrams" 
-              jnlp.main.class="nl.BobbinWork.viewer.gui.BwDiagrams" 
+              jnlp.main.class="nl.BobbinWork.diagram.gui.BwDiagrams" 
               jnlp.application.name="Diagram Explorer"
               jnlp.application.description="Working diagrams for bobbin lace"
               jnlp.application.kind="Play with grounds"

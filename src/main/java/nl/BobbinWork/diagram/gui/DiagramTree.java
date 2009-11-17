@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */
-package nl.BobbinWork.viewer.gui;
+package nl.BobbinWork.diagram.gui;
 
 import java.awt.Component;
 import java.util.*;
