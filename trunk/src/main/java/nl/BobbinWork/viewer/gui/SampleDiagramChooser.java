@@ -24,7 +24,6 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -36,106 +35,129 @@ import javax.swing.JSeparator;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 
 /**
- * A menu that lets a user open a web page as a stream.
- * Most menu items specify predefined URLs of sample diagrams. 
- * One item launches a dialog allowing a user to enter a URL.
+ * A menu that lets a user open a web page as a stream. Most menu items specify
+ * predefined URLs of sample diagrams. One item launches a dialog allowing a
+ * user to enter a URL.
  * 
  * @author J. Pol
- *
+ * 
  */
-@SuppressWarnings("serial") //$NON-NLS-1$
-public class SampleDiagramChooser extends JMenu {
-
+@SuppressWarnings("serial")//$NON-NLS-1$
+public class SampleDiagramChooser
+    extends JMenu
+{
   // TODO keep revision number synchronized
-	private static final String BASE_URL = "http://bobbinwork.googlecode.com/svn-history/r425/wiki/diagrams/"; //$NON-NLS-1$
-    private static final String[] SAMPLE_URLS = new String[] {//
-    	  "snow.xml", //$NON-NLS-1$
-    	  "flanders.xml", //$NON-NLS-1$
-    	  "braid-half-stitch.xml", //$NON-NLS-1$
-    	  "braid-chaos.xml", //$NON-NLS-1$
-    	  "braid-row-cloth-row-half-stitch.xml", //$NON-NLS-1$
-    };
-    /**
-     * Handed down to dialogs.
-     */
-    private Component parent;
-    
-    private ActionListener externalActionListener;
-    private InputStream inputStream = null;
-    /**
-     * Gives anonymous ActionListener's access to fields.
-     */
-    private SampleDiagramChooser self = this;
-    
-	/**
-	 * Creates an inputStream from the specified URL.
-	 * @param e 
-	 * 
-	 * @param url selected or entered by the user 
-	 * @return 
-	 */
-	private void createInputStream(ActionEvent e, String url) {
-		try {
-			inputStream = (new URL(url)).openStream();
-			e.setSource(inputStream);
-			externalActionListener.actionPerformed(e);
+  private static final String REVISIONED_URL =
+      "http://bobbinwork.googlecode.com/svn-history/r425/wiki/diagrams/"; //$NON-NLS-1$
+  private static final String LATEST_URL =
+  "http://bobbinwork.googlecode.com/svn/wiki/diagrams/";
+  private static final String[] SAMPLE_URLS = new String[] {//
+          "snow.xml", //$NON-NLS-1$
+          "flanders.xml", //$NON-NLS-1$
+          "braid-half-stitch.xml", //$NON-NLS-1$
+          "braid-chaos.xml", //$NON-NLS-1$
+          "braid-row-cloth-row-half-stitch.xml", //$NON-NLS-1$
+      };
+  /**
+   * Handed down to dialogs.
+   */
+  private final Component parent;
 
-		} catch (MalformedURLException e1) {
-		    JOptionPane.showMessageDialog(parent, //
-		            url + "\n" + e1.getLocalizedMessage(),// //$NON-NLS-1$
-		            getString("MenuFile_LoadSample_invalid_URL"), // //$NON-NLS-1$
-		            JOptionPane.ERROR_MESSAGE);
-		    return;
-		} catch (IOException e1) {
-			JOptionPane.showInputDialog(
-					parent,
-	                "", //$NON-NLS-1$
-	                url+"\n"); //$NON-NLS-1$
-			return;
-		}
-	}
-	
-	/**
-	 * @param parent handed down to dialogs
-	 * @param externalActionListener triggered when an InputStream is created from a user selected URL 
-	 */
-	public SampleDiagramChooser (Component parent, ActionListener externalActionListener){
-    	super();
-    	this.externalActionListener = externalActionListener;
-    	this.parent = parent;
-        applyStrings(this, "MenuFile_LoadSample"); //$NON-NLS-1$
+  private final ActionListener externalActionListener;
+  /**
+   * Creates an inputStream from the specified URL.
+   * 
+   * @param event
+   * 
+   * @param url
+   *          selected or entered by the user
+   * @return
+   */
+  private void createInputStream(
+      ActionEvent event,
+      String url)
+  {
+    try {
+      event.setSource( (new URL( url )).openStream() );
+      externalActionListener.actionPerformed( event );
 
-    	JMenuItem jMenuItem;
+    } catch (MalformedURLException e1) {
+      JOptionPane.showMessageDialog( parent, //
+          url + "\n" + e1.getLocalizedMessage(),// //$NON-NLS-1$
+          getString( "MenuFile_LoadSample_invalid_URL" ), // //$NON-NLS-1$
+          JOptionPane.ERROR_MESSAGE );
+      return;
+    } catch (IOException e1) {
+      JOptionPane.showInputDialog( parent, "", //$NON-NLS-1$
+          url + "\n" ); //$NON-NLS-1$
+      return;
+    }
+  }
 
-        for (String f:SAMPLE_URLS) {
-            jMenuItem = new JMenuItem(BASE_URL + f);
-            jMenuItem.setActionCommand(BASE_URL + f);
-            jMenuItem.addActionListener( new ActionListener() {
+  /**
+   * @param parent
+   *          handed down to dialogs
+   * @param externalActionListener
+   *          triggered when an InputStream is created from a user selected URL
+   */
+  public SampleDiagramChooser(
+      Component parent,
+      ActionListener externalActionListener)
+  {
+    super();
+    this.externalActionListener = externalActionListener;
+    this.parent = parent;
+    applyStrings( this, "MenuFile_LoadSample" ); //$NON-NLS-1$
 
-            	public void actionPerformed(ActionEvent e) {
-            		createInputStream(e,e.getActionCommand());
-            	}
-            } );
-            add(jMenuItem);
-    	}
-        
-        add(new JSeparator());
+    for (final String f : SAMPLE_URLS) {
+      add( createItem( REVISIONED_URL + f ) );
+    }
+    add( new JSeparator() );
+    for (final String f : SAMPLE_URLS) {
+      add( createItem( LATEST_URL + f ) );
+    }
+    add( new JSeparator() );
+    add( createDownloadOther() );
+  }
 
-        jMenuItem = new LocaleMenuItem("MenuFile_ChooseSample"); //$NON-NLS-1$
-    	jMenuItem.addActionListener(new ActionListener() {
+  private JMenuItem createItem(
+      String url)
+  {
+    // TODO enhancements to prepare in the background
+    // replace with actual links from http://bobbinwork.googlecode.com/svn/wiki/diagrams/
+    // cache files
+    // cache preview images for the drop down list
+    final JMenuItem jMenuItem;
+    jMenuItem = new JMenuItem( url );
+    jMenuItem.setActionCommand( url );
+    jMenuItem.addActionListener( new ActionListener()
+    {
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        createInputStream( event, event.getActionCommand() );
+      }
+    } );
+    return jMenuItem;
+  }
 
-    		public void actionPerformed(ActionEvent e) {
-    			createInputStream(e,(String)JOptionPane.showInputDialog(
-    	                self.parent,
-    	                "", //$NON-NLS-1$
-    	                "http://"));  //$NON-NLS-1$
-    			}
-    	});
-        add(jMenuItem);
-        
-    	// TODO enhancements to prepare in the background
-    	// replace with actual links from BASE_URL
-    	// cache files 
-    	// cache preview images for the drop down list
-	}
+  private JMenuItem createDownloadOther()
+  {
+    // can't access "this" in anonymous listener
+    final Component parent = this.parent; 
+   
+    final JMenuItem jMenuItem = new LocaleMenuItem( "MenuFile_ChooseSample" );
+    jMenuItem.addActionListener( new ActionListener()
+    {
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        final String url =
+            (String) JOptionPane.showInputDialog( parent, "", //$NON-NLS-1$
+                "http://" );//$NON-NLS-1$
+        createInputStream( event, url ); //$NON-NLS-1$
+      }
+    } );
+    return jMenuItem;
+  }
 }
