@@ -23,7 +23,7 @@
     <property file="../ant.properties" />
     <property name="build.dir" location="build" />
     <property name="svn.revision.of.published.jar" value="xxx" />
-    <property environment="env" /><!-- at least: JAVA_HOME (jdk 6+, not jre) -->
+    <property environment="env" /><!-- at least: JAVA_HOME (jdk 5+, not jre) -->
             
     <property name="version" value="2.1.${svn.revision.of.published.jar}" /><!--  
         base number signals compatibillity issues with basicStitches.xml? -->
@@ -32,7 +32,7 @@
     <property name="jnlp.code.base" value="http://bobbinwork.googlecode.com/files" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
     <property name="dev.utils" value="../bw-dev-utils" />
-    <property name="target" value="1.6" />
+    <property name="target" value="1.5" />
     <property name="jar.suffix" value="-rel-${version}.jar" />
 
     <path id="junit.classpath">
@@ -166,7 +166,7 @@
               jnlp.main.class="nl.BobbinWork.grids.gui.PolarGridPrinter" 
               jnlp.application.name="Polar Grid Generator"
               jnlp.application.description="Polar grids for bobbin lace"
-              jnlp.application.kind= "Polar grids that don't distort"
+              jnlp.application.kind= "Polar grids that don't make stitches high inside and wide outside"
         />
     </target>
     
