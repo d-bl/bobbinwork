@@ -50,7 +50,7 @@ public class SampleDiagramChooser
   private static final String REVISIONED_URL =
       "http://bobbinwork.googlecode.com/svn-history/r425/wiki/diagrams/"; //$NON-NLS-1$
   private static final String LATEST_URL =
-  "http://bobbinwork.googlecode.com/svn/wiki/diagrams/";
+      "http://bobbinwork.googlecode.com/svn/wiki/diagrams/";
   private static final String[] SAMPLE_URLS = new String[] {//
           "snow.xml", //$NON-NLS-1$
           "flanders.xml", //$NON-NLS-1$
@@ -64,6 +64,7 @@ public class SampleDiagramChooser
   private final Component parent;
 
   private final ActionListener externalActionListener;
+
   /**
    * Creates an inputStream from the specified URL.
    * 
@@ -80,19 +81,17 @@ public class SampleDiagramChooser
     try {
       event.setSource( (new URL( url )).openStream() );
       externalActionListener.actionPerformed( event );
-
-    } catch (MalformedURLException e1) {
-      JOptionPane.showMessageDialog( parent, //
-          url + "\n" + e1.getLocalizedMessage(),// //$NON-NLS-1$
-          getString( "MenuFile_LoadSample_invalid_URL" ), // //$NON-NLS-1$
+    } catch (Exception exception) {
+      final String message =
+          url + NEW_LINE + exception.getClass().getName() + NEW_LINE
+              + exception.getLocalizedMessage();
+      JOptionPane.showMessageDialog( parent, message,
+          getString( "MenuFile_LoadSample_error" ),
           JOptionPane.ERROR_MESSAGE );
-      return;
-    } catch (IOException e1) {
-      JOptionPane.showInputDialog( parent, "", //$NON-NLS-1$
-          url + "\n" ); //$NON-NLS-1$
-      return;
     }
   }
+
+  static final String NEW_LINE = System.getProperty( "line.separator" );
 
   /**
    * @param parent
@@ -124,7 +123,8 @@ public class SampleDiagramChooser
       String url)
   {
     // TODO enhancements to prepare in the background
-    // replace with actual links from http://bobbinwork.googlecode.com/svn/wiki/diagrams/
+    // replace with actual links from
+    // http://bobbinwork.googlecode.com/svn/wiki/diagrams/
     // cache files
     // cache preview images for the drop down list
     final JMenuItem jMenuItem;
@@ -144,18 +144,17 @@ public class SampleDiagramChooser
   private JMenuItem createDownloadOther()
   {
     // can't access "this" in anonymous listener
-    final Component parent = this.parent; 
-   
+    final Component parent = this.parent;
+
     final JMenuItem jMenuItem = new LocaleMenuItem( "MenuFile_ChooseSample" );
     jMenuItem.addActionListener( new ActionListener()
     {
       public void actionPerformed(
           final ActionEvent event)
       {
-        final String url =
-            (String) JOptionPane.showInputDialog( parent, "", //$NON-NLS-1$
-                "http://" );//$NON-NLS-1$
-        createInputStream( event, url ); //$NON-NLS-1$
+        final String url = (String) JOptionPane.showInputDialog( parent, "", //$NON-NLS-1$
+            "http://" );//$NON-NLS-1$
+        createInputStream( event, url );
       }
     } );
     return jMenuItem;
