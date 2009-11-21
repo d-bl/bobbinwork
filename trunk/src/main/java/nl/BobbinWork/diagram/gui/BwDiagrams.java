@@ -52,7 +52,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
@@ -73,8 +72,8 @@ import org.xml.sax.SAXException;
  */
 public class BwDiagrams
 {
-  private static final String BUNDLE =
-      "nl/BobbinWork/viewer/gui/labels";
+  static final String NEW_LINE = System.getProperty( "line.separator" );
+  private static final String BUNDLE = "nl/BobbinWork/diagram/gui/labels";
 
   public static void main(
       final String[] args)
@@ -83,10 +82,10 @@ public class BwDiagrams
       if (args.length > 0) {
         setBundle( BUNDLE, new Locale( args[0] ) );
       } else {
-        setBundle( BUNDLE );        
+        setBundle( BUNDLE );
       }
       // must come before any swing operation for the system look and feel
-      final BWFrame frame = new BWFrame( );
+      final BWFrame frame = new BWFrame();
 
       final JButton pipette = createThreadStyleButton( "pipette" );
       final JButton pinsel = createThreadStyleButton( "pinsel" );
@@ -294,15 +293,7 @@ public class BwDiagrams
       final Diagram model = createDiagramModel( inputStream );
       tree.setDiagramModel( model );
       canvas.setPattern( model );
-    } catch (final SAXException exception) {
-      showError( exception );
-    } catch (final IllegalArgumentException exception) {
-      showError( exception );
-    } catch (final IOException exception) {
-      showError( exception );
-    } catch (final XPathExpressionException exception) {
-      showError( exception );
-    } catch (final ParserConfigurationException exception) {
+    } catch (final Exception exception) {
       showError( exception );
     }
   }
@@ -310,10 +301,10 @@ public class BwDiagrams
   private static void showError(
       Exception exception)
   {
-
     JOptionPane.showMessageDialog( null, //
-        exception.getLocalizedMessage(), //
-        "I/O error or format error", // $NON-NLS-1$
+        exception.getClass().getName() + NEW_LINE
+            + exception.getLocalizedMessage(), //
+        Localizer.getString( "Load_error" ), // $NON-NLS-1$
         JOptionPane.ERROR_MESSAGE );
     exception.printStackTrace();
   }

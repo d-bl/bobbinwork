@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jnlp codebase="http://bobbinwork.googlecode.com/files" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/BwDiagrams.jnlp" spec="1.0+">
   <information>
-    <title>BobbinWork Diagram Explorer 2.1.454</title>
+    <title>BobbinWork Diagram Explorer 2.1.456</title>
     <vendor>J. Pol</vendor>
     <homepage href="http://bobbinwork.googlecode.com" />
     <description>Working diagrams for bobbin lace</description>
@@ -19,7 +19,7 @@
   <update check="timeout" policy="always" />
   <resources>
     <java version="1.5+" />
-    <jar download="eager" href="BwDiagrams-rel-2.1.454.jar" main="true" />
+    <jar download="eager" href="BwDiagrams-rel-2.1.456.jar" main="true" />
   </resources>
   <application-desc main-class="nl.BobbinWork.diagram.gui.BwDiagrams" />
 </jnlp>
