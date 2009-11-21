@@ -28,11 +28,6 @@ import org.xml.sax.SAXException;
 public class XmlTest extends XmlFixture {
 
   @Test
-  public void twist() throws SAXException, IOException {
-    XmlResources.validate(xmlResources.getTwist(5));
-  }
-  
-  @Test
   public void duplicateTitle() throws SAXException, IOException, TransformerException {
     assertSAXException(XmlResources.ROOT + "<title/><title/></diagram>", ".*'title'.*:group.*");
   }

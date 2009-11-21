@@ -17,18 +17,13 @@
  */
 package nl.BobbinWork.diagram.gui;
 
-import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
-import static nl.BobbinWork.bwlib.gui.Localizer.getString;
+import static nl.BobbinWork.bwlib.gui.Localizer.*;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.net.URL;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JSeparator;
+import javax.swing.*;
 
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 
@@ -84,8 +79,7 @@ public class SampleDiagramChooser
           url + NEW_LINE + exception.getClass().getName() + NEW_LINE
               + exception.getLocalizedMessage();
       JOptionPane.showMessageDialog( parent, message,
-          getString( "Load_error" ),
-          JOptionPane.ERROR_MESSAGE );
+          getString( "Load_error" ), JOptionPane.ERROR_MESSAGE );
     }
   }
 
@@ -102,6 +96,7 @@ public class SampleDiagramChooser
       ActionListener externalActionListener)
   {
     super();
+    applyStrings(this, "MenuFile_LoadSample"); //$NON-NLS-1$
     this.externalActionListener = externalActionListener;
     this.parent = parent;
 
@@ -149,7 +144,8 @@ public class SampleDiagramChooser
       public void actionPerformed(
           final ActionEvent event)
       {
-        final String url = (String) JOptionPane.showInputDialog( parent, "url", "http://" );//$NON-NLS-1$
+        final String url =
+            (String) JOptionPane.showInputDialog( parent, "url", "http://" );
         createInputStream( event, url );
       }
     } );

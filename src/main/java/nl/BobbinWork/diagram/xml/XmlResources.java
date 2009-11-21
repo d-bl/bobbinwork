@@ -85,25 +85,7 @@ public class XmlResources {
   static public NodeList evaluate (String xPathExp, Element document) throws XPathExpressionException {
     return (NodeList) xPath.evaluate(xPathExp,document, XPathConstants.NODESET);
   }
-  
-  /** Gets the XML definition of a twist. 
-   * The right thread goes over the left thread.
-   * 
-   * @param w width and height of the bounding box 
-   * @return a HTML-dom that describes a twist.
-   * @throws IOException 
-   * @throws SAXException 
-   */
-  public Document getTwist (int w) throws SAXException, IOException {
-    double w2 = (w/2D);
-    String s = "<?xml version='1.0'?>" + //$NON-NLS-1$
-    "<twist id='t' bobbins='1-2' " + ROOT_ATTRIBUTES + ">" + //$NON-NLS-1$ $NON-NLS-2$
-    "<back start='0," + w2 + "' end='" + w + "," + w2 + "'/>" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-    "<front start='" + w2 + ",0' end='" + w2 + "," + w + "' />" + //$NON-NLS-1$ $NON-NLS-2$ $NON-NLS-3$
-    "</twist>"; //$NON-NLS-1$
-    return parse(s);
-  }
-  
+    
   public Document parse(
       String xmlContent,
       String... includes) throws IOException, SAXException
@@ -186,13 +168,6 @@ public class XmlResources {
       URI uri) throws SAXException, IOException
   {
     return parse( new FileInputStream(new File(uri)) );
-  }
-  
-  public void validate(File xmlFile) 
-  throws IOException, SAXException {
-    
-    if ( validator == null && null == (validator=newValidator()) ) return;
-    validator.validate(new DOMSource( parse(xmlFile) ));
   }
   
   public static void validate(Document source) 
