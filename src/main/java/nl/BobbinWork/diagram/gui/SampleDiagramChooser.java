@@ -84,7 +84,7 @@ public class SampleDiagramChooser
           url + NEW_LINE + exception.getClass().getName() + NEW_LINE
               + exception.getLocalizedMessage();
       JOptionPane.showMessageDialog( parent, message,
-          getString( "MenuFile_LoadSample_error" ),
+          getString( "Load_error" ),
           JOptionPane.ERROR_MESSAGE );
     }
   }
@@ -104,7 +104,6 @@ public class SampleDiagramChooser
     super();
     this.externalActionListener = externalActionListener;
     this.parent = parent;
-    applyStrings( this, "MenuFile_LoadSample" ); //$NON-NLS-1$
 
     for (final String f : SAMPLE_URLS) {
       add( createItem( REVISIONED_URL + f ) );
@@ -150,8 +149,7 @@ public class SampleDiagramChooser
       public void actionPerformed(
           final ActionEvent event)
       {
-        final String url = (String) JOptionPane.showInputDialog( parent, "", //$NON-NLS-1$
-            "http://" );//$NON-NLS-1$
+        final String url = (String) JOptionPane.showInputDialog( parent, "url", "http://" );//$NON-NLS-1$
         createInputStream( event, url );
       }
     } );

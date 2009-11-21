@@ -36,6 +36,8 @@ public class HelpMenu
     extends JMenu
 {
 
+  private static final String REGEX = "[\r]?\n[\r]?";
+
   public HelpMenu(
       final JFrame parent,
       final String years,
@@ -47,6 +49,12 @@ public class HelpMenu
     this.versionedCaption = "BobbinWork - " + simpleCaption + " " //$NON-NLS-1$ //$NON-NLS-2$
         + version;
 
+    String translation = Localizer
+    .getString( "MenuHelp_About_Translation" ).replaceAll( REGEX, "<br>" );
+    if (!translation.equals( "" )) {
+      translation += "<hr>";
+    }
+    
     final String description =
         "<html> "
             + versionedCaption
@@ -56,10 +64,11 @@ public class HelpMenu
             + "J. Pol" //$NON-NLS-1$   
             + "<hr>" //$NON-NLS-1$ 
             + Localizer
-                .getString( "MenuHelp_About_License" ).replaceAll( "\\n", "<br>" ) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                .getString( "MenuHelp_About_License" ).replaceAll( REGEX, "<br>" ) //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
             + "<hr>" //$NON-NLS-1$ 
+            + translation
             + Localizer
-                .getString( "MenuHelp_About_URLs" ).replaceAll( "\\n", "<br>" ) //$NON-NLS-1$ //$NON-NLS-2$
+                .getString( "MenuHelp_About_URLs" ).replaceAll( REGEX, "<br>" ) //$NON-NLS-1$ //$NON-NLS-2$
             + "</html>" //$NON-NLS-1$ 
     ;
 
