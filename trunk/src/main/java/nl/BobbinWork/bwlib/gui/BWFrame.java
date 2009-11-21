@@ -22,25 +22,43 @@ import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 
 import java.awt.Dimension;
 import java.net.URL;
+import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
-public class BWFrame extends JFrame {
+public class BWFrame
+    extends JFrame
+{
 
-	public BWFrame (String bundle) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        setPreferredSize(new Dimension(790, 500));
-        setBundle(bundle);
-        URL iocnURL = BWFrame.class.getResource("bobbin.gif");
-    	if (iocnURL != null) 
-    		setIconImage(getToolkit().getImage(iocnURL));
-        setSize(700, 500);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
+  public BWFrame(String bundle)
+  {
+    this();
+    setBundle( bundle );
+  }
+  
+  public BWFrame(String bundle, Locale locale)
+  {
+    this();
+    setBundle( bundle, locale );
+  }
+
+  /**
+   * Creates a frame with the system look and feel.
+   * Must come before any swing/awt operation.
+   */
+  public BWFrame()
+  {
+    try {
+      UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    setPreferredSize( new Dimension( 790, 500 ) );
+    URL iocnURL = BWFrame.class.getResource( "bobbin.gif" );
+    if (iocnURL != null) setIconImage( getToolkit().getImage( iocnURL ) );
+    setSize( 700, 500 );
+    setDefaultCloseOperation( EXIT_ON_CLOSE );
+  }
 }

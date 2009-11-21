@@ -73,15 +73,20 @@ import org.xml.sax.SAXException;
  */
 public class BwDiagrams
 {
-  private static final String BUNDLE = "nl/BobbinWork/viewer/gui/labels";
+  private static final String BUNDLE =
+      "nl/BobbinWork/viewer/gui/labels";
 
   public static void main(
       final String[] args)
   {
-    if (args.length > 0) setBundle( BUNDLE, new Locale( args[0] ) );
     try {
-      // must be first for the system look and feel
-      final BWFrame frame = new BWFrame( BUNDLE );
+      if (args.length > 0) {
+        setBundle( BUNDLE, new Locale( args[0] ) );
+      } else {
+        setBundle( BUNDLE );        
+      }
+      // must come before any swing operation for the system look and feel
+      final BWFrame frame = new BWFrame( );
 
       final JButton pipette = createThreadStyleButton( "pipette" );
       final JButton pinsel = createThreadStyleButton( "pinsel" );
