@@ -23,7 +23,12 @@
     <property file="../ant.properties" />
     <property name="build.dir" location="build" />
     <property name="svn.revision.of.published.jar" value="xxx" />
-    <property environment="env" /><!-- at least: JAVA_HOME (jdk 5+, not jre) -->
+    <property environment="env" /><!-- 
+    at least: JAVA_HOME (jdk not jre) 
+    as of this writing Mac OS-X does not support 1.6
+    build 16 or 17 of 1.5 broke the xml parsing in java webstart: 
+    java.security.AccessControlException  access.denied (java.lang.RuntimePermission setIO)
+    -->
             
     <property name="version" value="2.1.${svn.revision.of.published.jar}" /><!--  
         base number signals compatibillity issues with basicStitches.xml? -->
