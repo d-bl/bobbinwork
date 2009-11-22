@@ -156,11 +156,9 @@ public class TreeExpander {
      * @param attributes
      * @return a map with the attribute values as key 
      *         and elements containing the attribute as value
-     * @throws XPathExpressionException
      */
     private static Map<String, Element> newIdMap(NodeList attributes)
-    throws XPathExpressionException {
-      
+    {
       int length = attributes.getLength();
       int capacity = (int) ( length / 0.75 );
       Map<String,Element> originals = new HashMap<String,Element>( capacity );

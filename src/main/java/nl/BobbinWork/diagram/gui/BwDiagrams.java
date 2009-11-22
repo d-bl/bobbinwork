@@ -29,14 +29,10 @@ import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.datatransfer.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.Locale;
 
@@ -132,8 +128,6 @@ public class BwDiagrams
   {
     return new EditForm.DiagramReplacedListener()
     {
-
-      //@Override
       public void rebuild(
           final Diagram newDiagram)
       {
@@ -172,8 +166,6 @@ public class BwDiagrams
   {
     return new ActionListener()
     {
-
-      //@Override
       public void actionPerformed(
           ActionEvent event)
       {
@@ -191,7 +183,6 @@ public class BwDiagrams
   {
     return new ActionListener()
     {
-      //@Override
       public void actionPerformed(
           ActionEvent event)
       {
@@ -229,8 +220,6 @@ public class BwDiagrams
   {
     return new ActionListener()
     {
-
-      //@Override
       public void actionPerformed(
           ActionEvent event)
       {
@@ -306,7 +295,16 @@ public class BwDiagrams
             + exception.getLocalizedMessage(), //
         Localizer.getString( "Load_error" ), // $NON-NLS-1$
         JOptionPane.ERROR_MESSAGE );
+
+    final StringWriter stringWriter = new StringWriter();
+    final PrintWriter printWriter = new PrintWriter( stringWriter );
+    exception.printStackTrace( printWriter );
+    printWriter.flush();
+    stringWriter.flush();
     exception.printStackTrace();
+    
+    StringSelection ss = new StringSelection(stringWriter.toString());
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
   }
 
   private static JPanel createBorderPanel()
