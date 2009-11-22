@@ -133,7 +133,7 @@ public class BwDiagrams
     return new EditForm.DiagramReplacedListener()
     {
 
-      @Override
+      //@Override
       public void rebuild(
           final Diagram newDiagram)
       {
@@ -173,7 +173,7 @@ public class BwDiagrams
     return new ActionListener()
     {
 
-      @Override
+      //@Override
       public void actionPerformed(
           ActionEvent event)
       {
@@ -191,7 +191,7 @@ public class BwDiagrams
   {
     return new ActionListener()
     {
-      @Override
+      //@Override
       public void actionPerformed(
           ActionEvent event)
       {
@@ -230,7 +230,7 @@ public class BwDiagrams
     return new ActionListener()
     {
 
-      @Override
+      //@Override
       public void actionPerformed(
           ActionEvent event)
       {

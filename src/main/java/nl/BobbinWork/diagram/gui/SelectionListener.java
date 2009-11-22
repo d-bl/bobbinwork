@@ -59,7 +59,7 @@ public class SelectionListener
     tree.addTreeSelectionListener( this );
   }
 
-  @Override
+  //@Override
   public void mouseClicked(
       final MouseEvent event)
   {
@@ -83,7 +83,7 @@ public class SelectionListener
     }
   }
 
-  @Override
+  //@Override
   public void valueChanged(
       final TreeSelectionEvent event)
   {
