@@ -290,9 +290,10 @@ public class BwDiagrams
   private static void showError(
       Exception exception)
   {
-    int answer =
+    final String stackTrace = stackTraceToString( exception );
+    final int answer =
         JOptionPane.showConfirmDialog( null, //
-            exception.getClass().getName() + NEW_LINE
+            exception.getClass().getName() + NEW_LINE + stackTrace + NEW_LINE
                 + exception.getLocalizedMessage() + NEW_LINE + NEW_LINE//
                 + Localizer.getString( "Load_error_detailsToClipBoard" ), //
             Localizer.getString( "Load_error_caption" ), // $NON-NLS-1$
@@ -300,8 +301,7 @@ public class BwDiagrams
 
     if (answer == JOptionPane.NO_OPTION) return;
 
-    String stackTrace = stackTraceToString( exception );
-    StringSelection ss = new StringSelection( stackTrace );
+    final StringSelection ss = new StringSelection( stackTrace );
     Toolkit.getDefaultToolkit().getSystemClipboard().setContents( ss, null );
   }
 
