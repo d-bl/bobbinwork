@@ -290,21 +290,34 @@ public class BwDiagrams
   private static void showError(
       Exception exception)
   {
-    JOptionPane.showMessageDialog( null, //
-        exception.getClass().getName() + NEW_LINE
-            + exception.getLocalizedMessage(), //
-        Localizer.getString( "Load_error" ), // $NON-NLS-1$
-        JOptionPane.ERROR_MESSAGE );
+    int answer =
+        JOptionPane.showConfirmDialog( null, //
+            exception.getClass().getName() + NEW_LINE
+                + exception.getLocalizedMessage() + NEW_LINE + NEW_LINE//
+                + Localizer.getString( "Load_error_detailsToClipBoard" ), //
+            Localizer.getString( "Load_error_caption" ), // $NON-NLS-1$
+            JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE );
 
+    if (answer == JOptionPane.NO_OPTION) return;
+
+    String stackTrace = stackTraceToString( exception );
+    StringSelection ss = new StringSelection( stackTrace );
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents( ss, null );
+  }
+
+  private static String stackTraceToString(
+      Throwable exception)
+  {
     final StringWriter stringWriter = new StringWriter();
     final PrintWriter printWriter = new PrintWriter( stringWriter );
     exception.printStackTrace( printWriter );
     printWriter.flush();
     stringWriter.flush();
-    exception.printStackTrace();
-    
-    StringSelection ss = new StringSelection(stringWriter.toString());
-    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+   
+    String stackTrace = stringWriter.toString()//
+        .replaceAll( "(?m)^\\tat java.awt[ -~]*[\\r\\n]+", "" )//
+        .replaceAll( "(?m)^\\tat javax.swing[ -~]*[\\r\\n]+", "" );
+    return stackTrace;
   }
 
   private static JPanel createBorderPanel()
