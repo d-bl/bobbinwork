@@ -1,4 +1,4 @@
-#summary get your environment up and running
+#summary get familiar with the development environment
 #labels Featured,Phase-Implementation
 
 = users =
