@@ -3,14 +3,6 @@
 
 Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids.
 
-=Bidirectional synchronisation between the other three panels=
-
-Just a tree to select a diagram section could be too intimidating. On the other hand, when clicking the diagram it is usually not clear which level is meant (thread/twist/stitch/group of stitches). To solve the dilemma and keep the user interface simple: first click the diagram, a corresponding tree element gets highlighted (at the default level of stitches), then click a higher or lower level in the tree if you want to manipulate a larger or smaller section. 
-
-  * Currently a section in the diagram gets highlighted if a tree element is selected. The other way around should also be implemented.
-  * The tree view is intended for lace makers and should be generated from the diagram model (objects of class Partition only) or at least from the expanded DOM tree. Titles should not show up as nodes.
-  * The tree/diagram should also be mutually synchronised with the source, like the synchronised outline when editing an XML file in Eclipse. Diagram objects generated from a cloned DOM sub tree should be linked to the `<`copy> element in the XML source. Even if the XML format is only used as bootstrap, this functionality is required for translators of `<`title>s (stitch names).
-
 =Manipulations=
   * Highlighting a diagram section should also pop up handlers to move, rotate, resize, squeeze and distort otherwise.
   * Drag points of Bezier curves.
