@@ -1,7 +1,7 @@
 #summary some notes on what could/should be done
 #labels Phase-Requirements
 
-  * complete the Java doc (use annopen source alternative for the Visio diagrams?)
+  * complete the Java doc (use an open source alternative for the Visio diagrams?)
   * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level testing is possible by visually checking and manipulating the sample/ground diagrams
   * see also 
     * [GuiRequirements GUI requirements].
