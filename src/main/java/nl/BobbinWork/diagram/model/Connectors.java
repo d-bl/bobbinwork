@@ -25,122 +25,138 @@ import java.util.Vector;
  * Manages line segments like connectors on pieces of a jig saw puzzle.
  * Connected pieces result into a bigger piece with less connectors than the sum
  * of connectors of the individual pieces.
- *
+ * 
  * The <em>point</em>s at the border of a partition are
  * <code>getIns(i).getStart()</code> and <code>getOut(i).getEnd()</code>.
- *
+ * 
  * @author J. Pol
  */
-class Connectors<T extends Segment> {
+class Connectors<T extends Segment>
+{
 
-    /** segments along the top edge of the jig saw piece (left to right) */
-	private List<T> ins;
+  /** segments along the top edge of the jig saw piece (left to right) */
+  private final List<T> ins;
 
-	/** segments along the bottom edge of the jig saw piece (left to right) */
-	private List<T> outs;
+  /** segments along the bottom edge of the jig saw piece (left to right) */
+  private final List<T> outs;
 
-	private Bounds<T> bounds = null;
-	List<Connectors<T>> children = new Vector<Connectors<T>>();
+  /**
+   * Cashed value. Connections are typically made during (re)construction of a
+   * diagram. If this connector is not the last in the diagram it gets connected
+   * to in turn. That changes the outs and the bounds should need adjustment.
+   * Rather be sure the bounds are not set at all when connecting. The value is
+   * typically requested when clicking around on ad diagram and the system is
+   * looking what to highlight. During that phase cashing improves performance
+   * without the penalty of gaps between individual highlights
+   */
+  private Bounds<T> bounds = null;
 
-    /**
-	 * Creates a populated instance for threads of a switch or pairs of a
-	 * stitch.
-	 *
-	 * <pre>
-	 * ins:   a   b
-	 *         \ /
-	 *          X
-	 *         / \
-	 * outs:  b   a
-	 * </pre>
-	 *
-	 * @param segments
-	 *            ordered (a,b) as shown in the figure.
-	 */
-    Connectors(List<T> segments) {
-        ins = segments;
-        outs = reverse(segments);
-        bounds = new Bounds<T>(ins);
+  final List<Connectors<T>> children = new Vector<Connectors<T>>();
+
+  /**
+   * Creates a populated instance for threads of a switch or pairs of a stitch.
+   * 
+   * <pre>
+   * ins:   a   b
+   *         \ /
+   *          X
+   *         / \
+   * outs:  b   a
+   * </pre>
+   * 
+   * @param segments
+   *          ordered (a,b) as shown in the figure.
+   */
+  Connectors(final List<T> segments)
+  {
+    ins = segments;
+    outs = reverse( segments );
+    bounds = new Bounds<T>( ins );
+  }
+
+  /**
+   * Creates a copy of the list with the elements in reversed order.
+   * 
+   * @param segments
+   * @return
+   */
+  private List<T> reverse(
+      final List<T> segments)
+  {
+    final List<T> list = new Vector<T>( segments.size() );
+    for (int i = segments.size(); --i >= 0;) {
+      list.add( segments.get( i ) );
     }
+    return list;
+  }
 
-    /** Creates a copy of the list with the elements in reversed order.
-     *
-     * @param segments
-     * @return
-     */
-    private List<T> reverse(List<T> segments) {
-        List<T> list = new Vector<T>(segments.size());
-        for (int i = segments.size(); --i >=0; ) {
-        	list.add(segments.get(i));
-        }
-        return list;
+  /**
+   * Creates a new instance to be populated by <code>connect()</code>.
+   * 
+   * @param count
+   *          the number of chained thread/pair segments.
+   */
+  Connectors(final int count)
+  {
+    ins = new Vector<T>( count );
+    outs = new Vector<T>( count );
+    for (int i = 0; i < count; i++) {
+      ins.add( null );
+      outs.add( null );
     }
+  }
 
-    /**
-     * Creates a new instance to be populated by
-     * <code>connect()</code>.
-     *
-     * @param count
-     *            the number of chained thread/pair segments.
-     */
-    Connectors(int count) {
-        ins = new Vector<T>(count);
-        outs = new Vector<T>(count);
-        for (int i=0;i<count;i++) {
-        	ins.add(null);
-        	outs.add(null);
-        }
+  /**
+   * Connects the starting segments of a diagram partition to the end segments
+   * of preceding diagram partitions.
+   * 
+   * @param child
+   *          Connectors of a sub partition of the diagram
+   * @param offset
+   *          first bobbin/pair used by the child
+   */
+  void connect(
+      final Connectors<T> child,
+      final int offset)
+  {
+    // visualisation of a diagram partition (stitches/switches):
+    // _____
+    // |x x|
+    // | x |
+    // |x x|
+    // |_x_|
+    final int end = Math.min( child.getIns().size(), ins.size() - offset );
+    for (int i = 0; i < end; i++) {
+      if (ins.get( offset + i ) == null) {
+        ins.set( offset + i, child.getIns().get( i ) );
+      } else if (outs.get( offset + i ) != null) {
+        outs.get( offset + i ).setNext( child.getIns().get( i ) );
+      }
+      if (child.outs.get( i ) != null) {
+        outs.set( offset + i, child.outs.get( i ) );
+      }
     }
+    children.add( child );
 
-    /**
-     * Connects the starting segments of a diagram partition to the end segments
-     * of preceding diagram partitions.
-     *
-     * @param child
-     *            Connectors of a sub partition of the diagram
-     * @param offset
-     *            first bobbin/pair used by the child
-     */
-    void connect(Connectors<T> child, int offset) {
-        // visualisation of a diagram partition (stitches/switches):
-        // _____
-        // |x x|
-        // | x |
-        // |x x|
-        // |_x_|
-        int end = Math.min(child.getIns().size(), ins.size() - offset);
-        for (int i = 0; i < end; i++) {
-            if (ins.get(offset + i) == null) {
-                ins.set(offset + i, child.getIns().get(i));
-            } else if (outs.get(offset + i) != null) {
-                outs.get(offset + i).setNext(child.getIns().get(i));
-            }
-            if (child.outs.get(i) != null) {
-                outs.set(offset + i, child.outs.get(i));
-            }
-        }
-        children.add(child);
-        
-        bounds = new Bounds<T>();
-        for (Connectors<T> c:children) {
-        	bounds.merge(c.getBounds());
-        }
-    }
+    bounds = null;
+  }
 
-    /**
-     * @return the thread/pair segments at the start of the diagram partion from
-     *         left to right
-     */
-    List<T> getIns() {
-        return ins;
-    }
+  /**
+   * @return the thread/pair segments at the start of the diagram partition from
+   *         left to right
+   */
+  List<T> getIns()
+  {
+    return ins;
+  }
 
-    /** @return @see Partition#getBounds() */
-    Bounds<T> getBounds() {
-    	
-    	if ( bounds == null || bounds.npoints == 0) {
-        	bounds = new Bounds<T>(ins,outs);
-        }
-        return bounds;
+  /** @return @see Partition#getBounds() */
+  Bounds<T> getBounds()
+  {
+
+    if (bounds == null || bounds.npoints == 0) {
+      bounds = new Bounds<T>( ins, outs );
     }
+    return bounds;
+  }
 }
