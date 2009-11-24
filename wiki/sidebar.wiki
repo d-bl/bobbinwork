@@ -8,8 +8,7 @@
       * [MathSolutions twist marks]
   * technical documentation
     * [http://bobbinwork.googlecode.com/svn/doc/api/index.html JavaDoc]
-    * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.gif class tree]
-    * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams3.gif object tree]
+    * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.htm class/object diagrams]
     * [GetStarted development environment]
   * plans and ideas
     * [MathChallenges mathematical challenges]
