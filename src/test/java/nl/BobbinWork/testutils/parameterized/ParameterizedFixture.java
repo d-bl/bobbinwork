@@ -17,7 +17,7 @@ import org.junit.runners.Parameterized;
  * cases you want to test.</li>
  * </ul>
  * 
- * @author Joke Pol
+ * @author J. Pol
  */
 @RunWith(Parameterized.class)
 public abstract class ParameterizedFixture

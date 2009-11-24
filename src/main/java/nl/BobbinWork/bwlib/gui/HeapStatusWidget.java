@@ -1,7 +1,7 @@
 /*
  * BobbinWork
  *
- * Copyright (C) 2009 Joke Pol
+ * Copyright (C) 2009 J. Pol
  *
  * This piece of code is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

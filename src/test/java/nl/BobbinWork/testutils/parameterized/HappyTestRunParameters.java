@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized;
  * Represents the test parameters fed to one run of a {@link Parameterized}
  * test.
  * 
- * @author Joke Pol
+ * @author J. Pol
  */
 @Ignore("This is a test tool, not a tester")
 public class HappyTestRunParameters
