@@ -11,7 +11,7 @@ import org.junit.runners.Parameterized.Parameters;
 /**
  * A usage example including a demonstration of error and failure reports.
  * 
- * @author Joke Pol
+ * @author J. Pol
  * 
  */
 @Ignore("the template demontrates how failures are reported")

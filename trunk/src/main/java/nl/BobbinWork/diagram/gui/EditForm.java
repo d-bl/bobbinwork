@@ -42,7 +42,7 @@ import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 /**
  * A tool bar to manipulate the selected item of a {@link DiagramTree}.
  * 
- * @author Joke Pol
+ * @author J. Pol
  * 
  */
 class EditForm

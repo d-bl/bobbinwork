@@ -5,7 +5,7 @@ import org.junit.runners.Parameterized;
 /**
  * Provides a word in the phrase that creates a {@link TestRunParameters} instance.
  * 
- * @author Joke Pol
+ * @author J. Pol
  *
  */
 public interface PhraseBuilder

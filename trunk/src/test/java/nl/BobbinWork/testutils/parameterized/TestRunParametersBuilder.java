@@ -11,7 +11,7 @@ import org.junit.Ignore;
  * subclass of {@link ParameterizedFixture}:<br>
  * <code>run("tag").expects("1").withInput(1)</code>
  * 
- * @author Joke Pol
+ * @author J. Pol
  */
 @Ignore("This is a test tool, not a tester")
 public class TestRunParametersBuilder

@@ -63,7 +63,7 @@ import org.xml.sax.SAXException;
 /**
  * Prototype for the new version of the viewer.
  * 
- * @author Joke Pol
+ * @author J. Pol
  * 
  */
 public class BwDiagrams
@@ -235,7 +235,7 @@ public class BwDiagrams
    * @return any text found on the Clipboard; if none found, return an empty
    *         String.
    */
-  public static String getClipboardContents()
+  private static String getClipboardContents()
   {
     final Transferable contents =
         Toolkit.getDefaultToolkit().getSystemClipboard().getContents( null );

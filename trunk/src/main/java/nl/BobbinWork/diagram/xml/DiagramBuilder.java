@@ -246,9 +246,9 @@ public class DiagramBuilder
    *              &nbsp;&nbsp;&lt;back ... /&gt;<br>
    *              &nbsp;&nbsp;&lt;front ... /&gt;<br>
    *              &lt;/twist&gt;<br>
-     *            </code> The order of the front and back element doesn't matter.
+   *              </code> The order of the front and back element doesn't matter.
    *          By definition the front thread goes from right to left.
-   * @return
+   * @return an instance as defined by the element
    */
   public static Twist createTwist(
       Element element)

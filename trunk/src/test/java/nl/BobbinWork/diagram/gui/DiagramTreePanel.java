@@ -33,7 +33,7 @@ import org.junit.Ignore;
 /**
  * Show a tree in a frame for a visual test based on the diagram model.
  * 
- * @author Joke Pol
+ * @author J. Pol
  * 
  */
 @Ignore("this is java application, not a JUnit test")

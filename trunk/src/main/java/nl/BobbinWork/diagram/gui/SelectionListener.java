@@ -30,7 +30,7 @@ import static nl.BobbinWork.diagram.gui.TreeSelectionUtil.*;
  * A bidirectional listener that highlights the selected element in both
  * components on an event in one of the components.
  * 
- * @author Joke Pol
+ * @author J. Pol
  * 
  */
 public class SelectionListener
