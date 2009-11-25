@@ -59,6 +59,7 @@ import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
 
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Prototype for the new version of the viewer.
@@ -117,7 +118,7 @@ public class BwDiagrams
       frame.getContentPane().add( mainPanel );
       frame.setVisible( true );
 
-    } catch (Exception exception) {
+    } catch (final Exception exception) {
       exception.printStackTrace();
     }
   }
@@ -167,7 +168,7 @@ public class BwDiagrams
     return new ActionListener()
     {
       public void actionPerformed(
-          ActionEvent event)
+          final ActionEvent event)
       {
         if (canvas.getSelectedThread() == null) return;
         canvas.getSelectedThread().getStyle().apply(
@@ -184,7 +185,7 @@ public class BwDiagrams
     return new ActionListener()
     {
       public void actionPerformed(
-          ActionEvent event)
+          final ActionEvent event)
       {
         if (canvas.getSelectedThread() == null) return;
         threadStyleToolBar.setCoreStyle( canvas.getSelectedThread().getStyle() );
@@ -221,7 +222,7 @@ public class BwDiagrams
     return new ActionListener()
     {
       public void actionPerformed(
-          ActionEvent event)
+          final ActionEvent event)
       {
         final byte[] bytes = getClipboardContents().getBytes();
         setDiagramModel( tree, canvas, new ByteArrayInputStream( bytes ) );
@@ -245,11 +246,11 @@ public class BwDiagrams
     if (hasTransferableText) {
       try {
         return (String) contents.getTransferData( DataFlavor.stringFlavor );
-      } catch (UnsupportedFlavorException exception) {
+      } catch (final UnsupportedFlavorException exception) {
         // highly unlikely since we are using a standard DataFlavor
         System.out.println( exception );
         exception.printStackTrace();
-      } catch (IOException ex) {
+      } catch (final IOException ex) {
         System.out.println( ex );
         ex.printStackTrace();
       }
@@ -283,38 +284,41 @@ public class BwDiagrams
       tree.setDiagramModel( model );
       canvas.setPattern( model );
     } catch (final Exception exception) {
-      showError( exception );
+      showError( canvas, exception );
     }
   }
 
   private static void showError(
-      Exception exception)
+      final JComponent parent,
+      final Exception exception)
   {
     final String stackTrace = stackTraceToString( exception );
-    final int answer =
-        JOptionPane.showConfirmDialog( null, //
-            exception.getClass().getName() + NEW_LINE + stackTrace + NEW_LINE
-                + exception.getLocalizedMessage() + NEW_LINE + NEW_LINE//
-                + Localizer.getString( "Load_error_detailsToClipBoard" ), //
-            Localizer.getString( "Load_error_caption" ), // $NON-NLS-1$
-            JOptionPane.YES_NO_OPTION, JOptionPane.ERROR_MESSAGE );
 
-    if (answer == JOptionPane.NO_OPTION) return;
-
-    final StringSelection ss = new StringSelection( stackTrace );
-    Toolkit.getDefaultToolkit().getSystemClipboard().setContents( ss, null );
+    final String title = Localizer.getString( "Load_error_caption" ); // $NON-NLS-1$
+    if (exception instanceof SAXException) {
+      final String message =
+          exception.getClass().getName() + NEW_LINE
+              + exception.getLocalizedMessage();
+      JOptionPane.showMessageDialog( parent, message, title,
+          JOptionPane.ERROR_MESSAGE );
+    } else {
+      final String message =
+          exception.getLocalizedMessage() + NEW_LINE + stackTrace;
+      JOptionPane.showMessageDialog( parent, message, title,
+          JOptionPane.ERROR_MESSAGE );
+    }
   }
 
   private static String stackTraceToString(
-      Throwable exception)
+      final Throwable exception)
   {
     final StringWriter stringWriter = new StringWriter();
     final PrintWriter printWriter = new PrintWriter( stringWriter );
     exception.printStackTrace( printWriter );
     printWriter.flush();
     stringWriter.flush();
-   
-    String stackTrace = stringWriter.toString()//
+
+    final String stackTrace = stringWriter.toString()//
         .replaceAll( "(?m)^\\tat java.awt[ -~]*[\\r\\n]+", "" )//
         .replaceAll( "(?m)^\\tat javax.swing[ -~]*[\\r\\n]+", "" );
     return stackTrace;
@@ -329,7 +333,7 @@ public class BwDiagrams
       final String name)
   {
     final URL url = ThreadStyleToolBar.class.getResource( name + ".gif" );
-    JButton button = new JButton( new ImageIcon( url ) );
+    final JButton button = new JButton( new ImageIcon( url ) );
     Localizer.applyStrings( button, "ThreadStyle_" + name );
     button.setEnabled( false );
     return button;
