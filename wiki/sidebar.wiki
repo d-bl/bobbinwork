@@ -7,7 +7,7 @@
       * [http://bw-en.wikispaces.com/grid+math polar grids]
       * [MathSolutions twist marks]
   * technical documentation
-    * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-summary.html JavaDoc]
+    * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
     * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.htm class/object diagrams]
     * [GetStarted development environment]
   * plans and ideas
