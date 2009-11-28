@@ -180,6 +180,15 @@ public class XmlResources {
   public static String toXmlString(Document doc) throws TransformerException {
     
     Transformer transformer = TransformerFactory.newInstance().newTransformer();
+    transformer.setOutputProperty(OutputKeys.INDENT, "no");
+    StreamResult result = new StreamResult(new StringWriter());
+    transformer.transform(new DOMSource(doc), result);
+    return result.getWriter().toString();
+  }
+
+  public static String toXmlString(Element doc) throws TransformerException {
+    
+    Transformer transformer = TransformerFactory.newInstance().newTransformer();
     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
     StreamResult result = new StreamResult(new StringWriter());
     transformer.transform(new DOMSource(doc), result);

@@ -18,19 +18,41 @@
 package nl.BobbinWork.diagram.xml;
 
 import static java.lang.Double.valueOf;
-import static nl.BobbinWork.diagram.xml.ElementType.*;
+import static nl.BobbinWork.diagram.xml.ElementType.back;
+import static nl.BobbinWork.diagram.xml.ElementType.front;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Vector;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.model.Cross;
+import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Group;
+import nl.BobbinWork.diagram.model.MultiplePairsPartition;
+import nl.BobbinWork.diagram.model.PairSegment;
+import nl.BobbinWork.diagram.model.Partition;
+import nl.BobbinWork.diagram.model.Pin;
+import nl.BobbinWork.diagram.model.Point;
+import nl.BobbinWork.diagram.model.Range;
+import nl.BobbinWork.diagram.model.Segment;
+import nl.BobbinWork.diagram.model.Stitch;
+import nl.BobbinWork.diagram.model.Style;
+import nl.BobbinWork.diagram.model.Switch;
+import nl.BobbinWork.diagram.model.ThreadSegment;
+import nl.BobbinWork.diagram.model.ThreadStyle;
+import nl.BobbinWork.diagram.model.Twist;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class DiagramBuilder
@@ -175,8 +197,11 @@ public class DiagramBuilder
   private static Diagram convert(
       final Document parsed) throws XPathExpressionException
   {
-    TreeExpander.replaceCopyElements( parsed.getDocumentElement() );
-    return createDiagram( parsed.getDocumentElement() );
+    final Element element = parsed.getDocumentElement();
+    TreeExpander.replaceCopyElements( element );
+    final Diagram diagram = createDiagram( element );
+    register( element, diagram );
+    return diagram;
   }
 
   public static Diagram createDiagramModel(
@@ -492,7 +517,7 @@ public class DiagramBuilder
           + range.toString() );
   }
 
-  private static void register(
+  static void register(
       Element element,
       Partition p)
   {
