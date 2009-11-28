@@ -19,8 +19,6 @@ package nl.BobbinWork.diagram.gui;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
-import static java.awt.event.InputEvent.CTRL_MASK;
-import static java.awt.event.KeyEvent.VK_V;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
 import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
@@ -29,10 +27,17 @@ import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.datatransfer.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URL;
 import java.util.Locale;
 
@@ -48,6 +53,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
@@ -57,13 +64,15 @@ import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.xml.DiagramBuilder;
+import nl.BobbinWork.diagram.xml.DiagramRebuilder;
+import nl.BobbinWork.diagram.xml.XmlResources;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
- * Prototype for the new version of the viewer.
- * 
  * @author J. Pol
  * 
  */
@@ -92,6 +101,7 @@ public class BwDiagrams
       new SelectionListener( tree, canvas, pipette, pinsel );
 
       final ActionListener loadListener = createLoadListener( tree, canvas );
+      final ActionListener clipboardExportListener = createClipboardExportListener( canvas );
       final ActionListener streamListener = createStreamListener( tree, canvas );
       final DiagramReplacedListener changeListener =
           createChangeListener( tree, canvas );
@@ -111,7 +121,7 @@ public class BwDiagrams
 
       final JPanel mainPanel = createBorderPanel();
       final JComponent mainMenu =
-          createMainMenu( frame, streamListener, loadListener );
+          createMainMenu( frame, streamListener, clipboardExportListener, loadListener );
       mainPanel.add( mainMenu, NORTH );
       mainPanel.add( splitPane, CENTER );
 
@@ -196,23 +206,53 @@ public class BwDiagrams
   private static JComponent createMainMenu(
       final BWFrame frame,
       final ActionListener inputStreamListener,
-      final ActionListener cliboardLoader)
+      final ActionListener clipboardExporter,
+      final ActionListener clipboardLoader)
   {
     final JComponent menuBar = new JMenuBar();
 
     final JMenu loadMenu = new JMenu();
     final JMenuItem fromClipbaord =
-        new LocaleMenuItem( "Load_clipboard", VK_V, CTRL_MASK );
-    applyStrings( loadMenu, "Load_menu" );
+        new LocaleMenuItem( "From_clipboard");
+    applyStrings( loadMenu, "Import_menu" );
     loadMenu.add( fromClipbaord );
-    fromClipbaord.addActionListener( cliboardLoader );
+    fromClipbaord.addActionListener( clipboardLoader );
+
+    final JMenu exportMenu = new JMenu();
+    final JMenuItem toClipbaord =
+        new LocaleMenuItem( "To_clipboard" );
+    applyStrings( exportMenu, "Export_menu" );
+    exportMenu.add( toClipbaord );
+    toClipbaord.addActionListener( clipboardExporter );
 
     menuBar.add( loadMenu );
+    menuBar.add( exportMenu );
     menuBar.add( new SampleDiagramChooser( menuBar, inputStreamListener ) );
     menuBar.add( new GroundChooser( inputStreamListener ) );
     menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );
     menuBar.add( new HeapStatusWidget() );
     return menuBar;
+  }
+
+  private static ActionListener createClipboardExportListener(final DiagramPanel canvas)
+  {
+    return new ActionListener(){
+
+      @Override
+      public void actionPerformed(
+          final ActionEvent event)
+      {
+        String s;
+        try {
+          s = DiagramRebuilder.toString(  canvas.getDiagram());
+        } catch (final TransformerException exception) {
+          s = stackTraceToString( exception );
+        } catch (final XPathExpressionException exception) {
+          s = stackTraceToString( exception );
+        }
+        final StringSelection ss = new StringSelection( s  );
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents( ss , null );
+      }};
   }
 
   private static ActionListener createLoadListener(

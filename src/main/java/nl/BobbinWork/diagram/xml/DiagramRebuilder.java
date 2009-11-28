@@ -16,6 +16,7 @@
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */package nl.BobbinWork.diagram.xml;
 
+import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.diagram.model.*;
@@ -40,21 +41,34 @@ public class DiagramRebuilder
     final String id = ((Element) p.getSourceObject()).getAttribute( "id" );
     return (id != null && !id.equals( "" ));
   }
-  
+
+  public static boolean canDelete(
+      Partition partition)
+  {
+    final Element domElement = (Element) partition.getSourceObject();
+    if (domElement==null) return false;
+    // TODO deleting switches only works if part of an original stitch
+    // in cases both cases ORPHAN_TO_CLONE and CLONE_TO_ORPHAN of parentnode are null
+    return!(partition instanceof Switch);
+  }
+
   public static Diagram delete(
       final Partition selected)
   {
-    final Element oldP = (Element) selected.getSourceObject();
-    if (oldP == null) return null;
-    final Document doc = oldP.getOwnerDocument();
-    if (oldP.getParentNode() != null) {
-      oldP.getParentNode().removeChild( oldP );
-    } else {
-      final Element original = (Element) oldP.getUserData( TreeExpander.ORPHAN_TO_CLONE );
-      if (original==null)return null;
+    final Element domElement = (Element) selected.getSourceObject();
+    if (domElement == null) return null;
+    final Element original =
+        (Element) domElement.getUserData( TreeExpander.ORPHAN_TO_CLONE );
+    if (original != null) {
       original.getParentNode().removeChild( original );
+    } else {
+      if (domElement.getParentNode() != null) {
+        domElement.getParentNode().removeChild( domElement );
+      } else {
+        return null;
+      }
     }
-    return rebuild( doc );
+    return rebuild( domElement.getOwnerDocument() );
   }
 
   public static Diagram replace(
@@ -76,15 +90,30 @@ public class DiagramRebuilder
   private static Diagram rebuild(
       final Document doc)
   {
-    if (doc == null ) return null;
+    if (doc == null) return null;
+    Element documentElement = doc.getDocumentElement();
     try {
       undoTransformations( doc );
-      TreeExpander.replaceCopyElements( doc.getDocumentElement() );
+      TreeExpander.replaceCopyElements( documentElement );
     } catch (XPathExpressionException exception) {
       exception.printStackTrace();
       return null;
     }
-    return DiagramBuilder.createDiagram( doc.getDocumentElement() );
+    Diagram diagram = DiagramBuilder.createDiagram( documentElement );
+    DiagramBuilder.register( documentElement, diagram );
+    return diagram;
+  }
+
+  public static String toString(
+      Diagram diagram) throws TransformerException, XPathExpressionException
+  {
+    if (diagram == null) return "";
+    final Element sourceObject = (Element) diagram.getSourceObject();
+    if (sourceObject == null) return "";
+    final Document ownerDocument = sourceObject.getOwnerDocument();
+    if (ownerDocument == null) return "";
+    DiagramRebuilder.undoTransformations( ownerDocument );
+    return XmlResources.toXmlString( ownerDocument );
   }
 
   private static void undoTransformations(
@@ -99,7 +128,7 @@ public class DiagramRebuilder
         orphan.setUserData( TreeExpander.ORPHAN_TO_CLONE, null, null );
         clone.setUserData( TreeExpander.CLONE_TO_ORPHAN, null, null );
       }
-      if (clone.getUserData( TreeExpander.DOM_TO_VIEW )!=null)
+      if (clone.getUserData( TreeExpander.DOM_TO_VIEW ) != null)
         clone.setUserData( TreeExpander.DOM_TO_VIEW, null, null );
     }
   }

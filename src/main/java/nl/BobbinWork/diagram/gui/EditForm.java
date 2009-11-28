@@ -235,7 +235,7 @@ class EditForm
     } else {
       copy.setEnabled( selected.isVisible()
           && DiagramRebuilder.canCopy( selected ) );
-      delete.setEnabled( true );
+      delete.setEnabled( DiagramRebuilder.canDelete( selected ) );
       showHide.setEnabled( true );
       paste.setEnabled( copied != null //
           && copied != selected //
