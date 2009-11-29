@@ -45,11 +45,7 @@ public class DiagramRebuilder
   public static boolean canDelete(
       Partition partition)
   {
-    final Element domElement = (Element) partition.getSourceObject();
-    if (domElement==null) return false;
-    // TODO deleting switches only works if part of an original stitch
-    // in cases both cases ORPHAN_TO_CLONE and CLONE_TO_ORPHAN of parentnode are null
-    return!(partition instanceof Switch);
+      return partition.getSourceObject() == null;
   }
 
   public static Diagram delete(
@@ -128,8 +124,6 @@ public class DiagramRebuilder
         orphan.setUserData( TreeExpander.ORPHAN_TO_CLONE, null, null );
         clone.setUserData( TreeExpander.CLONE_TO_ORPHAN, null, null );
       }
-      if (clone.getUserData( TreeExpander.DOM_TO_VIEW ) != null)
-        clone.setUserData( TreeExpander.DOM_TO_VIEW, null, null );
     }
   }
 }

@@ -166,6 +166,11 @@ class EditForm
   {
     if (newDiagram != null && diagramReplacedListener != null) {
       diagramReplacedListener.rebuild( newDiagram );
+      copied = selected = null;
+      copy.setEnabled( false );
+      delete.setEnabled( false );
+      paste.setEnabled( false );
+      showHide.setEnabled( false );
     }
   }
 
