@@ -1,6 +1,12 @@
 #summary some notes on what could/should be done
 #labels Phase-Requirements
 
+=Ultimately goal=
+support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids. Some details:
+  * Highlighting a diagram section should also pop up handlers to move, rotate, resize, squeeze and distort otherwise.
+  * Drag points of Bezier curves.
+
+=other tasks=
   * complete the Java doc (use an open source alternative for the Visio diagrams?)
   * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level testing is possible by visually checking and manipulating the sample/ground diagrams
   * see also 
