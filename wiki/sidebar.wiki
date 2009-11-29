@@ -4,7 +4,7 @@
     * [history]
     * [LicenceIssues diagrams code and licenses]
     * mathematical solutions
-      * [http://bw-en.wikispaces.com/grid+math polar grids]
+      * [http://bobbinwork.wikispaces.com/Mathematical+foundation+of+the+polar+grids polar grids]
       * [MathSolutions twist marks]
   * technical documentation
     * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
