@@ -102,7 +102,7 @@ public abstract class Partition {
     if (s != null) {
       s = s.replaceAll("\n", "<br>");
     }
-    return "<html><body>" + s + "</body></html>";
+    return String.format( "<html><body><p><strong>%s</strong></p><p>%s</p></body></html>", getCaption(), s);
   }
 
 	private static Map<Class<? extends Partition>, Icon> icons = new HashMap<Class<? extends Partition>, Icon>();
