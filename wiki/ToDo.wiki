@@ -1,7 +1,7 @@
 #summary some notes on what could/should be done
 #labels Phase-Requirements
 
-=Ultimately goal=
+=Ultimatel goal=
 support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids. Some details:
   * Highlighting a diagram section should also pop up handlers to move, rotate, resize, squeeze and distort otherwise.
   * Drag points of Bezier curves.
