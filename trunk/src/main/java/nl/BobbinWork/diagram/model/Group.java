@@ -1,4 +1,4 @@
-/* Group.java Copyright 2006-2007 by J. Pol
+/* Group.java Copyright 2009 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -20,7 +20,10 @@ package nl.BobbinWork.diagram.model;
 import java.util.Iterator;
 import java.util.List;
 
+
 /**
+ * Diagram section containing multiple stitches.
+ * 
  * @author J. Pol
  * 
  */

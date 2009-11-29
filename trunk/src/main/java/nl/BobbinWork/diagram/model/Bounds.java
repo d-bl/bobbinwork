@@ -19,9 +19,21 @@
 package nl.BobbinWork.diagram.model;
 
 import java.awt.Polygon;
+import java.awt.Shape;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Polygon containing the {@link Segment}s of a {@link Partition}, fitting
+ * together like jigsaw pieces. In contrast with {@link Shape#getBounds2D()} the
+ * polygons of different {@link Partition}s don't overlap but touch one another.
+ * 
+ * @author jokep
+ * 
+ * @param <T>
+ *          The {@link Segment} denotes for which presentation type the bounding
+ *          polygon applies.
+ */
 public class Bounds<T extends Segment> extends Polygon {
 	private static final long serialVersionUID = 1L;
 

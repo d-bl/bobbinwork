@@ -1,4 +1,4 @@
-/* Diagram.java Copyright 2006-2007 by J. Pol
+/* Diagram.java Copyright 2009 by J. Pol
  *
  * This file is part of BobbinWork.
  *
@@ -20,6 +20,8 @@ package nl.BobbinWork.diagram.model;
 import java.util.List;
 
 /**
+ * The root object of the diagram presentation model.
+ * 
  * @author J. Pol
  * 
  */
