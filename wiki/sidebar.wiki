@@ -13,5 +13,4 @@
   * plans and ideas
     * [MathChallenges mathematical challenges]
     * [ToDo]
-    * [GuiRequirements]
 [http://code.google.com/p/bobbinwork/w/list all wiki pages]
