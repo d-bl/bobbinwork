@@ -21,7 +21,7 @@ package nl.BobbinWork.diagram.model;
 import java.util.*;
 
 /**
- * DiagramPanel section containing multiple pair segments.
+ * Diagram section containing multiple pair segments.
  * 
  * @author J. Pol
  * 

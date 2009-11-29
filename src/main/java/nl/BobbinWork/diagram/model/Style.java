@@ -21,11 +21,8 @@ package nl.BobbinWork.diagram.model;
 import java.awt.Color;
 
 /**
- * The looks for a line segment.
+ * The painting instructions for a line segment.
  * 
- * @author J. Pol
- */
-/**
  * @author User
  *
  */

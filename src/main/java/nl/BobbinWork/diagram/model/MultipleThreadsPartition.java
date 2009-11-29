@@ -22,7 +22,7 @@ import java.util.List;
 
 
 /**
- * DiagramPanel section containing multiple threads segments.
+ * Diagram section containing multiple threads segments.
  * 
  * 
  * @author J. Pol

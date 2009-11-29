@@ -149,7 +149,7 @@
 
     <target name="JavaDoc" description="generate Javadoc files">
     	  <javadoc
-    	           destdir="../doc/api"
+    	           destdir="../generated/api"
     	           author="true"
     	           version="true"
     	           use="true"
@@ -175,6 +175,6 @@
         />
     </target>
     
-    <target name="all" depends="grids, diagrams, jnlp, testRun"/>
+    <target name="all" depends="grids, diagrams, jnlp, JavaDoc, testRun"/>
 
 </project>

@@ -20,6 +20,12 @@ package nl.BobbinWork.diagram.model;
 
 import java.awt.Shape;
 
+/**
+ * A 2D shape with painting properties.
+ * 
+ * @author J. Pol
+ *
+ */
 public class Drawable {
 	private Shape shape;
 	private Style style;
