@@ -1,8 +1,0 @@
-#summary some thoughts on what the GUI should become
-#labels Phase-Design
-
-Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids.
-
-=Manipulations=
-  * Highlighting a diagram section should also pop up handlers to move, rotate, resize, squeeze and distort otherwise.
-  * Drag points of Bezier curves.
