@@ -6,4 +6,3 @@ Ultimately: support drawing on the canvas by drag-and-drop rows, fields and trai
 =Manipulations=
   * Highlighting a diagram section should also pop up handlers to move, rotate, resize, squeeze and distort otherwise.
   * Drag points of Bezier curves.
-  * Interactively changed/created diagrams should be serialisable. If the XML input format is used, then changes to items in a cloned DOM sub tree should replace the original `<`copy> element.
