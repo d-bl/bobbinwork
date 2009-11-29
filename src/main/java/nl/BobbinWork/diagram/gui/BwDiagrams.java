@@ -64,12 +64,8 @@ import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
-import nl.BobbinWork.diagram.xml.XmlResources;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
