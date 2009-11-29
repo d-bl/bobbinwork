@@ -173,7 +173,9 @@ public class DiagramBuilder
   public static Diagram createDiagram(
       Element element)
   {
-    return new ChainedPairsPartitionFactory( element ).createDiagram();
+    Diagram diagram = new ChainedPairsPartitionFactory( element ).createDiagram();
+    DiagramBuilder.register( element, diagram );
+    return diagram;
   }
 
   public static Diagram createDiagramModel(
