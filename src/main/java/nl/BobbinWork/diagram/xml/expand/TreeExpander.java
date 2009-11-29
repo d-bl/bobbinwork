@@ -225,7 +225,7 @@ public class TreeExpander
               || key.equals( INDIRECT_CLONE_TO_ORPHAN )//
               )) {
             Object orphan = src.getUserData( key );
-            dst.setUserData( INDIRECT_CLONE_TO_ORPHAN, orphan, this );
+            dst.setUserData( INDIRECT_CLONE_TO_ORPHAN, orphan, cloneToOrphanHandler );
           }
         }
       };

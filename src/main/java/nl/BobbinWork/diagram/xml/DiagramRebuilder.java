@@ -19,15 +19,19 @@
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class DiagramRebuilder
 {
   public static boolean canReplace(
-      Partition p)
+      final Partition p)
   {
     if (p.getSourceObject() == null) return false;
     final String id = ((Element) p.getSourceObject()).getAttribute( "of" );
@@ -35,7 +39,7 @@ public class DiagramRebuilder
   }
 
   public static boolean canCopy(
-      Partition p)
+      final Partition p)
   {
     if (p.getSourceObject() == null) return false;
     final String id = ((Element) p.getSourceObject()).getAttribute( "id" );
@@ -43,9 +47,13 @@ public class DiagramRebuilder
   }
 
   public static boolean canDelete(
-      Partition partition)
+      final Partition partition)
   {
-      return partition.getSourceObject() == null;
+      final Element domElement = (Element) partition.getSourceObject();
+      if (domElement == null) return false;
+      if (domElement.getParentNode()!=null && domElement.getParentNode().getUserData( TreeExpander.CLONE_TO_ORPHAN ) != null)return false;
+      if (domElement.getParentNode()!=null && domElement.getParentNode().getUserData( TreeExpander.INDIRECT_CLONE_TO_ORPHAN ) != null)return false;
+      return true;
   }
 
   public static Diagram delete(
@@ -87,21 +95,23 @@ public class DiagramRebuilder
       final Document doc)
   {
     if (doc == null) return null;
-    Element documentElement = doc.getDocumentElement();
+
+    final Document parsed;
     try {
-      undoTransformations( doc );
-      TreeExpander.replaceCopyElements( documentElement );
-    } catch (XPathExpressionException exception) {
+      // parse from scratch to work around the memory loss
+      final String s = XmlResources.toXmlString(doc);
+      parsed = new XmlResources().parse( s );
+      TreeExpander.replaceCopyElements( parsed.getDocumentElement() );
+    } catch (final Exception exception) {
       exception.printStackTrace();
       return null;
     }
-    Diagram diagram = DiagramBuilder.createDiagram( documentElement );
-    DiagramBuilder.register( documentElement, diagram );
-    return diagram;
+    final Element element = parsed.getDocumentElement();
+    return DiagramBuilder.createDiagram( element );
   }
 
   public static String toString(
-      Diagram diagram) throws TransformerException, XPathExpressionException
+      final Diagram diagram) throws TransformerException, XPathExpressionException
   {
     if (diagram == null) return "";
     final Element sourceObject = (Element) diagram.getSourceObject();
@@ -113,12 +123,12 @@ public class DiagramRebuilder
   }
 
   private static void undoTransformations(
-      Document document) throws XPathExpressionException
+      final Document document) throws XPathExpressionException
   {
-    NodeList nodes = XmlResources.evaluate( "//*", document );
+    final NodeList nodes = XmlResources.evaluate( "//*", document );
     for (int i = 0; i < nodes.getLength(); i++) {
-      Node clone = nodes.item( i );
-      Node orphan = (Node) clone.getUserData( TreeExpander.CLONE_TO_ORPHAN );
+      final Node clone = nodes.item( i );
+      final Node orphan = (Node) clone.getUserData( TreeExpander.CLONE_TO_ORPHAN );
       if (orphan != null) {
         clone.getParentNode().replaceChild( orphan, clone );
         orphan.setUserData( TreeExpander.ORPHAN_TO_CLONE, null, null );
