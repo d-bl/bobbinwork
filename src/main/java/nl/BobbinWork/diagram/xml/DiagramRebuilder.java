@@ -21,6 +21,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.model.Partition;
+import nl.BobbinWork.diagram.model.Switch;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
 import org.w3c.dom.Document;
@@ -49,6 +50,11 @@ public class DiagramRebuilder
   public static boolean canDelete(
       final Partition partition)
   {
+      if (partition instanceof Switch) {
+        // the basic stitch in the library would be destroyed
+        return false;
+      }
+      
       final Element domElement = (Element) partition.getSourceObject();
       if (domElement == null) return false;
       if (domElement.getParentNode()!=null && domElement.getParentNode().getUserData( TreeExpander.CLONE_TO_ORPHAN ) != null)return false;
