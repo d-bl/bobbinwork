@@ -15,7 +15,7 @@ To become a project member or start contributing, drop a line or post patches on
  
 == Project structure ==
 
-Though Ant based the project has a Maven like organisation. Standard are `trunk`, `branches`, `tags` and `wiki` 
+Though the project is Ant based, it has a Maven like organisation. Standard are `trunk`, `branches`, `tags` and `wiki`, below a project specific overview
 
 || <pre>trunk/src/main/java</pre> || has the executable main classes: <br>`nl.BobbinWork.diagram.gui.BwDiagrams`<br> `nl.BobbinWork.grids.GridGUI.PolarGridPrinter` ||
 || <pre>trunk/src/test/java</pre> || contains tests for JUnit4, depends on `wiki/diagrams` ||
