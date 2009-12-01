@@ -98,6 +98,7 @@ public class DiagramRebuilder
 
     final Document parsed;
     try {
+      undoTransformations( doc );
       // parse from scratch to work around the memory loss
       final String s = XmlResources.toXmlString(doc);
       parsed = new XmlResources().parse( s );
