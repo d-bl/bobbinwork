@@ -3,14 +3,13 @@
   * background information
     * [history]
     * [LicenceIssues diagrams code and licenses]
-    * mathematical solutions
-      * [http://bobbinwork.wikispaces.com/Mathematical+foundation+of+the+polar+grids polar grids]
-      * [MathSolutions twist marks]
   * technical documentation
     * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
-    * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams2.htm class/object diagrams]
+    * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams.htm class/object diagrams]
     * [GetStarted development environment]
-  * plans and ideas
-    * [MathChallenges mathematical challenges]
-    * [ToDo]
+  * mathematics
+    * [http://bobbinwork.wikispaces.com/Mathematical+foundation+of+the+polar+grids polar grids]
+    * [MathSolutions twist marks]
+    * [MathChallenges remaining challenges]
+  * [ToDo plans and ideas]
 [http://code.google.com/p/bobbinwork/w/list all wiki pages]
