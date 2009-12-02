@@ -13,9 +13,9 @@ support drawing on the canvas by drag-and-drop rows, fields and trails of stitch
 
 *Code reviews*
 
-Even questions about the code might trigger improvements. You need to sign in with a Google account but don't need to join the project: See how reviews work on http://code.google.com/p/support/wiki/CodeReviews 
+Even questions about the code might trigger improvements. To add comments or questions you need to sign in with a Google account but don't need to join the project. 
 
-In short: 
+See how reviews work on http://code.google.com/p/support/wiki/CodeReviews In short: 
   * browse the source code online
   * double click a code line to enter you comment or question
   * when done publish your comment so others get notified
