@@ -242,10 +242,7 @@ class EditForm
           && DiagramRebuilder.canCopy( selected ) );
       delete.setEnabled( DiagramRebuilder.canDelete( selected ) );
       showHide.setEnabled( true );
-      paste.setEnabled( copied != null //
-          && copied != selected //
-          && copied.getNrOfPairs() == selected.getNrOfPairs() //
-          && DiagramRebuilder.canReplace( selected ) );
+      paste.setEnabled( DiagramRebuilder.canReplace( selected, copied ) );
     }
     setShowHideCaption();
   }

@@ -102,15 +102,6 @@ public class Localizer {
     }
 
     /**
-     * Gets the bundle with language specific strings.
-     * 
-     * @return null if no setBundle() has been called.
-     */
-    public static ResourceBundle getBundle() {
-        return bundle;
-    }
-
-    /**
      * Gets the lazy initialized bundle, for strings fetched before the
      * application called setBundle.
      * 
@@ -234,6 +225,11 @@ public class Localizer {
 
     /** no instantiation as all methods are static */
     private Localizer() {
+    }
+
+    public static String getLanguage()
+    {
+      return myBundle().getLocale().getLanguage();
     }
 
 }
