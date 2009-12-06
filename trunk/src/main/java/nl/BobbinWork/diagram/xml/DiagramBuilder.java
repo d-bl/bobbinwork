@@ -31,6 +31,7 @@ import java.util.Vector;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
+import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.diagram.model.Cross;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.model.Group;
@@ -70,7 +71,7 @@ public class DiagramBuilder
     final Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
     final String partitionTitle;
     
-    ChainedPairsPartitionFactory(Element element)
+    ChainedPairsPartitionFactory(final Element element)
     {
       this.element = element;
       partitionTitle = getTitle(element);
@@ -80,34 +81,34 @@ public class DiagramBuilder
       ; child = child.getNextSibling()) //
       {
         if (child.getNodeType() == Node.ELEMENT_NODE) {
-          ElementType childType = ElementType.valueOf( child.getNodeName() );
-          Element childElement = (Element) child;
+          final ElementType childType = ElementType.valueOf( child.getNodeName() );
+          final Element childElement = (Element) child;
           switch (childType) {
           case pin:
             parts.add( DiagramBuilder.createPin( childElement ) );
             break;
           case group:
-            MultiplePairsPartition part =
+            final MultiplePairsPartition part =
                 DiagramBuilder.createGroup( childElement );
             register( childElement, part );
             parts.add( part );
             break;
           case stitch:
-            MultiplePairsPartition part2 = createStitch( childElement );
+            final MultiplePairsPartition part2 = createStitch( childElement );
             register( childElement, part2 );
             parts.add( part2 );
             break;
           case new_bobbins:
-            ThreadStyle style = createThreadStyle( child.getFirstChild() );
-            String ranges[] = childElement.getAttribute( "nrs" ).split( "," );
-            for (String range : ranges) {
+            final ThreadStyle style = createThreadStyle( child.getFirstChild() );
+            final String ranges[] = childElement.getAttribute( "nrs" ).split( "," );
+            for (final String range : ranges) {
               final String[] nrs = range.split( "-" );
               final int start;
               final int end;
               try {
                 start = parseRangeNr( nrs[0] );
                 end = (nrs.length > 1 ? parseRangeNr( nrs[1] ) : start);
-              } catch (NumberFormatException e) {
+              } catch (final NumberFormatException e) {
                 throw new RuntimeException( "invalid number:\n<"
                     + child.getNodeName() + " " + //
                     child.getAttributes().getNamedItem( "nrs" ) + ">" );
@@ -149,31 +150,38 @@ public class DiagramBuilder
     }
   }
   
-  private static Element getFirst(Element element,ElementType type){
-    NodeList titleList = element.getElementsByTagName(type.toString());
+  private static Element getFirst(final Element element,final ElementType type){
+    final NodeList titleList = element.getElementsByTagName(type.toString());
     if (titleList==null||titleList.getLength()<=0)return null;
     return ((Element)titleList.item( 0 ));
   }
   
-  private static String getTitle(Element element){
-    Element t = getFirst(element,ElementType.title);
+  private static String getTitle(final Element element){
+    final Element t = getFirst(element,ElementType.title);
     if (t==null)return null;
-    Element v = getFirst(t,ElementType.value);
-    if (v==null )return null;
-    // TODO get the value of the locale language
-    return v.getTextContent();
+    final String lang = Localizer.getLanguage();
+    final NodeList list = element.getElementsByTagName(ElementType.value.toString());
+    if (list==null)return null;
+    int length = list.getLength();
+    for (int i=0 ; i<length ; i++) {
+        if ( list.item(i).getAttributes().getNamedItem(AttributeType.lang.toString()).getTextContent().matches(lang)) { 
+            return list.item(i).getTextContent();
+        }
+    }
+    if (length<=0)return null;
+    return list.item(0).getTextContent();
   }
 
   private static Group createGroup(
-      Element element)
+      final Element element)
   {
     return new ChainedPairsPartitionFactory( element ).createGroup();
   }
 
   public static Diagram createDiagram(
-      Element element)
+      final Element element)
   {
-    Diagram diagram = new ChainedPairsPartitionFactory( element ).createDiagram();
+    final Diagram diagram = new ChainedPairsPartitionFactory( element ).createDiagram();
     DiagramBuilder.register( element, diagram );
     return diagram;
   }
@@ -190,7 +198,7 @@ public class DiagramBuilder
             + " xmlns:xi='http://www.w3.org/2001/XInclude'"
             + "><xi:include href='basicStitches.xml'/>" + xmlContent
             + "</diagram>";
-    Document parsed = new XmlResources().parse( s );
+    final Document parsed = new XmlResources().parse( s );
     TreeExpander.replaceCopyElements( parsed.getDocumentElement() );
     return new ChainedPairsPartitionFactory( parsed.getDocumentElement() )
         .createDiagram();
@@ -207,7 +215,7 @@ public class DiagramBuilder
   }
 
   public static Diagram createDiagramModel(
-      URI uri)
+      final URI uri)
       throws URISyntaxException, IOException, SAXException,
       ParserConfigurationException, XPathExpressionException
   {
@@ -225,11 +233,11 @@ public class DiagramBuilder
   private static class SwitchFactory
   {
 
-    private Range range;
-    private ThreadSegment frontSegment;
-    private ThreadSegment backSegment;
+    private final Range range;
+    private final ThreadSegment frontSegment;
+    private final ThreadSegment backSegment;
 
-    SwitchFactory(Element element)
+    SwitchFactory(final Element element)
     {
       range = createRange( element );
       frontSegment =
@@ -261,7 +269,7 @@ public class DiagramBuilder
    * @return
    */
   private static Cross createCross(
-      Element element)
+      final Element element)
   {
     return new SwitchFactory( element ).createCross();
   }
@@ -278,7 +286,7 @@ public class DiagramBuilder
    * @return an instance as defined by the element
    */
   public static Twist createTwist(
-      Element element)
+      final Element element)
   {
     return new SwitchFactory( element ).createTwist();
   }
@@ -286,16 +294,16 @@ public class DiagramBuilder
   private static class SegmentFactory
   {
 
-    private Point start, c1, c2, end;
-    private Element element;
+    private final Point start, c1, c2, end;
+    private final Element element;
 
-    SegmentFactory(Element element)
+    SegmentFactory(final Element element)
     {
       this.element = element;
-      String start = element.getAttribute( "start" );
-      String end = element.getAttribute( "end" );
-      String c1 = element.getAttribute( "c1" );
-      String c2 = element.getAttribute( "c2" );
+      final String start = element.getAttribute( "start" );
+      final String end = element.getAttribute( "end" );
+      final String c1 = element.getAttribute( "c1" );
+      final String c2 = element.getAttribute( "c2" );
       if ((start == null) || start.equals( "" ))
         throw new IllegalArgumentException(
             "mandatory attribute start is missing" );
@@ -314,7 +322,7 @@ public class DiagramBuilder
       if (element.getAttributes().getNamedItem( "mark" ) != null) {
         try {
           twistMarkLength = Integer.parseInt( element.getAttribute( "mark" ) );
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
           twistMarkLength = 9 * new Style().getWidth();
         }
       }
@@ -335,7 +343,7 @@ public class DiagramBuilder
    *          <code>&lt;back&nbsp;...&gt;</code>
    */
   private static ThreadSegment createThreadSegment(
-      Element element)
+      final Element element)
   {
     return new SegmentFactory( element ).createThreadSegment();
   }
@@ -347,7 +355,7 @@ public class DiagramBuilder
    *          XML element, one of: <pair ...>, <back ...>, <front ...>
    */
   private static PairSegment createPairSegment(
-      Element element)
+      final Element element)
   {
     return new SegmentFactory( element ).createPairSegment();
   }
@@ -361,20 +369,20 @@ public class DiagramBuilder
    *          &lt;...&nbsp;width="..."&nbsp;color="..."&gt;
    */
   private static Style createStyle(
-      Element element)
+      final Element element)
   {
 
-    Style style = new Style();
+    final Style style = new Style();
     setStyle( element, style );
 
     return style;
   }
 
   private static ThreadStyle createThreadStyle(
-      Node child)
+      final Node child)
   {
-    Element grandChild = (Element) child.getFirstChild();
-    ThreadStyle threadStyle = new ThreadStyle();
+    final Element grandChild = (Element) child.getFirstChild();
+    final ThreadStyle threadStyle = new ThreadStyle();
     threadStyle.apply( createStyle( (Element) child ) );
     if (grandChild != null)
       threadStyle.getShadow().apply( createStyle( grandChild ) );
@@ -382,8 +390,8 @@ public class DiagramBuilder
   }
 
   private static void setStyle(
-      Element element,
-      Style style)
+      final Element element,
+      final Style style)
   {
     if (element == null) return;
     style.setColor( element.getAttribute( "color" ) );
@@ -391,14 +399,14 @@ public class DiagramBuilder
   }
 
   public static Stitch createStitch(
-      Element element)
+      final Element element)
   {
 
-    Range range = createRange( element );
+    final Range range = createRange( element );
     Style style = new Style();
-    List<Pin> pins = new Vector<Pin>();
-    List<Switch> switches = new Vector<Switch>();
-    List<PairSegment> pairs = new Vector<PairSegment>( range.getCount() );
+    final List<Pin> pins = new Vector<Pin>();
+    final List<Switch> switches = new Vector<Switch>();
+    final List<PairSegment> pairs = new Vector<PairSegment>( range.getCount() );
     int pairCountDown = range.getCount();
 
     for //
@@ -407,18 +415,18 @@ public class DiagramBuilder
     ; child = child.getNextSibling() //
     ) {
       if (child.getNodeType() == Node.ELEMENT_NODE) {
-        ElementType childType = ElementType.valueOf( child.getNodeName() );
-        Element childElement = (Element) child;
+        final ElementType childType = ElementType.valueOf( child.getNodeName() );
+        final Element childElement = (Element) child;
         if (childType == ElementType.cross) {
-          Cross cross = createCross( childElement );
+          final Cross cross = createCross( childElement );
           register( childElement, cross );
           switches.add( cross );
         } else if (childType == ElementType.twist) {
-          Twist twist = createTwist( childElement );
+          final Twist twist = createTwist( childElement );
           register( childElement, twist );
           switches.add( twist );
         } else if (childType == ElementType.pin) {
-          Pin pin = createPin( childElement );
+          final Pin pin = createPin( childElement );
           register( childElement, pin );
           pins.add( pin );
         } else if (childType == ElementType.style) {
@@ -432,10 +440,10 @@ public class DiagramBuilder
         }
       }
     }
-    for (Segment segment : pairs) {
+    for (final Segment segment : pairs) {
       segment.setStyle( style );
     }
-    Stitch s = new Stitch( range, pairs, switches, pins, getTitle( element ) );
+    final Stitch s = new Stitch( range, pairs, switches, pins, getTitle( element ) );
     register( element, s );
     return s;
   }
@@ -446,9 +454,9 @@ public class DiagramBuilder
    *          <code>&lt;pin position"<em>x,y</em>"&gt;</code>
    */
   private static Pin createPin(
-      Element element)
+      final Element element)
   {
-    String attribute = element.getAttribute( AttributeType.position.toString() );
+    final String attribute = element.getAttribute( AttributeType.position.toString() );
     return new Pin( createPoint( attribute ) );
   }
 
@@ -466,7 +474,7 @@ public class DiagramBuilder
    *          </ul>
    */
   private static Range createRange(
-      Element element)
+      final Element element)
   {
     final String tag = ElementType.getRangeAttribute( element.getNodeName() );
     final String value = element.getAttribute( tag );
@@ -483,16 +491,16 @@ public class DiagramBuilder
       } else {
         throw invalidRange( element.getNodeName(), tag, value );
       }
-    } catch (java.lang.NumberFormatException e) {
+    } catch (final java.lang.NumberFormatException e) {
       throw invalidRange( element.getNodeName(), tag, value );
     }
     return new Range( first, last );
   }
 
   private static RuntimeException invalidRange(
-      String elementTag,
-      String attributeTag,
-      String value)
+      final String elementTag,
+      final String attributeTag,
+      final String value)
   {
     return new IllegalArgumentException( "invalid or missing range:\n<"
         + elementTag + " ... " //
@@ -500,11 +508,11 @@ public class DiagramBuilder
   }
 
   private static Element getMandatoryElement(
-      Element element,
-      ElementType tag)
+      final Element element,
+      final ElementType tag)
   {
-    String tagString = tag.toString();
-    NodeList nodeList = element.getElementsByTagName( tagString );
+    final String tagString = tag.toString();
+    final NodeList nodeList = element.getElementsByTagName( tagString );
     if (nodeList.getLength() != 1)
       throw new IllegalArgumentException( "expecting exactly 1 " + tagString
           + "; found " + nodeList.getLength() );
@@ -512,7 +520,7 @@ public class DiagramBuilder
   }
 
   private static void checkRangeIs2(
-      Range range)
+      final Range range)
   {
     if (range.getCount() != 2)
       throw new IllegalArgumentException( "range should span 2 threads got: "
@@ -520,8 +528,8 @@ public class DiagramBuilder
   }
 
   static void register(
-      Element element,
-      Partition p)
+      final Element element,
+      final Partition p)
   {
     element.setUserData( MODEL_TO_DOM, p, null );
     Object orphan = element.getUserData( TreeExpander.CLONE_TO_ORPHAN );
@@ -535,15 +543,15 @@ public class DiagramBuilder
   }
 
   public static Point createPoint(
-      String s)
+      final String s)
   {
 
-    String xy[] = s.split( SEPARATOR );
+    final String xy[] = s.split( SEPARATOR );
     try {
       return new Point( //
           valueOf( xy[0] ).doubleValue(),//
           valueOf( xy[1] ).doubleValue() );
-    } catch (NumberFormatException e) {
+    } catch (final NumberFormatException e) {
       throw new IllegalArgumentException( "invalid coordinates: " + s );
     }
   }
