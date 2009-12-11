@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram
+  xmlns="http://BobbinWork.googlecode.com/bw.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+  <title>
+    <value lang="en">show basic stitches</value>
+  </title>
+  <xi:include href='basicStitches.xml'/>
+  <group pairs="1-130">
+    <title>
+      <value lang="en">Test the looks of the basic stitches</value>
+    </title>
+    <copy of="ctc" pairs="1-2"><move x="25" y="60"/></copy>
+    <copy of="tc" pairs="5-6"><move x="75" y="60"/></copy>
+    <copy of="tttctctc" pairs="3-4"><move x="50" y="50"/></copy>
+    <copy of="tc_rtl" pairs="7-8"><move x="135" y="15"/></copy>
+    <copy of="tc_ltr" pairs="9-10"><move x="105" y="15"/></copy>
+    <copy of="crc" pairs="11-12"><move x="15" y="40"/></copy>
+    <copy of="clc" pairs="13-14"><move x="85" y="40"/></copy>
+    <copy of="ttc" pairs="15-16"><move x="50" y="15"/></copy>
+    <copy of="tcrc" pairs="17-18"><move x="15" y="15"/></copy>
+    <copy of="tclc" pairs="19-20"><move x="85" y="15"/></copy>
+    <copy of="crtc" pairs="21-22"><move x="135" y="50"/></copy>
+    <copy of="cltc" pairs="23-24"><move x="105" y="50"/></copy>
+
+  </group>  
+</diagram>

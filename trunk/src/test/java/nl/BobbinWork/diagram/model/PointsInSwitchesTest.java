@@ -67,8 +67,8 @@ public class PointsInSwitchesTest {
 	/** figure (b) on http://code.google.com/p/bobbinwork/wiki/MathChallenges#Highlighting_(groups_of)_stitches */
 	static final String TCTC_BASED_ON_BASIC_STITCHES = ""+
 	"<group pairs='1-2'>\n"+
-	"<copy of='l'   pairs='1-1'><rotate centre='15,15' angle='-45'/><move x='188' y='73'/></copy>"+
-    "<copy of='r'   pairs='2-2'><rotate centre='15,15' angle='75' /><move x='215' y='92'/></copy>"+
+	"<copy of='C'><rotate centre='15,15' angle='-45'/><move x='188' y='73'/></copy>"+
+    "<copy of='F'><rotate centre='15,15' angle='75' /><move x='215' y='92'/></copy>"+
     "<copy of='ctc' pairs='1-2'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
     "</group>";
 	
