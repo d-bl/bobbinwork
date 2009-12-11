@@ -234,7 +234,6 @@ public class BwDiagrams
   {
     return new ActionListener(){
 
-      @Override
       public void actionPerformed(
           final ActionEvent event)
       {

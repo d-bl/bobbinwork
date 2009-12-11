@@ -133,6 +133,8 @@
         </javac>
         <jar destfile="${build.dir}/test.jar">
             <fileset dir="${build.dir}/tmptest" includes="**/*.*"/>
+            <fileset dir="src/main/resources" includes="**"/>
+            <fileset dir="src/test/resources" includes="**"/>
         </jar>
     </target>
             

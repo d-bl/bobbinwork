@@ -156,7 +156,15 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
    <xsd:element   name="rotate"   type="bw:rotate" minOccurs="0" maxOccurs="1" />
    <!-- more to be developped, e.g. copy a rectangle into a fan -->
   </xsd:sequence>
-  <xsd:attribute  name="pairs" type="bw:range"     use="required"/>
+  <xsd:attribute  name="pairs" type="bw:range"  use="required" />
+  <xsd:attribute  name="of"    type="xsd:IDREF" use="required"/>
+ </xsd:complexType>
+
+ <xsd:complexType name="copyswitch">
+  <xsd:sequence                                    minOccurs="0" maxOccurs="unbounded" >
+   <xsd:element   name="move"     type="bw:move"   minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="rotate"   type="bw:rotate" minOccurs="0" maxOccurs="1" />
+  </xsd:sequence>
   <xsd:attribute  name="of"    type="xsd:IDREF" use="required"/>
  </xsd:complexType>
 
@@ -192,11 +200,12 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
      or starts and ends with cross-movements;
      otherwise use both 'open' and 'closed'.
      -->
-   <xsd:element   name="style"  type="bw:style"  minOccurs="0" maxOccurs="1" />
+   <xsd:element   name="style"  type="bw:style"      minOccurs="0" maxOccurs="1" />
    <xsd:element   name="pair"   type="bw:pairCurve"  minOccurs="1" maxOccurs="unbounded" />
-   <xsd:sequence                                 minOccurs="1" maxOccurs="unbounded" >
-    <xsd:element  name="twist"  type="bw:switch" minOccurs="0" maxOccurs="unbounded" />
-    <xsd:element  name="cross"  type="bw:switch" minOccurs="0" maxOccurs="unbounded" />
+   <xsd:sequence                                     minOccurs="1" maxOccurs="unbounded" >
+    <xsd:element  name="copy"   type="bw:copyswitch" minOccurs="0" maxOccurs="unbounded" />
+    <xsd:element  name="twist"  type="bw:switch"     minOccurs="0" maxOccurs="unbounded" />
+    <xsd:element  name="cross"  type="bw:switch"     minOccurs="0" maxOccurs="unbounded" />
     <!-- Twist: Even thread over preceding thread.
          Cross: Odd thread over next thread
          Pairs used as threads and gimps cause exceptions.
