@@ -33,13 +33,6 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
             <value lang="en">stitches (building blocks for the diagram)</value>
             <value lang="nl">slagen (bouwstenen voor de werktekening)</value>
         </title>
-        <title>
-            <value lang="en">id conventions:         t = twist,   c = cross,   l = twist left pair,     r = twist right pair</value>
-            <value lang="nl">samenstelling van id's: t = draaien, c = kruisen, l = linker paar draaien, r = rechterpaar draaien</value>
-            <value lang="de">                        t = drehen,  c = kreuzen, l = links drehen,        r = rechts drehen</value>
-            <value lang="fr">                        t = tourner, c = croiser, l = croiser gauche,      r = croiser droit</value>
-        </title>
-
         <group pairs="1" display="no">
 
             <title>
@@ -253,387 +246,594 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 <value lang="en">at most 2 preceding twists</value>
                 <value lang="nl">maximaal 2 voorafgaande draaien</value>
             </title>
-            <group pairs="21-136" display="no">
+            <group pairs="1" display="no">
     
                 <title>
-                    <value lang="en">fixing stitch with varying preceding twists</value>
-                    <value lang="nl">fixeerslag met variaties in draaien vooraf</value>
+                  <value lang="en">fixing stitch with varying preceding twists</value>
+                  <value lang="nl">fixeerslag met variaties in draaien vooraf</value>
                 </title>
                 
-                <group id="ttctctc" pairs="1-2">
-                    <title>
-                        <value lang="en">2 twists, fixing stitch</value>
-                        <value lang="nl">2x draaien, fixeerslag</value>
-                    </title>
-                    <stitch id="tt" pairs="1-2" >
-                      <title>
-                          <value lang="en">2 twists</value>
-                          <value lang="nl">2x draaien</value>
-                      </title>
-                      <pair start="-8.7,-8.7" end="3,3" mark="" />
-                      <pair start="25.3,-8.7" end="13.3,3.3" mark="" />
-                      <twist id="B" bobbins="1-2">
-                          <back start="-12,-5.4" c1="-6,0.6" c2="-5.4,-12" end="0.6,-6" />
-                          <front start="-5.4,-12" c1="0.6,-6" c2="-12,-5.4" end="-6,0.6" />
-                      </twist>
-                      <twist id="C" bobbins="1-2">
-                          <back start="-6,0.6" c1="0,6.6" c2="0.6,-6" end="6.6,0" />
-                          <front start="0.6,-6" c1="6.6,0" c2="-6,0.6" end="0,6.6" />
-                      </twist>
-                      <twist id="E" bobbins="3-4">
-                          <back start="22,-12" c1="16,-6" c2="28.6,-5.4" end="22.6,0.6" />
-                          <front start="28.6,-5.4" c1="22.6,0.6" c2="22,-12" end="16,-6" />
-                      </twist>
-                      <twist id="F" bobbins="3-4">
-                          <back start="16,-6" c1="10,0" c2="22.6,0.6" end="16.6,6.6" />
-                          <front start="22.6,0.6" c1="16.6,6.6" c2="16,-6" end="10,0" />
-                      </twist>
-                    </stitch>
-                    <copy of="ctctc" pairs="1-2" />
-                </group>
-    
-
-                <stitch id="t" pairs="99-100" display="none">
-                    <title>
-                        <value lang="en">single twist of both pairs</value>
-                        <value lang="nl">beide paren 1x draaien</value>
-                    </title>
-                    <pair start="-2.7,-2.7" end="3,3" mark="" />
-                    <pair start="19.3,-2.7" end="13.3,3.3" mark="" />
-                    <copy of="C" />
-                    <copy of="F" />
+                <stitch id="ttctctc" pairs="1-2">
+                  <title>
+                      <value lang="en">double twist, fixing stitch</value>
+                      <value lang="nl">dubbele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-8.7,-8.7" end="16.6,23.3" />
+                  <pair start="25.3,-8.7" end="0,23.3" />
+                  <twist id="B" bobbins="1-2">
+                      <back start="-12,-5.4" c1="-6,0.6" c2="-5.4,-12" end="0.6,-6" />
+                      <front start="-5.4,-12" c1="0.6,-6" c2="-12,-5.4" end="-6,0.6" />
+                  </twist>
+                  <twist id="C" bobbins="1-2">
+                      <back start="-6,0.6" c1="0,6.6" c2="0.6,-6" end="6.6,0" />
+                      <front start="0.6,-6" c1="6.6,0" c2="-6,0.6" end="0,6.6" />
+                  </twist>
+                  <twist id="E" bobbins="3-4">
+                      <back start="22,-12" c1="16,-6" c2="28.6,-5.4" end="22.6,0.6" />
+                      <front start="28.6,-5.4" c1="22.6,0.6" c2="22,-12" end="16,-6" />
+                  </twist>
+                  <twist id="F" bobbins="3-4">
+                      <back start="16,-6" c1="10,0" c2="22.6,0.6" end="16.6,6.6" />
+                      <front start="22.6,0.6" c1="16.6,6.6" c2="16,-6" end="10,0" />
+                  </twist>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
                 </stitch>
-            
-                <group id="tctctc" pairs="3-4">
-                    <title>
-                        <value lang="en">1 twist, crossed turning stitch</value>
-                        <value lang="nl">1x draaien, gekruiste omkeer slag</value>
-                    </title>
-                    <copy of="t" pairs="1-2" />
-                    <copy of="ctctc" pairs="1-2"/>
-                </group>
-
-                <group id="ltctctc" pairs="5-6">
-                    <title>
-                        <value lang="en">2 twists left, 1 twist right, crossed turning stitch</value>
-                        <value lang="nl">linker paar 2x draaien, rechter paar 1x draaien, gekruiste omkeer slag</value>
-                    </title>
-                    <copy of="B" />
-                    <copy of="C" />
-                    <copy of="F" />
-                    <copy of="ctctc" pairs="1-2" />
-                </group>    
-                <group id="llctctc" pairs="7-8">
-                    <title>
-                        <value lang="en">2 twists left, crossed turning stitch</value>
-                        <value lang="nl">2x linker paar 1x draaien, gekruiste omkeer slag</value>
-                    </title>
-                    <copy of="B" />
-                    <copy of="C" />
-                    <copy of="ctctc" pairs="1-2" />
-                </group>    
-                <group id="lctctc" pairs="9-10">
+                <stitch id="tctctc" pairs="3-4">
+                  <title>
+                    <value lang="en">single twist, fixing twist</value>
+                    <value lang="nl">enkele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="C" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
+                <stitch id="ltctctc" pairs="5-6">
+                  <title>
+                    <value lang="en">left double twist, right single twist, fixing stitch</value>
+                    <value lang="nl">links dubbele draai, rechts enkele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="B" />
+                  <copy of="C" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
+                <stitch id="llctctc" pairs="7-8">
+                  <title>
+                    <value lang="en">left double twist, fixing stitch</value>
+                    <value lang="nl">links dubbele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="B"/>
+                  <copy of="C"/>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
+                <stitch id="lctctc" pairs="9-10">
                     <title>
                         <value lang="en">twist left, crossed turning stitch</value>
-                        <value lang="nl">linker paar 1x draaien, gekruiste omkeer slag</value>
+                        <value lang="nl">links enkele draai, gekruiste omkeer slag</value>
                     </title>
-                    <copy of="C" />
-                    <copy of="ctctc" pairs="1-2" />
-                </group>    
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="C" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
     
-                <group id="rtctctc" pairs="11-12">
-                    <title>
-                        <value lang="en">1 twist left, 2 twists right, crossed turning stitch</value>
-                        <value lang="nl">linker paar 1x draaien, rechter paar 2x draaien, gekruiste omkeer slag</value>
-                    </title>
-                    <copy of="C" />
-                    <copy of="E" />
-                    <copy of="F" />
-                    <copy of="ctctc" pairs="1-2" />
-                </group>    
-                <group id="rrctctc" pairs="13-14">
-                    <title>
-                        <value lang="en">2 twists right, crossed turning stitch</value>
-                        <value lang="nl">rechter paar 2x draaien, gekruiste omkeer slag</value>
-                    </title>
-                    <copy of="E" />
-                    <copy of="F" />
-                    <copy of="ctctc" pairs="1-2" />
-                </group>    
+                <stitch id="rtctctc" pairs="11-12">
+                  <title>
+                      <value lang="en">left double twist, right single twist, fixing stitch</value>
+                      <value lang="nl">links enkele draai, rechts dubbele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="C" />
+                  <copy of="E" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
+                <stitch id="rrctctc" pairs="13-14">
+                  <title>
+                      <value lang="en">double twist right, fixing stitch</value>
+                      <value lang="nl">rechts dubbele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="E" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
                 
-                <group id="rctctc" pairs="15-16">
-                    <title>
-                        <value lang="en">1 twist right, crossed turning stitch</value>
-                        <value lang="nl">rechter paar 1x draaien, gekruiste omkeer slag</value>
-                    </title>
-                    <copy of="F" />
-                    <copy of="ctctc" pairs="1-2" />
-                </group>    
-    
+                <stitch id="rctctc" pairs="15-16">
+                  <title>
+                      <value lang="en">single twist right, fixing stitch</value>
+                      <value lang="nl">rechts enkele draai, fixeerslag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="J"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
+
             </group>
-            <group pairs="37-52" display="no">
-    
+
+            <group pairs="2" display="no">
+
                 <title>
                     <value lang="en">turning stitch with varying preceding twists</value>
-                    <value lang="nl">gekruiste omkeer slag met variaties in draaien vooraf</value>
+                    <value lang="nl">omkeer slag met variaties in draaien vooraf</value>
                 </title>
 
-                <group id="ttcttc" pairs="1-2">
-                    <title>
-                        <value lang="en">2 twists, turning stitch</value>
-                        <value lang="nl">2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="tt" pairs="1-2" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
+                <stitch id="ttcttc" pairs="1-2">
+                  <title>
+                      <value lang="en">double twist, turning stitch</value>
+                      <value lang="nl">dubbele draai, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="B"/>
+                  <copy of="C"/>
+                  <copy of="E"/>
+                  <copy of="F"/>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
     
-                <group id="tcttc" pairs="3-4">
-                    <title>
-                        <value lang="en">1 twist, turning stitch</value>
-                        <value lang="nl">1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="t" pairs="1-2" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
+                <stitch id="tcttc" pairs="3-4">
+                  <title>
+                      <value lang="en">single twist, turning stitch</value>
+                      <value lang="nl">enkele draai, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="C"/>
+                  <copy of="F"/>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
+                
+                <stitch id="ltcttc" pairs="5-6">
+                  <title>
+                      <value lang="en">double twist left, single twist right, turning stitch</value>
+                      <value lang="nl">dubbele draai links, enkele draai rechts, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="B"/>
+                  <copy of="C"/>
+                  <copy of="F"/>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>    
     
-                <group id="ltcttc" pairs="5-6">
-                    <title>
-                        <value lang="en">2 twists left, 1 twist right, turning stitch</value>
-                        <value lang="nl">links 2x draaien, rechts 1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="B" />
-                    <copy of="C" />
-                    <copy of="F" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
-    
-                <group id="rtcttc" pairs="7-8">
-                    <title>
-                        <value lang="en">1 twist left, 2 twist2 right, turning stitch</value>
-                        <value lang="nl">links 1x draaien, rechts 2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="C" />
-                    <copy of="E" />
-                    <copy of="F" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
-    
-                <group id="llcttc" pairs="9-10">
-                    <title>
-                        <value lang="en">2 twist left, turning stitch</value>
-                        <value lang="nl">links 2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="B" />
-                    <copy of="C" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
-    
-                <group id="rrtcttc" pairs="11-12">
-                    <title>
-                        <value lang="en">2 twists right, turning stitch</value>
-                        <value lang="nl">rechts 2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="E" />
-                    <copy of="F" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
-    
-                <group id="lcttc" pairs="13-14">
-                    <title>
-                        <value lang="en">1 twist left, turning stitch</value>
-                        <value lang="nl">links 1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="C" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
-    
-                <group id="rcttc" pairs="15-16">
-                    <title>
-                        <value lang="en">1 twist right, turning stitch</value>
-                        <value lang="nl">rechts 1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="F" />
-                    <copy of="cttc" pairs="1-2" />
-                </group>    
-    
-            </group>
-            <group pairs="53-68" display="no">
-    
-                <title>
-                    <value lang="en">turn even threads with varying preceding twists</value>
-                    <value lang="nl">evne draden omkeren met variaties in draaien vooraf</value>
-                </title>
+                <stitch id="rtcttc" pairs="7-8">
+                  <title>
+                      <value lang="en">single twist left, double twist right, turning stitch</value>
+                      <value lang="nl">links enkele draai, rechts dubbele draai, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="C"/>
+                  <copy of="E"/>
+                  <copy of="F"/>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
 
-                <group id="ttcltc" pairs="1-2">
-                    <title>
-                        <value lang="en">2 twists, turn even threads</value>
-                        <value lang="nl">2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="tt" pairs="1-2" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="tcltc" pairs="3-4">
-                    <title>
-                        <value lang="en">1 twist, turn even threads</value>
-                        <value lang="nl">1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="t" pairs="1-2" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="ltcltc" pairs="5-6">
-                    <title>
-                        <value lang="en">2 twists left, 1 twist right, turn even threads</value>
-                        <value lang="nl">links 2x draaien, rechts 1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="B" />
-                    <copy of="C" />
-                    <copy of="F" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="rtcltc" pairs="7-8">
-                    <title>
-                        <value lang="en">1 twist left, 2 twist2 right, turn even threads</value>
-                        <value lang="nl">links 1x draaien, rechts 2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="C" />
-                    <copy of="E" />
-                    <copy of="F" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="llcltc" pairs="9-10">
-                    <title>
-                        <value lang="en">2 twist left, turn even threads</value>
-                        <value lang="nl">links 2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="B" />
-                    <copy of="C" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="rrtcltc" pairs="11-12">
-                    <title>
-                        <value lang="en">2 twists right, turn even threads</value>
-                        <value lang="nl">rechts 2x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="E" />
-                    <copy of="F" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="lcltc" pairs="13-14">
-                    <title>
-                        <value lang="en">1 twist left, turn even threads</value>
-                        <value lang="nl">links 1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="C" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
-                <group id="rcltc" pairs="15-16">
-                    <title>
-                        <value lang="en">1 twist right, turn even threads</value>
-                        <value lang="nl">rechts 1x draaien, omkeer slag</value>
-                    </title>
-                    <copy of="F" />
-                    <copy of="cltc" pairs="1-2" />
-                </group>    
-    
+                <stitch id="llcttc" pairs="9-10">
+                  <title>
+                      <value lang="en">double twist left, turning stitch</value>
+                      <value lang="nl">links dubbele draai, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="B" />
+                  <copy of="C" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
+
+                <stitch id="rrtcttc" pairs="11-12">
+                  <title>
+                      <value lang="en">double twist right, turning stitch</value>
+                      <value lang="nl">rechts dubbele draai, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="E" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
+
+                <stitch id="lcttc" pairs="13-14">
+                  <title>
+                      <value lang="en">single twist left, turning stitch</value>
+                      <value lang="nl">links enkele draaien, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="C" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
+
+                <stitch id="rcttc" pairs="15-16">
+                  <title>
+                      <value lang="en">single twist right, turning stitch</value>
+                      <value lang="nl">rechts enkele draaien, omkeer slag</value>
+                  </title>
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="F" />
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="I"/>
+                  <copy of="K"/>
+                  <copy of="L"/>
+                  <copy of="M"/>
+                </stitch>
             </group>
-            <group pairs="67-84" display="no">
-    
+
+            <group pairs="3" display="no">
+
                 <title>
                     <value lang="en">turn odd threads with varying preceding twists</value>
                     <value lang="nl">oneven draden omkeren met variaties in draaien vooraf</value>
                 </title>
 
-                <group id="ttcrtc" pairs="1-2">
+                <stitch id="ttcltc" pairs="1-2">
                     <title>
-                        <value lang="en">2 twists, turn odd threads</value>
-                        <value lang="nl">2x draaien, omkeer slag</value>
+                        <value lang="en">double twist, turn odd threads</value>
+                        <value lang="nl">dubbele draai, oneven draden omkeren</value>
                     </title>
-                    <copy of="tt" pairs="1-2" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                  <pair start="-2.7,-2.7" end="16.6,23.3" />
+                  <pair start="19.3,-2.7" end="0,23.3" />
+                  <copy of="B"/>
+                  <copy of="C"/>
+                  <copy of="E"/>
+                  <copy of="F"/>
+                  <copy of="G"/>
+                  <copy of="H"/>
+                  <copy of="K"/>
+                  <copy of="T"/>
+                  <copy of="M"/>
+                </stitch>    
     
-                <group id="tcrtc" pairs="3-4">
+                <stitch id="tcltc" pairs="3-4">
                     <title>
-                        <value lang="en">1 twist, turn odd threads</value>
-                        <value lang="nl">1x draaien, omkeer slag</value>
+                        <value lang="en">single twist, turn odd threads</value>
+                        <value lang="nl">enkele draai, oneven draden omkeren</value>
                     </title>
-                    <copy of="t" pairs="1-2" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="C" />
+                    <copy of="F" />
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
     
-                <group id="ltcrtc" pairs="5-6">
+                <stitch id="ltcltc" pairs="5-6">
                     <title>
-                        <value lang="en">2 twists left, 1 twist right, turn odd threads</value>
-                        <value lang="nl">links 2x draaien, rechts 1x draaien, omkeer slag</value>
+                        <value lang="en">double twists left, single twist right, turn odd threads</value>
+                        <value lang="nl">links dubbele draai, rechts enkele draai, oneven draden omkeren</value>
                     </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
                     <copy of="B" />
                     <copy of="C" />
                     <copy of="F" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
     
-                <group id="rtcrtc" pairs="7-8">
+                <stitch id="rtcltc" pairs="7-8">
                     <title>
-                        <value lang="en">1 twist left, 2 twist2 right, turn odd threads</value>
-                        <value lang="nl">links 1x draaien, rechts 2x draaien, omkeer slag</value>
+                        <value lang="en">single twist left, double twist right, turn odd threads</value>
+                        <value lang="nl">links enkele draai, rechts dubbele draai, oneven draden omkeren</value>
                     </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
                     <copy of="C" />
                     <copy of="E" />
                     <copy of="F" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
     
-                <group id="llcrtc" pairs="9-10">
+                <stitch id="llcltc" pairs="9-10">
                     <title>
-                        <value lang="en">2 twist left, turn odd threads</value>
-                        <value lang="nl">links 2x draaien, omkeer slag</value>
+                        <value lang="en">double twist left, turn odd threads</value>
+                        <value lang="nl">links dubbele draai, oneven draden omkeren</value>
                     </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
                     <copy of="B" />
                     <copy of="C" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
     
-                <group id="rrtcrtc" pairs="11-12">
+                <stitch id="rrtcltc" pairs="11-12">
                     <title>
-                        <value lang="en">2 twists right, turn odd threads</value>
-                        <value lang="nl">rechts 2x draaien, omkeer slag</value>
+                        <value lang="en">double twists right, turn odd threads</value>
+                        <value lang="nl">rechts dubbele draai, oneven draden omkeren</value>
                     </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
                     <copy of="E" />
                     <copy of="F" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
     
-                <group id="lcrtc" pairs="13-14">
+                <stitch id="lcltc" pairs="13-14">
                     <title>
-                        <value lang="en">1 twist left, turn odd threads</value>
-                        <value lang="nl">links 1x draaien, omkeer slag</value>
+                        <value lang="en">double twist left, turn odd threads</value>
+                        <value lang="nl">links enekel draai, oneven draden omkeren</value>
                     </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
                     <copy of="C" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
     
-                <group id="rcrtc" pairs="15-16">
+                <stitch id="rcltc" pairs="15-16">
                     <title>
-                        <value lang="en">1 twist right, turn odd threads</value>
-                        <value lang="nl">rechts 1x draaien, omkeer slag</value>
+                        <value lang="en">single twist right, turn odd threads</value>
+                        <value lang="nl">rechts enkele draaien, oneven draden omkeren</value>
                     </title>
-                    <copy of="F" />
-                    <copy of="crtc" pairs="1-2" />
-                </group>    
-    
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="F"/>
+                    <copy of="G"/>
+                    <copy of="H"/>
+                    <copy of="K"/>
+                    <copy of="T"/>
+                    <copy of="M"/>
+                </stitch>    
             </group>
-            <group pairs="85-100" display="no">
+
+            <group pairs="4" display="no">
+                <title>
+                    <value lang="en">turn even threads with varying preceding twists</value>
+                    <value lang="nl">even draden omkeren met variaties in draaien vooraf</value>
+                </title>
+
+                <stitch id="ttcrtc" pairs="1-2">
+                    <title>
+                        <value lang="en">double twist, turn even threads</value>
+                        <value lang="nl">dubbele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="B" />
+                    <copy of="C" />
+                    <copy of="E" />
+                    <copy of="F" />
+	                <copy of="G"/>
+	                <copy of="I"/>
+	                <copy of="L"/>
+	                <copy of="S"/>
+	                <copy of="M"/>
+                </stitch>    
     
+                <stitch id="tcrtc" pairs="3-4">
+                    <title>
+                        <value lang="en">single twist, turn even threads</value>
+                        <value lang="nl">enkele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="C"/>
+                    <copy of="F"/>
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+    
+                <stitch id="ltcrtc" pairs="5-6">
+                    <title>
+                        <value lang="en">double twists left, single twist right, turn even threads</value>
+                        <value lang="nl">links dubbele draai, rechts enkele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="B" />
+                    <copy of="C" />
+                    <copy of="F" />
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+    
+                <stitch id="rtcrtc" pairs="7-8">
+                    <title>
+                        <value lang="en">single twist left, double twist right, turn even threads</value>
+                        <value lang="nl">links enkele draai, rechts dubbele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="C" />
+                    <copy of="E" />
+                    <copy of="F" />
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+    
+                <stitch id="llcrtc" pairs="9-10">
+                    <title>
+                        <value lang="en">double twist left, turn even threads</value>
+                        <value lang="nl">links dubbele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="B" />
+                    <copy of="C" />
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+    
+                <stitch id="rrtcrtc" pairs="11-12">
+                    <title>
+                        <value lang="en">double twists right, turn even threads</value>
+                        <value lang="nl">rechts dubbele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="E" />
+                    <copy of="F" />
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+    
+                <stitch id="lcrtc" pairs="13-14">
+                    <title>
+                        <value lang="en">single twist left, turn even threads</value>
+                        <value lang="nl">links enkele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="C" />
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+    
+                <stitch id="rcrtc" pairs="15-16">
+                    <title>
+                        <value lang="en">single twist right, turn even threads</value>
+                        <value lang="nl">rechts enkele draai, even draden omkeren</value>
+                    </title>
+                    <pair start="-2.7,-2.7" end="16.6,23.3" />
+                    <pair start="19.3,-2.7" end="0,23.3" />
+                    <copy of="F" />
+                    <copy of="G"/>
+                    <copy of="I"/>
+                    <copy of="L"/>
+                    <copy of="S"/>
+                    <copy of="M"/>
+                </stitch>    
+            </group>
+
+            <group pairs="5" display="no">
+
                 <title>
                     <value lang="en">cloth stitch with varying preceding twists</value>
-                    <value lang="nl">gekruiste linnenslag met variaties in draaien vooraf</value>
+                    <value lang="nl">linnenslag met variaties in draaien vooraf</value>
                 </title>
 
                 <group id="ttctc" pairs="1-2">
@@ -641,7 +841,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                         <value lang="en">2 twists, cloth stitch</value>
                         <value lang="nl">2x draaien, linnenslag</value>
                     </title>
-                    <copy of="tt" pairs="1-2" />
+                    <copy of="B"/>
+                    <copy of="C"/>
+                    <copy of="E"/>
+                    <copy of="F"/>
                     <copy of="ctc" pairs="1-2" />
                 </group>    
     
@@ -722,7 +925,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="101-116" display="no">
+            <group pairs="6" display="no">
     
                 <title>
                     <value lang="en">no left twist with varying preceding twists</value>
@@ -734,7 +937,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                         <value lang="en">2 twists, no left twist</value>
                         <value lang="nl">2x draaien, geen linkerdraai</value>
                     </title>
-                    <copy of="tt" pairs="1-2" />
+                    <copy of="B"/>
+                    <copy of="C"/>
+                    <copy of="E"/>
+                    <copy of="F"/>
                     <copy of="crc" pairs="1-2" />
                 </group>    
     
@@ -808,7 +1014,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="117-132" display="no">
+            <group pairs="7" display="no">
     
                 <title>
                     <value lang="en">no right twist with varying preceding twists</value>
@@ -820,7 +1026,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                         <value lang="en">2 twists, no right twist</value>
                         <value lang="nl">2x draaien, geen rechterdraai</value>
                     </title>
-                    <copy of="tt" pairs="1-2" />
+                    <copy of="B"/>
+                    <copy of="C"/>
+                    <copy of="E"/>
+                    <copy of="F"/>
                     <copy of="clc" pairs="1-2" />
                 </group>    
     
@@ -894,7 +1103,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                 </group>    
     
             </group>
-            <group pairs="133-148" display="no">
+            <group pairs="8" display="no">
     
                 <title>
                     <value lang="en">half stitch with varying preceding twists</value>
@@ -906,7 +1115,10 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                         <value lang="en">2 twists, half stitch</value>
                         <value lang="nl">2x draaien, netslag</value>
                     </title>
-                    <copy of="tt" pairs="1-2" />
+                    <copy of="B"/>
+                    <copy of="C"/>
+                    <copy of="E"/>
+                    <copy of="F"/>
                     <copy of="tc" pairs="1-2" />
                 </group>    
     
@@ -915,7 +1127,8 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                         <value lang="en">1 twist, half stitch</value>
                         <value lang="nl">1x draaien, netslag</value>
                     </title>
-                    <copy of="t" pairs="1-2" />
+                    <copy of="C"/>
+                    <copy of="F"/>
                     <copy of="tc" pairs="1-2" />
                 </group>    
     
@@ -982,7 +1195,52 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
             </group>
         </group>
 
-        <group pairs="3" display="no">
+            <group pairs="3">
+                    <title>
+                        <value lang="en">for old diagrams</value>
+                        <value lang="nl">voor oude diagrammen</value>
+                    </title>
+                    <stitch id="tt" pairs="1-2" >
+                      <title>
+                          <value lang="en">2 twists</value>
+                          <value lang="nl">2x draaien</value>
+                      </title>
+                      <pair start="-8.7,-8.7" end="3,3" mark="" />
+                      <pair start="25.3,-8.7" end="13.3,3.3" mark="" />
+                      <copy of="B"/>
+                      <copy of="C"/>
+                      <copy of="E"/>
+                      <copy of="F"/>
+                    </stitch>
+                    <stitch id="r" pairs="3-3" display="none" >
+                        <title>
+                            <value lang="en">twist the right pair</value>
+                            <value lang="nl">draai het rechter paar</value>
+                        </title>
+                        <pair start="19.3,-2.7" end="13.3,3.3" mark="" />
+                      <copy of="F"/>
+                    </stitch>
+                    <stitch id="l" pairs="4-4" display="none">
+                      <title>
+                          <value lang="en">twist the left pair</value>
+                          <value lang="nl">draai het linker paar</value>
+                      </title>
+                      <pair start="-2.7,-2.7" end="3,3" mark="" />
+                      <copy of="C"/>
+                    </stitch>
+                    <stitch id="t" pairs="5-6" display="none">
+                        <title>
+                            <value lang="en">single twist of both pairs</value>
+                            <value lang="nl">beide paren 1x draaien</value>
+                        </title>
+                        <pair start="-2.7,-2.7" end="3,3" mark="" />
+                        <pair start="19.3,-2.7" end="13.3,3.3" mark="" />
+                        <copy of="C" />
+                        <copy of="F" />
+                    </stitch>
+            </group>
+
+        <group pairs="4" display="no">
             <title>
                 <value lang="en">3 preceding twists</value>
                 <value lang="nl">3 voorafgaande draaien</value>
