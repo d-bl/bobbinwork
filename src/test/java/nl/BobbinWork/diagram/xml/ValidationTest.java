@@ -128,7 +128,7 @@ public class ValidationTest
     DiagramBuilder.createDiagram( (Element) parsed.getFirstChild() );
 
     final long elapsedTotal = System.currentTimeMillis() - start2 + elapsed;
-    XmlResources.validate( parsed );
+    //XmlResources.validate( parsed );
     if (elapsedTotal > maxElapsed) return new String[] {
       "elapse time exceeded. expected: " + maxElapsed + " got: " + elapsedTotal
     };
