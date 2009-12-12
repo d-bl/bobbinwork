@@ -156,7 +156,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
    <xsd:element   name="rotate"   type="bw:rotate" minOccurs="0" maxOccurs="1" />
    <!-- more to be developped, e.g. copy a rectangle into a fan -->
   </xsd:sequence>
-  <xsd:attribute  name="pairs" type="bw:range"  use="required" />
+  <xsd:attribute  name="pairs" type="bw:range"  />
   <xsd:attribute  name="of"    type="xsd:IDREF" use="required"/>
  </xsd:complexType>
 

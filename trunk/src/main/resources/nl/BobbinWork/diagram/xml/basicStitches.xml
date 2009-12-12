@@ -658,10 +658,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
                     <copy of="G"/>
                     <copy of="H"/>
                     <copy of="I"/>
-                    <cross id="P" bobbins="2-3">
-                        <back start="11.6,11.6" end="6.6,16.6" />
-                        <front start="5,11.6" end="10,16.3" />
-                    </cross>
+                    <copy of="P"/>
                 </stitch>    
     
                 <group id="ltctc" pairs="5-6">
@@ -1148,9 +1145,7 @@ along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
 
         </group -->
 
-    </group>
-
-    <group pairs="3" display="no">
+    </group><group pairs="3" display="no">
         <title>
             <value lang="en">grid, shown in pair view</value>
             <value lang="nl">raster, getoond met draden</value>
