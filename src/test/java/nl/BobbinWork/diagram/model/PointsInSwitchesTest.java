@@ -66,11 +66,16 @@ public class PointsInSwitchesTest {
 	
 	/** figure (b) on http://code.google.com/p/bobbinwork/wiki/MathChallenges#Highlighting_(groups_of)_stitches */
 	static final String TCTC_BASED_ON_BASIC_STITCHES = ""+
-	"<group pairs='1-2'>\n"+
-	"<copy of='C'><rotate centre='15,15' angle='-45'/><move x='188' y='73'/></copy>"+
-    "<copy of='F'><rotate centre='15,15' angle='75' /><move x='215' y='92'/></copy>"+
-    "<copy of='ctc' pairs='1-2'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
-    "</group>";
+  "<stitch pairs='1-2'>\n"+
+  "<pair end='206.692,99.651' start='201.614,85.697'/>"+
+  "<pair end='197.261,95.032' start='211.130,90.13'/>"+
+  "<copy of='C'><rotate centre='15,15' angle='-45'/><move x='188' y='73'/></copy>"+
+  "<copy of='F'><rotate centre='15,15' angle='75' /><move x='215' y='92'/></copy>"+
+  "<copy of='G'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
+  "<copy of='N'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
+  "<copy of='O'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
+  "<copy of='P'><rotate centre='10,10' angle='25' /><move x='195' y='85'/></copy>"+
+  "</stitch>";
 	
 	/** same drawing but differently grouped. */
 	protected static final String TCTC_BUILDING_OWN_STITCHES= ""+
