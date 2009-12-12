@@ -18,42 +18,20 @@
 package nl.BobbinWork.diagram.xml;
 
 import static java.lang.Double.valueOf;
-import static nl.BobbinWork.diagram.xml.ElementType.back;
-import static nl.BobbinWork.diagram.xml.ElementType.front;
+import static nl.BobbinWork.diagram.xml.ElementType.*;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.Vector;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
-import nl.BobbinWork.diagram.model.Cross;
-import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.model.Group;
-import nl.BobbinWork.diagram.model.MultiplePairsPartition;
-import nl.BobbinWork.diagram.model.PairSegment;
-import nl.BobbinWork.diagram.model.Partition;
-import nl.BobbinWork.diagram.model.Pin;
-import nl.BobbinWork.diagram.model.Point;
-import nl.BobbinWork.diagram.model.Range;
-import nl.BobbinWork.diagram.model.Segment;
-import nl.BobbinWork.diagram.model.Stitch;
-import nl.BobbinWork.diagram.model.Style;
-import nl.BobbinWork.diagram.model.Switch;
-import nl.BobbinWork.diagram.model.ThreadSegment;
-import nl.BobbinWork.diagram.model.ThreadStyle;
-import nl.BobbinWork.diagram.model.Twist;
+import nl.BobbinWork.diagram.model.*;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 public class DiagramBuilder
@@ -70,18 +48,19 @@ public class DiagramBuilder
     final List<Partition> parts = new Vector<Partition>();
     final Vector<ThreadStyle> bobbins = new Vector<ThreadStyle>();
     final String partitionTitle;
-    
+
     ChainedPairsPartitionFactory(final Element element)
     {
       this.element = element;
-      partitionTitle = getTitle(element);
+      partitionTitle = getTitle( element );
       for //
       (Node child = element.getFirstChild() //
       ; child != null //
       ; child = child.getNextSibling()) //
       {
         if (child.getNodeType() == Node.ELEMENT_NODE) {
-          final ElementType childType = ElementType.valueOf( child.getNodeName() );
+          final ElementType childType =
+              ElementType.valueOf( child.getNodeName() );
           final Element childElement = (Element) child;
           switch (childType) {
           case pin:
@@ -100,7 +79,8 @@ public class DiagramBuilder
             break;
           case new_bobbins:
             final ThreadStyle style = createThreadStyle( child.getFirstChild() );
-            final String ranges[] = childElement.getAttribute( "nrs" ).split( "," );
+            final String ranges[] =
+                childElement.getAttribute( "nrs" ).split( "," );
             for (final String range : ranges) {
               final String[] nrs = range.split( "-" );
               final int start;
@@ -149,27 +129,37 @@ public class DiagramBuilder
       return new Diagram( parts );
     }
   }
-  
-  private static Element getFirst(final Element element,final ElementType type){
-    final NodeList titleList = element.getElementsByTagName(type.toString());
-    if (titleList==null||titleList.getLength()<=0)return null;
-    return ((Element)titleList.item( 0 ));
+
+  private static Element getFirst(
+      final Element element,
+      final ElementType type)
+  {
+    final NodeList titleList = element.getElementsByTagName( type.toString() );
+    if (titleList == null || titleList.getLength() <= 0) return null;
+    return ((Element) titleList.item( 0 ));
   }
-  
-  private static String getTitle(final Element element){
-    final Element t = getFirst(element,ElementType.title);
-    if (t==null)return null;
-    final String lang = Localizer.getLanguage();
-    final NodeList list = element.getElementsByTagName(ElementType.value.toString());
-    if (list==null)return null;
+
+  private static String getTitle(
+      final Element element)
+  {
+    final Element t = getFirst( element, title );
+    if (t == null) return null;
+    final String userLang = Localizer.getLanguage();
+    final NodeList list = element.getElementsByTagName( value.toString() );
+    if (list == null) return null;
     int length = list.getLength();
-    for (int i=0 ; i<length ; i++) {
-        if ( list.item(i).getAttributes().getNamedItem(AttributeType.lang.toString()).getTextContent().matches(lang)) { 
-            return list.item(i).getTextContent();
+    if (userLang != null) {
+      // else JUnit test
+      for (int i = 0; i < length; i++) {
+        NamedNodeMap attributes = list.item( i ).getAttributes();
+        if (attributes.getNamedItem( AttributeType.lang.toString() )
+            .getTextContent().matches( userLang )) {
+          return list.item( i ).getTextContent();
         }
-    }
-    if (length<=0)return null;
-    return list.item(0).getTextContent();
+      }
+    } 
+    if (length <= 0) return null;
+    return list.item( 0 ).getTextContent();
   }
 
   private static Group createGroup(
@@ -181,7 +171,8 @@ public class DiagramBuilder
   public static Diagram createDiagram(
       final Element element)
   {
-    final Diagram diagram = new ChainedPairsPartitionFactory( element ).createDiagram();
+    final Diagram diagram =
+        new ChainedPairsPartitionFactory( element ).createDiagram();
     DiagramBuilder.register( element, diagram );
     return diagram;
   }
@@ -281,8 +272,8 @@ public class DiagramBuilder
    *              &nbsp;&nbsp;&lt;back ... /&gt;<br>
    *              &nbsp;&nbsp;&lt;front ... /&gt;<br>
    *              &lt;/twist&gt;<br>
-   *              </code> The order of the front and back element doesn't matter.
-   *          By definition the front thread goes from right to left.
+   *              </code> The order of the front and back element doesn't
+   *          matter. By definition the front thread goes from right to left.
    * @return an instance as defined by the element
    */
   public static Twist createTwist(
@@ -443,7 +434,8 @@ public class DiagramBuilder
     for (final Segment segment : pairs) {
       segment.setStyle( style );
     }
-    final Stitch s = new Stitch( range, pairs, switches, pins, getTitle( element ) );
+    final Stitch s =
+        new Stitch( range, pairs, switches, pins, getTitle( element ) );
     register( element, s );
     return s;
   }
@@ -456,7 +448,8 @@ public class DiagramBuilder
   private static Pin createPin(
       final Element element)
   {
-    final String attribute = element.getAttribute( AttributeType.position.toString() );
+    final String attribute =
+        element.getAttribute( AttributeType.position.toString() );
     return new Pin( createPoint( attribute ) );
   }
 
@@ -533,9 +526,9 @@ public class DiagramBuilder
   {
     element.setUserData( MODEL_TO_DOM, p, null );
     Object orphan = element.getUserData( TreeExpander.CLONE_TO_ORPHAN );
-    if (orphan== null)
+    if (orphan == null)
       orphan = element.getUserData( TreeExpander.INDIRECT_CLONE_TO_ORPHAN );
-    p.setSourceObject( orphan==null?element:orphan );
+    p.setSourceObject( orphan == null ? element : orphan );
     if (element.getAttribute( AttributeType.display.toString() ).matches(
         "(no)|(No)|(NO)|(false)|(False)|(FALSE)" )) {
       p.setVisible( false );
