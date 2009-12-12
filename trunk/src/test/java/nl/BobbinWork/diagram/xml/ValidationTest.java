@@ -24,6 +24,9 @@ public class ValidationTest
   private static XmlResources xmlResources;
 
   private static final String EMPTY = XmlResources.ROOT + "</diagram>";
+  private static final String MISSING_PAIRS =
+      XmlResources.ROOT + XmlResources.INCLUDE
+          + "<stitch pairs='1-2'><copy of='C'/></stitch>" + "</diagram>";
   private static final URL NEW =
       XmlResources.class.getResource( "newDiagram.xml" );
 
@@ -51,8 +54,10 @@ public class ValidationTest
         run( "empty" ).expects( OK ).withInput( 20L, EMPTY ),
         run( "include error" ).expects( SE, "[iI]nclude" ).withInput( 20L, "",
             "non-existent.xml" ),
+        run( MISSING_PAIRS ).expects( OK /* FIXME */).withInput( 1000L,
+            NEW.toURI() ),
     } ) );
-    
+
     for (final Ground g : Ground.values()) {
       resultList.add( run( g.name() + ".diamond" ).expects( OK ).withInput(
           g.diamondLapse, g.diamond() ) );
@@ -128,7 +133,7 @@ public class ValidationTest
     DiagramBuilder.createDiagram( (Element) parsed.getFirstChild() );
 
     final long elapsedTotal = System.currentTimeMillis() - start2 + elapsed;
-    //XmlResources.validate( parsed );
+    // XmlResources.validate( parsed );
     if (elapsedTotal > maxElapsed) return new String[] {
       "elapse time exceeded. expected: " + maxElapsed + " got: " + elapsedTotal
     };
