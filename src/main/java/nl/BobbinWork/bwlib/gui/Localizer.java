@@ -17,8 +17,7 @@
  */
 package nl.BobbinWork.bwlib.gui;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
@@ -229,7 +228,10 @@ public class Localizer {
 
     public static String getLanguage()
     {
+      try {
       return myBundle().getLocale().getLanguage();
+      } catch (MissingResourceException exception){
+        return null;
+      }
     }
-
 }
