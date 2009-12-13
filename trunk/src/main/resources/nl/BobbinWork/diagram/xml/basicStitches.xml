@@ -1756,96 +1756,47 @@
 			</title>
 			<group id="legpair" pairs='3-4'>
 				<title>
-					<value lang="en">twist the legs twice</value>
-					<value lang="nl">draai de poten 2x</value>
+					<value lang="en">twist the legs</value>
+					<value lang="nl">draai de poten</value>
 				</title>
 				<pin position="78,-10" />
-				<group id="t1" pairs='1-2'>
-					<title>
-						<value lang="en">twist the legs</value>
-						<value lang="nl">draai de poten</value>
-					</title>
-					<copy of="C">
-						<rotate centre="0,0" angle="45" />
-						<move x='65' y='-18.7' />
-					</copy>
-					<copy of="F">
-						<rotate centre="0,0" angle="-45" />
-						<move x='80' y='-7' />
-					</copy>
-				</group>
-				<copy of="t1" pairs="1-2">
-					<move x='0' y='17' />
-				</copy>
+				<copy of="lll" pairs="1"><rotate centre="0,0" angle="45" /><move x='65' y='0' /></copy>
+				<copy of="lll" pairs="2"><rotate centre="0,0" angle="45" /><move x='95' y='0' /></copy>
 			</group>
-			<copy of="legpair" pairs="1-2">
-				<rotate centre="78,10" angle="-70" />
-				<move x='-51' y='40' />
-			</copy>
-			<copy of="legpair" pairs="5-6">
-				<rotate centre="78,10" angle="70" />
-				<move x='51' y='40' />
+			<copy of="legpair" pairs="1-2"><rotate centre="78,10" angle="-70" /><move x='-51' y='40' /></copy>
+			<copy of="legpair" pairs="5-6"><rotate centre="78,10" angle="70" /><move x='51' y='40' />
 			</copy>
 			<group id="spider_top" pairs='1-6'>
 				<title>
-					<value lang="en">cloth stitches with the right pairs through
-						the left pairs</value>
-					<value lang="nl">rechter paren in linnenslag door de linker
-						paren</value>
+					<value lang="en">cloth stitches with the right pairs through the left pairs</value>
+					<value lang="nl">rechter paren in linnenslag door de linker	paren</value>
 				</title>
 				<group pairs="1-6">
 					<title>
 						<value lang="en">4th pair through 3 to the left</value>
 						<value lang="nl">4e paar door 3 naar links</value>
 					</title>
-					<!-- 1 -->
-					<copy of="ctc" pairs="3-4">
-						<move x="70" y="15" />
-					</copy>
-					<!-- 2 -->
-					<copy of="ctc" pairs="2-3">
-						<move x="48" y="33" />
-					</copy>
-					<!-- 3 -->
-					<copy of="ctc" pairs="1-2">
-						<move x="30" y="55" />
-					</copy>
+					<!-- 1 --><copy of="ctc" pairs="3-4"><move x="70" y="15" /></copy>
+					<!-- 2 --><copy of="ctc" pairs="2-3"><move x="48" y="33" /></copy>
+					<!-- 3 --><copy of="ctc" pairs="1-2"><move x="30" y="55" /></copy>
 				</group>
 				<group pairs="1-6">
 					<title>
 						<value lang="en">5th pair through 3 to the left</value>
 						<value lang="nl">5e paar door 3 naar links</value>
 					</title>
-					<!-- 4 -->
-					<copy of="ctc" pairs="4-5">
-						<move x="93" y="33" />
-					</copy>
-					<!-- 5 -->
-					<copy of="ctc" pairs="3-4">
-						<move x="70" y="43" />
-					</copy>
-					<!-- 6 -->
-					<copy of="ctc" pairs="2-3">
-						<move x="50" y="63" />
-					</copy>
+					<!-- 4 --><copy of="ctc" pairs="4-5"><move x="93" y="33" /></copy>
+					<!-- 5 --><copy of="ctc" pairs="3-4"><move x="70" y="43" /></copy>
+					<!-- 6 --><copy of="ctc" pairs="2-3"><move x="50" y="63" /></copy>
 				</group>
 				<group pairs="1-6">
 					<title>
 						<value lang="en">5th pair through 3 to the left</value>
 						<value lang="nl">5e paar door 3 naar links</value>
 					</title>
-					<!-- 7 -->
-					<copy of="ctc" pairs="5-6">
-						<move x="110" y="55" />
-					</copy>
-					<!-- 8 -->
-					<copy of="ctc" pairs="4-5">
-						<move x="90" y="63" />
-					</copy>
-					<!-- 9 -->
-					<copy of="ctc" pairs="3-4">
-						<move x="70" y="70" />
-					</copy>
+					<!-- 7 --><copy of="ctc" pairs="5-6"><move x="110" y="55" /></copy>
+					<!-- 8 --><copy of="ctc" pairs="4-5"><move x="90" y="63" /></copy>
+					<!-- 9 --><copy of="ctc" pairs="3-4"><move x="70" y="70" /></copy>
 				</group>
 			</group>
 			<group id="spider_bottom" pairs='1-6'>
@@ -1855,44 +1806,17 @@
 					<value lang="nl">rechter paren in linnenslag door de linker
 						paren</value>
 				</title>
-				<!-- 10 -->
-				<copy of="ctc" pairs="3-4">
-					<move x="70" y="100" />
-				</copy>
-				<!-- 11 -->
-				<copy of="ctc" pairs="2-3">
-					<move x="50" y="108" />
-				</copy>
-				<!-- 12 -->
-				<copy of="ctc" pairs="1-2">
-					<move x="30" y="115" />
-				</copy>
+				<!-- 10 --><copy of="ctc" pairs="3-4"><move x="70" y="100" /></copy>
+				<!-- 11 --><copy of="ctc" pairs="2-3"><move x="50" y="108" /></copy>
+				<!-- 12 --><copy of="ctc" pairs="1-2"><move x="30" y="115" /></copy>
 
-				<!-- 13 -->
-				<copy of="ctc" pairs="4-5">
-					<move x="90" y="108" />
-				</copy>
-				<!-- 14 -->
-				<copy of="ctc" pairs="3-4">
-					<move x="70" y="125" />
-				</copy>
-				<!-- 15 -->
-				<copy of="ctc" pairs="2-3">
-					<move x="48" y="138" />
-				</copy>
+				<!-- 13 --><copy of="ctc" pairs="4-5"><move x="90" y="108" /></copy>
+				<!-- 14 --><copy of="ctc" pairs="3-4"><move x="70" y="125" /></copy>
+				<!-- 15 --><copy of="ctc" pairs="2-3"><move x="48" y="138" /></copy>
 
-				<!-- 16 -->
-				<copy of="ctc" pairs="5-6">
-					<move x="110" y="115" />
-				</copy>
-				<!-- 17 -->
-				<copy of="ctc" pairs="4-5">
-					<move x="93" y="138" />
-				</copy>
-				<!-- 18 -->
-				<copy of="ctc" pairs="3-4">
-					<move x="70" y="150" />
-				</copy>
+				<!-- 16 --><copy of="ctc" pairs="5-6"><move x="110" y="115" /></copy>
+				<!-- 17 --><copy of="ctc" pairs="4-5"><move x="93" y="138" /></copy>
+				<!-- 18 --><copy of="ctc" pairs="3-4"><move x="70" y="150" /></copy>
 			</group>
 		</group>
 		<group id="spider" pairs="11-18">
@@ -1905,24 +1829,12 @@
 					<value lang="en">triple twist all pairs</value>
 					<value lang="nl">draai alle paren 3x</value>
 				</title>
-				<copy of="lll" pairs="3-3">
-					<move x="63" y="9" />
-				</copy>
-				<copy of="lll" pairs="2-2">
-					<move x="45" y="29" />
-				</copy>
-				<copy of="lll" pairs="1-1">
-					<move x="22" y="48" />
-				</copy>
-				<copy of="rrr" pairs="4-4">
-					<move x="75" y="9" />
-				</copy>
-				<copy of="rrr" pairs="5-5">
-					<move x="96" y="28" />
-				</copy>
-				<copy of="rrr" pairs="6-6">
-					<move x="115" y="48" />
-				</copy>
+				<copy of="lll" pairs="3-3"><move x="63" y="9" /></copy>
+				<copy of="lll" pairs="2-2"><move x="45" y="29" /></copy>
+				<copy of="lll" pairs="1-1"><move x="22" y="48" /></copy>
+				<copy of="rrr" pairs="4-4"><move x="75" y="9" /></copy>
+				<copy of="rrr" pairs="5-5"><move x="96" y="28" /></copy>
+				<copy of="rrr" pairs="6-6"><move x="115" y="48" /></copy>
 			</group>
 			<copy of="spider_top" pairs='1-6' />
 			<pin position="78,93" />
