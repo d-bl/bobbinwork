@@ -1,3 +1,20 @@
+/* DiagramPainter.java Copyright 2009 by J. Pol
+ *
+ * This file is part of BobbinWork.
+ *
+ * BobbinWork is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * BobbinWork is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package nl.BobbinWork.diagram.gui;
 
 import static java.awt.BasicStroke.*;
@@ -38,23 +55,27 @@ public class DiagramPainter
     if (shape==null)return (Graphics2D) graphics;
     
     final int avaiableHeight;
+    final int avaiableWidth;
     final Rectangle bounds = shape.getBounds();
     final Insets insets;
     if (panel.getBorder() == null) {
       avaiableHeight = panel.getSize().height;
+      avaiableWidth = panel.getSize().width;
       insets = new InsetsUIResource( 0, 0, 0, 0 );
     } else {
       insets = panel.getBorder().getBorderInsets( panel );
       avaiableHeight = panel.getSize().height - insets.bottom - insets.top;
+      avaiableWidth = panel.getSize().width - insets.left - insets.right;
     }
     final double scale = (((double) avaiableHeight) / ((double) bounds.height));
     double dx = -bounds.x + insets.left;
     double dy = -bounds.y + insets.top;
 
     final Graphics2D g2 = (Graphics2D) graphics.create();
-    if (scale >= 1) {// put in the center
+    if (scale >= 1) {
+      // put in the center
       dy += (avaiableHeight - bounds.height) / 2D;
-      dx += (avaiableHeight - bounds.width) / 2D;
+      dx += (avaiableWidth - bounds.width) / 2D;
     } else {
       g2.scale( scale, scale );
     }

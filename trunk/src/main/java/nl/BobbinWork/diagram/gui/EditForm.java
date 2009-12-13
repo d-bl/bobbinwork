@@ -36,6 +36,7 @@ import javax.swing.event.TreeSelectionListener;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.Drawable;
 import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 
@@ -65,7 +66,7 @@ class EditForm
 
   private final DiagramReplacedListener diagramReplacedListener;
 
-  /** shown in {@link #clipBoard} */
+  /** shown in {@link #clipBoardThreads} */
   private Partition copied = null;
 
   /** The selected diagram element. Subject to manipulations by the buttons */
@@ -83,8 +84,25 @@ class EditForm
   private final JButton delete = createButton( DELETE );
   private final JButton paste = createButton( PASTE );
   private final JButton copy = createButton( COPY );
-  private final JComponent clipBoard = new JPanel()
+  private final JComponent clipBoardThreads = new ClipBoard(){
+    Iterable<Drawable> getPaintIterator()
+    {
+      return copied.getPairs();
+    }};
+
+  private final JComponent clipBoardPairs = new ClipBoard(){
+    Iterable<Drawable> getPaintIterator()
+    {
+      return copied.getThreads();
+    }};
+    
+  private abstract class ClipBoard extends JPanel
   {
+    ClipBoard () {
+      setBackground( Color.white );
+      applyStrings( this, "Clipboard" );
+    }
+    
     public void paintComponent(
         Graphics g)
     {
@@ -92,12 +110,14 @@ class EditForm
       if (copied == null) return;
       if (copied.isVisible()) {
         final Graphics2D g2 = DiagramPainter.fit( g, copied.getBounds(), this );
-        DiagramPainter.paint( g2, copied.getThreads() );
+        DiagramPainter.paint( g2, getPaintIterator() );
       } else {
         paste.setEnabled( false );
         copied = null;
       }
     }
+
+    abstract Iterable<Drawable> getPaintIterator();
   };
 
   /**
@@ -117,9 +137,8 @@ class EditForm
     this.diagramReplacedListener = diagramReplacedListener;
     setLayout( new GridLayout( 1, 0 ) );
     add( createButtonsPanel() );
-    add( clipBoard );
-    applyStrings( clipBoard, "Clipboard" );
-    clipBoard.setBackground( Color.white );
+    add( clipBoardPairs );
+    add( clipBoardThreads );
     copy.addActionListener( createCopyListener() );
     paste.addActionListener( createPasteListener() );
     delete.addActionListener( createDeleteListener() );
@@ -189,7 +208,8 @@ class EditForm
         if (selected != null) selected.setVisible( !selected.isVisible() );
         source.repaint();
         if (copied == selected) {
-          clipBoard.repaint();
+          clipBoardThreads.repaint();
+          clipBoardPairs.repaint();
         }
         setShowHideCaption();
         repaintOnDiagramChange.repaint();
@@ -210,7 +230,8 @@ class EditForm
           final ActionEvent event)
       {
         copied = selected;
-        clipBoard.repaint();
+        clipBoardThreads.repaint();
+        clipBoardPairs.repaint();
       }
     };
   }
