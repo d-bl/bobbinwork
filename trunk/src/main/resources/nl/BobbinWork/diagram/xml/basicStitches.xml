@@ -1715,7 +1715,7 @@
 			<value lang="nl">samengestelde slagen (bouwstenen voor
 				gronden)</value>
 		</title>
-		<group id="flanders" pairs="1">
+		<group id="flanders" pairs="1-4">
 			<title>
 				<value lang="en">flanders</value>
 				<value lang="nl">vlaanders</value>
@@ -1749,7 +1749,7 @@
 				</copy>
 			</group>
 		</group>
-		<group id="snowflake" pairs="2">
+		<group id="snowflake" pairs="5-10">
 			<title>
 				<value lang="en">snowflake</value>
 				<value lang="nl">sneeuwvlok</value>
@@ -1895,7 +1895,7 @@
 				</copy>
 			</group>
 		</group>
-		<group id="spider" pairs="3">
+		<group id="spider" pairs="11-18">
 			<title>
 				<value lang="en">spider</value>
 				<value lang="nl">spin</value>
@@ -1928,7 +1928,7 @@
 			<pin position="78,93" />
 			<copy of="spider_bottom" pairs='1-6' />
 		</group>
-		<group id="vierge" pairs="4">
+		<group id="vierge" pairs="19-22">
 			<title>
 				<value lang="en">vierge</value>
 				<value lang="nl">maagdengrond</value>
@@ -1974,7 +1974,7 @@
 				<move x="50" y="112" />
 			</copy>
 		</group>
-		<group id="sGravenmoers" pairs="5">
+		<group id="sGravenmoers" pairs="23-26">
 			<title>
 				<value lang="en">sGravenmoers</value>
 				<value lang="nl">sGravenmoers</value>

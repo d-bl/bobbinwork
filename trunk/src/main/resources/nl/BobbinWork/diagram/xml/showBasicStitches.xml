@@ -5,6 +5,21 @@
   xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
   xmlns:xi="http://www.w3.org/2001/XInclude"
 >
+    <!--
+        Copyright 2009, J. Pol 
+        
+        This file is part of BobbinWork. BobbinWork is
+        free software: you can redistribute it and/or modify it under the
+        terms of the GNU General Public License as published by the Free
+        Software Foundation, either version 3 of the License, or (at your
+        option) any later version. BobbinWork is distributed in the hope that
+        it will be useful, but WITHOUT ANY WARRANTY; without even the implied
+        warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See
+        the GNU General Public License for more details. You should have
+        received a copy of the GNU General Public License along with
+        BobbinWork. If not, see <http://www.gnu.org/licenses/>.
+    -->
+
   <title>
     <value lang="en">show basic stitches</value>
   </title>
@@ -25,6 +40,5 @@
     <copy of="tclc" pairs="19-20"><move x="85" y="15"/></copy>
     <copy of="crtc" pairs="21-22"><move x="135" y="50"/></copy>
     <copy of="cltc" pairs="23-24"><move x="105" y="50"/></copy>
-
   </group>  
 </diagram>
