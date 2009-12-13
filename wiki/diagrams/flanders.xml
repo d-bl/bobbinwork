@@ -7,7 +7,7 @@
 >
   <!-- This file is licensed under http://creativecommons.org/licenses/by/3.0/ 
     -->
- <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/521/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+ <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/524/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
  <group pairs="1-1">
   <title>
     <value lang="en"> Copyright 2006-2008, J. Falkink-Pol, some rights reserved </value>
