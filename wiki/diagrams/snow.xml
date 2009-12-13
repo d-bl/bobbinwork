@@ -8,7 +8,7 @@
   <title>
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
-  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/421/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/521/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group id="snow" pairs="32761-32766">
     <title>
       <value lang="en">snow flake</value>
@@ -24,10 +24,10 @@
       <copy of="ll"  pairs="2-2"><rotate centre="0,0" angle="-30" /><move x="8" y="33"/></copy>
       <pin position="57,-5"/>
       <copy of="lll"  pairs="3-3"><rotate centre="0,0" angle="45" /><move x="45" y="3"/></copy>
-      <copy of="rrr" pairs="4-4"><rotate centre="0,0" angle="-45" /><move x="58" y="15"/></copy>
+      <copy of="lll" pairs="4-4"><rotate centre="0,0" angle="45" /><move x="70" y="3"/></copy>
       <pin position="120,43"/>
-      <copy of="rrr" pairs="5-5"><rotate centre="0,0" angle="30" /><move x="93" y="23"/></copy>
-      <copy of="rrr" pairs="6-6"><rotate centre="0,0" angle="30" /><move x="110" y="50"/></copy>
+      <copy of="lll" pairs="5-5"><rotate centre="0,0" angle="120" /><move x="113" y="32"/></copy>
+      <copy of="lll" pairs="6-6"><rotate centre="0,0" angle="120" /><move x="125" y="58"/></copy>
     </group>
     <!-- 1 --><copy of="ctc"  pairs="3-4"><move x="50" y="10"/></copy>
     <!-- 2 --><copy of="ctc"  pairs="2-3"><move x="28" y="33"/></copy>

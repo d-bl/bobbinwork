@@ -5,175 +5,85 @@
   xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
   xmlns:xi="http://www.w3.org/2001/XInclude"
 >
-  <!-- This file is licensed under http://creativecommons.org/licenses/by/3.0/ 
-    -->
-  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/421/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
-  <group pairs="1-20">
-
+  <!-- Copyright 2009, J. Pol
+  
+    This file is licensed under http://creativecommons.org/licenses/by/3.0/ 
+  -->
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/521/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <group pairs="1-9">
     <title>
       <value lang="en">Diagram</value>
-
       <value lang="nl">Werktekening</value>
     </title>
 
     <new_bobbins nrs="1,2,7,8,9,10"><style color="#0000FF"/></new_bobbins>
     <new_bobbins nrs="3,4,5,6"><style color="#FF0000"><shadow color="#FFBBBB" width="5"/></style></new_bobbins>
-    <group id="start" pairs="1-9">
+    <group pairs="1-9">
       <title>
-
         <value lang="en">False footside</value>
         <value lang="nl">Opzet</value>
       </title>
-      <group pairs="1-2">
+      <stitch pairs="1-2">
         <title>
-          <value lang="en">twisted cloth stitch</value>
-          <value lang="nl">dubbele netslag</value>
-
+          <value lang="en">false footside left corner: three pair on two temporary pins, twisted cloth stitch</value>
+          <value lang="nl">drie paar om twee hulpspelden, dubbele netslag</value>
         </title>
-        <group pairs="1-2">
-          <title>
-            <value lang="en">twist both pairs</value>
-            <value lang="nl">draai beide paren</value>
-          </title>
-          <copy of="l"   pairs="1-1"><rotate centre="15,15" angle="-20"/><move x="25" y="100"/></copy>
-          <copy of="r"   pairs="2-2"><rotate centre="15,15" angle="20"/><move x="30" y="95"/></copy>
-
-        </group>
-        <copy of="ctc" pairs="1-2"><rotate centre="15,15" angle="-20"/><move x="25" y="100"/></copy>
-      </group>  
-      <pin position="40,115"/>
-      <group pairs="3-4">
-        <title>
-          <value lang="en">twisted cloth stitch</value>
-          <value lang="nl">dubbele netslag</value>
-
-        </title>
-        <group pairs="1-2">
-          <title>
-            <value lang="en">twist both pairs</value>
-            <value lang="nl">draai beide paren</value>
-          </title>
-          <copy of="l"    pairs="1-1"><rotate centre="15,15" angle="-60"/><move x="65" y="73"/></copy>
-          <copy of="r"    pairs="2-2"><rotate centre="15,15" angle="45"/><move x="87" y="82"/></copy>
-
-        </group>
-        <copy of="ctc"  pairs="1-2"><move x="075" y="85"/></copy>
-      </group>  
-      <pin position="085,110"/>
-      <group pairs="5-6">
-        <title>
-          <value lang="en">twisted cloth stitch</value>
-          <value lang="nl">dubbele netslag</value>
-
-        </title>
-        <group pairs="1-2">
-          <title>
-            <value lang="en">twist both pairs</value>
-            <value lang="nl">draai beide paren</value>
-          </title>
-          <copy of="l"    pairs="1-1"><rotate centre="15,15" angle="-45"/><move x="128" y="73"/></copy>
-          <copy of="r"    pairs="2-2"><rotate centre="15,15" angle="45"/><move x="147" y="82"/></copy>
-
-        </group>
-        <copy of="ctc"  pairs="1-2"><move x="135" y="85"/></copy>
-      </group>  
-      <pin position="145,110"/>
-      <group pairs="7-8">
-        <title>
-          <value lang="en">twisted cloth stitch</value>
-          <value lang="nl">dubbele netslag</value>
-
-        </title>
-        <copy of="l"    pairs="1-1"><rotate centre="15,15" angle="-45"/><move x="188" y="73"/></copy>
-        <copy of="r"    pairs="2-2"><rotate centre="15,15" angle="75"/><move x="215" y="92"/></copy>
-        <copy of="ctc"  pairs="1-2"><rotate centre="10,10" angle="25"/><move x="195" y="85"/></copy>
-      </group>  
-      <pin position="205,110"/>
+        <style color="#FF0000" width="2" />
+        <pair start="30,110" end="45,120" />
+        <pair start="40,100" end="30,120" />
+        <copy of="F"><rotate centre="15,15" angle="25"/><move x="25" y="90"/></copy>
+        <copy of="G"><rotate centre="15,15" angle="-20"/><move x="25" y="100"/></copy>
+        <copy of="N"><rotate centre="15,15" angle="-20"/><move x="25" y="100"/></copy>
+        <copy of="O"><rotate centre="15,15" angle="-20"/><move x="25" y="100"/></copy>
+        <copy of="P"><rotate centre="15,15" angle="-20"/><move x="25" y="100"/></copy>
+      </stitch>  
+      <pin position="40,116"/>
+      <copy of="ffs" pairs="3-4"><move x="075" y="85"/></copy><pin position="085,110"/>
+      <copy of="ffs" pairs="5-6"><move x="135" y="85"/></copy><pin position="145,110"/>
+      <copy of="ffs" pairs="7-8"><move x="195" y="85"/></copy><pin position="205,110"/>
     </group>
-    <group id="x"  pairs="1-9">
+    <group id="x1"  pairs="1-9">
       <title>
+        <value lang="en">row 1</value>
+        <value lang="nl">toer heen</value>
 
-         <value lang="en">2 rows</value>
-         <value lang="nl">2 toeren</value>
       </title>
-      <group id="x1"  pairs="1-9">
-        <title>
-          <value lang="en">row 1</value>
-          <value lang="nl">toer heen</value>
+      <copy of="tc_ltr" pairs="2-3"><move x="050" y="110"/></copy>
+      <copy of="tc_ltr" pairs="3-4"><move x="080" y="110"/></copy>
 
-        </title>
-        <group id="x1a"  pairs="1-8">
-          <title>
-            <value lang="en">half stitches</value>
-            <value lang="nl">netslagen</value>
-          </title>
-          <copy of="tc_ltr" pairs="2-3"><move x="050" y="110"/></copy>
-          <copy of="tc_ltr" pairs="3-4"><move x="080" y="110"/></copy>
-
-          <copy of="tc_ltr" pairs="4-5"><move x="110" y="110"/></copy>
-          <copy of="tc_ltr" pairs="5-6"><move x="140" y="110"/></copy>
-          <copy of="tc_ltr" pairs="6-7"><move x="170" y="110"/></copy>
-          <copy of="tc_ltr" pairs="7-8"><move x="200" y="110"/></copy>
-          <pin position="235,140"/>
-        </group>
-        <group id="x1b" pairs="8-9">
-          <title>
-            <value lang="en">twisted cloth stitch</value>
-
-            <value lang="nl">dubbele netslag</value>
-          </title>
-          <copy of="r"   pairs="2-2"><rotate centre="10,10" angle="-45"/><move x="246" y="122"/></copy>
-          <copy of="l"   pairs="1-1"><move x="242" y="132"/></copy>
-          <copy of="ctc" pairs="1-2"><move x="242" y="132"/></copy>
-        </group>
-      </group> 
-      <group id="x2"  pairs="1-9">
-        <title>
-
-          <value lang="en">row back</value>
-          <value lang="nl">toer terug</value>
-        </title>
-        <group pairs="1-8">
-          <title>
-            <value lang="en">half stitches</value>
-            <value lang="nl">netslagen</value>
-
-          </title>
-          <copy of="r"    pairs="8-8"><rotate centre="10,10" angle="45"/><move x="215" y="150"/></copy>
-          <copy of="lctc" pairs="7-8"><rotate centre="10,10" angle="45"/><move x="205" y="150"/></copy>
-          <copy of="lctc" pairs="6-7"><rotate centre="10,10" angle="45"/><move x="175" y="150"/></copy>
-          <copy of="lctc" pairs="5-6"><rotate centre="10,10" angle="45"/><move x="145" y="150"/></copy>
-          <copy of="lctc" pairs="4-5"><rotate centre="10,10" angle="45"/><move x="115" y="150"/></copy>
-          <copy of="lctc" pairs="3-4"><rotate centre="10,10" angle="45"/><move x="085" y="150"/></copy>
-          <copy of="lctc" pairs="2-3"><rotate centre="10,10" angle="45"/><move x="055" y="150"/></copy>
-        </group>
-
-        <pin position="50,170"/>
-        <!-- title>
-          <value lang="en">odd number of twist on one side to maintain couloured workers</value>
-          <value lang="nl"><![CDATA[aan <i>&euml;&euml;n</i> kant een oneven aantal draaien om de gekleeurede lopers in het spel
-                           te houden]]></value>
-        </title-->
-        <group pairs="1-2">
-          <title>
-            <value lang="en">twisted cloth stitch</value>
-
-            <value lang="nl">dubbele netslag</value>
-          </title>
-          <copy of="l"      pairs="1-1"><rotate centre="10,10" angle="35"/><move x="022" y="152"/></copy>
-          <copy of="rctc"   pairs="1-2"><move x="022" y="162"/></copy>
-        </group>
-      </group> 
-    </group>
+      <copy of="tc_ltr" pairs="4-5"><move x="110" y="110"/></copy>
+      <copy of="tc_ltr" pairs="5-6"><move x="140" y="110"/></copy>
+      <copy of="tc_ltr" pairs="6-7"><move x="170" y="110"/></copy>
+      <copy of="tc_ltr" pairs="7-8"><move x="200" y="110"/></copy>
+      <copy of="hs-1" pairs="8-9"><move x="242" y="132"/></copy>
+      <pin position="235,140"/>
+    </group> 
+    <group id="x2"  pairs="1-9">
+      <title>
+        <value lang="en">row back: twist runner only the first time, twist passives for each cloth stitch</value>
+        <value lang="nl">toer terug: draai de loper alleen de eerste keer, draai hangende paren voor de linnenslagen</value>
+      </title>
+      <copy of="tctc" pairs="7-8"><rotate centre="10,10" angle="45"/><move x="205" y="150"/></copy>
+      <copy of="lctc" pairs="6-7"><rotate centre="10,10" angle="45"/><move x="175" y="150"/></copy>
+      <copy of="lctc" pairs="5-6"><rotate centre="10,10" angle="45"/><move x="145" y="150"/></copy>
+      <copy of="lctc" pairs="4-5"><rotate centre="10,10" angle="45"/><move x="115" y="150"/></copy>
+      <copy of="lctc" pairs="3-4"><rotate centre="10,10" angle="45"/><move x="085" y="150"/></copy>
+      <copy of="lctc" pairs="2-3"><rotate centre="10,10" angle="45"/><move x="055" y="150"/></copy>
+      <!-- annotation>
+        <value lang="en">odd number of twist on one side to maintain couloured workers</value>
+        <value lang="nl"><![CDATA[aan <i>&euml;&euml;n</i> kant een oneven aantal draaien om de gekleeurede lopers in het spel
+                         te houden]]></value>
+      </annotation-->
+      <copy of="fs-1"   pairs="1-2"><move x="022" y="162"/></copy>
+      <pin position="50,170"/>
+    </group> 
+    
     <group id="x3"  pairs="1-9">
       <title>
-
          <value lang="en">2 rows</value>
          <value lang="nl">2 toeren</value>
       </title>
-      <copy of="x1a" pairs="1-9"><move y="60"/></copy>
-      <copy of="r"   pairs="9-9"><rotate centre="10,10" angle="-35"/><move x="242" y="164"/></copy>
-      <copy of="x1b" pairs="8-9"><move y="60"/></copy>
+      <copy of="x1" pairs="1-9"><move y="60"/></copy>
       <copy of="x2"  pairs="1-9"><move y="60"/></copy>
     </group>
 
