@@ -7,9 +7,9 @@
     * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
     * [http://bobbinwork.googlecode.com/svn/trunk/doc/class-diagrams.htm class/object diagrams]
     * [GetStarted development environment]
-  * mathematics
-    * [http://bobbinwork.wikispaces.com/Mathematical+foundation+of+the+polar+grids polar grids]
-    * [MathSolutions twist marks]
-    * [MathChallenges remaining challenges]
+  * mathematics solutions 
+    * [TwistMarkMath twist marks]
+    * [GridMath polar grids]
+  * [MathChallenges remaining mathematic challenges]
   * [ToDo plans and ideas]
 [http://code.google.com/p/bobbinwork/w/list all wiki pages]
