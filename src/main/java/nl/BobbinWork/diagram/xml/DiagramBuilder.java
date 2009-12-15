@@ -528,7 +528,8 @@ public class DiagramBuilder
     Object orphan = element.getUserData( TreeExpander.CLONE_TO_ORPHAN );
     if (orphan == null)
       orphan = element.getUserData( TreeExpander.INDIRECT_CLONE_TO_ORPHAN );
-    p.setSourceObject( orphan == null ? element : orphan );
+    String id = element.getAttribute( "id" );
+    p.setSourceObject( orphan == null ? element : orphan, id );
     if (element.getAttribute( AttributeType.display.toString() ).matches(
         "(no)|(No)|(NO)|(false)|(False)|(FALSE)" )) {
       p.setVisible( false );

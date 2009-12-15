@@ -102,10 +102,11 @@ public abstract class Partition {
     if (s != null) {
       s = s.replaceAll("\n", "<br>");
     }
-    return String.format( "<html><body><p><strong>%s</strong></p><p>%s</p></body></html>", getCaption(), s);
+    return String.format( "<html><body><p><strong>%s</strong><br/><em>%s</em></p><p>%s</p></body></html>", getCaption(), id, s);
   }
 
 	private static Map<Class<? extends Partition>, Icon> icons = new HashMap<Class<? extends Partition>, Icon>();
+  private String id;
 
   public Icon getIcon() {
 	  Icon icon = icons.get( getClass() );
@@ -122,9 +123,10 @@ public abstract class Partition {
 	}
 
   public void setSourceObject(
-      Object sourceObject)
+      Object sourceObject, String id)
   {
     this.sourceObject = sourceObject;
+    this.id = id;
   }
 
   public Object getSourceObject()
