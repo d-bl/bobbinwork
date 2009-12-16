@@ -191,7 +191,7 @@ public class Segment {
 	 * part of the chain.
 	 */
 	void disconnectEnd() {
-	    // disconnent old connection
+	    // disconnect old connection
 	    if ((this.next != null) && (this.next.getPrevious() != null) && (this.next.getPrevious() != this)) {
 	        this.previous.setStart(new Point(this.end));
 	        this.previous.setPrevious(null);
@@ -205,7 +205,7 @@ public class Segment {
 	 * the Style for one part of the chain.
 	 */
 	void disconnectStart() {
-	    // disconnent old connection
+	    // disconnect old connection
 	    if ((this.previous != null) && (this.previous.getNext() != null) && (this.previous.getNext() != this)) {
 	        this.setStart(new Point(this.previous.getEnd()));
 	        this.previous.setNext(null);
