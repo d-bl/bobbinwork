@@ -17,13 +17,20 @@
  */
 package nl.BobbinWork.diagram.xml;
 
+import static org.junit.Assert.assertThat;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 import java.io.IOException;
 
 import javax.xml.transform.TransformerException;
 
-import org.junit.Test;
+import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.xml.expand.TreeExpander;
+
+import org.junit.*;
+import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+
 
 public class XmlTest extends XmlFixture {
 
@@ -42,5 +49,21 @@ public class XmlTest extends XmlFixture {
     String s = "<group pairs='1-1'/>";
     String content = XmlResources.ROOT + s + s + "</diagram>";
     xmlResources.validate(content);
+  }
+  
+  @Ignore("see issue 23")
+  @Test
+  public void savingChangedThreads() throws Exception {
+    
+    Document parsed = xmlResources.parse( Ground.flanders.diamond() );
+    TreeExpander.replaceCopyElements( (Element) parsed.getFirstChild() );
+    Diagram diagram =DiagramBuilder.createDiagram( (Element) parsed.getFirstChild() );
+    
+    ThreadSegment thread = diagram.getThreadAt(203, 232);
+    thread.getStyle().setColor( "#FF0000" );
+    thread.getStyle().setWidth( 2 );
+    
+    String s = DiagramRebuilder.toString( diagram );
+    assertThat(s,containsString("<new_bobbins nrs='13'><style color='#FF0000' width='2'><shadow color='#CC0000' width='10'><style/></new_bobbins>"));
   }
 }
