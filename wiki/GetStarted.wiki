@@ -6,6 +6,8 @@
 Users can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
 
 = Developers =
+The [http://code.google.com/p/bobbinwork/issues/list?can=2&q=label%3Anewbee&sort=priority&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles issues labeled newbee] are good starting points for developers new to the project.
+
 Developers may use any IDE or whatever they are comfortable with. 
 The project builds with Java 1.5+ Ant 1.7+ and JUnit 4.3+ though JUnit 4.5 is recommended. For the proper JUnit version in Eclipse see this [http://www.nabble.com/Eclipse-Plugin-update--td24606794.html conversation]. 
 
@@ -14,8 +16,6 @@ How everything once used to work with Eclipse is described step by step on an [h
 To become a project member or start contributing:
  * drop a line or post patches on the issues or [http://groups.google.com/group/bobbinwork discussion group] of the project
  * browse the sources online to add review comments and/or questions
-
-The [http://code.google.com/p/bobbinwork/issues/list?can=2&q=label%3Anewbee&sort=priority&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles issues labeled newbee] are good starting point for developers new to the project.
  
 == Project structure ==
 
