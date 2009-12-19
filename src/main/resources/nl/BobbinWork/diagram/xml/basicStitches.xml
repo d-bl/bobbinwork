@@ -277,7 +277,7 @@
 						<back start="-6,0.6" c1="0,6.6" c2="0.6,-6" end="6.6,0" />
 						<front start="0.6,-6" c1="6.6,0" c2="-6,0.6" end="0,6.6" />
 					</twist>
-					<twist id="D" bobbins="1-2">
+					<twist id="D" bobbins="3-4">
 						<back start="28,-18" c1="22,-12" c2="34.6,-11.4" end="28.6,-5.4" />
 						<front start="34.6,-11.4" c1="28.6,-5.4" c2="28,-18" end="22,-12" />
 					</twist>
@@ -1446,7 +1446,7 @@
 			</group>
 		</group>
 
-		<group pairs="3">
+		<group pairs="3" display="no">
 			<title>
 				<value lang="en">loose twists</value>
 				<value lang="nl">losse draaien</value>
