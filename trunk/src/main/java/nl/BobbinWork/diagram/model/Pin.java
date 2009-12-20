@@ -21,8 +21,11 @@ package nl.BobbinWork.diagram.model;
 import java.awt.Polygon;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import nl.BobbinWork.bwlib.gui.Localizer;
 
 /**
  * A pin supporting a stitch or pair.
@@ -74,7 +77,10 @@ public class Pin extends Partition {
 		return Arrays.asList(a).iterator();
 	}
 
-  public String getTooltip() {
-    return getCaption() + " at " + position;
+  private static final MessageFormat CAPTION =
+    new MessageFormat( Localizer.getString( "Node_Pin" ));
+
+  public String getCaption() {
+    return CAPTION.format( new String[]{position.x+"",position.y+""} );
   }
 }

@@ -121,7 +121,7 @@ public class Localizer {
      * @return the value for the key
      */
     public static String getString(String key) {
-        return myBundle().getString(key);
+        return myBundle().getString(key).replaceAll( "[\r]?[\n][\r]?", "<br/>" );
     }
 
     /**

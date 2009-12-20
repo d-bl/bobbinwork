@@ -80,8 +80,7 @@ public class HeapStatusWidget
   private static String propertyToHtml(
       String value)
   {
-    return "<html><body>" + value.replaceAll( "[\r]?[\n][\r]?", "<br/>" )
-    + "</body></html>";
+    return "<html><body>" + value + "</body></html>";
   }
   
   private String format(

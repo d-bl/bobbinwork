@@ -50,7 +50,7 @@ public class HelpMenu
         + version;
 
     String translation = Localizer
-    .getString( "MenuHelp_About_Translation" ).replaceAll( REGEX, "<br>" );
+    .getString( "MenuHelp_About_Translation" );
     if (!translation.equals( "" )) {
       translation += "<hr>";
     }

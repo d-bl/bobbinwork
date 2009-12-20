@@ -91,18 +91,16 @@ public abstract class Partition {
 		
 	};
 
-  public String getCaption()
-  {
-    return Localizer.getString( "VoodooTree_"+getClass().getSimpleName() );
-  }
+  public abstract String getCaption();
 
   public String getTooltip()
   {
-    String s = Localizer.getString( "VoodooTree_"+getClass().getSimpleName()+"_hint" );
-    if (s != null) {
-      s = s.replaceAll("\n", "<br>");
+    try {
+      String s = Localizer.getString( "Node_"+getClass().getSimpleName()+"_hint" );
+      return String.format( "<html><body><p><em>%s</em></p><p><strong>%s</strong></p><p>%s</p></body></html>", id, getCaption(), s);
+    } catch (MissingResourceException exception){
+      return "";
     }
-    return String.format( "<html><body><p><strong>%s</strong><br/><em>%s</em></p><p>%s</p></body></html>", getCaption(), id, s);
   }
 
 	private static Map<Class<? extends Partition>, Icon> icons = new HashMap<Class<? extends Partition>, Icon>();

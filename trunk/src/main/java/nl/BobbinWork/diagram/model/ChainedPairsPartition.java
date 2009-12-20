@@ -33,8 +33,9 @@ abstract class ChainedPairsPartition
   abstract void connectChild(
       MultiplePairsPartition child);
 
-  ChainedPairsPartition(Range range, List<Partition> newParts)
+  ChainedPairsPartition(Range range, List<Partition> newParts, String title)
   {
+    super(title);
     setPairRange( range );
     initConnectors();
     List<Partition> parts = getPartitions();

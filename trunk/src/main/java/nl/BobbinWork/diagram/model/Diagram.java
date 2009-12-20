@@ -25,12 +25,21 @@ import java.util.List;
  * @author J. Pol
  * 
  */
-public class Diagram extends ChainedPairsPartition {
+public class Diagram
+    extends ChainedPairsPartition
+{
 
-    public Diagram(
-    		List<Partition> parts) {
-    	super (new Range(0, 0), parts);
-    }
-    void connectChild(MultiplePairsPartition part) {}
-    void initConnectors() {}
+  public Diagram(final List<Partition> parts, final String title)
+  {
+    super( new Range( 0, 0 ), parts, title );
+  }
+
+  void connectChild(
+      final MultiplePairsPartition part)
+  {
+  }
+
+  void initConnectors()
+  {
+  }
 }
