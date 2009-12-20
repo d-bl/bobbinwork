@@ -29,8 +29,9 @@ import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 public class DiagramTree
     extends JTree
 {
+  private static final int INITIAL_CAPACITY = 5000;
   private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map =
-      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>( 5000 );
+      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>( INITIAL_CAPACITY );
 
   private static class Renderer
       extends DefaultTreeCellRenderer
@@ -93,6 +94,7 @@ public class DiagramTree
     final DefaultMutableTreeNode root =
         (DefaultMutableTreeNode) treeModel.getRoot();
     root.removeAllChildren();
+    root.setUserObject( diagram );
     map.clear();
     buildTree( root, diagram );
     treeModel.nodeStructureChanged( root );

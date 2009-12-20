@@ -126,7 +126,7 @@ public class DiagramBuilder
 
     Diagram createDiagram()
     {
-      return new Diagram( parts );
+      return new Diagram( parts, partitionTitle );
     }
   }
 

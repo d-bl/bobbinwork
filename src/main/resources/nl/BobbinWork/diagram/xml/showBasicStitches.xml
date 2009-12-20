@@ -21,12 +21,12 @@
     -->
 
   <title>
-    <value lang="en">show basic stitches</value>
+    <value lang="en">Test the looks of the basic stitches</value>
   </title>
   <xi:include href='basicStitches.xml'/>
   <group pairs="1-130">
     <title>
-      <value lang="en">Test the looks of the basic stitches</value>
+      <value lang="en">The showcase</value>
     </title>
     <copy of="ctc" pairs="1-2"><move x="25" y="60"/></copy>
     <copy of="tc" pairs="5-6"><move x="75" y="60"/></copy>
@@ -39,6 +39,26 @@
     <copy of="tcrc" pairs="17-18"><move x="15" y="15"/></copy>
     <copy of="tclc" pairs="19-20"><move x="85" y="15"/></copy>
     <copy of="crtc" pairs="21-22"><move x="135" y="50"/></copy>
+    <group pairs="25-100">
+            <stitch pairs="25-26">
+                <style color="#AA00FF" width="2" />
+                <pair start="3,3" end="13.5,13.5" />
+                <pair start="13.5,3" end="3,13.3" />
+                <copy of="G" />
+                <twist id="N" bobbins="1-2">
+                    <back start="0,6.6" end="5,11.6" />
+                    <front start="5,5" end="0,10" />
+                </twist>
+                <twist id="O" bobbins="3-4">
+                    <back start="11.6,5" end="16.6,10" />
+                    <front start="16.6,6.6" end="11.6,11.6" />
+                </twist>
+                <cross id="P" bobbins="2-3">
+                    <back start="11.6,11.6" end="6.6,16.6" />
+                    <front start="5,11.6" end="10,16.3" />
+                </cross>
+            </stitch>
+            </group>
     <copy of="cltc" pairs="23-24"><move x="105" y="50"/></copy>
   </group>  
 </diagram>

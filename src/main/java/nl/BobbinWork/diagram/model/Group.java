@@ -29,14 +29,12 @@ import java.util.List;
  */
 public class Group extends ChainedPairsPartition {
 
-    private final String title;
     public Group(
     		Range range, 
     		List<Partition> parts, 
-    		List<ThreadStyle> styles, String partitionTitle) //
+    		List<ThreadStyle> styles, String title) //
     {
-    	super (range, parts);
-    	title = partitionTitle;
+    	super (range, parts, title);
     	Iterator<ThreadStyle> st = styles.iterator();
     	Iterator<ThreadSegment> segments = getThreadConnectors().getIns().iterator();
     	while (st.hasNext() && segments.hasNext()) {
@@ -48,15 +46,6 @@ public class Group extends ChainedPairsPartition {
     	}
     }
     
-    public String getCaption()
-    {
-      if (title != null) {
-        return pairRange.toString() + ": " + title;
-      } else {
-        return super.getCaption();
-      }
-    }
-
     void initConnectors() {
     	int count = getPairRange().getCount();
     	setPairConnectors(new Connectors<PairSegment>(count));

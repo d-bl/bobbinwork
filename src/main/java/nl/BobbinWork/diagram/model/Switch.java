@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
 
+import nl.BobbinWork.bwlib.gui.Localizer;
+
 /**
  * Two bobbins next to one another change positions.
  * 
@@ -42,7 +44,7 @@ public abstract class Switch extends MultipleThreadsPartition {
      * <code>setThreadConnectors</code> determining whether the <code>frontThread</code>
      * starts as left bobbin, or the <code>backThread</code>.
      */
-    Switch(Range range, ThreadSegment front, ThreadSegment back) {
+    Switch(final Range range, final ThreadSegment front, final ThreadSegment back) {
     	threadRange = range;
     	frontThread = front;
     	backThread = back;
@@ -95,11 +97,11 @@ public abstract class Switch extends MultipleThreadsPartition {
 
     @Override
 	final Iterator<Drawable> threadIterator () {
-		CubicCurve2D backCurve = backThread.getCurve();
-		CubicCurve2D frontCurve = frontThread.getCurve();
-		ThreadStyle backStyle = backThread.getStyle();
-		ThreadStyle frontStyle = frontThread.getStyle();
-		Drawable[] a = {//
+		final CubicCurve2D backCurve = backThread.getCurve();
+		final CubicCurve2D frontCurve = frontThread.getCurve();
+		final ThreadStyle backStyle = backThread.getStyle();
+		final ThreadStyle frontStyle = frontThread.getStyle();
+		final Drawable[] a = {//
 				new Drawable(backCurve, backStyle.getShadow()),
 				new Drawable(backCurve, backStyle),
 				new Drawable(frontCurve, frontStyle.getShadow()),
@@ -120,6 +122,7 @@ public abstract class Switch extends MultipleThreadsPartition {
 
 	public String getCaption()
   {
-    return threadRange.toString()+": " + super.getCaption();
+    final String key = "Node_"+getClass().getSimpleName();
+    return threadRange.toString()+": " + Localizer.getString( key );
   }
 }
