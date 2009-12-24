@@ -17,17 +17,22 @@
  */
 package nl.BobbinWork.diagram.model;
 
+import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
+import nl.BobbinWork.diagram.gui.BwDiagrams;
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.XmlResources;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -115,6 +120,7 @@ public class PointsInSwitchesTest {
 	
     @Parameters
     public static Collection<Object[]> data() throws Exception {
+      setBundle( "nl/BobbinWork/diagram/gui/labels", new Locale( "en" ) );
     	xr = new XmlResources();
       final MultiplePairsPartition ctctcBS = extractPart("<copy of='ctctc' pairs='1-2'/>");
       final MultiplePairsPartition ctctcOS = createPart(CTCTC);
