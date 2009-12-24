@@ -168,23 +168,6 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
     	highlight(part);
     }    
     
-    /**
-     * Highlights the thread segment at the specified position of the diagram
-     * 
-     * @param x
-     *            horizontal offset from the left margin
-     * @param y
-     *            vertical offset from the top margin
-     */
-    void highlightThreadAt(int x, int y) {
-
-        x /= getScreenScale();
-        y /= getScreenScale();
-        ThreadSegment threadSegment = diagram.getThreadAt(x, y);
-
-        highlight( threadSegment );
-    }
-
     public void highlight(
         ThreadSegment threadSegment)
     {
