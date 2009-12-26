@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram
+  xmlns="http://BobbinWork.googlecode.com/bw.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+  <title>
+    <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
+  </title>
+  <xi:include href='basicStitches.xml'/>
+  <group id="group" pairs="1-34">
+    <title>
+      <value lang="en">Flanders pea</value>
+      <value lang="nl">Boontje in vlaanderse grond</value>
+    </title>
+    <copy of="flanders" pairs="8-11"><move x="65" y="10" /></copy>
+    <copy of="flanders" pairs="6-9"><move x="10" y="65" /></copy>
+    <copy of="tc" pairs="6-7"><rotate centre="10,10" angle="45" /><move x="10" y="120" /></copy>
+    <copy of="flanders" pairs="12-15"><move x="175" y="10" /></copy>
+    <group pairs="10-13">
+      <title><value lang="en"/></title>
+      <!-- NW --><copy of="tc" pairs="1-2"><rotate centre="10,10" angle="-45" /><move x="120" y="65" /></copy>
+      <!-- NE --><copy of="tc" pairs="3-4"><rotate centre="10,10" angle="45" /><move x="180" y="65" /></copy>
+      <!-- N  --><copy of="tctc" pairs="2-3"><move x="150" y="75" /></copy>
+      <pin position="158,105" />
+      <!-- W  --><copy of="tctc" pairs="1-2"><move x="130" y="95" /></copy>
+      <!-- E  --><copy of="tctc" pairs="3-4"><move x="170" y="95" /></copy>
+    </group>
+    <group pairs="8-11">
+      <title><value lang="en"/></title>
+      <!-- NW --><copy of="tc" pairs="1-2"><rotate centre="10,10" angle="-45" /><move x="65" y="120" /></copy>
+      <!-- N  --><copy of="tctc" pairs="2-3"><move x="95" y="130" /></copy>
+      <pin position="103,160" />
+      <!-- W  --><copy of="tctc" pairs="1-2"><move x="75" y="150" /></copy>
+    </group>
+    <copy of="flanders" pairs="14-19"><move x="230" y="65" /></copy>
+    <group pairs="12-15">
+      <title><value lang="en"/></title>
+      <!-- NE --><copy of="tc" pairs="3-4"><rotate centre="10,10" angle="45" /><move x="235" y="120" /></copy>
+      <!-- N  --><copy of="tctc" pairs="2-3"><move x="205" y="130" /></copy>
+      <pin position="213,160" />
+      <!-- E  --><copy of="tctc" pairs="3-4"><move x="225" y="150" /></copy>
+    </group>
+    <copy of="spider_top" pairs="9-14"><move x="80" y="110" /></copy>
+    <group pairs="6-9">
+      <title><value lang="en"/></title>
+      <!-- NE --><copy of="tctc" pairs="3-4"><rotate centre="10,10" angle="45" /><move x="70" y="175" /></copy>
+      <pin position="88,215" />
+      <!-- NW --><copy of="tc" pairs="1-2"><rotate centre="10,10" angle="-45" /><move x="10" y="175" /></copy>
+      <!-- N  --><copy of="tctc" pairs="2-3"><move x="40" y="185" /></copy>
+      <pin position="48,215" />
+      <!-- E  --><copy of="tctc" pairs="1-2"><move x="20" y="205" /></copy>
+      <!-- S  --><copy of="tctc" pairs="2-3"><move x="40" y="225" /></copy>
+      <!-- SW --><copy of="tctc" pairs="3-4"><rotate centre="10,10" angle="-45" /><move x="65" y="230" /></copy>
+    </group>
+    <copy of="tc" pairs="16-17"><rotate centre="10,10" angle="-45" /><move x="285" y="120" /></copy>
+    <group pairs="14-19">
+      <title><value lang="en"/></title>
+      <!-- NW --><copy of="tctc" pairs="1-2"><rotate centre="10,10" angle="-45" /><move x="230" y="175" /></copy>
+      <!-- NE --><copy of="tc" pairs="3-4"><rotate centre="10,10" angle="45" /><move x="290" y="175" /></copy>
+      <pin position="230,215" />
+      <!-- N  --><copy of="tctc" pairs="2-3"><move x="260" y="185" /></copy>
+      <pin position="268,215" />
+      <!-- E  --><copy of="tctc" pairs="3-4"><move x="280" y="205" /></copy>
+      <!-- S  --><copy of="tctc" pairs="2-3"><move x="260" y="225" /></copy>
+      <!-- SE --><copy of="tctc" pairs="1-2"><rotate centre="10,10" angle="45" /><move x="235" y="230" /></copy>
+    </group>
+    <copy of="spider_bottom" pairs="9-14"><move x="80" y="130" /></copy>
+    <copy of="tc" pairs="6-7"><rotate centre="10,10" angle="45" /><move x="10" y="230" /></copy>
+    <group pairs="8-11">
+      <title><value lang="en"/></title>
+      <pin position="103,270" />
+      <!-- W  --><copy of="tctc" pairs="1-2"><move x="75" y="260" /></copy>
+      <!-- S  --><copy of="tctc" pairs="2-3"><move x="95" y="280" /></copy>
+    </group>
+    <copy of="flanders" pairs="6-9"><move x="10" y="285" /></copy>
+    <group pairs="12-15">
+      <title><value lang="en"/></title>
+      <pin position="213,270" />
+      <!-- E  --><copy of="tctc" pairs="3-4"><move x="225" y="260" /></copy>
+      <!-- S  --><copy of="tctc" pairs="2-3"><move x="205" y="280" /></copy>
+    </group>
+    <group pairs="10-13">
+      <title><value lang="en"/></title>
+      <pin position="158,325" />
+      <!-- W  --><copy of="tctc" pairs="1-2"><move x="130" y="315" /></copy>
+      <!-- E  --><copy of="tctc" pairs="3-4"><move x="170" y="315" /></copy>
+      <!-- S  --><copy of="tctc" pairs="2-3"><move x="150" y="335" /></copy>
+    </group>
+    <copy of="flanders" pairs="8-11"><move x="65" y="340" /></copy>
+    <copy of="tc" pairs="16-17"><rotate centre="10,10" angle="-45" /><move x="290" y="230" /></copy>
+    <copy of="flanders" pairs="14-19"><move x="230" y="285" /></copy>
+    <copy of="flanders" pairs="12-15"><move x="175" y="340" /></copy>
+  </group>
+</diagram>
