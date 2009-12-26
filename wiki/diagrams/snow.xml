@@ -9,7 +9,7 @@
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
   <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/553/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
-  <group id="snow" pairs="32761-32766">
+  <group id="snow" pairs="32766">
     <title>
       <value lang="en">snow flake</value>
       <value lang="nl">sneeuwvlok</value>

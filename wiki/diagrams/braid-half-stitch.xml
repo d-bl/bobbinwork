@@ -5,14 +5,14 @@
   xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
   xmlns:xi="http://www.w3.org/2001/XInclude"
 >
-  <!-- This file is licensed under http://creativecommons.org/licenses/by/3.0/ 
-    -->
-    <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/553/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
-    <group pairs="1-20">
-
+  <title>
+    <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
+  </title>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/553/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <group pairs="1-9">
     <title>
-      <value lang="en">Diagram</value>
-      <value lang="nl">Werktekening</value>
+      <value lang="en">Braid in half stitch</value>
+      <value lang="nl">Bandje met netslagen</value>
     </title>
 
     <new_bobbins nrs="1,2,7,8,9,10"><style color="#0000FF"></style></new_bobbins>
