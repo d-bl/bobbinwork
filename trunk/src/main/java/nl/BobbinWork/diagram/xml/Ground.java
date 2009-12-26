@@ -26,6 +26,8 @@ public enum Ground {
   flanders    (4, 4, 0,  55,  55, 500L, 450L), //
   snowflake   (4, 6, 2, 136, 100, 850L, 600L);
 
+  private static final String TEMPLATE =
+      "%s<title><value lang='en'/></title>%s<group pairs='1-%d'>%s</group></diagram>";
   private final int dX;
   private final int dY;
   private final int pairs;
@@ -78,7 +80,7 @@ public enum Ground {
       xx -= dX;
       yy += dY;
     }
-    String string = String.format( "<group pairs='%d-%d'>%s</group>", //$NON-NLS-1$
+    final String string = String.format( "<group pairs='%d-%d'>%s</group>", //$NON-NLS-1$
         1, pEnd, stitches );
     return string;
   }
@@ -104,10 +106,9 @@ public enum Ground {
         leftPair -= pairShift;
       }
     }
-    int nrOfPairs = pairShift * 2 * rows + pairs - pairShift;
-    final String s = String.format( "<group pairs='1-%d'>%s</group>", //$NON-NLS-1$
-        nrOfPairs, copies );
-    return XmlResources.ROOT + XmlResources.INCLUDE + s + "</diagram>"; //$NON-NLS-1$
+    final int nrOfPairs = pairShift * 2 * rows + pairs - pairShift;
+    return String.format( TEMPLATE, //$NON-NLS-1$
+        XmlResources.ROOT, XmlResources.INCLUDE, nrOfPairs, copies );
   }
 
   private String newCopyTag(
