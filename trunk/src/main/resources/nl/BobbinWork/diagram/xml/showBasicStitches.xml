@@ -29,8 +29,8 @@
       <value lang="en">The showcase</value>
     </title>
     <copy of="ctc" pairs="1-2"><move x="25" y="60"/></copy>
-    <copy of="tc" pairs="5-6"><move x="75" y="60"/></copy>
     <copy of="tttctctc" pairs="3-4"><move x="50" y="50"/></copy>
+    <copy of="tc" pairs="5-6"><move x="75" y="60"/></copy>
     <copy of="tc_rtl" pairs="7-8"><move x="135" y="15"/></copy>
     <copy of="tc_ltr" pairs="9-10"><move x="105" y="15"/></copy>
     <copy of="crc" pairs="11-12"><move x="15" y="40"/></copy>
@@ -39,26 +39,17 @@
     <copy of="tcrc" pairs="17-18"><move x="15" y="15"/></copy>
     <copy of="tclc" pairs="19-20"><move x="85" y="15"/></copy>
     <copy of="crtc" pairs="21-22"><move x="135" y="50"/></copy>
-    <group pairs="25-100">
-            <stitch pairs="25-26">
-                <style color="#AA00FF" width="2" />
-                <pair start="3,3" end="13.5,13.5" />
-                <pair start="13.5,3" end="3,13.3" />
-                <copy of="G" />
-                <twist id="N" bobbins="1-2">
-                    <back start="0,6.6" end="5,11.6" />
-                    <front start="5,5" end="0,10" />
-                </twist>
-                <twist id="O" bobbins="3-4">
-                    <back start="11.6,5" end="16.6,10" />
-                    <front start="16.6,6.6" end="11.6,11.6" />
-                </twist>
-                <cross id="P" bobbins="2-3">
-                    <back start="11.6,11.6" end="6.6,16.6" />
-                    <front start="5,11.6" end="10,16.3" />
-                </cross>
-            </stitch>
-            </group>
     <copy of="cltc" pairs="23-24"><move x="105" y="50"/></copy>
+    <group pairs="25-26">
+	    <copy of="tt" pairs="1-2"><move x="15" y="100"/></copy>
+	    <copy of="ctc" pairs="1-2"><move x="15" y="105"/></copy>
+    </group>
+    <group pairs="27-28">
+        <copy of="t" pairs="1-2"><move x="75" y="100"/></copy>
+        <copy of="ctc" pairs="1-2"><move x="75" y="100"/></copy>
+    </group>
+    <copy of="ffs" pairs="31-32"><move x="15" y="150"/></copy>
+    <copy of="hs-1" pairs="33-34"><move x="75" y="150"/></copy>
+    <copy of="fs-1" pairs="35-36"><move x="135" y="150"/></copy>
   </group>  
 </diagram>

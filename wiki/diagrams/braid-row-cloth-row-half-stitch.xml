@@ -9,7 +9,7 @@
   
     This file is licensed under http://creativecommons.org/licenses/by/3.0/ 
   -->
-  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/524/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/553/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group pairs="1-9">
     <title>
       <value lang="en">Diagram</value>
@@ -60,15 +60,29 @@
     </group> 
     <group id="x2"  pairs="1-9">
       <title>
-        <value lang="en">row back: twist runner only the first time, twist passives for each cloth stitch</value>
-        <value lang="nl">toer terug: draai de loper alleen de eerste keer, draai hangende paren voor de linnenslagen</value>
+        <value lang="en">row back</value>
+        <value lang="nl">toer terug</value>
       </title>
-      <copy of="tctc" pairs="7-8"><rotate centre="10,10" angle="45"/><move x="205" y="150"/></copy>
-      <copy of="lctc" pairs="6-7"><rotate centre="10,10" angle="45"/><move x="175" y="150"/></copy>
-      <copy of="lctc" pairs="5-6"><rotate centre="10,10" angle="45"/><move x="145" y="150"/></copy>
-      <copy of="lctc" pairs="4-5"><rotate centre="10,10" angle="45"/><move x="115" y="150"/></copy>
-      <copy of="lctc" pairs="3-4"><rotate centre="10,10" angle="45"/><move x="085" y="150"/></copy>
-      <copy of="lctc" pairs="2-3"><rotate centre="10,10" angle="45"/><move x="055" y="150"/></copy>
+      <group pairs="7-8">
+        <title>
+          <value lang="en">first cloth stitch</value>
+          <value lang="nl">eerste linnenslag</value>
+        </title>
+        <copy of="r1" pairs="2"><rotate centre="10,10" angle="45"/><move x="205" y="150"/></copy>
+        <group id="l-ctc" pairs="1-2">
+          <title>
+            <value lang="en">twist passive, cloth stitch</value>
+            <value lang="nl">draai hangend paar, linnenslag</value>
+          </title>
+          <copy of="l1" pairs="1"><rotate centre="10,10" angle="45"/><move x="205" y="150"/></copy>
+          <copy of="ctc" pairs="1-2"><rotate centre="10,10" angle="45"/><move x="205" y="150"/></copy>
+        </group>
+      </group>
+      <copy of="l-ctc" pairs="6-7"><move x="-30"/></copy>
+      <copy of="l-ctc" pairs="5-6"><move x="-60"/></copy>
+      <copy of="l-ctc" pairs="4-5"><move x="-90"/></copy>
+      <copy of="l-ctc" pairs="3-4"><move x="-120"/></copy>
+      <copy of="l-ctc" pairs="2-3"><move x="-150"/></copy>
       <!-- annotation>
         <value lang="en">odd number of twist on one side to maintain couloured workers</value>
         <value lang="nl"><![CDATA[aan <i>&euml;&euml;n</i> kant een oneven aantal draaien om de gekleeurede lopers in het spel

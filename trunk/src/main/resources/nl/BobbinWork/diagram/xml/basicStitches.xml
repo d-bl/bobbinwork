@@ -1451,33 +1451,21 @@
 				<value lang="en">loose twists</value>
 				<value lang="nl">losse draaien</value>
 			</title>
-			<stitch id="t" pairs="1-2" display="none">
-				<title>
-					<value lang="en">single twist of both pairs</value>
-					<value lang="nl">beide paren draaien</value>
-				</title>
-				<pair start="-2.7,-2.7" end="3,3" mark="" />
-				<pair start="19.3,-2.7" end="13.3,3.3" mark="" />
-				<copy of="C" />
-				<copy of="F" />
-			</stitch>
-			<stitch id="tt" pairs="3-4">
-				<title>
-					<value lang="en">2 twists</value>
-					<value lang="nl">2x draaien</value>
-				</title>
-				<pair start="-8.7,-8.7" end="3,3" mark="" />
-				<pair start="25.3,-8.7" end="13.3,3.3" mark="" />
-				<copy of="B" />
-				<copy of="C" />
-				<copy of="E" />
-				<copy of="F" />
-			</stitch>
-            <stitch id="l" pairs="7" display="none">
+            <stitch id="l" pairs="6" display="none">
                 <title>
-                    <value lang="en">twist the left pair</value>
-                    <value lang="nl">draai het linker paar</value>
+                    <value lang="en">twist</value>
+                    <value lang="nl">draai</value>
                 </title>
+                <style width="2"/>
+                <pair start="-2.7,-2.7" end="3,3" mark="" />
+                <copy of="C" />
+            </stitch>
+            <stitch id="l1" pairs="7" display="none">
+                <title>
+                    <value lang="en">twist passive</value>
+                    <value lang="nl">draai hangend paar</value>
+                </title>
+                <style width="2"/>
                 <pair start="-2.7,-2.7" end="3,3" mark="" />
                 <copy of="C" />
             </stitch>
@@ -1486,6 +1474,7 @@
                     <value lang="en">triple twist</value>
                     <value lang="nl">dubbele draai</value>
                 </title>
+                <style width="2"/>
                 <pair start="-2.7,-2.7" end="3,3" mark="" />
                 <copy of="B" />
                 <copy of="C" />
@@ -1495,38 +1484,75 @@
                     <value lang="en">triple twist</value>
                     <value lang="nl">driedubbele draai</value>
                 </title>
+                <style width="2"/>
                 <pair start="-2.7,-2.7" end="3,3" mark="" />
                 <copy of="A" />
                 <copy of="B" />
                 <copy of="C" />
             </stitch>
-			<stitch id="r" pairs="10-11" display="none">
+			<stitch id="r" pairs="9" display="none">
 				<title>
-					<value lang="en">twist the right pair</value>
-					<value lang="nl">draai het rechter paar</value>
+					<value lang="en">twist</value>
+					<value lang="nl">draai</value>
 				</title>
+                <style width="2"/>
 				<pair start="19.3,-2.7" end="13.3,3.3" mark="" />
-				<copy of="F"/>
+				<copy of="C"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
 			</stitch>
+            <stitch id="r1" pairs="10" display="none">
+                <title>
+                    <value lang="en">twist runner</value>
+                    <value lang="nl">draai looppaar</value>
+                </title>
+                <style width="2"/>
+                <pair start="19.3,-2.7" end="13.3,3.3" mark="" />
+                <copy of="C"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
+            </stitch>
             <stitch id="rr" pairs="12-13" display="none">
                 <title>
                     <value lang="en">double twist</value>
                     <value lang="nl">dubbele draai</value>
                 </title>
+                <style width="2"/>
                 <pair start="19.3,-2.7" end="13.3,3.3" mark="" />
-                <copy of="E" />
-                <copy of="F" />
+                <copy of="B"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
+                <copy of="C"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
             </stitch>
 			<stitch id="rrr" pairs="14-15" display="none">
 				<title>
 					<value lang="en">triple twist</value>
 					<value lang="nl">driedubbele draai</value>
 				</title>
+                <style width="2"/>
 				<pair start="19.3,-2.7" end="13.3,3.3" mark="" />
-				<copy of="D" />
-				<copy of="E" />
-				<copy of="F" />
+                <copy of="A"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
+                <copy of="B"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
+                <copy of="C"><rotate centre="10,10" angle="90" /><move x="-3" y="0"/></copy>
 			</stitch>
+            <group id="t" pairs="15-16" display="none">
+                <title>
+                    <value lang="en">single twist of both pairs</value>
+                    <value lang="nl">beide paren draaien</value>
+                </title>
+                <copy of="l" pairs="1" />
+                <copy of="r" pairs="2" />
+            </group>
+            <group id="tt" pairs="17-18">
+                <title>
+                    <value lang="en">double twists of both pairs</value>
+                    <value lang="nl">dubbele draai van beide paren</value>
+                </title>
+                <copy of="ll" pairs="1" />
+                <copy of="rr" pairs="2" />
+            </group>
+            <group id="ttt" pairs="19-20">
+                <title>
+                    <value lang="en">triple twists of both pairs</value>
+                    <value lang="nl">driedubbele draai van beide paren</value>
+                </title>
+                <copy of="lll" pairs="1" />
+                <copy of="rrr" pairs="2" />
+            </group>
 		</group>
 
 		<!--
@@ -1674,30 +1700,44 @@
         <copy of="O"/>
         <copy of="P"/>
       </stitch>
-      <stitch id="hs-1" pairs="3-4">
+      <group id="hs-1" pairs="3-4">
         <title>
           <value lang="en">headside</value>
           <value lang="nl">speld na vier (rechts)</value>
         </title>
-        <style color="#FF0000" width="2" />
-        <pair start="5,-5" c1="15,-5" c2="15,0" end="15,20" />
-        <pair start="15,-5" c1="15,15" c2="15,20" end="5,20" />
-        <copy of="C"><rotate centre="15,15" angle="-45"/><move x="3" y="-19"/></copy>
-        <copy of="E"><rotate centre="15,15" angle="-45"/><move x="7" y="-15"/></copy>
-        <copy of="F"><rotate centre="15,15" angle="-45"/><move x="7" y="-12"/></copy>
-        <copy of="G"/>
-        <copy of="N"/>
-        <copy of="O"/>
-        <copy of="P"/>
-      </stitch>
+          <stitch  pairs="2">
+	        <title>
+	          <value lang="en">twist edge pair</value>
+	          <value lang="nl">draai rand pair</value>
+	        </title>
+            <style color="#000000" width="2"/>
+            <pair start="15,-15" c1="15,-15" c2="15,0" end="15,0" mark=""/>
+            <copy of="B"><rotate centre="15,15" angle="40"/><move x="0" y="-5"/></copy>
+          </stitch>
+	      <stitch  pairs="1-2">
+	        <title>
+	          <value lang="en">double half stitch</value>
+	          <value lang="nl">dubbele netslag</value>
+	        </title>
+	        <style color="#FF0000" width="2" />
+	        <pair start="5,-5" c1="12,-5" c2="15,12" end="15,20" />
+	        <pair start="15,3" c1="15,5" c2="15,15" end="5,20" />
+	        <copy of="C"><rotate centre="15,15" angle="-45"/><move x="3" y="-19"/></copy>
+	        <copy of="F"><rotate centre="15,15" angle="-45"/><move x="7" y="-12"/></copy>
+	        <copy of="G"/>
+	        <copy of="N"/>
+	        <copy of="O"/>
+	        <copy of="P"/>
+	      </stitch>
+      </group>
       <stitch id="fs-1" pairs="5-6">
         <title>
           <value lang="en">footside</value>
           <value lang="nl">speld na vier (links)</value>
         </title>
         <style color="#FF0000" width="2" />
-        <pair start="7,-5" c1="5,20" c2="5,10" end="19,20" />
-        <pair start="19,-10" c1="5,-10" c2="5,20" end="12,20" />
+        <pair start="7,-10" c1="7,0" c2="10,20" end="19,20" />
+        <pair start="19,-10" c1="10,-10" c2="7,10" end="7,20" />
         <copy of="C"><rotate centre="15,15" angle="45"/><move x="-10" y="-5"/></copy>
         <copy of="F"/>
         <copy of="G"/>
