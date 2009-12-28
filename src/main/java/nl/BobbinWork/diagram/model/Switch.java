@@ -19,6 +19,7 @@
 package nl.BobbinWork.diagram.model;
 
 import java.awt.geom.CubicCurve2D;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Vector;
@@ -96,19 +97,26 @@ public abstract class Switch extends MultipleThreadsPartition {
     }
 
     @Override
-	final Iterator<Drawable> threadIterator () {
-		final CubicCurve2D backCurve = backThread.getCurve();
-		final CubicCurve2D frontCurve = frontThread.getCurve();
-		final ThreadStyle backStyle = backThread.getStyle();
-		final ThreadStyle frontStyle = frontThread.getStyle();
-		final Drawable[] a = {//
-				new Drawable(backCurve, backStyle.getShadow()),
-				new Drawable(backCurve, backStyle),
-				new Drawable(frontCurve, frontStyle.getShadow()),
-				new Drawable(frontCurve, frontStyle),
-				};
-		return Arrays.asList(a).iterator();
-	}
+    final Iterator<Drawable> threadIterator()
+    {
+      final ArrayList<Drawable> list = new ArrayList<Drawable>(4);
+      
+      addSegment( list, backThread );
+      addSegment( list, frontThread );
+      return list.iterator();
+    }
+
+    private void addSegment(
+        final ArrayList<Drawable> list,
+        final ThreadSegment segment)
+    {
+      ThreadStyle style = segment.getStyle();
+      if(style.getWidth()>0) {
+        final CubicCurve2D curve = segment.getCurve();
+        list.add( new Drawable( curve, style.getShadow() ));
+        list.add( new Drawable( curve, style ));
+      }
+    }
 
 	@Override
 	final Iterator<Drawable> pairIterator() {
