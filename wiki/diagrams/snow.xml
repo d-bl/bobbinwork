@@ -35,24 +35,28 @@
      
     <!-- 4 --><copy of="ctc"  pairs="4-5"><move x="73" y="33"/></copy>
 
-    <!-- 5 --><copy of="tc"  pairs="3-4"><move x="50" y="43"/></copy>
-    <!-- 6 --><copy of="tc"  pairs="2-3"><move x="30" y="63"/></copy>
+    <!-- 5 --><copy of="tc"   pairs="3-4"><move x="50" y="43"/></copy>
+    <!-- 6 --><copy of="tc"   pairs="2-3"><move x="30" y="63"/></copy>
       
     <!-- 7 --><copy of="ctc"  pairs="5-6"><move x="90" y="55"/></copy>
-    <!-- 8 --><copy of="tc"  pairs="4-5"><move x="70" y="63"/></copy>
-    <!-- 9 --><copy of="tc"  pairs="3-4"><move x="50" y="82"/></copy>
+    <!-- 8 --><copy of="tc"   pairs="4-5"><move x="70" y="63"/></copy>
+    <!-- 9 --><copy of="tc"   pairs="3-4"><move x="50" y="82"/></copy>
       
     <!-- 11 --><copy of="tc"  pairs="2-3"><move x="30" y="95"/></copy>
-    <!-- 12 --><copy of="rctc"  pairs="1-2"><move x="10" y="115"/></copy>
+    <!-- 12a--><copy of="r"   pairs="2">  <move x="10" y="115"/></copy>
+    <!-- 12b--><copy of="ctc" pairs="1-2"><move x="10" y="115"/></copy>
       
     <!-- 13 --><copy of="tc"  pairs="4-5"><move x="70" y="95"/></copy>
     <!-- 14 --><copy of="tc"  pairs="3-4"><move x="50" y="110"/></copy>
 
-    <!-- 15 --><copy of="rctc"  pairs="2-3"><move x="28" y="138"/></copy>
+    <!-- 15a--><copy of="r"   pairs="3">  <move x="28" y="138"/></copy>
+    <!-- 15b--><copy of="ctc" pairs="2-3"><move x="28" y="138"/></copy>
       
-    <!-- 16 --><copy of="lctc"  pairs="5-6"><move x="90" y="115"/></copy>
-    <!-- 17 --><copy of="lctc"  pairs="4-5"><move x="73" y="138"/></copy>
-    <!-- 18 --><copy of="ctc"  pairs="3-4"><move x="50" y="160"/></copy>
+    <!-- 16a--><copy of="l"   pairs="5">  <move x="90" y="115"/></copy>
+    <!-- 16b--><copy of="ctc" pairs="5-6"><move x="90" y="115"/></copy>
+    <!-- 17a--><copy of="l"   pairs="4">  <move x="73" y="138"/></copy>
+    <!-- 17b--><copy of="ctc" pairs="4-5"><move x="73" y="138"/></copy>
+    <!-- 18 --><copy of="ctc" pairs="3-4"><move x="50" y="160"/></copy>
   </group>
   <group pairs='1-34'>
     <title>
