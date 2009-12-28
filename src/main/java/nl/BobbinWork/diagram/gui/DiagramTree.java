@@ -31,7 +31,8 @@ public class DiagramTree
 {
   private static final int INITIAL_CAPACITY = 5000;
   private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map =
-      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>( INITIAL_CAPACITY );
+      new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>(
+          INITIAL_CAPACITY );
 
   private static class Renderer
       extends DefaultTreeCellRenderer
@@ -107,11 +108,13 @@ public class DiagramTree
     if (partition instanceof MultiplePairsPartition) {
       final MultiplePairsPartition ps = (MultiplePairsPartition) partition;
       for (final Partition p : ps.getPartitions()) {
-        final DefaultMutableTreeNode child = new DefaultMutableTreeNode( p );
-        treeNode.add( child );
-        buildTree( child, p );
-        if (p instanceof MultipleThreadsPartition)
-          map.put( (MultipleThreadsPartition) p, child );
+        if (!p.isDummyOfGimp()) {
+          final DefaultMutableTreeNode child = new DefaultMutableTreeNode( p );
+          treeNode.add( child );
+          buildTree( child, p );
+          if (p instanceof MultipleThreadsPartition)
+            map.put( (MultipleThreadsPartition) p, child );
+        }
       }
     }
   }
