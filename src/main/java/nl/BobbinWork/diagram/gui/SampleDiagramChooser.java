@@ -41,12 +41,13 @@ public class SampleDiagramChooser
 {
   // TODO keep revision number synchronized
   private static final String REVISIONED_URL =
-      "http://bobbinwork.googlecode.com/svn-history/r524/wiki/diagrams/"; //$NON-NLS-1$
+      "http://bobbinwork.googlecode.com/svn-history/r562/wiki/diagrams/"; //$NON-NLS-1$
   private static final String LATEST_URL =
       "http://bobbinwork.googlecode.com/svn/wiki/diagrams/";
   private static final String[] SAMPLE_URLS = new String[] {//
           "snow.xml", //$NON-NLS-1$
           "flanders.xml", //$NON-NLS-1$
+          "flandersPea.xml", //$NON-NLS-1$
           "braid-half-stitch.xml", //$NON-NLS-1$
           "braid-chaos.xml", //$NON-NLS-1$
           "braid-row-cloth-row-half-stitch.xml", //$NON-NLS-1$

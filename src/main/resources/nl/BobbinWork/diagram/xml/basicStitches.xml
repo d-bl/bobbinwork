@@ -16,16 +16,14 @@
 	<title>
 		<value lang="en">Library (building blocks for the diagram)
 		</value>
-		<value lang="nl">Bibliotheek (bouwstenen voor de
-			werktekening)</value>
-		<value lang="de">Bibliothek (Bausteine fur
-			Arbeitszeichnungen)</value>
+		<value lang="nl">Bibliotheek (bouwstenen voor de werktekening)</value>
+		<value lang="de">Bibliothek (Bausteine fur Arbeitszeichnungen)</value>
 	</title>
 	<group pairs="1" display="no">
 
 		<title>
-			<value lang="en">stitches without preceding twists</value>
-			<value lang="nl">slagen zonder draaien vooraf</value>
+			<value lang="en">stitches</value>
+			<value lang="nl">slagen</value>
 		</title>
 		<stitch id="ctctc" pairs="1-2">
 			<title>
@@ -479,7 +477,6 @@
 		<copy of="hor" pairs="351-360"><move y="1100" /></copy>
 
 	</group>
-
 	<group pairs="4" display="no">
 		<title>
 			<value lang="en">edges</value>
@@ -549,7 +546,6 @@
 		</stitch>
 
 	</group>
-
 	<group pairs="5" display="no">
 		<title>
 			<value lang="en">composed stitches (building blocks for
@@ -562,15 +558,13 @@
 				<value lang="en">flanders</value>
 				<value lang="nl">vlaanders</value>
 			</title>
-			<group pairs="1-4">
-				<!-- NE --><copy of="tc" pairs="1-2"><rotate centre="10,10" angle="-45" /></copy>
-				<!-- NW --><copy of="tc" pairs="3-4"><rotate centre="10,10" angle="45" /><move x="60" /></copy>
-				<!-- N  --><copy of="tctc" pairs="2-3"><move y="10" x="30" /></copy>
+				<!-- NW --><copy of="tc" pairs="1-2"><rotate centre="10,10" angle="-45" /></copy>
+				<!-- NE --><copy of="tc" pairs="3-4"><rotate centre="10,10" angle="45" /><move x="60" /></copy>
+				<!-- N  --><copy of="tctc" pairs="2-3"><move x="30" y="10" /></copy>
 				<pin position="38,40" />
-				<!-- E  --><copy of="tc" pairs="1-2"><move y="30" x="10" /></copy>
-				<!-- W  --><copy of="tc" pairs="3-4"><move y="30" x="50" /></copy>
-				<!-- S  --><copy of="tctc" pairs="2-3"><move y="50" x="30" /></copy>
-			</group>
+				<!-- W  --><copy of="tc" pairs="1-2"><move x="10" y="30" /></copy>
+				<!-- E  --><copy of="tc" pairs="3-4"><move x="50" y="30" /></copy>
+				<!-- S  --><copy of="tctc" pairs="2-3"><move x="30" y="50" /></copy>
 		</group>
 		<group id="snowflake" pairs="5-10">
 			<title>
@@ -712,4 +706,72 @@
 			</group>
 		</group>
 	</group>
+    <group pairs="6" display="no">
+      <title>
+          <value lang="en">gimps</value>
+          <value lang="nl">sierdraaden</value>
+      </title>
+      <stitch id="p2IsGimp" pairs="1-2" display="no">
+          <title>
+              <value lang="en">gimp</value>
+              <value lang="nl">sierdraad</value>
+          </title>
+          <style color="#AA00FF" width="2" />
+          <pair start="3,3" end="13.5,13.5" />
+          <pair start="13.5,3" end="3,13.3" />
+          <copy of="G" />
+          <copy of="N" />
+          <cross bobbins="3-4">
+              <front start="11.6,5" end="11.6,5" />
+              <back start="11.6,5" end="11.6,5" />
+          </cross>
+          <twist bobbins="2-3">
+              <front start="5,11.6" end="5,11.6" />
+              <back start="5,11.6" end="5,11.6" />
+          </twist>
+      </stitch>
+      <stitch id="p1IsGimp" pairs="3-4" display="no">
+              <title>
+                  <value lang="en">gimp</value>
+                  <value lang="nl">sierdraad</value>
+              </title>
+              <style color="#AA00FF" width="2" />
+              <pair start="3,3" end="13.5,13.5" />
+              <pair start="13.5,3" end="3,13.3" />
+              <copy of="G" />
+              <twist bobbins="1-2">
+                  <back start="5,5" end="5,5" />
+                  <front start="5,5" end="5,5" />
+              </twist>
+              <twist bobbins="3-4">
+                  <back start="11.6,5" end="16.6,10" />
+                  <front start="16.6,6.6" end="11.6,11.6" />
+              </twist>
+              <cross bobbins="2-3">
+                  <back start="11.6,11.6" end="11.6,11.6" />
+                  <front start="11.6,11.6" end="11.6,11.6" />
+              </cross>
+      </stitch>
+      <stitch id="bothGimps" pairs="5-6" display="no">
+              <title>
+                  <value lang="en">start pair of gimps</value>
+                  <value lang="nl">begin paar sierdraaden</value>
+              </title>
+              <style color="#AA00FF" width="2" />
+              <pair start="3,3" end="13.5,13.5" />
+              <pair start="13.5,3" end="3,13.3" />
+              <twist bobbins="1-2">
+                  <back start="8,8" end="8,8" />
+                  <front start="8,8" end="8,8" />
+              </twist>
+              <twist bobbins="3-4">
+                  <back start="8,8" end="8,8" />
+                  <front start="8,8" end="8,8" />
+              </twist>
+              <cross bobbins="2-3">
+                  <back start="8,8" end="8,8" />
+                  <front start="8,8" end="8,8" />
+              </cross>
+      </stitch>
+    </group>
 </group>
