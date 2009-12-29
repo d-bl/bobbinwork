@@ -44,8 +44,8 @@ class Connectors<T extends Segment>
    * Cashed value. Connections are typically made during (re)construction of a
    * diagram. If this connector is not the last in the diagram it gets connected
    * to in turn. That changes the outs and the bounds should need adjustment.
-   * Rather be sure the bounds are not set at all when connecting. The value is
-   * typically requested when clicking around on ad diagram and the system is
+   * Rather be sure the bounds are not set at all while connecting. The value is
+   * typically requested when clicking around on a diagram and the system is
    * looking what to highlight. During that phase cashing improves performance
    * without the penalty of gaps between individual highlights
    */

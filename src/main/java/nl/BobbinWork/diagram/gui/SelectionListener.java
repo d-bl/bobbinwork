@@ -72,7 +72,7 @@ public class SelectionListener
 
     if (partition instanceof Switch && canvas.isThreadsVisible()) {
       final Switch s = (Switch) partition;
-      canvas.highlight( s.getFront() );
+      canvas.highlight( s.getFronts()[0] );
       for (JComponent x:enableWhenThreadSelected){
         x.setEnabled( true );
       }

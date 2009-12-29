@@ -48,12 +48,12 @@ public class ThreadStyleToolBar
 
   public ThreadStyle getCoreStyle()
   {
-    return twist.getFront().getStyle();
+    return twist.getFronts()[0].getStyle();
   }
 
   private Style getShadowStyle()
   {
-    return twist.getFront().getStyle().getShadow();
+    return twist.getFronts()[0].getStyle().getShadow();
   }
 
   private int getCoreWidth()
@@ -69,29 +69,29 @@ public class ThreadStyleToolBar
   private void setCoreWidth(
       int value)
   {
-    twist.getFront().getStyle().setWidth( value );
-    twist.getBack().getStyle().setWidth( value );
+    twist.getFronts()[0].getStyle().setWidth( value );
+    twist.getBacks()[0].getStyle().setWidth( value );
   }
 
   private void setShadowWidth(
       int value)
   {
-    twist.getFront().getStyle().getShadow().setWidth( value );
-    twist.getBack().getStyle().getShadow().setWidth( value );
+    twist.getFronts()[0].getStyle().getShadow().setWidth( value );
+    twist.getBacks()[0].getStyle().getShadow().setWidth( value );
   }
 
   private void setCoreColor(
       Color value)
   {
-    twist.getFront().getStyle().setColor( value );
-    twist.getBack().getStyle().setColor( value );
+    twist.getFronts()[0].getStyle().setColor( value );
+    twist.getBacks()[0].getStyle().setColor( value );
   }
 
   private void setShadowColor(
       Color value)
   {
-    twist.getFront().getStyle().getShadow().setColor( value );
-    twist.getBack().getStyle().getShadow().setColor( value );
+    twist.getFronts()[0].getStyle().getShadow().setColor( value );
+    twist.getBacks()[0].getStyle().getShadow().setColor( value );
   }
 
   private class Preview
@@ -201,7 +201,7 @@ public class ThreadStyleToolBar
   {
     if (p != null) {
       getCoreStyle().apply( p );
-      twist.getBack().getStyle().apply( p );
+      twist.getBacks()[0].getStyle().apply( p );
       ((SpinnerNumberModel) coreSpinner.getModel()).setValue( Integer
           .valueOf( p.getWidth() ) );
       Integer width = Integer.valueOf( p.getShadow().getWidth() );
@@ -298,8 +298,8 @@ public class ThreadStyleToolBar
     final Point west = new Point( w, w / 2D );
     final Point north = new Point( w / 2D, 0 );
     final Point south = new Point( w / 2D, w );
-    final ThreadSegment back = new ThreadSegment( east, null, null, west );
-    final ThreadSegment front = new ThreadSegment( north, null, null, south );
+    final ThreadSegment[] back = new ThreadSegment[]{new ThreadSegment( east, null, null, west )};
+    final ThreadSegment[] front = new ThreadSegment[]{new ThreadSegment( north, null, null, south )};
     return new Twist( new Range( 1, 2 ), front, back );
   }
 }

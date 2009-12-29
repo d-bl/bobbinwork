@@ -27,109 +27,130 @@ import nl.BobbinWork.bwlib.gui.Localizer;
 
 /**
  * Two bobbins next to one another change positions.
+ * Occasionally multiple bobbins are treated as a single one.
  * 
  * @author J. Pol
  */
-public abstract class Switch extends MultipleThreadsPartition {
+public abstract class Switch
+    extends MultipleThreadsPartition
+{
 
-    /** Two bobbins exchanging their positions. */
-    private ThreadSegment frontThread = null, backThread = null;
+  /** Two (groups of) bobbins exchanging their positions. */
+  private ThreadSegment frontThreads[] = null, backThreads[] = null;
 
-    /** The range of threads/bobbins involved in the cross/twist. */
-    private Range threadRange = null;
+  /** The range of threads/bobbins involved in the cross/twist. */
+  private Range threadRange = null;
 
-    /**
-     * Creates a new instance of a <code>Cross</code> or <code>Twist</code>.
-     * The difference between the two is made by the abstract method
-     * <code>setThreadConnectors</code> determining whether the <code>frontThread</code>
-     * starts as left bobbin, or the <code>backThread</code>.
-     */
-    Switch(final Range range, final ThreadSegment front, final ThreadSegment back) {
-    	threadRange = range;
-    	frontThread = front;
-    	backThread = back;
-        setThreadConnectors(); 
-	}
-    
-    /**
-     * Adds the <code>backThread</code> and
-     * <code>frontThread</code> <code>ThreadSegment</code>s in the appropriate
-     * order to the <code>ThreadConnectors</code>.
-     * 
-     * For a <code>Cross</code> the <code>frontThread</code> segment starts as the
-     * left bobbin, for a <code>Twist</code> the <code>backThread</code>.
-     * 
-     * For each <code>Cross</code> and <code>Twist</code> two
-     * <code>ThreadSegment</code>s are drawn. The end points of one
-     * <code>Cross</code> and <code>Twist</code> are the start points of the next.
-     * While constructing a pattern cross by twist in the same order as a lace
-     * maker performs these actions, these segments are connected, eliminating
-     * gaps and giving the whole thread a single style (color/width).
-     */
-    abstract void setThreadConnectors();
-
-    /**
-     * Gets the numbers of the thread/bobbin positions involved in the
-     * cross/twist.
-     * 
-     * @return range of positions.
-     */
-    Range getThreadRange() {
-        return threadRange;
-    }
-
-    /**
-     * Gets the segment of the thread lying behind the other thread.
-     * 
-     * @return the thread segment in the background.
-     */
-    public ThreadSegment getBack() {
-        return backThread;
-    }
-
-    /** Gets the segment of the thread lying on top of the other thread. */
-    /**
-     * @return the thread segment in frontThread of the other one.
-     */
-    public ThreadSegment getFront() {
-        return frontThread;
-    }
-
-    @Override
-    final Iterator<Drawable> threadIterator()
-    {
-      final ArrayList<Drawable> list = new ArrayList<Drawable>(4);
-      
-      addSegment( list, backThread );
-      addSegment( list, frontThread );
-      return list.iterator();
-    }
-
-    private void addSegment(
-        final ArrayList<Drawable> list,
-        final ThreadSegment segment)
-    {
-      ThreadStyle style = segment.getStyle();
-      if(style.getWidth()>0) {
-        final CubicCurve2D curve = segment.getCurve();
-        list.add( new Drawable( curve, style.getShadow() ));
-        list.add( new Drawable( curve, style ));
-      }
-    }
-
-	@Override
-	final Iterator<Drawable> pairIterator() {
-		return new Vector<Drawable>().iterator();
-	}
-	
-	@Override
-	final Iterator<Drawable> pinIterator() {
-		return new Vector<Drawable>().iterator();
-	}
-
-	public String getCaption()
+  /**
+   * Creates a new instance of a <code>Cross</code> or <code>Twist</code>. The
+   * difference between the two is made by the abstract method
+   * <code>setThreadConnectors</code> determining whether the
+   * <code>frontThreads</code> starts as left bobbin, or the
+   * <code>backThreads</code>.
+   */
+  Switch(
+      final Range range,
+      final ThreadSegment[] fronts,
+      final ThreadSegment[] backs)
   {
-    final String key = "Node_"+getClass().getSimpleName();
-    return threadRange.toString()+": " + Localizer.getString( key );
+    if (range.getCount() != fronts.length + backs.length) {
+      String format = "range [%s] does not match number of front threads [%d] plus back threads[%d]";
+      String message = String.format( format, range.toString(),fronts.length, backs.length );
+      throw new IllegalArgumentException (message);
+    }
+    threadRange = range;
+    frontThreads = fronts;
+    backThreads = backs;
+    setThreadConnectors();
+  }
+
+  /**
+   * Adds the <code>backThread</code> and <code>frontThread</code>
+   * <code>ThreadSegment</code>s in the appropriate order to the
+   * <code>ThreadConnectors</code>.
+   * 
+   * For a <code>Cross</code> the <code>frontThread</code> segment starts as the
+   * left bobbin, for a <code>Twist</code> the <code>backThread</code>.
+   * 
+   * For each <code>Cross</code> and <code>Twist</code> two
+   * <code>ThreadSegment</code>s are drawn. The end points of one
+   * <code>Cross</code> and <code>Twist</code> are the start points of the next.
+   * While constructing a pattern cross by twist in the same order as a lace
+   * maker performs these actions, these segments are connected, eliminating
+   * gaps and giving the whole thread a single style (color/width).
+   */
+  abstract void setThreadConnectors();
+
+  /**
+   * Gets the numbers of the thread/bobbin positions involved in the
+   * cross/twist.
+   * 
+   * @return range of positions.
+   */
+  Range getThreadRange()
+  {
+    return threadRange;
+  }
+
+  /**
+   * Gets the segment of the thread(s) lying behind the other thread(s).
+   * 
+   * @return the thread segment(s) in the background.
+   */
+  public ThreadSegment[] getBacks()
+  {
+    return backThreads;
+  }
+
+  /**
+   * Gets the segment(s) of the thread(s) lying on top of the other thread.
+   * 
+   * @return the thread segment(s) in front of the other one(s).
+   */
+  public ThreadSegment[] getFronts()
+  {
+    return frontThreads;
+  }
+
+  @Override
+  final Iterator<Drawable> threadIterator()
+  {
+    final ArrayList<Drawable> list = new ArrayList<Drawable>( 4 );
+
+    for (final ThreadSegment segment : backThreads)
+      addSegment( list, segment );
+    for (final ThreadSegment segment : frontThreads)
+      addSegment( list, segment );
+    return list.iterator();
+  }
+
+  private void addSegment(
+      final ArrayList<Drawable> list,
+      final ThreadSegment backThread2)
+  {
+    final ThreadStyle style = backThread2.getStyle();
+    if (style.getWidth() > 0) {
+      final CubicCurve2D curve = backThread2.getCurve();
+      list.add( new Drawable( curve, style.getShadow() ) );
+      list.add( new Drawable( curve, style ) );
+    }
+  }
+
+  @Override
+  final Iterator<Drawable> pairIterator()
+  {
+    return new Vector<Drawable>().iterator();
+  }
+
+  @Override
+  final Iterator<Drawable> pinIterator()
+  {
+    return new Vector<Drawable>().iterator();
+  }
+
+  public String getCaption()
+  {
+    final String key = "Node_" + getClass().getSimpleName();
+    return threadRange.toString() + ": " + Localizer.getString( key );
   }
 }

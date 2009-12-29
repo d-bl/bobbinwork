@@ -108,13 +108,11 @@ public class DiagramTree
     if (partition instanceof MultiplePairsPartition) {
       final MultiplePairsPartition ps = (MultiplePairsPartition) partition;
       for (final Partition p : ps.getPartitions()) {
-        if (!p.isDummyOfGimp()) {
-          final DefaultMutableTreeNode child = new DefaultMutableTreeNode( p );
-          treeNode.add( child );
-          buildTree( child, p );
-          if (p instanceof MultipleThreadsPartition)
-            map.put( (MultipleThreadsPartition) p, child );
-        }
+        final DefaultMutableTreeNode child = new DefaultMutableTreeNode( p );
+        treeNode.add( child );
+        buildTree( child, p );
+        if (p instanceof MultipleThreadsPartition)
+          map.put( (MultipleThreadsPartition) p, child );
       }
     }
   }

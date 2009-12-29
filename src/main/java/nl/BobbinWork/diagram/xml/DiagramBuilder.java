@@ -225,26 +225,25 @@ public class DiagramBuilder
   {
 
     private final Range range;
-    private final ThreadSegment frontSegment;
-    private final ThreadSegment backSegment;
+    private final ThreadSegment[] frontSegments;
+    private final ThreadSegment[] backSegments;
 
     SwitchFactory(final Element element)
     {
       range = createRange( element );
-      frontSegment =
-          createThreadSegment( getMandatoryElement( element, front ) );
-      backSegment = createThreadSegment( getMandatoryElement( element, back ) );
-      checkRangeIs2( range );
+      frontSegments = 
+          createThreadSegments( getMandatoryElement( element, front ) );
+      backSegments = createThreadSegments( getMandatoryElement( element, back ) );
     }
 
     Cross createCross()
     {
-      return new Cross( range, frontSegment, backSegment );
+      return new Cross( range, frontSegments, backSegments );
     }
 
     Twist createTwist()
     {
-      return new Twist( range, frontSegment, backSegment );
+      return new Twist( range, frontSegments, backSegments );
     }
   }
 
@@ -327,16 +326,21 @@ public class DiagramBuilder
   }
 
   /**
-   * Creates a new instance of ThreadSegment.
+   * Creates a new instance(s) of ThreadSegment(s).
    * 
    * @param element
    *          <code>&lt;front&nbsp;...&gt;</code> or
    *          <code>&lt;back&nbsp;...&gt;</code>
    */
-  private static ThreadSegment createThreadSegment(
-      final Element element)
+  private static ThreadSegment[] createThreadSegments(
+      final NodeList elements)
   {
-    return new SegmentFactory( element ).createThreadSegment();
+    ThreadSegment[] result = new ThreadSegment[elements.getLength()];
+    for (int i=0 ; i<elements.getLength() ; i++) {
+      Element item = (Element) elements.item( i );
+      result[i] = new SegmentFactory( item ).createThreadSegment();
+    }
+    return result;
   }
 
   /**
@@ -500,24 +504,12 @@ public class DiagramBuilder
         + attributeTag + "='" + value + "' ...>" );
   }
 
-  private static Element getMandatoryElement(
+  private static NodeList getMandatoryElement(
       final Element element,
       final ElementType tag)
   {
     final String tagString = tag.toString();
-    final NodeList nodeList = element.getElementsByTagName( tagString );
-    if (nodeList.getLength() != 1)
-      throw new IllegalArgumentException( "expecting exactly 1 " + tagString
-          + "; found " + nodeList.getLength() );
-    return (Element) nodeList.item( 0 );
-  }
-
-  private static void checkRangeIs2(
-      final Range range)
-  {
-    if (range.getCount() != 2)
-      throw new IllegalArgumentException( "range should span 2 threads got: "
-          + range.toString() );
+    return element.getElementsByTagName( tagString );
   }
 
   static void register(

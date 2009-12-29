@@ -80,7 +80,7 @@ public class SampleDiagramChooser
           url + NEW_LINE + exception.getClass().getName() + NEW_LINE
               + exception.getLocalizedMessage();
       JOptionPane.showMessageDialog( parent, message,
-          getString( "Load_error" ), JOptionPane.ERROR_MESSAGE );
+          getString( "Load_error_caption" ), JOptionPane.ERROR_MESSAGE );
     }
   }
 

@@ -18,6 +18,7 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -29,31 +30,38 @@ import java.util.Vector;
  * over left bobbin in the same hand. A <code>Twist</code> describes what
  * happens in one hand. Note that each pair has it own instances: Though lace
  * makers shorthand describes a cloth stitch as CTC, we will have a left twist
- * and a right twist.
+ * and a right twist. Note that a bobbin may be read as a group of bobbins.
  * 
  * @author J. Pol
  */
-public class Twist extends Switch {
+public class Twist
+    extends Switch
+{
 
-	/**
-	 * @param range
-	 *            select which threads/bobbins of the parent should be used
-	 *            counting form left to right. Usually the left two bobbins or
-	 *            right two bobbins of a stitch. 
-	 * @param frontSegment
-	 *            represents the thread going from right to left over the other.
-	 * @param backSegment
-	 *            represents the thread going from left to right behind the
-	 *            other.
-	 */
-    public Twist(Range range, ThreadSegment frontSegment, ThreadSegment backSegment) {
-    	super (range, frontSegment,backSegment);
-	}
+  /**
+   * @param range
+   *          select which threads/bobbins of the parent should be used counting
+   *          form left to right. Usually the left two bobbins or right two
+   *          bobbins of a stitch.
+   * @param frontSegments
+   *          represents the thread(s) going from right to left over the other.
+   * @param backSegments
+   *          represents the thread(s) going from left to right behind the
+   *          other.
+   */
+  public Twist(
+      final Range range,
+      final ThreadSegment[] frontSegments,
+      final ThreadSegment[] backSegments)
+  {
+    super( range, frontSegments, backSegments );
+  }
 
-	void setThreadConnectors() {
-        List<ThreadSegment> ins = new Vector<ThreadSegment>(2);
-        ins.add(getBack());
-        ins.add(getFront());
-        super.setThreadConnectors(new Connectors<ThreadSegment>(ins));
-    }
+  void setThreadConnectors()
+  {
+    final List<ThreadSegment> ins = new Vector<ThreadSegment>( 2 );
+    ins.addAll( Arrays.asList( getBacks() ) );
+    ins.addAll( Arrays.asList( getFronts() ) );
+    super.setThreadConnectors( new Connectors<ThreadSegment>( ins ) );
+  }
 }
