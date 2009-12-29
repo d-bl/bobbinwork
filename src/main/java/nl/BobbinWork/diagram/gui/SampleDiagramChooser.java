@@ -45,6 +45,7 @@ public class SampleDiagramChooser
   private static final String LATEST_URL =
       "http://bobbinwork.googlecode.com/svn/wiki/diagrams/";
   private static final String[] SAMPLE_URLS = new String[] {//
+          "stars.xml", //$NON-NLS-1$
           "snow.xml", //$NON-NLS-1$
           "flanders.xml", //$NON-NLS-1$
           "flandersPea.xml", //$NON-NLS-1$
