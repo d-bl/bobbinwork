@@ -89,7 +89,7 @@ public abstract class MultiplePairsPartition
   {
     final Switch s = (Switch) getSwitchAt( x, y );
     if (s != null) {
-      return s.getFront();
+      return s.getFronts()[0];
     } else {
       return null;
     }

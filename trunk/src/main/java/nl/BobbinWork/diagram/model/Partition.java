@@ -120,16 +120,6 @@ public abstract class Partition {
 	  return icon;
 	}
 
-  /** @return true if not to be rendered with descriptive instructions */
-  public boolean isDummyOfGimp()
-  {
-    if (!(this instanceof Switch)) return false;
-    final Switch sw = (Switch) this;
-    if (sw.getFront().getStyle().getWidth() == 0) return true;
-    if (sw.getBack().getStyle().getWidth() == 0) return true;
-    return false;
-  }
-
   public void setSourceObject(
       Object sourceObject, String id)
   {

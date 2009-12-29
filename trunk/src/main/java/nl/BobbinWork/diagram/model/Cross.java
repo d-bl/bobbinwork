@@ -18,6 +18,7 @@
 
 package nl.BobbinWork.diagram.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -26,20 +27,25 @@ import java.util.Vector;
  * 
  * Having two bobbins in each hand usually the right bobbin in the left hand
  * goes over the left bobbin in the right hand. In other words, the second
- * bobbin goes over the third.
+ * bobbin goes over the third. A bobbin may be read as a group of bobbins
+ * treated as one.
  * 
  * @author J. Pol
  */
-public class Cross extends Switch {
+public class Cross
+    extends Switch
+{
 
-    public Cross(Range range, ThreadSegment front, ThreadSegment back) {
-    	super (range, front, back);
-	}
+  public Cross(final Range range, final ThreadSegment[] fronts, final ThreadSegment[] backs)
+  {
+    super( range, fronts, backs );
+  }
 
-	void setThreadConnectors() {
-        List<ThreadSegment> ins = new Vector<ThreadSegment>(2);
-        ins.add(getFront());
-        ins.add(getBack());
-        super.setThreadConnectors(new Connectors<ThreadSegment>(ins));
-    }
+  void setThreadConnectors()
+  {
+    final List<ThreadSegment> ins = new Vector<ThreadSegment>( 2 );
+    ins.addAll( Arrays.asList( getFronts() ) );
+    ins.addAll( Arrays.asList( getBacks() ) );
+    super.setThreadConnectors( new Connectors<ThreadSegment>( ins ) );
+  }
 }
