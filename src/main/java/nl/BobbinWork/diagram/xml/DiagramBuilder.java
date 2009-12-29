@@ -25,6 +25,7 @@ import java.net.*;
 import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.Localizer;
@@ -73,9 +74,17 @@ public class DiagramBuilder
             parts.add( part );
             break;
           case stitch:
-            final MultiplePairsPartition part2 = createStitch( childElement );
-            register( childElement, part2 );
-            parts.add( part2 );
+            try {
+              final MultiplePairsPartition part2 = createStitch( childElement );
+              register( childElement, part2 );
+              parts.add( part2 );
+            } catch (IllegalArgumentException exception){
+              try {
+                throw new RuntimeException (exception+XmlResources.toXmlString( childElement ));
+              } catch (TransformerException e) {
+                throw exception;
+              }
+            }
             break;
           case new_bobbins:
             final ThreadStyle style = createThreadStyle( child.getFirstChild() );
@@ -532,13 +541,17 @@ public class DiagramBuilder
       final String s)
   {
 
+    final String errorMessage = "Example to specify a point [x,y]: [2.3,5.6] got: ["+s+"]";
     final String xy[] = s.split( SEPARATOR );
+    if (xy.length<2){
+      throw new IllegalArgumentException(errorMessage);
+    }
     try {
       return new Point( //
           valueOf( xy[0] ).doubleValue(),//
           valueOf( xy[1] ).doubleValue() );
     } catch (final NumberFormatException e) {
-      throw new IllegalArgumentException( "invalid coordinates: " + s );
+      throw new IllegalArgumentException( errorMessage );
     }
   }
 
