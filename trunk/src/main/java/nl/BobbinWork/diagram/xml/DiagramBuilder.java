@@ -439,7 +439,7 @@ public class DiagramBuilder
           if (pairCountDown-- > 0) {
             pairs.add( createPairSegment( childElement ) );
           } else {
-            throw new RuntimeException( "adding pairs not yet implemented [" + getTitle( element ) + "]" );
+            throw new RuntimeException( "range allows only "+range.getCount()+" pair elements [" + getTitle( element ) + "]" );
           }
         }
       }
