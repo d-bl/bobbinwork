@@ -58,11 +58,11 @@ public enum Ground {
 
   public String square()
   {
-    return XmlResources.ROOT + XmlResources.INCLUDE + //
+    return XmlResources.ROOT + XmlResources.INCLUDE + "<group id='square' pairs='1-1000'>" + //
         createDiagonal( 1, pairs * 1, dX * 0 ) + //
         createDiagonal( 3, pairs * 2, dX * 1 ) + //
         createDiagonal( 5, pairs * 3, dX * 2 ) + //
-        "</diagram>";
+        "</group></diagram>";
   }
 
   public String createDiagonal(

@@ -38,19 +38,30 @@ public class GroundChooser extends JMenu {
     super();
     applyStrings(this, "MenuGround_Choose"); //$NON-NLS-1$
 
-    for ( Ground g : Ground.values() ) {
-      final JMenuItem item = new JMenuItem();
-      item.setActionCommand( g.xmlString() );
-      applyStrings(item, "MenuGround_"+g.name()); //$NON-NLS-1$
-      item.addActionListener(new ActionListener () {
-
-        public void actionPerformed(ActionEvent event) {
-          InputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
-          event.setSource(is);
-          externalActionListener.actionPerformed(event);                  
-        }
-      });
-      add(item);
+    for ( final Ground g : Ground.values() ) {
+      final String name = g.name();
+      add(createItem( externalActionListener, g.diamond(), name," <>" ));
+      add(createItem( externalActionListener, g.square(), name ," []"));
     }
+  }
+
+  private JMenuItem createItem(
+      final ActionListener externalActionListener,
+      final String xmlString,
+      final String name, String variant)
+  {
+    final JMenuItem item = new JMenuItem();
+    item.setActionCommand( xmlString );
+    applyStrings(item, "MenuGround_"+name); //$NON-NLS-1$
+    item.setText( item.getText()+variant);
+    item.addActionListener(new ActionListener () {
+
+      public void actionPerformed(final ActionEvent event) {
+        final InputStream is = new ByteArrayInputStream(item.getActionCommand().getBytes());
+        event.setSource(is);
+        externalActionListener.actionPerformed(event);                  
+      }
+    });
+    return item;
   }
 }
