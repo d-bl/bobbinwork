@@ -102,25 +102,26 @@ public class SampleDiagramChooser
     this.externalActionListener = externalActionListener;
     this.parent = parent;
 
-    for (final String f : SAMPLE_URLS) {
-      add( createItem( REVISIONED_URL + f ) );
-    }
-    add( new JSeparator() );
-    for (final String f : SAMPLE_URLS) {
-      add( createItem( LATEST_URL + f ) );
-    }
-    add( new JSeparator() );
+    add(createItems( REVISIONED_URL, "MenuFile_StableSample" ));
+    add(createItems( LATEST_URL, "MenuFile_LatestSample" ));
     add( createDownloadOther() );
+  }
+
+  private JMenu createItems(
+      String path, 
+      String key)
+  {
+    JMenu menu = new JMenu ();
+    applyStrings( menu, key );
+    for (final String f : SAMPLE_URLS) {
+      menu.add( createItem( path + f ) );
+    }
+    return menu;
   }
 
   private JMenuItem createItem(
       String url)
   {
-    // TODO enhancements to prepare in the background
-    // replace with actual links from
-    // http://bobbinwork.googlecode.com/svn/wiki/diagrams/
-    // cache files
-    // cache preview images for the drop down list
     final JMenuItem jMenuItem;
     jMenuItem = new JMenuItem( url );
     jMenuItem.setActionCommand( url );

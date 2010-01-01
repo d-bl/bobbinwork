@@ -51,5 +51,36 @@
     <copy of="ffs" pairs="31-32"><move x="15" y="150"/></copy>
     <copy of="hs-1" pairs="33-34"><move x="75" y="150"/></copy>
     <copy of="fs-1" pairs="35-36"><move x="135" y="150"/></copy>
-  </group>  
+  </group>
+  <group id="square" pairs="1-1000">
+    <group pairs="1-4" />
+    <group pairs="1-8">
+      <copy of="vierge" pairs="4-7">
+        <move x="80" y="0" />
+      </copy>
+      <copy of="vierge" pairs="4-7">
+        <move x="0" y="80" />
+      </copy>
+      <copy of="vierge" pairs="4-7">
+        <move x="-80" y="160" />
+      </copy>
+    </group>
+    <group pairs="1-12">
+      <copy of="vierge" pairs="8-11">
+        <move x="160" y="0" />
+      </copy>
+      <copy of="vierge" pairs="8-11">
+        <move x="80" y="80" />
+      </copy>
+      <copy of="vierge" pairs="8-11">
+        <move x="0" y="160" />
+      </copy>
+      <copy of="vierge" pairs="8-11">
+        <move x="-80" y="240" />
+      </copy>
+      <copy of="vierge" pairs="8-11">
+        <move x="-160" y="320" />
+      </copy>
+    </group>
+  </group>
 </diagram>
