@@ -58,25 +58,31 @@ public enum Ground {
 
   public String square()
   {
-    return XmlResources.ROOT + XmlResources.INCLUDE + "<group id='square' pairs='1-1000'>" + //
-        createDiagonal( 1, pairs * 1, dX * 0 ) + //
-        createDiagonal( 3, pairs * 2, dX * 1 ) + //
-        createDiagonal( 5, pairs * 3, dX * 2 ) + //
+    return XmlResources.ROOT + XmlResources.INCLUDE +  //
+        String.format( "<group id='square' pairs='1-%d'>", //$NON-NLS-1$
+                           (pairs + skippedPairs) * 4 ) + //
+        createDiagonal( 1, (pairs + skippedPairs) * 1, dX * 0, 0 ) + //
+        createDiagonal( 3, (pairs + skippedPairs) * 2, dX * 2, 0 ) + //
+        createDiagonal( 5, (pairs + skippedPairs) * 3, dX * 4, 0 ) + //
+        createDiagonal( 7, (pairs + skippedPairs) * 4, dX * 6, 0 ) + //
+        createDiagonal( 5, (pairs + skippedPairs) * 4, dX * 6, dY ) + //
+        createDiagonal( 3, (pairs + skippedPairs) * 4, dX * 6, dY*2 ) + //
+        createDiagonal( 1, (pairs + skippedPairs) * 4, dX * 6, dY*3 ) + //
         "</group></diagram>";
   }
 
   public String createDiagonal(
       final int count,
       final int pEnd,
-      final int xStart)
+      final int xStart, int yStart)
   {
     String stitches = "";//$NON-NLS-1$
-    int p = pEnd - pairs;
+    int p = pEnd - pairs+1;
     int xx = xStart;
-    int yy = 0;
+    int yy = 2*yStart;
     for (int i = count; i > 0 && p > 0; i--) {
       stitches += newCopyTag( p, xx, yy );
-      p -= skippedPairs;
+      p -= 0*skippedPairs + (int)((pairs+skippedPairs)/2);
       xx -= dX;
       yy += dY;
     }
