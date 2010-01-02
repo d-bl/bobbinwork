@@ -47,6 +47,7 @@ public class SampleDiagramChooser
   private static final String[] SAMPLE_URLS = new String[] {//
           "stars.xml", //$NON-NLS-1$
           "snow.xml", //$NON-NLS-1$
+          "plaits.xml", //$NON-NLS-1$
           "flanders.xml", //$NON-NLS-1$
           "flandersPea.xml", //$NON-NLS-1$
           "braid-half-stitch.xml", //$NON-NLS-1$
