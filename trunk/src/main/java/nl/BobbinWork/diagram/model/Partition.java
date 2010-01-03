@@ -97,7 +97,8 @@ public abstract class Partition {
   {
     try {
       String s = Localizer.getString( "Node_"+getClass().getSimpleName()+"_hint" );
-      return String.format( "<html><body><p><em>%s</em></p><p><strong>%s</strong></p><p>%s</p></body></html>", id, getCaption(), s);
+      String caption = getCaption();
+      return String.format( "<html><body><p><em>%s</em></p><p><strong>%s</strong></p><p>%s</p></body></html>", id, caption==null?"":caption, s);
     } catch (MissingResourceException exception){
       return "";
     }

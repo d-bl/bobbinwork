@@ -219,4 +219,15 @@ public abstract class MultiplePairsPartition
       return pairRange.toString();
     }
   }
+
+  public void setAllVisible(boolean visible) {
+    setVisible (visible);
+    for (Partition p : getPartitions()){
+      if (p instanceof MultiplePairsPartition){
+        ((MultiplePairsPartition) p).setAllVisible( visible );
+      } else if (p instanceof Switch) {
+        ((Switch) p).setVisible( visible );
+      }
+    }
+  }
 }

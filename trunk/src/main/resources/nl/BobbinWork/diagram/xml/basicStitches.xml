@@ -19,7 +19,76 @@
 		<value lang="nl">Bibliotheek (bouwstenen voor de werktekening)</value>
 		<value lang="de">Bibliothek (Bausteine fur Arbeitszeichnungen)</value>
 	</title>
-	<group pairs="1" display="no">
+    <group pairs="1">
+        <title>
+            <value lang="en">grid, shown in pair view</value>
+            <value lang="nl">raster, getoond met draden</value>
+        </title>
+        <group id="vert" pairs="1-10" display="none">
+            <stitch pairs="1-8">
+                <style width="1" color="#EEEEEE" />
+                <pair start="10,0" end="10,1200" />
+                <pair start="20,0" end="20,1200" />
+                <pair start="30,0" end="30,1200" />
+                <pair start="40,0" end="40,1200" />
+                <pair start="60,0" end="60,1200" />
+                <pair start="70,0" end="70,1200" />
+                <pair start="80,0" end="80,1200" />
+                <pair start="90,0" end="90,1200" />
+            </stitch>
+            <stitch pairs="9">
+                <style width="2" color="#EEEEEE" />
+                <pair start="50,0" end="50,1200" />
+            </stitch>
+            <stitch pairs="10">
+                <style width="2" color="#EEEEEE" />
+                <pair start="100,0" end="100,1200" />
+            </stitch>
+        </group>
+        <copy of="vert" pairs="021-030"><move x="100" /></copy>
+        <copy of="vert" pairs="041-050"><move x="200" /></copy>
+        <copy of="vert" pairs="061-070"><move x="300" /></copy>
+        <copy of="vert" pairs="081-090"><move x="400" /></copy>
+        <copy of="vert" pairs="091-100"><move x="500" /></copy>
+        <copy of="vert" pairs="101-110"><move x="600" /></copy>
+        <copy of="vert" pairs="111-120"><move x="700" /></copy>
+        <copy of="vert" pairs="121-130"><move x="800" /></copy>
+
+        <group id="hor" pairs="201-210" display="none">
+            <stitch pairs="1-8">
+                <style width="1" color="#EEEEEE" />
+                <pair start="0,10" end="900,10" />
+                <pair start="0,20" end="900,20" />
+                <pair start="0,30" end="900,30" />
+                <pair start="0,40" end="900,40" />
+                <pair start="0,60" end="900,60" />
+                <pair start="0,70" end="900,70" />
+                <pair start="0,80" end="900,80" />
+                <pair start="0,90" end="900,90" />
+            </stitch>
+            <stitch pairs="9">
+                <style width="2" color="#EEEEEE" />
+                <pair start="0,50" end="900,50" />
+            </stitch>
+            <stitch pairs="10">
+                <style width="3" color="#EEEEEE" />
+                <pair start="0,100" end="900,100" />
+            </stitch>
+        </group>
+        <copy of="hor" pairs="231-240"><move y="100" /></copy>
+        <copy of="hor" pairs="251-260"><move y="200" /></copy>
+        <copy of="hor" pairs="271-280"><move y="300" /></copy>
+        <copy of="hor" pairs="281-290"><move y="400" /></copy>
+        <copy of="hor" pairs="291-300"><move y="500" /></copy>
+        <copy of="hor" pairs="301-310"><move y="600" /></copy>
+        <copy of="hor" pairs="311-320"><move y="700" /></copy>
+        <copy of="hor" pairs="321-330"><move y="800" /></copy>
+        <copy of="hor" pairs="331-340"><move y="900" /></copy>
+        <copy of="hor" pairs="341-350"><move y="1000" /></copy>
+        <copy of="hor" pairs="351-360"><move y="1100" /></copy>
+
+    </group>
+	<group pairs="2" display="no">
 
 		<title>
 			<value lang="en">stitches</value>
@@ -282,7 +351,7 @@
 			<copy of="P" />
 		</stitch>
 	</group>
-	<group pairs="2" display="no">
+	<group pairs="3" display="no">
 		<title>
 			<value lang="en">loose twists</value>
 			<value lang="nl">losse draaien</value>
@@ -406,75 +475,6 @@
 			c2="20,08" end="15,08" /> <back start="15,08" end="00,20" />
 			</bobbin> </stitch> </group
 		-->
-
-	</group>
-	<group pairs="3" display="no">
-		<title>
-			<value lang="en">grid, shown in pair view</value>
-			<value lang="nl">raster, getoond met draden</value>
-		</title>
-		<group id="vert" pairs="1-10" display="none">
-			<stitch pairs="1-8">
-				<style width="1" color="#EEEEEE" />
-				<pair start="10,0" end="10,1200" />
-				<pair start="20,0" end="20,1200" />
-				<pair start="30,0" end="30,1200" />
-				<pair start="40,0" end="40,1200" />
-				<pair start="60,0" end="60,1200" />
-				<pair start="70,0" end="70,1200" />
-				<pair start="80,0" end="80,1200" />
-				<pair start="90,0" end="90,1200" />
-			</stitch>
-			<stitch pairs="9">
-				<style width="2" color="#EEEEEE" />
-				<pair start="50,0" end="50,1200" />
-			</stitch>
-			<stitch pairs="10">
-				<style width="2" color="#EEEEEE" />
-				<pair start="100,0" end="100,1200" />
-			</stitch>
-		</group>
-		<copy of="vert" pairs="021-030"><move x="100" /></copy>
-		<copy of="vert" pairs="041-050"><move x="200" /></copy>
-		<copy of="vert" pairs="061-070"><move x="300" /></copy>
-		<copy of="vert" pairs="081-090"><move x="400" /></copy>
-		<copy of="vert" pairs="091-100"><move x="500" /></copy>
-		<copy of="vert" pairs="101-110"><move x="600" /></copy>
-		<copy of="vert" pairs="111-120"><move x="700" /></copy>
-		<copy of="vert" pairs="121-130"><move x="800" /></copy>
-
-		<group id="hor" pairs="201-210" display="none">
-			<stitch pairs="1-8">
-				<style width="1" color="#EEEEEE" />
-				<pair start="0,10" end="900,10" />
-				<pair start="0,20" end="900,20" />
-				<pair start="0,30" end="900,30" />
-				<pair start="0,40" end="900,40" />
-				<pair start="0,60" end="900,60" />
-				<pair start="0,70" end="900,70" />
-				<pair start="0,80" end="900,80" />
-				<pair start="0,90" end="900,90" />
-			</stitch>
-			<stitch pairs="9">
-				<style width="2" color="#EEEEEE" />
-				<pair start="0,50" end="900,50" />
-			</stitch>
-			<stitch pairs="10">
-				<style width="3" color="#EEEEEE" />
-				<pair start="0,100" end="900,100" />
-			</stitch>
-		</group>
-		<copy of="hor" pairs="231-240"><move y="100" /></copy>
-		<copy of="hor" pairs="251-260"><move y="200" /></copy>
-		<copy of="hor" pairs="271-280"><move y="300" /></copy>
-		<copy of="hor" pairs="281-290"><move y="400" /></copy>
-		<copy of="hor" pairs="291-300"><move y="500" /></copy>
-		<copy of="hor" pairs="301-310"><move y="600" /></copy>
-		<copy of="hor" pairs="311-320"><move y="700" /></copy>
-		<copy of="hor" pairs="321-330"><move y="800" /></copy>
-		<copy of="hor" pairs="331-340"><move y="900" /></copy>
-		<copy of="hor" pairs="341-350"><move y="1000" /></copy>
-		<copy of="hor" pairs="351-360"><move y="1100" /></copy>
 
 	</group>
 	<group pairs="4" display="no">
