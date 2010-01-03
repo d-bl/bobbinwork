@@ -27,7 +27,7 @@ public enum Ground {
   snowflake   (4, 6, 2, 136, 100, 850L, 600L);
 
   private static final String TEMPLATE =
-      "%s<title><value lang='en'/></title>%s<group pairs='1-%d'>%s</group></diagram>";
+      "%s%s<group pairs='1-%d'>%s</group></diagram>";
   private final int dX;
   private final int dY;
   private final int pairs;
@@ -58,9 +58,7 @@ public enum Ground {
 
   public String square()
   {
-    return XmlResources.ROOT + XmlResources.INCLUDE +  //
-        String.format( "<group id='square' pairs='1-%d'>", //$NON-NLS-1$
-                           (pairs + skippedPairs) * 4 ) + //
+    String s = //
         createDiagonal( 1, (pairs + skippedPairs) * 1, dX * 0, 0 ) + //
         createDiagonal( 3, (pairs + skippedPairs) * 2, dX * 2, 0 ) + //
         createDiagonal( 5, (pairs + skippedPairs) * 3, dX * 4, 0 ) + //
@@ -68,7 +66,8 @@ public enum Ground {
         createDiagonal( 5, (pairs + skippedPairs) * 4, dX * 6, dY ) + //
         createDiagonal( 3, (pairs + skippedPairs) * 4, dX * 6, dY*2 ) + //
         createDiagonal( 1, (pairs + skippedPairs) * 4, dX * 6, dY*3 ) + //
-        "</group></diagram>";
+        "";
+    return String.format( TEMPLATE, XmlResources.ROOT, XmlResources.INCLUDE, (pairs + skippedPairs) * 4, s );
   }
 
   public String createDiagonal(
