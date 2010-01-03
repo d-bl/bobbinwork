@@ -71,7 +71,6 @@ class Connectors<T extends Segment>
   {
     ins = segments;
     outs = reverse( segments );
-    bounds = new Bounds<T>( ins );
   }
 
   /**
@@ -137,8 +136,6 @@ class Connectors<T extends Segment>
       }
     }
     children.add( child );
-
-    bounds = null;
   }
 
   /**
