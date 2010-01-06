@@ -224,8 +224,8 @@ public class BwDiagrams
     final MenuBar menuBar = new MenuBar();
     menuBar.addMenuItem( clipboardImporter, "From_clipboard", "Import_menu" );
     menuBar.add( exportMenu );
-    menuBar.add( new SampleDiagramChooser( menuBar, inputStreamListener ) );
-    menuBar.add( new GroundChooser( inputStreamListener ) );
+    menuBar.add( new SampleMenu( menuBar, inputStreamListener ) );
+    menuBar.add( new GroundMenu( inputStreamListener ) );
     menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );
     menuBar.add( new HeapStatusWidget() );
     return menuBar;

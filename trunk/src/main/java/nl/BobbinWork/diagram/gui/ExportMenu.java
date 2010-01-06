@@ -18,7 +18,7 @@ import javax.swing.JMenuItem;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
+import nl.BobbinWork.bwlib.gui.*;
 import nl.BobbinWork.diagram.conversion.ToImages;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 
@@ -50,11 +50,13 @@ public class ExportMenu
       final String keyBase)
   {
     final JMenuItem slides = new JMenu();
+    final String toolTip = "<html><body>"+Localizer.getString("To_" + keyBase + "_hint")+"</body></html>";
     applyStrings( slides, "To_" + keyBase );
     for (final String format : formats) {
       final String file = keyBase + "." + format;
       final JMenuItem item = new JMenuItem( file );
       item.addActionListener( toImagesListener );
+      item.setToolTipText( toolTip );
       slides.add( item );
     }
     return slides;

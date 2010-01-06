@@ -31,9 +31,9 @@ import nl.BobbinWork.diagram.xml.Ground;
 
 
 @SuppressWarnings("serial")
-public class GroundChooser extends JMenu {
+public class GroundMenu extends JMenu {
 
-  public GroundChooser (final ActionListener externalActionListener){
+  public GroundMenu (final ActionListener externalActionListener){
 
     super();
     applyStrings(this, "MenuGround_Choose"); //$NON-NLS-1$
