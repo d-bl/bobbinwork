@@ -221,7 +221,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
      * @param x
      *            horizontal offset from the left margin
      * @param y
-     *            vertical offset fromthe top margin
+     *            vertical offset from the top margin
      * @return null if the position is not at a thread in the diagram
      */
     public ThreadStyle getThreadStyleAt(int x, int y) {

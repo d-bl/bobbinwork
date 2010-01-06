@@ -36,7 +36,7 @@ import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
  * 
  */
 @SuppressWarnings("serial")//$NON-NLS-1$
-public class SampleDiagramChooser
+public class SampleMenu
     extends JMenu
 {
   // TODO keep revision number synchronized
@@ -94,7 +94,7 @@ public class SampleDiagramChooser
    * @param externalActionListener
    *          triggered when an InputStream is created from a user selected URL
    */
-  public SampleDiagramChooser(
+  public SampleMenu(
       Component parent,
       ActionListener externalActionListener)
   {
