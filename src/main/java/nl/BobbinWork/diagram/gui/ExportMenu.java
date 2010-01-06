@@ -65,7 +65,6 @@ public class ExportMenu
   {
     return new ActionListener()
     {
-      @Override
       public void actionPerformed(
           final ActionEvent event)
       {
