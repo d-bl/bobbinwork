@@ -116,7 +116,7 @@ public abstract class ToImages
     };
   }
 
-  private static Partition getAnimatedPartition(
+  static Partition getAnimatedPartition(
       final Diagram diagram)
   {
     Partition partition = diagram;
