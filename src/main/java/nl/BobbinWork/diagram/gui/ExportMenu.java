@@ -91,7 +91,7 @@ public class ExportMenu
       final ToImages toImages,
       final Dimension size) throws IOException
   {
-    if (fileName.contains( "slides" )) {
+    if (fileName.toLowerCase().contains( "slides" )) {
       toImages.createSlides( size, fileName );
     } else {
       final RenderedImage image = toImages.newImage( size );
@@ -105,7 +105,7 @@ public class ExportMenu
       final String fileName)
   {
     ToImages toImages;
-    if (fileName.contains( "thread" )) {
+    if (fileName.toLowerCase().contains( "thread" )) {
       toImages = ToImages.threads( canvas.getDiagram() );
     } else {
       toImages = ToImages.pairs( canvas.getDiagram() );
