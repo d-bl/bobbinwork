@@ -154,9 +154,10 @@ public class DiagramBuilder
     final Element t = getFirst( element, title );
     if (t == null) return null;
     final String userLang = Localizer.getLanguage();
-    final NodeList list = element.getElementsByTagName( value.toString() );
+    final NodeList list = t.getElementsByTagName( value.toString() );
     if (list == null) return null;
     int length = list.getLength();
+    if (length <= 0) return null;
     if (userLang != null) {
       // else JUnit test
       for (int i = 0; i < length; i++) {
@@ -167,7 +168,6 @@ public class DiagramBuilder
         }
       }
     } 
-    if (length <= 0) return null;
     return list.item( 0 ).getTextContent();
   }
 
