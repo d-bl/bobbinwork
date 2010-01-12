@@ -132,4 +132,15 @@ public abstract class Partition {
   {
     return sourceObject;
   }
+  
+  public ThreadStyle[] getThreadStyles()
+  {
+    if (!(this instanceof MultipleThreadsPartition)) return new ThreadStyle[0];
+    List<ThreadSegment> t = ((MultipleThreadsPartition)this).getThreadConnectors().getIns();
+    ThreadStyle[] result = new ThreadStyle[t.size()];
+    for (int i=0;i<result.length;i++)
+      if (t.get( i )!=null)
+        result[i] = t.get( i ).getStyle();
+    return result;
+  }
 }
