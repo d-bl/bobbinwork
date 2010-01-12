@@ -16,18 +16,18 @@
  * along with BobbinWork.  If not, see <http://www.gnu.org/licenses/>.
  */package nl.BobbinWork.diagram.xml;
 
+import java.util.List;
+
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.model.Partition;
-import nl.BobbinWork.diagram.model.Switch;
+import nl.BobbinWork.diagram.conversion.ToImages;
+import nl.BobbinWork.diagram.model.*;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.*;
+
+import com.sun.org.apache.xerces.internal.dom.DocumentFragmentImpl;
 
 public class DiagramRebuilder
 {
@@ -178,12 +178,79 @@ public class DiagramRebuilder
     if (diagram == null) return "";
     final Element sourceObject = (Element) diagram.getSourceObject();
     if (sourceObject == null) return "";
-    final Document ownerDocument = sourceObject.getOwnerDocument();
-    if (ownerDocument == null) return "";
-    DiagramRebuilder.undoTransformations( ownerDocument );
-    return XmlResources.toXmlString( ownerDocument );
+    final Document doc = sourceObject.getOwnerDocument();
+    if (doc == null) return "";
+    undoTransformations( doc );
+    final Partition visiblePartition = getVisiblePartition( diagram);
+    if (visiblePartition!=null){
+      final Element visible = (Element) visiblePartition.getSourceObject();
+      removerColors( sourceObject );
+      final Node first = visible.getFirstChild();
+      int i = 0;
+      for (ThreadStyle style:visiblePartition.getThreadStyles()) {
+        if (style !=null)
+          visible.insertBefore( newBobbin( doc, style, ++i+"" ),first);
+      }
+    }
+    return XmlResources.toXmlString( doc );
   }
 
+  private static Element newBobbin(
+      final Document doc,
+      final ThreadStyle x,
+      final String nrs)
+  {
+    final Element result = doc.createElement( ElementType.new_bobbins.name() );
+    final Element style = createStyle(doc,"style",x);
+    style.appendChild( createStyle(doc,"shadow",x.getShadow()) );
+    result.appendChild( style );
+    result.setAttribute( "nrs", nrs );
+    return result;
+  }
+  
+  private static Element createStyle(
+      final Document doc,
+      final String name,
+      final Style style)
+  {
+    final Element result = doc.createElement( name );
+    result.setAttribute( "color", "#"+ Integer.toHexString(style.getColor().getRGB()&0xFFFFFF) );
+    result.setAttribute( "width", "" + style.getWidth() );
+    return result;
+  }
+
+  private static void removerColors(
+      Element diagram)
+  {
+    NodeList elements;
+    try {
+      elements = XmlResources.evaluate( "//*[@nrs]", diagram.getOwnerDocument() );
+    } catch (XPathExpressionException exception) {
+      exception.printStackTrace();
+      return;
+    }
+    for (int i = 0; i < elements.getLength(); i++) {
+      Node node = elements.item( i );
+        node.getParentNode().removeChild( node );
+    }
+  }
+
+  private static Partition getVisiblePartition(
+      final Diagram diagram)
+  {
+    Partition partition = diagram;
+    while (null == partition.getBounds()) {
+      if (!(partition instanceof MultiplePairsPartition)) {
+        return null;
+      }
+      final List<Partition> list =
+          ((MultiplePairsPartition) partition).getPartitions();
+      return list.get( list.size() - 1 );
+    }
+    return partition;
+  }
+  
+  
   private static void undoTransformations(
       final Document document) throws XPathExpressionException
   {
