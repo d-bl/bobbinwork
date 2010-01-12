@@ -62,19 +62,25 @@ public class DiagramTree
     private void decorate(
         final Partition p)
     {
+      // TODO move most to model package
       String caption = p.getCaption();
       if (!p.isVisible()) {
-        caption = "<html><s>" + caption + "</s></html>";
+        caption = "<s>" + caption + "</s>";
       }
       if (!DiagramRebuilder.canReplace( p )) {
-        caption = "<html><em>" + caption + "</em></html>";
+        caption = "<em>" + caption + "</em>";
       }
       if (DiagramRebuilder.canCopy( p )) {
-        caption = "<html><strong>" + caption + "</stronng></html>";
+        caption = "<strong>" + caption + "</stronng>";
       }
+      caption = "<html>" + caption + "</html>" ;
       setText( caption );
       if (p.getIcon() != null) setIcon( p.getIcon() );
-      if (p.getTooltip() != null) setToolTipText( p.getTooltip() );
+      String tooltip = p.getTooltip();
+      if (tooltip == null || tooltip.equals( "" ))
+        setToolTipText( caption );
+      else
+        setToolTipText( p.getTooltip() );
     };
   };
 
