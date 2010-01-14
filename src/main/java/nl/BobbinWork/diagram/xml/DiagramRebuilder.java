@@ -185,11 +185,10 @@ public class DiagramRebuilder
     if (visiblePartition!=null){
       final Element visible = (Element) visiblePartition.getSourceObject();
       removerColors( sourceObject );
-      final Node first = visible.getFirstChild();
       int i = 0;
       for (ThreadStyle style:visiblePartition.getThreadStyles()) {
         if (style !=null)
-          visible.insertBefore( newBobbin( doc, style, ++i+"" ),first);
+          visible.appendChild( newBobbin( doc, style, ++i+"" ));
       }
     }
     return XmlResources.toXmlString( doc );
