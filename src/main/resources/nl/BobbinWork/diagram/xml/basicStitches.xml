@@ -94,6 +94,62 @@
 			<value lang="en">stitches</value>
 			<value lang="nl">slagen</value>
 		</title>
+        <stitch pairs="25-27">
+          <title><value lang="en"></value></title>
+          <style width="2" />
+          <pair start="0,0" end="0,0" />
+          <pair start="0,0" end="0,0" />
+          <cross id="C1" bobbins="2-3">
+            <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
+            <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
+          </cross>
+          <cross id="C2" bobbins="4-5">
+            <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
+            <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
+          </cross>
+          <twist id="T1" bobbins="1-2">
+            <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+            <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+          </twist>
+          <twist id="T2" bobbins="3-4">
+            <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+            <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+          </twist>
+          <twist id="T3" bobbins="5-6">
+            <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+            <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+          </twist>
+        </stitch>
+        <stitch id="star" pairs="28-30">
+          <title><value lang="en">Three pair star</value></title>
+          <title><value lang="en">Sterretje</value></title>
+          <pair start="-15,-8"  end="15,8" />
+          <pair start="0,-22" end="0,22" />
+          <pair start="15,-8" end="-15,8" />
+    
+          <copy of="T1"><move y="-22"  /><rotate centre="0,0" angle="-60" /></copy>
+          <copy of="T2"><move y="-22"  /><rotate centre="0,0" angle="0" /></copy>
+          <copy of="T3"><move y="-22"  /><rotate centre="0,0" angle="60" /></copy>
+      
+          <copy of="C1"><move y="-17" /><rotate centre="0,0" angle="-30" /></copy>
+          <copy of="C2"><move y="-17" /><rotate centre="0,0" angle="30" /></copy>
+          <copy of="T2"><move y="-10"  /><rotate centre="0,0" angle="0" /></copy>
+          <copy of="C1"><move y="-10" /><rotate centre="0,0" angle="-60" /></copy>
+          <copy of="C2"><move y="-10" /><rotate centre="0,0" angle="60" /></copy>
+      
+          <copy of="T1"><move y="0" x="-17" /><rotate centre="0,0" angle="0" /></copy>
+          <copy of="T3"><move y="0" x="17" /><rotate centre="0,0" angle="0" /></copy>
+    
+          <copy of="C1"><move y="10" /><rotate centre="0,0" angle="60" /></copy>
+          <copy of="C2"><move y="10" /><rotate centre="0,0" angle="-60" /></copy>
+          <copy of="T2"><move y="10"  /><rotate centre="0,0" angle="0" /></copy>
+          <copy of="C1"><move y="17" /><rotate centre="0,0" angle="30" /></copy>
+          <copy of="C2"><move y="17" /><rotate centre="0,0" angle="-30" /></copy>
+    
+          <copy of="T1"><move y="22"/><rotate centre="0,0" angle="60" /></copy>
+          <copy of="T2"><move y="22"/><rotate centre="0,0" angle="0" /></copy>
+          <copy of="T3"><move y="22"/><rotate centre="0,0" angle="-60" /></copy>
+        </stitch>
 		<stitch id="ctctc" pairs="1-2">
 			<title>
 				<value lang="en">fixing stitch</value>
@@ -350,6 +406,37 @@
 			<copy of="O" />
 			<copy of="P" />
 		</stitch>
+        <group id="vg" pairs="31-32">
+          <title>
+            <value lang="en">Torchon</value>
+            <value lang="nl">Vetergatslag</value>
+          </title>
+          <stitch pairs="1-2">
+            <title>
+              <value lang="en">half stitch</value>
+              <value lang="nl">netslag</value>
+            </title>
+            <style color="#00FF00" width="2" />
+            <pair start="3,3" end="8.5,4.5" />
+            <pair start="13.5,3" end="8.5,4.5" />
+            <copy of="C"/>
+            <copy of="F"/>
+            <copy of="G"/>
+          </stitch>
+          <pin position="8.5,8.5"/>
+          <stitch pairs="1-2">
+            <title>
+              <value lang="en">half stitch</value>
+              <value lang="nl">netslag</value>
+            </title>
+            <style color="#00FF00" width="2" />
+            <pair start="8.5,12" end="13.5,13.5" />
+            <pair start="8.5,12" end="3,13.3" />
+            <copy of="N"/>
+            <copy of="O"/>
+            <copy of="P"/>
+          </stitch>
+        </group>
 	</group>
 	<group pairs="3" display="no">
 		<title>
@@ -482,23 +569,28 @@
 			<value lang="en">edges</value>
 			<value lang="nl">randen</value>
 		</title>
-		<stitch id="ffs" pairs="1-2">
-			<title>
-				<value lang="en">false footside: four pair on two temporary
-					pins, twisted cloth stitch</value>
-				<value lang="nl">opzet: vier paar om twee hulpspelden,
-					dubbele netslag</value>
-			</title>
-			<style color="#FF0000" width="2" />
-			<pair start="-15,0" c1="0,0" c2="20,0" end="20,20" />
-			<pair start="25,0" c1="10,0" c2="-10,0" end="-10,20" />
-			<copy of="C"><rotate centre="15,15" angle="-45" /><move x="-8" y="-10" /></copy>
-			<copy of="F"><rotate centre="15,15" angle="45" /><move x="8" y="0" /></copy>
-			<copy of="G" />
-			<copy of="N" />
-			<copy of="O" />
-			<copy of="P" />
-		</stitch>
+		<group id="ffs" pairs="1-2">
+  			<title>
+  				<value lang="en">false footside: four pairs on two temporary pins</value>
+  				<value lang="nl">opzet: vier paar om twee hulpspelden</value>
+  			</title>
+    		<stitch  pairs="1-2">
+    			<title>
+    				<value lang="en">twisted cloth stitch</value>
+    				<value lang="nl">dubbele netslag</value>
+    			</title>
+    			<style color="#FF0000" width="2" />
+    			<pair start="-15,0" c1="0,0" c2="25,0" end="25,20" />
+    			<pair start="35,0" c1="10,0" c2="-5,0" end="-5,20" />
+    			<copy of="C"><rotate centre="15,15" angle="-45" /><move x="-8" y="-10" /></copy>
+    			<copy of="F"><rotate centre="15,15" angle="45" /><move x="8" y="0" /></copy>
+    			<copy of="G" />
+    			<copy of="N" />
+    			<copy of="O" />
+    			<copy of="P" />
+    		</stitch>
+            <pin position="9,22"/>
+        </group>
 		<group id="hs-1" pairs="3-4">
 			<title>
 				<value lang="en">headside</value>
@@ -513,6 +605,27 @@
 				<pair start="15,-15" c1="15,-15" c2="15,0" end="15,0" mark="" />
 				<copy of="B"><rotate centre="15,15" angle="40" /><move x="0" y="-5" /></copy>
 			</stitch>
+			<stitch pairs="1-2">
+				<title>
+					<value lang="en">double half stitch</value>
+					<value lang="nl">dubbele netslag</value>
+				</title>
+				<style color="#FF0000" width="2" />
+				<pair start="5,-5" c1="12,-5" c2="15,12" end="15,20" />
+				<pair start="15,3" c1="15,5" c2="15,15" end="5,20" />
+				<copy of="C"><rotate centre="15,15" angle="-45" /><move x="3" y="-19" /></copy>
+				<copy of="F"><rotate centre="15,15" angle="-45" /><move x="7" y="-12" /></copy>
+				<copy of="G" />
+				<copy of="N" />
+				<copy of="O" />
+				<copy of="P" />
+			</stitch>
+		</group>
+		<group id="hs-r" pairs="11-12">
+			<title>
+				<value lang="en">headside</value>
+				<value lang="nl">speld na vier (rechts)</value>
+			</title>
 			<stitch pairs="1-2">
 				<title>
 					<value lang="en">double half stitch</value>
@@ -544,7 +657,83 @@
 			<copy of="O" />
 			<copy of="P" />
 		</stitch>
-
+        <group id="ffsL" pairs="7-8">
+          <title>
+            <value lang="en">false footside left corner: three pair on two temporary pins</value>
+            <value lang="nl">drie paar om twee hulpspelden</value>
+          </title>
+          <stitch pairs="1-2">
+            <title>
+              <value lang="en">twisted cloth stitch</value>
+              <value lang="nl">dubbele netslag</value>
+            </title>
+            <style color="#FF0000" width="2" />
+            <pair start="2,-3" end="21,20" />
+            <pair start="45,-5" c1="0,-5" c2="0,-5" end="0,20" />
+            <copy of="F"><rotate centre="15,15" angle="25"/><move x="20"/></copy>
+            <copy of="G"/>
+            <copy of="N"/>
+            <copy of="O"/>
+            <copy of="P"/>
+          </stitch>
+          <pin position="18,17"/>
+        </group>
+        <group id="ffsR" pairs="9-10">
+          <title>
+            <value lang="en">false footside left corner: three pair on two temporary pins</value>
+            <value lang="nl">drie paar om twee hulpspelden</value>
+          </title>
+          <stitch pairs="1-2">
+            <title>
+              <value lang="en">twisted cloth stitch</value>
+              <value lang="nl">dubbele netslag</value>
+            </title>
+            <style color="#FF0000" width="2" />
+            <pair start="-25,-5" c1="21,-5" c2="21,-5"  end="21,20" />
+            <pair start="21,-3" end="0,17" />
+            <copy of="C"><rotate centre="15,15" angle="-25"/><move x="-20" y="-5"/></copy>
+            <copy of="G"/>
+            <copy of="N"/>
+            <copy of="O"/>
+            <copy of="P"/>
+          </stitch>
+          <pin position="-1,17"/>
+        </group>
+        <stitch id="ctc-small" pairs="12-13">
+            <title>
+                <value lang="en">cloth stitch</value>
+                <value lang="nl">linnenslag</value>
+            </title>
+            <style color="#AA00FF" width="2" />
+            <pair start="5,5" end="5,15" />
+            <pair start="10,10" end="0,10" />
+            <cross bobbins="2-3">
+                <back start="10,7" end="5,7" />
+                <front start="5,3" end="5,7" />
+            </cross>
+            <twist bobbins="1-2">
+                <front start="0,7" end="-2,7" />
+                <back start="0,3" end="0,7" />
+            </twist>
+            <twist bobbins="3-4">
+                <back start="5,12" end="5,12" />
+                <front start="8,12" end="5,12" />
+            </twist>
+            <cross bobbins="2-3">
+                <back start="0,12" end="0,12" />
+                <front start="0,12" end="0,15" />
+            </cross>
+        </stitch>
+        <group id="ffsLI" pairs="14-17">
+          <title>
+            <value lang="en">new pair from the right</value>
+            <value lang="nl">nieuw paar van rechts</value>
+          </title>
+          <copy of="ctc-small" pairs="2-3"><rotate centre="0,0" angle="45"/><move x="23" y="5"/></copy>
+          <copy of="ctc-small" pairs="1-2"></copy>
+          <pin position="9,15"/>
+          <copy of="ctc-small" pairs="2-3"><rotate centre="0,0" angle="-45"/><move x="0" y="18"/></copy>
+        </group>        
 	</group>
 	<group pairs="5" display="no">
 		<title>
@@ -754,9 +943,9 @@
                   <value lang="en">start pair of gimps</value>
                   <value lang="nl">begin paar sierdraaden</value>
               </title>
-              <style color="#AA00FF" width="2" />
-              <pair start="3,3" end="13.5,13.5" />
-              <pair start="13.5,3" end="3,13.3" />
+              <style color="#FFFF33" width="4" />
+              <pair start="3,-3" end="13.5,7" />
+              <pair start="13.5,-3" end="3,7" />
             <cross bobbins="1-4">
                 <back start="10,0" end="5,5" />
                 <back start="10,0" end="5,5" />
@@ -765,4 +954,58 @@
             </cross>
       </stitch>
     </group>
+    <stitch id="gRTL" pairs="11-12">
+      <title>
+        <value lang="nl">Sierdraad tussen 2e draai door</value>
+        <value lang="nl">Gimp through 2nd twist</value>
+      </title><!-- centre="2,9" -->
+      <style color="#AA00FF" width="2" />
+      <pair start="3,3" end="13.5,13.5" />
+      <pair start="13.5,3" end="3,13.3" />
+      <twist bobbins="1-2">
+          <back start="-5,-6" c1="-5,0" c2="3,-6" end="3,0" />
+          <front start="5,-6" c1="5,0" c2="-3,-6" end="-3,0" />
+      </twist>
+      <cross bobbins="2-4">
+          <front start="3,0" end="3,0" />
+          <back start="10,5" end="0,5" />
+          <back start="10,5" end="0,5" />
+      </cross>
+      <twist bobbins="1-3">
+          <back start="-3,0" c1="-3,10" c2="-2,8" end="0,10" />
+          <front start="0,5" end="-10,5" />
+          <front start="0,5" end="-10,5" />
+      </twist>
+      <twist bobbins="3-4">
+          <front start="3,0" c1="3,10" c2="-5,10" end="-5,13" />
+          <back start="0,10" c1="2,12" c2="5,12" end="5,13" />
+      </twist>
+    </stitch>
+    <stitch id="gLTR" pairs="13-14">
+      <title>
+        <value lang="nl">Sierdraad tussen 2e draai door</value>
+        <value lang="nl">Gimp through 2nd twist</value>
+      </title><!-- centre="2,9" -->
+      <style color="#AA00FF" width="2" />
+      <pair start="3,3" end="13.5,13.5" />
+      <pair start="13.5,3" end="3,13.3" />
+      <twist bobbins="3-4">
+          <back start="-5,-6" c1="-5,0" c2="3,-6" end="3,0" />
+          <front start="5,-6" c1="5,0" c2="-3,-6" end="-3,0" />
+      </twist>
+      <cross bobbins="1-3">
+          <back start="-3,0" c1="-3,10" c2="-2,8" end="0,10" />
+          <front start="-10,5" end="-0,5" />
+          <front start="-10,5" end="-0,5" />
+      </cross>
+      <twist bobbins="2-4">
+          <front start="3,0" end="3,0" />
+          <back start="0,5" end="10,5" />
+          <back start="0,5" end="10,5" />
+      </twist>
+      <twist bobbins="1-2">
+          <front start="3,0" c1="3,10" c2="-5,10" end="-5,13" />
+          <back start="0,10" c1="2,12" c2="5,12" end="5,13" />
+      </twist>
+    </stitch>
 </group>
