@@ -46,6 +46,7 @@ public class SampleMenu
       "http://bobbinwork.googlecode.com/svn/wiki/diagrams/";
   private static final String[] SAMPLE_URLS = new String[] {//
           "stars.xml", //$NON-NLS-1$
+          "trapgevel.xml", //$NON-NLS-1$
           "snow.xml", //$NON-NLS-1$
           "plaits.xml", //$NON-NLS-1$
           "flanders.xml", //$NON-NLS-1$
