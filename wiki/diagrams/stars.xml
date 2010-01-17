@@ -8,67 +8,7 @@
   <title>
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
-  <group pairs="1" display="no">
-    <title>
-        <value lang="en">Library (building blocks for the diagram)</value>
-        <value lang="nl">Bibliotheek (bouwstenen voor de werktekening)</value>
-        <value lang="de">Bibliothek (Bausteine fur Arbeitszeichnungen)</value>
-    </title>
-    <stitch pairs="1-3">
-      <title><value lang="en"></value></title>
-      <style width="2" />
-      <pair start="0,0" end="0,0" />
-      <pair start="0,0" end="0,0" />
-      <cross id="starC1" bobbins="2-3">
-        <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
-        <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
-      </cross>
-      <cross id="starC2" bobbins="4-5">
-        <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
-        <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
-      </cross>
-      <twist id="starT1" bobbins="1-2">
-        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
-        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
-      </twist>
-      <twist id="starT2" bobbins="3-4">
-        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
-        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
-      </twist>
-      <twist id="starT3" bobbins="5-6">
-        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
-        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
-      </twist>
-    </stitch>
-    <stitch id="star" pairs="3-5">
-      <pair start="-15,-8"  end="15,8" />
-      <pair start="0,-22" end="0,22" />
-      <pair start="15,-8" end="-15,8" />
-
-      <copy of="starT1"><move y="-22"  /><rotate centre="0,0" angle="-60" /></copy>
-      <copy of="starT2"><move y="-22"  /><rotate centre="0,0" angle="0" /></copy>
-      <copy of="starT3"><move y="-22"  /><rotate centre="0,0" angle="60" /></copy>
-  
-      <copy of="starC1"><move y="-17" /><rotate centre="0,0" angle="-30" /></copy>
-      <copy of="starC2"><move y="-17" /><rotate centre="0,0" angle="30" /></copy>
-      <copy of="starT2"><move y="-10"  /><rotate centre="0,0" angle="0" /></copy>
-      <copy of="starC1"><move y="-10" /><rotate centre="0,0" angle="-60" /></copy>
-      <copy of="starC2"><move y="-10" /><rotate centre="0,0" angle="60" /></copy>
-  
-      <copy of="starT1"><move y="0" x="-17" /><rotate centre="0,0" angle="0" /></copy>
-      <copy of="starT3"><move y="0" x="17" /><rotate centre="0,0" angle="0" /></copy>
-
-      <copy of="starC1"><move y="10" /><rotate centre="0,0" angle="60" /></copy>
-      <copy of="starC2"><move y="10" /><rotate centre="0,0" angle="-60" /></copy>
-      <copy of="starT2"><move y="10"  /><rotate centre="0,0" angle="0" /></copy>
-      <copy of="starC1"><move y="17" /><rotate centre="0,0" angle="30" /></copy>
-      <copy of="starC2"><move y="17" /><rotate centre="0,0" angle="-30" /></copy>
-
-      <copy of="starT1"><move y="22"/><rotate centre="0,0" angle="60" /></copy>
-      <copy of="starT2"><move y="22"/><rotate centre="0,0" angle="0" /></copy>
-      <copy of="starT3"><move y="22"/><rotate centre="0,0" angle="-60" /></copy>
-    </stitch>
-  </group>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/591/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group pairs="2">
     <title>
         <value lang="en">diagram</value>
@@ -92,8 +32,6 @@
       <copy of="star" pairs="7-9"><move x="230" y="155"/></copy>
 
       <copy of="star" pairs="5-7"><move x="165" y="195"/></copy>
-     <!-- 
-      -->
     </group>
   </group>
 </diagram>
