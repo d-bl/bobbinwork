@@ -68,19 +68,17 @@ public class DiagramBuilder
             parts.add( DiagramBuilder.createPin( childElement ) );
             break;
           case group:
-            final MultiplePairsPartition part =
-                DiagramBuilder.createGroup( childElement );
-            register( childElement, part );
-            parts.add( part );
+            createGroup( childElement );
             break;
           case stitch:
             try {
               final MultiplePairsPartition part2 = createStitch( childElement );
               register( childElement, part2 );
               parts.add( part2 );
-            } catch (IllegalArgumentException exception){
+            } catch (IllegalArgumentException exception) {
               try {
-                throw new RuntimeException (exception+XmlResources.toXmlString( childElement ));
+                throw new RuntimeException( exception
+                    + XmlResources.toXmlString( childElement ) );
               } catch (TransformerException e) {
                 throw exception;
               }
@@ -120,6 +118,19 @@ public class DiagramBuilder
       }
     }
 
+    private void createGroup(
+        final Element childElement)
+    {
+      ChainedPairsPartitionFactory factory =
+          new ChainedPairsPartitionFactory( childElement );
+      final Range pairRange = DiagramBuilder.createRange( factory.element );
+      final MultiplePairsPartition part =
+          new Group( pairRange, factory.parts, factory.bobbins,
+              factory.partitionTitle );
+      register( childElement, part );
+      parts.add( part );
+    }
+
     private int parseRangeNr(
         final String nr)
     {
@@ -128,12 +139,7 @@ public class DiagramBuilder
       return Integer.decode( nr ).intValue() - 1;
     }
 
-    Group createGroup()
-    {
-      return new Group( createRange( element ), parts, bobbins, partitionTitle );
-    }
-
-    Diagram createDiagram()
+    private Diagram createDiagram()
     {
       return new Diagram( parts, partitionTitle );
     }
@@ -167,14 +173,8 @@ public class DiagramBuilder
           return list.item( i ).getTextContent();
         }
       }
-    } 
+    }
     return list.item( 0 ).getTextContent();
-  }
-
-  private static Group createGroup(
-      final Element element)
-  {
-    return new ChainedPairsPartitionFactory( element ).createGroup();
   }
 
   public static Diagram createDiagram(
@@ -240,9 +240,10 @@ public class DiagramBuilder
     SwitchFactory(final Element element)
     {
       range = createRange( element );
-      frontSegments = 
+      frontSegments =
           createThreadSegments( getMandatoryElement( element, front ) );
-      backSegments = createThreadSegments( getMandatoryElement( element, back ) );
+      backSegments =
+          createThreadSegments( getMandatoryElement( element, back ) );
     }
 
     Cross createCross()
@@ -345,7 +346,7 @@ public class DiagramBuilder
       final NodeList elements)
   {
     ThreadSegment[] result = new ThreadSegment[elements.getLength()];
-    for (int i=0 ; i<elements.getLength() ; i++) {
+    for (int i = 0; i < elements.getLength(); i++) {
       Element item = (Element) elements.item( i );
       result[i] = new SegmentFactory( item ).createThreadSegment();
     }
@@ -439,10 +440,15 @@ public class DiagramBuilder
           if (pairCountDown-- > 0) {
             pairs.add( createPairSegment( childElement ) );
           } else {
-            throw new RuntimeException( "range allows only "+range.getCount()+" pair elements [" + getTitle( element ) + "]" );
+            throw new IllegalArgumentException( "range allows only " + range.getCount()
+                + " pair elements" );
           }
         }
       }
+    }
+    if (pairCountDown != 0) {
+      throw new IllegalArgumentException( "range requires " + range.getCount()
+          + " pair elements; got "+pairCountDown+" too few" );      
     }
     for (final Segment segment : pairs) {
       segment.setStyle( style );
@@ -530,6 +536,7 @@ public class DiagramBuilder
     if (orphan == null)
       orphan = element.getUserData( TreeExpander.INDIRECT_CLONE_TO_ORPHAN );
     String id = element.getAttribute( "id" );
+    if (id == null || id.equals( "" )) id = element.getAttribute( "of" );
     p.setSourceObject( orphan == null ? element : orphan, id );
     if (element.getAttribute( AttributeType.display.toString() ).matches(
         "(no)|(No)|(NO)|(false)|(False)|(FALSE)" )) {
@@ -541,10 +548,11 @@ public class DiagramBuilder
       final String s)
   {
 
-    final String errorMessage = "Example to specify a point [x,y]: [2.3,5.6] got: ["+s+"]";
+    final String errorMessage =
+        "Example to specify a point [x,y]: [2.3,5.6] got: [" + s + "]";
     final String xy[] = s.split( SEPARATOR );
-    if (xy.length<2){
-      throw new IllegalArgumentException(errorMessage);
+    if (xy.length < 2) {
+      throw new IllegalArgumentException( errorMessage );
     }
     try {
       return new Point( //
