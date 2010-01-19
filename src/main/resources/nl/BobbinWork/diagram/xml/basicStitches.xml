@@ -987,8 +987,8 @@
           <value lang="nl">Gimp through 2nd twist</value>
         </title><!-- centre="2,9" -->
         <style color="#FFFF33" width="4" />
+        <pair start="-10,5" end="10,5" />
         <pair start="0,5" end="0,5" />
-        <pair start="-10,5" end="5,10" />
         <twist bobbins="3-4">
             <back start="-5,-6" c1="-5,0" c2="3,-6" end="3,0" />
             <front start="5,-6" c1="5,0" c2="-3,-6" end="-3,0" />
