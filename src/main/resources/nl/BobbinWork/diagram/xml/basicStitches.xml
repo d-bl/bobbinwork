@@ -99,6 +99,7 @@
           <style width="2" />
           <pair start="0,0" end="0,0" />
           <pair start="0,0" end="0,0" />
+          <pair start="0,0" end="0,0" />
           <cross id="C1" bobbins="2-3">
             <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
             <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
