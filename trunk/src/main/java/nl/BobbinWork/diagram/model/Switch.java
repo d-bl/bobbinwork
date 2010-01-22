@@ -54,7 +54,7 @@ public abstract class Switch
       final ThreadSegment[] backs)
   {
     if (range.getCount() != fronts.length + backs.length) {
-      String format = "range [%s] does not match number of front threads [%d] plus back threads[%d]";
+      String format = "range [%s] =/= front threads [%d] + back threads[%d]";
       String message = String.format( format, range.toString(),fronts.length, backs.length );
       throw new IllegalArgumentException (message);
     }
