@@ -8,7 +8,7 @@
   <title>
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
-  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/591/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/598/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group pairs="1-15" display="yes">
     <new_bobbins nrs="3-8,13-16"><style color="#0000FF"/></new_bobbins>
     <new_bobbins nrs="9-12"><style color="#FF0000"/></new_bobbins>
