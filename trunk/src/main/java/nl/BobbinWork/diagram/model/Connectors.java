@@ -147,6 +147,41 @@ class Connectors<T extends Segment>
     return ins;
   }
 
+  /**
+   * Sets the ins to the first segments of the lines. The segments in each line is connected.
+   * 
+   * @param lines
+   *          array of segments that are typically linked into a line
+   */
+  void setIns(
+      final T[]... lines)
+  {
+    for (int i = 0; i < lines.length; i++) 
+      ins.set( i, lines[i][0] );
+    
+    for (final T[] segments : lines) {
+      segments[0].setStyle( new ThreadStyle() );
+      for (int i = 1; i < segments.length; i++)
+        segments[i - 1].setNext( segments[i] );
+    }
+
+  }
+
+  /**
+   * Sets the outs to the last segments of the lines.
+   * 
+   * @param lines
+   *          array of segments that are typically linked into a line
+   */
+  void setOuts(
+      final T[]... lines)
+  {
+    for (int i = 0; i < lines.length; i++) {
+      final int last = lines[i].length - 1;
+      ins.set( i, lines[i][last] );
+    }
+  }
+
   /** @return @see Partition#getBounds() */
   Bounds<T> getBounds()
   {

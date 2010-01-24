@@ -115,25 +115,10 @@ public abstract class Switch
   @Override
   final Iterator<Drawable> threadIterator()
   {
-    final ArrayList<Drawable> list = new ArrayList<Drawable>( 4 );
-
-    for (final ThreadSegment segment : backThreads)
-      addSegment( list, segment );
-    for (final ThreadSegment segment : frontThreads)
-      addSegment( list, segment );
-    return list.iterator();
-  }
-
-  private void addSegment(
-      final ArrayList<Drawable> list,
-      final ThreadSegment backThread2)
-  {
-    final ThreadStyle style = backThread2.getStyle();
-    if (style.getWidth() > 0) {
-      final CubicCurve2D curve = backThread2.getCurve();
-      list.add( new Drawable( curve, style.getShadow() ) );
-      list.add( new Drawable( curve, style ) );
-    }
+    final DrawableList drawables = new DrawableList();
+    drawables.addThreadSegments( backThreads );
+    drawables.addThreadSegments( frontThreads );
+    return drawables.iterator();
   }
 
   @Override
