@@ -548,21 +548,29 @@
 			<copy of="rrr" pairs="2" />
 		</group>
 
-		<!--
-			group pairs="30-39" display="no"> <title> <value
-			lang="en">picots</value> <value lang="nl">pico's</value> </title>
+  <group pairs="30-39" display="no">
+    <title>
+      <value lang="en">picots</value>
+      <value lang="nl">pico's</value>
+    </title>
 
-			<stitch id="knotted_picot" pairs="59-59"> <pair start="0,0"
-			c1="40,60" c2="40,-30" end="0,30" /> <pin position="22,15" /> <bobbin
-			starts_as="2" ends_as="2"> <front start="07,00" c1="10,08" c2="10,08"
-			end="14,10" /> <back start="14,10" c1="20,15" c2="35,05" end="35,15"
-			/> <back start="35,15" c1="35,25" c2="20,15" end="14,20" /> <front
-			start="14,20" c1="10,22" c2="10,22" end="07,30" /> </bobbin> <bobbin
-			starts_as="1" ends_as="1"> <front start="00,10" end="08,18" /> <back
-			start="08,18" end="15,22" /> <front start="15,22" c1="20,22"
-			c2="20,08" end="15,08" /> <back start="15,08" end="00,20" />
-			</bobbin> </stitch> </group
-		-->
+    <stitch id="knotted_picot" pairs="59-59">
+      <pair start="0,0" c1="40,60" c2="40,-30" end="0,30" />
+      <pin position="22,15" />
+      <bobbin starts_as="2" ends_as="2">
+        <front start="07,00" c1="10,08" c2="10,08" end="14,10" />
+        <back start="14,10" c1="20,15" c2="35,05" end="35,15" />
+        <back start="35,15" c1="35,25" c2="20,15" end="14,20" />
+        <front start="14,20" c1="10,22" c2="10,22" end="07,30" />
+      </bobbin>
+      <bobbin starts_as="1" ends_as="1">
+        <front start="00,10" end="08,18" />
+        <back start="08,18" end="15,22" />
+        <front start="15,22" c1="20,22" c2="20,08" end="15,08" />
+        <back start="15,08" end="00,20" />
+      </bobbin>
+    </stitch>
+  </group>
 
 	</group>
 	<group pairs="4" display="no">

@@ -18,6 +18,9 @@
 
 package nl.BobbinWork.diagram.xml;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 public enum Ground {
 
   vierge      (4, 4, 0,  80,  80, 800L, 600L), //
@@ -55,7 +58,15 @@ public enum Ground {
     this.pairShift = (pairs + skippedPairs) / 2;
     this.rows = rows;
   }
-
+  
+  public InputStream squareInputStream() { 
+    return new ByteArrayInputStream( square().getBytes() );
+  }
+  
+  public InputStream diamondInputStream() { 
+    return new ByteArrayInputStream( diamond().getBytes() );
+  }
+  
   public String square()
   {
     String s = //
