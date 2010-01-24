@@ -139,8 +139,8 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
       g2.scale(scale, scale);
       g2.setRenderingHint(KEY_INTERPOLATION, VALUE_INTERPOLATION_BILINEAR);
       g2.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON);
-  		if (showPairs) DiagramPainter.paint (g2,diagram.getPairs());
   		if (showThreads) DiagramPainter.paint (g2,diagram.getThreads());
+  		if (showPairs) DiagramPainter.paint (g2,diagram.getPairs());
   	}
 	
 
