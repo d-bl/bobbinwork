@@ -56,7 +56,7 @@ public class Knot
     picot.getPairConnectors().setIns( picot.pairs );
     picot.getPairConnectors().setOuts( picot.pairs );
     picot.getThreadConnectors().setIns( ts );
-    picot.getThreadConnectors().setIns( ts );
+    picot.getThreadConnectors().setOuts( ts[1], ts[0] );
     return picot;
   }
 
