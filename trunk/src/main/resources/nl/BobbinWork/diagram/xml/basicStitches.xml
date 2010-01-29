@@ -570,6 +570,22 @@
         <front start="14,20" c1="10,22" c2="10,22" end="07,30" />
       </bobbin>
     </stitch>
+    <stitch id="twisted_picot" pairs="21">
+      <pair start="0,0" c1="45,70" c2="45,-35" end="0,30" />
+      <!-- 
+       -->
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="0"/><move x="15" y="15"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-15"/><move x="20" y="27"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-40"/><move x="35" y="35"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-90"/><move x="47" y="25"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-220"/><move x="30 " y="12"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-250"/><move x="18" y="15"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-280"/><move x="5" y="40"/></copy>
+<!-- 
+-->
+      <pin position="23,17" />
+    </stitch>
+    
   </group>
 
 	</group>
