@@ -65,7 +65,9 @@ import nl.BobbinWork.bwlib.gui.PrintMenu;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
 import nl.BobbinWork.diagram.xml.DiagramRebuilder;
+import nl.BobbinWork.diagram.xml.XmlResources;
 
+import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
@@ -298,6 +300,7 @@ public class BwDiagrams
     try {
       final Diagram model = createDiagramModel( inputStream );
       tree.setDiagramModel( model );
+      System.out.println(XmlResources.toXmlString( ((Element)model.getSourceObject()).getOwnerDocument() ));
       canvas.setPattern( model );
     } catch (final Exception exception) {
       showError( canvas, exception );

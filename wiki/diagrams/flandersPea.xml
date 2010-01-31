@@ -8,11 +8,11 @@
   <title>
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
-  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/565/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/604/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
   <group pairs="1-34">
     <title>
-      <value lang="en">Flanders pea</value>
-      <value lang="nl">Boontje in vlaanderse grond</value>
+      <value lang="en">Flanders pea (under construction)</value>
+      <value lang="nl">Boontje in vlaanderse grond (nog niet af)</value>
     </title>
     <group pairs="6-17">
       <title>
@@ -25,6 +25,7 @@
       <copy of="flanders" pairs="7-10"><move x="175" y="10" /></copy>
       <copy of="flanders" pairs="9-12"><move x="230" y="65" /></copy>
       <copy of="tc" pairs="11-12"><rotate centre="10,10" angle="-45" /><move x="285" y="120" /></copy>
+      <copy of="twisted_picot" pairs="12"><move x="305" y="140" /></copy>
     </group>
     <group pairs="8-15">
       <title>
@@ -108,6 +109,7 @@
         <!-- SE --><copy of="tctc" pairs="1-2"><rotate centre="10,10" angle="45" /><move x="230" y="230" /></copy>
       </group>
       <copy of="tc" pairs="11-12"><rotate centre="10,10" angle="-45" /><move x="290" y="230" /></copy>
+      <copy of="twisted_picot" pairs="12"><move x="305" y="250" /></copy>
       <copy of="r" pairs="9"><move x="212" y="235" /></copy>
     </group>
     <group id="peaS" pairs="9-14">
