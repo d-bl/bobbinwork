@@ -52,4 +52,27 @@ public class Stitch extends MultiplePairsPartition {
 		}
 		return list.iterator();
 	}
+
+ // @Override
+  final Iterator<Drawable> threadIterator()
+  {
+    // segments are added in reversed order to allow twisted pico's
+    final DrawableList drawables = new DrawableList();
+    for (int i=getPartitions().size()-1;i>=0;i--){
+      Partition partition = getPartitions().get( i );
+      if (partition instanceof Switch) {
+        drawables.addThreadSegments( ((Switch)partition).getBacks() );
+      } else if (partition instanceof Pin) {
+        drawables.addPins( (Pin)partition );
+      }
+    }
+    for (int i=0; i<getPartitions().size();i++){
+      Partition partition = getPartitions().get( i );
+      if (partition instanceof Switch) {
+        drawables.addThreadSegments( ((Switch)partition).getFronts() );
+      }
+    }
+    return drawables.iterator();
+  }
+
 }

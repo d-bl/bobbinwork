@@ -575,14 +575,25 @@
       <!-- 
        -->
       <copy of="A"><rotate centre="-6.8,-6.8" angle="0"/><move x="15" y="15"/></copy>
-      <copy of="A"><rotate centre="-6.8,-6.8" angle="-15"/><move x="20" y="27"/></copy>
-      <copy of="A"><rotate centre="-6.8,-6.8" angle="-40"/><move x="35" y="35"/></copy>
-      <copy of="A"><rotate centre="-6.8,-6.8" angle="-90"/><move x="47" y="25"/></copy>
-      <copy of="A"><rotate centre="-6.8,-6.8" angle="-220"/><move x="30 " y="12"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-15"/><move x="23" y="29"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-60"/><move x="35" y="35"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-120"/><move x="45" y="20"/></copy>
+      <copy of="A"><rotate centre="-6.8,-6.8" angle="-180"/><move x="30 " y="8"/></copy>
+<!-- 
       <copy of="A"><rotate centre="-6.8,-6.8" angle="-250"/><move x="18" y="15"/></copy>
       <copy of="A"><rotate centre="-6.8,-6.8" angle="-280"/><move x="5" y="40"/></copy>
-<!-- 
+      
+      <move x="160" y="100"/>
 -->
+      <twist bobbins="1-2" pairs="">
+        <back  start="19.4,-1" c1="11.7,2.8" c2="23.3,7.7" end="8.4,26.7"/>
+        <front start="23.3,7.7" c1="15.6,11.3" c2="19.4,-1" end="1.5,21"/>
+      </twist>
+      <twist bobbins="1-2" pairs="">
+        <back  start="1.5,21" c1="-4,28.3" c2="8.4,26.7" end="3.6,33.7"/>
+        <front start="8.4,26.7" c1="3.6,33.7" c2="0.8,21.4" end="-4,28.3"/>
+      </twist>
+
       <pin position="23,17" />
     </stitch>
     

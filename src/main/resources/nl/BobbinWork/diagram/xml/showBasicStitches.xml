@@ -28,6 +28,7 @@
     <title>
       <value lang="en">The showcase</value>
     </title>
+   <!-- 
     <copy of="ctc" pairs="1-2"><move x="25" y="60"/></copy>
     <copy of="tttctctc" pairs="3-4"><move x="50" y="50"/></copy>
     <copy of="tc" pairs="5-6"><move x="75" y="60"/></copy>
@@ -35,16 +36,14 @@
     <copy of="tc_ltr" pairs="9-10"><move x="105" y="15"/></copy>
     <copy of="crc" pairs="11-12"><move x="15" y="40"/></copy>
     <copy of="clc" pairs="13-14"><move x="85" y="40"/></copy>
-   <!-- 
     <copy of="ttc" pairs="15-16"><move x="50" y="15"/></copy>
     <copy of="tcrc" pairs="17-18"><move x="15" y="15"/></copy>
     <copy of="tclc" pairs="19-20"><move x="85" y="15"/></copy>
-    -->
     <copy of="crtc" pairs="21-22"><move x="135" y="50"/></copy>
     <copy of="cltc" pairs="23-24"><move x="105" y="50"/></copy>
     <group pairs="25-26">
-	    <copy of="tt" pairs="1-2"><move x="15" y="100"/></copy>
-	    <copy of="ctc" pairs="1-2"><move x="15" y="105"/></copy>
+        <copy of="tt" pairs="1-2"><move x="15" y="100"/></copy>
+        <copy of="ctc" pairs="1-2"><move x="15" y="105"/></copy>
     </group>
     <group pairs="27-28">
         <copy of="t" pairs="1-2"><move x="75" y="100"/></copy>
@@ -53,7 +52,10 @@
     <copy of="ffs" pairs="31-32"><move x="15" y="150"/></copy>
     <copy of="hs-1" pairs="33-34"><move x="75" y="150"/></copy>
     <copy of="fs-1" pairs="35-36"><move x="135" y="150"/></copy>
+    -->
     <copy of="twisted_picot" pairs="37"><move x="160" y="100"/></copy>
-    <copy of="knotted_picot" pairs="38-41"><move x="190" y="70"/></copy>
+   <!-- 
+    <copy of="knotted_picot" pairs="38"><move x="190" y="70"/></copy>
+    -->
   </group>
 </diagram>
