@@ -1,4 +1,5 @@
 nl.BobbinWork.bwlib.gui
+nl.BobbinWork.diagram.conversion
 nl.BobbinWork.diagram.gui
 nl.BobbinWork.diagram.math
 nl.BobbinWork.diagram.model
