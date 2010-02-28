@@ -36,7 +36,7 @@
     <property name="jnlp.deploy" value="http://bobbinwork.googlecode.com/svn/trunk/webstart" />
     <property name="jnlp.code.base" value="http://bobbinwork.googlecode.com/files" />
     <property name="jnlp.home.page" value="http://bobbinwork.googlecode.com/" />
-    <property name="dev.utils" value="../bw-dev-utils" />
+    <property name="dev.utils" value="../dev-utils" />
     <property name="target" value="1.5" />
     <property name="jar.suffix" value="-rel-${version}.jar" />
 
