@@ -90,6 +90,12 @@ public class TreeExpander
    * another via setUserData(CLONE_TO_ORPHAN) respective
    * setUserData(ORPHAN_TO_CLONE).
    * 
+   * {@link http://bobbinwork.googlecode.com/svn/trunk/doc/ModelObjects.html}
+   * illustrates how the presentation model will be able to manipulate the
+   * original document. getSourceObject() allows to change the 'of' attributes
+   * in the original DOM-tree, [INDIRECT_]CLONE_TO_ORPHAN allows to create these
+   * relations. ORPHAN_TO_CLONE allows to restore the original DOM-tree.
+   * 
    * @param root
    *          gets its copy elements replaced.
    * @throws XPathExpressionException
