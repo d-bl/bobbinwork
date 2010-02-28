@@ -16,18 +16,18 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="193.34716796875023" width="468.68642162919855" x="152.43238417437294" y="884.9734332179548"/>
+              <y:Geometry height="105.3084836585499" width="468.68642162919855" x="152.43238417437294" y="301.69998597576756"/>
               <y:Fill color="#CAECFF84" transparent="false"/>
               <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="468.68642162919855" x="0.0" y="0.0">cloned &lt;copy of="y"&gt;</y:NodeLabel>
+              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="468.68642162919855" x="0.0" y="0.0">&lt;... id="x"&gt;</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="10" leftF="9.512862633188547" right="3" rightF="2.8870748299319757" top="0" topF="1.1368683772161603E-13"/>
+              <y:BorderInsets bottom="2" bottomF="1.7456747595038564" left="104" leftF="104.18350389960676" right="3" rightF="2.8870748299319757" top="8" topF="8.06983166527965"/>
             </y:GroupNode>
             <y:GroupNode>
-              <y:Geometry height="80.0" width="100.0" x="-18.9306640625" y="-38.08624267578125"/>
+              <y:Geometry height="80.0" width="100.0" x="-81.9306640625" y="-28.146484375"/>
               <y:Fill color="#CAECFF84" transparent="false"/>
               <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.676605224609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="100.0" x="0.0" y="0.0">Folder 1</y:NodeLabel>
@@ -44,137 +44,90 @@
           <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="918.9131915187362"/>
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="346.4170589350257"/>
               <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="52.041015625" x="6.4697265625" y="1.0">cloned
-orphane</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n0::n1">
-          <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="1027.4410845851426"/>
-              <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">cloned
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">original
 dom node</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n0::n2">
+        <node id="n0::n1">
           <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/Partition.html]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="538.2512622236395" y="918.9131915187362"/>
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="538.2512622236395" y="343.70957594182846"/>
               <y:Fill color="#EF9826" color2="#F4C800" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="52.90234375" x="6.0390625" y="8.469879150390625">Partition</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n0::n3">
+        <node id="n0::n2">
           <data key="d1"/>
           <data key="d3">
             <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="56.372314453125" x="490.95986526026525" y="1037.2705122497632"/>
+              <y:Geometry height="20.39208984375" width="56.372314453125" x="415.8987231611395" y="369.8707050310636"/>
               <y:Fill color="#CCFFFF" transparent="false"/>
               <y:BorderStyle hasColor="false" type="line" width="1.0"/>
               <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="54.372314453125" x="1.0" y="1.0">creates</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n0::n4">
+        <node id="n0::n3">
           <data key="d1"/>
-          <data key="d2"><![CDATA[<html><body><p>
-getUserData(TreeExpander.ORPHAN_TO_CLONE)<br/>
-allows to restore the original DOM-tree<br/>
-<p></body></html>]]></data>
+          <data key="d2"><![CDATA[<html><body>getSourceObject() allows to change the<br/>
+'of' attributes in the original DOM-tree
+</body></html>]]></data>
           <data key="d3">
             <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="113.940673828125" x="320.8859206356865" y="977.0489947413924"/>
+              <y:Geometry height="20.39208984375" width="128.332763671875" x="379.9184985517645" y="343.70957594182846"/>
               <y:Fill color="#CCFFFF" transparent="false"/>
               <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">ORPHAN_TO_CLONE</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="126.332763671875" x="1.0" y="1.0">getSourceObject()</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n0::n5">
-          <data key="d1"/>
-          <data key="d2"><![CDATA[getUserData(TreeExpander.CLONE_TO_ORPHAN)]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="113.940673828125" x="176.9452468075615" y="977.5550297722274"/>
-              <y:Fill color="#CCFFFF" transparent="false"/>
-              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">CLONE_TO_ORPHAN</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <edge id="n0::e0" source="n0::n1" target="n0::n3">
+        <edge id="n0::e0" source="n0::n2" target="n0::n1">
           <data key="d7">
             <y:PolyLineEdge>
-              <y:Path sx="32.490234375" sy="2.0857142857144026" tx="-28.1861572265625" ty="0.0"/>
-              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="301.0693487673391" y="-1.9999955627367854"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n0::e1" source="n0::n3" target="n0::n2">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="23.64569848168719" sy="-10.196044921875" tx="-27.949775630124577" ty="17.93975830078125"/>
+              <y:Path sx="28.1861572265625" sy="-5.336851165711323" tx="-32.490234375" ty="13.080564544617573"/>
               <y:LineStyle color="#000000" type="dashed" width="1.0"/>
               <y:Arrows source="none" target="white_delta"/>
-              <y:EdgeLabel alignment="center" backgroundColor="#CCFFFF" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-102.00002707836012" y="-491.7636674377368"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="30.99012330762389" y="2.0000098712116596"/>
               <y:BendStyle smoothed="false"/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n0::e2" source="n0::n4" target="n0::n1">
+        <edge id="n0::e1" source="n0::n0" target="n0::n2">
           <data key="d7">
             <y:PolyLineEdge>
-              <y:Path sx="-49.11511881991589" sy="10.196044921875" tx="24.635016280853392" ty="-17.93975830078125"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="delta"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="12.999983510923812"/>
+              <y:Path sx="32.490234375" sy="11.726823048018957" tx="-28.1861572265625" ty="-3.9831096691127073"/>
+              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="72.5903753786672" y="-2.0000083978147245"/>
               <y:BendStyle smoothed="false"/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n0::e3" source="n0::n1" target="n0::n5">
+        <edge id="n0::e2" source="n0::n1" target="n0::n3">
           <data key="d7">
             <y:PolyLineEdge>
-              <y:Path sx="-22.855218094146608" sy="-17.93975830078125" tx="47.33532063320911" ty="10.196044921875"/>
+              <y:Path sx="-32.490234375" sy="-7.74371337890625" tx="64.1663818359375" ty="0.0"/>
               <y:LineStyle color="#000000" type="line" width="1.0"/>
               <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-16.71812934475247"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-16.970722639641735" y="2.0000117328440865"/>
               <y:BendStyle smoothed="false"/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n0::e4" source="n0::n5" target="n0::n0">
+        <edge id="n0::e3" source="n0::n3" target="n0::n0">
           <data key="d7">
             <y:PolyLineEdge>
-              <y:Path sx="47.33532063320911" sy="-10.196044921875" tx="-22.855218094146608" ty="17.93975830078125"/>
+              <y:Path sx="-64.1663818359375" sy="1.3537414965986159" tx="32.490234375" ty="-9.097454875504866"/>
               <y:LineStyle color="#000000" type="line" width="1.0"/>
               <y:Arrows source="none" target="delta"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-13.336690135768208"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n0::e5" source="n0::n0" target="n0::n4">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="24.635016280853392" sy="17.93975830078125" tx="-49.11511881991589" ty="-10.196044921875"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="9.128126821470573"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-23.618762497674766" y="1.9999934638177024"/>
               <y:BendStyle smoothed="false"/>
             </y:PolyLineEdge>
           </data>
@@ -182,177 +135,6 @@ allows to restore the original DOM-tree<br/>
       </graph>
     </node>
     <node id="n1" yfiles.foldertype="group">
-      <data key="d2"><![CDATA[ ]]></data>
-      <data key="d3">
-        <y:ProxyAutoBoundsNode>
-          <y:Realizers active="0">
-            <y:GroupNode>
-              <y:Geometry height="193.34716796875" width="468.68642162919855" x="152.43238417437294" y="661.6262652492048"/>
-              <y:Fill color="#CAECFF84" transparent="false"/>
-              <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="468.68642162919855" x="0.0" y="0.0">&lt;copy of="x"&gt;</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="false" innerGraphDisplayEnabled="false"/>
-              <y:NodeBounds considerNodeLabelSize="true"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="10" leftF="9.512862633188547" right="3" rightF="2.8870748299319757" top="0" topF="0.0"/>
-            </y:GroupNode>
-            <y:GroupNode>
-              <y:Geometry height="80.0" width="100.0" x="-18.9306640625" y="-38.08624267578125"/>
-              <y:Fill color="#CAECFF84" transparent="false"/>
-              <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.676605224609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="100.0" x="0.0" y="0.0">Folder 1</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="true" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-          </y:Realizers>
-        </y:ProxyAutoBoundsNode>
-      </data>
-      <graph edgedefault="directed" id="n1:">
-        <node id="n1::n0">
-          <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="695.5660235499861"/>
-              <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">orphaned
-dom node</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n1::n1">
-          <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="804.0939166163923"/>
-              <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">cloned
-dom node</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n1::n2">
-          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/Partition.html]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="538.2512622236395" y="695.5660235499861"/>
-              <y:Fill color="#EF9826" color2="#F4C800" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="52.90234375" x="6.0390625" y="8.469879150390625">Partition</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n1::n3">
-          <data key="d1"/>
-          <data key="d3">
-            <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="56.372314453125" x="490.95986526026525" y="813.923344281013"/>
-              <y:Fill color="#CCFFFF" transparent="false"/>
-              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="54.372314453125" x="1.0" y="1.0">creates</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n1::n4">
-          <data key="d1"/>
-          <data key="d2"><![CDATA[<html><body><p>
-getUserData(TreeExpander.ORPHAN_TO_CLONE)<br/>
-allows to restore the original DOM-tree<br/>
-<p></body></html>]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="113.940673828125" x="320.8859206356865" y="753.7018267726423"/>
-              <y:Fill color="#CCFFFF" transparent="false"/>
-              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">ORPHAN_TO_CLONE</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <node id="n1::n5">
-          <data key="d1"/>
-          <data key="d2"><![CDATA[getUserData(TreeExpander.CLONE_TO_ORPHAN)]]></data>
-          <data key="d3">
-            <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="113.940673828125" x="176.9452468075615" y="753.7018267726423"/>
-              <y:Fill color="#CCFFFF" transparent="false"/>
-              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">CLONE_TO_ORPHAN</y:NodeLabel>
-            </y:GenericNode>
-          </data>
-        </node>
-        <edge id="n1::e0" source="n1::n1" target="n1::n3">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="32.490234375" sy="2.0857142857144026" tx="-28.1861572265625" ty="0.0"/>
-              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="301.0693487673391" y="-1.9999955627370127"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n1::e1" source="n1::n3" target="n1::n2">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="23.64569848168719" sy="-10.196044921875" tx="-27.949775630124577" ty="17.93975830078125"/>
-              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-              <y:Arrows source="none" target="white_delta"/>
-              <y:EdgeLabel alignment="center" backgroundColor="#CCFFFF" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-102.00002707836012" y="-491.763667437737"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n1::e2" source="n1::n4" target="n1::n1">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="-49.11511881991589" sy="10.196044921875" tx="24.635016280853392" ty="-17.93975830078125"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="delta"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="12.999983510923585"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n1::e3" source="n1::n1" target="n1::n5">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="-22.855218094146608" sy="-17.93975830078125" tx="47.33532063320911" ty="10.196044921875"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-16.970719614076415"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n1::e4" source="n1::n5" target="n1::n0">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="47.33532063320911" sy="-10.196044921875" tx="-22.855218094146608" ty="17.93975830078125"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="delta"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-13.08470276837329"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n1::e5" source="n1::n0" target="n1::n4">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="24.635016280853392" sy="17.93975830078125" tx="-49.11511881991589" ty="-10.196044921875"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="9.12812682147046"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-      </graph>
-    </node>
-    <node id="n2" yfiles.foldertype="group">
       <data key="d2"><![CDATA[ ]]></data>
       <data key="d3">
         <y:ProxyAutoBoundsNode>
@@ -381,8 +163,8 @@ allows to restore the original DOM-tree<br/>
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n2:">
-        <node id="n2::n0">
+      <graph edgedefault="directed" id="n1:">
+        <node id="n1::n0">
           <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
@@ -394,7 +176,7 @@ dom node</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n1">
+        <node id="n1::n1">
           <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
@@ -406,7 +188,7 @@ dom node</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n2">
+        <node id="n1::n2">
           <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/Partition.html]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
@@ -417,7 +199,7 @@ dom node</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n3">
+        <node id="n1::n3">
           <data key="d1"/>
           <data key="d3">
             <y:GenericNode configuration="ShinyPlateNode">
@@ -428,8 +210,8 @@ dom node</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n4">
-          <data key="d1"/>
+        <node id="n1::n4">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/xml/expand/TreeExpander.html]]></data>
           <data key="d2"><![CDATA[<html><body><p>
 getUserData(TreeExpander.ORPHAN_TO_CLONE)<br/>
 allows to restore the original DOM-tree<br/>
@@ -443,8 +225,8 @@ allows to restore the original DOM-tree<br/>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n5">
-          <data key="d1"/>
+        <node id="n1::n5">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/xml/expand/TreeExpander.html]]></data>
           <data key="d2"><![CDATA[getUserData(TreeExpander.CLONE_TO_ORPHAN)]]></data>
           <data key="d3">
             <y:GenericNode configuration="ShinyPlateNode">
@@ -455,7 +237,7 @@ allows to restore the original DOM-tree<br/>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n2::n6">
+        <node id="n1::n6">
           <data key="d1"/>
           <data key="d2"><![CDATA[<html><body>getSourceObject() allows to change the<br/>
 'of' attributes in the original DOM-tree
@@ -469,7 +251,7 @@ allows to restore the original DOM-tree<br/>
             </y:GenericNode>
           </data>
         </node>
-        <edge id="n2::e0" source="n2::n1" target="n2::n3">
+        <edge id="n1::e0" source="n1::n1" target="n1::n3">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="32.490234375" sy="2.0857142857144026" tx="-28.1861572265625" ty="0.0"/>
@@ -480,7 +262,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e1" source="n2::n3" target="n2::n2">
+        <edge id="n1::e1" source="n1::n3" target="n1::n2">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="23.64569848168719" sy="-10.196044921875" tx="-27.949775630124577" ty="17.93975830078125"/>
@@ -491,7 +273,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e2" source="n2::n4" target="n2::n1">
+        <edge id="n1::e2" source="n1::n4" target="n1::n1">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="-49.11511881991589" sy="10.196044921875" tx="24.635016280853392" ty="-17.93975830078125"/>
@@ -502,7 +284,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e3" source="n2::n1" target="n2::n5">
+        <edge id="n1::e3" source="n1::n1" target="n1::n5">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="-22.855218094146608" sy="-17.93975830078125" tx="47.33532063320911" ty="10.196044921875"/>
@@ -513,7 +295,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e4" source="n2::n5" target="n2::n0">
+        <edge id="n1::e4" source="n1::n5" target="n1::n0">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="47.33532063320911" sy="-10.196044921875" tx="-22.855218094146608" ty="17.93975830078125"/>
@@ -524,7 +306,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e5" source="n2::n2" target="n2::n6">
+        <edge id="n1::e5" source="n1::n2" target="n1::n6">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="-32.490234375" sy="0.0" tx="64.1663818359375" ty="0.0"/>
@@ -535,7 +317,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e6" source="n2::n6" target="n2::n0">
+        <edge id="n1::e6" source="n1::n6" target="n1::n0">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="-64.1663818359375" sy="0.0" tx="32.490234375" ty="0.0"/>
@@ -546,7 +328,7 @@ allows to restore the original DOM-tree<br/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n2::e7" source="n2::n0" target="n2::n4">
+        <edge id="n1::e7" source="n1::n0" target="n1::n4">
           <data key="d7">
             <y:PolyLineEdge>
               <y:Path sx="24.635016280853392" sy="17.93975830078125" tx="-49.11511881991589" ty="-10.196044921875"/>
@@ -559,24 +341,195 @@ allows to restore the original DOM-tree<br/>
         </edge>
       </graph>
     </node>
+    <node id="n2" yfiles.foldertype="group">
+      <data key="d2"><![CDATA[ ]]></data>
+      <data key="d3">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="193.34716796875" width="468.68642162919855" x="152.43238417437294" y="661.6262652492048"/>
+              <y:Fill color="#CAECFF84" transparent="false"/>
+              <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="468.68642162919855" x="0.0" y="0.0">&lt;copy of="x"&gt;</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" innerGraphDisplayEnabled="false"/>
+              <y:NodeBounds considerNodeLabelSize="true"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="10" leftF="9.512862633188547" right="3" rightF="2.8870748299319757" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="80.0" width="100.0" x="-18.9306640625" y="-38.08624267578125"/>
+              <y:Fill color="#CAECFF84" transparent="false"/>
+              <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.676605224609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="100.0" x="0.0" y="0.0">Folder 1</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n2:">
+        <node id="n2::n0">
+          <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="BevelNodeWithShadow">
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="695.5660235499861"/>
+              <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">orphaned
+dom node</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n2::n1">
+          <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="BevelNodeWithShadow">
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="804.0939166163923"/>
+              <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">cloned
+dom node</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n2::n2">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/Partition.html]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="BevelNodeWithShadow">
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="538.2512622236395" y="695.5660235499861"/>
+              <y:Fill color="#EF9826" color2="#F4C800" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="52.90234375" x="6.0390625" y="8.469879150390625">Partition</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n2::n3">
+          <data key="d1"/>
+          <data key="d3">
+            <y:GenericNode configuration="ShinyPlateNode">
+              <y:Geometry height="20.39208984375" width="56.372314453125" x="490.95986526026525" y="813.923344281013"/>
+              <y:Fill color="#CCFFFF" transparent="false"/>
+              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="54.372314453125" x="1.0" y="1.0">creates</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n2::n4">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/xml/expand/TreeExpander.html]]></data>
+          <data key="d2"><![CDATA[<html><body><p>
+getUserData(TreeExpander.ORPHAN_TO_CLONE)<br/>
+allows to restore the original DOM-tree<br/>
+<p></body></html>]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="ShinyPlateNode">
+              <y:Geometry height="20.39208984375" width="113.940673828125" x="320.8859206356865" y="753.7018267726423"/>
+              <y:Fill color="#CCFFFF" transparent="false"/>
+              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">ORPHAN_TO_CLONE</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n2::n5">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/xml/expand/TreeExpander.html]]></data>
+          <data key="d2"><![CDATA[getUserData(TreeExpander.CLONE_TO_ORPHAN)]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="ShinyPlateNode">
+              <y:Geometry height="20.39208984375" width="113.940673828125" x="176.9452468075615" y="753.7018267726423"/>
+              <y:Fill color="#CCFFFF" transparent="false"/>
+              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">CLONE_TO_ORPHAN</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <edge id="n2::e0" source="n2::n1" target="n2::n3">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="32.490234375" sy="2.0857142857144026" tx="-28.1861572265625" ty="0.0"/>
+              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="301.0693487673391" y="-1.9999955627370127"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n2::e1" source="n2::n3" target="n2::n2">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="23.64569848168719" sy="-10.196044921875" tx="-27.949775630124577" ty="17.93975830078125"/>
+              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+              <y:Arrows source="none" target="white_delta"/>
+              <y:EdgeLabel alignment="center" backgroundColor="#CCFFFF" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-102.00002707836012" y="-491.763667437737"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n2::e2" source="n2::n4" target="n2::n1">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="-49.11511881991589" sy="10.196044921875" tx="24.635016280853392" ty="-17.93975830078125"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="delta"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="12.999983510923585"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n2::e3" source="n2::n1" target="n2::n5">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="-22.855218094146608" sy="-17.93975830078125" tx="47.33532063320911" ty="10.196044921875"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-16.970719614076415"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n2::e4" source="n2::n5" target="n2::n0">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="47.33532063320911" sy="-10.196044921875" tx="-22.855218094146608" ty="17.93975830078125"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="delta"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-13.08470276837329"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n2::e5" source="n2::n0" target="n2::n4">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="24.635016280853392" sy="17.93975830078125" tx="-49.11511881991589" ty="-10.196044921875"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="9.12812682147046"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+      </graph>
+    </node>
     <node id="n3" yfiles.foldertype="group">
       <data key="d2"><![CDATA[ ]]></data>
       <data key="d3">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="105.3084836585499" width="468.68642162919855" x="152.43238417437294" y="301.69998597576756"/>
+              <y:Geometry height="193.34716796875023" width="468.68642162919855" x="152.43238417437294" y="884.9734332179548"/>
               <y:Fill color="#CAECFF84" transparent="false"/>
               <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="468.68642162919855" x="0.0" y="0.0">&lt;... id="x"&gt;</y:NodeLabel>
+              <y:NodeLabel alignment="center" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="468.68642162919855" x="0.0" y="0.0">cloned &lt;copy of="y"&gt;</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" innerGraphDisplayEnabled="false"/>
               <y:NodeBounds considerNodeLabelSize="true"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="2" bottomF="1.7456747595038564" left="104" leftF="104.18350389960676" right="3" rightF="2.8870748299319757" top="8" topF="8.06983166527965"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="10" leftF="9.512862633188547" right="3" rightF="2.8870748299319757" top="0" topF="1.1368683772161603E-13"/>
             </y:GroupNode>
             <y:GroupNode>
-              <y:Geometry height="80.0" width="100.0" x="-81.9306640625" y="-28.146484375"/>
+              <y:Geometry height="80.0" width="100.0" x="-18.9306640625" y="-38.08624267578125"/>
               <y:Fill color="#CAECFF84" transparent="false"/>
               <y:BorderStyle color="#666699" type="dotted" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#99CCFF" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.676605224609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="100.0" x="0.0" y="0.0">Folder 1</y:NodeLabel>
@@ -593,90 +546,137 @@ allows to restore the original DOM-tree<br/>
           <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="346.4170589350257"/>
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="918.9131915187362"/>
               <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">original
-dom node</y:NodeLabel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="52.041015625" x="6.4697265625" y="1.0">cloned
+orphane</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
         <node id="n3::n1">
+          <data key="d1"><![CDATA[http://java.sun.com/javase/6/docs/api/org/w3c/dom/Node.html#getUserData(java.lang.String)]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="BevelNodeWithShadow">
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="271.6158880739797" y="1027.4410845851426"/>
+              <y:Fill color="#99FF66" color2="#CCFFCC" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="33.8795166015625" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="62.98046875" x="1.0" y="1.0">cloned
+dom node</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <node id="n3::n2">
           <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/Partition.html]]></data>
           <data key="d3">
             <y:GenericNode configuration="BevelNodeWithShadow">
-              <y:Geometry height="35.8795166015625" width="64.98046875" x="538.2512622236395" y="343.70957594182846"/>
+              <y:Geometry height="35.8795166015625" width="64.98046875" x="538.2512622236395" y="918.9131915187362"/>
               <y:Fill color="#EF9826" color2="#F4C800" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.93975830078125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="52.90234375" x="6.0390625" y="8.469879150390625">Partition</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n3::n2">
+        <node id="n3::n3">
           <data key="d1"/>
           <data key="d3">
             <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="56.372314453125" x="415.8987231611395" y="369.8707050310636"/>
+              <y:Geometry height="20.39208984375" width="56.372314453125" x="490.95986526026525" y="1037.2705122497632"/>
               <y:Fill color="#CCFFFF" transparent="false"/>
               <y:BorderStyle hasColor="false" type="line" width="1.0"/>
               <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="54.372314453125" x="1.0" y="1.0">creates</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <node id="n3::n3">
-          <data key="d1"/>
-          <data key="d2"><![CDATA[<html><body>getSourceObject() allows to change the<br/>
-'of' attributes in the original DOM-tree
-</body></html>]]></data>
+        <node id="n3::n4">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/xml/expand/TreeExpander.html]]></data>
+          <data key="d2"><![CDATA[<html><body><p>
+getUserData(TreeExpander.ORPHAN_TO_CLONE)<br/>
+allows to restore the original DOM-tree<br/>
+<p></body></html>]]></data>
           <data key="d3">
             <y:GenericNode configuration="ShinyPlateNode">
-              <y:Geometry height="20.39208984375" width="128.332763671875" x="379.9184985517645" y="343.70957594182846"/>
+              <y:Geometry height="20.39208984375" width="113.940673828125" x="320.8859206356865" y="977.0489947413924"/>
               <y:Fill color="#CCFFFF" transparent="false"/>
               <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="126.332763671875" x="1.0" y="1.0">getSourceObject()</y:NodeLabel>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">ORPHAN_TO_CLONE</y:NodeLabel>
             </y:GenericNode>
           </data>
         </node>
-        <edge id="n3::e0" source="n3::n2" target="n3::n1">
+        <node id="n3::n5">
+          <data key="d1"><![CDATA[http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/xml/expand/TreeExpander.html]]></data>
+          <data key="d2"><![CDATA[getUserData(TreeExpander.CLONE_TO_ORPHAN)]]></data>
+          <data key="d3">
+            <y:GenericNode configuration="ShinyPlateNode">
+              <y:Geometry height="20.39208984375" width="113.940673828125" x="176.9452468075615" y="977.5550297722274"/>
+              <y:Fill color="#CCFFFF" transparent="false"/>
+              <y:BorderStyle hasColor="false" type="line" width="1.0"/>
+              <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeMono" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="18.39208984375" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="111.940673828125" x="1.0" y="1.0">CLONE_TO_ORPHAN</y:NodeLabel>
+            </y:GenericNode>
+          </data>
+        </node>
+        <edge id="n3::e0" source="n3::n1" target="n3::n3">
           <data key="d7">
             <y:PolyLineEdge>
-              <y:Path sx="28.1861572265625" sy="-5.336851165711323" tx="-32.490234375" ty="13.080564544617573"/>
+              <y:Path sx="32.490234375" sy="2.0857142857144026" tx="-28.1861572265625" ty="0.0"/>
+              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="301.0693487673391" y="-1.9999955627367854"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n3::e1" source="n3::n3" target="n3::n2">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="23.64569848168719" sy="-10.196044921875" tx="-27.949775630124577" ty="17.93975830078125"/>
               <y:LineStyle color="#000000" type="dashed" width="1.0"/>
               <y:Arrows source="none" target="white_delta"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="30.99012330762389" y="2.0000098712116596"/>
+              <y:EdgeLabel alignment="center" backgroundColor="#CCFFFF" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="on_edge" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-102.00002707836012" y="-491.7636674377368"/>
               <y:BendStyle smoothed="false"/>
             </y:PolyLineEdge>
           </data>
         </edge>
-        <edge id="n3::e1" source="n3::n0" target="n3::n2">
+        <edge id="n3::e2" source="n3::n4" target="n3::n1">
           <data key="d7">
             <y:PolyLineEdge>
-              <y:Path sx="32.490234375" sy="11.726823048018957" tx="-28.1861572265625" ty="-3.9831096691127073"/>
-              <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="free" modelPosition="anywhere" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="72.5903753786672" y="-2.0000083978147245"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n3::e2" source="n3::n1" target="n3::n3">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="-32.490234375" sy="-7.74371337890625" tx="64.1663818359375" ty="0.0"/>
-              <y:LineStyle color="#000000" type="line" width="1.0"/>
-              <y:Arrows source="none" target="none"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-16.970722639641735" y="2.0000117328440865"/>
-              <y:BendStyle smoothed="false"/>
-            </y:PolyLineEdge>
-          </data>
-        </edge>
-        <edge id="n3::e3" source="n3::n3" target="n3::n0">
-          <data key="d7">
-            <y:PolyLineEdge>
-              <y:Path sx="-64.1663818359375" sy="1.3537414965986159" tx="32.490234375" ty="-9.097454875504866"/>
+              <y:Path sx="-49.11511881991589" sy="10.196044921875" tx="24.635016280853392" ty="-17.93975830078125"/>
               <y:LineStyle color="#000000" type="line" width="1.0"/>
               <y:Arrows source="none" target="delta"/>
-              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="-23.618762497674766" y="1.9999934638177024"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="12.999983510923812"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n3::e3" source="n3::n1" target="n3::n5">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="-22.855218094146608" sy="-17.93975830078125" tx="47.33532063320911" ty="10.196044921875"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-16.71812934475247"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n3::e4" source="n3::n5" target="n3::n0">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="47.33532063320911" sy="-10.196044921875" tx="-22.855218094146608" ty="17.93975830078125"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="delta"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="-13.336690135768208"/>
+              <y:BendStyle smoothed="false"/>
+            </y:PolyLineEdge>
+          </data>
+        </edge>
+        <edge id="n3::e5" source="n3::n0" target="n3::n4">
+          <data key="d7">
+            <y:PolyLineEdge>
+              <y:Path sx="24.635016280853392" sy="17.93975830078125" tx="-49.11511881991589" ty="-10.196044921875"/>
+              <y:LineStyle color="#000000" type="line" width="1.0"/>
+              <y:Arrows source="none" target="none"/>
+              <y:EdgeLabel alignment="center" distance="2.0" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="4.0" modelName="six_pos" modelPosition="tail" preferredPlacement="anywhere" ratio="0.5" textColor="#000000" visible="true" width="4.0" x="1.9999888274893465" y="9.128126821470573"/>
               <y:BendStyle smoothed="false"/>
             </y:PolyLineEdge>
           </data>
@@ -736,11 +736,11 @@ ORPHAN</y:NodeLabel>
       <data key="d1"><![CDATA[http://www.yworks.com/en/products_yed_about.html]]></data>
       <data key="d3">
         <y:GenericNode configuration="ShinyPlateNode">
-          <y:Geometry height="50.0" width="358.0" x="-107.82805325255094" y="251.69998597576756"/>
+          <y:Geometry height="50.0" width="206.0" x="-107.82805325255094" y="251.69998597576756"/>
           <y:Fill color="#FFFFFF" transparent="false"/>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
-          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeSans" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.0" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="356.0" x="1.0" y="1.0">&lt;html&gt;&lt;body&gt;
-&lt;b&gt;hover for more detailed descriptions and links   &lt;/b&gt;
+          <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeSans" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.0" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="204.0" x="1.0" y="1.0">&lt;html&gt;&lt;body&gt;
+&lt;b&gt;hover for details and links   &lt;/b&gt;
 &lt;p&gt;created by yEd&lt;/p&gt;
 &lt;p&gt;&lt;/body&gt;&lt;/html&gt;</y:NodeLabel>
         </y:GenericNode>
@@ -792,7 +792,7 @@ ORPHAN</y:NodeLabel>
         </y:GenericNode>
       </data>
     </node>
-    <edge id="e0" source="n9" target="n2::n2">
+    <edge id="e0" source="n9" target="n1::n2">
       <data key="d6"><![CDATA[TreeSelectionEvent()
 .getPath()
 .getPathComponent(...)
@@ -809,7 +809,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e1" source="n9" target="n3::n1">
+    <edge id="e1" source="n9" target="n0::n1">
       <data key="d6"><![CDATA[TreeSelectionEvent()
 .getPath()
 .getPathComponent(...)
@@ -826,7 +826,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e2" source="n3::n1" target="n2::n2">
+    <edge id="e2" source="n0::n1" target="n1::n2">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="17.93975830078125" tx="0.0" ty="-17.93975830078125"/>
@@ -837,7 +837,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e3" source="n3::n0" target="n2::n0">
+    <edge id="e3" source="n0::n0" target="n1::n0">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="17.93975830078125" tx="0.0" ty="-17.93975830078125"/>
@@ -848,7 +848,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e4" source="n9" target="n1::n2">
+    <edge id="e4" source="n9" target="n2::n2">
       <data key="d6"><![CDATA[TreeSelectionEvent()
 .getPath()
 .getPathComponent(...)
@@ -863,7 +863,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e5" source="n9" target="n0::n2">
+    <edge id="e5" source="n9" target="n3::n2">
       <data key="d6"><![CDATA[TreeSelectionEvent()
 .getPath()
 .getPathComponent(...)
@@ -880,7 +880,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e6" source="n1::n1" target="n0::n0">
+    <edge id="e6" source="n2::n1" target="n3::n0">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="17.93975830078125" tx="0.0" ty="-17.93975830078125"/>
@@ -891,7 +891,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e7" source="n1::n2" target="n0::n2">
+    <edge id="e7" source="n2::n2" target="n3::n2">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="5.0" sy="17.93975830078125" tx="5.0" ty="-17.93975830078125"/>
@@ -902,7 +902,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e8" source="n5" target="n2::n0">
+    <edge id="e8" source="n5" target="n1::n0">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-0.0" sy="-10.196044921875" tx="-32.490234375" ty="5.0">
@@ -915,7 +915,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n6" target="n2::n0">
+    <edge id="e9" source="n6" target="n1::n0">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-0.0" sy="-24.588134765625" tx="-32.490234375" ty="-5.0">
@@ -928,7 +928,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n0::n1" target="n6">
+    <edge id="e10" source="n3::n1" target="n6">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-32.490234375" sy="0.0" tx="35.3822021484375" ty="0.0"/>
@@ -939,7 +939,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e11" source="n0::n2" target="n5">
+    <edge id="e11" source="n3::n2" target="n5">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-5.0" sy="-17.93975830078125" tx="64.1663818359375" ty="0.0">
@@ -952,7 +952,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e12" source="n8" target="n3::n0">
+    <edge id="e12" source="n8" target="n0::n0">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-0.0" sy="-24.588134765625" tx="-32.490234375" ty="-5.0">
@@ -965,7 +965,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e13" source="n1::n1" target="n8">
+    <edge id="e13" source="n2::n1" target="n8">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-32.490234375" sy="0.0" tx="35.3822021484375" ty="0.0"/>
@@ -987,7 +987,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n1::n2" target="n10">
+    <edge id="e15" source="n2::n2" target="n10">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="-17.93975830078125" tx="64.1663818359375" ty="0.0">
@@ -1000,7 +1000,7 @@ ORPHAN</y:NodeLabel>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e16" source="n10" target="n3::n0">
+    <edge id="e16" source="n10" target="n0::n0">
       <data key="d7">
         <y:PolyLineEdge>
           <y:Path sx="-0.0" sy="-10.196044921875" tx="-32.490234375" ty="5.0">
