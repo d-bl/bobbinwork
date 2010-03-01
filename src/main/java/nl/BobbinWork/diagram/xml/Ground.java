@@ -22,7 +22,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 public enum Ground {
-
+  
   vierge      (4, 4, 0,  80,  80, 800L, 600L), //
   sGravenmoers(4, 4, 0,  80,  80, 650L, 500L), //
   spider      (4, 6, 0,  80, 140, 850L, 600L), //
