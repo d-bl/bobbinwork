@@ -1,5 +1,5 @@
 #summary get familiar with the development environment
-#labels Featured,Phase-Implementation
+#labels Phase-Implementation
 
 = users =
 
