@@ -14,7 +14,7 @@ To become a project member or start contributing:
  
 == Project structure ==
 
-Though the project is [http://ant.apache.org/ Ant] based, it has a [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html Maven] like directory structure. However, for Maven the project would need at least 3 modules but I want to deliver stand alone executable jars that just need a JRE. Standard for svn projects are `trunk`, `branches` and `tags`, googlecode adds a standard `wiki`, below an overview of the project specific structure
+Though the project is [http://ant.apache.org/ Ant] based, it has a [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html Maven] like directory structure. However, for Maven the project would need at least 3 modules but I want to deliver stand alone executable jars that just need a JRE. Standard for [http://subversion.tigris.org subversion] projects are `trunk`, `branches` and `tags`, googlecode adds a standard `wiki`, below an overview of the project specific structure
 
 || <pre>trunk/src/main/java</pre> || has the executable main classes: <br>`nl.BobbinWork.diagram.gui.BwDiagrams`<br> `nl.BobbinWork.grids.GridGUI.PolarGridPrinter` ||
 || <pre>trunk/src/test/java</pre> || contains tests for JUnit4, depends on `wiki/diagrams` ||
