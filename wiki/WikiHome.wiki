@@ -2,7 +2,7 @@
 
 Developers can find their wiki pages at the navigation panel on the left.
 
-  * Gewbruikers kunnen tercht op [http://bobbinwork.wikispaces.com/#Deutsch wikispace]
+  * Gebruikers kunnen tercht op [http://bobbinwork.wikispaces.com/#Deutsch wikispace]
   * Users can go to [http://bobbinwork.wikispaces.com/#English wikispace]
   * Fur Benutzer gibt es [http://bobbinwork.wikispaces.com/#Deutsch wikispace]
   * ... and more languages [http://bobbinwork.wikispaces.com wikispace]
