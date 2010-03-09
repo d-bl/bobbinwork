@@ -1,0 +1,5 @@
+#summary different wiki's for different audiences.
+
+[[http://bobbinwork.wikispaces.com wiki]] for Users/Gebruikers/Benutzer and more languages.
+
+Developers can find their pages at the navigation panel on the left.
