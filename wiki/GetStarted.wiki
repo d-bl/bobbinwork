@@ -1,11 +1,6 @@
 #summary get familiar with the development environment
 #labels Phase-Implementation
 
-= users =
-
-Users can go to the [http://code.google.com/p/bobbinwork/ project home page] and look under "links".
-
-= Developers =
 The [http://code.google.com/p/bobbinwork/issues/list?can=2&q=label%3Anewbee&sort=priority&colspec=ID+Type+Status+Priority+Milestone+Owner+Summary&cells=tiles issues labeled newbee] are good starting points for developers new to the project.
 
 Developers may use any IDE or whatever they are comfortable with. 
