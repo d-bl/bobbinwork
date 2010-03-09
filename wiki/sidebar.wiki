@@ -1,15 +1,16 @@
 #summary by default on every page
 
-  * background information
-    * [history]
-    * [LicenceIssues diagrams, code and licenses]
-  * technical documentation
-    * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
-    * [http://bobbinwork.googlecode.com/svn/trunk/doc class/object diagrams]
-    * [GetStarted development environment]
-  * mathematical solutions 
-    * [TwistMarkMath twist marks]
-    * [GridMath polar grids]
-  * [MathChallenges remaining mathematic challenges]
-  * [ToDo plans and ideas]
+background information
+  * [history]
+  * [LicenceIssues diagrams, code and licenses]
+technical documentation
+  * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
+  * [http://bobbinwork.googlecode.com/svn/trunk/doc class/object diagrams]
+  * [GetStarted development environment]
+mathematical solutions 
+  * [TwistMarkMath twist marks]
+  * [GridMath polar grids]
+[MathChallenges remaining mathematic challenges]
+[ToDo plans and ideas]
+
 [http://code.google.com/p/bobbinwork/w/list all wiki pages]
