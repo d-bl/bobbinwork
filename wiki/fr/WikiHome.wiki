@@ -2,4 +2,4 @@
 #sidebar sidebar
 
   * [http://bobbinwork.wikispaces.com/#Deutch wiki] para y por usuarios
-  * [sidebar wiki] for and by developers (English preferred, Dutch, German and French accepted)
+  * [GetStarted wiki] for and by developers (English preferred, Dutch, German and French accepted)

@@ -2,4 +2,4 @@
 #sidebar sidebar
 
   * [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von Benutzern
-  * [sidebar wiki] für und von Entwiklers (betsens Englisch aber Deutsch geht auch)
+  * [GetStarted wiki] für und von Entwiklers (betsens Englisch aber Deutsch geht auch)
