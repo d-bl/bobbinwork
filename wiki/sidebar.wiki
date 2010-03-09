@@ -1,16 +1,16 @@
 #summary side bar for every page
 
-wiki [WikiHome home] [http://code.google.com/p/bobbinwork/w/list all]
-
   * background information
     * [history]
     * [LicenceIssues diagrams, code and licenses]
   * technical documentation
     * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
     * [http://bobbinwork.googlecode.com/svn/trunk/doc class/object diagrams]
-    * [GetStarted development environment]
+    * [GetStarted development environment / get started]
   * mathematical solutions 
     * [TwistMarkMath twist marks]
     * [GridMath polar grids]
   * [MathChallenges remaining mathematic challenges]
   * [ToDo plans and ideas]
+
+[http://code.google.com/p/bobbinwork/w/list all] wiki pages
