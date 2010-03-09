@@ -1,4 +1,5 @@
 #summary verschillende wiki's voor verschillend publiek
+#sidebar sidebar
 
   * Gebruikers kunnen terecht op [http://bobbinwork.wikispaces.com/#Nederlands wikispace]
   * Ontwikkelaars kunnen links op het overzicht terecht (bij voorkeur engels maar Nederlands kan ook)

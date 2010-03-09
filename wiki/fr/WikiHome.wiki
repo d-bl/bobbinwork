@@ -1,4 +1,5 @@
 #summary 2 Wiki's
+#sidebar sidebar
 
   * [http://bobbinwork.wikispaces.com/#Deutch wiki] para y por usuarios
   * Developers can find their pages in the navigation panel on the left (English preferred, Dutch, German and French accepted)

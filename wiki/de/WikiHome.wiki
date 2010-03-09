@@ -1,4 +1,5 @@
 #summary zwei Wiki's
+#sidebar sidebar
 
   * [http://bobbinwork.wikispaces.com/#Deutch wiki] für und von Benutzern
   * Seiten für Entwiklers gibt es im Übersicht links (betsens Englisch aber Deutsch geht auch)
