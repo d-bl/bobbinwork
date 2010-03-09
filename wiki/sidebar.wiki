@@ -1,4 +1,6 @@
-#summary by default on every page
+#summary side bar for every page
+
+wiki [WikiHome home] [http://code.google.com/p/bobbinwork/w/list all]
 
   * background information
     * [history]
@@ -12,5 +14,3 @@
     * [GridMath polar grids]
   * [MathChallenges remaining mathematic challenges]
   * [ToDo plans and ideas]
-
-[http://code.google.com/p/bobbinwork/w/list all wiki pages]
