@@ -15,7 +15,7 @@ To become a project member or start contributing:
  
 == Project structure ==
 
-Though the project is Ant based, it has a Maven like organisation. However, as two jar files are created, maven would need at least 2 modules. As both share a package that would introduce a third module and jar. Standard for svn projects are `trunk`, `branches` and `tags`, googlecode adds a standard `wiki`, below an overview of the project specific structure
+Though the project is Ant based, it has a Maven like directory structure. However, for Maven the project would need at least 3 modules. Standard for svn projects are `trunk`, `branches` and `tags`, googlecode adds a standard `wiki`, below an overview of the project specific structure
 
 || <pre>trunk/src/main/java</pre> || has the executable main classes: <br>`nl.BobbinWork.diagram.gui.BwDiagrams`<br> `nl.BobbinWork.grids.GridGUI.PolarGridPrinter` ||
 || <pre>trunk/src/test/java</pre> || contains tests for JUnit4, depends on `wiki/diagrams` ||
