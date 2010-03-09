@@ -1,6 +1,6 @@
 #summary side bar for every page
 
-wiki pages for developers
+*wiki pages for developers*
 
   * background information
     * [history]
