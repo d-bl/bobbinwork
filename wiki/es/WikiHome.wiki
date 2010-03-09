@@ -1,5 +1,5 @@
 #summary 2 Wiki's
 #sidebar sidebar
 
-  * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des utilisateurs
-  * [GetStarted wiki] for and by developers (English preferred, Dutch, German and French accepted)
+  * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des *utilisateurs*
+  * [GetStarted wiki] for and by *developers* (English preferred, Dutch, German and French accepted)
