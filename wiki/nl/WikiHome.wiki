@@ -1,5 +1,5 @@
 #summary verschillende wiki's voor verschillend publiek
 #sidebar sidebar
 
-  * [http://bobbinwork.wikispaces.com/#Nederlands wiki] voor en door *gebruikers*
+  * [http://bobbinwork.wikispaces.com/#Nederlands wiki] voor en door *gebruikers* (in diverse talen)
   * [GetStarted wiki] voor en door *ontwikkelaars* (bij voorkeur engels maar nederlands kan ook)

@@ -1,5 +1,5 @@
 #summary zwei Wiki's
 #sidebar sidebar
 
-  * [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern*
+  * [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen))
   * [GetStarted wiki] für und von *Entwiklers* (betsens Englisch aber Deutsch geht auch)
