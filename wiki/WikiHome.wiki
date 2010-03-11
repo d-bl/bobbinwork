@@ -1,4 +1,4 @@
 #summary different wiki's for different audiences
 
   * [http://bobbinwork.wikispaces.com wiki] *for and by users* in various languages
-  * *Developers* can find their pages in the navigation panel on the left (English preferred, Dutch, German and French accepted)
+  * workaround a bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en proper version] of this page with an overview of the pages for *developers* (English preferred, Dutch, German and French accepted)
