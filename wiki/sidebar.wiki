@@ -1,7 +1,10 @@
 #summary side bar for every page
 
-*wiki pages for developers*<br>(English preferred, Dutch, German and French possible)
+*wiki pages for developers*
 
+English preferred, Dutch, German and French possible
+
+  * [ToDo plans and ideas]
   * background information
     * [history]
     * [LicenceIssues diagrams, code and licenses]
@@ -13,6 +16,5 @@
     * [TwistMarkMath twist marks]
     * [GridMath polar grids]
   * [MathChallenges remaining mathematic challenges]
-  * [ToDo plans and ideas]
 
 [http://code.google.com/p/bobbinwork/w/list all] developer wiki pages
