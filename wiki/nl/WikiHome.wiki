@@ -4,4 +4,4 @@
   * zelfstandige [http://bobbinwork.wikispaces.com/#Nederlands wiki] voor en door *gebruikers* (in diverse talen)
   * [GetStarted wiki] voor en door *ontwikkelaars* (bij voorkeur engels maar nederlands kan ook)
 
-Achterdeur i.v.m. google bug: betere versie van [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl deze pagina] waarop commentaar gegeven kan worden.
+Achterdeur i.v.m. google bug: betere versie van [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl deze pagina] waarop commentaar gegeven kan worden en naar ander vertalingen gelinkt wordt.

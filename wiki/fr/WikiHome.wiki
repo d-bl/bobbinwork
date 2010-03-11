@@ -4,4 +4,4 @@
   * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des *utilisateurs* (plusieurs langues)
   * [GetStarted wiki] pour et par des *développeurs* (Anglais preferé, Francais accepté)
   
-Workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr less limping version] of this page that allows comments (for example a proposal to translate the english phrases on this page)
+Workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr less limping version] of this page that allows comments (for example a proposal to translate the english phrases on this page) and leads to translations

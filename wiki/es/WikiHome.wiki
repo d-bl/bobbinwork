@@ -4,4 +4,4 @@
   * [http://bobbinwork.wikispaces.com/#Deutch wiki] para y por *usuarios* (various languages)
   * [GetStarted wiki] para y por *developers* (English prefered) 
 
-Workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es less limping version] of this page that allows comments (for example a proposal to translate the english phrases on this page)
+Workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es less limping version] of this page that allows comments (for example a proposal to translate the english phrases on this page) and leads to translations
