@@ -1,4 +1,5 @@
 #summary different wiki's for different audiences
 
   * [http://bobbinwork.wikispaces.com wiki] *for and by users* in various languages
-  * workaround a bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en proper version] of this page with an overview of the pages for *developers* (English preferred, Dutch, German and French accepted)
+
+workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en proper version] of this page that allows edits and comment
