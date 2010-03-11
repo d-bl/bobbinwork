@@ -1,7 +1,7 @@
 #summary zwei Wiki's
 #sidebar sidebar
 
-  * [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen))
-  * [GetStarted wiki] für und von *Entwiklers* (betsens Englisch aber Deutsch geht auch)
+  * separate [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen))
+  * [GetStarted wiki] für und von *Entwiklers* (Englisch bevorzugt, Deutsch auch möglich)
 
 Hintertür wegen ein Google Fehler: bessere version von [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de diese Seite] wo Kommentar ablegen möglich ist.
