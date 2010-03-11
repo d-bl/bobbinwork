@@ -3,3 +3,5 @@
 
   * [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen))
   * [GetStarted wiki] für und von *Entwiklers* (betsens Englisch aber Deutsch geht auch)
+
+Hintertür wegen ein Google Fehler: bessere version von [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de diese Seite] wo Kommentar ablegen möglich ist.

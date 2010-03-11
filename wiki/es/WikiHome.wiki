@@ -1,5 +1,7 @@
 #summary 2 Wiki's
 #sidebar sidebar
 
-  * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des *utilisateurs* (plusieurs langues)
-  * [GetStarted wiki] for and by *developers* (English preferred, Dutch, German and French accepted)
+  * [http://bobbinwork.wikispaces.com/#Deutch wiki] para y por *usuarios* (various languages)
+  * [GetStarted wiki] para y por *developers* (English preferred, Dutch, German and French accepted)  
+
+Workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es less limping version] of this page that allows comments (for example a proposal to translate the english phrases on this page)

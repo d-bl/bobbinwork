@@ -3,4 +3,4 @@
   * an external *[http://bobbinwork.wikispaces.com wiki] for and by users* in various languages
   * an overview of *developer wiki pages* on the left
 
-workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en proper version] of this page that allows edits and comment
+workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en proper version] of this page that allows edits and comments
