@@ -1,7 +1,8 @@
-#summary zwei Wiki's
-#sidebar sidebar
+#summary zwei Wiki's für zwei Zwecke
 
   * separate [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen)
   * [GetStarted wiki] für und von *Entwiklers* (Englisch bevorzugt, Deutsch auch möglich)
 
-Hintertür wegen ein Google Fehler: bessere version von [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de diese Seite] wo Kommentar ablegen möglich ist, zum beispiel für ausbesserung dieser Seite. Es gibt da auch Links nach mehr Sprachen.
+[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de Hintertür], benötigt wegen ein Google Fehler.
+Diese Hintertür bietet Links nach weitere versionen dieser Seite (Locales),
+und erlaubt Kommentar ablegen, zur ausbesserung dieser Seite. 

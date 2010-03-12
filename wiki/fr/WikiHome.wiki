@@ -1,7 +1,8 @@
-#summary 2 Wiki's
-#sidebar sidebar
+#summary two Wiki's for two audiences
 
   * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des *utilisateurs* (plusieurs langues)
   * [GetStarted wiki] pour et par des *développeurs* (Anglais preferé, Francais accepté)
   
-Workaround a google bug: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr less limping version] of this page that allows comments (for example a proposal to translate the english phrases on this page) and leads to translations
+[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es backdoor] to this page, needed because of a google bug.
+The backdoor version has links to other 'locales'
+and allows comments to discuss about the content of this page.

@@ -1,7 +1,8 @@
 #summary verschillende wiki's voor verschillend publiek
-#sidebar sidebar
 
   * zelfstandige [http://bobbinwork.wikispaces.com/#Nederlands wiki] voor en door *gebruikers* (in diverse talen)
   * [GetStarted wiki] voor en door *ontwikkelaars* (bij voorkeur engels maar nederlands kan ook)
 
-Achterdeur i.v.m. google bug: betere versie van [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl deze pagina] waarop commentaar gegeven kan worden en naar ander vertalingen gelinkt wordt.
+[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es achterdeur] naar deze pagina, nodig wegens een google bug.
+De actherdeur heeft links naar anderstalige versies (locales) van deze pagina
+en maakt het mogelijk commentaar achter te laten over de inhoud van de pagina. 
