@@ -2,7 +2,7 @@
 
 *wiki pages for developers*
 
-English preferred, Dutch, German and French possible
+English preferred, Dutch, German and French is also understood
 
   * [ToDo plans and ideas]
   * background information
