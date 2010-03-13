@@ -741,7 +741,7 @@ ORPHAN</y:NodeLabel>
           <y:BorderStyle hasColor="false" type="line" width="1.0"/>
           <y:NodeLabel alignment="left" autoSizePolicy="content" fontFamily="FreeSans" fontSize="16" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="48.0" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="204.0" x="1.0" y="1.0">&lt;html&gt;&lt;body&gt;
 &lt;b&gt;hover for details and links   &lt;/b&gt;
-&lt;p&gt;created by yEd&lt;/p&gt;
+&lt;p&gt;created with yEd&lt;/p&gt;
 &lt;p&gt;&lt;/body&gt;&lt;/html&gt;</y:NodeLabel>
         </y:GenericNode>
       </data>
