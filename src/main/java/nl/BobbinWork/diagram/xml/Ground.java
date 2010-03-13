@@ -30,7 +30,8 @@ public enum Ground {
   snowflake   (4, 6, 2, 136, 100, 850L, 600L);
 
   private static final String TEMPLATE =
-      "%s%s<group pairs='1-%d'>%s</group></diagram>";
+      "" + XmlResources.ROOT + "<title><value lang='en'>%s</value></title>"
+          + XmlResources.INCLUDE + "<group pairs='1-%d'>%s</group></diagram>";
   private final int dX;
   private final int dY;
   private final int pairs;
@@ -78,7 +79,7 @@ public enum Ground {
         createDiagonal( 3, (pairs + skippedPairs) * 4, dX * 6, dY*2 ) + //
         createDiagonal( 1, (pairs + skippedPairs) * 4, dX * 6, dY*3 ) + //
         "";
-    return String.format( TEMPLATE, XmlResources.ROOT, XmlResources.INCLUDE, (pairs + skippedPairs) * 4, s );
+    return String.format( TEMPLATE,"ground", (pairs + skippedPairs) * 4, s );
   }
 
   public String createDiagonal(
@@ -123,8 +124,7 @@ public enum Ground {
       }
     }
     final int nrOfPairs = pairShift * 2 * rows + pairs - pairShift;
-    return String.format( TEMPLATE, //$NON-NLS-1$
-        XmlResources.ROOT, XmlResources.INCLUDE, nrOfPairs, copies );
+    return String.format( TEMPLATE, "ground", nrOfPairs, copies );
   }
 
   private String newCopyTag(
