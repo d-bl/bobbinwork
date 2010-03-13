@@ -10,7 +10,7 @@ English preferred, Dutch, German and French is also understood
     * [LicenceIssues diagrams, code and licenses]
   * technical documentation
     * [http://bobbinwork.googlecode.com/svn/generated/api/index.html?nl/BobbinWork/diagram/model/package-tree.html JavaDoc]
-    * [http://bobbinwork.googlecode.com/svn/trunk/doc class/object diagrams] (select a .gif or .html file)
+    * [http://bobbinwork.googlecode.com/svn/trunk/doc/index.hyml class/object diagrams]
     * [GetStarted development environment / get started]
   * mathematical solutions 
     * [TwistMarkMath twist marks]
