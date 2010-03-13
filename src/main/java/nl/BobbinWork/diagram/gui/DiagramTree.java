@@ -17,6 +17,8 @@
  */
 package nl.BobbinWork.diagram.gui;
 
+import static nl.BobbinWork.bwlib.gui.Localizer.getString;
+
 import java.awt.Component;
 import java.util.*;
 
@@ -92,6 +94,7 @@ public class DiagramTree
     setRootVisible( true );
     setCellRenderer( new Renderer() );
     setSelectionMode();
+    getAccessibleContext().setAccessibleName(getString("Tree_Accessible_Name"));
   }
 
   void setDiagramModel(

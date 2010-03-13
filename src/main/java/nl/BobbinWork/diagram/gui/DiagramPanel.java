@@ -19,6 +19,7 @@
 package nl.BobbinWork.diagram.gui;
 
 import static java.awt.RenderingHints.*;
+import static nl.BobbinWork.bwlib.gui.Localizer.getString;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -58,6 +59,7 @@ public class DiagramPanel extends JPanel implements PrintablePreviewer {
     /** Creates a new instance of DiagramPanel. */
     public DiagramPanel() {
     	setBackground(Color.white);
+      getAccessibleContext().setAccessibleName(getString("Diagram_Accessible_Name"));
     }
 
     public DiagramPanel(Diagram model)
