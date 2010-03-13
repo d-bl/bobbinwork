@@ -28,7 +28,6 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
@@ -52,9 +51,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.xpath.XPathExpressionException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
@@ -64,7 +63,6 @@ import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 import nl.BobbinWork.diagram.xml.XmlResources;
 
 import org.w3c.dom.Element;
@@ -300,8 +298,11 @@ public class BwDiagrams
     try {
       final Diagram model = createDiagramModel( inputStream );
       tree.setDiagramModel( model );
-      System.out.println(XmlResources.toXmlString( ((Element)model.getSourceObject()).getOwnerDocument() ));
+      //System.out.println(XmlResources.toXmlString( ((Element)model.getSourceObject()).getOwnerDocument() ));
       canvas.setPattern( model );
+
+      tree.setSelectionRow(0);
+      tree.requestFocus();
     } catch (final Exception exception) {
       showError( canvas, exception );
     }
@@ -355,6 +356,7 @@ public class BwDiagrams
     final JButton button = new JButton( new ImageIcon( url ) );
     Localizer.applyStrings( button, "ThreadStyle_" + name );
     button.setEnabled( false );
+    button.setRequestFocusEnabled( false );
     return button;
   }
 }

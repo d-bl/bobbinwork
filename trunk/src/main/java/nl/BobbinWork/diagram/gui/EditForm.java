@@ -50,6 +50,8 @@ class EditForm
     extends JToolBar
     implements TreeSelectionListener
 {
+  private static final long serialVersionUID = 1L;
+
   private static final String PREFIX = "TreeToolBar_";
   private static final String COPY = PREFIX + "copy";
   private static final String PASTE = PREFIX + "paste";
@@ -84,13 +86,16 @@ class EditForm
   private final JButton delete = createButton( DELETE );
   private final JButton paste = createButton( PASTE );
   private final JButton copy = createButton( COPY );
-  private final JComponent clipBoardThreads = new ClipBoard(){
+  private final JComponent clipBoardThreads = new ClipBoard("threads"){
+    private static final long serialVersionUID = 1L;
+
     Iterable<Drawable> getPaintIterator()
     {
       return copied.getPairs();
     }};
 
-  private final JComponent clipBoardPairs = new ClipBoard(){
+  private final JComponent clipBoardPairs = new ClipBoard("pairs"){
+    private static final long serialVersionUID = 1L;
     Iterable<Drawable> getPaintIterator()
     {
       return copied.getThreads();
@@ -98,9 +103,13 @@ class EditForm
     
   private abstract class ClipBoard extends JPanel
   {
-    ClipBoard () {
+    private static final long serialVersionUID = 1L;
+    private final String type;
+
+    ClipBoard (String type) {
+      this.type = type;
       setBackground( Color.white );
-      applyStrings( this, "Clipboard" );
+      applyStrings( this, "Clipboard_"+type );
     }
     
     public void paintComponent(
@@ -157,7 +166,13 @@ class EditForm
       public void actionPerformed(
           final ActionEvent event)
       {
+        final String caption = copied.getCaption();
+        clipBoardThreads.getAccessibleContext().setAccessibleDescription( caption );
+        clipBoardPairs.getAccessibleContext().setAccessibleDescription( caption );
         rebuild( DiagramRebuilder.replace( selected, copied ) );
+        // next two don't seem to work
+        clipBoardThreads.setToolTipText( caption+"\n\n"+Localizer.getString( "Clipboard_threads_hint" ) );
+        clipBoardPairs.setToolTipText( caption+"\n\n"+Localizer.getString( "Clipboard_pairs_hint" ) );
       }
 
     };
@@ -261,9 +276,9 @@ class EditForm
     } else {
       copy.setEnabled( selected.isVisible()
           && DiagramRebuilder.canCopy( selected ) );
+      paste.setEnabled( DiagramRebuilder.canReplace( selected, copied ) );
       delete.setEnabled( DiagramRebuilder.canDelete( selected ) );
       showHide.setEnabled( true );
-      paste.setEnabled( DiagramRebuilder.canReplace( selected, copied ) );
     }
     setShowHideCaption();
   }
@@ -289,6 +304,7 @@ class EditForm
     JButton button = new JButton();
     applyStrings(button, key); 
     button.setEnabled(false);
+    button.setRequestFocusEnabled( false );
     return button;  
   }
 }

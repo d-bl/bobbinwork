@@ -56,6 +56,7 @@ public abstract class MultipleThreadsPartition extends Partition {
     }
     
     public int getNrOfPairs() {
+        if (threadConnectors==null)return 0;
         final List<ThreadSegment> ins = threadConnectors.getIns();
         if (ins == null)return 0;
         return ins.size();

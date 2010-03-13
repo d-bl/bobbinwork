@@ -142,6 +142,7 @@ public class ThreadStyleToolBar
       URL url = ThreadStyleToolBar.class.getResource( fileName );
       setIcon( new ImageIcon( url ) );
       addActionListener( this );
+      setRequestFocusEnabled(false);
     }
 
     public void actionPerformed(
