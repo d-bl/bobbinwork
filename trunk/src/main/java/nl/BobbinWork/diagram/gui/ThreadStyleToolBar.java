@@ -25,9 +25,12 @@ import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.*;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
+import javax.swing.colorchooser.ColorChooserComponentFactory;
 import javax.swing.event.*;
 import javax.xml.parsers.ParserConfigurationException;
 
+import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.diagram.model.*;
 import nl.BobbinWork.diagram.model.Point;
 
@@ -67,28 +70,28 @@ public class ThreadStyleToolBar
   }
 
   private void setCoreWidth(
-      int value)
+      final int value)
   {
     twist.getFronts()[0].getStyle().setWidth( value );
     twist.getBacks()[0].getStyle().setWidth( value );
   }
 
   private void setShadowWidth(
-      int value)
+      final int value)
   {
     twist.getFronts()[0].getStyle().getShadow().setWidth( value );
     twist.getBacks()[0].getStyle().getShadow().setWidth( value );
   }
 
   private void setCoreColor(
-      Color value)
+      final Color value)
   {
     twist.getFronts()[0].getStyle().setColor( value );
     twist.getBacks()[0].getStyle().setColor( value );
   }
 
   private void setShadowColor(
-      Color value)
+      final Color value)
   {
     twist.getFronts()[0].getStyle().getShadow().setColor( value );
     twist.getBacks()[0].getStyle().getShadow().setColor( value );
@@ -97,7 +100,7 @@ public class ThreadStyleToolBar
   private class Preview
       extends JPanel
   {
-    Preview(Dimension dim)
+    Preview(final Dimension dim)
     {
 
       setPreferredSize( dim );
@@ -109,7 +112,7 @@ public class ThreadStyleToolBar
     }
 
     public void paintComponent(
-        Graphics g)
+        final Graphics g)
     {
 
       super.paintComponent( g );
@@ -117,18 +120,29 @@ public class ThreadStyleToolBar
     }
   }
 
-  private JSpinner coreSpinner = new JSpinner( new SpinnerNumberModel //
+  private final JSpinner coreSpinner = new JSpinner( new SpinnerNumberModel //
       ( getCoreWidth(), 1, getShadowWidth() - 2, 1 ) );
 
-  private JSpinner shadowSpinner = new JSpinner( new SpinnerNumberModel //
+  private final JSpinner shadowSpinner = new JSpinner( new SpinnerNumberModel //
       ( getShadowWidth(), getCoreWidth() + 2, 20, 2 ) );
 
   private int getSpinnerValue(
-      ChangeEvent e)
+      final ChangeEvent e)
   {
 
-    SpinnerNumberModel source = (SpinnerNumberModel) e.getSource();
+    final SpinnerNumberModel source = (SpinnerNumberModel) e.getSource();
     return Integer.parseInt( source.getValue().toString() );
+  }
+
+  public static AbstractColorChooserPanel findPanel(final JColorChooser chooser, final String name) {
+    final AbstractColorChooserPanel[] panels = chooser.getChooserPanels();
+    for (int i = 0; i < panels.length; i++) {
+      final String clsName = panels[i].getClass().getName();
+      if (clsName.equals(name)) {
+        return panels[i];
+      }
+    }
+    return null;
   }
 
   private abstract class ColorButton
@@ -136,24 +150,38 @@ public class ThreadStyleToolBar
       implements ActionListener
   {
 
-    ColorButton(String fileName)
-    {
+    private final JDialog dialog;
 
-      URL url = ThreadStyleToolBar.class.getResource( fileName );
+    ColorButton(final String iconFileName, String keyBase)
+    {
+      applyStrings(this,keyBase);
+      final URL url = ThreadStyleToolBar.class.getResource( iconFileName );
+      final String name = Localizer.getString(keyBase+"_dialog_title");
+      final JColorChooser chooser = new JColorChooser();
+      chooser.setChooserPanels( ColorChooserComponentFactory.getDefaultChooserPanels() );
       setIcon( new ImageIcon( url ) );
       addActionListener( this );
       setRequestFocusEnabled(false);
+      
+      ActionListener okListener = new ActionListener()
+      {
+        @Override
+        public void actionPerformed(
+            final ActionEvent e)
+        {
+          setColor( chooser.getColor() );
+          preview.repaint();
+        }
+      };
+      dialog =
+          JColorChooser.createDialog( ThreadStyleToolBar.this, name, true,
+              chooser, okListener, null );
     }
 
     public void actionPerformed(
-        ActionEvent e)
+        final ActionEvent e)
     {
-
-      Color color = JColorChooser.showDialog( this, this.getText(), getColor() );
-      if (color != null) {
-        setColor( color );
-        preview.repaint();
-      }
+      dialog.setVisible( true );
     }
 
     protected abstract Color getColor();
@@ -162,7 +190,7 @@ public class ThreadStyleToolBar
         Color color);
   }
 
-  private ColorButton shadowButton = new ColorButton( "back.PNG" ) { //$NON-NLS-1$
+  private final ColorButton shadowButton = new ColorButton( "back.PNG", "ThreadStyle_shadow_color" ) { //$NON-NLS-1$
 
         protected Color getColor()
         {
@@ -170,13 +198,13 @@ public class ThreadStyleToolBar
         }
 
         protected void setColor(
-            Color color)
+            final Color color)
         {
           setShadowColor( color );
         }
       };
 
-  private ColorButton coreButton = new ColorButton( "front.PNG" ) { //$NON-NLS-1$
+  private final ColorButton coreButton = new ColorButton( "front.PNG", "ThreadStyle_core_color" ) { //$NON-NLS-1$
 
         protected Color getColor()
         {
@@ -184,10 +212,10 @@ public class ThreadStyleToolBar
         }
 
         protected void setColor(
-            Color color)
+            final Color color)
         {
-          Color shadowColor = getShadowStyle().getColor();
-          int shadowRGB = shadowColor.getRGB();
+          final Color shadowColor = getShadowStyle().getColor();
+          final int shadowRGB = shadowColor.getRGB();
           setCoreColor( color );
           if (shadowRGB == -1) {
             // once the shadow is white, it should stay white
@@ -198,14 +226,14 @@ public class ThreadStyleToolBar
       };
 
   public void setCoreStyle(
-      ThreadStyle p)
+      final ThreadStyle p)
   {
     if (p != null) {
       getCoreStyle().apply( p );
       twist.getBacks()[0].getStyle().apply( p );
       ((SpinnerNumberModel) coreSpinner.getModel()).setValue( Integer
           .valueOf( p.getWidth() ) );
-      Integer width = Integer.valueOf( p.getShadow().getWidth() );
+      final Integer width = Integer.valueOf( p.getShadow().getWidth() );
       ((SpinnerNumberModel) shadowSpinner.getModel()).setValue( width );
       preview.repaint();
     }
@@ -222,11 +250,9 @@ public class ThreadStyleToolBar
     applyStrings( preview, "ThreadStyle" ); //$NON-NLS-1$
     applyStrings( coreSpinner, "ThreadStyle_core_width" ); //$NON-NLS-1$
     applyStrings( shadowSpinner, "ThreadStyle_shadow_width" ); //$NON-NLS-1$
-    applyStrings( coreButton, "ThreadStyle_core_color" ); //$NON-NLS-1$
-    applyStrings( shadowButton, "ThreadStyle_shadow_color" ); //$NON-NLS-1$
 
     // dimensions
-    Dimension dim = new Dimension( //
+    final Dimension dim = new Dimension( //
         (int) (coreSpinner.getPreferredSize().width * 1.4), //
         coreSpinner.getPreferredSize().height );
     coreSpinner.setMaximumSize( dim );
@@ -254,10 +280,10 @@ public class ThreadStyleToolBar
     {
 
       public void stateChanged(
-          ChangeEvent e)
+          final ChangeEvent e)
       {
 
-        SpinnerNumberModel shadowModel =
+        final SpinnerNumberModel shadowModel =
             (SpinnerNumberModel) shadowSpinner.getModel();
 
         int i = getSpinnerValue( e );
@@ -276,13 +302,13 @@ public class ThreadStyleToolBar
     {
 
       public void stateChanged(
-          ChangeEvent e)
+          final ChangeEvent e)
       {
 
-        SpinnerNumberModel coreModel =
+        final SpinnerNumberModel coreModel =
             (SpinnerNumberModel) coreSpinner.getModel();
 
-        int i = getSpinnerValue( e );
+        final int i = getSpinnerValue( e );
         coreModel.setMaximum( Integer.valueOf( i - 2 ) );
         setShadowWidth( i );
 
