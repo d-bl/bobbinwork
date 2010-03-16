@@ -1,7 +1,7 @@
 #summary Distintas wikis para distintos usuarios
 
- * [http://bobbinwork.wikispaces.com/#espanol wiki]  para y por usuarios (varios idiomas)
- * [GetStarted wiki] para y por programadores (preferiblemente inglés)
+ * [http://bobbinwork.wikispaces.com/#espanol wiki]  para y por *usuarios* (varios idiomas)
+ * [GetStarted wiki] para y por *programadores* (preferiblemente inglés)
 
 [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es puerta trasera] a
 esta página, necesaria a causa de un problema con Google. La versión de
