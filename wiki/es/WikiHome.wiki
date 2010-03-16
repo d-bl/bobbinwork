@@ -1,8 +1,9 @@
-#summary different wiki's for different audiences
+#summary Distintas wikis para distintos usuarios
 
-  * [http://bobbinwork.wikispaces.com/#Deutch wiki] para y por *usuarios* (various languages)
-  * [GetStarted wiki] para y por *developers* (English preferred) 
+*       wiki <http://bobbinwork.wikispaces.com/#espagnol>  para y por usuarios (varios idiomas)
+*       [GetStarted wiki] para y por programadores (preferiblemente inglés)
 
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es backdoor] to this page, needed because of a google bug.
-The backdoor version has links to other 'locales'
-and allows comments to discuss about the content of this page.
+puerta trasera <http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es>  a
+esta página, necesaria a causa de un problema con Google. La versión de
+puerta trasera tiene enlaces a otras versiones de esta página (locales) y
+permite hacer comentarios para mejorar el contenido de la misma.
