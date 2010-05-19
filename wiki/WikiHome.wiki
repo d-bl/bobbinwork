@@ -2,7 +2,3 @@
 
   * an external *[http://bobbinwork.wikispaces.com wiki] for and by users* in various languages
   * an overview of *developer wiki pages* on the left
-
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en backdoor] to this page, needed because of a google bug.
-The backdoor version has links to other 'locales'
-and allows to change the page or leave comments about the content of this page.
