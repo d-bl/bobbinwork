@@ -2,3 +2,7 @@
 
   * separate [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen)
   * [GetStarted wiki] für und von *Entwiklers* (Englisch bevorzugt, Deutsch auch möglich)
+
+[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de Hintertür], benötigt wegen ein Google Fehler.
+Diese Hintertür bietet Links nach weitere versionen dieser Seite (Locales),
+und erlaubt Kommentar ablegen, zur ausbesserung dieser Seite. 
