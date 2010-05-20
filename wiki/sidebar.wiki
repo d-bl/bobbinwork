@@ -1,8 +1,8 @@
 #summary side bar for every page
 
-*wiki pages for developers*
-
 [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en en], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl nl], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de de], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr fr], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es es]
+
+*wiki pages for developers*
 
 English preferred, Dutch, German and French is also understood
 
