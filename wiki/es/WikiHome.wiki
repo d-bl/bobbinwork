@@ -2,8 +2,3 @@
 
  * [http://bobbinwork.wikispaces.com/#Espanol wiki]  para y por *usuarios* (varios idiomas)
  * [GetStarted wiki] para y por *programadores* (preferiblemente inglés)
-
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es puerta trasera] a
-esta página, necesaria a causa de un problema con Google. La versión de
-puerta trasera tiene enlaces a otras versiones de esta página (locales) y
-permite hacer comentarios para mejorar el contenido de la misma.

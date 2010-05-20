@@ -2,7 +2,3 @@
 
   * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des *utilisateurs* (plusieurs langues)
   * [GetStarted wiki] pour et par des *développeurs* (Anglais preferé, Francais accepté)
-  
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr backdoor] to this page, needed because of a google bug.
-The backdoor version has links to other 'locales'
-and allows comments to discuss about the content of this page.
