@@ -1,0 +1,587 @@
+<class-diagram version="0.9.86" automaticImage="PNG" icons="true" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Connectors" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false">    
+    <position x="922" y="114" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Group" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Group.java" binary="false">    
+    <position x="107" y="144" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.ChainedPairsPartition" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ChainedPairsPartition.java" binary="false">    
+    <position x="285" y="54" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Switch" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false">    
+    <position x="729" y="243" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Style" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Style.java" binary="false">    
+    <position x="134" y="373" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Diagram" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Diagram.java" binary="false">    
+    <position x="281" y="139" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.ThreadStyle" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadStyle.java" binary="false">    
+    <position x="79" y="471" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Partition" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false">    
+    <position x="493" y="126" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.MultipleThreadsPartition" 
+    project="trunk" file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultipleThreadsPartition.java" binary="false">    
+    <position x="719" y="175" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Bounds" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Bounds.java" binary="false">    
+    <position x="923" y="39" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Segment" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false">    
+    <position x="786" y="523" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Point" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Point.java" binary="false">    
+    <position x="787" y="404" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Range" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Range.java" binary="false">    
+    <position x="504" y="276" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Drawable" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Drawable.java" binary="false">    
+    <position x="109" y="267" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Cross" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Cross.java" binary="false">    
+    <position x="707" y="322" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Stitch" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Stitch.java" binary="false">    
+    <position x="752" y="40" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Knot" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Knot.java" binary="false">    
+    <position x="347" y="351" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.DrawableList" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/DrawableList.java" binary="false">    
+    <position x="107" y="51" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.PairSegment" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/PairSegment.java" binary="false">    
+    <position x="510" y="414" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Pin" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Pin.java" binary="false">    
+    <position x="284" y="223" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Twist" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Twist.java" binary="false">    
+    <position x="855" y="321" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.ThreadSegment" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadSegment.java" binary="false">    
+    <position x="444" y="497" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.Partition.Drawables" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false">    
+    <position x="494" y="200" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" project="trunk" 
+    file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false">    
+    <position x="516" y="34" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Group" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Group.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.ChainedPairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ChainedPairsPartition.java" binary="false"/>  
+  </generalization>  
+  <generalization>    
+    <bendpoint x="483" y="549"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.ThreadSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadSegment.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="761" y="464"/>    
+    <bendpoint x="761" y="422"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="c1"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Point" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Point.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Knot" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Knot.java" binary="false" navigable="false">      
+      <attribute name="pairs"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.PairSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/PairSegment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.MultipleThreadsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultipleThreadsPartition.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Partition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="627" y="300"/>    
+    <bendpoint x="596" y="528"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Switch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false" navigable="false">      
+      <attribute name="backThreads"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.ThreadSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadSegment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="950" y="471"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="false">      
+      <attribute name="ins"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="246" y="251"/>    
+    <bendpoint x="243" y="336"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Pin" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Pin.java" binary="false" navigable="false">      
+      <attribute name="STYLE"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Style" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Style.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="672" y="443"/>    
+    <bendpoint x="670" y="403"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="start"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Point" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Point.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Stitch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Stitch.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false"/>  
+  </generalization>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Diagram" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Diagram.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.ChainedPairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ChainedPairsPartition.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="357" y="448"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Knot" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Knot.java" binary="false" navigable="false">      
+      <attribute name="backs"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.ThreadSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadSegment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="323" y="473"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Knot" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Knot.java" binary="false" navigable="false">      
+      <attribute name="fronts"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.ThreadSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadSegment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <bendpoint x="389" y="88"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Knot" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Knot.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false"/>  
+  </generalization>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.ChainedPairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ChainedPairsPartition.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="17" y="399"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.ThreadStyle" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadStyle.java" binary="false" navigable="false">      
+      <attribute name="shadow"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Style" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Style.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="827" y="574"/>    
+    <bendpoint x="761" y="575"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="previous"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Switch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.MultipleThreadsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultipleThreadsPartition.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="962" y="500"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="false">      
+      <attribute name="outs"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Knot" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Knot.java" binary="false" navigable="false">      
+      <attribute name="pins"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Pin" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Pin.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="524" y="361"/>    
+    <bendpoint x="656" y="361"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Pin" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Pin.java" binary="false" navigable="false">      
+      <attribute name="position"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Point" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Point.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="818" y="464"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="c2"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Point" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Point.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.MultipleThreadsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultipleThreadsPartition.java" binary="false" 
+      navigable="false">      
+      <attribute name="threadConnectors"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Twist" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Twist.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Switch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="673" y="563"/>    
+    <bendpoint x="378" y="562"/>    
+    <bendpoint x="247" y="411"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="style"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Style" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Style.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="851" y="575"/>    
+    <bendpoint x="952" y="575"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="next"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="582" y="316"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Switch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false" navigable="false">      
+      <attribute name="threadRange"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Range" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Range.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="617" y="302"/>    
+    <bendpoint x="594" y="458"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Switch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false" navigable="false">      
+      <attribute name="frontThreads"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.ThreadSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadSegment.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="false">      
+      <attribute name="bounds"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Bounds" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Bounds.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Partition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Partition.Drawables" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false"/>  
+  </nesting>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.ThreadStyle" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/ThreadStyle.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Style" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Style.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="890" y="439"/>    
+    <bendpoint x="897" y="402"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false" navigable="false">      
+      <attribute name="end"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Point" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Point.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="false">      
+      <attribute name="children"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <bendpoint x="128" y="318"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Drawable" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Drawable.java" binary="false" navigable="false">      
+      <attribute name="style"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Style" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Style.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Pin" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Pin.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Partition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <bendpoint x="591" y="114"/>    
+    <bendpoint x="615" y="238"/>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false" 
+      navigable="false">      
+      <attribute name="pairRange"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Range" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Range.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.Cross" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Cross.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Switch" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Switch.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false" 
+      navigable="false">      
+      <attribute name="pairConnectors"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Connectors" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Connectors.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.PairSegment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/PairSegment.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Segment" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Segment.java" binary="false"/>  
+  </generalization>  
+  <association>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false" 
+      navigable="false">      
+      <attribute name="partitions"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.Partition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/Partition.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization>    
+    <source project="trunk" name="nl.BobbinWork.diagram.model.MultiplePairsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultiplePairsPartition.java" binary="false"/>    
+    <target project="trunk" name="nl.BobbinWork.diagram.model.MultipleThreadsPartition" 
+      file="/trunk/src/main/java/nl/BobbinWork/diagram/model/MultipleThreadsPartition.java" binary="false"/>  
+  </generalization>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
