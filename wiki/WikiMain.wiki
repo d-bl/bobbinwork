@@ -1,5 +1,5 @@
 #summary WikiHome
 =different wiki's for different audiences=
-For user guides in various languages: see external links on the project home page.
+*User guides in various languages*: see external links on the project home page.
 
-Developers: see the navigation area.
+*Developers*: see the navigation area of this page.
