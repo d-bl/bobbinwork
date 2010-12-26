@@ -1,6 +1,0 @@
-#summary zwei Wiki's für zwei Zwecke
-
-  * separate [http://bobbinwork.wikispaces.com/#Deutsch wiki] für und von *Benutzern* (verschiedene Sprachen)
-  * [GetStarted wiki] für und von *Entwiklers* (Englisch bevorzugt, Deutsch auch möglich)
-
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en en], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl nl], DE, [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr fr], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es es]

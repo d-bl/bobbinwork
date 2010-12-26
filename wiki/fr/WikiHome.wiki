@@ -1,6 +1,0 @@
-#summary two Wiki's for two audiences
-
-  * [http://bobbinwork.wikispaces.com/#Francais wiki] pour et par des *utilisateurs* (plusieurs langues)
-  * [GetStarted wiki] pour et par des *développeurs* (Anglais preferé, Francais accepté)
-  
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en en], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl nl], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de de], FR, [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es es]

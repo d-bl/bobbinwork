@@ -1,6 +1,0 @@
-#summary Distintas wikis para distintos usuarios
-
- * [http://bobbinwork.wikispaces.com/#Espanol wiki]  para y por *usuarios* (varios idiomas)
- * [GetStarted wiki] para y por *programadores* (preferiblemente inglés)
-
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en en], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl nl], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de de], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr fr], ES

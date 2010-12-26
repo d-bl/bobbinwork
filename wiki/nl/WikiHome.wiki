@@ -1,6 +1,0 @@
-#summary verschillende wiki's voor verschillend publiek
-
-  * zelfstandige [http://bobbinwork.wikispaces.com/#Nederlands wiki] voor en door *gebruikers* (in diverse talen)
-  * [GetStarted wiki] voor en door *ontwikkelaars* (bij voorkeur engels maar nederlands kan ook)
-
-[http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en en], NL, [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de de], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr fr], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es es]
