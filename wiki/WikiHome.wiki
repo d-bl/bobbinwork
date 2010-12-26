@@ -1,6 +1,3 @@
 #summary different wiki's for different audiences
 
-  * an external *[http://bobbinwork.wikispaces.com wiki] for and by users* in various languages
-  * an overview of *developer wiki pages* on the left
-
-EN, [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl nl], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de de], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr fr], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es es]
+See external links on the project home page
