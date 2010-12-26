@@ -1,3 +1,3 @@
-#summary different wiki's for different audiences
-
-=See external links on the project home page=
+#summary WikiHome
+=different wiki's for different audiences=
+See external links on the project home page
