@@ -1,8 +1,6 @@
 #summary side bar for every page
 
-!WikiHome: [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=en en], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=nl nl], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=de de], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=fr fr], [http://code.google.com/p/bobbinwork/wiki/WikiHome?wl=es es] 
-
-*wiki ToC for developers*
+*Wiki ToC for developers*
 
 comments are also welcome in Dutch, German and French
 
@@ -19,5 +17,5 @@ comments are also welcome in Dutch, German and French
     * [GridMath polar grids]
   * [MathChallenges remaining mathematic challenges]
 
-  [http://code.google.com/p/bobbinwork/w/list all] developer wiki pages
+ [http://code.google.com/p/bobbinwork/w/list all] developer wiki pages
   
