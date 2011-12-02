@@ -8,14 +8,13 @@
   <title>
     <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
   </title>
-  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/591/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
-  <group pairs="2">
+  <xi:include href='/mnt/hgfs/joke/hobby/svn-bw/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <group pairs="1-12">
     <title>
         <value lang="en">diagram</value>
         <value lang="nl">werktekening</value>
         <value lang="de">Arbeitszeichnung</value>
     </title>
-    <group pairs="1-12">
       <new_bobbins nrs="5,6,15,16,19,20,21,22"><style color="#0000FF"></style></new_bobbins>
       <new_bobbins nrs="9,10,11,12,13,14"><style color="#00FF00"></style></new_bobbins>
       <new_bobbins nrs="1,2,3,4,7,8,17,18"><style color="#FF0000"></style></new_bobbins>
@@ -32,6 +31,5 @@
       <copy of="star" pairs="7-9"><move x="230" y="155"/></copy>
 
       <copy of="star" pairs="5-7"><move x="165" y="195"/></copy>
-    </group>
   </group>
 </diagram>
