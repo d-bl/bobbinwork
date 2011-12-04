@@ -708,7 +708,7 @@
                 <copy of="P" />
             </stitch>
         </group>
-        <stitch id="fs-1" pairs="5-6">
+        <stitch id="fs" pairs="5-6">
             <title>
                 <value lang="en">footside</value>
                 <value lang="nl">speld na vier (links)</value>
@@ -723,6 +723,29 @@
             <copy of="O" />
             <copy of="P" />
         </stitch>
+        <group id="fs-1" pairs="21-22">
+          <title>
+            <value lang="en">headside</value>
+            <value lang="nl">speld na vier (links)</value>
+          </title>
+          <pin position="25,8"/>
+          <copy of="r1" pairs="1"><rotate centre="10,10" angle="-60"/><move x="-0" y="-25"/></copy>
+          <stitch pairs="1-2">
+              <title>
+                  <value lang="en">twisted cloth stitch</value>
+                  <value lang="nl">dubbele netslag</value>
+              </title>
+              <style color="#FF0000" width="2" />
+              <pair start="7,-10" c1="7,0" c2="10,20" end="19,20" />
+              <pair start="19,-10" c1="10,-10" c2="7,10" end="7,20" />
+              <copy of="C"><rotate centre="15,15" angle="45" /><move x="-10" y="-5" /></copy>
+              <copy of="F" />
+              <copy of="G" />
+              <copy of="N" />
+              <copy of="O" />
+              <copy of="P" />
+          </stitch>
+        </group>
         <group id="ffsL" pairs="7-8">
           <title>
             <value lang="en">false footside left corner: three pair on two temporary pins</value>
