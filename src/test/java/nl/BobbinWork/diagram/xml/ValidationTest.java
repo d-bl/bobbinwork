@@ -12,10 +12,12 @@ import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 import nl.BobbinWork.testutils.parameterized.*;
 
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.runners.Parameterized.Parameters;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
+@Ignore
 public class ValidationTest
     extends ParameterizedFixture
 {
