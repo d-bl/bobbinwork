@@ -54,6 +54,9 @@ public class SampleMenu
           "braid-half-stitch.xml", //$NON-NLS-1$
           "braid-chaos.xml", //$NON-NLS-1$
           "braid-row-cloth-row-half-stitch.xml", //$NON-NLS-1$
+          "snake-cloth.xml", //$NON-NLS-1$
+          "snake-cloth-footside.xml", //$NON-NLS-1$
+          "snake-half.xml", //$NON-NLS-1$
       };
   /**
    * Handed down to dialogs.
