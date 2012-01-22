@@ -19,5 +19,4 @@ comments are also welcome in Dutch, German and French
 
  [http://code.google.com/p/bobbinwork/w/list all] developer wiki pages
 
- [http://bobbinwork.googlecode.com/svn/generated/api/index.html JavaDoc]
   
