@@ -14,7 +14,7 @@
       <value lang="en">components</value>
       <value lang="nl">componenten</value>
     </title>
-    <group pairs="1-10">
+    <group pairs="1-10" display="none">
       <title>
         <value lang="en">ring</value>
         <value lang="nl">ring</value>
@@ -144,20 +144,20 @@
       <copy of='ringed-snow' pairs='13-22'><move x='614' y='140'/></copy>
       <copy of='ringed-snow' pairs='7-16'><move x='408' y='280'/></copy>
     </group>
-    <group id="edges" pairs='1-34'>
+    <group id="west" pairs='1-4'>
       <title>
-        <value lang="en">edges</value>
-        <value lang="nl">randen</value>
+        <value lang="en">west</value>
+        <value lang="nl">west</value>
       </title>
-      <group id="edge" pairs='1-2'>
+      <group id="westedge" pairs='1-2'>
         <title>
           <value lang="en">edge</value>
           <value lang="nl">rand</value>
         </title>
         <pin                                                         position="200,    310"/>
-        <copy of="ll"  pairs="1"  ><rotate centre="0,0" angle="+45" /><move x="190" y="310"/></copy>
+        <copy of="ll"  pairs="1"  ><rotate centre="0,0" angle="+45" /><move x="185" y="310"/></copy>
         <copy of="ctc" pairs="1-2">                                   <move x="190" y="326"/></copy>
-        <copy of="ll"  pairs="1"  ><rotate centre="0,0" angle="-15" /><move x="195" y="365"/></copy>
+        <copy of="ll"  pairs="1"  ><rotate centre="0,0" angle="+45" /><move x="185" y="365"/></copy>
         <pin                                                         position="200,    350"/>
       </group>
       <group id='sw' pairs='1-4'>
@@ -171,15 +171,49 @@
         <!-- 4 --><copy of="ctc"  pairs="1-2"><rotate centre="0,0" angle="30" /><move x="198" y="390"/></copy>
         <!-- 5 --><copy of="ctc"  pairs="2-3"><rotate centre="0,0" angle="15" /><move x="215" y="420"/></copy>
       </group>
-      <copy of='edge' pairs='1-2'><move x='0' y='138'/></copy>
+      <copy of='westedge' pairs='1-2'><move x='0' y='138'/></copy>
     </group>
-    <copy of='repeat' pairs='1-34'><move x='0' y='280'/></copy>
-    <copy of='edges'  pairs='1-34'><move x='0' y='280'/></copy>
-    <copy of='repeat' pairs='1-34'><move x='0' y='560'/></copy>
-    <copy of='edge'   pairs='1-34'><move x='0' y='560'/></copy>
-    <copy of='sw'     pairs='1-34'><move x='0' y='560'/></copy>
-    <copy of='north'  pairs='01-10'><move x='200' y='980'/></copy>
-    <copy of='north'  pairs='13-22'><move x='615' y='980'/></copy>
-    <copy of='sw'     pairs='7-10'><move x='210' y='700'/></copy>
+    <group id="east" pairs='19-22'>
+      <title>
+        <value lang="en">east</value>
+        <value lang="nl">oost</value>
+      </title>
+      <group id="eastedge" pairs='3-4'>
+        <title>
+          <value lang="en">edge</value>
+          <value lang="nl">rand</value>
+        </title>
+        <pin                                                        position="880,    310"/>
+        <copy of="ll"  pairs="2"  ><rotate centre="0,0" angle="45" /><move x="895" y="315"/></copy>
+        <copy of="ctc" pairs="1-2">                                  <move x="875" y="326"/></copy>
+        <copy of="ll"  pairs="2"  ><rotate centre="0,0" angle="45" /><move x="895" y="360"/></copy>
+        <pin                                                        position="880,    350"/>
+      </group>
+      <group id='se' pairs='1-4'>
+        <title>
+          <value lang="en">south east</value>
+          <value lang="nl">zuid oost</value>
+        </title>
+        <!-- 1 --><copy of="ctc" pairs="2-3"><rotate centre="0,0" angle="-15" /><move x="820" y="370"/></copy>
+        <!-- 2 --><copy of="ctc" pairs="3-4"><rotate centre="0,0" angle="-30" /><move x="855" y="380"/></copy>
+        <!-- 3 --><copy of="ctc" pairs="2-3"><rotate centre="0,0" angle="-00" /><move x="835" y="395"/></copy>
+        <!-- 4 --><copy of="ctc" pairs="1-2"><rotate centre="0,0" angle="-15" /><move x="810" y="410"/></copy>
+        <!-- 5 --><copy of="ctc" pairs="2-3"><rotate centre="0,0" angle="-15" /><move x="840" y="430"/></copy>
+      </group>
+      <copy of='eastedge' pairs='3-4'><move x='0' y='138'/></copy>
+    </group>
+    <copy of='repeat'   pairs='01-22'><move x='0' y='280'/></copy>
+    <copy of='west'     pairs='01-04'><move x='0' y='280'/></copy>
+    <copy of='east'     pairs='19-22'><move x='0' y='280'/></copy>
+    <copy of='repeat'   pairs='01-22'><move x='0' y='560'/></copy>
+    <copy of='westedge' pairs='01-04'><move x='0' y='560'/></copy>
+    <copy of='sw'       pairs='01-04'><move x='0' y='560'/></copy>
+    <copy of='eastedge' pairs='21-22'><move x='0' y='560'/></copy>
+    <copy of='se'       pairs='19-22'><move x='0' y='560'/></copy>
+    <copy of='north'    pairs='01-10'><move x='200' y='980'/></copy>
+    <copy of='north'    pairs='13-22'><move x='615' y='980'/></copy>
+    <copy of='sw'       pairs='07-10'><move x='210' y='700'/></copy>
+    <copy of='se'       pairs='13-16'><move x='-210' y='700'/></copy>
+    <copy of='north'    pairs='07-16'><move x='407' y='1120'/></copy>
   </group>
 </diagram>
