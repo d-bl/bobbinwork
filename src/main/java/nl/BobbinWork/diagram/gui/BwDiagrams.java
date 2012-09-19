@@ -51,8 +51,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
-import javax.swing.tree.TreeNode;
-import javax.swing.tree.TreePath;
 import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
@@ -63,9 +61,7 @@ import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
-import nl.BobbinWork.diagram.xml.XmlResources;
 
-import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
@@ -201,6 +197,8 @@ public class BwDiagrams
   private static class MenuBar
       extends JMenuBar
   {
+    private static final long serialVersionUID = 1L;
+
     void addMenuItem(
         final ActionListener clipboardExporter,
         final String subMenuKey,

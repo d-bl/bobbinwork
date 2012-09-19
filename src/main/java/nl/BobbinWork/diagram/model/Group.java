@@ -41,7 +41,6 @@ public class Group extends ChainedPairsPartition {
     		ThreadSegment threadSegment = segments.next();
         if (threadSegment == null) break;
     		ThreadStyle threadStyle = st.next();
-    		if (threadSegment == null) break;
         threadSegment.getStyle().apply(threadStyle);
     	}
     }

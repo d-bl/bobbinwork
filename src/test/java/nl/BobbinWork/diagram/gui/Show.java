@@ -11,10 +11,8 @@ import javax.swing.JPanel;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
 import nl.BobbinWork.diagram.model.Drawable;
-import nl.BobbinWork.diagram.model.Partition;
 import nl.BobbinWork.diagram.model.Knot;
-import nl.BobbinWork.diagram.xml.DiagramBuilder;
-import nl.BobbinWork.diagram.xml.Ground;
+import nl.BobbinWork.diagram.model.Partition;
 
 public class Show
 {
@@ -22,6 +20,8 @@ public class Show
   private static Iterable<Drawable> drawables;
 
   private static class Panel extends JPanel {
+    private static final long serialVersionUID = 1L;
+
     Panel()
     {
       setBackground( Color.white );

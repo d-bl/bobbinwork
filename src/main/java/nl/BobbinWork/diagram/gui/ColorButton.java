@@ -37,7 +37,7 @@ class ColorButton
     
     final ActionListener buttonListener = new ActionListener()
     {
-      @Override
+//      @Override
       public void actionPerformed(
           final ActionEvent event)
       {
@@ -47,7 +47,7 @@ class ColorButton
     
     final ActionListener dialogListener = new ActionListener()
     {
-      @Override
+//      @Override
       public void actionPerformed(
           final ActionEvent event)
       {

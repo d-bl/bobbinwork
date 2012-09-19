@@ -259,7 +259,7 @@ public class ThreadStyleToolBar
     return new ColorButton.OkListener()
     {
 
-      @Override
+//      @Override
       public void colorChosen(
           Color color)
       {
@@ -281,7 +281,7 @@ public class ThreadStyleToolBar
     return new ColorButton.OkListener()
     {
 
-      @Override
+//      @Override
       public void colorChosen(
           Color color)
       {

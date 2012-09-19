@@ -21,13 +21,18 @@ import java.util.List;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
-import nl.BobbinWork.diagram.conversion.ToImages;
-import nl.BobbinWork.diagram.model.*;
+import nl.BobbinWork.diagram.model.Diagram;
+import nl.BobbinWork.diagram.model.MultiplePairsPartition;
+import nl.BobbinWork.diagram.model.Partition;
+import nl.BobbinWork.diagram.model.Style;
+import nl.BobbinWork.diagram.model.Switch;
+import nl.BobbinWork.diagram.model.ThreadStyle;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
-import org.w3c.dom.*;
-
-import com.sun.org.apache.xerces.internal.dom.DocumentFragmentImpl;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 public class DiagramRebuilder
 {

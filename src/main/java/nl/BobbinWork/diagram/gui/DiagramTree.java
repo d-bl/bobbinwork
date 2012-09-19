@@ -31,7 +31,8 @@ import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 public class DiagramTree
     extends JTree
 {
-  private static final int INITIAL_CAPACITY = 5000;
+    private static final long serialVersionUID = 1L;
+private static final int INITIAL_CAPACITY = 5000;
   private final Map<MultipleThreadsPartition, DefaultMutableTreeNode> map =
       new HashMap<MultipleThreadsPartition, DefaultMutableTreeNode>(
           INITIAL_CAPACITY );
@@ -39,6 +40,8 @@ public class DiagramTree
   private static class Renderer
       extends DefaultTreeCellRenderer
   {
+    private static final long serialVersionUID = 1L;
+
     public Component getTreeCellRendererComponent(
         final JTree tree,
         final Object value,

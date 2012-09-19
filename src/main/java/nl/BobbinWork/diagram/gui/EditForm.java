@@ -104,10 +104,10 @@ class EditForm
   private abstract class ClipBoard extends JPanel
   {
     private static final long serialVersionUID = 1L;
-    private final String type;
+//    private final String type;
 
     ClipBoard (String type) {
-      this.type = type;
+//      this.type = type;
       setBackground( Color.white );
       applyStrings( this, "Clipboard_"+type );
     }
