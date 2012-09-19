@@ -57,41 +57,41 @@ public class TestImages
   }
 
   // TODO for now just a visual check of the generated files
-  @Test(timeout=1500)
+  @Test(timeout=3000)
   public void gif() throws Exception
   {
     final BufferedImage image = toThreadImage.newImage( size );
-    ImageIO.write( image, "gif", new File( "build/tmp1.gif" ) );
+    ImageIO.write( image, "gif", new File( "src/test/resources/tmp/tmp1.gif" ) );
   }
 
   @Test(timeout=1500)
   public void jpeg() throws Exception
   {
     final BufferedImage image = toPairImage.newImage( size );
-    ImageIO.write( image, "jpeg", new File( "build/tmp1.jpg" ) );
+    ImageIO.write( image, "jpeg", new File( "src/test/resources/tmp/tmp1.jpg" ) );
   }
 
   @Test(timeout=1500)
   public void png() throws Exception
   {
     final BufferedImage image = toPairImage.newImage( size );
-    ImageIO.write( image, "png", new File( "build/tmp1.png" ) );
+    ImageIO.write( image, "png", new File( "src/test/resources/tmp/tmp1.png" ) );
   }
 
   @Test(expected=IllegalArgumentException.class)
   public void extension() throws Exception
   {
-    toPairImage.createSlides( size, "build/pairSlides.xxx" );
+    toPairImage.createSlides( size, "src/test/resources/tmp/pairSlides.xxx" );
   }
 
   @Test
   public void threadSlides() throws Exception
   {
-    toThreadImage.createSlides( size, "build/threadSlides.jpeg" );
+    toThreadImage.createSlides( size, "src/test/resources/tmp/threadSlides.jpeg" );
   }
   @Test
   public void pairSlides() throws Exception
   {
-    toPairImage.createSlides( size, "build/pairSlides.jpeg" );
+    toPairImage.createSlides( size, "src/test/resources/tmp/pairSlides.jpeg" );
   }
 }
