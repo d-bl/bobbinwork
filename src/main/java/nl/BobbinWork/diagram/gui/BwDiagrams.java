@@ -59,6 +59,7 @@ import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
+import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
 
@@ -220,8 +221,12 @@ public class BwDiagrams
       final ExportMenu exportMenu)
   {
     final MenuBar menuBar = new MenuBar();
+    menuBar.add( new FileMenu( inputStreamListener, null, null ) );
+    
+    // TODO move import/export into filemenu
     menuBar.addMenuItem( clipboardImporter, "From_clipboard", "Import_menu" );
     menuBar.add( exportMenu );
+    
     menuBar.add( new SampleMenu( menuBar, inputStreamListener ) );
     menuBar.add( new GroundMenu( inputStreamListener ) );
     menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );
@@ -281,7 +286,12 @@ public class BwDiagrams
       public void actionPerformed(
           final ActionEvent event)
       {
-        final InputStream inputStream = (InputStream) event.getSource();
+        Object source = event.getSource();
+        final InputStream inputStream;
+        if (source instanceof NamedInputStream)
+            inputStream = ((NamedInputStream) source).getStream();
+        else
+            inputStream = (InputStream) source;
         setDiagramModel( tree, canvas, inputStream );
       }
 
