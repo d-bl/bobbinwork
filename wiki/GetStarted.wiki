@@ -1,7 +1,7 @@
 #summary get familiar with the development environment
 #labels Phase-Implementation
 
-The source pages have instructions how to check out the code with SubVersion. Developers may use any IDE or whatever they are comfortable with. At least [http://www.eclipse.org/ Eclipse] has a simple way to import existing [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html Maven] projects.
+The source pages have instructions how to check out the code with [http://subversion.apache.org/ SubVersion]. Developers may use any IDE or whatever they are comfortable with. At least [http://www.eclipse.org/ Eclipse] has a simple way to import existing [http://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html Maven] projects. Installation of eclipse plugin [http://www.objectaid.com/ ObjectAid] is recomended: it keeps uml diagrams synchronised when using eclipse refactoring options.
 
 
 To become a project member or start contributing:
