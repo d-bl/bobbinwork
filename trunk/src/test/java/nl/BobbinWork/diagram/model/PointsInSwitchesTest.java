@@ -26,13 +26,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import nl.BobbinWork.diagram.gui.BwDiagrams;
 import nl.BobbinWork.diagram.xml.DiagramBuilder;
 import nl.BobbinWork.diagram.xml.XmlResources;
 import nl.BobbinWork.diagram.xml.expand.TreeExpander;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

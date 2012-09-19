@@ -134,7 +134,9 @@ public class XmlResources {
     for (String base : INCLUDE_BASES) {
       
       final PrintStream saved = System.out;
-      final PrintStream buffer = new BufferOutputStream().getPrintStream();
+      final BufferOutputStream outputStream = new BufferOutputStream();
+      try {
+      final PrintStream buffer = outputStream.getPrintStream();
       System.setErr( buffer );
 
       try {
@@ -159,6 +161,9 @@ public class XmlResources {
         messages = exception.getMessage() + " [" + base + "] " + messages;
       } finally {
         System.setErr( saved );
+      }
+      } finally {
+          outputStream.close();
       }
     }
     throw new SAXException( messages );

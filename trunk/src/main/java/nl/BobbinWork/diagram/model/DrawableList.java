@@ -6,7 +6,9 @@ import java.util.ArrayList;
 public class DrawableList
     extends ArrayList<Drawable>
 {
-  void addThreadSegments(
+    private static final long serialVersionUID = 1L;
+
+void addThreadSegments(
       ThreadSegment... segments)
   {
     for (final ThreadSegment segment : segments) {

@@ -25,7 +25,8 @@ import nl.BobbinWork.diagram.xml.DiagramRebuilder;
 public class ExportMenu
     extends JMenu
 {
-  private final ActionListener toImagesListener;
+    private static final long serialVersionUID = 1L;
+private final ActionListener toImagesListener;
 
   public ExportMenu(final DiagramPanel canvas)
   {

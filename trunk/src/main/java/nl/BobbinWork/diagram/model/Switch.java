@@ -18,8 +18,6 @@
 
 package nl.BobbinWork.diagram.model;
 
-import java.awt.geom.CubicCurve2D;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
 

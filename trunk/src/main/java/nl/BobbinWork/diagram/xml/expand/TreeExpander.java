@@ -146,6 +146,8 @@ public class TreeExpander
         case rotate:
           list.add( new Rotate( node.getAttributes() ) );
           break;
+        default:
+            break;
         }
       }
     }
