@@ -93,11 +93,7 @@ public class BwDiagrams
       final DiagramTree tree = new DiagramTree();
       new SelectionListener( tree, canvas, pipette, pinsel );
 
-      final ActionListener loadListener = createLoadListener( tree, canvas );
-      final ActionListener streamListener = createStreamListener( tree, canvas );
-      final DiagramReplacedListener changeListener =
-          createChangeListener( tree, canvas );
-      final EditForm editForm = new EditForm( canvas, changeListener );
+      final EditForm editForm = new EditForm( canvas, createChangeListener( tree, canvas ) );
       tree.addTreeSelectionListener( editForm );
 
       final JComponent left = createBorderPanel();
@@ -108,14 +104,9 @@ public class BwDiagrams
       right.add( createDiagramTools( canvas, pipette, pinsel ), NORTH );
       right.add( new JScrollPane( canvas ), CENTER );
 
-      final JComponent splitPane =
-          new JSplitPane( HORIZONTAL_SPLIT, left, right );
-
       final JPanel mainPanel = createBorderPanel();
-      final JComponent mainMenu =
-          createMainMenu( frame, streamListener, loadListener, new ExportMenu(canvas) );
-      mainPanel.add( mainMenu, NORTH );
-      mainPanel.add( splitPane, CENTER );
+      mainPanel.add( createMainMenu( frame, tree, canvas ), NORTH );
+      mainPanel.add( new JSplitPane( HORIZONTAL_SPLIT, left, right ), CENTER );
 
       frame.getContentPane().add( mainPanel );
       frame.setVisible( true );
@@ -195,38 +186,27 @@ public class BwDiagrams
     };
   }
 
-  private static class MenuBar
-      extends JMenuBar
+  private static JMenu createImportMenu(final ActionListener loadListener)
   {
-    private static final long serialVersionUID = 1L;
-
-    void addMenuItem(
-        final ActionListener clipboardExporter,
-        final String subMenuKey,
-        final String mainMenuKey)
-    {
-      final JMenu exportMenu = new JMenu();
-      final JMenuItem toClipbaord = new LocaleMenuItem( subMenuKey );
-      applyStrings( exportMenu, mainMenuKey );
-      exportMenu.add( toClipbaord );
-      toClipbaord.addActionListener( clipboardExporter );
-      add( exportMenu );
-    }
+      final JMenu importMenu = new JMenu();
+      final JMenuItem fromClipbaord = new LocaleMenuItem( "From_clipboard" );
+      applyStrings( importMenu, "Import_menu" );
+      importMenu.add( fromClipbaord );
+      fromClipbaord.addActionListener( loadListener );
+      return importMenu;
   }
 
   private static JComponent createMainMenu(
       final BWFrame frame,
-      final ActionListener inputStreamListener,
-      final ActionListener clipboardImporter,
-      final ExportMenu exportMenu)
+      final DiagramTree tree,
+      final DiagramPanel canvas)
   {
-    final MenuBar menuBar = new MenuBar();
-    menuBar.add( new FileMenu( inputStreamListener, null, null ) );
-    
-    // TODO move import/export into filemenu
-    menuBar.addMenuItem( clipboardImporter, "From_clipboard", "Import_menu" );
-    menuBar.add( exportMenu );
-    
+    final ActionListener loadListener = createLoadListener( tree, canvas );
+    final ActionListener inputStreamListener = createStreamListener( tree, canvas );
+    final JMenuBar menuBar = new JMenuBar();
+    menuBar.add( new FileMenu( inputStreamListener ) );
+    menuBar.add(createImportMenu( loadListener) );
+    menuBar.add( new ExportMenu(canvas) );
     menuBar.add( new SampleMenu( menuBar, inputStreamListener ) );
     menuBar.add( new GroundMenu( inputStreamListener ) );
     menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );
