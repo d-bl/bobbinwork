@@ -49,37 +49,25 @@ public class FileMenu extends JMenu {
      * @param inputStreamListener 
      *        listens for newly opened input streams. 
      *        The event source will be a NamedInputStream. 
-     * @param saveListener 
-     *        listens for save requests from the user. 
-     *        The event source will be a String with a file name
-     *        in case of SaveAs or null otherwise.
-     * @param newFileName 
-     *        name of the file that is opened as a stream if the new item is pressed
      */
-    public FileMenu(
-            final ActionListener inputStreamListener, 
-            final ActionListener saveListener, 
-            final String newFileName) {
+    public FileMenu(final ActionListener inputStreamListener) {
 
         applyStrings(this, "MenuFile_file"); //$NON-NLS-1$
 
-        try { 
-            fileChooser = new JFileChooser();
-            fileChooser.setFileFilter(new BWFileFilter( 
-                    getString("FileType"), //$NON-NLS-1$
-                    "xml,bwml".split(",") )); //$NON-NLS-1$ //$NON-NLS-2$
-            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            
-        } catch (java.security.AccessControlException e) { }
+        fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new BWFileFilter( 
+                getString("FileType"), //$NON-NLS-1$
+                "xml,bwml".split(",") )); //$NON-NLS-1$ //$NON-NLS-2$
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         
         JMenuItem jMenuItem = new LocaleMenuItem( "MenuFile_open", VK_O, CTRL_DOWN_MASK); //$NON-NLS-1$
-        addConditionalItem ( jMenuItem, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if ( getIntputStream(e) ) inputStreamListener.actionPerformed(e);
-            }
-        });
+        jMenuItem.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            if ( getIntputStream(e) ) inputStreamListener.actionPerformed(e);
+                        }
+                    });
+        add(jMenuItem, 0);
 
-        // TODO change to Quit for mac
         jMenuItem = new LocaleMenuItem( "MenuFile_exit", VK_F4, ALT_DOWN_MASK); //$NON-NLS-1$
         jMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -87,20 +75,6 @@ public class FileMenu extends JMenu {
             }
         });
         add(jMenuItem);
-    }
-    
-    private void addConditionalItem (JMenuItem jMenuItem, ActionListener actionListener){
-        if ( fileChooser == null ) {
-            jMenuItem.setEnabled(false); 
-        } else {   
-            jMenuItem.addActionListener(actionListener);
-        }
-        add(jMenuItem, 0);
-    }
-    
-    
-    public final void clearSelectedFile() {
-        if (fileChooser != null) fileChooser.setSelectedFile(null);
     }
 
     /**
@@ -119,12 +93,8 @@ public class FileMenu extends JMenu {
             e.setSource(new NamedInputStream(name, new FileInputStream(name)));
             return true;
         } catch (FileNotFoundException ioe) {
-            showError(ioe.getLocalizedMessage(), getString("MenuFile_open")); //$NON-NLS-1$
+            JOptionPane.showMessageDialog(this, ioe.getLocalizedMessage(), getString("MenuFile_open"), JOptionPane.ERROR_MESSAGE); //$NON-NLS-1$
         }
         return false;
-    }
-
-    private void showError(String message, String title) {
-        JOptionPane.showMessageDialog(this, message, title, JOptionPane.ERROR_MESSAGE);
     }
 }
