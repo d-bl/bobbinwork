@@ -21,41 +21,85 @@
     -->
 
   <title>
-    <value lang="en">Test the looks of the basic stitches</value>
+    <value lang="en">Showcase of the elements in the library</value>
+    <value lang="nl">Etalage van de bouwstenen uit de bibliotheek</value>
   </title>
   <xi:include href='basicStitches.xml'/>
-  <group pairs="1-130">
+  <group pairs="1">
     <title>
-      <value lang="en">The showcase</value>
+      <value lang="en">Stitches</value>
+      <value lang="nl">Slagen</value>
     </title>
-   <!-- 
     <copy of="ctc" pairs="1-2"><move x="25" y="60"/></copy>
     <copy of="tttctctc" pairs="3-4"><move x="50" y="50"/></copy>
     <copy of="tc" pairs="5-6"><move x="75" y="60"/></copy>
-    <copy of="tc_rtl" pairs="7-8"><move x="135" y="15"/></copy>
-    <copy of="tc_ltr" pairs="9-10"><move x="105" y="15"/></copy>
+    <copy of="tc_rtl" pairs="7-8"><move x="75" y="85"/></copy>
+    <copy of="tc_ltr" pairs="9-10"><move x="10" y="85"/></copy>
     <copy of="crc" pairs="11-12"><move x="15" y="40"/></copy>
     <copy of="clc" pairs="13-14"><move x="85" y="40"/></copy>
+<!--
     <copy of="ttc" pairs="15-16"><move x="50" y="15"/></copy>
     <copy of="tcrc" pairs="17-18"><move x="15" y="15"/></copy>
     <copy of="tclc" pairs="19-20"><move x="85" y="15"/></copy>
-    <copy of="crtc" pairs="21-22"><move x="135" y="50"/></copy>
-    <copy of="cltc" pairs="23-24"><move x="105" y="50"/></copy>
-    <group pairs="25-26">
-        <copy of="tt" pairs="1-2"><move x="15" y="100"/></copy>
-        <copy of="ctc" pairs="1-2"><move x="15" y="105"/></copy>
-    </group>
-    <group pairs="27-28">
-        <copy of="t" pairs="1-2"><move x="75" y="100"/></copy>
-        <copy of="ctc" pairs="1-2"><move x="75" y="100"/></copy>
-    </group>
-    <copy of="ffs" pairs="31-32"><move x="15" y="150"/></copy>
-    <copy of="hs-1" pairs="33-34"><move x="75" y="150"/></copy>
-    <copy of="fs-1" pairs="35-36"><move x="135" y="150"/></copy>
-    -->
+    <copy of="tctc" pairs="27-28"><move x="75" y="100"/></copy>
+-->
+    <copy of="crtc" pairs="21-22"><move x="5" y="5"/></copy>
+    <copy of="cltc" pairs="23-24"><move x="95" y="5"/></copy>
+    <copy of="tctc" pairs="27-28"><move x="50" y="10"/></copy>
     <copy of="twisted_picot" pairs="37"><move x="160" y="100"/></copy>
-   <!-- 
     <copy of="knotted_picot" pairs="38"><move x="190" y="70"/></copy>
-    -->
+
+    <copy of="star" pairs="39-41"><move x="250" y="30"/></copy>    <copy of="ctctc" pairs="42-43"><move x="280" y="5"/></copy>
+    <copy of="cttc" pairs="44-45"><move x="310" y="5"/></copy>
+    <copy of="vg" pairs="46-47"><move x="280" y="55"/></copy>
+  </group>
+  <group pairs="2">
+    <title>
+      <value lang="en">Edges</value>
+      <value lang="nl">Randen</value>
+    </title>
+    <copy of="ffs" pairs="1-2"><move x="85" y="150"/></copy>
+    <copy of="ffsL" pairs="3-4"><move x="5" y="155"/></copy>
+    <copy of="ffsR" pairs="5-6"><move x="165" y="155"/></copy>
+    <copy of="hs-1" pairs="7-8"><move x="160" y="230"/></copy>
+    <copy of="fs-1" pairs="9-10"><move x="10" y="230"/></copy>
+    <copy of="fs" pairs="11-12"><move x="10" y="310"/></copy>
+    <copy of="hs-r" pairs="13-14"><move x="160" y="310"/></copy>
+  </group>
+  <group pairs="3">
+    <title>
+      <value lang="en">Special</value>
+      <value lang="nl">Speciaal</value>
+    </title>
+    <copy of="ctc-small" pairs="15-16"><move x="53" y="310"/></copy>
+    <copy of="ffsLI" pairs="17-18"><move x="105" y="310"/></copy>
+  </group>
+  <group pairs="4">
+    <title>
+      <value lang="en">Grounds</value>
+      <value lang="nl">Gronden</value>
+    </title>
+    <copy of="vierge" pairs="1-4"><move x="5" y="410"/></copy>
+    <copy of="sGravenmoers" pairs="5-8"><move x="125" y="410"/></copy>
+    <copy of="flanders" pairs="9-12"><move x="85" y="520"/></copy>
+    <copy of="snowflake" pairs="13-18"><move x="255" y="410"/></copy>
+    <copy of="spider" pairs="19-24"><move x="425" y="410"/></copy>
+  </group>
+  <group pairs="5">
+    <title>
+      <value lang="en">Loose twists</value>
+      <value lang="nl">losse draaien</value>
+    </title>
+    <copy of="l" pairs="1"><move x="180" y="20"/></copy>
+    <copy of="l1" pairs="2"><move x="180" y="20"/></copy>
+    <copy of="ll" pairs="3"><move x="180" y="20"/></copy>
+    <copy of="lll" pairs="4"><move x="180" y="20"/></copy>
+    <copy of="r" pairs="5"><move x="180" y="20"/></copy>
+    <copy of="r1" pairs="6"><move x="180" y="20"/></copy>
+    <copy of="rr" pairs="7"><move x="180" y="20"/></copy>
+    <copy of="rrr" pairs="8"><move x="180" y="20"/></copy>
+    <copy of="t" pairs="9"><move x="180" y="20"/></copy>
+    <copy of="tt" pairs="10"><move x="180" y="20"/></copy>
+    <copy of="ttt" pairs="11"><move x="180" y="20"/></copy>
   </group>
 </diagram>
