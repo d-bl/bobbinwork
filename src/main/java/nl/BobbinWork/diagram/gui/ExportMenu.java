@@ -128,9 +128,9 @@ private final ActionListener toImagesListener;
         try {
           s = DiagramRebuilder.toString( canvas.getDiagram() );
         } catch (final TransformerException exception) {
-          s = BwDiagrams.stackTraceToString( exception );
+          s = ExceptionHelper.toString( exception );
         } catch (final XPathExpressionException exception) {
-          s = BwDiagrams.stackTraceToString( exception );
+          s = ExceptionHelper.toString( exception );
         }
         final StringSelection ss = new StringSelection( s );
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents( ss, null );
