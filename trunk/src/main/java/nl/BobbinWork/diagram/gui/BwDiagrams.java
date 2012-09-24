@@ -35,8 +35,6 @@ import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.net.URL;
 import java.util.Locale;
 
@@ -47,13 +45,13 @@ import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
+import nl.BobbinWork.bwlib.gui.ExceptionHelper;
 import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
@@ -93,7 +91,8 @@ public class BwDiagrams
       final DiagramTree tree = new DiagramTree();
       new SelectionListener( tree, canvas, pipette, pinsel );
 
-      final EditForm editForm = new EditForm( canvas, createChangeListener( tree, canvas ) );
+      final EditForm editForm =
+          new EditForm( canvas, createChangeListener( tree, canvas ) );
       tree.addTreeSelectionListener( editForm );
 
       final JComponent left = createBorderPanel();
@@ -164,8 +163,8 @@ public class BwDiagrams
           final ActionEvent event)
       {
         if (canvas.getSelectedThread() == null) return;
-        canvas.getSelectedThread().getStyle().apply(
-            threadStyleToolBar.getCoreStyle() );
+        canvas.getSelectedThread().getStyle()
+            .apply( threadStyleToolBar.getCoreStyle() );
         canvas.repaint();
       }
     };
@@ -186,14 +185,15 @@ public class BwDiagrams
     };
   }
 
-  private static JMenu createImportMenu(final ActionListener loadListener)
+  private static JMenu createImportMenu(
+      final ActionListener loadListener)
   {
-      final JMenu importMenu = new JMenu();
-      final JMenuItem fromClipbaord = new LocaleMenuItem( "From_clipboard" );
-      applyStrings( importMenu, "Import_menu" );
-      importMenu.add( fromClipbaord );
-      fromClipbaord.addActionListener( loadListener );
-      return importMenu;
+    final JMenu importMenu = new JMenu();
+    final JMenuItem fromClipbaord = new LocaleMenuItem( "From_clipboard" );
+    applyStrings( importMenu, "Import_menu" );
+    importMenu.add( fromClipbaord );
+    fromClipbaord.addActionListener( loadListener );
+    return importMenu;
   }
 
   private static JComponent createMainMenu(
@@ -202,11 +202,12 @@ public class BwDiagrams
       final DiagramPanel canvas)
   {
     final ActionListener loadListener = createLoadListener( tree, canvas );
-    final ActionListener inputStreamListener = createStreamListener( tree, canvas );
+    final ActionListener inputStreamListener =
+        createStreamListener( tree, canvas );
     final JMenuBar menuBar = new JMenuBar();
     menuBar.add( new FileMenu( inputStreamListener ) );
-    menuBar.add(createImportMenu( loadListener) );
-    menuBar.add( new ExportMenu(canvas) );
+    menuBar.add( createImportMenu( loadListener ) );
+    menuBar.add( new ExportMenu( canvas ) );
     menuBar.add( new SampleMenu( menuBar, inputStreamListener ) );
     menuBar.add( new GroundMenu( inputStreamListener ) );
     menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );
@@ -269,9 +270,9 @@ public class BwDiagrams
         Object source = event.getSource();
         final InputStream inputStream;
         if (source instanceof NamedInputStream)
-            inputStream = ((NamedInputStream) source).getStream();
+          inputStream = ((NamedInputStream) source).getStream();
         else
-            inputStream = (InputStream) source;
+          inputStream = (InputStream) source;
         setDiagramModel( tree, canvas, inputStream );
       }
 
@@ -286,50 +287,15 @@ public class BwDiagrams
     try {
       final Diagram model = createDiagramModel( inputStream );
       tree.setDiagramModel( model );
-      //System.out.println(XmlResources.toXmlString( ((Element)model.getSourceObject()).getOwnerDocument() ));
+      // System.out.println(XmlResources.toXmlString(
+      // ((Element)model.getSourceObject()).getOwnerDocument() ));
       canvas.setPattern( model );
 
-      tree.setSelectionRow(0);
+      tree.setSelectionRow( 0 );
       tree.requestFocus();
     } catch (final Exception exception) {
-      showError( canvas, exception );
+      ExceptionHelper.show(canvas, exception,Localizer.getString( "Load_error_caption" ) ); // $NON-NLS-1$
     }
-  }
-
-  private static void showError(
-      final JComponent parent,
-      final Exception exception)
-  {
-    final String stackTrace = stackTraceToString( exception );
-
-    final String title = Localizer.getString( "Load_error_caption" ); // $NON-NLS-1$
-    if (exception instanceof SAXException) {
-      final String message =
-          exception.getClass().getName() + NEW_LINE
-              + exception.getLocalizedMessage();
-      JOptionPane.showMessageDialog( parent, message, title,
-          JOptionPane.ERROR_MESSAGE );
-    } else {
-      final String message =
-          exception.getLocalizedMessage() + NEW_LINE + stackTrace;
-      JOptionPane.showMessageDialog( parent, message, title,
-          JOptionPane.ERROR_MESSAGE );
-    }
-  }
-
-  static String stackTraceToString(
-      final Throwable exception)
-  {
-    final StringWriter stringWriter = new StringWriter();
-    final PrintWriter printWriter = new PrintWriter( stringWriter );
-    exception.printStackTrace( printWriter );
-    printWriter.flush();
-    stringWriter.flush();
-
-    final String stackTrace = stringWriter.toString()//
-        .replaceAll( "(?m)^\\tat java.awt[ -~]*[\\r\\n]+", "" )//
-        .replaceAll( "(?m)^\\tat javax.swing[ -~]*[\\r\\n]+", "" );
-    return stackTrace;
   }
 
   private static JPanel createBorderPanel()
