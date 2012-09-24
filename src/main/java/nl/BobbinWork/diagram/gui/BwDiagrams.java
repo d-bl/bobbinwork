@@ -20,21 +20,13 @@ package nl.BobbinWork.diagram.gui;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.NORTH;
 import static javax.swing.JSplitPane.HORIZONTAL_SPLIT;
-import static nl.BobbinWork.bwlib.gui.Localizer.applyStrings;
 import static nl.BobbinWork.bwlib.gui.Localizer.setBundle;
-import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.Locale;
 
@@ -42,22 +34,17 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
-import nl.BobbinWork.bwlib.gui.ExceptionHelper;
 import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
-import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.gui.Localizer;
 import nl.BobbinWork.bwlib.gui.PrintMenu;
-import nl.BobbinWork.bwlib.io.NamedInputStream;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
 
@@ -103,8 +90,13 @@ public class BwDiagrams
       right.add( createDiagramTools( canvas, pipette, pinsel ), NORTH );
       right.add( new JScrollPane( canvas ), CENTER );
 
+      final JMenuBar mainMenu = new MainMenuHelper(frame, new DiagramLoader( tree, canvas, frame )).get();
+      mainMenu.add( new ExportMenu( canvas ) );
+      mainMenu.add( new HelpMenu( frame, "2009", "diagrams" ) );
+      mainMenu.add( new HeapStatusWidget() );
+
       final JPanel mainPanel = createBorderPanel();
-      mainPanel.add( createMainMenu( frame, tree, canvas ), NORTH );
+      mainPanel.add( mainMenu, NORTH );
       mainPanel.add( new JSplitPane( HORIZONTAL_SPLIT, left, right ), CENTER );
 
       frame.getContentPane().add( mainPanel );
@@ -183,119 +175,6 @@ public class BwDiagrams
         threadStyleToolBar.setCoreStyle( canvas.getSelectedThread().getStyle() );
       }
     };
-  }
-
-  private static JMenu createImportMenu(
-      final ActionListener loadListener)
-  {
-    final JMenu importMenu = new JMenu();
-    final JMenuItem fromClipbaord = new LocaleMenuItem( "From_clipboard" );
-    applyStrings( importMenu, "Import_menu" );
-    importMenu.add( fromClipbaord );
-    fromClipbaord.addActionListener( loadListener );
-    return importMenu;
-  }
-
-  private static JComponent createMainMenu(
-      final BWFrame frame,
-      final DiagramTree tree,
-      final DiagramPanel canvas)
-  {
-    final ActionListener loadListener = createLoadListener( tree, canvas );
-    final ActionListener inputStreamListener =
-        createStreamListener( tree, canvas );
-    final JMenuBar menuBar = new JMenuBar();
-    menuBar.add( new FileMenu( inputStreamListener ) );
-    menuBar.add( createImportMenu( loadListener ) );
-    menuBar.add( new ExportMenu( canvas ) );
-    menuBar.add( new SampleMenu( menuBar, inputStreamListener ) );
-    menuBar.add( new GroundMenu( inputStreamListener ) );
-    menuBar.add( new HelpMenu( frame, "2009", "diagrams" ) );
-    menuBar.add( new HeapStatusWidget() );
-    return menuBar;
-  }
-
-  private static ActionListener createLoadListener(
-      final DiagramTree tree,
-      final DiagramPanel canvas)
-  {
-    return new ActionListener()
-    {
-      public void actionPerformed(
-          final ActionEvent event)
-      {
-        final byte[] bytes = getClipboardContents().getBytes();
-        setDiagramModel( tree, canvas, new ByteArrayInputStream( bytes ) );
-      }
-    };
-  }
-
-  /**
-   * Get the String residing on the system clip board.
-   * 
-   * @return any text found on the Clipboard; if none found, return an empty
-   *         String.
-   */
-  private static String getClipboardContents()
-  {
-    final Transferable contents =
-        Toolkit.getDefaultToolkit().getSystemClipboard().getContents( null );
-    final boolean hasTransferableText =
-        (contents != null)
-            && contents.isDataFlavorSupported( DataFlavor.stringFlavor );
-    if (hasTransferableText) {
-      try {
-        return (String) contents.getTransferData( DataFlavor.stringFlavor );
-      } catch (final UnsupportedFlavorException exception) {
-        // highly unlikely since we are using a standard DataFlavor
-        System.out.println( exception );
-        exception.printStackTrace();
-      } catch (final IOException ex) {
-        System.out.println( ex );
-        ex.printStackTrace();
-      }
-    }
-    return "";
-  }
-
-  private static ActionListener createStreamListener(
-      final DiagramTree tree,
-      final DiagramPanel canvas)
-  {
-    return new ActionListener()
-    {
-      public void actionPerformed(
-          final ActionEvent event)
-      {
-        Object source = event.getSource();
-        final InputStream inputStream;
-        if (source instanceof NamedInputStream)
-          inputStream = ((NamedInputStream) source).getStream();
-        else
-          inputStream = (InputStream) source;
-        setDiagramModel( tree, canvas, inputStream );
-      }
-
-    };
-  }
-
-  private static void setDiagramModel(
-      final DiagramTree tree,
-      final DiagramPanel canvas,
-      final InputStream inputStream)
-  {
-    try {
-      final Diagram model = createDiagramModel( inputStream );
-      tree.setDiagramModel( model );
-      // System.out.println(XmlResources.toXmlString(
-      // ((Element)model.getSourceObject()).getOwnerDocument() ));
-      canvas.setPattern( model );
-
-      tree.setSelectionRow( 0 );
-      tree.requestFocus();
-    } catch (final Exception exception) {
-      ExceptionHelper.show(canvas, exception,Localizer.getString( "Load_error_caption" ) ); // $NON-NLS-1$
-    }
   }
 
   private static JPanel createBorderPanel()
