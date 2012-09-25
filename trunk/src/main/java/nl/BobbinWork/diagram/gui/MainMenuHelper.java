@@ -36,13 +36,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.filechooser.FileFilter;
 
-import nl.BobbinWork.bwlib.gui.ExceptionHelper;
+import nl.BobbinWork.bwlib.gui.ExceptionHandler;
 import nl.BobbinWork.bwlib.gui.LocaleMenuItem;
 import nl.BobbinWork.bwlib.io.ClipboardHelper;
 import nl.BobbinWork.bwlib.io.InputStreamHandler;
@@ -50,34 +49,32 @@ import nl.BobbinWork.diagram.xml.Ground;
 
 public class MainMenuHelper
 {
-  public JFrame parent;
+  public ExceptionHandler exceptionHandler;
   public JMenuBar menuBar;
   public InputStreamHandler inputStreamHandler;
 
   /**
    * Creates a {@link JMenuBar} with items that load diagrams and the exit item
    * at the tail of the file menu.
-   * 
-   * @param parent
-   *          passed on to dialogs
    * @param inputStreamHandler
    *          loads the diagrams
+   * @param exceptionHandler
    */
   public MainMenuHelper(
-      final JFrame parent,
-      final InputStreamHandler inputStreamHandler)
+      final InputStreamHandler inputStreamHandler,
+      final ExceptionHandler exceptionHandler)
   {
-    this.parent = parent;
+    this.exceptionHandler = exceptionHandler;
     this.inputStreamHandler = inputStreamHandler;
     menuBar = new JMenuBar();
     menuBar.add( createFileMenu() );
-    menuBar.add( createImportMenu() );
     menuBar.add( createSampleMenu() );
     menuBar.add( createGroundMenu() );
+    menuBar.add( createImportMenu() );
   }
 
   /**
-   * gets the {@link JMenuBar}
+   * Gets the {@link JMenuBar}
    * 
    * @return
    */
@@ -165,9 +162,9 @@ public class MainMenuHelper
           is = new ByteArrayInputStream( xmlString.getBytes( "UTF-8" ) );
           inputStreamHandler.proces( is );
         } catch (final UnsupportedEncodingException e) {
-          ExceptionHelper.show( parent, e, "could not load diagram" );
+          exceptionHandler.show( e, "could not load diagram" );
         } catch (final IOException e) {
-          ExceptionHelper.show( parent, e, "could not load diagram" );
+          exceptionHandler.show( e, "could not load diagram" );
         }
       }
     } );
@@ -203,13 +200,13 @@ public class MainMenuHelper
       public void actionPerformed(
           final ActionEvent e)
       {
-        if (chooser.showOpenDialog( parent ) != JFileChooser.APPROVE_OPTION)
+        if (chooser.showOpenDialog( null ) != JFileChooser.APPROVE_OPTION)
           return;
         try {
           inputStreamHandler.proces( new FileInputStream( chooser
               .getSelectedFile() ) );
         } catch (final Exception exception) {
-          ExceptionHelper.show( parent, exception, "could not load diagram" );
+          exceptionHandler.show( exception, "could not load diagram" );
           return;
         }
         // TODO adjust recent-file menu
@@ -251,9 +248,9 @@ public class MainMenuHelper
         try {
           inputStreamHandler.proces( new URL( url ).openStream() );
         } catch (final MalformedURLException e) {
-          ExceptionHelper.show( parent, e, "could not load diagram" );
+          exceptionHandler.show( e, "could not load diagram" );
         } catch (final IOException e) {
-          ExceptionHelper.show( parent, e, "could not load diagram" );
+          exceptionHandler.show( e, "could not load diagram" );
         }
       }
 

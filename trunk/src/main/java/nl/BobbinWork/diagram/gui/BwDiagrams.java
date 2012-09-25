@@ -41,10 +41,10 @@ import javax.swing.JSplitPane;
 import javax.xml.parsers.ParserConfigurationException;
 
 import nl.BobbinWork.bwlib.gui.BWFrame;
+import nl.BobbinWork.bwlib.gui.ExceptionHandler;
 import nl.BobbinWork.bwlib.gui.HeapStatusWidget;
 import nl.BobbinWork.bwlib.gui.HelpMenu;
 import nl.BobbinWork.bwlib.gui.Localizer;
-import nl.BobbinWork.bwlib.gui.PrintMenu;
 import nl.BobbinWork.diagram.gui.EditForm.DiagramReplacedListener;
 import nl.BobbinWork.diagram.model.Diagram;
 
@@ -70,7 +70,7 @@ public class BwDiagrams
       }
       // must come before any swing operation for the system look and feel
       final BWFrame frame = new BWFrame();
-
+      final ExceptionHandler exceptionHandler = new ExceptionHandler(frame);
       final JButton pipette = createThreadStyleButton( "pipette" );
       final JButton pinsel = createThreadStyleButton( "pinsel" );
 
@@ -90,8 +90,9 @@ public class BwDiagrams
       right.add( createDiagramTools( canvas, pipette, pinsel ), NORTH );
       right.add( new JScrollPane( canvas ), CENTER );
 
-      final JMenuBar mainMenu = new MainMenuHelper(frame, new DiagramLoader( tree, canvas, frame )).get();
-      mainMenu.add( new ExportMenu( canvas ) );
+      final DiagramLoader diagramLoader = new DiagramLoader( tree, canvas, exceptionHandler );
+      final JMenuBar mainMenu = new MainMenuHelper(diagramLoader, exceptionHandler).get();
+      mainMenu.add( new ExportMenu( canvas , exceptionHandler) );
       mainMenu.add( new HelpMenu( frame, "2009", "diagrams" ) );
       mainMenu.add( new HeapStatusWidget() );
 
@@ -139,7 +140,6 @@ public class BwDiagrams
     threadStyleToolBar.add( pipette, 0 );
 
     final JComponent diagramTools = new JMenuBar();
-    diagramTools.add( new PrintMenu( canvas ) );
     diagramTools.add( new ViewMenu( canvas, null, null ) );
     diagramTools.add( threadStyleToolBar );
     return diagramTools;

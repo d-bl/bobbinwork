@@ -21,9 +21,7 @@ import static nl.BobbinWork.diagram.xml.DiagramBuilder.createDiagramModel;
 
 import java.io.InputStream;
 
-import javax.swing.JFrame;
-
-import nl.BobbinWork.bwlib.gui.ExceptionHelper;
+import nl.BobbinWork.bwlib.gui.ExceptionHandler;
 import nl.BobbinWork.bwlib.io.InputStreamHandler;
 import nl.BobbinWork.diagram.model.Diagram;
 
@@ -32,16 +30,16 @@ public class DiagramLoader
 {
   private final DiagramTree tree;
   private final DiagramPanel canvas;
-  private final JFrame parent;
+  private final ExceptionHandler exceptionHandler;
 
   public DiagramLoader(
       final DiagramTree tree,
       final DiagramPanel canvas,
-      final JFrame parent)
+      final ExceptionHandler exceptionHandler)
   {
     this.tree = tree;
     this.canvas = canvas;
-    this.parent = parent;
+    this.exceptionHandler = exceptionHandler;
   }
 
   public void proces(
@@ -54,7 +52,7 @@ public class DiagramLoader
       tree.setSelectionRow( 0 );
       tree.requestFocus();
     } catch (final Exception exception) {
-      ExceptionHelper.show(parent, exception, "could not load diagram");
+      exceptionHandler.show( exception, "could not load diagram");
     }
   }
 }
