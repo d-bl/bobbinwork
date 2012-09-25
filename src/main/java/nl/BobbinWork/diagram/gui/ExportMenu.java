@@ -27,9 +27,11 @@ public class ExportMenu
 {
     private static final long serialVersionUID = 1L;
 private final ActionListener toImagesListener;
+private final ExceptionHandler exceptionHandler;
 
-  public ExportMenu(final DiagramPanel canvas)
+  public ExportMenu(final DiagramPanel canvas, ExceptionHandler exceptionHandler)
   {
+    this.exceptionHandler = exceptionHandler;
     applyStrings( this, "Export_menu" );
 
     final JMenuItem toClipbaord = new LocaleMenuItem( "To_clipboard" );
@@ -39,14 +41,13 @@ private final ActionListener toImagesListener;
     final List<String> formats = ToImages.formats();
     toImagesListener = newToImagesListener( canvas );
 
-    add( createImageMenu( canvas, formats, "pairSnapShot" ) );
-    add( createImageMenu( canvas, formats, "pairSlides" ) );
-    add( createImageMenu( canvas, formats, "threadSnapShot" ) );
-    add( createImageMenu( canvas, formats, "threadSlides" ) );
+    add( createImageMenu( formats, "pairSnapShot" ) );
+    add( createImageMenu( formats, "pairSlides" ) );
+    add( createImageMenu( formats, "threadSnapShot" ) );
+    add( createImageMenu( formats, "threadSlides" ) );
   }
 
   private JMenuItem createImageMenu(
-      final DiagramPanel canvas,
       final List<String> formats,
       final String keyBase)
   {
@@ -79,11 +80,9 @@ private final ActionListener toImagesListener;
         try {
           createImages( fileName, toImages, size );
         } catch (final IllegalArgumentException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+          exceptionHandler.show( e, "could not write image"  );
         } catch (final IOException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
+          exceptionHandler.show( e, "could not write image" );
         }
       }
     };
@@ -116,7 +115,7 @@ private final ActionListener toImagesListener;
     return toImages;
   }
 
-  private static ActionListener createToClipboardListener(
+  private ActionListener createToClipboardListener(
       final DiagramPanel canvas)
   {
     return new ActionListener()
@@ -128,9 +127,9 @@ private final ActionListener toImagesListener;
         try {
           s = DiagramRebuilder.toString( canvas.getDiagram() );
         } catch (final TransformerException exception) {
-          s = ExceptionHelper.toString( exception );
+          s = exceptionHandler.toString( exception );
         } catch (final XPathExpressionException exception) {
-          s = ExceptionHelper.toString( exception );
+          s = exceptionHandler.toString( exception );
         }
         final StringSelection ss = new StringSelection( s );
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents( ss, null );

@@ -25,16 +25,23 @@ import javax.swing.JOptionPane;
 
 import org.xml.sax.SAXException;
 
-public class ExceptionHelper
+public class ExceptionHandler
 {
   private static final String NEW_LINE = System.getProperty( "line.separator" );
 
-  public static void show (Component parent, Throwable exception, String title){
+
+  private final Component parent;
+
+  public ExceptionHandler(final Component parent){
+    this.parent = parent;
+  }
+
+  public void show (Throwable exception, String title){
     JOptionPane.showMessageDialog( parent, toString(exception), title,
         JOptionPane.ERROR_MESSAGE );
 
   }
-  public static String toString(
+  public String toString(
       final Throwable exception)
   {
     final String msg =
