@@ -1,6 +1,10 @@
 =different wiki's for different audiences=
 ==User guides in various languages==
-see external links on the project home page.
+Accessible until the 15th of November 2014 via external links on the project home page. The following links give access to the last exports from `wikispaces.com`
+
+  * [http://bobbinwork.googlecode.com/svn/wiki/wikispaces/bobbinwork_20140921.pdf pdf] without images
+  * zipped [http://bobbinwork.googlecode.com/svn/wiki/wikispaces/bobbinwork_20140921.zip wiki files]
+  * zipped [http://bobbinwork.googlecode.com/svn/wiki/wikispaces/bobbinwork_20140922-HTML.zip web pages] the absolute links within the wiki links are not yet replaced by relative links. Hint: try to delete "`http://bobbinwork.wikispaces.com/`" in the unzipped files.
 
 ==Developers==
 see the navigation area of this page.
