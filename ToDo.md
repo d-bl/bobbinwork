@@ -1,0 +1,18 @@
+# Ultimatel goal #
+support drawing on the canvas by drag-and-drop rows, fields and trails of stitches on all types of grids. Some details:
+  * Highlighting a diagram section should also pop up handles to move, rotate, resize, squeeze and distort otherwise.
+  * Drag points of Bezier curves.
+
+# other tasks #
+  * complete the Java doc (use an open source alternative for the Visio diagrams?)
+  * add unit tests, the package `diagram.math` is pretty complete, next would be `diagram.model`. Otherwise only high level testing is possible by visually checking and manipulating the sample/ground diagrams
+  * see also the to do's in the code and the [issues](http://code.google.com/p/bobbinwork/issues/list)
+
+**Code reviews**
+
+Even questions about the code might trigger improvements. To add comments or questions you need to sign in with a Google account but don't need to join the project.
+
+See how reviews work on http://code.google.com/p/support/wiki/CodeReviews In short:
+  * browse the source code online
+  * double click a code line to enter you comment or question
+  * when done publish your comment so others get notified

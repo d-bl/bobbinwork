@@ -1,0 +1,121 @@
+The basic idea to draw thread diagrams is drawing small curved segments of lines. A shadow for each segment creates the over/under effect. A shadow with a colour identical to the background creates the traditional diagrams:
+
+http://bobbinwork.googlecode.com/svn/wiki/images/bezier/shadow.PNG
+
+
+
+# Shortened ends #
+Unlike traditional diagrams, the diagram above shows no ends come out of the stitch going to the bobbins. That is a technical work-around for better chaining the stitches together. If the chaining can not be improved, such that it can deal with overlapping ends, the program should extend the loose ends for a while. This is rather a programming challenge than a mathematical challenge, though it might be tricky in what direction to extend the loose ends.
+
+# Gaps #
+The following code snippet shows how to define the Bezier curves of a half stitch. Note that the "." is for the decimals and the "," separates X from Y. X being the horizontal distance from the left side of the canvas, and Y the vertical distance from the top side of the canvas, so 0,0 is the top left corner.
+```
+<stitch id="tc" pairs="15-16">
+    <pair start="3,13.3" end="13.5,3" />
+    <pair start="3,3" end="13.5,13.5" />
+    <twist bobbins="1-2">
+        <back start="0,6.6" end="5,11.6" />
+        <front start="5,2" c1="5,5" c2="5,5" end="0,10" />
+    </twist>
+    <twist bobbins="3-4">
+        <back start="11.6,2" c1="11.6,5" c2="11.6,5" end="16.6,10" />
+        <front start="16.6,6.6" end="11.6,11.6" />
+    </twist>
+    <cross bobbins="2-3">
+        <back start="11.6,11.6" end="6.6,16.6" />
+        <front start="5,11.6" end="10,16.3" />
+    </cross>
+</stitch>
+```
+
+http://bobbinwork.googlecode.com/svn/wiki/images/bezier/ttc.PNG
+
+Combining two of such twists and a cross, would result in the left diagram. The right versions shows what happens when the program knows how to make the ends meet. But just making the ends meet is not sufficient. The "shadow" still shows a gap.
+
+http://bobbinwork.googlecode.com/svn/wiki/images/bezier/basics.PNG
+
+As shown in the picture above, not only the black end and red start should be on the same spot, but they should also be on a straight line with black c2 and red c1. That might be a smaller challenge than extending the ends discussed above. But it adds to the tension challenge discussed below.
+
+# Tension #
+In this example of a striped Vierge ground, the drunken coloured lines show that the program doesn't know how to tension the threads.
+
+http://bobbinwork.googlecode.com/svn/wiki/images/bezier/drunken.PNG
+
+After making the segment ends meet and put the control points in a straight line as described above. Subsequently the line/thread should be flattened/tensioned. This flattening process has some restrictions:
+
+  * threads cannot move through pins
+  * segments within a "switch" should stay together: an X should not turn into a T or even separated, where the width of the shadow and angle determines when an X turns into a T.
+
+On a pair level flattening lines is less an issue but when an X turns into a T is not so well defined.
+
+# Highlighting threads #
+
+Selecting threads has an obvious bug. The current strategy is drizzling into the details of the tree until the cross or twist is found that contains the mouse pointer. Then nearest thread is highlighted. The following issue show why some sections at the edge sometimes can't be selected.
+
+# Highlighting (groups of) stitches #
+
+(a) http://bobbinwork.googlecode.com/svn/wiki/images/bezier/high-lights.PNG
+(b) http://bobbinwork.googlecode.com/svn/wiki/images/bezier/highlight-complication.PNG
+
+In the images above, the yellow areas are the bounding polygons of a group of stitches, used to highlight them. The coloured dots show the start points and end points of the selected group of stitches that define the polygon. That is a quick and dirty solution. It usually works when just drawing grounds. But the polygon in (a) should extend to the left and the polygon in (b) should extend at the top. Stitches chained to a moon slice would be even worse.
+
+The green dots
+http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244#190<br>
+The red dots<br>
+<a href='http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244#190'>http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244#190</a><br>
+
+The improved approach below adds dots between the green and red dots. That should improve (a). However we need additional points between the green dots in (b). So I'm afraid we have to store the polygon in a field, and merge them in the method connect.<br>
+The stored polygons should reflect changes made by setNext in Connectors.connect<br>
+Possible hints on:<br>
+<a href='http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html'>http://valis.cs.uiuc.edu/~sariel/research/CG/applets/convex_decomp/Default.html</a><br>
+<a href='http://cgm.cs.mcgill.ca/~orm/mergech.html'>http://cgm.cs.mcgill.ca/~orm/mergech.html</a>
+
+
+<h2>Improved approach</h2>
+
+The Connectors class looses information about internal segments.<br>
+We should also merge the bounding polygons of the children<br>
+and store the result with the parent.<br>
+Using polygons is more complex than rectangular bounding boxes, but rectangles would cause overlap.<br>
+We can't use overlap when drizzling down the tree to find which thread is pointed at.<br>
+<br>
+<a href='http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244'>http://code.google.com/p/bobbinwork/source/browse/trunk/src/nl/BobbinWork/diagram/model/Connectors.java?r=244</a>
+implements an improvement at stitch level. It tries to use control points too, but needs the following changes:<br>
+<pre><code>addPoint(b.getStart(), a.getEnd(),rights,b.getC1());<br>
+addPoint(b.getStart(), a.getEnd(),rights,a.getC2());<br>
+addPoint(b.getEnd(), a.getStart(),lefts,b.getC2());<br>
+addPoint(b.getEnd(), a.getStart(),lefts,a.getC1());<br>
+...<br>
+/** Adds east to list if the compas is only rotated and not mirrored. */<br>
+private void addPoint(Point north, Point south, List&lt;Point&gt; list, Point east){<br>
+</code></pre>
+
+The method addPoint would need the method isMirrored below, but how to imlement it?<br>
+<br>
+<pre><code>import java.awt.geom.Point2D;<br>
+public class Compas {<br>
+  private static boolean isMirrored(<br>
+       Point2D north, <br>
+       Point2D east, <br>
+       Point2D south)<br>
+  {<br>
+     return false;<br>
+  }<br>
+  public static void main (String[] args) {<br>
+    Point2D[][] ps = { <br>
+      // (0,0) is north-west corner of canvas, compass may be rotated<br>
+      {new Point2D.Float(1,0),new Point2D.Float(1,2),new Point2D.Float(2,1)},//false<br>
+      {new Point2D.Float(1,1),new Point2D.Float(1,2),new Point2D.Float(0,1)},//true<br>
+    };<br>
+    for ( Point2D[] p:ps ) {<br>
+      System.out.println(isMirrored(p[0],p[1],p[2]));<br>
+    }<br>
+  }<br>
+}<br>
+</code></pre>
+
+Rotate east and and south together around north and return (rotatedEast.x < north.x) ?<br>
+<br>
+Calculate a line through east perpendicular on north-south and do something with the direction of both lines?<br>
+<br>
+Would <code>java.awt.geom.AffineTransform</code> and/or <code>java.awt.Graphics2D</code> be useful?
