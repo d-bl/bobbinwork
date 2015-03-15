@@ -3,7 +3,7 @@ the wiki a [CC-BY](http://creativecommons.org/licenses/by/3.0/).
 
 * UML, java objects mapped to diagram components and other [diagrams](https://cdn.rawgit.com/jo-pol/bobbinwork/master/doc/index.html)
 * [javadoc.zip](http://web.archive.org/*/https://bobbinwork.googlecode.com/svn/generated/javadoc.zip)
-* mathematics are explained in the wiki
+* user guide and applied mathematics in the wiki
 
 This project is succeeded by [DiBL](https://github.com/jo-pol/DiBL/wiki), which has a different approach. 
 Issues in this project may still have links pointing back to the original google code location 
