@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram
+  xmlns="http://BobbinWork.googlecode.com/bw.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+  <title>
+    <value lang="en">Copyright 20011, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
+    <!--
+    See for examples:
+    
+    "Nyt i knipling, Begynderknipling for born og voskne" by Aase Nilson, page 22
+    
+    without the tongue
+    
+    "Snakes Galore" by Christine Springett
+    http://paternoster.orpheusweb.co.uk/lace/curlylace/snakesgallery.html 
+    http://paternoster.orpheusweb.co.uk/lace/curlylace/curlylace.html
+     -->
+  </title>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/709/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <group pairs="1-5">
+    <title>
+      <value lang="en">Snake</value>
+      <value lang="nl">Slang</value>
+    </title>
+
+    <new_bobbins nrs="5,6,7,8"><style color="#0000FF"/></new_bobbins>
+    <new_bobbins nrs="3,4,9,10"><style color="#FF0000"><shadow color="#FFBBBB" width="5"/></style></new_bobbins>
+    <group pairs="3-4">
+      <title>
+        <value lang="en">Plait (the tongue): hang two pairs as a rainbow on top pin</value>
+        <value lang="nl">Vlechtje (de tong): hang twee paar als een regenboog om bovenste speld</value>
+      </title>
+      <pin position="109,130"/>
+      <copy of="tctc" pairs="1-2"><rotate centre="15,15" angle="0"/><move x="101" y="140"/></copy>
+      <group pairs="1-2">
+        <title>
+          <value lang="en">determine repeats by sight</value>
+          <value lang="nl">bepaal aantal slagen op het gezicht</value>
+        </title>
+        <copy of="tc" pairs="1-2"><rotate centre="15,15" angle="0"/><move x="101" y="155"/></copy>
+        <copy of="tc" pairs="1-2"><rotate centre="15,15" angle="0"/><move x="101" y="170"/></copy>
+        <copy of="tc" pairs="1-2"><rotate centre="15,15" angle="0"/><move x="101" y="185"/></copy>
+        <pin position="110,210"/>
+      </group>
+    </group>
+    <group id="x3" pairs="1-5">
+      <title>
+        <value lang="en">rows</value>
+        <value lang="nl">toeren heen en terug</value>
+      </title>
+      <group id="x1"  pairs="1-5">
+        <title>
+          <value lang="en">row 1</value>
+          <value lang="nl">toer heen</value>
+        </title>
+        <copy of="ctc" pairs="1-2"><rotate centre="10,10" angle="-45"/><move x="057" y="217"/></copy>
+        <copy of="ctc" pairs="2-3"><rotate centre="10,10" angle="-45"/><move x="087" y="217"/></copy>
+        <copy of="ctc" pairs="3-4"><rotate centre="10,10" angle="-45"/><move x="117" y="217"/></copy>
+        <copy of="ctc" pairs="4-5"><rotate centre="10,10" angle="-45"/><move x="147" y="217"/></copy>
+        <group pairs="5-6">
+          <title>
+            <value lang="en">around the pin</value>
+            <value lang="nl">keren om de speld</value>
+          </title>
+          <pin position="167,242"/>
+          <copy of="r1" pairs="1"><rotate centre="10,10" angle="-75"/><move x="177" y="235"/></copy>
+          <copy of="r1" pairs="1"><rotate centre="10,10" angle="45"/><move x="150" y="250"/></copy>
+        </group>
+      </group> 
+      <group id="x2"  pairs="1-5">
+        <title>
+          <value lang="en">row back</value>
+          <value lang="nl">toer terug</value>
+        </title>
+        <copy of="ctc" pairs="4-5"><rotate centre="10,10" angle="45"/><move x="145" y="250"/></copy>
+        <copy of="ctc" pairs="3-4"><rotate centre="10,10" angle="45"/><move x="115" y="250"/></copy>
+        <copy of="ctc" pairs="2-3"><rotate centre="10,10" angle="45"/><move x="085" y="250"/></copy>
+        <copy of="ctc" pairs="1-2"><rotate centre="10,10" angle="45"/><move x="055" y="250"/></copy>
+        <group pairs="1">
+          <title>
+            <value lang="en">around the pin</value>
+            <value lang="nl">keren om de speld</value>
+          </title>
+          <pin position="52,272"/>
+          <copy of="r1" pairs="1"><rotate centre="10,10" angle="-75"/><move x="037" y="268"/></copy>
+          <copy of="r1" pairs="1"><rotate centre="10,10" angle="-100"/><move x="043" y="280"/></copy>
+        </group>
+      </group> 
+    </group> 
+    <copy of="x3" pairs="1-5"><move y="60"/></copy>
+    <copy of="x3" pairs="1-5"><move y="120"/></copy>
+    <copy of="x3" pairs="1-5"><move y="180"/></copy>
+  </group>
+</diagram>

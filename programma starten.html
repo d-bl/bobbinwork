@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>BobbinWork - programma starten</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+Tips en trucs als het programma niet start met een simpele (dubbel)klik. Zie ook de issues op de <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/" rel="nofollow">ontwikkelaars site</a><br />
+<br />
+<h1 id="toc0"><a name="jnlp bestanden"></a>jnlp bestanden</h1>
+Java WebStart beschermt je systeem bij als een jnlp file start. Bestanden lezen of schrijven kan dan niet. Verder kun je eventueel beveiligingsvragen krijgen als het programma de printer of het internet probeert te benaderen. De jnlp files zorgen ervoor dat je altijd de laatste versie draait.<br />
+<br />
+<h1 id="toc1"><a name="jar bestanden"></a>jar bestanden</h1>
+Je kunt ook kiezen om jar bestanden te starten. Deze kunnen wel bestanden op je eigen systeem benaderen. Na downloaden kun je dubbelklikken of de programma's starten met een commando-regel:<br />
+<ul class="quotelist"><li><tt>java -jar &quot;c://.../BwDiagrams.jar&quot; nl</tt></li><li><tt>java -jar &quot;c://.../bwpGrid.jar&quot; nl</tt></li></ul>De <u><tt>c://...</tt></u> hangt af van de plaats waar je de bestanden neer zet. Let op de richting van de schuine strepen, altijd: &quot;/&quot;. Je kunt <u><tt>nl</tt></u> weglaten of vervangen door een andere taal. Welke talen beschikbaar zijn zie je links in het menu gedeelte van de wiki-pagina's.<br />
+<br />
+<h1 id="toc2"><a name="Geheugen vereisten"></a>Geheugen vereisten</h1>
+Grote werktekeningen (en veel wijzigingen) vergen veel geheugen. Indien de standaard grootte te kort schiet, probeer dan<br />
+<ul class="quotelist"><li><tt>java -Xmx1G -jar &quot;c://.../bwViewer.jar&quot; nl</tt></li></ul>dit reserveert een maximum van 1 Giga bytes.<br />
+<br />
+<h1 id="toc3"><a name="Systeem vereisten"></a>Systeem vereisten</h1>
+Om de programma's te draaien is een Java Runtime Environment <a class="wiki_link_ext" href="http://www.java.com/en/download/" rel="nofollow">JRE 1.5+</a> nodig.<br />
+<br />
+Als je JRE 1.4 hebt en niet wilt upgraden, wil je misschien gebruik maken van een oude <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/files/bwpGrid.jar" rel="nofollow">bwpGrid.jar</a> of <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/files/bwViewer.jar" rel="nofollow">bwViewer.jar</a>. Deze heeft nog een oude licentie voor persoonlijk gebruik, voor diagrammen mis je dan de nieuwste mogelijkheden.
+    </div>
+  </body>
+</html>

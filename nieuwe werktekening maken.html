@@ -1,0 +1,228 @@
+<html>
+  <head>
+    <title>BobbinWork - nieuwe werktekening maken</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<div id="toc"><h1 class="nopad">Table of Contents</h1><div style="margin-left: 1em;"><a href="#voorbereiding">voorbereiding</a></div>
+<div style="margin-left: 1em;"><a href="#Groepen">Groepen</a></div>
+<div style="margin-left: 1em;"><a href="#Slag voor slag">Slag voor slag</a></div>
+<div style="margin-left: 1em;"><a href="#tussenstand">tussenstand</a></div>
+<div style="margin-left: 1em;"><a href="#slagen">slagen</a></div>
+<div style="margin-left: 1em;"><a href="#Speld">Speld</a></div>
+<div style="margin-left: 1em;"><a href="#Variaties">Variaties</a></div>
+</div>
+Wil je meer dan variaties op de ingebakken voorbeelden, dan kun je ook zelf een tekening maken. Wat hier beschreven wordt moet nog veel eenvoudiger gemaakt worden, maar als niemand mee gaat helpen kan dat nog wel even duren. Als je eenmaal een tekening hebt, kun je er wel eenvoudig eindeloos op variëren. Geef de draden verschillende kleuren en zie hoe ze totaal anders door een grond kunnen lopen als je een enkele slag verandert. <img src="files/spider.PNG" alt="spider.PNG" title="spider.PNG" align="left" /><br />
+<h1 id="toc0"><a name="voorbereiding"></a>voorbereiding</h1>
+ Schets je parentekening op ruitjespapier. Zorg voor zo'n twee ruitjes tussen iedere slag, voor bijvoorbeeld omkeerslagen is meer ruimte nodig. Nummer de slagen in de volgorde zoals je ze zou klossen. Als voorbeeld gebruiken we de spin hiernaast. Bewerk een kopie van <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/svn/trunk/src/test/resources/nl/BobbinWork/diagram/xml/newDiagram.xml" rel="nofollow">niew.xml</a> met je favoriete programma voor platte tekst of XML bestanden.<br />
+<h1 id="toc1"><a name="Groepen"></a>Groepen</h1>
+ Onderaan in het bestand vind je de volgende code:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml">    <span class="sc3"><span class="re1">&lt;/title<span class="re2">&gt;</span></span></span>
+    <span class="sc-1">&lt;!-- put here your instructions --&gt;</span>
+  <span class="sc3"><span class="re1">&lt;/group<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/diagram<span class="re2">&gt;</span></span></span></pre>
+
+De commentaar-regel vervangen we door onze spin. We maken een groep waarbinnen we de slagen plaatsen. De stippeltjes moeten we nog verder uitwerken. Deze groep krijgt een unieke naam (een id) zodat hij opnieuw gebruikt kan worden. Uniek: dus nooit meerdere hondjes Fikkie noemen. Verder moet je aangeven welke paren (pairs) je voor de spin wilt gebruiken.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml">    <span class="sc3"><span class="re1">&lt;/title<span class="re2">&gt;</span></span></span>
+    <span class="sc3"><span class="re1">&lt;group</span> <span class="re0">id</span>=<span class="st0">&quot;spin&quot;</span> <span class="re0">pairs</span>=<span class="st0">&quot;1-6&quot;</span><span class="re2">&gt;</span></span>
+      ...
+    <span class="sc3"><span class="re1">&lt;/group<span class="re2">&gt;</span></span></span>
+  <span class="sc3"><span class="re1">&lt;/group<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/diagram<span class="re2">&gt;</span></span></span></pre>
+
+<h1 id="toc2"><a name="Slag voor slag"></a>Slag voor slag</h1>
+ <img src="files/spin-draden.PNG" alt="spin-draden.PNG" title="spin-draden.PNG" align="right" /> Binnen de groep die we net hebben gemaakt, moet iedere slag afzonderlijk beschreven worden. De eerste slag ziet er als volgt uit:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml"><span class="sc-1">&lt;!-- 1 --&gt;</span><span class="sc3"><span class="re1">&lt;copy</span> <span class="re0">of</span>=<span class="st0">&quot;ctc&quot;</span> <span class="re0">pairs</span>=<span class="st0">&quot;3-4&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;move</span> <span class="re0">x</span>=<span class="st0">&quot;50&quot;</span> <span class="re0">y</span>=<span class="st0">&quot;0&quot;</span><span class="re2">/&gt;</span><span class="re1">&lt;/copy<span class="re2">&gt;</span></span></span></pre>
+
+De regel begint met een stukje commentaar: het nummer uit de tekening, dit is een geheugensteuntje voor jezelf. &quot;ctc&quot; is een Engelse afkorting voor &quot;cruisen traaien cruisen&quot; oftewel een linnenslag. Voor de paren tellen vanaf het meest linker paar binnen de spin die we voor deze slag nodig hebben. Rest ons nog aan te geven <em>waar</em> de slag getekend moet worden: X is de horizontale afstand tot de linkerbovenhoek, Y is de verticale afstand tot de linkerbovenhoek. Dat wordt dus hokjes tellen, een hokje is tien pixels.<br />
+<h1 id="toc3"><a name="tussenstand"></a>tussenstand</h1>
+ Controleer regelmatig het resultaat en sla het bestand tussendoor op. Copiëer de hele inhoud van het bestand en gebruik de functie <em>import - van systeemklembord</em> van BobbinWork. Het duurt even, maar met kleine stapjes tegelijk zijn vergissingen eenvoudiger te achterhalen en je kunt bij fouten terugvallen op de laatst opgeslagen versie. Wissel ook af en toe met het tonen van draden of paren. Let ook op de status balk. Voor niet al te grote tekeningen zou het probleem inmiddels verholpen moeten zijn, maar als de statusbalk vol loopt is het beschikbare geheugen op en loopt het programma vast, zie ook <a class="wiki_link" href="programma%20starten.html">programma starten</a>.<br />
+<img src="files/ids.PNG" alt="ids.PNG" title="ids.PNG" style="height: 246px; width: 218px;" align="left" /><br />
+<h1 id="toc4"><a name="slagen"></a>slagen</h1>
+ De slag &quot;ctc&quot; komt overigens uit de &quot;bibliotheek&quot;, zie afbeelding. De bibliotheek hebben we bij de voorbereiding al binnengehaald met een <tt>include</tt> opdracht. Mis je bepaalde slagen? Zoek in de bibliotheek een slag op die lijkt op wat je wilt. Zoek de id (<tt>ctc</tt> of <tt>tctc</tt> in de voorbeelden) op in de <a class="wiki_link_ext" href="http://code.google.com/p/bobbinwork/source/browse/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml" rel="nofollow">include</a> file, copiëer de hele groep en pas deze naar wens aan, denk om een nieuwe unieke id. Kijk ook bij de <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/svn/trunk/src/main/resources/nl/BobbinWork/diagram/xml/anatomie.html" rel="nofollow">anatomie</a> van de include file. Geef desgewenst ook een kleur<a class="wiki_link_ext" href="http://www.colorschemer.com/online.html" rel="nofollow">_</a> aan voor de parentekening:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml"><span class="sc3"><span class="re1">&lt;/title<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;style</span> <span class="re0">color</span>=<span class="st0">&quot;#AA00FF&quot;</span> <span class="re0">width</span>=<span class="st0">&quot;2&quot;</span> <span class="re2">/&gt;</span></span>
+<span class="sc3"><span class="re1">&lt;pair</span> <span class="re0">start</span>=<span class="st0">&quot;3,3&quot;</span> <span class="re0">end</span>=<span class="st0">&quot;13.5,13.5&quot;</span> <span class="re2">/&gt;</span></span></pre>
+
+<h1 id="toc5"><a name="Speld"></a>Speld</h1>
+ Uiteraard moeten we halverwege ook nog een speld steken.<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml"><span class="sc3"><span class="re1">&lt;pin</span> <span class="re0">position</span>=<span class="st0">&quot;58,83&quot;</span><span class="re2">/&gt;</span></span></pre>
+
+<img src="files/B3-74-inversed.PNG" alt="B3-74-inversed.PNG" title="B3-74-inversed.PNG" align="right" /><br />
+<h1 id="toc6"><a name="Variaties"></a>Variaties</h1>
+ Het resultaat lijkt nog niet zo spannend, maar maak van ctc eens ct of tctc of laat slag 10 weg en 9 een eindje zakken, of...<br />
+Voor je het weet heb je een tiental spinnen of sneeuwvlokken, en netslagen tekenen met potlood vergt de nodige oefening. Op een vergelijkbare manier als de spinnen zelf, kunnen we ook een groep van spinnen maken. Geef de draden een kleurtje bij aan het einde een groep:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml">  <span class="sc3"><span class="re1">&lt;new_bobbins</span> <span class="re0">nrs</span>=<span class="st0">&quot;1,2&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;style</span> <span class="re0">color</span>=<span class="st0">&quot;#00FF00&quot;</span><span class="re2">/&gt;</span><span class="re1">&lt;/new_bobbins<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/group<span class="re2">&gt;</span></span></span></pre>
+
+Voor de traditionele tekeningen met dunne onderbroken lijntjes:<br />
+
+<style type="text/css"><!--
+/**
+ * GeSHi (C) 2004 - 2007 Nigel McNie, 2007 - 2008 Benny Baumann
+ * (http://qbnz.com/highlighter/ and http://geshi.org/)
+ */
+.xml  {font-family:monospace;}
+.xml .imp {font-weight: bold; color: red;}
+.xml .es0 {color: #000099; font-weight: bold;}
+.xml .br0 {color: #66cc66;}
+.xml .sy0 {color: #66cc66;}
+.xml .st0 {color: #ff0000;}
+.xml .sc-1 {color: #808080; font-style: italic;}
+.xml .sc0 {color: #00bbdd;}
+.xml .sc1 {color: #ddbb00;}
+.xml .sc2 {color: #339933;}
+.xml .sc3 {color: #009900;}
+.xml .re0 {color: #000066;}
+.xml .re1 {color: #000000; font-weight: bold;}
+.xml .re2 {color: #000000; font-weight: bold;}
+.xml span.xtra { display:block; }
+
+-->
+</style><pre class="xml">  <span class="sc3"><span class="re1">&lt;new_bobbins</span> <span class="re0">nrs</span>=<span class="st0">&quot;3,4,5,6&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;style</span> <span class="re0">color</span>=<span class="st0">&quot;#000000&quot;</span> <span class="re0">width</span>=<span class="st0">&quot;1&quot;</span><span class="re2">&gt;</span><span class="re1">&lt;shadow</span> <span class="re0">color</span>=<span class="st0">&quot;#FFFFFF&quot;</span> <span class="re0">width</span>=<span class="st0">&quot;5&quot;</span><span class="re2">/&gt;</span><span class="re1">&lt;/style<span class="re2">&gt;</span></span></span>
+<span class="sc3"><span class="re1">&lt;/group<span class="re2">&gt;</span></span></span></pre>
+
+Kijk maar eens bij de ingebakken <a class="wiki_link_ext" href="http://code.google.com/p/bobbinwork/source/browse/wiki/diagrams/" rel="nofollow">voorbeelden</a>
+    </div>
+  </body>
+</html>

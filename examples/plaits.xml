@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram
+  xmlns="http://BobbinWork.googlecode.com/bw.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+  <title>
+    <value lang="en">Copyright 2009, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
+  </title>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/709/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <group pairs="1001-1012">
+    <title>
+        <value lang="en">Library (building blocks for plait connections)</value>
+        <value lang="nl">Bibliotheek (bouwstenen voor verbindingen in vlechten)</value>
+        <value lang="de">Bibliothek (Bausteine fur Verbindungen von Flechter)</value>
+    </title>
+    <stitch pairs="1-6">
+      <title><value lang="en">dummy</value></title>
+      <style width="2" />
+      <pair start="0,0" end="0,0" />
+      <pair start="0,0" end="0,0" />
+      <pair start="0,0" end="0,0" />
+      <pair start="0,0" end="0,0" />
+      <pair start="0,0" end="0,0" />
+      <pair start="0,0" end="0,0" />
+      <cross id="starC1" bobbins="3-6">
+        <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
+        <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
+        <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
+        <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
+      </cross>
+      <cross id="starC2" bobbins="7-10">
+        <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
+        <front start="-3,-1" c1="-2,0" c2="2,0" end="3,1" />
+        <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
+        <back start="3,-1" c1="2,0" c2="-2,0"  end="-3,1" />
+      </cross>
+      <twist id="starT1" bobbins="1-4">
+        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+      </twist>
+      <twist id="starT2" bobbins="5-8">
+        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+      </twist>
+      <twist id="starT3" bobbins="9-12">
+        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+        <front start="3,-1" c1="2,0" c2="-2,0" end="-3,1" />
+        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+        <back start="-3,-1" c1="-2,0" c2="2,0"  end="3,1" />
+      </twist>
+    </stitch>
+    <stitch id="star" pairs="7-12">
+      <title><value lang="en">three plait connection</value></title>
+      <pair start="-15,-8"  end="15,8" />
+      <pair start="-15,-8"  end="15,8" />
+      <pair start="0,-22" end="0,22" />
+      <pair start="0,-22" end="0,22" />
+      <pair start="15,-8" end="-15,8" />
+      <pair start="15,-8" end="-15,8" />
+
+      <copy of="starT1"><move y="-22"  /><rotate centre="0,0" angle="-60" /></copy>
+      <copy of="starT2"><move y="-22"  /><rotate centre="0,0" angle="0" /></copy>
+      <copy of="starT3"><move y="-22"  /><rotate centre="0,0" angle="60" /></copy>
+  
+      <copy of="starC1"><move y="-17" /><rotate centre="0,0" angle="-30" /></copy>
+      <copy of="starC2"><move y="-17" /><rotate centre="0,0" angle="30" /></copy>
+      <copy of="starT2"><move y="-10"  /><rotate centre="0,0" angle="0" /></copy>
+      <copy of="starC1"><move y="-10" /><rotate centre="0,0" angle="-60" /></copy>
+      <copy of="starC2"><move y="-10" /><rotate centre="0,0" angle="60" /></copy>
+  
+      <copy of="starT1"><move y="0" x="-17" /><rotate centre="0,0" angle="0" /></copy>
+      <copy of="starT3"><move y="0" x="17" /><rotate centre="0,0" angle="0" /></copy>
+
+      <copy of="starC1"><move y="10" /><rotate centre="0,0" angle="60" /></copy>
+      <copy of="starC2"><move y="10" /><rotate centre="0,0" angle="-60" /></copy>
+      <copy of="starT2"><move y="10"  /><rotate centre="0,0" angle="0" /></copy>
+      <copy of="starC1"><move y="17" /><rotate centre="0,0" angle="30" /></copy>
+      <copy of="starC2"><move y="17" /><rotate centre="0,0" angle="-30" /></copy>
+
+      <copy of="starT1"><move y="22"/><rotate centre="0,0" angle="60" /></copy>
+      <copy of="starT2"><move y="22"/><rotate centre="0,0" angle="0" /></copy>
+      <copy of="starT3"><move y="22"/><rotate centre="0,0" angle="-60" /></copy>
+    </stitch>
+  </group>
+  <group id="x1" pairs="1-6">
+    <title>
+        <value lang="en">diagram</value>
+        <value lang="nl">werktekening</value>
+        <value lang="de">Arbeitszeichnung</value>
+    </title>
+    <group id="x2" pairs="1-6">
+      <title><value lang="en">plaits</value></title>
+    
+      <new_bobbins nrs="5,7"><style color="#00FF00"></style></new_bobbins>
+      <new_bobbins nrs="6,8"><style color="#FF0000"></style></new_bobbins>
+
+      <copy of="ctctc" pairs="1-2"><move x="160" y="40"/><rotate centre="170,100" angle="-60" /></copy>
+      <copy of="ctctc" pairs="3-4"><move x="160" y="40"/><rotate centre="170,100" angle="0" /></copy>
+      <copy of="ctctc" pairs="5-6"><move x="160" y="40"/><rotate centre="170,100" angle="60" /></copy>
+      <copy of="star" pairs="1-6"><move x="170" y="100"/></copy>
+      <copy of="ctctc" pairs="1-2"><move x="160" y="130"/><rotate centre="170,100" angle="60" /></copy>
+      <copy of="ctctc" pairs="3-4"><move x="160" y="130"/><rotate centre="170,100" angle="0" /></copy>
+      <copy of="ctctc" pairs="5-6"><move x="160" y="130"/><rotate centre="170,100" angle="-60" /></copy>
+     <!-- 
+      -->
+
+     <!-- 
+      -->
+    </group>
+  </group>
+</diagram>

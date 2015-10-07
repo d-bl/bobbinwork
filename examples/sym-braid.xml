@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<diagram
+  xmlns="http://BobbinWork.googlecode.com/bw.xsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://BobbinWork.googlecode.com bw.xsd"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+  <title>
+    <value lang="en">Copyright 2010, J. Pol, some rights reserved: http://creativecommons.org/licenses/by/3.0/</value>
+  </title>
+  <xi:include href='http://bobbinwork.googlecode.com/svn/!svn/bc/562/trunk/src/main/resources/nl/BobbinWork/diagram/xml/basicStitches.xml'/>
+  <group pairs="1-9">
+    <title>
+      <value lang="en">Symmetrical Braid</value>
+      <value lang="nl">Symetrisch Bandje</value>
+    </title>
+
+    <group id="x"  pairs="1-6">
+      <title>
+         <value lang="en">2 rows</value>
+         <value lang="nl">2 toeren</value>
+      </title>
+      <copy of="tctc" pairs="1-2"><move x="50" y="50"/></copy>
+      <pin position="75,57"/>
+      <!-- 
+       -->
+      <copy of="tc_ltr" pairs="2-3"><move x="70" y="50"/></copy>
+      <copy of="tctc" pairs="5-6"><move x="150" y="50"/></copy>
+      <pin position="142,57"/>
+      <copy of="tc_rtl" pairs="4-5"><move x="120" y="50"/></copy>
+      <copy of="tc" pairs="3-4"><move x="100" y="70"/></copy>
+      <copy of="tc_ltr" pairs="4-5"><move x="120" y="75"/></copy>
+      <copy of="tc_rtl" pairs="2-3"><move x="70" y="75"/></copy>
+    </group>
+    <copy of="x" pairs="1-6"><move y="55"/></copy>
+    <copy of="x" pairs="1-6"><move y="110"/></copy>
+    <copy of="x" pairs="1-6"><move y="165"/></copy>
+    <copy of="x" pairs="1-6"><move y="220"/></copy>
+  </group>
+</diagram>

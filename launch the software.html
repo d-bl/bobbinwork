@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>BobbinWork - launch the software</title>
+    <link rel="stylesheet" href="static/style.css" type="text/css" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  </head>
+  <body>
+    <div class="wiki" id="content_view" style="display: block;">
+<div id="toc"><h1 class="nopad">Table of Contents</h1><div style="margin-left: 1em;"><a href="#run jnlp files">run jnlp files</a></div>
+<div style="margin-left: 1em;"><a href="#run jar files">run jar files</a></div>
+<div style="margin-left: 1em;"><a href="#memory requirements">memory requirements</a></div>
+<div style="margin-left: 1em;"><a href="#system requirements">system requirements</a></div>
+<div style="margin-left: 1em;"><a href="#if all else fails">if all else fails</a></div>
+</div>
+See also the issues on the <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/" rel="nofollow">developers site</a><br />
+<h1 id="toc0"><a name="run jnlp files"></a>run jnlp files</h1>
+Links to these files are listed under &quot;executables&quot; in the navigation area on the left of this page. These files are executed with Java WebStart. Some pro's and contra's:<br />
+<ul><li>you need less hoops to jump through to get them running</li><li>it makes sure you always get the latest version</li><li>it protects your system but at a price: it blocks some if not the most important functionality</li></ul><br />
+<h1 id="toc1"><a name="run jar files"></a>run jar files</h1>
+ Links to these files are listed under &quot;executables&quot; in the navigation area on the left of this page. Once downloaded you can start them from a command line:<br />
+<ul class="quotelist"><li><tt>java -jar &quot;c://.../BwDiagrams-rel.x.x.jar&quot; en&amp;</tt></li><li><tt>java -jar &quot;c://.../bwpGrid-rel.x.x.jar&quot; en&amp;</tt></li></ul>The <u><tt>c://...</tt></u> part depends on the location where you saved the files. The <u><tt>x.x</tt></u> part depends on downloaded version. Please note the direction of the slashes, even on windows: &quot;/&quot;. You can drop <u><tt>en</tt></u> or replace it with a language of your choice. The supported languages are listed in the navigation area of this page, language support might be partial.<br />
+<br />
+Though jar files are a special breed of zip files, it might not be wise to unzip. Occasionally a system does that automatically.<br />
+<br />
+<h1 id="toc2"><a name="memory requirements"></a>memory requirements</h1>
+ Large diagrams (or many changes) require a lot of memory as shown by the status bar. In case you need more than is assigned by default, you could try the command line:<br />
+<ul class="quotelist"><li><tt>java -Xmx1G -jar &quot;c://.../BwDiagrams.jar&quot;</tt></li></ul>which allows maximum memory usage of 1 Giga Byte.<br />
+<br />
+<h1 id="toc3"><a name="system requirements"></a>system requirements</h1>
+ You'll need a Java runtime environment: <a class="wiki_link_ext" href="http://www.java.com/getjava/" rel="nofollow">JRE 1.5+</a><br />
+<br />
+On linux (ubuntu) the default OpenJDK 1.6.0 prompts with <br />
+<ul class="quotelist"><li><em>UnsatisfiedLinkError: Can't load library: /usr/lib/jvm/java-6-openjdk/jre/lib/i386/xawt/libmawt.so</em></li></ul>You could try <br />
+<ul class="quotelist"><li><tt>sudo update-java-alternatives -s java-6-sun</tt></li></ul>as explained on <a class="wiki_link_ext" href="https://help.ubuntu.com/community/Java" rel="nofollow">https://help.ubuntu.com/community/Java</a><br />
+<br />
+<h1 id="toc4"><a name="if all else fails"></a>if all else fails</h1>
+A web start version that might not deny access but is less intuitive: <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/svn/trunk/webstart/bwViewer.jnlp" rel="nofollow">bwViewer.jnlp</a><br />
+<br />
+If the command &quot;java -version&quot; prompts with 1.4 and you hesitate to upgrade, you might try older versions <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/files/bwpGrid.jar" rel="nofollow">bwpGrid.jar</a> or <a class="wiki_link_ext" href="http://bobbinwork.googlecode.com/files/bwViewer.jar" rel="nofollow">bwViewer.jar</a> they have a personal-use-only license.
+    </div>
+  </body>
+</html>
