@@ -4,3 +4,6 @@
 .settings
 .DS_Store
 /.pydevproject
+
+.idea/
+viewer.iml
